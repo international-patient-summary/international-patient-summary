@@ -1,0 +1,46 @@
+name: Site check
+
+# Lints, type-checks, and builds the site on pull requests to this repository,
+# so problems surface here before bin/publish pushes them to the site repository.
+
+on:
+  pull_request:
+    paths:
+      - 'international-patient-summary.github.io/**'
+      - 'locales/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working-directory: international-patient-summary.github.io
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          package_json_file: international-patient-summary.github.io/package.json
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 26
+          cache: pnpm
+          cache-dependency-path: international-patient-summary.github.io/pnpm-lock.yaml
+
+      - run: pnpm install --frozen-lockfile
+
+      # Fail if the vendored content is out of date with ../locales.
+      - name: Content is in sync
+        run: |
+          pnpm run sync:content
+          test -z "$(git status --porcelain -- content)" || { echo "::error::content/ is stale; run 'make sync-content' and commit"; exit 1; }
+
+      - run: pnpm run lint
+      - run: pnpm run check
+      - run: pnpm run build
