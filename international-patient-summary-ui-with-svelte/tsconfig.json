@@ -1,0 +1,13 @@
+{
+	"extends": "$app/tsconfig",
+	"compilerOptions": {
+		"allowJs": true,
+		"checkJs": true,
+		"strict": true,
+		"skipLibCheck": true,
+		"resolveJsonModule": true,
+		"types": ["$app/types", "node", "vitest/globals"]
+	},
+	"include": ["src", "e2e", "bin", "*.ts"],
+	"exclude": ["node_modules", "build"]
+}

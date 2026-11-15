@@ -1,0 +1,547 @@
+# International Patient Summary UI — Simplified Chinese (mainland China), zh-CN.
+# Keys follow locales/en-us/messages.yaml, the source of truth (spec §4.3).
+# Every value is a Unicode MessageFormat 2 (MF2) message.
+# Clinical content is never translated: these are interface words only.
+# Machine-drafted; see REVIEW.md before release.
+
+app:
+  title: 国际患者摘要查看器
+  shortTitle: IPS 查看器
+  tagline: 在浏览器中查看 HL7 FHIR 国际患者摘要。所有数据均不会离开您的设备。
+
+skipLink: 跳至主要内容
+
+header:
+  label: 网站页眉
+  home: 首页
+  examples: 示例
+
+picker:
+  links: 页面
+  theme: 主题
+  locale: 语言
+  textSize: 文字大小
+  share: 分享本应用
+  shareEmail: 电子邮件
+  copyLink: 复制本应用链接
+  copied: 链接已复制
+  copyFailed: 无法复制链接
+
+footer:
+  label: 网站页脚
+  notMedicalDevice: 本工具仅用于查看，不属于医疗器械。临床决策请以原始记录为准。
+  privacy: 文档仅在您的浏览器中读取和导出，不会上传、存储或共享任何内容。
+  standards: '支持 HL7 FHIR 国际患者摘要 {$version}（FHIR R4）。基于 Lily Design System 构建。'
+
+nav:
+  pages: 页面
+
+loader:
+  heading: 打开患者摘要
+  intro: 选择文件、粘贴文档、输入网址或试用示例。支持 JSON 和 YAML 格式。
+  tabsLabel: 打开患者摘要的方式
+  tabFile: 文件
+  tabPaste: 粘贴
+  tabUrl: 网址
+  tabExamples: 示例
+  fileLabel: 选择文件
+  fileHint: JSON（.json）或 YAML（.yaml、.yml）格式的 FHIR Bundle，最大 10 MB。
+  dropHint: 也可将文件拖放到本页任意位置。
+  dropActive: 松开鼠标即可打开文件
+  fileSelected: |-
+    .input {$count :number}
+    .match $count
+    0 {{未选择文件}}
+    * {{已选择 {$count} 个文件}}
+  pasteLabel: 粘贴 FHIR Bundle（JSON 或 YAML）
+  pasteButton: 打开粘贴的文档
+  urlLabel: FHIR Bundle 的网址
+  urlHint: 网址必须以 https:// 开头，且服务器必须允许浏览器访问（CORS）；否则请先下载文件再打开。
+  urlButton: 获取并打开
+  examplesIntro: 来自 HL7 FHIR IPS 实施指南 2.0.1 的示例文档。
+  openExample: '打开 {$name}'
+  loading: 正在打开文档…
+  loadedAs: '已从 {$source} 加载 {$format} 文档。'
+  sourceText: 粘贴的文本
+  errorTitle: 出现问题
+  errorPosition: '第 {$line} 行，第 {$column} 列。'
+  errorDetail: '详细信息：{$detail}'
+
+load:
+  errors:
+    tooLarge: '文档过大（{$size} 字节），上限为 {$max} 字节。'
+    empty: 文档为空。
+    invalidJson: 文档不是有效的 JSON。
+    invalidYaml: 文档不是有效的 YAML。
+    notJsonOrYaml: 文档既不是有效的 JSON，也不是有效的 YAML。
+    yamlMultiDocument: '该 YAML 包含 {$count} 个文档，请一次只打开一个文档。'
+    yamlNonFinite: '该 YAML 在 {$path} 处含有 FHIR 无法表示的值（无穷大或非数字）。'
+    yamlUnsupportedType: '该 YAML 在 {$path} 处含有 FHIR JSON 无法表示的值。'
+    yamlDuplicateKey: 该 YAML 在同一对象中存在重复的键。
+    yamlCustomTag: 该 YAML 使用了标签。FHIR YAML 必须是不含标签的纯数据。
+    yamlAliasLimit: '该 YAML 使用的别名过多（超过 {$max} 个）。'
+    urlInvalid: 这不是有效的网址。
+    urlNotHttps: 仅可打开安全网址（https://）。
+    urlNetwork: '无法从 {$host} 获取文档。服务器可能不允许浏览器访问（CORS），或网络可能已断开。请尝试下载文件后再打开。'
+    urlStatus: '服务器返回 HTTP 状态码 {$status}。'
+
+checks:
+  heading: 文档检查
+  summary: |-
+    .input {$count :number}
+    .match $count
+    0 {{文档检查：无问题}}
+    * {{文档检查：{$count} 项发现}}
+  intro: 本查看器会报告其在文档结构中发现的问题。它不是校验工具；如需检查一致性，请使用 HL7 FHIR Validator。
+  severity:
+    error: 错误
+    warning: 警告
+    info: 信息
+  notFhir: 这不是 FHIR 资源。
+  notBundle: '这是 FHIR {$found}，而不是 Bundle。国际患者摘要是类型为 "document" 的 Bundle。'
+  notDocument: '该 Bundle 的类型为 "{$found}"。国际患者摘要是类型为 "document" 的 Bundle。'
+  firstNotComposition: Bundle 中的第一个条目不是 Composition。
+  noSubject: Composition 未注明患者身份（缺少 subject）。
+  subjectUnresolved: '患者（{$reference}）不在该 Bundle 中。'
+  noIpsProfile: 该文档未声明遵循 IPS 规范（缺少 IPS meta.profile）。
+  unknownVersion: '该文档声明的 IPS 版本为 {$version}，本查看器无法识别该版本。'
+  notPatientSummaryType: '该 Composition 的类型为 LOINC {$code}，而不是 60591-5 "Patient summary Document"。'
+  unknownSection: '代码为 {$code} 的部分不属于 IPS 标准部分，将按原样显示。'
+  unresolvedReference: '条目（{$reference}）不在该 Bundle 中。'
+  requiredSectionMissing: '文档缺少必需部分（LOINC {$code}）。'
+  blocking: 无法显示此文档。
+
+sections:
+  medications:
+    title: 用药摘要
+  allergies:
+    title: 过敏与不耐受
+  problems:
+    title: 问题列表
+  immunizations:
+    title: 免疫接种
+  results:
+    title: 检验检查结果
+  procedures:
+    title: 手术操作史
+  devices:
+    title: 医疗器械
+  vitalSigns:
+    title: 生命体征
+  pastIllness:
+    title: 既往病史
+  functionalStatus:
+    title: 功能状态
+  planOfCare:
+    title: 诊疗计划
+  socialHistory:
+    title: 社会史
+  pregnancy:
+    title: 妊娠史
+  advanceDirectives:
+    title: 预立医疗指示
+  alerts:
+    title: 警示
+  patientStory:
+    title: 患者自述
+  generic:
+    title: 其他部分
+
+level:
+  required: 必需部分
+  recommended: 推荐部分
+  optional: 可选部分
+  unknown: 非 IPS 部分
+
+state:
+  known: 已记录
+  none-known: 无已知
+  not-recorded: 未记录
+  unavailable: 信息不可用
+  omitted: 文档中缺少此部分
+  narrativeOnly: 无结构化条目。请参阅文档中的叙述文本。
+  withReason: '{$state} — {$reason}'
+  unresolved: 在文档中找不到这些条目。
+
+emptyReason:
+  nilknown: 无已知
+  notasked: 未询问
+  notstarted: 未开始
+  unavailable: 信息不可用
+  withheld: 信息已保留
+  closed: 列表已关闭
+
+viewer:
+  documentHeading: 患者摘要
+  contents: 目录
+  showCodes: 显示代码
+  codes: 代码
+  narrative: 文档中的叙述文本
+  source: 源数据（JSON）
+  loadAnother: 打开其他文档
+  sectionCount: |-
+    .input {$count :number}
+    .match $count
+    0 {{无条目}}
+    * {{{$count} 个条目}}
+  unresolvedInline: |-
+    .input {$count :number}
+    .match $count
+    * {{本部分有 {$count} 个条目在文档中找不到。}}
+  documentLanguage: 临床内容按文档原文及其原始语言显示。
+  enteredInError: 录入错误
+  timeline: 以时间线显示
+  timelineLabel: '{$title}（时间线）'
+  undated: 日期未记录
+
+patient:
+  bannerLabel: 患者
+  identityLabel: 患者身份
+  name: 姓名
+  birthDate: 出生日期
+  age: 年龄
+  gender: 性别
+  identifiers: 标识符
+  contact: 联系方式
+  address: 地址
+  deceased: 已故
+  deceasedOn: '死亡日期 {$date}'
+  notStated: 未注明
+  dangerLabel: 过敏与警示
+  allergies: 过敏与不耐受
+  alerts: 警示
+  noActiveAlerts: 文档中无有效警示
+  more: |-
+    .input {$count :number}
+    .match $count
+    * {{另有 {$count} 项，见下方相应部分}}
+
+document:
+  heading: 关于本文档
+  label: 文档详情
+  title: 标题
+  date: 日期
+  authors: 作者
+  custodian: 保管机构
+  attesters: 证明人
+  confidentiality: 保密级别
+  language: 语言
+  version: IPS 版本
+  versionStated: 'IPS {$version}'
+  versionNotStated: IPS（未注明版本）
+  versionNoProfile: 未注明
+  status: 状态
+  identifier: 标识符
+
+fields:
+  substance: 过敏物质
+  reaction: 反应
+  severity: 严重程度
+  criticality: 危急程度
+  clinicalStatus: 临床状态
+  verificationStatus: 确认状态
+  type: 类型
+  category: 类别
+  onset: 发病
+  medication: 药物
+  strength: 规格
+  form: 剂型
+  dosage: 用法用量
+  status: 状态
+  effective: 时间
+  condition: 疾病/问题
+  abatement: 缓解
+  vaccine: 疫苗
+  date: 日期
+  dose: 剂次
+  lotNumber: 批号
+  performer: 接种者
+  procedure: 手术操作
+  performed: 实施时间
+  device: 器械
+  timing: 使用期间
+  observation: 检验或观察项目
+  result: 结果
+  referenceRange: 参考范围
+  report: 报告
+  conclusion: 结论
+  alert: 警示
+  period: 期间
+  item: 项目
+  description: 描述
+  sourceDocument: 源文档
+  activities: 活动
+  findings: 所见
+
+format:
+  periodRange: '{$start} 至 {$end}'
+  periodFrom: '自 {$start} 起'
+  periodUntil: '至 {$end} 止'
+  rangeBetween: '{$low} 至 {$high}'
+  rangeAtLeast: '至少 {$low}'
+  rangeAtMost: '至多 {$high}'
+  frequency: '每 {$periodLabel} {$frequency} 次'
+  asNeeded: 必要时
+  prescribedOn: '开具于 {$date}'
+  onset: '自 {$date} 起'
+  abatement: '缓解于 {$date}'
+  dose: '剂量 {$dose}'
+  doseOf: '第 {$dose} 剂（共 {$series} 剂）'
+  usedSince: '开始：{$date}'
+  timeUnit:
+    s: |-
+      .input {$count :number}
+      .match $count
+      * {{{$count} 秒}}
+    min: |-
+      .input {$count :number}
+      .match $count
+      * {{{$count} 分钟}}
+    h: |-
+      .input {$count :number}
+      .match $count
+      * {{{$count} 小时}}
+    d: |-
+      .input {$count :number}
+      .match $count
+      * {{{$count} 天}}
+    wk: |-
+      .input {$count :number}
+      .match $count
+      * {{{$count} 周}}
+    mo: |-
+      .input {$count :number}
+      .match $count
+      * {{{$count} 个月}}
+    a: |-
+      .input {$count :number}
+      .match $count
+      * {{{$count} 年}}
+  age:
+    minutes: |-
+      .input {$count :number}
+      .match $count
+      * {{{$count} 分钟}}
+    hours: |-
+      .input {$count :number}
+      .match $count
+      * {{{$count} 小时}}
+    days: |-
+      .input {$count :number}
+      .match $count
+      * {{{$count} 天}}
+    weeks: |-
+      .input {$count :number}
+      .match $count
+      * {{{$count} 周}}
+    months: |-
+      .input {$count :number}
+      .match $count
+      * {{{$count} 个月}}
+    years: |-
+      .input {$count :number}
+      .match $count
+      * {{{$count} 岁}}
+
+values:
+  notStated: 未注明
+  yes: 是
+  no: 否
+  resourceOfType: '{$type} 记录'
+
+status:
+  active: 活动
+  inactive: 非活动
+  resolved: 已解决
+  recurrence: 复发
+  relapse: 再发
+  remission: 缓解
+  unconfirmed: 未确认
+  provisional: 初步诊断
+  differential: 鉴别诊断
+  confirmed: 已确认
+  refuted: 已排除
+  presumed: 推定
+  entered-in-error: 录入错误
+  completed: 已完成
+  intended: 拟执行
+  stopped: 已停止
+  on-hold: 暂停
+  unknown: 状态未知
+  not-taken: 未服用
+  not-done: 未执行
+  preparation: 准备中
+  in-progress: 进行中
+  final: 最终
+  preliminary: 初步
+  amended: 已修订
+  corrected: 已更正
+  cancelled: 已取消
+  registered: 已登记
+  draft: 草稿
+  revoked: 已撤销
+  rejected: 已拒绝
+  proposed: 拟议
+  current: 当前
+  superseded: 已被取代
+  revised: 已修改
+  partial: 部分
+  appended: 已追加
+
+severity:
+  mild: 轻度反应
+  moderate: 中度反应
+  severe: 重度反应
+
+criticality:
+  low: 低风险
+  high: 高风险
+  unable-to-assess: 风险无法评估
+
+allergyType:
+  allergy: 过敏
+  intolerance: 不耐受
+
+allergyCategory:
+  food: 食物
+  medication: 药物
+  environment: 环境
+  biologic: 生物制品
+
+interpretation:
+  N: 正常
+  A: 异常
+  AA: 危急异常
+  H: 偏高
+  HH: 危急偏高
+  HU: 显著偏高
+  L: 偏低
+  LL: 危急偏低
+  LU: 显著偏低
+  POS: 阳性
+  NEG: 阴性
+  IND: 不确定
+  DET: 检出
+  ND: 未检出
+  U: 显著上升
+  D: 显著下降
+  B: 好转
+  W: 恶化
+  S: 敏感
+  R: 耐药
+  I: 中介
+
+absentReason:
+  unknown: 未知
+  asked-unknown: 已询问，但未知
+  temp-unknown: 暂时未知
+  not-asked: 未询问
+  asked-declined: 已询问，但拒绝回答
+  masked: 已屏蔽
+  not-applicable: 不适用
+  unsupported: 不支持
+  as-text: 以文本记录
+  error: 错误
+  not-a-number: 非数字
+  negative-infinity: 负无穷大
+  positive-infinity: 正无穷大
+  not-performed: 未执行
+  not-permitted: 不允许
+
+consentProvision:
+  permit: 允许
+  deny: 拒绝
+
+gender:
+  male: 男
+  female: 女
+  other: 其他
+  unknown: 未知
+
+attestationMode:
+  personal: 个人
+  professional: 专业
+  legal: 法定
+  official: 官方
+
+confidentiality:
+  U: 不受限
+  L: 低
+  M: 中等
+  N: 一般
+  R: 受限
+  V: 严格受限
+
+results:
+  label: 检验检查结果表
+  observation: 检验或观察项目
+  result: 结果
+  date: 日期
+  group: '报告：{$name}'
+
+examples:
+  heading: 示例文档
+  intro: 以下是 HL7 FHIR 国际患者摘要实施指南 2.0.1 中发布的示例，所描述的患者均为虚构。
+  open: 打开
+  bundle-minimal:
+    name: 最简示例
+    description: 最小的有效摘要——仅包含三个必需部分。
+  bundle-no-info-required-sections:
+    name: 必需部分无信息
+    description: 必需部分均无数据，并分别注明原因。展示“信息不可用”与“无已知”的区别。
+  bundle-ips-all-sections:
+    name: 全部部分
+    description: 包含 IPS 定义的所有部分，包括警示和患者自述（2.0 版新增）。
+  IPS-examples-Bundle-01:
+    name: 示例 1
+    description: 典型摘要，包含过敏、用药、问题、检验检查结果和诊疗计划。
+  IPS-examples-Bundle-with-immunization:
+    name: 含免疫接种的示例
+    description: 在示例 1 基础上增加免疫接种史。
+
+export:
+  heading: 导出
+  intro: 下载此摘要。文件在您的浏览器中生成，不会上传任何内容。
+  formatLabel: 格式
+  json: JSON
+  jsonDescription: 与加载时完全一致的 FHIR Bundle。
+  yaml: YAML
+  yamlDescription: 以 YAML 格式表示的同一 Bundle。YAML 不是 FHIR 官方格式。
+  markdown: Markdown
+  markdownDescription: 便于阅读的临床摘要，包含所有部分。
+  pdf: PDF（单页）
+  pdfDescription: 用于交接或打印的单页临床摘要。
+  options: 选项
+  includeNarrative: 包含各部分的叙述文本（纯文本）
+  includeCodes: 包含代码
+  paperSize: 纸张大小
+  paperAuto: 自动（美国使用 US Letter，其他地区使用 A4）
+  paperA4: A4
+  paperLetter: US Letter
+  download: 下载
+  downloadAnyway: 仍然下载 PDF
+  generating: 正在生成文件…
+  downloaded: '已下载 {$filename}'
+  failed: 无法生成文件。
+  overflowWarning: 必须显示的内容（身份信息、警示、过敏、在用药物）无法容纳在一页内。PDF 超过一页，并在每一页上均有说明。
+  yamlComment: '由国际患者摘要查看器导出的 HL7 FHIR Bundle 的 YAML 形式。YAML 不是 FHIR 官方格式；它与 FHIR JSON 一一对应。'
+
+summary:
+  generatedAt: '生成于 {$date}'
+  sourceDocument: '源文档 {$identifier}，日期 {$date}'
+  sourceDate: '源文档日期 {$date}'
+  notMedicalDevice: 不属于医疗器械。临床决策请以原始记录为准。
+  notShown: '本页未显示：{$sections}'
+  moreNotShown: |-
+    .input {$count :number}
+    .match $count
+    * {{另有 {$count} 项未显示}}
+  sectionNotShown: 此部分存在——未在本单页摘要中显示。
+  continued: 续页——本摘要超过一页
+  pageOf: '第 {$page} 页，共 {$count} 页'
+  activeMedications: 在用药物
+  activeProblems: 活动性问题
+  alertsAndAllergies: 警示与过敏
+  patient: 患者
+  narrative: 叙述文本
+  codes: 代码

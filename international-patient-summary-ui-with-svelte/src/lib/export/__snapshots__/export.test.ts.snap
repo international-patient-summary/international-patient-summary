@@ -1,0 +1,2345 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Markdown export > matches the snapshot for every fixture in cy-001 > IPS-examples-Bundle-01 1`] = `
+"# Patient Summary as of December 11, 2017 14:30
+
+## Claf
+
+- **Enw:** Martha DeLarosa
+- **Dyddiad geni:** 1 Mai 1972 (54 o flynyddoedd)
+- **Rhywedd:** Benyw
+- **Dynodwyr:** 574687583 (urn:oid:2.16.840.1.113883.2.4.6.3)
+
+## Ynglŷn â'r ddogfen hon
+
+- **Dyddiad:** 11 Rhag 2017, 13:30
+- **Awduron:** Beetje van Hulp
+- **Ceidwad:** Anorg Aniza Tion BV / The best custodian ever
+- **Ardystiwyd gan:** Beetje van Hulp (cyfreithiol) 11 Rhag 2017, 13:30; Anorg Aniza Tion BV / The best custodian ever (cyfreithiol) 11 Rhag 2017, 13:30
+- **Cyfrinachedd:** Normal
+- **Iaith:** Saesneg Prydain (en-GB)
+- **Fersiwn IPS:** IPS (fersiwn heb ei nodi)
+
+## Rhestr problemau
+
+| Cyflwr | Statws clinigol | Statws dilysu | Difrifoldeb | Cychwyn | Codau |
+| --- | --- | --- | --- | --- | --- |
+| Menopausal flushing (finding) | Gweithredol | Wedi'i gadarnhau | Moderate severity | 2015 | SNOMED CT 198436008 · ICD-10 N95.1 |
+
+**Naratif:**
+
+> Hot flushes
+
+## Crynodeb o feddyginiaethau
+
+| Meddyginiaeth | Dosio | Statws | Pryd | Codau |
+| --- | --- | --- | --- | --- |
+| Product containing anastrozole (medicinal product) | 1 tablet, Oral use | Gweithredol | O Maw 2015 | SNOMED CT 108774000 · urn:oid:2.16.840.1.113883.2.4.4.1 99872 · urn:oid:2.16.840.1.113883.2.4.4.7 2076667 · ATC L02BG03 |
+| Cimicifuga racemosa extract (substance) | Oral use | Gweithredol | O Ion 2016 | SNOMED CT 412588001 · ATC G02CX04 |
+
+**Naratif:**
+
+> Medication Strength Form Dosage Comment
+> Anastrozole 1 mg tablet once daily treatment for breast cancer
+> Black Cohosh Extract pil herbal supplement
+
+## Alergeddau ac anoddefiadau
+
+| Sylwedd | Critigolrwydd | Statws clinigol | Statws dilysu | Math | Categori | Cychwyn | Codau |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Substance with penicillin structure (substance) | Risg uchel | Gweithredol | Wedi'i gadarnhau | Alergedd | Meddyginiaeth | 2010 | SNOMED CT 764146007 |
+
+**Naratif:**
+
+> Allergy to penicillin, high criticality, active No known food allergies
+
+## Hanes salwch blaenorol
+
+| Cyflwr | Statws clinigol | Statws dilysu | Difrifoldeb | Cychwyn | Wedi gwella | Codau |
+| --- | --- | --- | --- | --- | --- | --- |
+| Malignant tumor of breast | Wedi cilio | Wedi'i gadarnhau | Severe | Ion 2015 | Maw 2015 | SNOMED CT 254837009 · http://terminology.hl7.org/CodeSystem/icd-o-3 8500/3 |
+
+**Naratif:**
+
+> Breast cancer Stage II with no evidence of recurrence following treatment
+
+## Cynllun gofal
+
+*Dim cofnodion strwythuredig. Gweler y naratif o'r ddogfen.*
+
+**Naratif:**
+
+> Continue hormone medication with Anastrozole for total of 5 years and monitor for potential breast cancer recurrence
+
+## Canlyniadau
+
+| Prawf neu arsylwad | Canlyniad | Dyddiad | Codau |
+| --- | --- | --- | --- |
+| Blood typing | ABO and Rh group \\[Type\\] in Blood: Blood group A Rh(D) positive; C Ab \\[Presence\\] in Serum or Plasma: Positive; E Ab \\[Presence\\] in Serum or Plasma: Positive; little c Ab \\[Presence\\] in Serum or Plasma: Negative | 10 Hyd 2015 |   |
+| Hemoglobin A1c/Hemoglobin.total in Blood by HPLC | 7.5 % | 10 Tach 2017, 07:20 | LOINC 17856-6 |
+| Bacteria identified in Isolate | Methicillin resistant Staphylococcus aureus | 10 Rhag 2017, 07:20 | LOINC 42803-7 |
+
+**Naratif:**
+
+> Blood typing
+> Blood group A+
+> C Ab \\[Presence\\] in Serum or Plasma Positive
+> E Ab \\[Presence\\] in Serum or Plasma Positive
+> Little c Ab \\[Presence\\] in Serum or Plasma Negative
+> Hemoglobin A1c monitoring
+> Hemoglobin A1c/Hemoglobin.total in Blood by HPLC 7.5 %
+> Bacteriology
+> Methicillin resistant Staphylococcus aureus
+> Healthy carrier of MRSA
+
+---
+
+- Crëwyd 15 Tach 2026, 12:00
+- Dogfen ffynhonnell 3f69e0a5-2177-4540-baab-7a5d0877428f, dyddiedig 11 Rhag 2017, 13:30
+- Fersiwn IPS: IPS (fersiwn heb ei nodi)
+- **Nid yw'n ddyfais feddygol. Gwiriwch benderfyniadau clinigol yn erbyn y cofnod gwreiddiol.**
+"
+`;
+
+exports[`Markdown export > matches the snapshot for every fixture in cy-001 > IPS-examples-Bundle-with-immunization 1`] = `
+"# Patient Summary as of December 11, 2017 14:30
+
+## Claf
+
+- **Enw:** Martha DeLarosa
+- **Dyddiad geni:** 1 Mai 1972 (54 o flynyddoedd)
+- **Rhywedd:** Benyw
+- **Dynodwyr:** 574687583 (urn:oid:2.16.840.1.113883.2.4.6.3)
+
+## Ynglŷn â'r ddogfen hon
+
+- **Dyddiad:** 11 Rhag 2017, 13:30
+- **Awduron:** Beetje van Hulp
+- **Ceidwad:** Anorg Aniza Tion BV / The best custodian ever
+- **Ardystiwyd gan:** Beetje van Hulp (cyfreithiol) 11 Rhag 2017, 13:30; Anorg Aniza Tion BV / The best custodian ever (cyfreithiol) 11 Rhag 2017, 13:30
+- **Cyfrinachedd:** Normal
+- **Iaith:** Saesneg Prydain (en-GB)
+- **Fersiwn IPS:** IPS (fersiwn heb ei nodi)
+
+## Rhestr problemau
+
+| Cyflwr | Statws clinigol | Statws dilysu | Difrifoldeb | Cychwyn | Codau |
+| --- | --- | --- | --- | --- | --- |
+| Menopausal flushing (finding) | Gweithredol | Wedi'i gadarnhau | Moderate severity | 2015 | SNOMED CT 198436008 · ICD-10 N95.1 |
+
+**Naratif:**
+
+> Hot flushes
+
+## Crynodeb o feddyginiaethau
+
+| Meddyginiaeth | Dosio | Statws | Pryd | Codau |
+| --- | --- | --- | --- | --- |
+| Product containing anastrozole (medicinal product) | 1 tablet, Oral use | Gweithredol | O Maw 2015 | SNOMED CT 108774000 · urn:oid:2.16.840.1.113883.2.4.4.1 99872 · urn:oid:2.16.840.1.113883.2.4.4.7 2076667 · ATC L02BG03 |
+| Cimicifuga racemosa extract (substance) | Oral use | Gweithredol | O Ion 2016 | SNOMED CT 412588001 · ATC G02CX04 |
+
+**Naratif:**
+
+> Medication Strength Form Dosage Comment
+> Anastrozole 1 mg tablet once daily treatment for breast cancer
+> Black Cohosh Extract pil herbal supplement
+
+## Alergeddau ac anoddefiadau
+
+| Sylwedd | Critigolrwydd | Statws clinigol | Statws dilysu | Math | Categori | Cychwyn | Codau |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Substance with penicillin structure (substance) | Risg uchel | Gweithredol | Wedi'i gadarnhau | Alergedd | Meddyginiaeth | 2010 | SNOMED CT 764146007 |
+
+**Naratif:**
+
+> Allergy to penicillin, high criticality, active No known food allergies
+
+## Hanes salwch blaenorol
+
+| Cyflwr | Statws clinigol | Statws dilysu | Difrifoldeb | Cychwyn | Wedi gwella | Codau |
+| --- | --- | --- | --- | --- | --- | --- |
+| Malignant tumor of breast | Wedi cilio | Wedi'i gadarnhau | Severe | Ion 2015 | Maw 2015 | SNOMED CT 254837009 · http://terminology.hl7.org/CodeSystem/icd-o-3 8500/3 |
+
+**Naratif:**
+
+> Breast cancer Stage II with no evidence of recurrence following treatment
+
+## Cynllun gofal
+
+*Dim cofnodion strwythuredig. Gweler y naratif o'r ddogfen.*
+
+**Naratif:**
+
+> Continue hormone medication with Anastrozole for total of 5 years and monitor for potential breast cancer recurrence
+
+## Canlyniadau
+
+| Prawf neu arsylwad | Canlyniad | Dyddiad | Codau |
+| --- | --- | --- | --- |
+| Blood typing | ABO and Rh group \\[Type\\] in Blood: Blood group A Rh(D) positive; C Ab \\[Presence\\] in Serum or Plasma: Positive; E Ab \\[Presence\\] in Serum or Plasma: Positive; little c Ab \\[Presence\\] in Serum or Plasma: Negative | 10 Hyd 2015 |   |
+| Hemoglobin A1c/Hemoglobin.total in Blood by HPLC | 7.5 % | 10 Tach 2017, 07:20 | LOINC 17856-6 |
+| Bacteria identified in Isolate | Methicillin resistant Staphylococcus aureus | 10 Rhag 2017, 07:20 | LOINC 42803-7 |
+
+**Naratif:**
+
+> Blood typing
+> Blood group A+
+> C Ab \\[Presence\\] in Serum or Plasma Positive
+> E Ab \\[Presence\\] in Serum or Plasma Positive
+> Little c Ab \\[Presence\\] in Serum or Plasma Negative
+> Hemoglobin A1c monitoring
+> Hemoglobin A1c/Hemoglobin.total in Blood by HPLC 7.5 %
+> Bacteriology
+> Methicillin resistant Staphylococcus aureus
+> Healthy carrier of MRSA
+
+## Imiwneiddiadau
+
+| Brechlyn | Dyddiad | Dos | Statws | Rhif swp | Codau |
+| --- | --- | --- | --- | --- | --- |
+| Bordetella pertussis and Clostridium tetani and Corynebacterium diphtheriae and Human poliovirus antigens only vaccine product | 3 Meh 1998, 23:00 | Dos 1 | Wedi'i gwblhau | AXK23RWERS | SNOMED CT 871878002 · ATC J07CA02 |
+
+**Naratif:**
+
+> Marie Lux-Brennard (Apr 17, 1998)
+> Vaccin anti diphtérie-coqueluche-tétanos-poliomyélite, Jun 3, 1998, 10:00:00 PM
+> Voie intramusculaire, Cuisse droite
+
+---
+
+- Crëwyd 15 Tach 2026, 12:00
+- Dogfen ffynhonnell 3f69e0a5-2177-4540-baab-7a5d0877428f, dyddiedig 11 Rhag 2017, 13:30
+- Fersiwn IPS: IPS (fersiwn heb ei nodi)
+- **Nid yw'n ddyfais feddygol. Gwiriwch benderfyniadau clinigol yn erbyn y cofnod gwreiddiol.**
+"
+`;
+
+exports[`Markdown export > matches the snapshot for every fixture in cy-001 > bundle-ips-all-sections 1`] = `
+"# International Patient Summary
+
+## Claf
+
+- **Enw:** Patricia JORDANA
+- **Dyddiad geni:** 30 Medi 1956 (70 o flynyddoedd)
+- **Rhywedd:** Benyw
+- **Dynodwyr:** ABC1234 (https://standards.digital.health.nz/ns/nhi-id)
+
+## Ynglŷn â'r ddogfen hon
+
+- **Dyddiad:** 13 Medi 2024
+- **Awduron:** NorthCare Pukete Road-Thomas Road
+- **Ceidwad:** NorthCare Pukete Road-Thomas Road
+- **Ardystiwyd gan:** HASHIRA COORAY COORAY (Doctor) (proffesiynol) 13 Medi 2024
+- **Cyfrinachedd:** Normal
+- **Iaith:** Saesneg (Seland Newydd) (en-NZ)
+- **Fersiwn IPS:** IPS (fersiwn heb ei nodi)
+
+## Rhestr problemau
+
+| Cyflwr | Statws clinigol | Statws dilysu | Cychwyn | Codau |
+| --- | --- | --- | --- | --- |
+| Essential hypertension | Gweithredol | Wedi'i gadarnhau | 25 Mai 2016 | SNOMED CT 59621000 |
+| Gout | Gweithredol | Wedi'i gadarnhau | 25 Mai 2016 | SNOMED CT 90560007 |
+
+**Naratif:**
+
+> Problem Onset Clinical Status Verification Status Severity
+> Essential hypertension May 24 2016 20:00
+> Gout May 24 2016 20:00
+
+## Alergeddau ac anoddefiadau
+
+| Sylwedd | Statws clinigol | Statws dilysu | Codau |
+| --- | --- | --- | --- |
+| Penicillin | Gweithredol | Wedi'i gadarnhau | SNOMED CT 764146007 · ATC J01CA |
+
+**Naratif:**
+
+> Allergy Type Substance Onset Clinical Status Verification Status Reaction
+> Penicillin
+
+## Crynodeb o feddyginiaethau
+
+| Meddyginiaeth | Dosio | Statws | Pryd | Codau |
+| --- | --- | --- | --- | --- |
+| Product containing cilazapril (medicinal product) | Take 1 daily | Wedi'i atal | 1 Rhag 2023 | SNOMED CT 318913001 |
+| Product containing lisinopril (medicinal product) | Take One tablet once daily, Swallow, oral, 1 gwaith bob 1 diwrnod | Gweithredol | 13 Awst 2024 | SNOMED CT 108575001 |
+| Fluocortolone | apply a small amount to the affected area up to 4 times daily on the first day, then twice daily for at least 1 week; continue for up to a maximum of 4 weeks | Gweithredol | 30 Awst 2024 | ATC C05AA08 |
+
+**Naratif:**
+
+> Medication Dates Dosage-Timing Status Route
+> cilazapril 500 microgram tablet, 90 stopped
+> lisinopril 5 mg tablet active
+> Ultraproct - cinchocaine 0.5% (5 mg/g) + fluocortolone hexanoate 0.095% (945 microgram/g) + fluocortolone pivalate 0.092% (918 microgram/g) ointment active
+
+## Imiwneiddiadau
+
+| Brechlyn | Dyddiad | Dos | Statws | Rhif swp | Rhoddwyd gan | Codau |
+| --- | --- | --- | --- | --- | --- | --- |
+| Influenza, split virus, trivalent, preservative | 10 Ebr 2024 | Dos 1 | Wedi'i gwblhau | H06 | NorthCare Pukete Road-Thomas Road | CVX 141 |
+| COVID-19, mRNA, LNP-S, bivalent, PF, 30 mcg/0.3 mL dose | 18 Chwef 2024 | Dos 5 | Wedi'i gwblhau | GK3908-068 | NorthCare Pukete Road-Thomas Road | CVX 300 |
+| Influenza, split virus, trivalent, preservative | 12 Ebr 2023 | Dos 1 | Wedi'i gwblhau | 358899 | NorthCare Pukete Road-Thomas Road | CVX 141 |
+| COVID-19, mRNA, LNP-S, PF, 30 mcg/0.3 mL dose | 1 Awst 2022 | Dos 4 | Wedi'i gwblhau | PCB0008-07 | NorthCare Pukete Road-Thomas Road | CVX 208 |
+| zoster live | 13 Gorff 2022 | Dos 1 | Wedi'i gwblhau | U021248 | NorthCare Pukete Road-Thomas Road | CVX 121 |
+| COVID-19, mRNA, LNP-S, PF, 30 mcg/0.3 mL dose | 13 Ion 2022 | Dos 3 | Wedi'i gwblhau | FL1072-025 | NorthCare Pukete Road-Thomas Road | CVX 208 |
+| COVID-19, mRNA, LNP-S, PF, 30 mcg/0.3 mL dose | 27 Awst 2021 | Dos 2 | Wedi'i gwblhau | FE8163-007 | NorthCare Pukete Road-Thomas Road | CVX 208 |
+| COVID-19, mRNA, LNP-S, PF, 30 mcg/0.3 mL dose | 5 Awst 2021 | Dos 1 | Wedi'i gwblhau | FF8871-001 | NorthCare Pukete Road-Thomas Road | CVX 208 |
+
+**Naratif:**
+
+> Vaccine Date Status Lot Number
+> Influenza, split virus, trivalent, preservative Apr 9 2024 20:00 Completed H06
+> COVID-19, mRNA, LNP-S, bivalent, PF, 30 mcg/0.3 mL dose Feb 17 2024 19:00 Completed GK3908-068
+> Influenza, split virus, trivalent, preservative Apr 11 2023 20:00 Completed 358899
+> COVID-19, mRNA, LNP-S, PF, 30 mcg/0.3 mL dose Jul 31 2022 20:00 Completed PCB0008-07
+> zoster live Jul 12 2022 20:00 Completed U021248
+> COVID-19, mRNA, LNP-S, PF, 30 mcg/0.3 mL dose Jan 12 2022 19:00 Completed FL1072-025
+> COVID-19, mRNA, LNP-S, PF, 30 mcg/0.3 mL dose Aug 26 2021 20:00 Completed FE8163-007
+> COVID-19, mRNA, LNP-S, PF, 30 mcg/0.3 mL dose Aug 4 2021 20:00 Completed FF8871-001
+
+## Canlyniadau
+
+| Prawf neu arsylwad | Canlyniad | Ystod gyfeirio | Dyddiad | Codau |
+| --- | --- | --- | --- | --- |
+| Cholesterol.total/Cholesterol in HDL \\[Molar ratio\\] in Serum or Plasma | 4.1 mmol/L | NA | 31 Hyd 2023, 15:06 | LOINC 32309-7 |
+| Lipid risk factors \\[Finding\\] | A combined CVD risk of which lipids is one component should be estimated to guide CVD risk management decisions. If lipid modifying medication is considered suggest checking first for treatable secondary causes of dyslipidaemia. | NA | 31 Hyd 2023, 15:06 | LOINC 49062-3 |
+| Cholesterol in LDL \\[Moles/volume\\] in Serum or Plasma by calculation | 3.6 mmol/L | NA | 31 Hyd 2023, 15:06 | LOINC 39469-2 |
+| Triglyceride \\[Moles/volume\\] in Serum or Plasma | 1.7 mmol/L | NA | 31 Hyd 2023, 15:06 | LOINC 14927-8 |
+| Cholesterol \\[Moles/volume\\] in Serum or Plasma | 5.7 mmol/L | NA | 31 Hyd 2023, 15:06 | LOINC 14647-2 |
+| Cholesterol in HDL \\[Moles/volume\\] in Serum or Plasma | 1.39 mmol/L | NA | 31 Hyd 2023, 15:06 | LOINC 14646-4 |
+
+**Naratif:**
+
+> Result Value Date Status
+> Cholesterol.total/Cholesterol in HDL \\[Molar ratio\\] in Serum or Plasma 4.1 mmol/L Oct 31 2023 11:06 final
+> Lipid risk factors \\[Finding\\] A combined CVD risk of which lipids is one component should be estimated to guide CVD risk management decisions. If lipid modifying medication is considered suggest checking first for treatable secondary causes of dyslipidaemia. Oct 31 2023 11:06 final
+> Cholesterol in LDL \\[Moles/volume\\] in Serum or Plasma by calculation 3.6 mmol/L Oct 31 2023 11:06 final
+> Triglyceride \\[Moles/volume\\] in Serum or Plasma 1.7 mmol/L Oct 31 2023 11:06 final
+> Cholesterol \\[Moles/volume\\] in Serum or Plasma 5.7 mmol/L Oct 31 2023 11:06 final
+> Cholesterol in HDL \\[Moles/volume\\] in Serum or Plasma 1.39 mmol/L Oct 31 2023 11:06 final
+
+## Hanes triniaethau
+
+| Triniaeth | Statws | Cyflawnwyd | Codau |
+| --- | --- | --- | --- |
+| Total hip replacement | Wedi'i gwblhau | 28 Ebr 2000 | SNOMED CT 52734007 |
+
+**Naratif:**
+
+> Procedure Date Status
+> Total hip replacement Apr 27 2000 20:00 Completed
+
+## Dyfeisiau meddygol
+
+| Dyfais | Statws | Yn cael ei defnyddio | Codau |
+| --- | --- | --- | --- |
+| Hip prosthesis, device (physical object) | Gweithredol | Dechrau: Anhysbys | SNOMED CT 67270000 |
+
+**Naratif:**
+
+> Device Status Body Site Start End
+> Hip prosthesis active
+
+## Arwyddion hanfodol
+
+| Prawf neu arsylwad | Canlyniad | Dyddiad | Codau |
+| --- | --- | --- | --- |
+| Body weight | 91.5 kg | 10 Ebr 2024, 10:58 | LOINC 29463-7 |
+| Body mass index (BMI) \\[Ratio\\] | 24.56 kg/m2 | 10 Ebr 2024, 10:58 | LOINC 39156-5 |
+| Blood pressure panel with all children optional | Systolic blood pressure: 140 mmHg; Diastolic blood pressure: 80 mmHg | 30 Awst 2024, 09:32 | LOINC 85354-9 |
+
+**Naratif:**
+
+> Vital Sign Value Date Status
+> Body weight 91.5 kg Apr 10 2024 05:58 final
+> Body mass index (BMI) \\[Ratio\\] 24.56 kg/m2 Apr 10 2024 05:58 final
+> Blood pressure panel with all children optional 140/80 mmHg Aug 30 2024 04:32 final
+
+## Hanes cymdeithasol
+
+| Prawf neu arsylwad | Canlyniad | Dyddiad | Codau |
+| --- | --- | --- | --- |
+| Tobacco smoking status | Never smoker | 20 Hyd 2022 | LOINC 72166-2 |
+| Alcoholic drinks per day | 1 d | 22 Meh 2016 | LOINC 74013-4 |
+
+**Naratif:**
+
+> Social History Observation Value Date Status
+> Tobacco smoking status Never smoker Oct 19 2022 20:00 final
+> Alcoholic drinks per day 1 d Jun 21 2016 20:00 final
+
+## Rhybuddion
+
+| Rhybudd | Categori | Statws | Codau |
+| --- | --- | --- | --- |
+| Shellfish free diet | Diet | Gweithredol | SNOMED CT 1255002008 |
+
+**Naratif:**
+
+> Alert Status Category Priority Start End
+> Shellfish free diet Active Diet
+
+## Stori'r claf
+
+| Eitem | Disgrifiad | Statws | Dyddiad | Dogfen ffynhonnell | Codau |
+| --- | --- | --- | --- | --- | --- |
+| Do Not Resuscitate | Not for resuscitation | Gweithredol | 1 Medi 2021 | Advance Directive Document | http://terminology.hl7.org/CodeSystem/consentcategorycodes dnr |
+
+**Naratif:**
+
+> Patient undergoing lifestyle changes to lower blood pressure.
+
+## Penderfyniadau ymlaen llaw
+
+| Eitem | Disgrifiad | Statws | Dyddiad | Dogfen ffynhonnell | Codau |
+| --- | --- | --- | --- | --- | --- |
+| Do Not Resuscitate | Not for resuscitation | Gweithredol | 1 Medi 2021 | Advance Directive Document | http://terminology.hl7.org/CodeSystem/consentcategorycodes dnr |
+
+**Naratif:**
+
+> Scope Status Category Date Performer
+> Treatment active Do Not Resuscitate Aug 31 2021 20:00
+
+## Statws gweithredol
+
+| Cyflwr | Statws clinigol | Statws dilysu | Cychwyn | Codau |
+| --- | --- | --- | --- | --- |
+| Impaired Mobility | Gweithredol | Wedi'i gadarnhau | 25 Mai 2016 | SNOMED CT 82971005 |
+
+**Naratif:**
+
+> Code Onset Clinical Status Verification Status Severity
+> Impaired Mobility May 24 2016 20:00
+
+## Hanes salwch blaenorol
+
+| Cyflwr | Statws clinigol | Statws dilysu | Cychwyn | Codau |
+| --- | --- | --- | --- | --- |
+| Fever | Wedi gwella | Wedi'i gadarnhau | 25 Mai 2013 | SNOMED CT 386661006 |
+
+**Naratif:**
+
+> Past Problem Onset Clinical Status Verification Status Severity
+> Fever May 24 2013 20:00
+
+## Hanes beichiogrwydd
+
+| Prawf neu arsylwad | Canlyniad | Dyddiad | Codau |
+| --- | --- | --- | --- |
+| Pregnancy status | Not Pregnant | 10 Ion 2020 | LOINC 82810-3 |
+
+**Naratif:**
+
+> Pregnancy Observation Value Date Status
+> Pregnancy status Not Pregnant Jan 9 2020 19:00 final
+
+## Cynllun gofal
+
+| Eitem | Statws | Dyddiad | Gweithgareddau | Codau |
+| --- | --- | --- | --- | --- |
+| Manage obesity and weight loss | Gweithredol | Tan 1 Meh 2017 | Weight Measured |   |
+
+**Naratif:**
+
+> Title Description Status Intent Category Period Start Period End
+> Weight Measured Manage obesity and weight loss Active Plan Weight management plan May 31 2017 20:00
+
+---
+
+- Crëwyd 15 Tach 2026, 12:00
+- Dogfen ffynhonnell ac7a747c-a2c9-493c-ba39-4ac6997eed1e, dyddiedig 13 Medi 2024
+- Fersiwn IPS: IPS (fersiwn heb ei nodi)
+- **Nid yw'n ddyfais feddygol. Gwiriwch benderfyniadau clinigol yn erbyn y cofnod gwreiddiol.**
+"
+`;
+
+exports[`Markdown export > matches the snapshot for every fixture in cy-001 > bundle-minimal 1`] = `
+"# Patient Summary as of December 11, 2020 14:30
+
+## Claf
+
+- **Enw:** Martha DeLarosa
+- **Dyddiad geni:** 1 Mai 1972 (54 o flynyddoedd)
+- **Rhywedd:** Benyw
+- **Dynodwyr:** 574687583 (urn:oid:2.16.840.1.113883.2.4.6.3)
+
+## Ynglŷn â'r ddogfen hon
+
+- **Dyddiad:** 11 Rhag 2020, 13:30
+- **Awduron:** Beetje van Hulp
+- **Ceidwad:** Anorg Aniza Tion BV / The best custodian ever
+- **Ardystiwyd gan:** Beetje van Hulp (cyfreithiol) 11 Rhag 2020, 13:30; Anorg Aniza Tion BV / The best custodian ever (cyfreithiol) 11 Rhag 2020, 13:30
+- **Cyfrinachedd:** Normal
+- **Iaith:** Saesneg America (en-US)
+- **Fersiwn IPS:** IPS (fersiwn heb ei nodi)
+
+## Rhestr problemau
+
+| Cyflwr | Statws clinigol | Statws dilysu | Difrifoldeb | Cychwyn | Codau |
+| --- | --- | --- | --- | --- | --- |
+| Menopausal flushing (finding) | Gweithredol | Wedi'i gadarnhau | Moderate | 2015 | SNOMED CT 198436008 · ICD-10 N95.1 |
+
+**Naratif:**
+
+> Condition Name: Menopausal Flushing
+> Code: 198436008
+> Status: Active
+
+## Crynodeb o feddyginiaethau
+
+| Meddyginiaeth | Dosio | Statws | Pryd | Codau |
+| --- | --- | --- | --- | --- |
+| Product containing anastrozole (medicinal product) | 1 tablet, Oral use | Gweithredol | O Maw 2015 | SNOMED CT 108774000 · urn:oid:2.16.840.1.113883.2.4.4.1 99872 · urn:oid:2.16.840.1.113883.2.4.4.7 2076667 · ATC L02BG03 |
+
+**Naratif:**
+
+> Medication Name: Oral anastrozole 1mg tablet
+> Code:
+> Status: Active, started March 2015
+> Instructions: Take 1 time per day
+
+## Alergeddau ac anoddefiadau
+
+| Sylwedd | Critigolrwydd | Statws clinigol | Statws dilysu | Math | Categori | Cychwyn | Codau |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Substance with penicillin structure (substance) | Risg uchel | Gweithredol | Wedi'i gadarnhau | Alergedd | Meddyginiaeth | 2010 | SNOMED CT 764146007 |
+
+**Naratif:**
+
+> Allergy Name: Pencillins
+> Verification Status: Confirmed
+> Reaction: no information
+
+---
+
+- Crëwyd 15 Tach 2026, 12:00
+- Dogfen ffynhonnell 28b95815-76ce-457b-b7ae-a972e527db40, dyddiedig 11 Rhag 2020, 13:30
+- Fersiwn IPS: IPS (fersiwn heb ei nodi)
+- **Nid yw'n ddyfais feddygol. Gwiriwch benderfyniadau clinigol yn erbyn y cofnod gwreiddiol.**
+"
+`;
+
+exports[`Markdown export > matches the snapshot for every fixture in cy-001 > bundle-no-info-required-sections 1`] = `
+"# International Patient Summary
+
+## Claf
+
+- **Enw:** James Judge
+- **Dyddiad geni:** 25 Ebr 1985 (41 o flynyddoedd)
+- **Rhywedd:** Gwryw
+- **Dynodwyr:** AAA1234 (https://standards.digital.health.nz/ns/nhi-id)
+
+## Ynglŷn â'r ddogfen hon
+
+- **Dyddiad:** 3 Mai 2021
+- **Awduron:** Northcare, Thomas Road
+- **Ceidwad:** NorthCare Pukete Road
+- **Ardystiwyd gan:** Dr Richard Kildare Kildare (Doctor) (proffesiynol) 3 Mai 2021
+- **Cyfrinachedd:** Normal
+- **Iaith:** Saesneg (Seland Newydd) (en-NZ)
+- **Fersiwn IPS:** IPS (fersiwn heb ei nodi)
+
+## Alergeddau ac anoddefiadau
+
+*Gwybodaeth ddim ar gael — No information available*
+
+**Naratif:**
+
+> There is no information available regarding the subject's allergies.
+
+## Rhestr problemau
+
+*Gwybodaeth ddim ar gael — No information available*
+
+**Naratif:**
+
+> There is no information available about the subject's health problems or disabilities.
+
+## Crynodeb o feddyginiaethau
+
+*Gwybodaeth ddim ar gael — No information available*
+
+**Naratif:**
+
+> There is no information available about the subject's medication use or administration.
+
+## Imiwneiddiadau
+
+| Brechlyn | Dyddiad | Dos | Statws | Rhif swp | Rhoddwyd gan | Codau |
+| --- | --- | --- | --- | --- | --- | --- |
+| Influenza, split virus, trivalent, preservative | 3 Gorff 2020 | Dos 2 | Wedi'i gwblhau | B52b | NorthCare Pukete Road | CVX 141 |
+| Influenza, split virus, trivalent, preservative | 3 Meh 2019 | Dos 1 | Wedi'i gwblhau | B52 | NorthCare Pukete Road | CVX 141 |
+
+**Naratif:**
+
+> Vaccine Date Seq Route Site Indication Status
+> Influenza 03/07/2020 2 Injection, intramuscular Entire left upper arm Eligible condition (Influenza) completed
+> Influenza 03/06/2019 1 Injection, intramuscular Entire left upper arm Eligible condition (Influenza) completed
+
+---
+
+- Crëwyd 15 Tach 2026, 12:00
+- Dogfen ffynhonnell 59f51f0b-2005-485c-858e-3d3ae9657287, dyddiedig 3 Mai 2021
+- Fersiwn IPS: IPS (fersiwn heb ei nodi)
+- **Nid yw'n ddyfais feddygol. Gwiriwch benderfyniadau clinigol yn erbyn y cofnod gwreiddiol.**
+"
+`;
+
+exports[`Markdown export > matches the snapshot for every fixture in en-GB > IPS-examples-Bundle-01 1`] = `
+"# Patient Summary as of December 11, 2017 14:30
+
+## Patient
+
+- **Name:** Martha DeLarosa
+- **Date of birth:** 1 May 1972 (54 years)
+- **Gender:** Female
+- **Identifiers:** 574687583 (urn:oid:2.16.840.1.113883.2.4.6.3)
+
+## About this document
+
+- **Date:** 11 Dec 2017, 13:30
+- **Authors:** Beetje van Hulp
+- **Custodian:** Anorg Aniza Tion BV / The best custodian ever
+- **Attested by:** Beetje van Hulp (legal) 11 Dec 2017, 13:30; Anorg Aniza Tion BV / The best custodian ever (legal) 11 Dec 2017, 13:30
+- **Confidentiality:** Normal
+- **Language:** British English (en-GB)
+- **IPS version:** IPS (version not stated)
+
+## Problem list
+
+| Condition | Clinical status | Verification status | Severity | Onset | Codes |
+| --- | --- | --- | --- | --- | --- |
+| Menopausal flushing (finding) | Active | Confirmed | Moderate severity | 2015 | SNOMED CT 198436008 · ICD-10 N95.1 |
+
+**Narrative:**
+
+> Hot flushes
+
+## Medication summary
+
+| Medication | Dosage | Status | When | Codes |
+| --- | --- | --- | --- | --- |
+| Product containing anastrozole (medicinal product) | 1 tablet, Oral use | Active | From Mar 2015 | SNOMED CT 108774000 · urn:oid:2.16.840.1.113883.2.4.4.1 99872 · urn:oid:2.16.840.1.113883.2.4.4.7 2076667 · ATC L02BG03 |
+| Cimicifuga racemosa extract (substance) | Oral use | Active | From Jan 2016 | SNOMED CT 412588001 · ATC G02CX04 |
+
+**Narrative:**
+
+> Medication Strength Form Dosage Comment
+> Anastrozole 1 mg tablet once daily treatment for breast cancer
+> Black Cohosh Extract pil herbal supplement
+
+## Allergies and intolerances
+
+| Substance | Criticality | Clinical status | Verification status | Type | Category | Onset | Codes |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Substance with penicillin structure (substance) | High risk | Active | Confirmed | Allergy | Medication | 2010 | SNOMED CT 764146007 |
+
+**Narrative:**
+
+> Allergy to penicillin, high criticality, active No known food allergies
+
+## History of past illness
+
+| Condition | Clinical status | Verification status | Severity | Onset | Resolved | Codes |
+| --- | --- | --- | --- | --- | --- | --- |
+| Malignant tumor of breast | Remission | Confirmed | Severe | Jan 2015 | Mar 2015 | SNOMED CT 254837009 · http://terminology.hl7.org/CodeSystem/icd-o-3 8500/3 |
+
+**Narrative:**
+
+> Breast cancer Stage II with no evidence of recurrence following treatment
+
+## Plan of care
+
+*No structured entries. See the narrative from the document.*
+
+**Narrative:**
+
+> Continue hormone medication with Anastrozole for total of 5 years and monitor for potential breast cancer recurrence
+
+## Results
+
+| Test or observation | Result | Date | Codes |
+| --- | --- | --- | --- |
+| Blood typing | ABO and Rh group \\[Type\\] in Blood: Blood group A Rh(D) positive; C Ab \\[Presence\\] in Serum or Plasma: Positive; E Ab \\[Presence\\] in Serum or Plasma: Positive; little c Ab \\[Presence\\] in Serum or Plasma: Negative | 10 Oct 2015 |   |
+| Hemoglobin A1c/Hemoglobin.total in Blood by HPLC | 7.5 % | 10 Nov 2017, 07:20 | LOINC 17856-6 |
+| Bacteria identified in Isolate | Methicillin resistant Staphylococcus aureus | 10 Dec 2017, 07:20 | LOINC 42803-7 |
+
+**Narrative:**
+
+> Blood typing
+> Blood group A+
+> C Ab \\[Presence\\] in Serum or Plasma Positive
+> E Ab \\[Presence\\] in Serum or Plasma Positive
+> Little c Ab \\[Presence\\] in Serum or Plasma Negative
+> Hemoglobin A1c monitoring
+> Hemoglobin A1c/Hemoglobin.total in Blood by HPLC 7.5 %
+> Bacteriology
+> Methicillin resistant Staphylococcus aureus
+> Healthy carrier of MRSA
+
+---
+
+- Generated 15 Nov 2026, 12:00
+- Source document 3f69e0a5-2177-4540-baab-7a5d0877428f, dated 11 Dec 2017, 13:30
+- IPS version: IPS (version not stated)
+- **Not a medical device. Check clinical decisions against the source record.**
+"
+`;
+
+exports[`Markdown export > matches the snapshot for every fixture in en-GB > IPS-examples-Bundle-with-immunization 1`] = `
+"# Patient Summary as of December 11, 2017 14:30
+
+## Patient
+
+- **Name:** Martha DeLarosa
+- **Date of birth:** 1 May 1972 (54 years)
+- **Gender:** Female
+- **Identifiers:** 574687583 (urn:oid:2.16.840.1.113883.2.4.6.3)
+
+## About this document
+
+- **Date:** 11 Dec 2017, 13:30
+- **Authors:** Beetje van Hulp
+- **Custodian:** Anorg Aniza Tion BV / The best custodian ever
+- **Attested by:** Beetje van Hulp (legal) 11 Dec 2017, 13:30; Anorg Aniza Tion BV / The best custodian ever (legal) 11 Dec 2017, 13:30
+- **Confidentiality:** Normal
+- **Language:** British English (en-GB)
+- **IPS version:** IPS (version not stated)
+
+## Problem list
+
+| Condition | Clinical status | Verification status | Severity | Onset | Codes |
+| --- | --- | --- | --- | --- | --- |
+| Menopausal flushing (finding) | Active | Confirmed | Moderate severity | 2015 | SNOMED CT 198436008 · ICD-10 N95.1 |
+
+**Narrative:**
+
+> Hot flushes
+
+## Medication summary
+
+| Medication | Dosage | Status | When | Codes |
+| --- | --- | --- | --- | --- |
+| Product containing anastrozole (medicinal product) | 1 tablet, Oral use | Active | From Mar 2015 | SNOMED CT 108774000 · urn:oid:2.16.840.1.113883.2.4.4.1 99872 · urn:oid:2.16.840.1.113883.2.4.4.7 2076667 · ATC L02BG03 |
+| Cimicifuga racemosa extract (substance) | Oral use | Active | From Jan 2016 | SNOMED CT 412588001 · ATC G02CX04 |
+
+**Narrative:**
+
+> Medication Strength Form Dosage Comment
+> Anastrozole 1 mg tablet once daily treatment for breast cancer
+> Black Cohosh Extract pil herbal supplement
+
+## Allergies and intolerances
+
+| Substance | Criticality | Clinical status | Verification status | Type | Category | Onset | Codes |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Substance with penicillin structure (substance) | High risk | Active | Confirmed | Allergy | Medication | 2010 | SNOMED CT 764146007 |
+
+**Narrative:**
+
+> Allergy to penicillin, high criticality, active No known food allergies
+
+## History of past illness
+
+| Condition | Clinical status | Verification status | Severity | Onset | Resolved | Codes |
+| --- | --- | --- | --- | --- | --- | --- |
+| Malignant tumor of breast | Remission | Confirmed | Severe | Jan 2015 | Mar 2015 | SNOMED CT 254837009 · http://terminology.hl7.org/CodeSystem/icd-o-3 8500/3 |
+
+**Narrative:**
+
+> Breast cancer Stage II with no evidence of recurrence following treatment
+
+## Plan of care
+
+*No structured entries. See the narrative from the document.*
+
+**Narrative:**
+
+> Continue hormone medication with Anastrozole for total of 5 years and monitor for potential breast cancer recurrence
+
+## Results
+
+| Test or observation | Result | Date | Codes |
+| --- | --- | --- | --- |
+| Blood typing | ABO and Rh group \\[Type\\] in Blood: Blood group A Rh(D) positive; C Ab \\[Presence\\] in Serum or Plasma: Positive; E Ab \\[Presence\\] in Serum or Plasma: Positive; little c Ab \\[Presence\\] in Serum or Plasma: Negative | 10 Oct 2015 |   |
+| Hemoglobin A1c/Hemoglobin.total in Blood by HPLC | 7.5 % | 10 Nov 2017, 07:20 | LOINC 17856-6 |
+| Bacteria identified in Isolate | Methicillin resistant Staphylococcus aureus | 10 Dec 2017, 07:20 | LOINC 42803-7 |
+
+**Narrative:**
+
+> Blood typing
+> Blood group A+
+> C Ab \\[Presence\\] in Serum or Plasma Positive
+> E Ab \\[Presence\\] in Serum or Plasma Positive
+> Little c Ab \\[Presence\\] in Serum or Plasma Negative
+> Hemoglobin A1c monitoring
+> Hemoglobin A1c/Hemoglobin.total in Blood by HPLC 7.5 %
+> Bacteriology
+> Methicillin resistant Staphylococcus aureus
+> Healthy carrier of MRSA
+
+## Immunisations
+
+| Vaccine | Date | Dose | Status | Lot number | Codes |
+| --- | --- | --- | --- | --- | --- |
+| Bordetella pertussis and Clostridium tetani and Corynebacterium diphtheriae and Human poliovirus antigens only vaccine product | 3 Jun 1998, 23:00 | Dose 1 | Completed | AXK23RWERS | SNOMED CT 871878002 · ATC J07CA02 |
+
+**Narrative:**
+
+> Marie Lux-Brennard (Apr 17, 1998)
+> Vaccin anti diphtérie-coqueluche-tétanos-poliomyélite, Jun 3, 1998, 10:00:00 PM
+> Voie intramusculaire, Cuisse droite
+
+---
+
+- Generated 15 Nov 2026, 12:00
+- Source document 3f69e0a5-2177-4540-baab-7a5d0877428f, dated 11 Dec 2017, 13:30
+- IPS version: IPS (version not stated)
+- **Not a medical device. Check clinical decisions against the source record.**
+"
+`;
+
+exports[`Markdown export > matches the snapshot for every fixture in en-GB > bundle-ips-all-sections 1`] = `
+"# International Patient Summary
+
+## Patient
+
+- **Name:** Patricia JORDANA
+- **Date of birth:** 30 Sept 1956 (70 years)
+- **Gender:** Female
+- **Identifiers:** ABC1234 (https://standards.digital.health.nz/ns/nhi-id)
+
+## About this document
+
+- **Date:** 13 Sept 2024
+- **Authors:** NorthCare Pukete Road-Thomas Road
+- **Custodian:** NorthCare Pukete Road-Thomas Road
+- **Attested by:** HASHIRA COORAY COORAY (Doctor) (professional) 13 Sept 2024
+- **Confidentiality:** Normal
+- **Language:** English (New Zealand) (en-NZ)
+- **IPS version:** IPS (version not stated)
+
+## Problem list
+
+| Condition | Clinical status | Verification status | Onset | Codes |
+| --- | --- | --- | --- | --- |
+| Essential hypertension | Active | Confirmed | 25 May 2016 | SNOMED CT 59621000 |
+| Gout | Active | Confirmed | 25 May 2016 | SNOMED CT 90560007 |
+
+**Narrative:**
+
+> Problem Onset Clinical Status Verification Status Severity
+> Essential hypertension May 24 2016 20:00
+> Gout May 24 2016 20:00
+
+## Allergies and intolerances
+
+| Substance | Clinical status | Verification status | Codes |
+| --- | --- | --- | --- |
+| Penicillin | Active | Confirmed | SNOMED CT 764146007 · ATC J01CA |
+
+**Narrative:**
+
+> Allergy Type Substance Onset Clinical Status Verification Status Reaction
+> Penicillin
+
+## Medication summary
+
+| Medication | Dosage | Status | When | Codes |
+| --- | --- | --- | --- | --- |
+| Product containing cilazapril (medicinal product) | Take 1 daily | Stopped | 1 Dec 2023 | SNOMED CT 318913001 |
+| Product containing lisinopril (medicinal product) | Take One tablet once daily, Swallow, oral, 1 times every 1 day | Active | 13 Aug 2024 | SNOMED CT 108575001 |
+| Fluocortolone | apply a small amount to the affected area up to 4 times daily on the first day, then twice daily for at least 1 week; continue for up to a maximum of 4 weeks | Active | 30 Aug 2024 | ATC C05AA08 |
+
+**Narrative:**
+
+> Medication Dates Dosage-Timing Status Route
+> cilazapril 500 microgram tablet, 90 stopped
+> lisinopril 5 mg tablet active
+> Ultraproct - cinchocaine 0.5% (5 mg/g) + fluocortolone hexanoate 0.095% (945 microgram/g) + fluocortolone pivalate 0.092% (918 microgram/g) ointment active
+
+## Immunisations
+
+| Vaccine | Date | Dose | Status | Lot number | Given by | Codes |
+| --- | --- | --- | --- | --- | --- | --- |
+| Influenza, split virus, trivalent, preservative | 10 Apr 2024 | Dose 1 | Completed | H06 | NorthCare Pukete Road-Thomas Road | CVX 141 |
+| COVID-19, mRNA, LNP-S, bivalent, PF, 30 mcg/0.3 mL dose | 18 Feb 2024 | Dose 5 | Completed | GK3908-068 | NorthCare Pukete Road-Thomas Road | CVX 300 |
+| Influenza, split virus, trivalent, preservative | 12 Apr 2023 | Dose 1 | Completed | 358899 | NorthCare Pukete Road-Thomas Road | CVX 141 |
+| COVID-19, mRNA, LNP-S, PF, 30 mcg/0.3 mL dose | 1 Aug 2022 | Dose 4 | Completed | PCB0008-07 | NorthCare Pukete Road-Thomas Road | CVX 208 |
+| zoster live | 13 Jul 2022 | Dose 1 | Completed | U021248 | NorthCare Pukete Road-Thomas Road | CVX 121 |
+| COVID-19, mRNA, LNP-S, PF, 30 mcg/0.3 mL dose | 13 Jan 2022 | Dose 3 | Completed | FL1072-025 | NorthCare Pukete Road-Thomas Road | CVX 208 |
+| COVID-19, mRNA, LNP-S, PF, 30 mcg/0.3 mL dose | 27 Aug 2021 | Dose 2 | Completed | FE8163-007 | NorthCare Pukete Road-Thomas Road | CVX 208 |
+| COVID-19, mRNA, LNP-S, PF, 30 mcg/0.3 mL dose | 5 Aug 2021 | Dose 1 | Completed | FF8871-001 | NorthCare Pukete Road-Thomas Road | CVX 208 |
+
+**Narrative:**
+
+> Vaccine Date Status Lot Number
+> Influenza, split virus, trivalent, preservative Apr 9 2024 20:00 Completed H06
+> COVID-19, mRNA, LNP-S, bivalent, PF, 30 mcg/0.3 mL dose Feb 17 2024 19:00 Completed GK3908-068
+> Influenza, split virus, trivalent, preservative Apr 11 2023 20:00 Completed 358899
+> COVID-19, mRNA, LNP-S, PF, 30 mcg/0.3 mL dose Jul 31 2022 20:00 Completed PCB0008-07
+> zoster live Jul 12 2022 20:00 Completed U021248
+> COVID-19, mRNA, LNP-S, PF, 30 mcg/0.3 mL dose Jan 12 2022 19:00 Completed FL1072-025
+> COVID-19, mRNA, LNP-S, PF, 30 mcg/0.3 mL dose Aug 26 2021 20:00 Completed FE8163-007
+> COVID-19, mRNA, LNP-S, PF, 30 mcg/0.3 mL dose Aug 4 2021 20:00 Completed FF8871-001
+
+## Results
+
+| Test or observation | Result | Reference range | Date | Codes |
+| --- | --- | --- | --- | --- |
+| Cholesterol.total/Cholesterol in HDL \\[Molar ratio\\] in Serum or Plasma | 4.1 mmol/L | NA | 31 Oct 2023, 15:06 | LOINC 32309-7 |
+| Lipid risk factors \\[Finding\\] | A combined CVD risk of which lipids is one component should be estimated to guide CVD risk management decisions. If lipid modifying medication is considered suggest checking first for treatable secondary causes of dyslipidaemia. | NA | 31 Oct 2023, 15:06 | LOINC 49062-3 |
+| Cholesterol in LDL \\[Moles/volume\\] in Serum or Plasma by calculation | 3.6 mmol/L | NA | 31 Oct 2023, 15:06 | LOINC 39469-2 |
+| Triglyceride \\[Moles/volume\\] in Serum or Plasma | 1.7 mmol/L | NA | 31 Oct 2023, 15:06 | LOINC 14927-8 |
+| Cholesterol \\[Moles/volume\\] in Serum or Plasma | 5.7 mmol/L | NA | 31 Oct 2023, 15:06 | LOINC 14647-2 |
+| Cholesterol in HDL \\[Moles/volume\\] in Serum or Plasma | 1.39 mmol/L | NA | 31 Oct 2023, 15:06 | LOINC 14646-4 |
+
+**Narrative:**
+
+> Result Value Date Status
+> Cholesterol.total/Cholesterol in HDL \\[Molar ratio\\] in Serum or Plasma 4.1 mmol/L Oct 31 2023 11:06 final
+> Lipid risk factors \\[Finding\\] A combined CVD risk of which lipids is one component should be estimated to guide CVD risk management decisions. If lipid modifying medication is considered suggest checking first for treatable secondary causes of dyslipidaemia. Oct 31 2023 11:06 final
+> Cholesterol in LDL \\[Moles/volume\\] in Serum or Plasma by calculation 3.6 mmol/L Oct 31 2023 11:06 final
+> Triglyceride \\[Moles/volume\\] in Serum or Plasma 1.7 mmol/L Oct 31 2023 11:06 final
+> Cholesterol \\[Moles/volume\\] in Serum or Plasma 5.7 mmol/L Oct 31 2023 11:06 final
+> Cholesterol in HDL \\[Moles/volume\\] in Serum or Plasma 1.39 mmol/L Oct 31 2023 11:06 final
+
+## History of procedures
+
+| Procedure | Status | Performed | Codes |
+| --- | --- | --- | --- |
+| Total hip replacement | Completed | 28 Apr 2000 | SNOMED CT 52734007 |
+
+**Narrative:**
+
+> Procedure Date Status
+> Total hip replacement Apr 27 2000 20:00 Completed
+
+## Medical devices
+
+| Device | Status | In use | Codes |
+| --- | --- | --- | --- |
+| Hip prosthesis, device (physical object) | Active | Start: Unknown | SNOMED CT 67270000 |
+
+**Narrative:**
+
+> Device Status Body Site Start End
+> Hip prosthesis active
+
+## Vital signs
+
+| Test or observation | Result | Date | Codes |
+| --- | --- | --- | --- |
+| Body weight | 91.5 kg | 10 Apr 2024, 10:58 | LOINC 29463-7 |
+| Body mass index (BMI) \\[Ratio\\] | 24.56 kg/m2 | 10 Apr 2024, 10:58 | LOINC 39156-5 |
+| Blood pressure panel with all children optional | Systolic blood pressure: 140 mmHg; Diastolic blood pressure: 80 mmHg | 30 Aug 2024, 09:32 | LOINC 85354-9 |
+
+**Narrative:**
+
+> Vital Sign Value Date Status
+> Body weight 91.5 kg Apr 10 2024 05:58 final
+> Body mass index (BMI) \\[Ratio\\] 24.56 kg/m2 Apr 10 2024 05:58 final
+> Blood pressure panel with all children optional 140/80 mmHg Aug 30 2024 04:32 final
+
+## Social history
+
+| Test or observation | Result | Date | Codes |
+| --- | --- | --- | --- |
+| Tobacco smoking status | Never smoker | 20 Oct 2022 | LOINC 72166-2 |
+| Alcoholic drinks per day | 1 d | 22 Jun 2016 | LOINC 74013-4 |
+
+**Narrative:**
+
+> Social History Observation Value Date Status
+> Tobacco smoking status Never smoker Oct 19 2022 20:00 final
+> Alcoholic drinks per day 1 d Jun 21 2016 20:00 final
+
+## Alerts
+
+| Alert | Category | Status | Codes |
+| --- | --- | --- | --- |
+| Shellfish free diet | Diet | Active | SNOMED CT 1255002008 |
+
+**Narrative:**
+
+> Alert Status Category Priority Start End
+> Shellfish free diet Active Diet
+
+## Patient story
+
+| Item | Description | Status | Date | Source document | Codes |
+| --- | --- | --- | --- | --- | --- |
+| Do Not Resuscitate | Not for resuscitation | Active | 1 Sept 2021 | Advance Directive Document | http://terminology.hl7.org/CodeSystem/consentcategorycodes dnr |
+
+**Narrative:**
+
+> Patient undergoing lifestyle changes to lower blood pressure.
+
+## Advance directives
+
+| Item | Description | Status | Date | Source document | Codes |
+| --- | --- | --- | --- | --- | --- |
+| Do Not Resuscitate | Not for resuscitation | Active | 1 Sept 2021 | Advance Directive Document | http://terminology.hl7.org/CodeSystem/consentcategorycodes dnr |
+
+**Narrative:**
+
+> Scope Status Category Date Performer
+> Treatment active Do Not Resuscitate Aug 31 2021 20:00
+
+## Functional status
+
+| Condition | Clinical status | Verification status | Onset | Codes |
+| --- | --- | --- | --- | --- |
+| Impaired Mobility | Active | Confirmed | 25 May 2016 | SNOMED CT 82971005 |
+
+**Narrative:**
+
+> Code Onset Clinical Status Verification Status Severity
+> Impaired Mobility May 24 2016 20:00
+
+## History of past illness
+
+| Condition | Clinical status | Verification status | Onset | Codes |
+| --- | --- | --- | --- | --- |
+| Fever | Resolved | Confirmed | 25 May 2013 | SNOMED CT 386661006 |
+
+**Narrative:**
+
+> Past Problem Onset Clinical Status Verification Status Severity
+> Fever May 24 2013 20:00
+
+## History of pregnancy
+
+| Test or observation | Result | Date | Codes |
+| --- | --- | --- | --- |
+| Pregnancy status | Not Pregnant | 10 Jan 2020 | LOINC 82810-3 |
+
+**Narrative:**
+
+> Pregnancy Observation Value Date Status
+> Pregnancy status Not Pregnant Jan 9 2020 19:00 final
+
+## Plan of care
+
+| Item | Status | Date | Activities | Codes |
+| --- | --- | --- | --- | --- |
+| Manage obesity and weight loss | Active | Until 1 Jun 2017 | Weight Measured |   |
+
+**Narrative:**
+
+> Title Description Status Intent Category Period Start Period End
+> Weight Measured Manage obesity and weight loss Active Plan Weight management plan May 31 2017 20:00
+
+---
+
+- Generated 15 Nov 2026, 12:00
+- Source document ac7a747c-a2c9-493c-ba39-4ac6997eed1e, dated 13 Sept 2024
+- IPS version: IPS (version not stated)
+- **Not a medical device. Check clinical decisions against the source record.**
+"
+`;
+
+exports[`Markdown export > matches the snapshot for every fixture in en-GB > bundle-minimal 1`] = `
+"# Patient Summary as of December 11, 2020 14:30
+
+## Patient
+
+- **Name:** Martha DeLarosa
+- **Date of birth:** 1 May 1972 (54 years)
+- **Gender:** Female
+- **Identifiers:** 574687583 (urn:oid:2.16.840.1.113883.2.4.6.3)
+
+## About this document
+
+- **Date:** 11 Dec 2020, 13:30
+- **Authors:** Beetje van Hulp
+- **Custodian:** Anorg Aniza Tion BV / The best custodian ever
+- **Attested by:** Beetje van Hulp (legal) 11 Dec 2020, 13:30; Anorg Aniza Tion BV / The best custodian ever (legal) 11 Dec 2020, 13:30
+- **Confidentiality:** Normal
+- **Language:** American English (en-US)
+- **IPS version:** IPS (version not stated)
+
+## Problem list
+
+| Condition | Clinical status | Verification status | Severity | Onset | Codes |
+| --- | --- | --- | --- | --- | --- |
+| Menopausal flushing (finding) | Active | Confirmed | Moderate | 2015 | SNOMED CT 198436008 · ICD-10 N95.1 |
+
+**Narrative:**
+
+> Condition Name: Menopausal Flushing
+> Code: 198436008
+> Status: Active
+
+## Medication summary
+
+| Medication | Dosage | Status | When | Codes |
+| --- | --- | --- | --- | --- |
+| Product containing anastrozole (medicinal product) | 1 tablet, Oral use | Active | From Mar 2015 | SNOMED CT 108774000 · urn:oid:2.16.840.1.113883.2.4.4.1 99872 · urn:oid:2.16.840.1.113883.2.4.4.7 2076667 · ATC L02BG03 |
+
+**Narrative:**
+
+> Medication Name: Oral anastrozole 1mg tablet
+> Code:
+> Status: Active, started March 2015
+> Instructions: Take 1 time per day
+
+## Allergies and intolerances
+
+| Substance | Criticality | Clinical status | Verification status | Type | Category | Onset | Codes |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Substance with penicillin structure (substance) | High risk | Active | Confirmed | Allergy | Medication | 2010 | SNOMED CT 764146007 |
+
+**Narrative:**
+
+> Allergy Name: Pencillins
+> Verification Status: Confirmed
+> Reaction: no information
+
+---
+
+- Generated 15 Nov 2026, 12:00
+- Source document 28b95815-76ce-457b-b7ae-a972e527db40, dated 11 Dec 2020, 13:30
+- IPS version: IPS (version not stated)
+- **Not a medical device. Check clinical decisions against the source record.**
+"
+`;
+
+exports[`Markdown export > matches the snapshot for every fixture in en-GB > bundle-no-info-required-sections 1`] = `
+"# International Patient Summary
+
+## Patient
+
+- **Name:** James Judge
+- **Date of birth:** 25 Apr 1985 (41 years)
+- **Gender:** Male
+- **Identifiers:** AAA1234 (https://standards.digital.health.nz/ns/nhi-id)
+
+## About this document
+
+- **Date:** 3 May 2021
+- **Authors:** Northcare, Thomas Road
+- **Custodian:** NorthCare Pukete Road
+- **Attested by:** Dr Richard Kildare Kildare (Doctor) (professional) 3 May 2021
+- **Confidentiality:** Normal
+- **Language:** English (New Zealand) (en-NZ)
+- **IPS version:** IPS (version not stated)
+
+## Allergies and intolerances
+
+*Information unavailable — No information available*
+
+**Narrative:**
+
+> There is no information available regarding the subject's allergies.
+
+## Problem list
+
+*Information unavailable — No information available*
+
+**Narrative:**
+
+> There is no information available about the subject's health problems or disabilities.
+
+## Medication summary
+
+*Information unavailable — No information available*
+
+**Narrative:**
+
+> There is no information available about the subject's medication use or administration.
+
+## Immunisations
+
+| Vaccine | Date | Dose | Status | Lot number | Given by | Codes |
+| --- | --- | --- | --- | --- | --- | --- |
+| Influenza, split virus, trivalent, preservative | 3 Jul 2020 | Dose 2 | Completed | B52b | NorthCare Pukete Road | CVX 141 |
+| Influenza, split virus, trivalent, preservative | 3 Jun 2019 | Dose 1 | Completed | B52 | NorthCare Pukete Road | CVX 141 |
+
+**Narrative:**
+
+> Vaccine Date Seq Route Site Indication Status
+> Influenza 03/07/2020 2 Injection, intramuscular Entire left upper arm Eligible condition (Influenza) completed
+> Influenza 03/06/2019 1 Injection, intramuscular Entire left upper arm Eligible condition (Influenza) completed
+
+---
+
+- Generated 15 Nov 2026, 12:00
+- Source document 59f51f0b-2005-485c-858e-3d3ae9657287, dated 3 May 2021
+- IPS version: IPS (version not stated)
+- **Not a medical device. Check clinical decisions against the source record.**
+"
+`;
+
+exports[`Markdown export > matches the snapshot for every fixture in en-US > IPS-examples-Bundle-01 1`] = `
+"# Patient Summary as of December 11, 2017 14:30
+
+## Patient
+
+- **Name:** Martha DeLarosa
+- **Date of birth:** May 1, 1972 (54 years)
+- **Gender:** Female
+- **Identifiers:** 574687583 (urn:oid:2.16.840.1.113883.2.4.6.3)
+
+## About this document
+
+- **Date:** Dec 11, 2017, 01:30 PM
+- **Authors:** Beetje van Hulp
+- **Custodian:** Anorg Aniza Tion BV / The best custodian ever
+- **Attested by:** Beetje van Hulp (legal) Dec 11, 2017, 01:30 PM; Anorg Aniza Tion BV / The best custodian ever (legal) Dec 11, 2017, 01:30 PM
+- **Confidentiality:** Normal
+- **Language:** British English (en-GB)
+- **IPS version:** IPS (version not stated)
+
+## Problem list
+
+| Condition | Clinical status | Verification status | Severity | Onset | Codes |
+| --- | --- | --- | --- | --- | --- |
+| Menopausal flushing (finding) | Active | Confirmed | Moderate severity | 2015 | SNOMED CT 198436008 · ICD-10 N95.1 |
+
+**Narrative:**
+
+> Hot flushes
+
+## Medication summary
+
+| Medication | Dosage | Status | When | Codes |
+| --- | --- | --- | --- | --- |
+| Product containing anastrozole (medicinal product) | 1 tablet, Oral use | Active | From Mar 2015 | SNOMED CT 108774000 · urn:oid:2.16.840.1.113883.2.4.4.1 99872 · urn:oid:2.16.840.1.113883.2.4.4.7 2076667 · ATC L02BG03 |
+| Cimicifuga racemosa extract (substance) | Oral use | Active | From Jan 2016 | SNOMED CT 412588001 · ATC G02CX04 |
+
+**Narrative:**
+
+> Medication Strength Form Dosage Comment
+> Anastrozole 1 mg tablet once daily treatment for breast cancer
+> Black Cohosh Extract pil herbal supplement
+
+## Allergies and intolerances
+
+| Substance | Criticality | Clinical status | Verification status | Type | Category | Onset | Codes |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Substance with penicillin structure (substance) | High risk | Active | Confirmed | Allergy | Medication | 2010 | SNOMED CT 764146007 |
+
+**Narrative:**
+
+> Allergy to penicillin, high criticality, active No known food allergies
+
+## History of past illness
+
+| Condition | Clinical status | Verification status | Severity | Onset | Resolved | Codes |
+| --- | --- | --- | --- | --- | --- | --- |
+| Malignant tumor of breast | Remission | Confirmed | Severe | Jan 2015 | Mar 2015 | SNOMED CT 254837009 · http://terminology.hl7.org/CodeSystem/icd-o-3 8500/3 |
+
+**Narrative:**
+
+> Breast cancer Stage II with no evidence of recurrence following treatment
+
+## Plan of care
+
+*No structured entries. See the narrative from the document.*
+
+**Narrative:**
+
+> Continue hormone medication with Anastrozole for total of 5 years and monitor for potential breast cancer recurrence
+
+## Results
+
+| Test or observation | Result | Date | Codes |
+| --- | --- | --- | --- |
+| Blood typing | ABO and Rh group \\[Type\\] in Blood: Blood group A Rh(D) positive; C Ab \\[Presence\\] in Serum or Plasma: Positive; E Ab \\[Presence\\] in Serum or Plasma: Positive; little c Ab \\[Presence\\] in Serum or Plasma: Negative | Oct 10, 2015 |   |
+| Hemoglobin A1c/Hemoglobin.total in Blood by HPLC | 7.5 % | Nov 10, 2017, 07:20 AM | LOINC 17856-6 |
+| Bacteria identified in Isolate | Methicillin resistant Staphylococcus aureus | Dec 10, 2017, 07:20 AM | LOINC 42803-7 |
+
+**Narrative:**
+
+> Blood typing
+> Blood group A+
+> C Ab \\[Presence\\] in Serum or Plasma Positive
+> E Ab \\[Presence\\] in Serum or Plasma Positive
+> Little c Ab \\[Presence\\] in Serum or Plasma Negative
+> Hemoglobin A1c monitoring
+> Hemoglobin A1c/Hemoglobin.total in Blood by HPLC 7.5 %
+> Bacteriology
+> Methicillin resistant Staphylococcus aureus
+> Healthy carrier of MRSA
+
+---
+
+- Generated Nov 15, 2026, 12:00 PM
+- Source document 3f69e0a5-2177-4540-baab-7a5d0877428f, dated Dec 11, 2017, 01:30 PM
+- IPS version: IPS (version not stated)
+- **Not a medical device. Check clinical decisions against the source record.**
+"
+`;
+
+exports[`Markdown export > matches the snapshot for every fixture in en-US > IPS-examples-Bundle-with-immunization 1`] = `
+"# Patient Summary as of December 11, 2017 14:30
+
+## Patient
+
+- **Name:** Martha DeLarosa
+- **Date of birth:** May 1, 1972 (54 years)
+- **Gender:** Female
+- **Identifiers:** 574687583 (urn:oid:2.16.840.1.113883.2.4.6.3)
+
+## About this document
+
+- **Date:** Dec 11, 2017, 01:30 PM
+- **Authors:** Beetje van Hulp
+- **Custodian:** Anorg Aniza Tion BV / The best custodian ever
+- **Attested by:** Beetje van Hulp (legal) Dec 11, 2017, 01:30 PM; Anorg Aniza Tion BV / The best custodian ever (legal) Dec 11, 2017, 01:30 PM
+- **Confidentiality:** Normal
+- **Language:** British English (en-GB)
+- **IPS version:** IPS (version not stated)
+
+## Problem list
+
+| Condition | Clinical status | Verification status | Severity | Onset | Codes |
+| --- | --- | --- | --- | --- | --- |
+| Menopausal flushing (finding) | Active | Confirmed | Moderate severity | 2015 | SNOMED CT 198436008 · ICD-10 N95.1 |
+
+**Narrative:**
+
+> Hot flushes
+
+## Medication summary
+
+| Medication | Dosage | Status | When | Codes |
+| --- | --- | --- | --- | --- |
+| Product containing anastrozole (medicinal product) | 1 tablet, Oral use | Active | From Mar 2015 | SNOMED CT 108774000 · urn:oid:2.16.840.1.113883.2.4.4.1 99872 · urn:oid:2.16.840.1.113883.2.4.4.7 2076667 · ATC L02BG03 |
+| Cimicifuga racemosa extract (substance) | Oral use | Active | From Jan 2016 | SNOMED CT 412588001 · ATC G02CX04 |
+
+**Narrative:**
+
+> Medication Strength Form Dosage Comment
+> Anastrozole 1 mg tablet once daily treatment for breast cancer
+> Black Cohosh Extract pil herbal supplement
+
+## Allergies and intolerances
+
+| Substance | Criticality | Clinical status | Verification status | Type | Category | Onset | Codes |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Substance with penicillin structure (substance) | High risk | Active | Confirmed | Allergy | Medication | 2010 | SNOMED CT 764146007 |
+
+**Narrative:**
+
+> Allergy to penicillin, high criticality, active No known food allergies
+
+## History of past illness
+
+| Condition | Clinical status | Verification status | Severity | Onset | Resolved | Codes |
+| --- | --- | --- | --- | --- | --- | --- |
+| Malignant tumor of breast | Remission | Confirmed | Severe | Jan 2015 | Mar 2015 | SNOMED CT 254837009 · http://terminology.hl7.org/CodeSystem/icd-o-3 8500/3 |
+
+**Narrative:**
+
+> Breast cancer Stage II with no evidence of recurrence following treatment
+
+## Plan of care
+
+*No structured entries. See the narrative from the document.*
+
+**Narrative:**
+
+> Continue hormone medication with Anastrozole for total of 5 years and monitor for potential breast cancer recurrence
+
+## Results
+
+| Test or observation | Result | Date | Codes |
+| --- | --- | --- | --- |
+| Blood typing | ABO and Rh group \\[Type\\] in Blood: Blood group A Rh(D) positive; C Ab \\[Presence\\] in Serum or Plasma: Positive; E Ab \\[Presence\\] in Serum or Plasma: Positive; little c Ab \\[Presence\\] in Serum or Plasma: Negative | Oct 10, 2015 |   |
+| Hemoglobin A1c/Hemoglobin.total in Blood by HPLC | 7.5 % | Nov 10, 2017, 07:20 AM | LOINC 17856-6 |
+| Bacteria identified in Isolate | Methicillin resistant Staphylococcus aureus | Dec 10, 2017, 07:20 AM | LOINC 42803-7 |
+
+**Narrative:**
+
+> Blood typing
+> Blood group A+
+> C Ab \\[Presence\\] in Serum or Plasma Positive
+> E Ab \\[Presence\\] in Serum or Plasma Positive
+> Little c Ab \\[Presence\\] in Serum or Plasma Negative
+> Hemoglobin A1c monitoring
+> Hemoglobin A1c/Hemoglobin.total in Blood by HPLC 7.5 %
+> Bacteriology
+> Methicillin resistant Staphylococcus aureus
+> Healthy carrier of MRSA
+
+## Immunizations
+
+| Vaccine | Date | Dose | Status | Lot number | Codes |
+| --- | --- | --- | --- | --- | --- |
+| Bordetella pertussis and Clostridium tetani and Corynebacterium diphtheriae and Human poliovirus antigens only vaccine product | Jun 3, 1998, 11:00 PM | Dose 1 | Completed | AXK23RWERS | SNOMED CT 871878002 · ATC J07CA02 |
+
+**Narrative:**
+
+> Marie Lux-Brennard (Apr 17, 1998)
+> Vaccin anti diphtérie-coqueluche-tétanos-poliomyélite, Jun 3, 1998, 10:00:00 PM
+> Voie intramusculaire, Cuisse droite
+
+---
+
+- Generated Nov 15, 2026, 12:00 PM
+- Source document 3f69e0a5-2177-4540-baab-7a5d0877428f, dated Dec 11, 2017, 01:30 PM
+- IPS version: IPS (version not stated)
+- **Not a medical device. Check clinical decisions against the source record.**
+"
+`;
+
+exports[`Markdown export > matches the snapshot for every fixture in en-US > bundle-ips-all-sections 1`] = `
+"# International Patient Summary
+
+## Patient
+
+- **Name:** Patricia JORDANA
+- **Date of birth:** Sep 30, 1956 (70 years)
+- **Gender:** Female
+- **Identifiers:** ABC1234 (https://standards.digital.health.nz/ns/nhi-id)
+
+## About this document
+
+- **Date:** Sep 13, 2024
+- **Authors:** NorthCare Pukete Road-Thomas Road
+- **Custodian:** NorthCare Pukete Road-Thomas Road
+- **Attested by:** HASHIRA COORAY COORAY (Doctor) (professional) Sep 13, 2024
+- **Confidentiality:** Normal
+- **Language:** English (New Zealand) (en-NZ)
+- **IPS version:** IPS (version not stated)
+
+## Problem list
+
+| Condition | Clinical status | Verification status | Onset | Codes |
+| --- | --- | --- | --- | --- |
+| Essential hypertension | Active | Confirmed | May 25, 2016 | SNOMED CT 59621000 |
+| Gout | Active | Confirmed | May 25, 2016 | SNOMED CT 90560007 |
+
+**Narrative:**
+
+> Problem Onset Clinical Status Verification Status Severity
+> Essential hypertension May 24 2016 20:00
+> Gout May 24 2016 20:00
+
+## Allergies and intolerances
+
+| Substance | Clinical status | Verification status | Codes |
+| --- | --- | --- | --- |
+| Penicillin | Active | Confirmed | SNOMED CT 764146007 · ATC J01CA |
+
+**Narrative:**
+
+> Allergy Type Substance Onset Clinical Status Verification Status Reaction
+> Penicillin
+
+## Medication summary
+
+| Medication | Dosage | Status | When | Codes |
+| --- | --- | --- | --- | --- |
+| Product containing cilazapril (medicinal product) | Take 1 daily | Stopped | Dec 1, 2023 | SNOMED CT 318913001 |
+| Product containing lisinopril (medicinal product) | Take One tablet once daily, Swallow, oral, 1 times every 1 day | Active | Aug 13, 2024 | SNOMED CT 108575001 |
+| Fluocortolone | apply a small amount to the affected area up to 4 times daily on the first day, then twice daily for at least 1 week; continue for up to a maximum of 4 weeks | Active | Aug 30, 2024 | ATC C05AA08 |
+
+**Narrative:**
+
+> Medication Dates Dosage-Timing Status Route
+> cilazapril 500 microgram tablet, 90 stopped
+> lisinopril 5 mg tablet active
+> Ultraproct - cinchocaine 0.5% (5 mg/g) + fluocortolone hexanoate 0.095% (945 microgram/g) + fluocortolone pivalate 0.092% (918 microgram/g) ointment active
+
+## Immunizations
+
+| Vaccine | Date | Dose | Status | Lot number | Given by | Codes |
+| --- | --- | --- | --- | --- | --- | --- |
+| Influenza, split virus, trivalent, preservative | Apr 10, 2024 | Dose 1 | Completed | H06 | NorthCare Pukete Road-Thomas Road | CVX 141 |
+| COVID-19, mRNA, LNP-S, bivalent, PF, 30 mcg/0.3 mL dose | Feb 18, 2024 | Dose 5 | Completed | GK3908-068 | NorthCare Pukete Road-Thomas Road | CVX 300 |
+| Influenza, split virus, trivalent, preservative | Apr 12, 2023 | Dose 1 | Completed | 358899 | NorthCare Pukete Road-Thomas Road | CVX 141 |
+| COVID-19, mRNA, LNP-S, PF, 30 mcg/0.3 mL dose | Aug 1, 2022 | Dose 4 | Completed | PCB0008-07 | NorthCare Pukete Road-Thomas Road | CVX 208 |
+| zoster live | Jul 13, 2022 | Dose 1 | Completed | U021248 | NorthCare Pukete Road-Thomas Road | CVX 121 |
+| COVID-19, mRNA, LNP-S, PF, 30 mcg/0.3 mL dose | Jan 13, 2022 | Dose 3 | Completed | FL1072-025 | NorthCare Pukete Road-Thomas Road | CVX 208 |
+| COVID-19, mRNA, LNP-S, PF, 30 mcg/0.3 mL dose | Aug 27, 2021 | Dose 2 | Completed | FE8163-007 | NorthCare Pukete Road-Thomas Road | CVX 208 |
+| COVID-19, mRNA, LNP-S, PF, 30 mcg/0.3 mL dose | Aug 5, 2021 | Dose 1 | Completed | FF8871-001 | NorthCare Pukete Road-Thomas Road | CVX 208 |
+
+**Narrative:**
+
+> Vaccine Date Status Lot Number
+> Influenza, split virus, trivalent, preservative Apr 9 2024 20:00 Completed H06
+> COVID-19, mRNA, LNP-S, bivalent, PF, 30 mcg/0.3 mL dose Feb 17 2024 19:00 Completed GK3908-068
+> Influenza, split virus, trivalent, preservative Apr 11 2023 20:00 Completed 358899
+> COVID-19, mRNA, LNP-S, PF, 30 mcg/0.3 mL dose Jul 31 2022 20:00 Completed PCB0008-07
+> zoster live Jul 12 2022 20:00 Completed U021248
+> COVID-19, mRNA, LNP-S, PF, 30 mcg/0.3 mL dose Jan 12 2022 19:00 Completed FL1072-025
+> COVID-19, mRNA, LNP-S, PF, 30 mcg/0.3 mL dose Aug 26 2021 20:00 Completed FE8163-007
+> COVID-19, mRNA, LNP-S, PF, 30 mcg/0.3 mL dose Aug 4 2021 20:00 Completed FF8871-001
+
+## Results
+
+| Test or observation | Result | Reference range | Date | Codes |
+| --- | --- | --- | --- | --- |
+| Cholesterol.total/Cholesterol in HDL \\[Molar ratio\\] in Serum or Plasma | 4.1 mmol/L | NA | Oct 31, 2023, 03:06 PM | LOINC 32309-7 |
+| Lipid risk factors \\[Finding\\] | A combined CVD risk of which lipids is one component should be estimated to guide CVD risk management decisions. If lipid modifying medication is considered suggest checking first for treatable secondary causes of dyslipidaemia. | NA | Oct 31, 2023, 03:06 PM | LOINC 49062-3 |
+| Cholesterol in LDL \\[Moles/volume\\] in Serum or Plasma by calculation | 3.6 mmol/L | NA | Oct 31, 2023, 03:06 PM | LOINC 39469-2 |
+| Triglyceride \\[Moles/volume\\] in Serum or Plasma | 1.7 mmol/L | NA | Oct 31, 2023, 03:06 PM | LOINC 14927-8 |
+| Cholesterol \\[Moles/volume\\] in Serum or Plasma | 5.7 mmol/L | NA | Oct 31, 2023, 03:06 PM | LOINC 14647-2 |
+| Cholesterol in HDL \\[Moles/volume\\] in Serum or Plasma | 1.39 mmol/L | NA | Oct 31, 2023, 03:06 PM | LOINC 14646-4 |
+
+**Narrative:**
+
+> Result Value Date Status
+> Cholesterol.total/Cholesterol in HDL \\[Molar ratio\\] in Serum or Plasma 4.1 mmol/L Oct 31 2023 11:06 final
+> Lipid risk factors \\[Finding\\] A combined CVD risk of which lipids is one component should be estimated to guide CVD risk management decisions. If lipid modifying medication is considered suggest checking first for treatable secondary causes of dyslipidaemia. Oct 31 2023 11:06 final
+> Cholesterol in LDL \\[Moles/volume\\] in Serum or Plasma by calculation 3.6 mmol/L Oct 31 2023 11:06 final
+> Triglyceride \\[Moles/volume\\] in Serum or Plasma 1.7 mmol/L Oct 31 2023 11:06 final
+> Cholesterol \\[Moles/volume\\] in Serum or Plasma 5.7 mmol/L Oct 31 2023 11:06 final
+> Cholesterol in HDL \\[Moles/volume\\] in Serum or Plasma 1.39 mmol/L Oct 31 2023 11:06 final
+
+## History of procedures
+
+| Procedure | Status | Performed | Codes |
+| --- | --- | --- | --- |
+| Total hip replacement | Completed | Apr 28, 2000 | SNOMED CT 52734007 |
+
+**Narrative:**
+
+> Procedure Date Status
+> Total hip replacement Apr 27 2000 20:00 Completed
+
+## Medical devices
+
+| Device | Status | In use | Codes |
+| --- | --- | --- | --- |
+| Hip prosthesis, device (physical object) | Active | Start: Unknown | SNOMED CT 67270000 |
+
+**Narrative:**
+
+> Device Status Body Site Start End
+> Hip prosthesis active
+
+## Vital signs
+
+| Test or observation | Result | Date | Codes |
+| --- | --- | --- | --- |
+| Body weight | 91.5 kg | Apr 10, 2024, 10:58 AM | LOINC 29463-7 |
+| Body mass index (BMI) \\[Ratio\\] | 24.56 kg/m2 | Apr 10, 2024, 10:58 AM | LOINC 39156-5 |
+| Blood pressure panel with all children optional | Systolic blood pressure: 140 mmHg; Diastolic blood pressure: 80 mmHg | Aug 30, 2024, 09:32 AM | LOINC 85354-9 |
+
+**Narrative:**
+
+> Vital Sign Value Date Status
+> Body weight 91.5 kg Apr 10 2024 05:58 final
+> Body mass index (BMI) \\[Ratio\\] 24.56 kg/m2 Apr 10 2024 05:58 final
+> Blood pressure panel with all children optional 140/80 mmHg Aug 30 2024 04:32 final
+
+## Social history
+
+| Test or observation | Result | Date | Codes |
+| --- | --- | --- | --- |
+| Tobacco smoking status | Never smoker | Oct 20, 2022 | LOINC 72166-2 |
+| Alcoholic drinks per day | 1 d | Jun 22, 2016 | LOINC 74013-4 |
+
+**Narrative:**
+
+> Social History Observation Value Date Status
+> Tobacco smoking status Never smoker Oct 19 2022 20:00 final
+> Alcoholic drinks per day 1 d Jun 21 2016 20:00 final
+
+## Alerts
+
+| Alert | Category | Status | Codes |
+| --- | --- | --- | --- |
+| Shellfish free diet | Diet | Active | SNOMED CT 1255002008 |
+
+**Narrative:**
+
+> Alert Status Category Priority Start End
+> Shellfish free diet Active Diet
+
+## Patient story
+
+| Item | Description | Status | Date | Source document | Codes |
+| --- | --- | --- | --- | --- | --- |
+| Do Not Resuscitate | Not for resuscitation | Active | Sep 1, 2021 | Advance Directive Document | http://terminology.hl7.org/CodeSystem/consentcategorycodes dnr |
+
+**Narrative:**
+
+> Patient undergoing lifestyle changes to lower blood pressure.
+
+## Advance directives
+
+| Item | Description | Status | Date | Source document | Codes |
+| --- | --- | --- | --- | --- | --- |
+| Do Not Resuscitate | Not for resuscitation | Active | Sep 1, 2021 | Advance Directive Document | http://terminology.hl7.org/CodeSystem/consentcategorycodes dnr |
+
+**Narrative:**
+
+> Scope Status Category Date Performer
+> Treatment active Do Not Resuscitate Aug 31 2021 20:00
+
+## Functional status
+
+| Condition | Clinical status | Verification status | Onset | Codes |
+| --- | --- | --- | --- | --- |
+| Impaired Mobility | Active | Confirmed | May 25, 2016 | SNOMED CT 82971005 |
+
+**Narrative:**
+
+> Code Onset Clinical Status Verification Status Severity
+> Impaired Mobility May 24 2016 20:00
+
+## History of past illness
+
+| Condition | Clinical status | Verification status | Onset | Codes |
+| --- | --- | --- | --- | --- |
+| Fever | Resolved | Confirmed | May 25, 2013 | SNOMED CT 386661006 |
+
+**Narrative:**
+
+> Past Problem Onset Clinical Status Verification Status Severity
+> Fever May 24 2013 20:00
+
+## History of pregnancy
+
+| Test or observation | Result | Date | Codes |
+| --- | --- | --- | --- |
+| Pregnancy status | Not Pregnant | Jan 10, 2020 | LOINC 82810-3 |
+
+**Narrative:**
+
+> Pregnancy Observation Value Date Status
+> Pregnancy status Not Pregnant Jan 9 2020 19:00 final
+
+## Plan of care
+
+| Item | Status | Date | Activities | Codes |
+| --- | --- | --- | --- | --- |
+| Manage obesity and weight loss | Active | Until Jun 1, 2017 | Weight Measured |   |
+
+**Narrative:**
+
+> Title Description Status Intent Category Period Start Period End
+> Weight Measured Manage obesity and weight loss Active Plan Weight management plan May 31 2017 20:00
+
+---
+
+- Generated Nov 15, 2026, 12:00 PM
+- Source document ac7a747c-a2c9-493c-ba39-4ac6997eed1e, dated Sep 13, 2024
+- IPS version: IPS (version not stated)
+- **Not a medical device. Check clinical decisions against the source record.**
+"
+`;
+
+exports[`Markdown export > matches the snapshot for every fixture in en-US > bundle-minimal 1`] = `
+"# Patient Summary as of December 11, 2020 14:30
+
+## Patient
+
+- **Name:** Martha DeLarosa
+- **Date of birth:** May 1, 1972 (54 years)
+- **Gender:** Female
+- **Identifiers:** 574687583 (urn:oid:2.16.840.1.113883.2.4.6.3)
+
+## About this document
+
+- **Date:** Dec 11, 2020, 01:30 PM
+- **Authors:** Beetje van Hulp
+- **Custodian:** Anorg Aniza Tion BV / The best custodian ever
+- **Attested by:** Beetje van Hulp (legal) Dec 11, 2020, 01:30 PM; Anorg Aniza Tion BV / The best custodian ever (legal) Dec 11, 2020, 01:30 PM
+- **Confidentiality:** Normal
+- **Language:** American English (en-US)
+- **IPS version:** IPS (version not stated)
+
+## Problem list
+
+| Condition | Clinical status | Verification status | Severity | Onset | Codes |
+| --- | --- | --- | --- | --- | --- |
+| Menopausal flushing (finding) | Active | Confirmed | Moderate | 2015 | SNOMED CT 198436008 · ICD-10 N95.1 |
+
+**Narrative:**
+
+> Condition Name: Menopausal Flushing
+> Code: 198436008
+> Status: Active
+
+## Medication summary
+
+| Medication | Dosage | Status | When | Codes |
+| --- | --- | --- | --- | --- |
+| Product containing anastrozole (medicinal product) | 1 tablet, Oral use | Active | From Mar 2015 | SNOMED CT 108774000 · urn:oid:2.16.840.1.113883.2.4.4.1 99872 · urn:oid:2.16.840.1.113883.2.4.4.7 2076667 · ATC L02BG03 |
+
+**Narrative:**
+
+> Medication Name: Oral anastrozole 1mg tablet
+> Code:
+> Status: Active, started March 2015
+> Instructions: Take 1 time per day
+
+## Allergies and intolerances
+
+| Substance | Criticality | Clinical status | Verification status | Type | Category | Onset | Codes |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Substance with penicillin structure (substance) | High risk | Active | Confirmed | Allergy | Medication | 2010 | SNOMED CT 764146007 |
+
+**Narrative:**
+
+> Allergy Name: Pencillins
+> Verification Status: Confirmed
+> Reaction: no information
+
+---
+
+- Generated Nov 15, 2026, 12:00 PM
+- Source document 28b95815-76ce-457b-b7ae-a972e527db40, dated Dec 11, 2020, 01:30 PM
+- IPS version: IPS (version not stated)
+- **Not a medical device. Check clinical decisions against the source record.**
+"
+`;
+
+exports[`Markdown export > matches the snapshot for every fixture in en-US > bundle-no-info-required-sections 1`] = `
+"# International Patient Summary
+
+## Patient
+
+- **Name:** James Judge
+- **Date of birth:** Apr 25, 1985 (41 years)
+- **Gender:** Male
+- **Identifiers:** AAA1234 (https://standards.digital.health.nz/ns/nhi-id)
+
+## About this document
+
+- **Date:** May 3, 2021
+- **Authors:** Northcare, Thomas Road
+- **Custodian:** NorthCare Pukete Road
+- **Attested by:** Dr Richard Kildare Kildare (Doctor) (professional) May 3, 2021
+- **Confidentiality:** Normal
+- **Language:** English (New Zealand) (en-NZ)
+- **IPS version:** IPS (version not stated)
+
+## Allergies and intolerances
+
+*Information unavailable — No information available*
+
+**Narrative:**
+
+> There is no information available regarding the subject's allergies.
+
+## Problem list
+
+*Information unavailable — No information available*
+
+**Narrative:**
+
+> There is no information available about the subject's health problems or disabilities.
+
+## Medication summary
+
+*Information unavailable — No information available*
+
+**Narrative:**
+
+> There is no information available about the subject's medication use or administration.
+
+## Immunizations
+
+| Vaccine | Date | Dose | Status | Lot number | Given by | Codes |
+| --- | --- | --- | --- | --- | --- | --- |
+| Influenza, split virus, trivalent, preservative | Jul 3, 2020 | Dose 2 | Completed | B52b | NorthCare Pukete Road | CVX 141 |
+| Influenza, split virus, trivalent, preservative | Jun 3, 2019 | Dose 1 | Completed | B52 | NorthCare Pukete Road | CVX 141 |
+
+**Narrative:**
+
+> Vaccine Date Seq Route Site Indication Status
+> Influenza 03/07/2020 2 Injection, intramuscular Entire left upper arm Eligible condition (Influenza) completed
+> Influenza 03/06/2019 1 Injection, intramuscular Entire left upper arm Eligible condition (Influenza) completed
+
+---
+
+- Generated Nov 15, 2026, 12:00 PM
+- Source document 59f51f0b-2005-485c-858e-3d3ae9657287, dated May 3, 2021
+- IPS version: IPS (version not stated)
+- **Not a medical device. Check clinical decisions against the source record.**
+"
+`;
+
+exports[`Markdown export > matches the snapshot for every fixture in zh-CN > IPS-examples-Bundle-01 1`] = `
+"# Patient Summary as of December 11, 2017 14:30
+
+## 患者
+
+- **姓名:** Martha DeLarosa
+- **出生日期:** 1972年5月1日 (54 岁)
+- **性别:** 女
+- **标识符:** 574687583 (urn:oid:2.16.840.1.113883.2.4.6.3)
+
+## 关于本文档
+
+- **日期:** 2017年12月11日 13:30
+- **作者:** Beetje van Hulp
+- **保管机构:** Anorg Aniza Tion BV / The best custodian ever
+- **证明人:** Beetje van Hulp (法定) 2017年12月11日 13:30; Anorg Aniza Tion BV / The best custodian ever (法定) 2017年12月11日 13:30
+- **保密级别:** 一般
+- **语言:** 英国英语 (en-GB)
+- **IPS 版本:** IPS（未注明版本）
+
+## 问题列表
+
+| 疾病/问题 | 临床状态 | 确认状态 | 严重程度 | 发病 | 代码 |
+| --- | --- | --- | --- | --- | --- |
+| Menopausal flushing (finding) | 活动 | 已确认 | Moderate severity | 2015年 | SNOMED CT 198436008 · ICD-10 N95.1 |
+
+**叙述文本:**
+
+> Hot flushes
+
+## 用药摘要
+
+| 药物 | 用法用量 | 状态 | 时间 | 代码 |
+| --- | --- | --- | --- | --- |
+| Product containing anastrozole (medicinal product) | 1 tablet, Oral use | 活动 | 自 2015年3月 起 | SNOMED CT 108774000 · urn:oid:2.16.840.1.113883.2.4.4.1 99872 · urn:oid:2.16.840.1.113883.2.4.4.7 2076667 · ATC L02BG03 |
+| Cimicifuga racemosa extract (substance) | Oral use | 活动 | 自 2016年1月 起 | SNOMED CT 412588001 · ATC G02CX04 |
+
+**叙述文本:**
+
+> Medication Strength Form Dosage Comment
+> Anastrozole 1 mg tablet once daily treatment for breast cancer
+> Black Cohosh Extract pil herbal supplement
+
+## 过敏与不耐受
+
+| 过敏物质 | 危急程度 | 临床状态 | 确认状态 | 类型 | 类别 | 发病 | 代码 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Substance with penicillin structure (substance) | 高风险 | 活动 | 已确认 | 过敏 | 药物 | 2010年 | SNOMED CT 764146007 |
+
+**叙述文本:**
+
+> Allergy to penicillin, high criticality, active No known food allergies
+
+## 既往病史
+
+| 疾病/问题 | 临床状态 | 确认状态 | 严重程度 | 发病 | 缓解 | 代码 |
+| --- | --- | --- | --- | --- | --- | --- |
+| Malignant tumor of breast | 缓解 | 已确认 | Severe | 2015年1月 | 2015年3月 | SNOMED CT 254837009 · http://terminology.hl7.org/CodeSystem/icd-o-3 8500/3 |
+
+**叙述文本:**
+
+> Breast cancer Stage II with no evidence of recurrence following treatment
+
+## 诊疗计划
+
+*无结构化条目。请参阅文档中的叙述文本。*
+
+**叙述文本:**
+
+> Continue hormone medication with Anastrozole for total of 5 years and monitor for potential breast cancer recurrence
+
+## 检验检查结果
+
+| 检验或观察项目 | 结果 | 日期 | 代码 |
+| --- | --- | --- | --- |
+| Blood typing | ABO and Rh group \\[Type\\] in Blood: Blood group A Rh(D) positive; C Ab \\[Presence\\] in Serum or Plasma: Positive; E Ab \\[Presence\\] in Serum or Plasma: Positive; little c Ab \\[Presence\\] in Serum or Plasma: Negative | 2015年10月10日 |   |
+| Hemoglobin A1c/Hemoglobin.total in Blood by HPLC | 7.5 % | 2017年11月10日 07:20 | LOINC 17856-6 |
+| Bacteria identified in Isolate | Methicillin resistant Staphylococcus aureus | 2017年12月10日 07:20 | LOINC 42803-7 |
+
+**叙述文本:**
+
+> Blood typing
+> Blood group A+
+> C Ab \\[Presence\\] in Serum or Plasma Positive
+> E Ab \\[Presence\\] in Serum or Plasma Positive
+> Little c Ab \\[Presence\\] in Serum or Plasma Negative
+> Hemoglobin A1c monitoring
+> Hemoglobin A1c/Hemoglobin.total in Blood by HPLC 7.5 %
+> Bacteriology
+> Methicillin resistant Staphylococcus aureus
+> Healthy carrier of MRSA
+
+---
+
+- 生成于 2026年11月15日 12:00
+- 源文档 3f69e0a5-2177-4540-baab-7a5d0877428f，日期 2017年12月11日 13:30
+- IPS 版本: IPS（未注明版本）
+- **不属于医疗器械。临床决策请以原始记录为准。**
+"
+`;
+
+exports[`Markdown export > matches the snapshot for every fixture in zh-CN > IPS-examples-Bundle-with-immunization 1`] = `
+"# Patient Summary as of December 11, 2017 14:30
+
+## 患者
+
+- **姓名:** Martha DeLarosa
+- **出生日期:** 1972年5月1日 (54 岁)
+- **性别:** 女
+- **标识符:** 574687583 (urn:oid:2.16.840.1.113883.2.4.6.3)
+
+## 关于本文档
+
+- **日期:** 2017年12月11日 13:30
+- **作者:** Beetje van Hulp
+- **保管机构:** Anorg Aniza Tion BV / The best custodian ever
+- **证明人:** Beetje van Hulp (法定) 2017年12月11日 13:30; Anorg Aniza Tion BV / The best custodian ever (法定) 2017年12月11日 13:30
+- **保密级别:** 一般
+- **语言:** 英国英语 (en-GB)
+- **IPS 版本:** IPS（未注明版本）
+
+## 问题列表
+
+| 疾病/问题 | 临床状态 | 确认状态 | 严重程度 | 发病 | 代码 |
+| --- | --- | --- | --- | --- | --- |
+| Menopausal flushing (finding) | 活动 | 已确认 | Moderate severity | 2015年 | SNOMED CT 198436008 · ICD-10 N95.1 |
+
+**叙述文本:**
+
+> Hot flushes
+
+## 用药摘要
+
+| 药物 | 用法用量 | 状态 | 时间 | 代码 |
+| --- | --- | --- | --- | --- |
+| Product containing anastrozole (medicinal product) | 1 tablet, Oral use | 活动 | 自 2015年3月 起 | SNOMED CT 108774000 · urn:oid:2.16.840.1.113883.2.4.4.1 99872 · urn:oid:2.16.840.1.113883.2.4.4.7 2076667 · ATC L02BG03 |
+| Cimicifuga racemosa extract (substance) | Oral use | 活动 | 自 2016年1月 起 | SNOMED CT 412588001 · ATC G02CX04 |
+
+**叙述文本:**
+
+> Medication Strength Form Dosage Comment
+> Anastrozole 1 mg tablet once daily treatment for breast cancer
+> Black Cohosh Extract pil herbal supplement
+
+## 过敏与不耐受
+
+| 过敏物质 | 危急程度 | 临床状态 | 确认状态 | 类型 | 类别 | 发病 | 代码 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Substance with penicillin structure (substance) | 高风险 | 活动 | 已确认 | 过敏 | 药物 | 2010年 | SNOMED CT 764146007 |
+
+**叙述文本:**
+
+> Allergy to penicillin, high criticality, active No known food allergies
+
+## 既往病史
+
+| 疾病/问题 | 临床状态 | 确认状态 | 严重程度 | 发病 | 缓解 | 代码 |
+| --- | --- | --- | --- | --- | --- | --- |
+| Malignant tumor of breast | 缓解 | 已确认 | Severe | 2015年1月 | 2015年3月 | SNOMED CT 254837009 · http://terminology.hl7.org/CodeSystem/icd-o-3 8500/3 |
+
+**叙述文本:**
+
+> Breast cancer Stage II with no evidence of recurrence following treatment
+
+## 诊疗计划
+
+*无结构化条目。请参阅文档中的叙述文本。*
+
+**叙述文本:**
+
+> Continue hormone medication with Anastrozole for total of 5 years and monitor for potential breast cancer recurrence
+
+## 检验检查结果
+
+| 检验或观察项目 | 结果 | 日期 | 代码 |
+| --- | --- | --- | --- |
+| Blood typing | ABO and Rh group \\[Type\\] in Blood: Blood group A Rh(D) positive; C Ab \\[Presence\\] in Serum or Plasma: Positive; E Ab \\[Presence\\] in Serum or Plasma: Positive; little c Ab \\[Presence\\] in Serum or Plasma: Negative | 2015年10月10日 |   |
+| Hemoglobin A1c/Hemoglobin.total in Blood by HPLC | 7.5 % | 2017年11月10日 07:20 | LOINC 17856-6 |
+| Bacteria identified in Isolate | Methicillin resistant Staphylococcus aureus | 2017年12月10日 07:20 | LOINC 42803-7 |
+
+**叙述文本:**
+
+> Blood typing
+> Blood group A+
+> C Ab \\[Presence\\] in Serum or Plasma Positive
+> E Ab \\[Presence\\] in Serum or Plasma Positive
+> Little c Ab \\[Presence\\] in Serum or Plasma Negative
+> Hemoglobin A1c monitoring
+> Hemoglobin A1c/Hemoglobin.total in Blood by HPLC 7.5 %
+> Bacteriology
+> Methicillin resistant Staphylococcus aureus
+> Healthy carrier of MRSA
+
+## 免疫接种
+
+| 疫苗 | 日期 | 剂次 | 状态 | 批号 | 代码 |
+| --- | --- | --- | --- | --- | --- |
+| Bordetella pertussis and Clostridium tetani and Corynebacterium diphtheriae and Human poliovirus antigens only vaccine product | 1998年6月3日 23:00 | 剂量 1 | 已完成 | AXK23RWERS | SNOMED CT 871878002 · ATC J07CA02 |
+
+**叙述文本:**
+
+> Marie Lux-Brennard (Apr 17, 1998)
+> Vaccin anti diphtérie-coqueluche-tétanos-poliomyélite, Jun 3, 1998, 10:00:00 PM
+> Voie intramusculaire, Cuisse droite
+
+---
+
+- 生成于 2026年11月15日 12:00
+- 源文档 3f69e0a5-2177-4540-baab-7a5d0877428f，日期 2017年12月11日 13:30
+- IPS 版本: IPS（未注明版本）
+- **不属于医疗器械。临床决策请以原始记录为准。**
+"
+`;
+
+exports[`Markdown export > matches the snapshot for every fixture in zh-CN > bundle-ips-all-sections 1`] = `
+"# International Patient Summary
+
+## 患者
+
+- **姓名:** Patricia JORDANA
+- **出生日期:** 1956年9月30日 (70 岁)
+- **性别:** 女
+- **标识符:** ABC1234 (https://standards.digital.health.nz/ns/nhi-id)
+
+## 关于本文档
+
+- **日期:** 2024年9月13日
+- **作者:** NorthCare Pukete Road-Thomas Road
+- **保管机构:** NorthCare Pukete Road-Thomas Road
+- **证明人:** HASHIRA COORAY COORAY (Doctor) (专业) 2024年9月13日
+- **保密级别:** 一般
+- **语言:** 英语（新西兰） (en-NZ)
+- **IPS 版本:** IPS（未注明版本）
+
+## 问题列表
+
+| 疾病/问题 | 临床状态 | 确认状态 | 发病 | 代码 |
+| --- | --- | --- | --- | --- |
+| Essential hypertension | 活动 | 已确认 | 2016年5月25日 | SNOMED CT 59621000 |
+| Gout | 活动 | 已确认 | 2016年5月25日 | SNOMED CT 90560007 |
+
+**叙述文本:**
+
+> Problem Onset Clinical Status Verification Status Severity
+> Essential hypertension May 24 2016 20:00
+> Gout May 24 2016 20:00
+
+## 过敏与不耐受
+
+| 过敏物质 | 临床状态 | 确认状态 | 代码 |
+| --- | --- | --- | --- |
+| Penicillin | 活动 | 已确认 | SNOMED CT 764146007 · ATC J01CA |
+
+**叙述文本:**
+
+> Allergy Type Substance Onset Clinical Status Verification Status Reaction
+> Penicillin
+
+## 用药摘要
+
+| 药物 | 用法用量 | 状态 | 时间 | 代码 |
+| --- | --- | --- | --- | --- |
+| Product containing cilazapril (medicinal product) | Take 1 daily | 已停止 | 2023年12月1日 | SNOMED CT 318913001 |
+| Product containing lisinopril (medicinal product) | Take One tablet once daily, Swallow, oral, 每 1 天 1 次 | 活动 | 2024年8月13日 | SNOMED CT 108575001 |
+| Fluocortolone | apply a small amount to the affected area up to 4 times daily on the first day, then twice daily for at least 1 week; continue for up to a maximum of 4 weeks | 活动 | 2024年8月30日 | ATC C05AA08 |
+
+**叙述文本:**
+
+> Medication Dates Dosage-Timing Status Route
+> cilazapril 500 microgram tablet, 90 stopped
+> lisinopril 5 mg tablet active
+> Ultraproct - cinchocaine 0.5% (5 mg/g) + fluocortolone hexanoate 0.095% (945 microgram/g) + fluocortolone pivalate 0.092% (918 microgram/g) ointment active
+
+## 免疫接种
+
+| 疫苗 | 日期 | 剂次 | 状态 | 批号 | 接种者 | 代码 |
+| --- | --- | --- | --- | --- | --- | --- |
+| Influenza, split virus, trivalent, preservative | 2024年4月10日 | 剂量 1 | 已完成 | H06 | NorthCare Pukete Road-Thomas Road | CVX 141 |
+| COVID-19, mRNA, LNP-S, bivalent, PF, 30 mcg/0.3 mL dose | 2024年2月18日 | 剂量 5 | 已完成 | GK3908-068 | NorthCare Pukete Road-Thomas Road | CVX 300 |
+| Influenza, split virus, trivalent, preservative | 2023年4月12日 | 剂量 1 | 已完成 | 358899 | NorthCare Pukete Road-Thomas Road | CVX 141 |
+| COVID-19, mRNA, LNP-S, PF, 30 mcg/0.3 mL dose | 2022年8月1日 | 剂量 4 | 已完成 | PCB0008-07 | NorthCare Pukete Road-Thomas Road | CVX 208 |
+| zoster live | 2022年7月13日 | 剂量 1 | 已完成 | U021248 | NorthCare Pukete Road-Thomas Road | CVX 121 |
+| COVID-19, mRNA, LNP-S, PF, 30 mcg/0.3 mL dose | 2022年1月13日 | 剂量 3 | 已完成 | FL1072-025 | NorthCare Pukete Road-Thomas Road | CVX 208 |
+| COVID-19, mRNA, LNP-S, PF, 30 mcg/0.3 mL dose | 2021年8月27日 | 剂量 2 | 已完成 | FE8163-007 | NorthCare Pukete Road-Thomas Road | CVX 208 |
+| COVID-19, mRNA, LNP-S, PF, 30 mcg/0.3 mL dose | 2021年8月5日 | 剂量 1 | 已完成 | FF8871-001 | NorthCare Pukete Road-Thomas Road | CVX 208 |
+
+**叙述文本:**
+
+> Vaccine Date Status Lot Number
+> Influenza, split virus, trivalent, preservative Apr 9 2024 20:00 Completed H06
+> COVID-19, mRNA, LNP-S, bivalent, PF, 30 mcg/0.3 mL dose Feb 17 2024 19:00 Completed GK3908-068
+> Influenza, split virus, trivalent, preservative Apr 11 2023 20:00 Completed 358899
+> COVID-19, mRNA, LNP-S, PF, 30 mcg/0.3 mL dose Jul 31 2022 20:00 Completed PCB0008-07
+> zoster live Jul 12 2022 20:00 Completed U021248
+> COVID-19, mRNA, LNP-S, PF, 30 mcg/0.3 mL dose Jan 12 2022 19:00 Completed FL1072-025
+> COVID-19, mRNA, LNP-S, PF, 30 mcg/0.3 mL dose Aug 26 2021 20:00 Completed FE8163-007
+> COVID-19, mRNA, LNP-S, PF, 30 mcg/0.3 mL dose Aug 4 2021 20:00 Completed FF8871-001
+
+## 检验检查结果
+
+| 检验或观察项目 | 结果 | 参考范围 | 日期 | 代码 |
+| --- | --- | --- | --- | --- |
+| Cholesterol.total/Cholesterol in HDL \\[Molar ratio\\] in Serum or Plasma | 4.1 mmol/L | NA | 2023年10月31日 15:06 | LOINC 32309-7 |
+| Lipid risk factors \\[Finding\\] | A combined CVD risk of which lipids is one component should be estimated to guide CVD risk management decisions. If lipid modifying medication is considered suggest checking first for treatable secondary causes of dyslipidaemia. | NA | 2023年10月31日 15:06 | LOINC 49062-3 |
+| Cholesterol in LDL \\[Moles/volume\\] in Serum or Plasma by calculation | 3.6 mmol/L | NA | 2023年10月31日 15:06 | LOINC 39469-2 |
+| Triglyceride \\[Moles/volume\\] in Serum or Plasma | 1.7 mmol/L | NA | 2023年10月31日 15:06 | LOINC 14927-8 |
+| Cholesterol \\[Moles/volume\\] in Serum or Plasma | 5.7 mmol/L | NA | 2023年10月31日 15:06 | LOINC 14647-2 |
+| Cholesterol in HDL \\[Moles/volume\\] in Serum or Plasma | 1.39 mmol/L | NA | 2023年10月31日 15:06 | LOINC 14646-4 |
+
+**叙述文本:**
+
+> Result Value Date Status
+> Cholesterol.total/Cholesterol in HDL \\[Molar ratio\\] in Serum or Plasma 4.1 mmol/L Oct 31 2023 11:06 final
+> Lipid risk factors \\[Finding\\] A combined CVD risk of which lipids is one component should be estimated to guide CVD risk management decisions. If lipid modifying medication is considered suggest checking first for treatable secondary causes of dyslipidaemia. Oct 31 2023 11:06 final
+> Cholesterol in LDL \\[Moles/volume\\] in Serum or Plasma by calculation 3.6 mmol/L Oct 31 2023 11:06 final
+> Triglyceride \\[Moles/volume\\] in Serum or Plasma 1.7 mmol/L Oct 31 2023 11:06 final
+> Cholesterol \\[Moles/volume\\] in Serum or Plasma 5.7 mmol/L Oct 31 2023 11:06 final
+> Cholesterol in HDL \\[Moles/volume\\] in Serum or Plasma 1.39 mmol/L Oct 31 2023 11:06 final
+
+## 手术操作史
+
+| 手术操作 | 状态 | 实施时间 | 代码 |
+| --- | --- | --- | --- |
+| Total hip replacement | 已完成 | 2000年4月28日 | SNOMED CT 52734007 |
+
+**叙述文本:**
+
+> Procedure Date Status
+> Total hip replacement Apr 27 2000 20:00 Completed
+
+## 医疗器械
+
+| 器械 | 状态 | 使用期间 | 代码 |
+| --- | --- | --- | --- |
+| Hip prosthesis, device (physical object) | 活动 | 开始：未知 | SNOMED CT 67270000 |
+
+**叙述文本:**
+
+> Device Status Body Site Start End
+> Hip prosthesis active
+
+## 生命体征
+
+| 检验或观察项目 | 结果 | 日期 | 代码 |
+| --- | --- | --- | --- |
+| Body weight | 91.5 kg | 2024年4月10日 10:58 | LOINC 29463-7 |
+| Body mass index (BMI) \\[Ratio\\] | 24.56 kg/m2 | 2024年4月10日 10:58 | LOINC 39156-5 |
+| Blood pressure panel with all children optional | Systolic blood pressure: 140 mmHg; Diastolic blood pressure: 80 mmHg | 2024年8月30日 09:32 | LOINC 85354-9 |
+
+**叙述文本:**
+
+> Vital Sign Value Date Status
+> Body weight 91.5 kg Apr 10 2024 05:58 final
+> Body mass index (BMI) \\[Ratio\\] 24.56 kg/m2 Apr 10 2024 05:58 final
+> Blood pressure panel with all children optional 140/80 mmHg Aug 30 2024 04:32 final
+
+## 社会史
+
+| 检验或观察项目 | 结果 | 日期 | 代码 |
+| --- | --- | --- | --- |
+| Tobacco smoking status | Never smoker | 2022年10月20日 | LOINC 72166-2 |
+| Alcoholic drinks per day | 1 d | 2016年6月22日 | LOINC 74013-4 |
+
+**叙述文本:**
+
+> Social History Observation Value Date Status
+> Tobacco smoking status Never smoker Oct 19 2022 20:00 final
+> Alcoholic drinks per day 1 d Jun 21 2016 20:00 final
+
+## 警示
+
+| 警示 | 类别 | 状态 | 代码 |
+| --- | --- | --- | --- |
+| Shellfish free diet | Diet | 活动 | SNOMED CT 1255002008 |
+
+**叙述文本:**
+
+> Alert Status Category Priority Start End
+> Shellfish free diet Active Diet
+
+## 患者自述
+
+| 项目 | 描述 | 状态 | 日期 | 源文档 | 代码 |
+| --- | --- | --- | --- | --- | --- |
+| Do Not Resuscitate | Not for resuscitation | 活动 | 2021年9月1日 | Advance Directive Document | http://terminology.hl7.org/CodeSystem/consentcategorycodes dnr |
+
+**叙述文本:**
+
+> Patient undergoing lifestyle changes to lower blood pressure.
+
+## 预立医疗指示
+
+| 项目 | 描述 | 状态 | 日期 | 源文档 | 代码 |
+| --- | --- | --- | --- | --- | --- |
+| Do Not Resuscitate | Not for resuscitation | 活动 | 2021年9月1日 | Advance Directive Document | http://terminology.hl7.org/CodeSystem/consentcategorycodes dnr |
+
+**叙述文本:**
+
+> Scope Status Category Date Performer
+> Treatment active Do Not Resuscitate Aug 31 2021 20:00
+
+## 功能状态
+
+| 疾病/问题 | 临床状态 | 确认状态 | 发病 | 代码 |
+| --- | --- | --- | --- | --- |
+| Impaired Mobility | 活动 | 已确认 | 2016年5月25日 | SNOMED CT 82971005 |
+
+**叙述文本:**
+
+> Code Onset Clinical Status Verification Status Severity
+> Impaired Mobility May 24 2016 20:00
+
+## 既往病史
+
+| 疾病/问题 | 临床状态 | 确认状态 | 发病 | 代码 |
+| --- | --- | --- | --- | --- |
+| Fever | 已解决 | 已确认 | 2013年5月25日 | SNOMED CT 386661006 |
+
+**叙述文本:**
+
+> Past Problem Onset Clinical Status Verification Status Severity
+> Fever May 24 2013 20:00
+
+## 妊娠史
+
+| 检验或观察项目 | 结果 | 日期 | 代码 |
+| --- | --- | --- | --- |
+| Pregnancy status | Not Pregnant | 2020年1月10日 | LOINC 82810-3 |
+
+**叙述文本:**
+
+> Pregnancy Observation Value Date Status
+> Pregnancy status Not Pregnant Jan 9 2020 19:00 final
+
+## 诊疗计划
+
+| 项目 | 状态 | 日期 | 活动 | 代码 |
+| --- | --- | --- | --- | --- |
+| Manage obesity and weight loss | 活动 | 至 2017年6月1日 止 | Weight Measured |   |
+
+**叙述文本:**
+
+> Title Description Status Intent Category Period Start Period End
+> Weight Measured Manage obesity and weight loss Active Plan Weight management plan May 31 2017 20:00
+
+---
+
+- 生成于 2026年11月15日 12:00
+- 源文档 ac7a747c-a2c9-493c-ba39-4ac6997eed1e，日期 2024年9月13日
+- IPS 版本: IPS（未注明版本）
+- **不属于医疗器械。临床决策请以原始记录为准。**
+"
+`;
+
+exports[`Markdown export > matches the snapshot for every fixture in zh-CN > bundle-minimal 1`] = `
+"# Patient Summary as of December 11, 2020 14:30
+
+## 患者
+
+- **姓名:** Martha DeLarosa
+- **出生日期:** 1972年5月1日 (54 岁)
+- **性别:** 女
+- **标识符:** 574687583 (urn:oid:2.16.840.1.113883.2.4.6.3)
+
+## 关于本文档
+
+- **日期:** 2020年12月11日 13:30
+- **作者:** Beetje van Hulp
+- **保管机构:** Anorg Aniza Tion BV / The best custodian ever
+- **证明人:** Beetje van Hulp (法定) 2020年12月11日 13:30; Anorg Aniza Tion BV / The best custodian ever (法定) 2020年12月11日 13:30
+- **保密级别:** 一般
+- **语言:** 美国英语 (en-US)
+- **IPS 版本:** IPS（未注明版本）
+
+## 问题列表
+
+| 疾病/问题 | 临床状态 | 确认状态 | 严重程度 | 发病 | 代码 |
+| --- | --- | --- | --- | --- | --- |
+| Menopausal flushing (finding) | 活动 | 已确认 | Moderate | 2015年 | SNOMED CT 198436008 · ICD-10 N95.1 |
+
+**叙述文本:**
+
+> Condition Name: Menopausal Flushing
+> Code: 198436008
+> Status: Active
+
+## 用药摘要
+
+| 药物 | 用法用量 | 状态 | 时间 | 代码 |
+| --- | --- | --- | --- | --- |
+| Product containing anastrozole (medicinal product) | 1 tablet, Oral use | 活动 | 自 2015年3月 起 | SNOMED CT 108774000 · urn:oid:2.16.840.1.113883.2.4.4.1 99872 · urn:oid:2.16.840.1.113883.2.4.4.7 2076667 · ATC L02BG03 |
+
+**叙述文本:**
+
+> Medication Name: Oral anastrozole 1mg tablet
+> Code:
+> Status: Active, started March 2015
+> Instructions: Take 1 time per day
+
+## 过敏与不耐受
+
+| 过敏物质 | 危急程度 | 临床状态 | 确认状态 | 类型 | 类别 | 发病 | 代码 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Substance with penicillin structure (substance) | 高风险 | 活动 | 已确认 | 过敏 | 药物 | 2010年 | SNOMED CT 764146007 |
+
+**叙述文本:**
+
+> Allergy Name: Pencillins
+> Verification Status: Confirmed
+> Reaction: no information
+
+---
+
+- 生成于 2026年11月15日 12:00
+- 源文档 28b95815-76ce-457b-b7ae-a972e527db40，日期 2020年12月11日 13:30
+- IPS 版本: IPS（未注明版本）
+- **不属于医疗器械。临床决策请以原始记录为准。**
+"
+`;
+
+exports[`Markdown export > matches the snapshot for every fixture in zh-CN > bundle-no-info-required-sections 1`] = `
+"# International Patient Summary
+
+## 患者
+
+- **姓名:** James Judge
+- **出生日期:** 1985年4月25日 (41 岁)
+- **性别:** 男
+- **标识符:** AAA1234 (https://standards.digital.health.nz/ns/nhi-id)
+
+## 关于本文档
+
+- **日期:** 2021年5月3日
+- **作者:** Northcare, Thomas Road
+- **保管机构:** NorthCare Pukete Road
+- **证明人:** Dr Richard Kildare Kildare (Doctor) (专业) 2021年5月3日
+- **保密级别:** 一般
+- **语言:** 英语（新西兰） (en-NZ)
+- **IPS 版本:** IPS（未注明版本）
+
+## 过敏与不耐受
+
+*信息不可用 — No information available*
+
+**叙述文本:**
+
+> There is no information available regarding the subject's allergies.
+
+## 问题列表
+
+*信息不可用 — No information available*
+
+**叙述文本:**
+
+> There is no information available about the subject's health problems or disabilities.
+
+## 用药摘要
+
+*信息不可用 — No information available*
+
+**叙述文本:**
+
+> There is no information available about the subject's medication use or administration.
+
+## 免疫接种
+
+| 疫苗 | 日期 | 剂次 | 状态 | 批号 | 接种者 | 代码 |
+| --- | --- | --- | --- | --- | --- | --- |
+| Influenza, split virus, trivalent, preservative | 2020年7月3日 | 剂量 2 | 已完成 | B52b | NorthCare Pukete Road | CVX 141 |
+| Influenza, split virus, trivalent, preservative | 2019年6月3日 | 剂量 1 | 已完成 | B52 | NorthCare Pukete Road | CVX 141 |
+
+**叙述文本:**
+
+> Vaccine Date Seq Route Site Indication Status
+> Influenza 03/07/2020 2 Injection, intramuscular Entire left upper arm Eligible condition (Influenza) completed
+> Influenza 03/06/2019 1 Injection, intramuscular Entire left upper arm Eligible condition (Influenza) completed
+
+---
+
+- 生成于 2026年11月15日 12:00
+- 源文档 59f51f0b-2005-485c-858e-3d3ae9657287，日期 2021年5月3日
+- IPS 版本: IPS（未注明版本）
+- **不属于医疗器械。临床决策请以原始记录为准。**
+"
+`;

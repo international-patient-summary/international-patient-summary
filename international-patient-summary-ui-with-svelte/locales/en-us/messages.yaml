@@ -1,0 +1,565 @@
+# International Patient Summary UI — English (United States), en-US.
+# The fallback locale and the source of truth for keys (spec §4.3).
+# Every value is a Unicode MessageFormat 2 (MF2) message.
+# Clinical content is never translated: these are interface words only.
+
+app:
+  title: International Patient Summary viewer
+  shortTitle: IPS viewer
+  tagline: View an HL7 FHIR International Patient Summary in your browser. Nothing leaves your device.
+
+skipLink: Skip to main content
+
+header:
+  label: Site header
+  home: Home
+  examples: Examples
+
+picker:
+  links: Pages
+  theme: Theme
+  locale: Language
+  textSize: Text size
+  share: Share this app
+  shareEmail: Email
+  copyLink: Copy link to this app
+  copied: Link copied
+  copyFailed: Could not copy the link
+
+footer:
+  label: Site footer
+  notMedicalDevice: This is a viewing tool, not a medical device. Check clinical decisions against the source record.
+  privacy: Documents are read and exported in your browser only. Nothing is uploaded, stored, or shared.
+  standards: 'Supports HL7 FHIR International Patient Summary {$version} (FHIR R4). Built with the Lily Design System.'
+
+nav:
+  pages: Pages
+
+loader:
+  heading: Open a patient summary
+  intro: Choose a file, paste a document, enter a web address, or try an example. JSON and YAML are both accepted.
+  tabsLabel: Ways to open a patient summary
+  tabFile: File
+  tabPaste: Paste
+  tabUrl: Web address
+  tabExamples: Examples
+  fileLabel: Choose a file
+  fileHint: A FHIR Bundle in JSON (.json) or YAML (.yaml, .yml), up to 10 MB.
+  dropHint: Or drop a file anywhere on this page.
+  dropActive: Drop the file to open it
+  fileSelected: |-
+    .input {$count :number}
+    .match $count
+    0   {{No file chosen}}
+    one {{{$count} file chosen}}
+    *   {{{$count} files chosen}}
+  pasteLabel: Paste a FHIR Bundle (JSON or YAML)
+  pasteButton: Open pasted document
+  urlLabel: Web address of a FHIR Bundle
+  urlHint: The address must start with https://. The server must allow browser access (CORS); if it does not, download the file and open it instead.
+  urlButton: Fetch and open
+  examplesIntro: Example documents from the HL7 FHIR IPS Implementation Guide 2.0.1.
+  openExample: 'Open {$name}'
+  loading: Opening the document…
+  loadedAs: '{$format} document loaded from {$source}.'
+  sourceText: pasted text
+  errorTitle: There is a problem
+  errorPosition: 'Line {$line}, column {$column}.'
+  errorDetail: 'Details: {$detail}'
+
+load:
+  errors:
+    tooLarge: 'The document is too large ({$size} bytes). The limit is {$max} bytes.'
+    empty: The document is empty.
+    invalidJson: The document is not valid JSON.
+    invalidYaml: The document is not valid YAML.
+    notJsonOrYaml: The document is neither valid JSON nor valid YAML.
+    yamlMultiDocument: 'The YAML holds {$count} documents. Open one document at a time.'
+    yamlNonFinite: 'The YAML has a value FHIR cannot hold (infinity or not-a-number) at {$path}.'
+    yamlUnsupportedType: 'The YAML has a value FHIR JSON cannot hold at {$path}.'
+    yamlDuplicateKey: The YAML repeats a key in the same object.
+    yamlCustomTag: The YAML uses a tag. FHIR YAML must be plain data with no tags.
+    yamlAliasLimit: 'The YAML uses too many aliases (more than {$max}).'
+    urlInvalid: That is not a web address.
+    urlNotHttps: Only secure web addresses (https://) can be opened.
+    urlNetwork: 'Could not fetch the document from {$host}. The server may not allow browser access (CORS), or the network may be down. Try downloading the file and opening it instead.'
+    urlStatus: 'The server answered with HTTP status {$status}.'
+
+checks:
+  heading: Document checks
+  summary: |-
+    .input {$count :number}
+    .match $count
+    0   {{Document checks: none}}
+    one {{Document checks: {$count} finding}}
+    *   {{Document checks: {$count} findings}}
+  intro: The viewer reports problems it can see in the document's structure. It is not a validator; use the HL7 FHIR Validator to check conformance.
+  severity:
+    error: Error
+    warning: Warning
+    info: Information
+  notFhir: This is not a FHIR resource.
+  notBundle: 'This is a FHIR {$found}, not a Bundle. An International Patient Summary is a Bundle of type "document".'
+  notDocument: 'This Bundle has type "{$found}". An International Patient Summary is a Bundle of type "document".'
+  firstNotComposition: The first entry in the Bundle is not a Composition.
+  noSubject: The Composition does not say who the patient is (no subject).
+  subjectUnresolved: 'The patient ({$reference}) is not in the Bundle.'
+  noIpsProfile: The document does not claim to follow the IPS profiles (no IPS meta.profile).
+  unknownVersion: 'The document claims IPS version {$version}, which this viewer does not know.'
+  notPatientSummaryType: 'The Composition type is LOINC {$code}, not 60591-5 "Patient summary Document".'
+  unknownSection: 'A section with code {$code} is not an IPS section; it is shown as it is.'
+  unresolvedReference: 'An entry ({$reference}) is not in the Bundle.'
+  requiredSectionMissing: 'A required section (LOINC {$code}) is missing from the document.'
+  blocking: This document cannot be shown.
+
+sections:
+  medications:
+    title: Medication summary
+  allergies:
+    title: Allergies and intolerances
+  problems:
+    title: Problem list
+  immunizations:
+    title: Immunizations
+  results:
+    title: Results
+  procedures:
+    title: History of procedures
+  devices:
+    title: Medical devices
+  vitalSigns:
+    title: Vital signs
+  pastIllness:
+    title: History of past illness
+  functionalStatus:
+    title: Functional status
+  planOfCare:
+    title: Plan of care
+  socialHistory:
+    title: Social history
+  pregnancy:
+    title: History of pregnancy
+  advanceDirectives:
+    title: Advance directives
+  alerts:
+    title: Alerts
+  patientStory:
+    title: Patient story
+  generic:
+    title: Other section
+
+level:
+  required: Required section
+  recommended: Recommended section
+  optional: Optional section
+  unknown: Section not in the IPS
+
+state:
+  known: Recorded
+  none-known: None known
+  not-recorded: Not recorded
+  unavailable: Information unavailable
+  omitted: Section missing from document
+  narrativeOnly: No structured entries. See the narrative from the document.
+  withReason: '{$state} — {$reason}'
+  unresolved: The entries could not be found in the document.
+
+emptyReason:
+  nilknown: None known
+  notasked: Not asked
+  notstarted: Not started
+  unavailable: Information unavailable
+  withheld: Information withheld
+  closed: List closed
+
+viewer:
+  documentHeading: Patient summary
+  contents: Contents
+  showCodes: Show codes
+  codes: Codes
+  narrative: Narrative from the document
+  source: Source data (JSON)
+  loadAnother: Open another document
+  sectionCount: |-
+    .input {$count :number}
+    .match $count
+    0   {{No entries}}
+    one {{{$count} entry}}
+    *   {{{$count} entries}}
+  unresolvedInline: |-
+    .input {$count :number}
+    .match $count
+    one {{{$count} entry in this section could not be found in the document.}}
+    *   {{{$count} entries in this section could not be found in the document.}}
+  documentLanguage: Clinical content is shown as written in the document, in its own language.
+  enteredInError: Entered in error
+  timeline: Show as timeline
+  timelineLabel: '{$title}, as a timeline'
+  undated: Date not recorded
+
+patient:
+  bannerLabel: Patient
+  identityLabel: Patient identity
+  name: Name
+  birthDate: Date of birth
+  age: Age
+  gender: Gender
+  identifiers: Identifiers
+  contact: Contact
+  address: Address
+  deceased: Deceased
+  deceasedOn: 'Deceased {$date}'
+  notStated: Not stated
+  dangerLabel: Allergies and alerts
+  allergies: Allergies and intolerances
+  alerts: Alerts
+  noActiveAlerts: No active alerts in the document
+  more: |-
+    .input {$count :number}
+    .match $count
+    one {{and {$count} more in the section below}}
+    *   {{and {$count} more in the section below}}
+
+document:
+  heading: About this document
+  label: Document details
+  title: Title
+  date: Date
+  authors: Authors
+  custodian: Custodian
+  attesters: Attested by
+  confidentiality: Confidentiality
+  language: Language
+  version: IPS version
+  versionStated: 'IPS {$version}'
+  versionNotStated: IPS (version not stated)
+  versionNoProfile: Not stated
+  status: Status
+  identifier: Identifier
+
+fields:
+  substance: Substance
+  reaction: Reaction
+  severity: Severity
+  criticality: Criticality
+  clinicalStatus: Clinical status
+  verificationStatus: Verification status
+  type: Type
+  category: Category
+  onset: Onset
+  medication: Medication
+  strength: Strength
+  form: Form
+  dosage: Dosage
+  status: Status
+  effective: When
+  condition: Condition
+  abatement: Resolved
+  vaccine: Vaccine
+  date: Date
+  dose: Dose
+  lotNumber: Lot number
+  performer: Given by
+  procedure: Procedure
+  performed: Performed
+  device: Device
+  timing: In use
+  observation: Test or observation
+  result: Result
+  referenceRange: Reference range
+  report: Report
+  conclusion: Conclusion
+  alert: Alert
+  period: Period
+  item: Item
+  description: Description
+  sourceDocument: Source document
+  activities: Activities
+  findings: Findings
+
+format:
+  periodRange: '{$start} to {$end}'
+  periodFrom: 'From {$start}'
+  periodUntil: 'Until {$end}'
+  rangeBetween: '{$low} to {$high}'
+  rangeAtLeast: 'At least {$low}'
+  rangeAtMost: 'At most {$high}'
+  frequency: '{$frequency} times every {$periodLabel}'
+  asNeeded: as needed
+  prescribedOn: 'Prescribed {$date}'
+  onset: 'Since {$date}'
+  abatement: 'Resolved {$date}'
+  dose: 'Dose {$dose}'
+  doseOf: 'Dose {$dose} of {$series}'
+  usedSince: 'Start: {$date}'
+  timeUnit:
+    s: |-
+      .input {$count :number}
+      .match $count
+      one {{{$count} second}}
+      *   {{{$count} seconds}}
+    min: |-
+      .input {$count :number}
+      .match $count
+      one {{{$count} minute}}
+      *   {{{$count} minutes}}
+    h: |-
+      .input {$count :number}
+      .match $count
+      one {{{$count} hour}}
+      *   {{{$count} hours}}
+    d: |-
+      .input {$count :number}
+      .match $count
+      one {{{$count} day}}
+      *   {{{$count} days}}
+    wk: |-
+      .input {$count :number}
+      .match $count
+      one {{{$count} week}}
+      *   {{{$count} weeks}}
+    mo: |-
+      .input {$count :number}
+      .match $count
+      one {{{$count} month}}
+      *   {{{$count} months}}
+    a: |-
+      .input {$count :number}
+      .match $count
+      one {{{$count} year}}
+      *   {{{$count} years}}
+  age:
+    minutes: |-
+      .input {$count :number}
+      .match $count
+      one {{{$count} minute}}
+      *   {{{$count} minutes}}
+    hours: |-
+      .input {$count :number}
+      .match $count
+      one {{{$count} hour}}
+      *   {{{$count} hours}}
+    days: |-
+      .input {$count :number}
+      .match $count
+      one {{{$count} day}}
+      *   {{{$count} days}}
+    weeks: |-
+      .input {$count :number}
+      .match $count
+      one {{{$count} week}}
+      *   {{{$count} weeks}}
+    months: |-
+      .input {$count :number}
+      .match $count
+      one {{{$count} month}}
+      *   {{{$count} months}}
+    years: |-
+      .input {$count :number}
+      .match $count
+      one {{{$count} year}}
+      *   {{{$count} years}}
+
+values:
+  notStated: Not stated
+  yes: Yes
+  no: No
+  resourceOfType: '{$type} record'
+
+status:
+  active: Active
+  inactive: Inactive
+  resolved: Resolved
+  recurrence: Recurrence
+  relapse: Relapse
+  remission: Remission
+  unconfirmed: Unconfirmed
+  provisional: Provisional
+  differential: Differential diagnosis
+  confirmed: Confirmed
+  refuted: Refuted
+  presumed: Presumed
+  entered-in-error: Entered in error
+  completed: Completed
+  intended: Intended
+  stopped: Stopped
+  on-hold: On hold
+  unknown: Status unknown
+  not-taken: Not taken
+  not-done: Not done
+  preparation: In preparation
+  in-progress: In progress
+  final: Final
+  preliminary: Preliminary
+  amended: Amended
+  corrected: Corrected
+  cancelled: Cancelled
+  registered: Registered
+  draft: Draft
+  revoked: Revoked
+  rejected: Rejected
+  proposed: Proposed
+  current: Current
+  superseded: Superseded
+  revised: Revised
+  partial: Partial
+  appended: Appended
+
+severity:
+  mild: Mild reaction
+  moderate: Moderate reaction
+  severe: Severe reaction
+
+criticality:
+  low: Low risk
+  high: High risk
+  unable-to-assess: Risk unable to assess
+
+allergyType:
+  allergy: Allergy
+  intolerance: Intolerance
+
+allergyCategory:
+  food: Food
+  medication: Medication
+  environment: Environment
+  biologic: Biologic
+
+interpretation:
+  N: Normal
+  A: Abnormal
+  AA: Critically abnormal
+  H: High
+  HH: Critically high
+  HU: Significantly high
+  L: Low
+  LL: Critically low
+  LU: Significantly low
+  POS: Positive
+  NEG: Negative
+  IND: Indeterminate
+  DET: Detected
+  ND: Not detected
+  U: Significant change up
+  D: Significant change down
+  B: Better
+  W: Worse
+  S: Susceptible
+  R: Resistant
+  I: Intermediate
+
+absentReason:
+  unknown: Unknown
+  asked-unknown: Asked, but unknown
+  temp-unknown: Temporarily unknown
+  not-asked: Not asked
+  asked-declined: Asked, but declined
+  masked: Masked
+  not-applicable: Not applicable
+  unsupported: Unsupported
+  as-text: Recorded as text
+  error: Error
+  not-a-number: Not a number
+  negative-infinity: Negative infinity
+  positive-infinity: Positive infinity
+  not-performed: Not performed
+  not-permitted: Not permitted
+
+consentProvision:
+  permit: Permit
+  deny: Deny
+
+gender:
+  male: Male
+  female: Female
+  other: Other
+  unknown: Unknown
+
+attestationMode:
+  personal: personal
+  professional: professional
+  legal: legal
+  official: official
+
+confidentiality:
+  U: Unrestricted
+  L: Low
+  M: Moderate
+  N: Normal
+  R: Restricted
+  V: Very restricted
+
+results:
+  label: Results table
+  observation: Test or observation
+  result: Result
+  date: Date
+  group: 'Report: {$name}'
+
+examples:
+  heading: Example documents
+  intro: These are published examples from the HL7 FHIR International Patient Summary Implementation Guide 2.0.1. They describe fictional patients.
+  open: Open
+  bundle-minimal:
+    name: Minimal
+    description: The smallest valid summary — the three required sections only.
+  bundle-no-info-required-sections:
+    name: No information in required sections
+    description: Required sections with no data, each stating why. Shows how "unavailable" differs from "none known".
+  bundle-ips-all-sections:
+    name: All sections
+    description: Every section the IPS defines, including Alerts and Patient story (new in 2.0).
+  IPS-examples-Bundle-01:
+    name: Example 1
+    description: A typical summary with allergies, medicines, problems, results and a plan of care.
+  IPS-examples-Bundle-with-immunization:
+    name: Example with immunizations
+    description: Example 1 with an immunization history.
+
+export:
+  heading: Export
+  intro: Download this summary. Files are made in your browser; nothing is uploaded.
+  formatLabel: Format
+  json: JSON
+  jsonDescription: The FHIR Bundle exactly as loaded.
+  yaml: YAML
+  yamlDescription: The same Bundle as YAML. YAML is not an official FHIR format.
+  markdown: Markdown
+  markdownDescription: A readable clinical summary, every section included.
+  pdf: PDF (one page)
+  pdfDescription: A one-page clinical summary for handing over or printing.
+  options: Options
+  includeNarrative: Include each section's narrative (as plain text)
+  includeCodes: Include codes
+  paperSize: Paper size
+  paperAuto: Automatic (US Letter in the United States, A4 elsewhere)
+  paperA4: A4
+  paperLetter: US Letter
+  download: Download
+  downloadAnyway: Download the PDF anyway
+  generating: Making the file…
+  downloaded: 'Downloaded {$filename}'
+  failed: The file could not be made.
+  overflowWarning: The must-show content (identity, alerts, allergies, active medicines) does not fit on one page. The PDF runs to more than one page, and says so on every page.
+  yamlComment: 'YAML form of an HL7 FHIR Bundle, exported by the International Patient Summary viewer. YAML is not an official FHIR format; it maps one to one to FHIR JSON.'
+
+summary:
+  generatedAt: 'Generated {$date}'
+  sourceDocument: 'Source document {$identifier}, dated {$date}'
+  sourceDate: 'Source document dated {$date}'
+  notMedicalDevice: Not a medical device. Check clinical decisions against the source record.
+  notShown: 'Not shown on this page: {$sections}'
+  moreNotShown: |-
+    .input {$count :number}
+    .match $count
+    one {{+{$count} more not shown}}
+    *   {{+{$count} more not shown}}
+  sectionNotShown: Section present — not shown on this one-page summary.
+  continued: CONTINUED — this summary exceeds one page
+  pageOf: 'Page {$page} of {$count}'
+  activeMedications: Active medications
+  activeProblems: Active problems
+  alertsAndAllergies: Alerts and allergies
+  patient: Patient
+  narrative: Narrative
+  codes: Codes

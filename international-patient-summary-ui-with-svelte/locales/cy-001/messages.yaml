@@ -1,0 +1,639 @@
+# International Patient Summary UI — Welsh, cy-001.
+# Keys match en-us, the source of truth for keys (spec §4.3).
+# Every value is a Unicode MessageFormat 2 (MF2) message.
+# Clinical content is never translated: these are interface words only.
+# Machine-drafted: needs review by a fluent Welsh-speaking clinician (see REVIEW.md).
+
+app:
+  title: Gwyliwr Crynodeb Cleifion Rhyngwladol
+  shortTitle: Gwyliwr IPS
+  tagline: Gweld Crynodeb Cleifion Rhyngwladol HL7 FHIR yn eich porwr. Nid oes dim yn gadael eich dyfais.
+
+skipLink: Neidio i'r prif gynnwys
+
+header:
+  label: Pennyn y wefan
+  home: Hafan
+  examples: Enghreifftiau
+
+picker:
+  links: Tudalennau
+  theme: Thema
+  locale: Iaith
+  textSize: Maint y testun
+  share: Rhannu'r ap hwn
+  shareEmail: E-bost
+  copyLink: Copïo dolen i'r ap hwn
+  copied: Dolen wedi'i chopïo
+  copyFailed: Nid oedd modd copïo'r ddolen
+
+footer:
+  label: Troedyn y wefan
+  notMedicalDevice: Offeryn gweld yw hwn, nid dyfais feddygol. Gwiriwch benderfyniadau clinigol yn erbyn y cofnod gwreiddiol.
+  privacy: Caiff dogfennau eu darllen a'u hallforio yn eich porwr yn unig. Nid oes dim yn cael ei lanlwytho, ei storio na'i rannu.
+  standards: 'Yn cefnogi Crynodeb Cleifion Rhyngwladol HL7 FHIR {$version} (FHIR R4). Wedi''i adeiladu gyda''r Lily Design System.'
+
+nav:
+  pages: Tudalennau
+
+loader:
+  heading: Agor crynodeb claf
+  intro: Dewiswch ffeil, gludwch ddogfen, rhowch gyfeiriad gwe, neu rhowch gynnig ar enghraifft. Derbynnir JSON a YAML.
+  tabsLabel: Ffyrdd o agor crynodeb claf
+  tabFile: Ffeil
+  tabPaste: Gludo
+  tabUrl: Cyfeiriad gwe
+  tabExamples: Enghreifftiau
+  fileLabel: Dewis ffeil
+  fileHint: Bundle FHIR mewn JSON (.json) neu YAML (.yaml, .yml), hyd at 10 MB.
+  dropHint: Neu gollyngwch ffeil unrhyw le ar y dudalen hon.
+  dropActive: Gollyngwch y ffeil i'w hagor
+  fileSelected: |-
+    .input {$count :number}
+    .match $count
+    zero {{Dim ffeil wedi'i dewis}}
+    one  {{{$count} ffeil wedi'i dewis}}
+    two  {{{$count} ffeil wedi'u dewis}}
+    few  {{{$count} ffeil wedi'u dewis}}
+    many {{{$count} ffeil wedi'u dewis}}
+    *    {{{$count} o ffeiliau wedi'u dewis}}
+  pasteLabel: Gludwch Bundle FHIR (JSON neu YAML)
+  pasteButton: Agor y ddogfen a ludwyd
+  urlLabel: Cyfeiriad gwe Bundle FHIR
+  urlHint: Rhaid i'r cyfeiriad ddechrau gyda https://. Rhaid i'r gweinydd ganiatáu mynediad gan borwr (CORS); os nad yw'n gwneud hynny, lawrlwythwch y ffeil a'i hagor yn lle hynny.
+  urlButton: Nôl ac agor
+  examplesIntro: Dogfennau enghreifftiol o Ganllaw Gweithredu HL7 FHIR IPS 2.0.1.
+  openExample: 'Agor {$name}'
+  loading: Wrthi'n agor y ddogfen…
+  loadedAs: 'Dogfen {$format} wedi''i llwytho o {$source}.'
+  sourceText: testun a ludwyd
+  errorTitle: Mae problem
+  errorPosition: 'Llinell {$line}, colofn {$column}.'
+  errorDetail: 'Manylion: {$detail}'
+
+load:
+  errors:
+    tooLarge: 'Mae''r ddogfen yn rhy fawr ({$size} beit). Y terfyn yw {$max} beit.'
+    empty: Mae'r ddogfen yn wag.
+    invalidJson: Nid yw'r ddogfen yn JSON dilys.
+    invalidYaml: Nid yw'r ddogfen yn YAML dilys.
+    notJsonOrYaml: Nid yw'r ddogfen yn JSON dilys nac yn YAML dilys.
+    yamlMultiDocument: 'Mae''r YAML yn cynnwys {$count} dogfen. Agorwch un ddogfen ar y tro.'
+    yamlNonFinite: 'Mae gan y YAML werth na all FHIR ei ddal (anfeidredd neu nid-rhif) yn {$path}.'
+    yamlUnsupportedType: 'Mae gan y YAML werth na all FHIR JSON ei ddal yn {$path}.'
+    yamlDuplicateKey: Mae'r YAML yn ailadrodd allwedd yn yr un gwrthrych.
+    yamlCustomTag: Mae'r YAML yn defnyddio tag. Rhaid i FHIR YAML fod yn ddata plaen heb dagiau.
+    yamlAliasLimit: 'Mae''r YAML yn defnyddio gormod o aliasau (mwy na {$max}).'
+    urlInvalid: Nid yw hwnnw'n gyfeiriad gwe.
+    urlNotHttps: Dim ond cyfeiriadau gwe diogel (https://) y gellir eu hagor.
+    urlNetwork: 'Nid oedd modd nôl y ddogfen o {$host}. Efallai nad yw''r gweinydd yn caniatáu mynediad gan borwr (CORS), neu efallai fod y rhwydwaith i lawr. Rhowch gynnig ar lawrlwytho''r ffeil a''i hagor yn lle hynny.'
+    urlStatus: 'Atebodd y gweinydd gyda statws HTTP {$status}.'
+
+checks:
+  heading: Gwiriadau'r ddogfen
+  summary: |-
+    .input {$count :number}
+    .match $count
+    zero {{Gwiriadau'r ddogfen: dim}}
+    one  {{Gwiriadau'r ddogfen: {$count} canfyddiad}}
+    two  {{Gwiriadau'r ddogfen: {$count} ganfyddiad}}
+    few  {{Gwiriadau'r ddogfen: {$count} chanfyddiad}}
+    many {{Gwiriadau'r ddogfen: {$count} chanfyddiad}}
+    *    {{Gwiriadau'r ddogfen: {$count} o ganfyddiadau}}
+  intro: Mae'r gwyliwr yn adrodd ar broblemau y gall eu gweld yn strwythur y ddogfen. Nid dilysydd mohono; defnyddiwch Ddilysydd HL7 FHIR i wirio cydymffurfiaeth.
+  severity:
+    error: Gwall
+    warning: Rhybudd
+    info: Gwybodaeth
+  notFhir: Nid adnodd FHIR yw hwn.
+  notBundle: 'Mae hwn yn {$found} FHIR, nid yn Bundle. Mae Crynodeb Cleifion Rhyngwladol yn Bundle o''r math "document".'
+  notDocument: 'Mae gan y Bundle hwn y math "{$found}". Mae Crynodeb Cleifion Rhyngwladol yn Bundle o''r math "document".'
+  firstNotComposition: Nid Composition yw'r cofnod cyntaf yn y Bundle.
+  noSubject: Nid yw'r Composition yn dweud pwy yw'r claf (dim subject).
+  subjectUnresolved: 'Nid yw''r claf ({$reference}) yn y Bundle.'
+  noIpsProfile: Nid yw'r ddogfen yn honni ei bod yn dilyn proffiliau IPS (dim meta.profile IPS).
+  unknownVersion: 'Mae''r ddogfen yn honni fersiwn IPS {$version}, nad yw''r gwyliwr hwn yn ei hadnabod.'
+  notPatientSummaryType: 'Math y Composition yw LOINC {$code}, nid 60591-5 "Patient summary Document".'
+  unknownSection: 'Nid yw adran â''r cod {$code} yn adran IPS; fe''i dangosir fel y mae.'
+  unresolvedReference: 'Nid yw cofnod ({$reference}) yn y Bundle.'
+  requiredSectionMissing: 'Mae adran ofynnol (LOINC {$code}) ar goll o''r ddogfen.'
+  blocking: Nid oes modd dangos y ddogfen hon.
+
+sections:
+  medications:
+    title: Crynodeb o feddyginiaethau
+  allergies:
+    title: Alergeddau ac anoddefiadau
+  problems:
+    title: Rhestr problemau
+  immunizations:
+    title: Imiwneiddiadau
+  results:
+    title: Canlyniadau
+  procedures:
+    title: Hanes triniaethau
+  devices:
+    title: Dyfeisiau meddygol
+  vitalSigns:
+    title: Arwyddion hanfodol
+  pastIllness:
+    title: Hanes salwch blaenorol
+  functionalStatus:
+    title: Statws gweithredol
+  planOfCare:
+    title: Cynllun gofal
+  socialHistory:
+    title: Hanes cymdeithasol
+  pregnancy:
+    title: Hanes beichiogrwydd
+  advanceDirectives:
+    title: Penderfyniadau ymlaen llaw
+  alerts:
+    title: Rhybuddion
+  patientStory:
+    title: Stori'r claf
+  generic:
+    title: Adran arall
+
+level:
+  required: Adran ofynnol
+  recommended: Adran a argymhellir
+  optional: Adran ddewisol
+  unknown: Adran nad yw yn yr IPS
+
+state:
+  known: Wedi'i gofnodi
+  none-known: Dim yn hysbys
+  not-recorded: Heb ei gofnodi
+  unavailable: Gwybodaeth ddim ar gael
+  omitted: Adran ar goll o'r ddogfen
+  narrativeOnly: Dim cofnodion strwythuredig. Gweler y naratif o'r ddogfen.
+  withReason: '{$state} — {$reason}'
+  unresolved: Nid oedd modd dod o hyd i'r cofnodion yn y ddogfen.
+
+emptyReason:
+  nilknown: Dim yn hysbys
+  notasked: Heb ofyn
+  notstarted: Heb ddechrau
+  unavailable: Gwybodaeth ddim ar gael
+  withheld: Gwybodaeth wedi'i dal yn ôl
+  closed: Rhestr wedi'i chau
+
+viewer:
+  documentHeading: Crynodeb y claf
+  contents: Cynnwys
+  showCodes: Dangos codau
+  codes: Codau
+  narrative: Naratif o'r ddogfen
+  source: Data ffynhonnell (JSON)
+  loadAnother: Agor dogfen arall
+  sectionCount: |-
+    .input {$count :number}
+    .match $count
+    zero {{Dim cofnodion}}
+    one  {{{$count} cofnod}}
+    two  {{{$count} gofnod}}
+    few  {{{$count} chofnod}}
+    many {{{$count} chofnod}}
+    *    {{{$count} o gofnodion}}
+  unresolvedInline: |-
+    .input {$count :number}
+    .match $count
+    zero {{Nid oes cofnod ar goll yn yr adran hon.}}
+    one  {{Nid oedd modd dod o hyd i {$count} cofnod yn yr adran hon yn y ddogfen.}}
+    two  {{Nid oedd modd dod o hyd i {$count} gofnod yn yr adran hon yn y ddogfen.}}
+    few  {{Nid oedd modd dod o hyd i {$count} chofnod yn yr adran hon yn y ddogfen.}}
+    many {{Nid oedd modd dod o hyd i {$count} chofnod yn yr adran hon yn y ddogfen.}}
+    *    {{Nid oedd modd dod o hyd i {$count} o gofnodion yn yr adran hon yn y ddogfen.}}
+  documentLanguage: Dangosir y cynnwys clinigol fel y'i hysgrifennwyd yn y ddogfen, yn ei hiaith ei hun.
+  enteredInError: Wedi'i gofnodi mewn camgymeriad
+  timeline: Dangos fel llinell amser
+  timelineLabel: '{$title}, fel llinell amser'
+  undated: Dyddiad heb ei gofnodi
+
+patient:
+  bannerLabel: Claf
+  identityLabel: Hunaniaeth y claf
+  name: Enw
+  birthDate: Dyddiad geni
+  age: Oed
+  gender: Rhywedd
+  identifiers: Dynodwyr
+  contact: Cyswllt
+  address: Cyfeiriad
+  deceased: Wedi marw
+  deceasedOn: 'Bu farw {$date}'
+  notStated: Heb ei nodi
+  dangerLabel: Alergeddau a rhybuddion
+  allergies: Alergeddau ac anoddefiadau
+  alerts: Rhybuddion
+  noActiveAlerts: Dim rhybuddion gweithredol yn y ddogfen
+  more: |-
+    .input {$count :number}
+    .match $count
+    zero {{a {$count} arall yn yr adran isod}}
+    one  {{a {$count} arall yn yr adran isod}}
+    two  {{a {$count} arall yn yr adran isod}}
+    few  {{a {$count} arall yn yr adran isod}}
+    many {{a {$count} arall yn yr adran isod}}
+    *    {{a {$count} arall yn yr adran isod}}
+
+document:
+  heading: Ynglŷn â'r ddogfen hon
+  label: Manylion y ddogfen
+  title: Teitl
+  date: Dyddiad
+  authors: Awduron
+  custodian: Ceidwad
+  attesters: Ardystiwyd gan
+  confidentiality: Cyfrinachedd
+  language: Iaith
+  version: Fersiwn IPS
+  versionStated: 'IPS {$version}'
+  versionNotStated: IPS (fersiwn heb ei nodi)
+  versionNoProfile: Heb ei nodi
+  status: Statws
+  identifier: Dynodwr
+
+fields:
+  substance: Sylwedd
+  reaction: Adwaith
+  severity: Difrifoldeb
+  criticality: Critigolrwydd
+  clinicalStatus: Statws clinigol
+  verificationStatus: Statws dilysu
+  type: Math
+  category: Categori
+  onset: Cychwyn
+  medication: Meddyginiaeth
+  strength: Cryfder
+  form: Ffurf
+  dosage: Dosio
+  status: Statws
+  effective: Pryd
+  condition: Cyflwr
+  abatement: Wedi gwella
+  vaccine: Brechlyn
+  date: Dyddiad
+  dose: Dos
+  lotNumber: Rhif swp
+  performer: Rhoddwyd gan
+  procedure: Triniaeth
+  performed: Cyflawnwyd
+  device: Dyfais
+  timing: Yn cael ei defnyddio
+  observation: Prawf neu arsylwad
+  result: Canlyniad
+  referenceRange: Ystod gyfeirio
+  report: Adroddiad
+  conclusion: Casgliad
+  alert: Rhybudd
+  period: Cyfnod
+  item: Eitem
+  description: Disgrifiad
+  sourceDocument: Dogfen ffynhonnell
+  activities: Gweithgareddau
+  findings: Canfyddiadau
+
+format:
+  periodRange: '{$start} i {$end}'
+  periodFrom: 'O {$start}'
+  periodUntil: 'Tan {$end}'
+  rangeBetween: '{$low} i {$high}'
+  rangeAtLeast: 'O leiaf {$low}'
+  rangeAtMost: 'Ar y mwyaf {$high}'
+  frequency: '{$frequency} gwaith bob {$periodLabel}'
+  asNeeded: yn ôl yr angen
+  prescribedOn: 'Rhagnodwyd {$date}'
+  onset: 'Ers {$date}'
+  abatement: 'Wedi gwella {$date}'
+  dose: 'Dos {$dose}'
+  doseOf: 'Dos {$dose} o {$series}'
+  usedSince: 'Dechrau: {$date}'
+  timeUnit:
+    s: |-
+      .input {$count :number}
+      .match $count
+      zero {{{$count} eiliad}}
+      one  {{{$count} eiliad}}
+      two  {{{$count} eiliad}}
+      few  {{{$count} eiliad}}
+      many {{{$count} eiliad}}
+      *    {{{$count} o eiliadau}}
+    min: |-
+      .input {$count :number}
+      .match $count
+      zero {{{$count} munud}}
+      one  {{{$count} funud}}
+      two  {{{$count} funud}}
+      few  {{{$count} munud}}
+      many {{{$count} munud}}
+      *    {{{$count} o funudau}}
+    h: |-
+      .input {$count :number}
+      .match $count
+      zero {{{$count} awr}}
+      one  {{{$count} awr}}
+      two  {{{$count} awr}}
+      few  {{{$count} awr}}
+      many {{{$count} awr}}
+      *    {{{$count} o oriau}}
+    d: |-
+      .input {$count :number}
+      .match $count
+      zero {{{$count} diwrnod}}
+      one  {{{$count} diwrnod}}
+      two  {{{$count} ddiwrnod}}
+      few  {{{$count} diwrnod}}
+      many {{{$count} diwrnod}}
+      *    {{{$count} o ddiwrnodau}}
+    wk: |-
+      .input {$count :number}
+      .match $count
+      zero {{{$count} wythnos}}
+      one  {{{$count} wythnos}}
+      two  {{{$count} wythnos}}
+      few  {{{$count} wythnos}}
+      many {{{$count} wythnos}}
+      *    {{{$count} o wythnosau}}
+    mo: |-
+      .input {$count :number}
+      .match $count
+      zero {{{$count} mis}}
+      one  {{{$count} mis}}
+      two  {{{$count} fis}}
+      few  {{{$count} mis}}
+      many {{{$count} mis}}
+      *    {{{$count} o fisoedd}}
+    a: |-
+      .input {$count :number}
+      .match $count
+      zero {{{$count} blwyddyn}}
+      one  {{{$count} flwyddyn}}
+      two  {{{$count} flynedd}}
+      few  {{{$count} blynedd}}
+      many {{{$count} blynedd}}
+      *    {{{$count} o flynyddoedd}}
+  age:
+    minutes: |-
+      .input {$count :number}
+      .match $count
+      zero {{{$count} munud}}
+      one  {{{$count} funud}}
+      two  {{{$count} funud}}
+      few  {{{$count} munud}}
+      many {{{$count} munud}}
+      *    {{{$count} o funudau}}
+    hours: |-
+      .input {$count :number}
+      .match $count
+      zero {{{$count} awr}}
+      one  {{{$count} awr}}
+      two  {{{$count} awr}}
+      few  {{{$count} awr}}
+      many {{{$count} awr}}
+      *    {{{$count} o oriau}}
+    days: |-
+      .input {$count :number}
+      .match $count
+      zero {{{$count} diwrnod}}
+      one  {{{$count} diwrnod}}
+      two  {{{$count} ddiwrnod}}
+      few  {{{$count} diwrnod}}
+      many {{{$count} diwrnod}}
+      *    {{{$count} o ddiwrnodau}}
+    weeks: |-
+      .input {$count :number}
+      .match $count
+      zero {{{$count} wythnos}}
+      one  {{{$count} wythnos}}
+      two  {{{$count} wythnos}}
+      few  {{{$count} wythnos}}
+      many {{{$count} wythnos}}
+      *    {{{$count} o wythnosau}}
+    months: |-
+      .input {$count :number}
+      .match $count
+      zero {{{$count} mis}}
+      one  {{{$count} mis}}
+      two  {{{$count} fis}}
+      few  {{{$count} mis}}
+      many {{{$count} mis}}
+      *    {{{$count} o fisoedd}}
+    years: |-
+      .input {$count :number}
+      .match $count
+      zero {{{$count} blwyddyn}}
+      one  {{{$count} flwyddyn}}
+      two  {{{$count} flynedd}}
+      few  {{{$count} blynedd}}
+      many {{{$count} blynedd}}
+      *    {{{$count} o flynyddoedd}}
+
+values:
+  notStated: Heb ei nodi
+  yes: Ie
+  no: Na
+  resourceOfType: 'Cofnod {$type}'
+
+status:
+  active: Gweithredol
+  inactive: Anweithredol
+  resolved: Wedi gwella
+  recurrence: Wedi digwydd eto
+  relapse: Atglafychiad
+  remission: Wedi cilio
+  unconfirmed: Heb ei gadarnhau
+  provisional: Dros dro
+  differential: Diagnosis gwahaniaethol
+  confirmed: Wedi'i gadarnhau
+  refuted: Wedi'i wrthbrofi
+  presumed: Tybiedig
+  entered-in-error: Wedi'i gofnodi mewn camgymeriad
+  completed: Wedi'i gwblhau
+  intended: Bwriedig
+  stopped: Wedi'i atal
+  on-hold: Ar saib
+  unknown: Statws anhysbys
+  not-taken: Heb ei gymryd
+  not-done: Heb ei wneud
+  preparation: Wrthi'n paratoi
+  in-progress: Ar y gweill
+  final: Terfynol
+  preliminary: Rhagarweiniol
+  amended: Wedi'i ddiwygio
+  corrected: Wedi'i gywiro
+  cancelled: Wedi'i ganslo
+  registered: Wedi'i gofrestru
+  draft: Drafft
+  revoked: Wedi'i ddirymu
+  rejected: Wedi'i wrthod
+  proposed: Arfaethedig
+  current: Cyfredol
+  superseded: Wedi'i ddisodli
+  revised: Wedi'i adolygu
+  partial: Rhannol
+  appended: Wedi'i atodi
+
+severity:
+  mild: Adwaith ysgafn
+  moderate: Adwaith cymedrol
+  severe: Adwaith difrifol
+
+criticality:
+  low: Risg isel
+  high: Risg uchel
+  unable-to-assess: Methu asesu'r risg
+
+allergyType:
+  allergy: Alergedd
+  intolerance: Anoddefiad
+
+allergyCategory:
+  food: Bwyd
+  medication: Meddyginiaeth
+  environment: Amgylchedd
+  biologic: Biolegol
+
+interpretation:
+  N: Normal
+  A: Annormal
+  AA: Annormal critigol
+  H: Uchel
+  HH: Uchel critigol
+  HU: Uchel sylweddol
+  L: Isel
+  LL: Isel critigol
+  LU: Isel sylweddol
+  POS: Positif
+  NEG: Negatif
+  IND: Amhendant
+  DET: Wedi'i ganfod
+  ND: Heb ei ganfod
+  U: Newid sylweddol i fyny
+  D: Newid sylweddol i lawr
+  B: Gwell
+  W: Gwaeth
+  S: Sensitif
+  R: Gwrthiannol
+  I: Canolradd
+
+absentReason:
+  unknown: Anhysbys
+  asked-unknown: Gofynnwyd, ond anhysbys
+  temp-unknown: Anhysbys dros dro
+  not-asked: Heb ofyn
+  asked-declined: Gofynnwyd, ond gwrthodwyd
+  masked: Wedi'i guddio
+  not-applicable: Amherthnasol
+  unsupported: Heb ei gefnogi
+  as-text: Wedi'i gofnodi fel testun
+  error: Gwall
+  not-a-number: Nid yw'n rhif
+  negative-infinity: Anfeidredd negatif
+  positive-infinity: Anfeidredd positif
+  not-performed: Heb ei gyflawni
+  not-permitted: Heb ei ganiatáu
+
+consentProvision:
+  permit: Caniatáu
+  deny: Gwrthod
+
+gender:
+  male: Gwryw
+  female: Benyw
+  other: Arall
+  unknown: Anhysbys
+
+attestationMode:
+  personal: personol
+  professional: proffesiynol
+  legal: cyfreithiol
+  official: swyddogol
+
+confidentiality:
+  U: Dim cyfyngiad
+  L: Isel
+  M: Cymedrol
+  N: Normal
+  R: Cyfyngedig
+  V: Cyfyngedig iawn
+
+results:
+  label: Tabl canlyniadau
+  observation: Prawf neu arsylwad
+  result: Canlyniad
+  date: Dyddiad
+  group: 'Adroddiad: {$name}'
+
+examples:
+  heading: Dogfennau enghreifftiol
+  intro: Dyma enghreifftiau cyhoeddedig o Ganllaw Gweithredu Crynodeb Cleifion Rhyngwladol HL7 FHIR 2.0.1. Maent yn disgrifio cleifion ffuglennol.
+  open: Agor
+  bundle-minimal:
+    name: Lleiaf
+    description: Y crynodeb dilys lleiaf — y tair adran ofynnol yn unig.
+  bundle-no-info-required-sections:
+    name: Dim gwybodaeth mewn adrannau gofynnol
+    description: Adrannau gofynnol heb ddata, pob un yn nodi pam. Yn dangos sut mae "Gwybodaeth ddim ar gael" yn wahanol i "Dim yn hysbys".
+  bundle-ips-all-sections:
+    name: Pob adran
+    description: Pob adran y mae'r IPS yn ei diffinio, gan gynnwys Rhybuddion a Stori'r claf (newydd yn 2.0).
+  IPS-examples-Bundle-01:
+    name: Enghraifft 1
+    description: Crynodeb nodweddiadol gydag alergeddau, meddyginiaethau, problemau, canlyniadau a chynllun gofal.
+  IPS-examples-Bundle-with-immunization:
+    name: Enghraifft gydag imiwneiddiadau
+    description: Enghraifft 1 gyda hanes imiwneiddio.
+
+export:
+  heading: Allforio
+  intro: Lawrlwythwch y crynodeb hwn. Caiff ffeiliau eu creu yn eich porwr; nid oes dim yn cael ei lanlwytho.
+  formatLabel: Fformat
+  json: JSON
+  jsonDescription: Y Bundle FHIR yn union fel y'i llwythwyd.
+  yaml: YAML
+  yamlDescription: Yr un Bundle fel YAML. Nid yw YAML yn fformat FHIR swyddogol.
+  markdown: Markdown
+  markdownDescription: Crynodeb clinigol darllenadwy, gyda phob adran wedi'i chynnwys.
+  pdf: PDF (un dudalen)
+  pdfDescription: Crynodeb clinigol un dudalen ar gyfer ei drosglwyddo neu ei argraffu.
+  options: Opsiynau
+  includeNarrative: Cynnwys naratif pob adran (fel testun plaen)
+  includeCodes: Cynnwys codau
+  paperSize: Maint papur
+  paperAuto: Awtomatig (US Letter yn yr Unol Daleithiau, A4 ym mhobman arall)
+  paperA4: A4
+  paperLetter: US Letter
+  download: Lawrlwytho
+  downloadAnyway: Lawrlwytho’r PDF beth bynnag
+  generating: Wrthi'n creu'r ffeil…
+  downloaded: 'Wedi lawrlwytho {$filename}'
+  failed: Nid oedd modd creu'r ffeil.
+  overflowWarning: Nid yw'r cynnwys y mae'n rhaid ei ddangos (hunaniaeth, rhybuddion, alergeddau, meddyginiaethau gweithredol) yn ffitio ar un dudalen. Mae'r PDF yn fwy nag un dudalen, ac mae'n nodi hynny ar bob tudalen.
+  yamlComment: 'Ffurf YAML ar Bundle HL7 FHIR, wedi''i allforio gan y Gwyliwr Crynodeb Cleifion Rhyngwladol. Nid yw YAML yn fformat FHIR swyddogol; mae''n cyfateb un i un i FHIR JSON.'
+
+summary:
+  generatedAt: 'Crëwyd {$date}'
+  sourceDocument: 'Dogfen ffynhonnell {$identifier}, dyddiedig {$date}'
+  sourceDate: 'Dogfen ffynhonnell dyddiedig {$date}'
+  notMedicalDevice: Nid yw'n ddyfais feddygol. Gwiriwch benderfyniadau clinigol yn erbyn y cofnod gwreiddiol.
+  notShown: 'Heb eu dangos ar y dudalen hon: {$sections}'
+  moreNotShown: |-
+    .input {$count :number}
+    .match $count
+    zero {{+{$count} arall heb eu dangos}}
+    one  {{+{$count} arall heb ei ddangos}}
+    two  {{+{$count} arall heb eu dangos}}
+    few  {{+{$count} arall heb eu dangos}}
+    many {{+{$count} arall heb eu dangos}}
+    *    {{+{$count} arall heb eu dangos}}
+  sectionNotShown: Mae'r adran yn bresennol — heb ei dangos ar y crynodeb un dudalen hwn.
+  continued: PARHAD — mae'r crynodeb hwn yn hwy nag un dudalen
+  pageOf: 'Tudalen {$page} o {$count}'
+  activeMedications: Meddyginiaethau gweithredol
+  activeProblems: Problemau gweithredol
+  alertsAndAllergies: Rhybuddion ac alergeddau
+  patient: Claf
+  narrative: Naratif
+  codes: Codau
