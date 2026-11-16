@@ -40,7 +40,7 @@ Not in scope yet (see [plans.md](../plans.md)):
 | Concern        | Choice                                                         |
 | -------------- | -------------------------------------------------------------- |
 | Language       | Rust, edition 2024, `rust-version` 1.98 (stable minus two)     |
-| HTTP           | Axum 0.8, through Axa 0.15 (`postgres-sqlx` feature)           |
+| HTTP           | Axum 0.8, through Axa 0.16 (`postgres-sqlx` feature)           |
 | Database       | Postgres (16 or newer; developed on 18) through sqlx 0.9       |
 | Migrations     | sqlx reversible migrations in `migrations/`, compiled in       |
 | Errors         | RFC 9457 problem details (`application/problem+json`), by Axa  |
@@ -144,7 +144,9 @@ patient's record.
 ## 7. Configuration
 
 There are no config files. Axa reads the environment; `check` prints the
-effective settings with secrets redacted. The ones this service relies on:
+effective settings with secrets redacted, and `health [--ready]` asks the
+server on this machine for its probe and exits non-zero unless it answers,
+for a container image with no `curl`. The ones this service relies on:
 
 | Variable               | Default (development)                                                    |
 | ---------------------- | ------------------------------------------------------------------------ |

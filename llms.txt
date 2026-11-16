@@ -12,7 +12,7 @@
 
 - [Website](international-patient-summary.github.io/README.md): SvelteKit 3 + Lily Design System site on GitHub Pages; builds its own llms.txt
 - [Viewer (frontend)](international-patient-summary-ui-with-svelte/llms.txt): Svelte 5 IPS viewer with JSON/YAML/Markdown/PDF export and a backendless tour
-- [Service (backend)](international-patient-summary-service-with-axum/llms.txt): Rust Axum + Axa 0.15 + sqlx + Postgres store for IPS document Bundles
+- [Service (backend)](international-patient-summary-service-with-axum/llms.txt): Rust Axum + Axa 0.16 + sqlx + Postgres store for IPS document Bundles
 - [iOS app](international-patient-summary-app-with-swift/llms.txt): Swift + UIKit (no SwiftUI) IPS viewer; in memory only, no network
 - [Android app](international-patient-summary-app-with-kotlin/llms.txt): Kotlin + Jetpack Compose IPS viewer; in memory only, no network
 - [Mobile app translations](international-patient-summary-app-translations/README.md): both apps' strings in 65 languages, and the script that writes them in

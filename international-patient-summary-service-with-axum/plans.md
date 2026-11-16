@@ -19,7 +19,7 @@ exactly as it went in, with no one able to reach it who should not.
 
 | Decision      | Choice                                                    | Why                                                                                     |
 | ------------- | --------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| Framework     | Axum 0.8 with Axa 0.15                                    | Requested; Axa gives health, config, errors, middleware, shutdown, CLI without a framework |
+| Framework     | Axum 0.8 with Axa 0.16                                    | Requested; Axa gives health, config, errors, middleware, shutdown, CLI without a framework |
 | Database      | Postgres through sqlx 0.9, `axa` feature `postgres-sqlx`  | Requested; sqlx is Axa's preferred database path                                        |
 | SQL           | Runtime-checked `sqlx::query`, not `query!` macros        | Builds with no database at compile time; three queries do not need the macros          |
 | Storage       | Whole Bundle as `jsonb`, one row per document             | The viewer needs the document, not a relational model of it                            |

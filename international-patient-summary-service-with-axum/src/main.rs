@@ -1,4 +1,4 @@
-//! The service's entry point: `start`, `db`, `task`, and `check`, as Axa's command line has them.
+//! The service's entry point: `start`, `db`, `task`, `check`, and `health`, as Axa's command line has them.
 
 use std::process::ExitCode;
 
@@ -35,6 +35,10 @@ async fn run() -> Result<()> {
     if matches!(cli.command, Command::Check) {
         return cli::check(&environment, &defaults);
     }
+    // `health` asks the server on this machine, for an image with no curl; it connects to nothing else.
+    if let Command::Health { ready, port } = cli.command {
+        return cli::health(&environment, &defaults, ready, port).await;
+    }
 
     let mut config = Config::from_env(&environment, &defaults)?;
     config.apply_cli(&cli);
@@ -61,7 +65,7 @@ async fn run() -> Result<()> {
             database(&pool, &command).await
         }
         Command::Task { .. } => Err(Error::string("this service has no tasks")),
-        Command::Check => unreachable!("answered before configuration"),
+        Command::Check | Command::Health { .. } => unreachable!("answered before configuration"),
     }
 }
 
