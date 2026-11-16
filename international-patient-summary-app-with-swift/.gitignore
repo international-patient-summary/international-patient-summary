@@ -1,0 +1,11 @@
+# Xcode
+DerivedData/
+build/
+*.xcresult
+xcuserdata/
+*.xcuserstate
+IPSApp.xcodeproj/project.xcworkspace/xcuserdata/
+# Swift Package Manager
+IPSKit/.build/
+IPSKit/.swiftpm/
+.DS_Store

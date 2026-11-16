@@ -1,0 +1,131 @@
+{
+  "name": "international-patient-summary-app-with-swift",
+  "description": "Apple iOS app (Swift, UIKit in code, no SwiftUI) that opens and shows HL7 FHIR International Patient Summary documents. In memory only, no network; checks documents exactly as the backend service does.",
+  "license": "MIT OR Apache-2.0 OR BSD-3-Clause OR GPL-2.0-only OR GPL-3.0-only",
+  "language": "Swift",
+  "swift_language_mode": "6",
+  "xcode": "27.2",
+  "deployment_target": "iOS 18.0",
+  "stack": [
+    "UIKit (programmatic)",
+    "IPSKit local Swift package (Foundation only)",
+    "Swift Testing",
+    "XCUITest"
+  ],
+  "commands": {
+    "test-core": "cd IPSKit && swift test",
+    "test-app": "xcodebuild test -project IPSApp.xcodeproj -scheme IPSApp -destination 'platform=iOS Simulator,name=iPhone 17' CODE_SIGNING_ALLOWED=NO",
+    "open": "open IPSApp.xcodeproj"
+  },
+  "documentation": {
+    "readme": "README.md",
+    "agents": "AGENTS.md",
+    "specification": "spec/index.md",
+    "plan": "plans.md",
+    "tasks": "tasks.md",
+    "changelog": "CHANGELOG.md"
+  },
+  "sections": {
+    "Specification": [
+      {
+        "name": "Spec §1",
+        "path": "spec/purpose.md",
+        "description": "Purpose, and the ideas taken from MyIPS"
+      },
+      {
+        "name": "Spec §2",
+        "path": "spec/scope.md",
+        "description": "Scope"
+      },
+      {
+        "name": "Spec §3",
+        "path": "spec/documents.md",
+        "description": "The check (M-CHECK), reading (M-READ), loading (M-LOAD)"
+      },
+      {
+        "name": "Spec §4",
+        "path": "spec/screens.md",
+        "description": "List, summary and About screens (M-LIST, M-VIEW, M-ABOUT)"
+      },
+      {
+        "name": "Spec §5",
+        "path": "spec/sharing-and-privacy.md",
+        "description": "M-SHARE, M-PRIV"
+      },
+      {
+        "name": "Spec §6",
+        "path": "spec/accessibility-and-language.md",
+        "description": "M-A11Y, M-I18N"
+      },
+      {
+        "name": "Spec §7",
+        "path": "spec/fixtures.md",
+        "description": "The five IG examples"
+      },
+      {
+        "name": "Spec §8",
+        "path": "spec/ios.md",
+        "description": "Stack, architecture, platform notes"
+      },
+      {
+        "name": "Spec §9",
+        "path": "spec/verification.md",
+        "description": "Requirement-to-test map, manual checks"
+      }
+    ],
+    "Core": [
+      {
+        "name": "Check",
+        "path": "IPSKit/Sources/IPSKit/Check.swift",
+        "description": "M-CHECK-1/2: Refusal codes and pointers, the service's S-API-2"
+      },
+      {
+        "name": "Document",
+        "path": "IPSKit/Sources/IPSKit/Document.swift",
+        "description": "references, patient, sections, entries"
+      },
+      {
+        "name": "Sections",
+        "path": "IPSKit/Sources/IPSKit/Sections.swift",
+        "description": "IPS 2.0.1 section registry"
+      },
+      {
+        "name": "Absent",
+        "path": "IPSKit/Sources/IPSKit/Absent.swift",
+        "description": "none known, not recorded, unavailable, omitted"
+      },
+      {
+        "name": "Format",
+        "path": "IPSKit/Sources/IPSKit/Format.swift",
+        "description": "displayOf, names, dates, ages, quantities, narrative as plain text"
+      }
+    ],
+    "App": [
+      {
+        "name": "SummaryListViewController",
+        "path": "App/SummaryListViewController.swift",
+        "description": "home, import, paste, examples"
+      },
+      {
+        "name": "SummaryViewController",
+        "path": "App/SummaryViewController.swift",
+        "description": "alerts, patient, document, sections, share"
+      },
+      {
+        "name": "AboutViewController",
+        "path": "App/AboutViewController.swift",
+        "description": "safety, privacy, versions, Clear all"
+      },
+      {
+        "name": "SummaryStore",
+        "path": "App/SummaryStore.swift",
+        "description": "in-memory store, examples, share file"
+      },
+      {
+        "name": "Strings",
+        "path": "App/Localizable.xcstrings",
+        "description": "every interface string"
+      }
+    ]
+  }
+}

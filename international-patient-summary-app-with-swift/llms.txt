@@ -1,0 +1,43 @@
+# international-patient-summary-app-with-swift
+
+> Apple iOS app (Swift, UIKit in code, no SwiftUI) that opens and shows HL7 FHIR International Patient Summary documents. In memory only, no network; checks documents exactly as the backend service does.
+
+## Docs
+
+- [README](README.md): privacy, use, build and test, layout
+- [AGENTS](AGENTS.md): rules
+- [Specification](spec/index.md): contents; single source of truth; §1-§7 shared with the Android app
+- [Spec §1](spec/purpose.md): Purpose, and the ideas taken from MyIPS
+- [Spec §2](spec/scope.md): Scope
+- [Spec §3](spec/documents.md): The check (M-CHECK), reading (M-READ), loading (M-LOAD)
+- [Spec §4](spec/screens.md): List, summary and About screens (M-LIST, M-VIEW, M-ABOUT)
+- [Spec §5](spec/sharing-and-privacy.md): M-SHARE, M-PRIV
+- [Spec §6](spec/accessibility-and-language.md): M-A11Y, M-I18N
+- [Spec §7](spec/fixtures.md): The five IG examples
+- [Spec §8](spec/ios.md): Stack, architecture, platform notes
+- [Spec §9](spec/verification.md): Requirement-to-test map, manual checks
+- [Plan](plans.md): phases 1-8
+- [Tasks](tasks.md): checklist
+- [Changelog](CHANGELOG.md)
+
+## Commands
+
+- test-core: `cd IPSKit && swift test`
+- test-app: `xcodebuild test -project IPSApp.xcodeproj -scheme IPSApp -destination 'platform=iOS Simulator,name=iPhone 17' CODE_SIGNING_ALLOWED=NO`
+- open: `open IPSApp.xcodeproj`
+
+## Core (IPSKit)
+
+- [Check](IPSKit/Sources/IPSKit/Check.swift): M-CHECK-1/2, Refusal codes and pointers (the service's S-API-2)
+- [Document](IPSKit/Sources/IPSKit/Document.swift): references, patient, sections, entries
+- [Sections](IPSKit/Sources/IPSKit/Sections.swift): IPS 2.0.1 section registry
+- [Absent](IPSKit/Sources/IPSKit/Absent.swift): none known, not recorded, unavailable, omitted
+- [Format](IPSKit/Sources/IPSKit/Format.swift): displayOf, names, dates, ages, quantities, narrative as plain text
+
+## App
+
+- [SummaryListViewController](App/SummaryListViewController.swift): home, import, paste, examples
+- [SummaryViewController](App/SummaryViewController.swift): alerts, patient, document, sections, share
+- [AboutViewController](App/AboutViewController.swift): safety, privacy, versions, Clear all
+- [SummaryStore](App/SummaryStore.swift): in-memory store, examples, share file
+- [Strings](App/Localizable.xcstrings): every interface string

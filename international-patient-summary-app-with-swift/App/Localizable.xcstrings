@@ -1,0 +1,1458 @@
+{
+  "sourceLanguage": "en",
+  "version": "1.0",
+  "strings": {
+    "about.clearAll": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clear all summaries"
+          }
+        }
+      }
+    },
+    "about.clearAll.confirm.action": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clear all"
+          }
+        }
+      }
+    },
+    "about.clearAll.confirm.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Every open summary is forgotten. This cannot be undone."
+          }
+        }
+      }
+    },
+    "about.clearAll.confirm.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clear all summaries?"
+          }
+        }
+      }
+    },
+    "about.ips": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "International Patient Summary"
+          }
+        }
+      }
+    },
+    "about.privacy.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Summaries are kept in this app's memory, on this device, and forgotten when the app closes. There is no account, and the app makes no network requests. A summary leaves the device only when you share it."
+          }
+        }
+      }
+    },
+    "about.privacy.heading": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Privacy"
+          }
+        }
+      }
+    },
+    "about.safety.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This app is not a medical device. It shows what a document says and never changes it. Clinical decisions belong to the clinician reading the source record."
+          }
+        }
+      }
+    },
+    "about.safety.heading": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Safety"
+          }
+        }
+      }
+    },
+    "about.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "About"
+          }
+        }
+      }
+    },
+    "about.version": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App version"
+          }
+        }
+      }
+    },
+    "about.versions.heading": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versions"
+          }
+        }
+      }
+    },
+    "alerts.allergiesMissing": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This document has no allergies section. Ask about allergies."
+          }
+        }
+      }
+    },
+    "alerts.heading": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alerts"
+          }
+        }
+      }
+    },
+    "alerts.highCriticality": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allergy, high criticality: %@"
+          }
+        }
+      }
+    },
+    "app.name": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Patient Summary"
+          }
+        }
+      }
+    },
+    "banner.born": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Born %@"
+          }
+        }
+      }
+    },
+    "banner.bornAge": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Born %1$@ (age %2$ld)"
+          }
+        }
+      }
+    },
+    "banner.gender": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gender: %@"
+          }
+        }
+      }
+    },
+    "banner.heading": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Patient"
+          }
+        }
+      }
+    },
+    "banner.identifier": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Identifier"
+          }
+        }
+      }
+    },
+    "banner.noName": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Name not recorded"
+          }
+        }
+      }
+    },
+    "banner.unknownPatient": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The patient is not in this document."
+          }
+        }
+      }
+    },
+    "cancel": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancel"
+          }
+        }
+      }
+    },
+    "code.active": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Active"
+          }
+        }
+      }
+    },
+    "code.allergy": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allergy"
+          }
+        }
+      }
+    },
+    "code.amended": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Amended"
+          }
+        }
+      }
+    },
+    "code.cancelled": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancelled"
+          }
+        }
+      }
+    },
+    "code.completed": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Completed"
+          }
+        }
+      }
+    },
+    "code.confirmed": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Confirmed"
+          }
+        }
+      }
+    },
+    "code.corrected": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Corrected"
+          }
+        }
+      }
+    },
+    "code.differential": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Differential"
+          }
+        }
+      }
+    },
+    "code.draft": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Draft"
+          }
+        }
+      }
+    },
+    "code.entered-in-error": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entered in error"
+          }
+        }
+      }
+    },
+    "code.final": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Final"
+          }
+        }
+      }
+    },
+    "code.high": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "High"
+          }
+        }
+      }
+    },
+    "code.in-progress": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In progress"
+          }
+        }
+      }
+    },
+    "code.inactive": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inactive"
+          }
+        }
+      }
+    },
+    "code.intended": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Intended"
+          }
+        }
+      }
+    },
+    "code.intolerance": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Intolerance"
+          }
+        }
+      }
+    },
+    "code.low": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Low"
+          }
+        }
+      }
+    },
+    "code.not-done": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not done"
+          }
+        }
+      }
+    },
+    "code.not-taken": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not taken"
+          }
+        }
+      }
+    },
+    "code.on-hold": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On hold"
+          }
+        }
+      }
+    },
+    "code.preliminary": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preliminary"
+          }
+        }
+      }
+    },
+    "code.preparation": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preparation"
+          }
+        }
+      }
+    },
+    "code.presumed": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Presumed"
+          }
+        }
+      }
+    },
+    "code.provisional": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Provisional"
+          }
+        }
+      }
+    },
+    "code.recurrence": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recurrence"
+          }
+        }
+      }
+    },
+    "code.refuted": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Refuted"
+          }
+        }
+      }
+    },
+    "code.registered": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Registered"
+          }
+        }
+      }
+    },
+    "code.relapse": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Relapse"
+          }
+        }
+      }
+    },
+    "code.remission": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remission"
+          }
+        }
+      }
+    },
+    "code.resolved": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resolved"
+          }
+        }
+      }
+    },
+    "code.stopped": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stopped"
+          }
+        }
+      }
+    },
+    "code.unable-to-assess": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unable to assess"
+          }
+        }
+      }
+    },
+    "code.unconfirmed": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unconfirmed"
+          }
+        }
+      }
+    },
+    "code.unknown": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unknown"
+          }
+        }
+      }
+    },
+    "detail.abatement": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ended"
+          }
+        }
+      }
+    },
+    "detail.criticality": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Criticality"
+          }
+        }
+      }
+    },
+    "detail.dosage": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dosage"
+          }
+        }
+      }
+    },
+    "detail.dose": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dose number"
+          }
+        }
+      }
+    },
+    "detail.effective": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Date"
+          }
+        }
+      }
+    },
+    "detail.format": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@: %2$@"
+          }
+        }
+      }
+    },
+    "detail.interpretation": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Interpretation"
+          }
+        }
+      }
+    },
+    "detail.lot": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lot"
+          }
+        }
+      }
+    },
+    "detail.occurrence": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Date"
+          }
+        }
+      }
+    },
+    "detail.onset": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Onset"
+          }
+        }
+      }
+    },
+    "detail.reaction": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reaction"
+          }
+        }
+      }
+    },
+    "detail.recorded": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recorded"
+          }
+        }
+      }
+    },
+    "detail.referenceRange": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reference range"
+          }
+        }
+      }
+    },
+    "detail.status": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Status"
+          }
+        }
+      }
+    },
+    "detail.type": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Type"
+          }
+        }
+      }
+    },
+    "detail.value": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Value"
+          }
+        }
+      }
+    },
+    "detail.verification": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verification"
+          }
+        }
+      }
+    },
+    "document.author": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Author"
+          }
+        }
+      }
+    },
+    "document.date": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Date"
+          }
+        }
+      }
+    },
+    "document.heading": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Document"
+          }
+        }
+      }
+    },
+    "document.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Title"
+          }
+        }
+      }
+    },
+    "entry.unresolved": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entry not found in this document"
+          }
+        }
+      }
+    },
+    "gender.female": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Female"
+          }
+        }
+      }
+    },
+    "gender.male": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Male"
+          }
+        }
+      }
+    },
+    "gender.other": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Other"
+          }
+        }
+      }
+    },
+    "gender.unknown": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unknown"
+          }
+        }
+      }
+    },
+    "import.unreadable": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The file could not be read."
+          }
+        }
+      }
+    },
+    "list.delete": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete"
+          }
+        }
+      }
+    },
+    "list.empty.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open an International Patient Summary from a file, the clipboard, or the examples. It stays in this app's memory, on this device, until you close the app."
+          }
+        }
+      }
+    },
+    "list.empty.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No summaries open"
+          }
+        }
+      }
+    },
+    "list.examples": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Load examples"
+          }
+        }
+      }
+    },
+    "list.import": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Import file"
+          }
+        }
+      }
+    },
+    "list.open": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open a summary"
+          }
+        }
+      }
+    },
+    "list.paste": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paste"
+          }
+        }
+      }
+    },
+    "list.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Summaries"
+          }
+        }
+      }
+    },
+    "list.untitled": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Untitled summary"
+          }
+        }
+      }
+    },
+    "narrative.hide": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hide the document's narrative"
+          }
+        }
+      }
+    },
+    "narrative.show": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show the document's narrative"
+          }
+        }
+      }
+    },
+    "ok": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OK"
+          }
+        }
+      }
+    },
+    "paste.empty": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The clipboard has no text to open."
+          }
+        }
+      }
+    },
+    "refusal.code": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Code: %@"
+          }
+        }
+      }
+    },
+    "refusal.no_composition": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The Bundle's first entry is not a Composition."
+          }
+        }
+      }
+    },
+    "refusal.no_subject": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The Composition does not name its patient."
+          }
+        }
+      }
+    },
+    "refusal.not_a_bundle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "It is not a FHIR Bundle."
+          }
+        }
+      }
+    },
+    "refusal.not_a_document": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The Bundle's type is not “document”."
+          }
+        }
+      }
+    },
+    "refusal.not_a_patient_summary": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The Composition is not a Patient Summary (LOINC 60591-5)."
+          }
+        }
+      }
+    },
+    "refusal.not_json": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "It is not JSON."
+          }
+        }
+      }
+    },
+    "refusal.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This app cannot open that as a patient summary"
+          }
+        }
+      }
+    },
+    "refusal.too_large": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "It is larger than 10 MB."
+          }
+        }
+      }
+    },
+    "section.advanceDirectives": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Advance Directives"
+          }
+        }
+      }
+    },
+    "section.alerts": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alerts"
+          }
+        }
+      }
+    },
+    "section.allergies": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allergies and Intolerances"
+          }
+        }
+      }
+    },
+    "section.devices": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Medical Devices"
+          }
+        }
+      }
+    },
+    "section.functional": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Functional Status"
+          }
+        }
+      }
+    },
+    "section.generic": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Section"
+          }
+        }
+      }
+    },
+    "section.immunizations": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Immunizations"
+          }
+        }
+      }
+    },
+    "section.medications": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Medication Summary"
+          }
+        }
+      }
+    },
+    "section.pastIllness": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "History of Past Illness"
+          }
+        }
+      }
+    },
+    "section.patientStory": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Patient Story"
+          }
+        }
+      }
+    },
+    "section.planOfCare": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plan of Care"
+          }
+        }
+      }
+    },
+    "section.pregnancy": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "History of Pregnancy"
+          }
+        }
+      }
+    },
+    "section.problems": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Problem List"
+          }
+        }
+      }
+    },
+    "section.procedures": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "History of Procedures"
+          }
+        }
+      }
+    },
+    "section.results": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Results"
+          }
+        }
+      }
+    },
+    "section.socialHistory": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Social History"
+          }
+        }
+      }
+    },
+    "section.vitalSigns": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vital Signs"
+          }
+        }
+      }
+    },
+    "state.narrativeOnly": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No structured entries. The document's narrative follows."
+          }
+        }
+      }
+    },
+    "state.noneKnown": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "None known"
+          }
+        }
+      }
+    },
+    "state.notRecorded": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not recorded"
+          }
+        }
+      }
+    },
+    "state.omitted": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Section missing from document"
+          }
+        }
+      }
+    },
+    "state.unavailable": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Information unavailable"
+          }
+        }
+      }
+    },
+    "state.unavailableReason": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Information unavailable — %@"
+          }
+        }
+      }
+    },
+    "summary.share": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Share"
+          }
+        }
+      }
+    },
+    "summary.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Summary"
+          }
+        }
+      }
+    }
+  }
+}
