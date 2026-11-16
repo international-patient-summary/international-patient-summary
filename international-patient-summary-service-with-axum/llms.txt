@@ -1,0 +1,38 @@
+# international-patient-summary-service-with-axum
+
+> Backend for the IPS viewer: stores HL7 FHIR International Patient Summary document Bundles in Postgres and serves them as application/fhir+json. Refuses production until it has authentication.
+
+## Docs
+
+- [README](README.md): quick start, API, layout
+- [AGENTS](AGENTS.md): rules
+- [Specification](spec/index.md): single source of truth; §4 is the API
+- [Plan](plans.md): phases 1-5
+- [Tasks](tasks.md): checklist
+- [Changelog](CHANGELOG.md)
+
+## Commands
+
+- serve: `cargo run -- start`
+- check: `cargo run -- check`
+- migrate: `cargo run -- db migrate`
+- status: `cargo run -- db status`
+- test: `cargo test`
+- test-all: `AXA_TEST_DB_URL=postgres://... cargo test -- --include-ignored`
+- lint: `cargo clippy --all-targets -- -D warnings`
+
+## API
+
+- [POST /fhir/Bundle](src/routes.rs): store an IPS document: 201 + Location, or 422 problem with code and pointer
+- [GET /fhir/Bundle/{id}](src/routes.rs): the stored Bundle, Cache-Control: no-store, or 404
+- [DELETE /fhir/Bundle/{id}](src/routes.rs): 204 or 404
+- [Health](src/lib.rs): /_health/live, /_health/ready (waits on migrations), /_health/startup
+
+## Modules
+
+- [main](src/main.rs): command line: start, db, check
+- [lib](src/lib.rs): defaults, routes, context, production guard
+- [ips](src/ips.rs): structural IPS check and refusal codes
+- [store](src/store.rs): SQL
+- [migrations](migrations/): sqlx reversible migrations
+- [tests](tests/api.rs): request tests; fixtures in tests/fixtures/

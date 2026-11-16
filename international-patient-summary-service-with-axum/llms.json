@@ -1,0 +1,88 @@
+{
+  "name": "international-patient-summary-service-with-axum",
+  "description": "Backend for the IPS viewer: stores HL7 FHIR International Patient Summary document Bundles in Postgres and serves them as application/fhir+json. Refuses production until it has authentication.",
+  "license": "MIT OR Apache-2.0 OR BSD-3-Clause OR GPL-2.0-only OR GPL-3.0-only",
+  "language": "Rust",
+  "edition": "2024",
+  "rust_version": "1.98",
+  "stack": [
+    "Axum 0.8",
+    "Axa 0.13 (postgres-sqlx)",
+    "sqlx 0.9",
+    "Postgres 16+",
+    "axa-test 0.4"
+  ],
+  "commands": {
+    "serve": "cargo run -- start",
+    "check": "cargo run -- check",
+    "migrate": "cargo run -- db migrate",
+    "status": "cargo run -- db status",
+    "test": "cargo test",
+    "test-all": "AXA_TEST_DB_URL=postgres://... cargo test -- --include-ignored",
+    "lint": "cargo clippy --all-targets -- -D warnings"
+  },
+  "documentation": {
+    "readme": "README.md",
+    "agents": "AGENTS.md",
+    "specification": "spec/index.md",
+    "plan": "plans.md",
+    "tasks": "tasks.md",
+    "changelog": "CHANGELOG.md"
+  },
+  "sections": {
+    "API": [
+      {
+        "name": "POST /fhir/Bundle",
+        "path": "src/routes.rs",
+        "description": "store an IPS document: 201 + Location, or 422 problem with code and pointer"
+      },
+      {
+        "name": "GET /fhir/Bundle/{id}",
+        "path": "src/routes.rs",
+        "description": "the stored Bundle, Cache-Control: no-store, or 404"
+      },
+      {
+        "name": "DELETE /fhir/Bundle/{id}",
+        "path": "src/routes.rs",
+        "description": "204 or 404"
+      },
+      {
+        "name": "Health",
+        "path": "src/lib.rs",
+        "description": "/_health/live, /_health/ready (waits on migrations), /_health/startup"
+      }
+    ],
+    "Modules": [
+      {
+        "name": "main",
+        "path": "src/main.rs",
+        "description": "command line: start, db, check"
+      },
+      {
+        "name": "lib",
+        "path": "src/lib.rs",
+        "description": "defaults, routes, context, production guard"
+      },
+      {
+        "name": "ips",
+        "path": "src/ips.rs",
+        "description": "structural IPS check and refusal codes"
+      },
+      {
+        "name": "store",
+        "path": "src/store.rs",
+        "description": "SQL"
+      },
+      {
+        "name": "migrations",
+        "path": "migrations/",
+        "description": "sqlx reversible migrations"
+      },
+      {
+        "name": "tests",
+        "path": "tests/api.rs",
+        "description": "request tests; fixtures in tests/fixtures/"
+      }
+    ]
+  }
+}

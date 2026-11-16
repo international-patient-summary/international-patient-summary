@@ -87,6 +87,13 @@ longer, says "CONTINUED" on every page, and the app warns before download.
 Filenames never contain the patient's name or identifiers:
 `international-patient-summary-<composition-date>.<ext>`.
 
+**Tour.** A public, backendless walkthrough at `/tour/`: sign in with the
+demonstration account `example@example.com` (password `example`, filled in for
+you), browse the summaries an in-memory stand-in for the
+[backend service](../international-patient-summary-service-with-axum/) holds,
+open one in the viewer, delete or reset, and sign out. It needs no server and
+stores nothing; a reload ends it.
+
 **Languages.** Welsh (`cy-001`), English US (`en-US`, fallback), English UK
 (`en-GB`), Simplified Chinese (`zh-CN`), through Sveltia I18n with Unicode
 MessageFormat 2 messages in `locales/<dir>/messages.yaml`. Clinical content is
@@ -109,8 +116,10 @@ src/lib/fhir/        framework-free FHIR layer
   summary.ts         patient identity and document metadata in words
   narrative.ts       DOMPurify allowlist; narrative → plain text
 src/lib/export/      framework-free exporters (json, yaml, markdown, pdf, filename)
+src/lib/service/     the backend's API as an interface; TourService, in memory
+src/lib/tour.svelte.ts  the tour's session (demo sign-in, open, delete, sign-out)
 src/lib/components/  Svelte components on Lily headless
-src/routes/          / (loader + viewer), /examples/
+src/routes/          / (loader + viewer), /examples/, /tour/
 locales/             UI messages, one directory per locale
 static/examples/     IG 2.0.1 example Bundles and their YAML twins
 static/fonts/        Noto Sans and Noto Sans SC for the PDF (OFL)

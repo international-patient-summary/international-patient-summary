@@ -16,7 +16,7 @@ Built with **Rust**, **Axum** 0.8, [**Axa**](https://crates.io/crates/axa)
 
 ## Quick start
 
-Requires Rust 1.97 or newer and Postgres 16 or newer.
+Requires Rust 1.98 or newer and Postgres 16 or newer.
 
 ```sh
 podman compose up -d          # or: docker compose up -d

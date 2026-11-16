@@ -9,7 +9,7 @@ This file is the source of truth. A change in behaviour carries a spec edit, a
 code edit, and a test edit together. Requirement IDs (`S-API-1`) name the test
 that proves them in [§8](#8-verification).
 
-Revision: 2026-11-15 (initial).
+Revision: 2026-11-15 (initial; MSRV 1.98 and S-WEB-3 the same day).
 
 ## 1. Scope
 
@@ -39,7 +39,7 @@ Not in scope yet (see [plans.md](../plans.md)):
 
 | Concern        | Choice                                                         |
 | -------------- | -------------------------------------------------------------- |
-| Language       | Rust, edition 2024, `rust-version` 1.97                        |
+| Language       | Rust, edition 2024, `rust-version` 1.98 (stable minus two)     |
 | HTTP           | Axum 0.8, through Axa 0.13 (`postgres-sqlx` feature)           |
 | Database       | Postgres (16 or newer; developed on 18) through sqlx 0.9       |
 | Migrations     | sqlx reversible migrations in `migrations/`, compiled in       |
@@ -123,6 +123,10 @@ patient's record.
   is refused at boot.
 - **S-WEB-2** Axa's standard stack refuses a cross-site write (`403`) and
   sets security headers on every answer. The service adds no exception.
+- **S-WEB-3** The viewer's public tour runs without this service, through
+  `TourService` (viewer spec §6.8), which mirrors §4: ids, the S-API-2 check
+  order, codes and pointers, and `404`s. A change to §4 changes the viewer's
+  `src/lib/service/` and its spec in the same commit.
 
 ## 6. Safety and privacy
 

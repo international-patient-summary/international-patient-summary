@@ -144,11 +144,23 @@ README (purpose, safety notice, quick start, fixtures, architecture),
 `AGENTS.md` for AI agents working on the repo, CHANGELOG, licence,
 GitHub Pages deploy workflow, tag `v0.1.0`.
 
+### Phase 9 — Public tour (backendless)
+
+A `/tour/` page (spec §6.8) that signs in as `example@example.com` and
+browses an in-memory stand-in for the backend service, seeded with the five
+examples, then opens a summary in the ordinary viewer. `IpsService`
+(`src/lib/service/service.ts`) states the backend's API and contract once, so
+a later `HttpService` against `international-patient-summary-service-with-axum`
+is a second implementation of the same interface, not a new design. Built
+from Lily `Tour`, `StepList`, `Form`, `EmailInput`, `PasswordInput` and
+`DocumentList`.
+
 ## Later (post-v1, see spec §11)
 
 `$summary` against a FHIR server; SMART Health Links / QR decoding;
 FHIR XML; summary comparison; validator hand-off; tagged PDF/UA;
-multi-page full-summary PDF.
+multi-page full-summary PDF; `HttpService` against the backend once it has
+authentication (backend plan P3).
 
 ## Risks and mitigations
 

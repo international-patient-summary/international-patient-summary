@@ -1,0 +1,44 @@
+# international-patient-summary-ui-with-svelte
+
+> Browser-only, read-only viewer for HL7 FHIR International Patient Summary documents (JSON or YAML), with JSON/YAML/Markdown/one-page PDF export, four locales, and a public backendless tour signing in as example@example.com.
+
+## Docs
+
+- [README](README.md): what it does, quick start, architecture
+- [AGENTS](AGENTS.md): rules: runes, i18n, privacy, YAML, statuses
+- [Specification](spec/index.md): single source of truth; §6.8 is the tour
+- [Plan](plans.md): phases 1-9
+- [Tasks](tasks.md): checklist with verify steps
+- [Changelog](CHANGELOG.md)
+
+## Commands
+
+- install: `pnpm install`
+- dev: `pnpm run dev`
+- build: `pnpm run build`
+- test: `pnpm test`
+- e2e: `pnpm run test:e2e`
+- check: `pnpm run check`
+- lint: `pnpm run lint`
+
+## Routes
+
+- [/](src/routes/+page.svelte): loader and viewer
+- [/examples/](src/routes/examples/+page.svelte): the five IG examples
+- [/tour/](src/routes/tour/+page.svelte): public backendless tour: sign in as example@example.com
+
+## Modules
+
+- [FHIR core](src/lib/fhir/): framework-free parsing, references, sections, absent states, formatting
+- [Export](src/lib/export/): JSON, YAML, Markdown, one-page PDF
+- [Service contract](src/lib/service/service.ts): the backend API as IpsService; its IPS check and refusal codes
+- [Tour service](src/lib/service/tour-service.ts): in-memory IpsService for the tour
+- [Tour session](src/lib/tour.svelte.ts): demo sign-in, seeding, open, delete, sign-out
+- [Viewer state](src/lib/state.svelte.ts): the open document, in memory only
+
+## Locales
+
+- [en-US (source of keys)](locales/en-us/messages.yaml)
+- [en-GB](locales/en-gb/messages.yaml)
+- [cy-001](locales/cy-001/messages.yaml): machine-drafted; see REVIEW.md
+- [zh-CN](locales/zh-cn/messages.yaml): machine-drafted; see REVIEW.md

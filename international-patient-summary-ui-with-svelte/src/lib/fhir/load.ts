@@ -4,7 +4,7 @@ import { LoadError, MAX_INPUT_BYTES, parseText, type ParseResult } from './parse
 
 export interface LoadResult extends ParseResult {
 	/** Where it came from, for display only: a filename, "pasted text", or the URL. */
-	source: { kind: 'file' | 'text' | 'url' | 'example'; name?: string };
+	source: { kind: 'file' | 'text' | 'url' | 'example' | 'service'; name?: string };
 }
 
 /** Load a File chosen by the picker or dropped on the page. */

@@ -32,3 +32,10 @@ Please check in particular:
 | `document.custodian`               | Ceidwad                                | Custodian                               |
 | `values.yes` / `values.no`         | Ie / Na                                | Yes / No                                |
 | `format.frequency`                 | {$frequency} gwaith bob {$periodLabel} | {$frequency} times every {$periodLabel} |
+
+## Tour strings (added 2026-11-15)
+
+The `tour.*` keys and `header.tour` are machine-drafted too (tasks P9-T6).
+Please check the register of the sign-in wording, and that the tour is clearly
+described as a demonstration with no server. `example@example.com` and the
+password `example` must stay as they are.

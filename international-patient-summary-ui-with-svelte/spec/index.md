@@ -5,7 +5,10 @@ Companion files: [../plans.md](../plans.md) (the phased plan) and
 [../tasks.md](../tasks.md) (the checklist). When work lands that changes
 anything claimed here, update this file in the same commit.
 
-Status: version 1 implemented, 2026-11-15 (see [../CHANGELOG.md](../CHANGELOG.md)).
+Status: version 1 implemented, 2026-11-15, with the public tour (§6.8) added
+the same day (see [../CHANGELOG.md](../CHANGELOG.md)). The backend is
+[`international-patient-summary-service-with-axum`](../../international-patient-summary-service-with-axum/);
+this viewer works without it.
 Open before release: clinical review of the cy-001 and zh-cn wording
 (P7-T4), CI green on the published repository (P1-T8), and the v0.1.0 tag.
 
@@ -115,6 +118,8 @@ fixtures (§9).
 - Export the loaded summary as JSON, YAML, Markdown, or a one-page PDF,
   generated and downloaded entirely in the browser (§6.7).
 - Fully client-side: no document leaves the browser.
+- A public, backendless tour (§6.8): a demonstration sign-in as
+  `example@example.com` and an in-memory stand-in for the backend service.
 
 ### Out of scope (version 1)
 
@@ -129,6 +134,8 @@ fixtures (§9).
 - Terminology server lookups; the viewer displays `coding.display` /
   `text` as supplied.
 - Any storage of patient data server-side or in browser storage.
+- Real sign-in, and calls to the backend service. The tour's sign-in is a
+  demonstration; the backend has no authentication yet (its plan P3).
 
 ## 4. Technology
 
@@ -298,6 +305,10 @@ src/
       narrative.ts   # sanitise section.text.div; narrative → plain text
       parse.ts       # JSON or YAML text → plain object (format detection, limits)
       models.ts      # view models: FHIR → Lily medical component props, export fields
+    service/         # pure TypeScript, no Svelte (§6.8)
+      service.ts     # the backend's API as an interface; its IPS check and refusal codes
+      tour-service.ts# in-memory implementation for the tour
+    tour.svelte.ts   # tour session: demo sign-in, seeding, open/delete/reset, sign-out
       summary.ts     # patient identity and document metadata in words
     export/          # pure TypeScript, no Svelte; each returns a Blob
       json.ts        # canonical pretty JSON of the loaded Bundle
@@ -545,6 +556,42 @@ revoked immediately after the click. No export makes a network
 request, except fetching the app's own self-hosted font files on first
 PDF use.
 
+### 6.8 Public tour (backendless)
+
+A guided walkthrough at `/tour/`, linked from the header, that shows how the
+viewer will work with the backend service, without needing it.
+
+- **F-TOUR-1 Sign-in.** A sign-in form with Lily `Form`, `Field`,
+  `EmailInput` and `PasswordInput`, filled in with the public tour account
+  `example@example.com` and password `example`. Only that account is
+  accepted (email compared trimmed and case-insensitively); anything else
+  shows an inline error. The check is a demonstration, not security, and
+  the page says so.
+- **F-TOUR-2 Backendless.** `TourService` implements `IpsService`, the
+  backend's API (`create`, `read`, `remove`, and `list`, which the backend
+  plans as P4), entirely in memory. It mirrors the backend's contract:
+  server-issued v4 UUIDs written into `Bundle.id`; the backend's structural
+  IPS check with its five refusal codes and JSON pointers (`not_a_bundle`,
+  `not_a_document`, `no_composition`, `not_a_patient_summary`,
+  `no_subject`); `404` for an unknown or malformed id; deep copies in and
+  out. Signing in seeds it with the five bundled examples (§2.2), fetched
+  from the app's own origin. No other request is made.
+- **F-TOUR-3 Steps.** A Lily `StepList` shows three steps (Sign in, Your
+  summaries, View a summary) with words for each status; a Lily `Tour`
+  (non-modal, closed with Escape or "Hide the guide", reopened with "Show
+  the guide") explains the current step as "Name (step n of 3)".
+- **F-TOUR-4 Summaries.** A Lily `DocumentList` of stored documents, newest
+  first, each with the subject's name, the Composition title and date, and
+  Open and Delete buttons whose accessible names include the document.
+  "Reset the tour" restores the five examples.
+- **F-TOUR-5 Viewing.** Open shows the ordinary viewer (§6.3–§6.7) with
+  source "service"; "Back to your summaries" and the viewer's own close
+  button return to the list.
+- **F-TOUR-6 Privacy.** The session (account, store, open document) lives
+  only in memory, like the viewer's (§5). Sign-out or reload ends it.
+  Nothing is written to localStorage, sessionStorage, IndexedDB or cookies,
+  apart from the picker preferences.
+
 ## 7. Non-functional requirements
 
 - **Accessibility**: WCAG 2.2 AA required, AAA targeted (matching Lily).
@@ -600,6 +647,11 @@ lossless.
   needed.
 - **i18n**: key parity and MF2 compile check across the four locales;
   plural rendering for Welsh counts 0, 1, 2, 3, 6, 7.
+- **Tour**: `src/lib/service/service.test.ts` holds the service to the
+  backend's contract (check order, codes, pointers, ids, 404s, copies);
+  `src/lib/tour.test.ts` covers sign-in, seeding, open, delete and sign-out;
+  `e2e/tour.spec.ts` walks the tour, asserts no request leaves the origin
+  and nothing is stored, and runs axe in Welsh and Chinese.
 - **End-to-end (Playwright)**: load each fixture by each loader path;
   switch through all four locales and assert `<html lang>` updates;
   keyboard-only navigation; print media emulation; axe-core sweep of
@@ -630,6 +682,8 @@ lossless.
 - Validation hand-off to the HL7 FHIR Validator.
 - Tagged (accessible) PDF / PDF/UA for the one-page summary.
 - Multi-page full-summary PDF export.
+- An `HttpService` implementing `IpsService` against the backend, once it
+  has authentication: "Save to service" and "Open from service".
 
 ## 12. References
 

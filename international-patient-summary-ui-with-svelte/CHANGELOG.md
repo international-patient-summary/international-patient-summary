@@ -4,6 +4,12 @@
 
 First implementation of the specification (spec/index.md).
 
+- Public, backendless tour at `/tour/` (spec §6.8): demonstration sign-in as
+  `example@example.com`, an in-memory `TourService` that keeps the backend
+  service's API contract, Lily `Tour`, `StepList` and `DocumentList`, in all
+  four locales, with unit, e2e and axe tests.
+- Header links now mark the current page under `trailingSlash: 'always'`.
+
 - SvelteKit 3 + Svelte 5 static app (adapter-static, fully prerendered,
   client-rendered), strict Content-Security-Policy.
 - Lily Design System 0.9.0 headless components, including the medical record

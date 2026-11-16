@@ -10,3 +10,5 @@ First implementation of the specification (spec/index.md).
 - Health probes with a pending-migrations check; refuses to serve in
   production until authentication exists.
 - Unit and request tests, including the five IPS IG example Bundles.
+- `rust-version` 1.98 (stable minus two), with an MSRV CI job.
+- The viewer's public tour mirrors this API in memory (spec S-WEB-3).

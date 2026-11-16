@@ -15,6 +15,7 @@ header:
   label: 网站页眉
   home: 首页
   examples: 示例
+  tour: 导览
 
 picker:
   links: 页面
@@ -545,3 +546,45 @@ summary:
   patient: 患者
   narrative: 叙述文本
   codes: 代码
+
+tour:
+  heading: 导览
+  intro: 使用演示账户试用查看器。登录、浏览已存储的摘要、打开其中一份，然后退出登录。
+  calloutLabel: 关于本导览
+  backendless: 本导览无需服务器。登录和摘要存储都在您的浏览器中运行，仅包含有关虚构患者的已发布示例，退出登录或重新加载页面后即会清除。不会向任何地方发送任何内容。
+  steps: 导览步骤
+  guide: 导览指南
+  stepOf: '{$name}（第 {$step} 步，共 {$total} 步）'
+  showGuide: 显示指南
+  hideGuide: 隐藏指南
+  loading: 正在加载导览
+  signOut: 退出登录
+  signIn:
+    heading: 登录
+    guide: 使用导览账户登录。电子邮件和密码已经填好，直接选择“登录”即可。
+    form: 登录导览
+    email: 电子邮件
+    password: 密码
+    hint: '使用 {$email}，密码为“example”。这是一个公开的演示账户。'
+    submit: 登录
+  summaries:
+    heading: 您的摘要
+    guide: 这些是为导览账户存储的摘要。打开一份进行查看，或删除一份并观察列表的变化。重置导览即可重新开始。
+    signedInAs: '已登录为 {$email}'
+    list: 已存储的摘要
+    untitled: 无标题摘要
+    date: '日期：{$date}'
+    open: 打开
+    openNamed: '打开 {$title}'
+    delete: 删除
+    deleteNamed: '删除 {$title}'
+    empty: 没有已存储的摘要。重置导览即可恢复示例。
+    reset: 重置导览
+  view:
+    heading: 查看摘要
+    guide: 这就是查看器，与查看任何文档时完全相同。试试各个章节和导出菜单，返回您的摘要，或退出登录以结束导览。
+    back: 返回您的摘要
+  errors:
+    signIn: 这不是导览账户。请使用 example@example.com，密码为“example”。
+    notFound: 该摘要已不再存储。
+    service: 导览无法加载其摘要。请重新加载页面后重试。

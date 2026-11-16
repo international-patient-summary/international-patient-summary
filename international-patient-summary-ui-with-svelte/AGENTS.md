@@ -34,6 +34,9 @@ commit.
 - Filenames never contain the patient's name or identifiers.
 - `src/lib/fhir` and `src/lib/export` stay framework-free and unit-tested;
   components only lay out what `models.ts` and `summary.ts` return.
+- The tour (spec §6.8) stays backendless: `TourService` keeps the backend's
+  contract (`../international-patient-summary-service-with-axum/spec/index.md`
+  §4). Change both specs together when the API changes.
 - Use the Svelte MCP `svelte-autofixer` on changed components.
 
 ## Verify before you finish
@@ -54,3 +57,4 @@ performance budgets of spec §7.
 - Section → Lily list/item components: `src/lib/components/sections/EntryList.svelte`
 - PDF fitting loop: `src/lib/export/pdf.ts` (`plans()` and `exportPdf()`)
 - Fixtures: `static/examples/` (IG) and `src/lib/fhir/fixtures/` (edge cases)
+- Tour: `src/routes/tour/+page.svelte`, `src/lib/tour.svelte.ts`, `src/lib/service/`

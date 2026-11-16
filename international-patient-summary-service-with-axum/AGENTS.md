@@ -25,6 +25,11 @@ against that project's spec.
 - Do not remove the production refusal (spec S-SAFE-1) except in the change
   that adds authentication.
 - Raise any new dependency or Axa feature with the user first.
+- The viewer's backendless tour mirrors this API (spec S-WEB-3): change
+  `../international-patient-summary-ui-with-svelte/src/lib/service/` and its
+  spec §6.8 with any change to spec §4.
+- `rust-version` is stable minus two (1.98 while stable is 1.100), checked
+  by the `msrv` CI job. Bump both together.
 - `Cargo.lock` is committed. This machine's Cargo enforces a minimum publish
   age; do not override it for anything the user has not named.
 

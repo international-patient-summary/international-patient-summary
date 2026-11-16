@@ -26,3 +26,10 @@ Terms the drafter is least sure of:
 Also check: `format.frequency` word order (每 {$periodLabel} {$frequency} 次),
 `format.age.years` using 岁 rather than 年, and `fields.performer` (接种者),
 which assumes the label is shown only for immunizations.
+
+## Tour strings (added 2026-11-15)
+
+The `tour.*` keys and `header.tour` are machine-drafted too (tasks P9-T6).
+Please check the register of the sign-in wording, and that the tour is clearly
+described as a demonstration with no server. `example@example.com` and the
+password `example` must stay as they are.

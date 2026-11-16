@@ -1,6 +1,6 @@
 # International Patient Summary UI with Svelte — Tasks
 
-Checklist companion to [plans.md](plans.md), revision 2026-11-15.
+Checklist companion to [plans.md](plans.md), revision 2026-11-15 (Phase 9 added the same day).
 Ticked tasks were implemented and verified on 2026-11-15; open boxes still need
 a person (translation review), a pushed repository (CI), or a release decision.
 Requirements live in [spec/index.md](spec/index.md); section references
@@ -325,3 +325,25 @@ Rules for the executing agent:
 - [ ] **P8-T5 Tag `v0.1.0`** after spec §10 acceptance criteria all pass.
 
   Verify: deployed site loads each example in each locale.
+
+## Phase 9 — Public tour (§6.8)
+
+- [x] **P9-T1 Service contract.** `src/lib/service/service.ts`: `IpsService`,
+      `checkIps` mirroring the backend's `src/ips.rs`, its refusal codes and
+      pointers, `isServiceId`. Verify: `pnpm test src/lib/service`.
+- [x] **P9-T2 In-memory service.** `TourService`: ids into `Bundle.id`, 422
+      refusals, 404s, newest-first listing with subject name, deep copies.
+- [x] **P9-T3 Tour session.** `src/lib/tour.svelte.ts`: tour account only,
+      seeding from the bundled examples, open/delete/reset, sign-out forgets
+      everything. Verify: `pnpm test src/lib/tour`.
+- [x] **P9-T4 Tour page and header link.** `src/routes/tour/+page.svelte`
+      with Lily `StepList`, `Tour`, `Form`, `DocumentList`; `tour.*` and
+      `header.tour` in all four locales; nav `aria-current` fixed for
+      trailing slashes. Verify: `pnpm run check`, svelte-autofixer.
+- [x] **P9-T5 End-to-end.** `e2e/tour.spec.ts`: walk-through, no request
+      off-origin or to `/fhir/`, nothing stored, axe in cy-001 and zh-CN;
+      `/tour/` added to the axe route sweep. Verify: `pnpm run test:e2e`.
+- [ ] **P9-T6 Translation review** of the new `tour.*` strings in cy-001 and
+      zh-cn (part of P7-T4).
+- [ ] **P9-T7 `HttpService`** against the backend, after its P3
+      (authentication).

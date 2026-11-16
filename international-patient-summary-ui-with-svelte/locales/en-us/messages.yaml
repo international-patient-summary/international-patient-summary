@@ -14,6 +14,7 @@ header:
   label: Site header
   home: Home
   examples: Examples
+  tour: Tour
 
 picker:
   links: Pages
@@ -563,3 +564,45 @@ summary:
   patient: Patient
   narrative: Narrative
   codes: Codes
+
+tour:
+  heading: Tour
+  intro: Try the viewer with a demonstration account. Sign in, browse the stored summaries, open one, and sign out.
+  calloutLabel: About this tour
+  backendless: This tour needs no server. Its sign-in and its store of summaries run in your browser, hold only published examples about fictional patients, and are gone when you sign out or reload. Nothing is sent anywhere.
+  steps: Tour steps
+  guide: Tour guide
+  stepOf: '{$name} (step {$step} of {$total})'
+  showGuide: Show the guide
+  hideGuide: Hide the guide
+  loading: Loading the tour
+  signOut: Sign out
+  signIn:
+    heading: Sign in
+    guide: Sign in with the tour account. Its email and password are already filled in, so choose Sign in.
+    form: Sign in to the tour
+    email: Email
+    password: Password
+    hint: 'Use {$email} with the password “example”. It is a public demonstration account.'
+    submit: Sign in
+  summaries:
+    heading: Your summaries
+    guide: These are the summaries stored for the tour account. Open one to view it, or delete one and watch the list change. Reset the tour to start again.
+    signedInAs: 'Signed in as {$email}'
+    list: Stored summaries
+    untitled: Untitled summary
+    date: 'Dated {$date}'
+    open: Open
+    openNamed: 'Open {$title}'
+    delete: Delete
+    deleteNamed: 'Delete {$title}'
+    empty: No summaries are stored. Reset the tour to restore the examples.
+    reset: Reset the tour
+  view:
+    heading: View a summary
+    guide: This is the viewer, exactly as for any document. Try the sections and the export menu, go back to your summaries, or sign out to end the tour.
+    back: Back to your summaries
+  errors:
+    signIn: That is not the tour account. Use example@example.com with the password “example”.
+    notFound: That summary is no longer stored.
+    service: The tour could not load its summaries. Reload the page and try again.

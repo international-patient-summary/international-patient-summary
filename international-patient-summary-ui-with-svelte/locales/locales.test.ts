@@ -58,7 +58,10 @@ const SAMPLE = {
 	filename: 'f',
 	identifier: 'i',
 	sections: 's',
-	page: 1
+	page: 1,
+	email: 'e',
+	step: 1,
+	total: 3
 };
 
 describe.each(Object.entries(DIRS))('locale %s', (tag, dir) => {

@@ -15,6 +15,7 @@ header:
   label: Pennyn y wefan
   home: Hafan
   examples: Enghreifftiau
+  tour: Taith
 
 picker:
   links: Tudalennau
@@ -637,3 +638,45 @@ summary:
   patient: Claf
   narrative: Naratif
   codes: Codau
+
+tour:
+  heading: Taith
+  intro: Rhowch gynnig ar y gwyliwr gyda chyfrif arddangos. Mewngofnodwch, porwch y crynodebau sydd wedi'u storio, agorwch un, ac allgofnodwch.
+  calloutLabel: Am y daith hon
+  backendless: Nid oes angen gweinydd ar y daith hon. Mae ei mewngofnodi a'i storfa o grynodebau yn rhedeg yn eich porwr, yn dal enghreifftiau cyhoeddedig am gleifion ffuglennol yn unig, ac yn diflannu pan fyddwch yn allgofnodi neu'n ail-lwytho. Nid oes dim yn cael ei anfon i unman.
+  steps: Camau'r daith
+  guide: Canllaw'r daith
+  stepOf: '{$name} (cam {$step} o {$total})'
+  showGuide: Dangos y canllaw
+  hideGuide: Cuddio'r canllaw
+  loading: Wrthi'n llwytho'r daith
+  signOut: Allgofnodi
+  signIn:
+    heading: Mewngofnodi
+    guide: Mewngofnodwch gyda chyfrif y daith. Mae ei e-bost a'i gyfrinair eisoes wedi'u llenwi, felly dewiswch Mewngofnodi.
+    form: Mewngofnodi i'r daith
+    email: E-bost
+    password: Cyfrinair
+    hint: 'Defnyddiwch {$email} gyda''r cyfrinair “example”. Cyfrif arddangos cyhoeddus yw hwn.'
+    submit: Mewngofnodi
+  summaries:
+    heading: Eich crynodebau
+    guide: Dyma'r crynodebau sydd wedi'u storio ar gyfer cyfrif y daith. Agorwch un i'w weld, neu dilëwch un a gwyliwch y rhestr yn newid. Ailosodwch y daith i ddechrau eto.
+    signedInAs: 'Wedi mewngofnodi fel {$email}'
+    list: Crynodebau wedi'u storio
+    untitled: Crynodeb heb deitl
+    date: 'Dyddiad: {$date}'
+    open: Agor
+    openNamed: 'Agor {$title}'
+    delete: Dileu
+    deleteNamed: 'Dileu {$title}'
+    empty: Nid oes crynodebau wedi'u storio. Ailosodwch y daith i adfer yr enghreifftiau.
+    reset: Ailosod y daith
+  view:
+    heading: Gweld crynodeb
+    guide: Dyma'r gwyliwr, yn union fel ar gyfer unrhyw ddogfen. Rhowch gynnig ar yr adrannau a'r ddewislen allforio, ewch yn ôl i'ch crynodebau, neu allgofnodwch i orffen y daith.
+    back: Yn ôl i'ch crynodebau
+  errors:
+    signIn: Nid dyna gyfrif y daith. Defnyddiwch example@example.com gyda'r cyfrinair “example”.
+    notFound: Nid yw'r crynodeb hwnnw wedi'i storio mwyach.
+    service: Nid oedd modd i'r daith lwytho ei chrynodebau. Ail-lwythwch y dudalen a rhowch gynnig arall arni.

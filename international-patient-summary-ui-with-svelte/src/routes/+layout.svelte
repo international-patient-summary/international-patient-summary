@@ -15,19 +15,30 @@
 	const themesUrl = asset('assets/themes/light.css').replace(/light\.css$/, '');
 	const homeHref = resolve('/');
 	const examplesHref = resolve('/examples');
+	const tourHref = resolve('/tour');
+
+	// trailingSlash is 'always', so '/tour/' is the page resolve('/tour') names.
+	const isCurrent = (href: string) =>
+		page.url.pathname.replace(/\/$/, '') === href.replace(/\/$/, '');
 
 	const links = $derived([
 		{
 			id: 'home',
 			label: t('header.home'),
 			href: homeHref,
-			current: page.url.pathname === homeHref
+			current: isCurrent(homeHref)
 		},
 		{
 			id: 'examples',
 			label: t('header.examples'),
 			href: examplesHref,
-			current: page.url.pathname === examplesHref
+			current: isCurrent(examplesHref)
+		},
+		{
+			id: 'tour',
+			label: t('header.tour'),
+			href: tourHref,
+			current: isCurrent(tourHref)
 		}
 	]);
 

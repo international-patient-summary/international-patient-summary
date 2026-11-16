@@ -28,3 +28,11 @@ jobs:
       - run: cargo fmt --all --check
       - run: cargo clippy --locked --all-targets -- -D warnings
       - run: cargo test --locked -- --include-ignored
+
+  msrv:
+    # rust-version in Cargo.toml: stable minus two. Change both together.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@1.98
+      - run: cargo build --locked --all-targets

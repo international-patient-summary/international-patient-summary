@@ -1,0 +1,103 @@
+{
+	"name": "international-patient-summary-ui-with-svelte",
+	"description": "Browser-only, read-only viewer for HL7 FHIR International Patient Summary documents (JSON or YAML), with JSON/YAML/Markdown/one-page PDF export, four locales, and a public backendless tour signing in as example@example.com.",
+	"license": "MIT OR Apache-2.0 OR BSD-3-Clause OR GPL-2.0-only OR GPL-3.0-only",
+	"language": "TypeScript",
+	"stack": [
+		"Svelte 5.57",
+		"SvelteKit 3.2",
+		"Lily Design System headless 0.9.0",
+		"Sveltia I18n (MF2)",
+		"pdfmake 0.3",
+		"vitest 5",
+		"Playwright 1.65"
+	],
+	"commands": {
+		"install": "pnpm install",
+		"dev": "pnpm run dev",
+		"build": "pnpm run build",
+		"test": "pnpm test",
+		"e2e": "pnpm run test:e2e",
+		"check": "pnpm run check",
+		"lint": "pnpm run lint"
+	},
+	"documentation": {
+		"readme": "README.md",
+		"agents": "AGENTS.md",
+		"specification": "spec/index.md",
+		"plan": "plans.md",
+		"tasks": "tasks.md",
+		"changelog": "CHANGELOG.md"
+	},
+	"sections": {
+		"Routes": [
+			{
+				"name": "/",
+				"path": "src/routes/+page.svelte",
+				"description": "loader and viewer"
+			},
+			{
+				"name": "/examples/",
+				"path": "src/routes/examples/+page.svelte",
+				"description": "the five IG examples"
+			},
+			{
+				"name": "/tour/",
+				"path": "src/routes/tour/+page.svelte",
+				"description": "public backendless tour: sign in as example@example.com"
+			}
+		],
+		"Modules": [
+			{
+				"name": "FHIR core",
+				"path": "src/lib/fhir/",
+				"description": "framework-free parsing, references, sections, absent states, formatting"
+			},
+			{
+				"name": "Export",
+				"path": "src/lib/export/",
+				"description": "JSON, YAML, Markdown, one-page PDF"
+			},
+			{
+				"name": "Service contract",
+				"path": "src/lib/service/service.ts",
+				"description": "the backend API as IpsService; its IPS check and refusal codes"
+			},
+			{
+				"name": "Tour service",
+				"path": "src/lib/service/tour-service.ts",
+				"description": "in-memory IpsService for the tour"
+			},
+			{
+				"name": "Tour session",
+				"path": "src/lib/tour.svelte.ts",
+				"description": "demo sign-in, seeding, open, delete, sign-out"
+			},
+			{
+				"name": "Viewer state",
+				"path": "src/lib/state.svelte.ts",
+				"description": "the open document, in memory only"
+			}
+		],
+		"Locales": [
+			{
+				"name": "en-US (source of keys)",
+				"path": "locales/en-us/messages.yaml"
+			},
+			{
+				"name": "en-GB",
+				"path": "locales/en-gb/messages.yaml"
+			},
+			{
+				"name": "cy-001",
+				"path": "locales/cy-001/messages.yaml",
+				"description": "machine-drafted; see REVIEW.md"
+			},
+			{
+				"name": "zh-CN",
+				"path": "locales/zh-cn/messages.yaml",
+				"description": "machine-drafted; see REVIEW.md"
+			}
+		]
+	}
+}
