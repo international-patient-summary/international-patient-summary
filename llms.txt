@@ -1,0 +1,26 @@
+# international-patient-summary
+
+> International Patient Summary (IPS): an introduction in 45 locales, its website, a browser viewer (frontend), a storage service (backend), and iOS and Android apps.
+
+## Docs
+
+- [README](README.md): contents and how the projects fit together
+- [AGENTS](AGENTS.md): rules for every project, supply-chain policy, verify commands
+- [Dependabot](.github/dependabot.yml): weekly updates with a two-day cooldown
+
+## Projects
+
+- [Website](international-patient-summary.github.io/README.md): SvelteKit 3 + Lily Design System site on GitHub Pages; builds its own llms.txt
+- [Viewer (frontend)](international-patient-summary-ui-with-svelte/llms.txt): Svelte 5 IPS viewer with JSON/YAML/Markdown/PDF export and a backendless tour
+- [Service (backend)](international-patient-summary-service-with-axum/llms.txt): Rust Axum + Axa 0.13 + sqlx + Postgres store for IPS document Bundles
+- [iOS app](international-patient-summary-app-with-swift/llms.txt): Swift + UIKit (no SwiftUI) IPS viewer; in memory only, no network
+- [Android app](international-patient-summary-app-with-kotlin/llms.txt): Kotlin + Jetpack Compose IPS viewer; in memory only, no network
+
+## Content
+
+- [Introduction (en-US)](locales/en-us/index.md): the one-page IPS introduction; other locales under locales/<code>/
+
+## Specifications
+
+- [GitHub Discussions](spec/github-discussions-for-organization-repository/index.md)
+- [Locales](spec/locales-for-global-sharing-with-svelte/index.md)

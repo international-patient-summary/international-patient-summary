@@ -1,0 +1,57 @@
+{
+  "name": "international-patient-summary",
+  "description": "International Patient Summary (IPS): an introduction in 45 locales, its website, a browser viewer (frontend), a storage service (backend), and iOS and Android apps.",
+  "license": "MIT OR Apache-2.0 OR BSD-3-Clause OR GPL-2.0-only OR GPL-3.0-only",
+  "repository": "https://github.com/international-patient-summary/international-patient-summary",
+  "documentation": {
+    "readme": "README.md",
+    "agents": "AGENTS.md",
+    "dependabot": ".github/dependabot.yml"
+  },
+  "sections": {
+    "Projects": [
+      {
+        "name": "Website",
+        "path": "international-patient-summary.github.io/README.md",
+        "description": "SvelteKit 3 + Lily Design System site on GitHub Pages; builds its own llms.txt"
+      },
+      {
+        "name": "Viewer (frontend)",
+        "path": "international-patient-summary-ui-with-svelte/llms.txt",
+        "description": "Svelte 5 IPS viewer with JSON/YAML/Markdown/PDF export and a backendless tour"
+      },
+      {
+        "name": "Service (backend)",
+        "path": "international-patient-summary-service-with-axum/llms.txt",
+        "description": "Rust Axum + Axa 0.13 + sqlx + Postgres store for IPS document Bundles"
+      },
+      {
+        "name": "iOS app",
+        "path": "international-patient-summary-app-with-swift/llms.txt",
+        "description": "Swift + UIKit (no SwiftUI) IPS viewer; in memory only, no network"
+      },
+      {
+        "name": "Android app",
+        "path": "international-patient-summary-app-with-kotlin/llms.txt",
+        "description": "Kotlin + Jetpack Compose IPS viewer; in memory only, no network"
+      }
+    ],
+    "Content": [
+      {
+        "name": "Introduction (en-US)",
+        "path": "locales/en-us/index.md",
+        "description": "the one-page IPS introduction; other locales under locales/<code>/"
+      }
+    ],
+    "Specifications": [
+      {
+        "name": "GitHub Discussions",
+        "path": "spec/github-discussions-for-organization-repository/index.md"
+      },
+      {
+        "name": "Locales",
+        "path": "spec/locales-for-global-sharing-with-svelte/index.md"
+      }
+    ]
+  }
+}

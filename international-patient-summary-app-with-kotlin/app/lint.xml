@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Lint treats warnings as errors (app/build.gradle.kts). The checks below
+     are off on purpose, each with its reason. -->
+<lint>
+    <!-- Versions follow the two-day age rule (AGENTS.md), not "newest". -->
+    <issue id="GradleDependency" severity="ignore" />
+    <issue id="NewerVersionAvailable" severity="ignore" />
+    <issue id="AndroidGradlePluginVersion" severity="ignore" />
+    <!-- targetSdk 36 is a decision (spec §8.1); compileSdk is 37. Raise both on purpose. -->
+    <issue id="OldTargetApi" severity="ignore" />
+</lint>

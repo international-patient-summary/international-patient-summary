@@ -1,0 +1,176 @@
+{
+  "name": "international-patient-summary-app-with-kotlin",
+  "description": "Google Android app (Kotlin, Jetpack Compose, Material 3; no Java) that opens and shows HL7 FHIR International Patient Summary documents. In memory only, no network; checks documents exactly as the backend service does.",
+  "license": "MIT OR Apache-2.0 OR BSD-3-Clause OR GPL-2.0-only OR GPL-3.0-only",
+  "language": "Kotlin",
+  "kotlin": "2.4.21",
+  "gradle": "9.9.1",
+  "android_gradle_plugin": "9.5.1",
+  "min_sdk": 29,
+  "target_sdk": 36,
+  "compile_sdk": 37,
+  "stack": [
+    "Jetpack Compose (BOM 2026.09.00)",
+    "Material 3",
+    "kotlinx-serialization-json 1.13.0 (JsonElement only)",
+    "JUnit 4"
+  ],
+  "commands": {
+    "test": "./gradlew :app:testDebugUnitTest",
+    "build": "./gradlew :app:assembleDebug",
+    "lint": "./gradlew :app:lintDebug",
+    "install": "./gradlew :app:installDebug",
+    "verify": "./gradlew :app:testDebugUnitTest :app:assembleDebug :app:lintDebug"
+  },
+  "documentation": {
+    "readme": "README.md",
+    "agents": "AGENTS.md",
+    "specification": "spec/index.md",
+    "plan": "plans.md",
+    "tasks": "tasks.md",
+    "changelog": "CHANGELOG.md"
+  },
+  "sections": {
+    "Specification": [
+      {
+        "name": "Spec §1",
+        "path": "spec/purpose.md",
+        "description": "Purpose, and the ideas taken from MyIPS"
+      },
+      {
+        "name": "Spec §2",
+        "path": "spec/scope.md",
+        "description": "Scope"
+      },
+      {
+        "name": "Spec §3",
+        "path": "spec/documents.md",
+        "description": "The check (M-CHECK), reading (M-READ), loading (M-LOAD)"
+      },
+      {
+        "name": "Spec §4",
+        "path": "spec/screens.md",
+        "description": "List, summary and About screens (M-LIST, M-VIEW, M-ABOUT)"
+      },
+      {
+        "name": "Spec §5",
+        "path": "spec/sharing-and-privacy.md",
+        "description": "M-SHARE, M-PRIV"
+      },
+      {
+        "name": "Spec §6",
+        "path": "spec/accessibility-and-language.md",
+        "description": "M-A11Y, M-I18N"
+      },
+      {
+        "name": "Spec §7",
+        "path": "spec/fixtures.md",
+        "description": "The five IG examples"
+      },
+      {
+        "name": "Spec §8",
+        "path": "spec/android.md",
+        "description": "Stack, architecture, platform notes"
+      },
+      {
+        "name": "Spec §9",
+        "path": "spec/verification.md",
+        "description": "Requirement-to-test map, manual checks"
+      }
+    ],
+    "Core": [
+      {
+        "name": "Check",
+        "path": "app/src/main/kotlin/io/github/internationalpatientsummary/app/ips/Check.kt",
+        "description": "M-CHECK-1/2, Refusal codes and pointers (the service's S-API-2)"
+      },
+      {
+        "name": "BundleIndex",
+        "path": "app/src/main/kotlin/io/github/internationalpatientsummary/app/ips/BundleIndex.kt",
+        "description": "references by fullUrl, then Type/id"
+      },
+      {
+        "name": "Sections",
+        "path": "app/src/main/kotlin/io/github/internationalpatientsummary/app/ips/Sections.kt",
+        "description": "IPS 2.0.1 section registry"
+      },
+      {
+        "name": "Absent",
+        "path": "app/src/main/kotlin/io/github/internationalpatientsummary/app/ips/Absent.kt",
+        "description": "none known, not recorded, unavailable, missing"
+      },
+      {
+        "name": "SummaryReader",
+        "path": "app/src/main/kotlin/io/github/internationalpatientsummary/app/ips/SummaryReader.kt",
+        "description": "patient, document, sections, allergy alert"
+      },
+      {
+        "name": "EntryReader",
+        "path": "app/src/main/kotlin/io/github/internationalpatientsummary/app/ips/EntryReader.kt",
+        "description": "one entry as a row with detail lines"
+      },
+      {
+        "name": "Format",
+        "path": "app/src/main/kotlin/io/github/internationalpatientsummary/app/ips/Format.kt",
+        "description": "displayOf, names, dates, ages, quantities"
+      },
+      {
+        "name": "Narrative",
+        "path": "app/src/main/kotlin/io/github/internationalpatientsummary/app/ips/Narrative.kt",
+        "description": "narrative as plain text"
+      }
+    ],
+    "App": [
+      {
+        "name": "MainActivity",
+        "path": "app/src/main/kotlin/io/github/internationalpatientsummary/app/MainActivity.kt",
+        "description": "privacy cover, share sheet, share-file cleanup"
+      },
+      {
+        "name": "AppViewModel",
+        "path": "app/src/main/kotlin/io/github/internationalpatientsummary/app/AppViewModel.kt",
+        "description": "screen state, open, examples, delete, clear"
+      },
+      {
+        "name": "SummaryStore",
+        "path": "app/src/main/kotlin/io/github/internationalpatientsummary/app/SummaryStore.kt",
+        "description": "in-memory store"
+      },
+      {
+        "name": "ShareFiles",
+        "path": "app/src/main/kotlin/io/github/internationalpatientsummary/app/ShareFiles.kt",
+        "description": "FileProvider share file"
+      },
+      {
+        "name": "SummariesScreen",
+        "path": "app/src/main/kotlin/io/github/internationalpatientsummary/app/ui/SummariesScreen.kt",
+        "description": "home, import, paste, examples"
+      },
+      {
+        "name": "SummaryScreen",
+        "path": "app/src/main/kotlin/io/github/internationalpatientsummary/app/ui/SummaryScreen.kt",
+        "description": "alert, patient, document, sections"
+      },
+      {
+        "name": "AboutScreen",
+        "path": "app/src/main/kotlin/io/github/internationalpatientsummary/app/ui/AboutScreen.kt",
+        "description": "safety, privacy, versions, Clear all"
+      },
+      {
+        "name": "Strings",
+        "path": "app/src/main/res/values/strings.xml",
+        "description": "every interface string"
+      },
+      {
+        "name": "Manifest",
+        "path": "app/src/main/AndroidManifest.xml",
+        "description": "no network permission, no backup, FileProvider"
+      },
+      {
+        "name": "Tests",
+        "path": "app/src/test/kotlin/io/github/internationalpatientsummary/app/",
+        "description": "JVM unit tests; fixtures in app/src/test/resources/fixtures/"
+      }
+    ]
+  }
+}

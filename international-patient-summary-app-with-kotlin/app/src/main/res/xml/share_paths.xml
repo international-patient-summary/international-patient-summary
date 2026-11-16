@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Only cacheDir/share/ is shared, and only on a Share tap (spec M-SHARE-1). -->
+<paths>
+    <cache-path name="share" path="share/" />
+</paths>

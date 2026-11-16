@@ -1,0 +1,51 @@
+# Dependency updates for every project in this repository.
+# cooldown matches the local supply-chain rule (Cargo min-publish-age, pnpm
+# minimumReleaseAge, and the Gradle versions catalog, two days): no version
+# younger than that is proposed. The iOS app has no dependencies outside
+# Apple's SDKs, so only its GitHub Actions are watched.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /international-patient-summary-ui-with-svelte
+    schedule: { interval: weekly }
+    cooldown: { default-days: 2 }
+    groups:
+      minor-and-patch: { update-types: [minor, patch] }
+    ignore:
+      # TypeScript 7 (the native compiler) waits for svelte-check support.
+      - dependency-name: typescript
+        update-types: [version-update:semver-major]
+
+  - package-ecosystem: npm
+    directory: /international-patient-summary.github.io
+    schedule: { interval: weekly }
+    cooldown: { default-days: 2 }
+    groups:
+      minor-and-patch: { update-types: [minor, patch] }
+    ignore:
+      - dependency-name: typescript
+        update-types: [version-update:semver-major]
+
+  - package-ecosystem: cargo
+    directory: /international-patient-summary-service-with-axum
+    schedule: { interval: weekly }
+    cooldown: { default-days: 2 }
+    groups:
+      minor-and-patch: { update-types: [minor, patch] }
+
+  - package-ecosystem: gradle
+    directory: /international-patient-summary-app-with-kotlin
+    schedule: { interval: weekly }
+    cooldown: { default-days: 2 }
+    groups:
+      minor-and-patch: { update-types: [minor, patch] }
+
+  - package-ecosystem: github-actions
+    directories:
+      - /
+      - /international-patient-summary-ui-with-svelte
+      - /international-patient-summary-service-with-axum
+      - /international-patient-summary-app-with-swift
+      - /international-patient-summary-app-with-kotlin
+    schedule: { interval: weekly }
+    cooldown: { default-days: 2 }
