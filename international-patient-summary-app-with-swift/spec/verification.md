@@ -23,12 +23,13 @@ xcodebuild test -project IPSApp.xcodeproj -scheme IPSApp \
 | M-VIEW-5              | `DocumentTests.absentStatesFromEmptyReason`, `aMixedAllergyListIsKnown`, `sectionStatesFollowTheViewersOrder`; `FormatTests.absentStates`; UI |
 | M-VIEW-6              | `FormatTests.narrativeBecomesPlainText`                                  |
 | M-VIEW-7              | `FormatTests.displayPrefersDisplayThenTextThenSystemAndCode`, `statusesAreCodes` |
-| M-SHARE-1             | `DocumentTests.sharingGivesBackTheExactBytes`; manual: Share, then Save to Files |
+| M-LOAD-2, M-LIST-3    | UI `testPasteRefusalAndShare` (plain text refused as `not_json`, list unchanged; an IPS opens) |
+| M-SHARE-1             | `DocumentTests.sharingGivesBackTheExactBytes`; UI `testPasteRefusalAndShare` (the sheet names `international-patient-summary`, JSON) |
 | M-PRIV-3, M-ABOUT-1   | UI `testTheExamplesOpenAndClear`                                         |
 | M-A11Y-2              | UI `testTheLargestTextSize`                                              |
 | M-I18N-1              | UI: no ⟦key⟧ on any screen visited                                       |
 
 Manual, before a release: M-LOAD-1 (import a fixture from Files, and an
-11 MB file); M-LOAD-2 (paste a fixture's text, and plain text); M-LIST-2
+11 MB file); M-LIST-2
 (swipe, and VoiceOver's Delete action); M-PRIV-2 (the app switcher shows the
 cover); M-A11Y-1 (VoiceOver reads headings and rows); dark appearance.

@@ -156,7 +156,8 @@ private fun Empty(actions: OpenActions) {
 @Composable
 private fun SummaryRow(summary: Summary, onOpen: () -> Unit, onDelete: () -> Unit) {
     val locale = currentLocale()
-    val deleteLabel = stringResource(R.string.action_delete_summary)
+    val name = summary.listTitle ?: stringResource(R.string.list_untitled)
+    val deleteLabel = stringResource(R.string.action_delete_named, name)
     val state = rememberSwipeToDismissBoxState()
     SwipeToDismissBox(
         state = state,
@@ -186,7 +187,7 @@ private fun SummaryRow(summary: Summary, onOpen: () -> Unit, onDelete: () -> Uni
                         customActions = listOf(CustomAccessibilityAction(deleteLabel) { onDelete(); true })
                     },
             ) {
-                Text(summary.listTitle ?: stringResource(R.string.list_untitled), style = MaterialTheme.typography.titleMedium)
+                Text(name, style = MaterialTheme.typography.titleMedium)
                 summary.document.title?.let { Text(it, style = MaterialTheme.typography.bodyMedium) }
                 Format.date(summary.document.date, locale, withTime = false)?.let {
                     Text(it, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)

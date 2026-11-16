@@ -11,6 +11,8 @@
     <string name="action_examples">Load examples</string>
     <string name="action_about">About</string>
     <string name="action_delete_summary">Delete this summary</string>
+    <!-- A list row's delete button names its summary, so a screen reader says which. -->
+    <string name="action_delete_named">Delete %1$s</string>
     <string name="empty_title">No summaries open</string>
     <string name="empty_body">Open an International Patient Summary: import a FHIR JSON file, paste one you have copied, or load the five examples. Summaries stay in memory on this phone only.</string>
     <string name="list_untitled">Untitled summary</string>

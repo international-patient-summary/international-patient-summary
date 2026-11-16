@@ -89,4 +89,48 @@ final class IPSAppUITests: XCTestCase {
         XCTAssertTrue(alert.isHittable, "the alert is on screen first, not clipped")
         screenshot(app, "6-largest-text")
     }
+
+    /// Allows iOS's "paste from another app" prompt, which belongs to SpringBoard.
+    private func allowPaste() {
+        let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
+        let allow = springboard.alerts.buttons["Allow Paste"]
+        if allow.waitForExistence(timeout: 3) { allow.tap() }
+    }
+
+    /// M-LOAD-2, M-LIST-3, M-SHARE-1: paste text that is not JSON (refused, list unchanged),
+    /// then an IPS (opened), and share it as a file named for no one. Slow (about three
+    /// minutes): each write to the simulator's pasteboard from the test runner takes ~80 s.
+    func testPasteRefusalAndShare() throws {
+        let app = XCUIApplication()
+        app.launch()
+        XCTAssertTrue(app.buttons["list.paste"].waitForExistence(timeout: 10))
+
+        UIPasteboard.general.string = "resourceType: Bundle"
+        app.buttons["list.paste"].tap()
+        allowPaste()
+        let refusal = app.alerts.firstMatch
+        XCTAssertTrue(refusal.waitForExistence(timeout: 5))
+        XCTAssertTrue(
+            refusal.staticTexts.containing(NSPredicate(format: "label CONTAINS %@", "Code: not_json")).firstMatch.exists)
+        screenshot(app, "7-refusal")
+        refusal.buttons["OK"].tap()
+        XCTAssertTrue(app.buttons["list.paste"].exists, "the list is unchanged")
+
+        let url = try XCTUnwrap(
+            Bundle(for: Self.self).url(forResource: "bundle-minimal", withExtension: "json"))
+        UIPasteboard.general.string = try String(contentsOf: url, encoding: .utf8)
+        app.buttons["list.paste"].tap()
+        allowPaste()
+        XCTAssertTrue(app.navigationBars["Martha DeLarosa"].waitForExistence(timeout: 5))
+
+        app.buttons["share"].tap()
+        let sheet = app.otherElements["ActivityListView"].firstMatch
+        XCTAssertTrue(sheet.waitForExistence(timeout: 5) || app.sheets.firstMatch.waitForExistence(timeout: 2))
+        // The sheet's caption names the file, never the patient, and types it JSON.
+        let caption = app.otherElements["LP.CaptionBar.TopCaption"]
+        XCTAssertTrue(caption.waitForExistence(timeout: 5))
+        XCTAssertEqual(caption.label, "international-patient-summary")
+        XCTAssertTrue(app.otherElements["LP.CaptionBar.BottomCaption"].label.hasPrefix("JSON"))
+        screenshot(app, "8-share")
+    }
 }

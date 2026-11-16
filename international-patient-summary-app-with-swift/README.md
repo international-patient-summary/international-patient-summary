@@ -39,7 +39,7 @@ Requires Xcode 27.2 or later (Swift 6.4); runs on iOS 18 and later.
 # the core, on the Mac, no simulator (32 tests)
 cd IPSKit && swift test && cd ..
 
-# the app, end to end, on a simulator (2 UI tests)
+# the app, end to end, on a simulator (3 UI tests; the paste test takes ~3 minutes)
 xcodebuild test -project IPSApp.xcodeproj -scheme IPSApp \
   -destination 'platform=iOS Simulator,name=iPhone 17' CODE_SIGNING_ALLOWED=NO
 

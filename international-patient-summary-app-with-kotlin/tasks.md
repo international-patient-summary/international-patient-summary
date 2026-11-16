@@ -18,6 +18,14 @@ The checklist for [plans.md](plans.md). `[x]` done, `[ ]` open.
 - [x] P1-T12 README, AGENTS, spec (one file per section, §1–§7 shared with iOS), llms.txt/llms.json
 - [ ] P1-T13 Compose instrumented smoke test (load examples, open one, banner shows the name); until then, spec §9 step 1 by hand
 - [ ] P1-T14 Run the manual checks of spec §9 on an API 29 and an API 33+ emulator before the first release
+  - Done on an API 33 emulator (2026-11-16): launch, Load examples, open,
+    alert first, Share (chooser names `international-patient-summary.json`;
+    file deleted when it closes), Import file from Downloads, an 11 MB file
+    refused as `too_large`, delete from the list, About → Clear all, font
+    scale 2.0 in dark mode. Fixed from it: P1-T15, P1-T16.
+  - Still to do: Paste (API 33 has no `adb` clipboard command), TalkBack, API 29.
+- [x] P1-T15 The app switcher showed the record on API 33: cover on focus loss too (spec §8.3)
+- [x] P1-T16 Each list row's delete button names its summary ("Delete James Judge") for TalkBack
 
 ## Phase 2 — Translations
 

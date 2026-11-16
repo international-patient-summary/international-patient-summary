@@ -17,7 +17,14 @@ import io.github.internationalpatientsummary.app.ui.App
 class MainActivity : ComponentActivity() {
     private val viewModel: AppViewModel by viewModels()
 
-    /** Covers the window while paused, on Android 12L and earlier (M-PRIV-2). */
+    /**
+     * Covers the window while paused (M-PRIV-2). On Android 13 and later
+     * setRecentsScreenshotEnabled(false) also stops the saved thumbnail, but the
+     * switcher still shows the live window as it opens, so the cover is drawn on
+     * every version. The Pixel launcher keeps the app live (resumed) in the
+     * switcher, so losing window focus also covers it (both seen on an API 33
+     * emulator, 2026-11-16).
+     */
     private val covered = mutableStateOf(false)
 
     private val share = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -36,7 +43,12 @@ class MainActivity : ComponentActivity() {
 
     override fun onPause() {
         super.onPause()
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) covered.value = true
+        covered.value = true
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        covered.value = !hasFocus
     }
 
     override fun onResume() {

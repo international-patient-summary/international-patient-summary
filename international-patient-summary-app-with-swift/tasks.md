@@ -12,9 +12,12 @@ requirements to tests.
 - [x] P1-T5 UIKit app: scene in code, list, summary, About (§4)
 - [x] P1-T6 Import, paste, examples, share (M-LOAD-*, M-SHARE-1)
 - [x] P1-T7 Privacy: in memory, privacy cover, share-file cleanup, privacy manifest (M-PRIV-*)
-- [x] P1-T8 XCUITests: examples → summary → Clear all; largest text size
+- [x] P1-T8 XCUITests: examples → summary → Clear all; largest text size; paste, refusal and share (3 tests)
 - [x] P1-T9 CI workflow (macOS runner: `swift test`, `xcodebuild test`)
 - [ ] P1-T10 Manual checks in spec §9 on a device, with VoiceOver
+  - Simulator run (iPhone 17 Pro, iOS 27.2, 2026-11-16): launch, examples, summary,
+    paste (with iOS's Allow Paste prompt), `not_json` refusal, share sheet. Still to
+    do: import from Files, an 11 MB file, VoiceOver, the app switcher cover.
 - [ ] P1-T11 App icon and accent colour (asset catalog)
 - [ ] P1-T12 Signing team and App Store privacy answers ("Data Not Collected")
 

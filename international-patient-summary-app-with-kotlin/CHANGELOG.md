@@ -2,6 +2,12 @@
 
 ## 0.1.0 — unreleased
 
+Fixed after a first run on an API 33 emulator:
+
+- The app switcher showed the open record: the cover now also appears when
+  the window loses focus (the Pixel launcher keeps the app live there).
+- Each list row's delete button now names its summary for TalkBack.
+
 First implementation of the specification (spec/index.md).
 
 - Android app in Kotlin (no Java), Jetpack Compose and Material 3; minSdk 29,

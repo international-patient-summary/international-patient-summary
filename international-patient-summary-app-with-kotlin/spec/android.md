@@ -77,16 +77,20 @@ the summaries are gone when the process ends.
 - **Network and backup** (M-PRIV-1): the manifest asks for no permission
   that reaches a network; `android:allowBackup="false"`, and both
   `dataExtractionRules` and `fullBackupContent` exclude every domain.
-- **Privacy cover** (M-PRIV-2): on Android 13 (API 33) and later,
-  `setRecentsScreenshotEnabled(false)`; on earlier versions a plain surface
-  with the app's name covers the window from `onPause` to `onResume`.
-  `FLAG_SECURE` is not used, so a person may still take a screenshot to show
-  a clinician.
+- **Privacy cover** (M-PRIV-2): a plain surface with the app's name covers
+  the window while the activity is paused **or has lost window focus**, on
+  every API level; on Android 13 (API 33) and later
+  `setRecentsScreenshotEnabled(false)` also stops the saved thumbnail. Seen
+  on an API 33 emulator (2026-11-16): the Pixel launcher keeps the app live
+  and resumed in the switcher, so neither the thumbnail flag nor `onPause`
+  hid the record; losing focus does. The cost: the cover also shows behind
+  the app's own dialogs (a refusal, Clear all), which take window focus.
+  `FLAG_SECURE` is not used, so people can still take screenshots.
 - **Logs** (M-PRIV-4): the app writes no logs of its own.
 - **Accessibility** (M-A11Y-1/2): screen and section titles use
   `semantics { heading() }`; entry and list rows merge their text into one
-  announcement; a list row has a TalkBack "Delete this summary" custom
-  action as well as the swipe and the Delete button; icon buttons carry
+  announcement; a list row has a TalkBack "Delete <name>" custom
+  action as well as the swipe and a Delete button with the same name; icon buttons carry
   content descriptions; touch targets are at least 48 dp; text uses `sp`
   through Material typography, so it follows the font scale.
 - **Dates**: a FHIR dateTime is written at the document's own offset, not
