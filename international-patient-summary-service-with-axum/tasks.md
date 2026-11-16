@@ -4,7 +4,7 @@ Checklist for [plans.md](plans.md). Spec: [spec/index.md](spec/index.md).
 
 ## P1 — Scaffold and the document API
 
-- [x] **P1-T1** Crate with Axa 0.13 (`postgres-sqlx`), sqlx 0.9, strict lints
+- [x] **P1-T1** Crate with Axa 0.15 (`postgres-sqlx`), sqlx 0.9, strict lints
       (`missing_docs`, pedantic clippy, no `unsafe`).
       Verify: `cargo clippy --all-targets -- -D warnings`.
 - [x] **P1-T2** Migration `ips_documents` with the document check constraint (spec §3).

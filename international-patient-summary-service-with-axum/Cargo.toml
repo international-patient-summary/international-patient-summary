@@ -16,7 +16,7 @@ name = "international-patient-summary-service-with-axum"
 path = "src/main.rs"
 
 [dependencies]
-axa = { version = "0.13", features = ["postgres-sqlx"] }
+axa = { version = "0.15", features = ["postgres-sqlx"] }
 axum = "0.8"
 serde_json = "1"
 sqlx = { version = "0.9", default-features = false, features = ["postgres", "runtime-tokio", "macros", "migrate", "uuid", "json", "chrono"] }
@@ -25,7 +25,7 @@ tracing = "0.1"
 uuid = { version = "1", features = ["v4"] }
 
 [dev-dependencies]
-axa-test = { version = "0.4", features = ["postgres-sqlx"] }
+axa-test = { version = "0.6", features = ["postgres-sqlx"] }
 
 [lints.rust]
 unsafe_code = "forbid"
