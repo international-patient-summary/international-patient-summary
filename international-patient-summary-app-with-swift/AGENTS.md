@@ -23,7 +23,10 @@ change in behaviour carries a spec edit, a code edit and a test edit together.
   SwiftData, or backup. No network code. No logging of document content.
 - Every interface string is in `App/Localizable.xcstrings`, looked up with
   `L10n.text`; a missing key shows as ⟦key⟧ and fails the UI tests.
-  Clinical text from a document is never translated.
+  Clinical text from a document is never translated. A new key needs a
+  value in every language in the catalog (`CatalogTests` checks). Translations are edited in
+  `../international-patient-summary-app-translations/languages/`, then
+  `python3 translations.py generate`; never by hand in the catalog.
 - Words first: alerts and absent states are written out; colour and symbols
   only reinforce. Allergies are never collapsed.
 - File names never contain a patient's name or identifiers.

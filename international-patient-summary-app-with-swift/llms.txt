@@ -40,4 +40,4 @@
 - [SummaryViewController](App/SummaryViewController.swift): alerts, patient, document, sections, share
 - [AboutViewController](App/AboutViewController.swift): safety, privacy, versions, Clear all
 - [SummaryStore](App/SummaryStore.swift): in-memory store, examples, share file
-- [Strings](App/Localizable.xcstrings): every interface string
+- [Strings](App/Localizable.xcstrings): every interface string, in English and 65 localizations

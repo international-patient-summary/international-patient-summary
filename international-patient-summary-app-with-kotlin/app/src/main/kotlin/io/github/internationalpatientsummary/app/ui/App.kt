@@ -4,48 +4,91 @@ package io.github.internationalpatientsummary.app.ui
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import io.github.internationalpatientsummary.app.AppViewModel
 import io.github.internationalpatientsummary.app.Problem
 import io.github.internationalpatientsummary.app.R
 import io.github.internationalpatientsummary.app.Screen
+import io.github.internationalpatientsummary.app.Shortcut
 import io.github.internationalpatientsummary.app.ips.Summary
+
+/** Wide enough for the list beside the open summary (M-TAB-1): Material's "expanded" width. */
+val TWO_PANE_WIDTH = 840.dp
 
 @Composable
 fun App(viewModel: AppViewModel, covered: Boolean, onShare: (Summary) -> Unit) {
     IpsTheme {
         BackHandler(enabled = viewModel.screen != Screen.Summaries) { viewModel.back() }
-        Box(Modifier.fillMaxSize()) {
+        val actions = rememberOpenActions(viewModel)
+        // M-TAB-2: a keyboard shortcut runs the same action as its button, from any screen.
+        LaunchedEffect(viewModel.pending) {
+            when (viewModel.pending) {
+                Shortcut.IMPORT -> actions.onImport()
+                Shortcut.PASTE -> actions.onPaste()
+                Shortcut.EXAMPLES -> actions.onExamples()
+                Shortcut.DELETE_OPEN, null -> Unit
+            }
+            viewModel.shortcutDone()
+        }
+        BoxWithConstraints(Modifier.fillMaxSize()) {
+            val twoPane = maxWidth >= TWO_PANE_WIDTH
             when (val screen = viewModel.screen) {
-                Screen.Summaries -> SummariesScreen(viewModel)
                 Screen.About -> AboutScreen(viewModel)
-                is Screen.Open -> {
-                    val summary = viewModel.summary(screen.id)
-                    if (summary == null) {
-                        LaunchedEffect(screen) { viewModel.back() }
-                    } else {
-                        SummaryScreen(
-                            summary = summary,
-                            onBack = { viewModel.back() },
-                            onShare = { onShare(summary) },
-                            onDelete = { viewModel.delete(summary.id) },
-                        )
+                else -> if (twoPane) {
+                    Row(Modifier.fillMaxSize()) {
+                        Box(Modifier.weight(2f)) { SummariesScreen(viewModel, actions, selected = (screen as? Screen.Open)?.id) }
+                        VerticalDivider()
+                        Box(Modifier.weight(3f)) { Detail(viewModel, screen, onShare, showBack = false) }
                     }
+                } else if (screen is Screen.Open) {
+                    Detail(viewModel, screen, onShare, showBack = true)
+                } else {
+                    SummariesScreen(viewModel, actions, selected = null)
                 }
             }
             viewModel.problem?.let { ProblemAlert(it, viewModel::dismissProblem) }
             if (covered) Cover()
         }
+    }
+}
+
+/** The open summary, or (beside the list, before one is chosen) what to do. */
+@Composable
+private fun Detail(viewModel: AppViewModel, screen: Screen, onShare: (Summary) -> Unit, showBack: Boolean) {
+    val summary = (screen as? Screen.Open)?.let { viewModel.summary(it.id) }
+    if (summary == null) {
+        if (screen is Screen.Open) LaunchedEffect(screen) { viewModel.back() }
+        Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.surfaceContainerLow) {
+            Box(Modifier.padding(24.dp), contentAlignment = Alignment.Center) {
+                Text(
+                    stringResource(R.string.detail_placeholder),
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
+        }
+    } else {
+        SummaryScreen(
+            summary = summary,
+            onBack = if (showBack) ({ viewModel.back() }) else null,
+            onShare = { onShare(summary) },
+            onDelete = { viewModel.delete(summary.id) },
+        )
     }
 }
 

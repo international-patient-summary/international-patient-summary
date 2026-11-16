@@ -143,6 +143,15 @@ class SummaryReaderTest {
         assertTrue(results.isNotEmpty())
     }
 
+    @Test fun statusDetailsKeepEachCode() {
+        // M-VIEW-7: clinical then verification status, as codes the screen words.
+        val summary = Fixtures.open("bundle-minimal")
+        val problem = summary.sections.first { it.key == SectionKey.PROBLEMS }.entries.first() as Entry.Resolved
+        val status = problem.details.single { it.kind == DetailKind.STATUS }
+        assertEquals(listOf("active", "confirmed"), status.codes)
+        assertEquals("active, confirmed", status.value)
+    }
+
     @Test fun narrativeWithoutEntriesIsKept() {
         val summary = Fixtures.open("IPS-examples-Bundle-01")
         val plan = summary.sections.first { it.key == SectionKey.PLAN_OF_CARE }

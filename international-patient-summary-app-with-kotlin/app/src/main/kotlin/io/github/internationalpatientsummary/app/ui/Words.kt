@@ -71,13 +71,47 @@ fun detailLabel(kind: DetailKind): Int = when (kind) {
     DetailKind.INTERPRETATION -> R.string.detail_interpretation
 }
 
+/** FHIR codes the app puts in words (M-VIEW-7), the same set as the iOS app's `code.*`. */
+val CODE_WORDS: Map<String, Int> = mapOf(
+    "active" to R.string.code_active,
+    "allergy" to R.string.code_allergy,
+    "amended" to R.string.code_amended,
+    "cancelled" to R.string.code_cancelled,
+    "completed" to R.string.code_completed,
+    "confirmed" to R.string.code_confirmed,
+    "corrected" to R.string.code_corrected,
+    "differential" to R.string.code_differential,
+    "draft" to R.string.code_draft,
+    "entered-in-error" to R.string.code_entered_in_error,
+    "final" to R.string.code_final,
+    "high" to R.string.code_high,
+    "in-progress" to R.string.code_in_progress,
+    "inactive" to R.string.code_inactive,
+    "intended" to R.string.code_intended,
+    "intolerance" to R.string.code_intolerance,
+    "low" to R.string.code_low,
+    "not-done" to R.string.code_not_done,
+    "not-taken" to R.string.code_not_taken,
+    "on-hold" to R.string.code_on_hold,
+    "preliminary" to R.string.code_preliminary,
+    "preparation" to R.string.code_preparation,
+    "presumed" to R.string.code_presumed,
+    "provisional" to R.string.code_provisional,
+    "recurrence" to R.string.code_recurrence,
+    "refuted" to R.string.code_refuted,
+    "registered" to R.string.code_registered,
+    "relapse" to R.string.code_relapse,
+    "remission" to R.string.code_remission,
+    "resolved" to R.string.code_resolved,
+    "stopped" to R.string.code_stopped,
+    "unable-to-assess" to R.string.code_unable_to_assess,
+    "unconfirmed" to R.string.code_unconfirmed,
+    "unknown" to R.string.code_unknown,
+)
+
+/** A FHIR code in the interface's words ("active" -> "Active"); an unknown code as written. */
 @Composable
-fun criticalityText(code: String): String = when (code) {
-    "high" -> stringResource(R.string.criticality_high)
-    "low" -> stringResource(R.string.criticality_low)
-    "unable-to-assess" -> stringResource(R.string.criticality_unable_to_assess)
-    else -> code
-}
+fun codeText(code: String): String = CODE_WORDS[code]?.let { stringResource(it) } ?: code
 
 @Composable
 fun genderText(code: String): String = when (code) {

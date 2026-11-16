@@ -12,7 +12,7 @@
 | Core          | `IPSKit`, a local Swift package: Foundation only, no UIKit               |
 | Tests         | Swift Testing for `IPSKit` (`swift test`); XCUITest for the app          |
 | Dependencies  | None outside Apple's SDKs                                                |
-| Strings       | `App/Localizable.xcstrings` (English)                                    |
+| Strings       | `App/Localizable.xcstrings`: English and 65 localizations (M-I18N-2), state `needs_review`; `App/InfoPlist.xcstrings` names the app on the home screen in each; `knownRegions` lists them |
 
 The app target uses `SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor`; `IPSKit`
 types are `Sendable` values. Warnings are errors.
@@ -28,16 +28,19 @@ IPSKit/                    Swift package, no UIKit (spec §3, §4.2 readers)
     Sections.swift         M-READ-3: SectionKey registry
     Absent.swift           M-VIEW-5: SectionState rules
     Format.swift           M-VIEW-7: displayOf, names, dates, ages, quantities, narrative
+    DocumentFile.swift     readDocumentFile: size first, then bytes (Import and drop)
   Tests/IPSKitTests/       Swift Testing suites + the five fixtures
 App/                       the UIKit app (file-system-synchronized group)
   AppDelegate.swift        @main; scene configuration in code; removes share files
   SceneDelegate.swift      window, navigation, M-PRIV-2 privacy cover
   SummaryStore.swift       in-memory store (M-PRIV-1), Examples, ShareFile
-  SummaryListViewController.swift   §4.1
+  SplitViewController.swift         M-TAB-1: the list beside the open summary; ⌘O ⌘V ⌘E (M-TAB-2)
+  SummaryListViewController.swift   §4.1; ⌘⌫ and the drop delegate (M-TAB-2, M-TAB-3)
   SummaryViewController.swift       §4.2, M-SHARE-1
   AboutViewController.swift         §4.3, M-PRIV-3
   L10n.swift               string lookup; a missing key shows as ⟦key⟧
   Localizable.xcstrings    every interface string
+  InfoPlist.xcstrings      the home-screen name in every language (generated)
   PrivacyInfo.xcprivacy    no tracking, no collected data, no required-reason APIs
   Examples/                the five IG examples (M-LOAD-3)
 UITests/                   XCUITest end-to-end tests

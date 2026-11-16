@@ -41,6 +41,25 @@ class AppViewModel : ViewModel() {
     var busy: Boolean by mutableStateOf(false)
         private set
 
+    /** A keyboard shortcut for the screen to carry out (it holds the file picker and clipboard). */
+    var pending: Shortcut? by mutableStateOf(null)
+        private set
+
+    /** M-TAB-2: delete acts here; the others wait for the screen. Answers whether it was used. */
+    fun shortcut(shortcut: Shortcut): Boolean {
+        if (shortcut == Shortcut.DELETE_OPEN) {
+            val open = screen as? Screen.Open ?: return false
+            delete(open.id)
+        } else {
+            pending = shortcut
+        }
+        return true
+    }
+
+    fun shortcutDone() {
+        pending = null
+    }
+
     fun summary(id: Long): Summary? = store.get(id)
 
     fun show(next: Screen) {

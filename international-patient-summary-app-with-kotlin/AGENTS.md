@@ -34,7 +34,10 @@ edit and a test edit in the same commit, and updates `tasks.md`.
 - File names never contain the patient's name or identifiers.
 - Narrative is shown as plain text (`Narrative.plainText`); never a WebView.
 - Every interface string is in `res/values/strings.xml`, with plurals for
-  counts; clinical text is never translated. Every icon button has a
+  counts, and in every `values-*/` language folder (`TranslationsTest`
+  checks). Edit translations in `../international-patient-summary-app-translations/languages/`
+  and run `python3 translations.py generate`, never `values-*/` by hand;
+  clinical text is never translated. Every icon button has a
   content description; titles use `semantics { heading() }`; touch targets
   are at least 48 dp; text sizes in `sp` (Material typography).
 - Allergies are never behind a collapsed control. Statuses are words; colour

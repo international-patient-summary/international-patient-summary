@@ -1,6 +1,6 @@
 import UIKit
 
-/// The window: a navigation stack rooted at the summaries list, and the privacy cover.
+/// The window: the summaries list and the open summary (side by side when wide), and the privacy cover.
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     private var cover: UIView?
@@ -11,10 +11,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     ) {
         guard let windowScene = scene as? UIWindowScene else { return }
         let window = UIWindow(windowScene: windowScene)
-        let navigation = UINavigationController(
-            rootViewController: SummaryListViewController(store: SummaryStore.shared))
-        navigation.navigationBar.prefersLargeTitles = true
-        window.rootViewController = navigation
+        window.rootViewController = SplitViewController(store: SummaryStore.shared)
         window.makeKeyAndVisible()
         self.window = window
     }

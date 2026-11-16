@@ -23,7 +23,7 @@
       {
         "name": "Service (backend)",
         "path": "international-patient-summary-service-with-axum/llms.txt",
-        "description": "Rust Axum + Axa 0.13 + sqlx + Postgres store for IPS document Bundles"
+        "description": "Rust Axum + Axa 0.15 + sqlx + Postgres store for IPS document Bundles"
       },
       {
         "name": "iOS app",
@@ -34,6 +34,11 @@
         "name": "Android app",
         "path": "international-patient-summary-app-with-kotlin/llms.txt",
         "description": "Kotlin + Jetpack Compose IPS viewer; in memory only, no network"
+      },
+      {
+        "name": "Mobile app translations",
+        "path": "international-patient-summary-app-translations/README.md",
+        "description": "Both mobile apps' strings in 65 languages, and the script that writes them in"
       }
     ],
     "Content": [

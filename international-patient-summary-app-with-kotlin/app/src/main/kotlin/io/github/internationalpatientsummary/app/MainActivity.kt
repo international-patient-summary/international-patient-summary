@@ -5,6 +5,10 @@ package io.github.internationalpatientsummary.app
 
 import android.os.Build
 import android.os.Bundle
+import android.view.KeyEvent
+import android.view.KeyboardShortcutGroup
+import android.view.KeyboardShortcutInfo
+import android.view.Menu
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -54,6 +58,29 @@ class MainActivity : ComponentActivity() {
     override fun onResume() {
         super.onResume()
         covered.value = false
+    }
+
+    // M-TAB-2: Ctrl shortcuts from a hardware keyboard.
+    override fun onKeyShortcut(keyCode: Int, event: KeyEvent): Boolean {
+        val shortcut = Shortcuts.of(keyCode, event.isCtrlPressed) ?: return super.onKeyShortcut(keyCode, event)
+        return viewModel.shortcut(shortcut) || super.onKeyShortcut(keyCode, event)
+    }
+
+    /** Listed in the system's keyboard shortcuts helper (Meta+/). */
+    override fun onProvideKeyboardShortcuts(data: MutableList<KeyboardShortcutGroup>, menu: Menu?, deviceId: Int) {
+        super.onProvideKeyboardShortcuts(data, menu, deviceId)
+        val ctrl = KeyEvent.META_CTRL_ON
+        data.add(
+            KeyboardShortcutGroup(
+                getString(R.string.app_name),
+                listOf(
+                    KeyboardShortcutInfo(getString(R.string.action_import), KeyEvent.KEYCODE_O, ctrl),
+                    KeyboardShortcutInfo(getString(R.string.action_paste), KeyEvent.KEYCODE_V, ctrl),
+                    KeyboardShortcutInfo(getString(R.string.action_examples), KeyEvent.KEYCODE_E, ctrl),
+                    KeyboardShortcutInfo(getString(R.string.action_delete_summary), KeyEvent.KEYCODE_DEL, ctrl),
+                ),
+            ),
+        )
     }
 
     private fun shareSummary(summary: Summary) {

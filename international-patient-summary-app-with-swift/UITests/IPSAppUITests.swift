@@ -22,7 +22,9 @@ final class IPSAppUITests: XCTestCase {
         add(attachment)
     }
 
-    func testTheExamplesOpenAndClear() {
+    /// The phone flow, a stack with Back; the iPad's side-by-side flow is tested below.
+    func testTheExamplesOpenAndClear() throws {
+        guard UIDevice.current.userInterfaceIdiom == .phone else { throw XCTSkip("iPhone only") }
         let app = XCUIApplication()
         app.launch()
 
@@ -74,6 +76,77 @@ final class IPSAppUITests: XCTestCase {
         clear.tap()
         app.alerts.buttons["Clear all"].tap()
         XCTAssertTrue(app.staticTexts["No summaries open"].waitForExistence(timeout: 5))
+    }
+
+    /// M-TAB-1/2: on iPad the list stays beside the open summary, the keyboard works, and Clear all empties both.
+    func testTheListSitsBesideTheSummaryOnIPad() throws {
+        guard UIDevice.current.userInterfaceIdiom == .pad else { throw XCTSkip("iPad only") }
+        XCUIDevice.shared.orientation = .landscapeLeft
+        let app = XCUIApplication()
+        app.launch()
+        XCTAssertTrue(app.staticTexts["Open a summary"].waitForExistence(timeout: 10))
+        // M-TAB-2: ⌘E loads the examples, as the button does.
+        app.typeKey("e", modifierFlags: .command)
+        let table = app.tables["summaries"]
+        XCTAssertTrue(table.cells.element(boundBy: 4).waitForExistence(timeout: 5))
+
+        // Two examples are Martha's; the newest, the IG's Bundle-01, is first.
+        table.cells.element(boundBy: 0).tap()
+        XCTAssertTrue(app.navigationBars["Martha DeLarosa"].waitForExistence(timeout: 5))
+        XCTAssertTrue(table.staticTexts["James Judge"].exists, "the list is still beside the summary")
+        XCTAssertTrue(table.cells.element(boundBy: 0).isSelected, "the open summary's row is selected")
+        assertNoMissingStrings(app)
+        screenshot(app, "ipad-1-beside")
+
+        // Another row replaces the summary; the list does not move.
+        table.staticTexts["James Judge"].tap()
+        XCTAssertTrue(app.navigationBars["James Judge"].waitForExistence(timeout: 5))
+        XCTAssertFalse(app.navigationBars["Martha DeLarosa"].exists)
+
+        // M-TAB-1: deleting the open summary empties its side. (⌘⌫ does the same on a
+        // hardware keyboard, but the simulator does not deliver it to the app: tasks P9-T2.)
+        table.cells.containing(.staticText, identifier: "James Judge").firstMatch.swipeLeft()
+        table.buttons["Delete"].tap()
+        XCTAssertTrue(table.staticTexts["James Judge"].waitForNonExistence(timeout: 5))
+        XCTAssertEqual(table.cells.count, 4)
+        XCTAssertTrue(app.staticTexts["Open a summary"].waitForExistence(timeout: 5))
+        table.cells.element(boundBy: 0).tap()
+        XCTAssertTrue(app.navigationBars["Martha DeLarosa"].waitForExistence(timeout: 5))
+
+        // M-PRIV-3: Clear all leaves no summary in either column.
+        app.buttons["about"].tap()
+        let clear = app.cells["clearAll"]
+        XCTAssertTrue(clear.waitForExistence(timeout: 5))
+        while !clear.isHittable { app.swipeUp() }
+        clear.tap()
+        app.alerts.buttons["Clear all"].tap()
+        XCTAssertTrue(app.staticTexts["No summaries open"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.navigationBars["Martha DeLarosa"].waitForNonExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["Open a summary"].exists)
+        screenshot(app, "ipad-2-cleared")
+    }
+
+    /// M-TAB-1, M-I18N-2: the iPad layout in Arabic, right to left, in both orientations.
+    /// Screenshots are kept for review; no string is missing.
+    func testRightToLeftOnIPad() throws {
+        guard UIDevice.current.userInterfaceIdiom == .pad else { throw XCTSkip("iPad only") }
+        let app = XCUIApplication()
+        app.launchArguments += ["-AppleLanguages", "(ar)", "-AppleLocale", "ar"]
+        for orientation in [UIDeviceOrientation.landscapeLeft, .portrait] {
+            XCUIDevice.shared.orientation = orientation
+            app.launch()
+            let table = app.tables["summaries"]
+            XCTAssertTrue(app.buttons["list.examples"].waitForExistence(timeout: 10))
+            app.buttons["list.examples"].tap()
+            XCTAssertTrue(table.cells.element(boundBy: 4).waitForExistence(timeout: 5))
+            table.cells.element(boundBy: 0).tap()
+            XCTAssertTrue(app.buttons["share"].waitForExistence(timeout: 5))
+            // Right to left: the list is on the right, the summary on the left.
+            XCTAssertGreaterThan(table.frame.midX, app.buttons["share"].frame.midX)
+            assertNoMissingStrings(app)
+            screenshot(app, "ipad-ar-\(orientation == .portrait ? "portrait" : "landscape")")
+            app.terminate()
+        }
     }
 
     /// M-A11Y-2: at the largest accessibility text size, the alert and banner still read in full.

@@ -26,8 +26,13 @@ class FormatTest {
         assertNull(Format.displayOf(null))
     }
 
-    @Test fun statusIsAWordNotAUri() {
-        assertEquals("active", Format.statusOf(json("""{"coding":[{"system":"http://terminology.hl7.org/CodeSystem/condition-clinical","code":"active"}]}""")))
+    @Test fun statusIsTheCodeNotAUri() {
+        assertEquals("active", Format.statusCode(json("""{"coding":[{"system":"http://terminology.hl7.org/CodeSystem/condition-clinical","code":"active"}]}""")))
+        // The code comes first, so the screen can put it in the reader's language (as iOS does).
+        assertEquals("confirmed", Format.statusCode(json("""{"coding":[{"code":"confirmed","display":"Confirmed"}],"text":"Sure"}""")))
+        assertEquals("Confirmed", Format.statusCode(json("""{"coding":[{"display":"Confirmed"}],"text":"Sure"}""")))
+        assertEquals("Sure", Format.statusCode(json("""{"text":"Sure"}""")))
+        assertNull(Format.statusCode(null))
     }
 
     @Test fun systemLabels() {
@@ -54,6 +59,21 @@ class FormatTest {
         assertEquals("11 Dec 2020", Format.date("2020-12-11T14:30:00+01:00", Locale.UK, withTime = false))
         assertEquals("not a date", Format.date("not a date", Locale.UK))
         assertNull(Format.date(null, Locale.UK))
+    }
+
+    @Test fun datesUseTheLanguagesDigits() {
+        // A date uses the same digits as the age beside it, which Android's
+        // plurals write with the locale's own (M-I18N-2): Arabic-Indic in Egypt.
+        for (tag in listOf("ar-EG", "fa", "ar", "en-GB")) {
+            val locale = Locale.forLanguageTag(tag)
+            val zero = String.format(locale, "%d", 0).single()
+            val digits = (zero..zero + 9).toSet()
+            for (value in listOf("1972", "1972-05", "1972-05-01", "2020-12-11T14:30:00+01:00")) {
+                val written = Format.date(value, locale)!!
+                assertTrue("$tag $value -> $written", written.filter { it.isDigit() }.all { it in digits })
+            }
+        }
+        assertTrue(Format.date("1972-05-01", Locale.forLanguageTag("ar-EG"))!!.contains('\u0661'))
     }
 
     @Test fun agesAreWholeYearsAndNeverGuessed() {

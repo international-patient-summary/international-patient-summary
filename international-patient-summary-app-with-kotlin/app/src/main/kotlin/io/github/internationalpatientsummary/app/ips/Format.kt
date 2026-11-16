@@ -9,9 +9,11 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.OffsetDateTime
 import java.time.Period
+import java.time.Year
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeParseException
+import java.time.format.DecimalStyle
 import java.time.format.FormatStyle
 import java.util.Locale
 
@@ -57,13 +59,17 @@ object Format {
         return if (system != null) "${systemLabel(system)}|$code" else code
     }
 
-    /** A status concept in words: display, then text, then the bare code ("active"). */
-    fun statusOf(concept: JsonElement?): String? {
+    /**
+     * The code of a status concept (`clinicalStatus`, `verificationStatus`), such
+     * as "active", which the screen puts in words (M-VIEW-7); falls back to the
+     * display, then `text`. The same order as the iOS app's `statusCode`.
+     */
+    fun statusCode(concept: JsonElement?): String? {
         if (concept == null) return null
         val codings = concept.list("coding")
-        return codings.firstNotNullOfOrNull { it.text("display") }
+        return codings.firstNotNullOfOrNull { it.text("code") }
+            ?: codings.firstNotNullOfOrNull { it.text("display") }
             ?: concept.text("text")
-            ?: codings.firstNotNullOfOrNull { it.text("code") }
     }
 
     /** The name to show: official, then usual, then any current; text, else parts. */
@@ -104,9 +110,9 @@ object Format {
         if (value.isNullOrBlank()) return null
         return try {
             when {
-                YEAR.matches(value) -> value
+                YEAR.matches(value) -> Year.parse(value).format(digits(DateTimeFormatter.ofPattern("y", locale), locale))
                 YEAR_MONTH.matches(value) ->
-                    YearMonth.parse(value).format(DateTimeFormatter.ofPattern("MMM yyyy", locale))
+                    YearMonth.parse(value).format(digits(DateTimeFormatter.ofPattern("MMM yyyy", locale), locale))
                 FULL_DATE.matches(value) -> LocalDate.parse(value).format(mediumDate(locale))
                 else -> {
                     val parsed = try {
@@ -115,7 +121,7 @@ object Format {
                         LocalDateTime.parse(value)
                     }
                     if (withTime) {
-                        parsed.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT).withLocale(locale))
+                        parsed.format(digits(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT).withLocale(locale), locale))
                     } else {
                         parsed.toLocalDate().format(mediumDate(locale))
                     }
@@ -126,7 +132,14 @@ object Format {
         }
     }
 
-    private fun mediumDate(locale: Locale) = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).withLocale(locale)
+    private fun mediumDate(locale: Locale) = digits(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).withLocale(locale), locale)
+
+    /**
+     * The language's own digits (Arabic-Indic for Arabic), as the age beside a
+     * date already has them (M-I18N-2). java.time writes ASCII digits unless told.
+     */
+    private fun digits(formatter: DateTimeFormatter, locale: Locale): DateTimeFormatter =
+        formatter.withDecimalStyle(DecimalStyle.of(locale))
 
     /** Age in whole years on [today], or null for a partial, missing or future birth date. */
     fun ageInYears(birthDate: String?, today: LocalDate): Int? {

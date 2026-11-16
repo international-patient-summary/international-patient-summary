@@ -24,6 +24,12 @@ android {
         }
     }
 
+    // Android 13+ lists the app's languages in Settings (per-app language), from
+    // the values-* folders and res/resources.properties (spec M-I18N-1).
+    androidResources {
+        generateLocaleConfig = true
+    }
+
     buildFeatures {
         compose = true
         buildConfig = true

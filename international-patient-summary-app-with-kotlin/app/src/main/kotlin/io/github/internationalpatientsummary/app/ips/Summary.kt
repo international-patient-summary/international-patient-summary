@@ -65,5 +65,9 @@ sealed interface Entry {
 
 enum class DetailKind { STATUS, CRITICALITY, REACTIONS, DOSAGE, DATE, VALUE, INTERPRETATION }
 
-/** A detail line. DATE values are FHIR dates, written by the screen in its locale. */
-data class Detail(val kind: DetailKind, val value: String)
+/**
+ * A detail line. DATE values are FHIR dates, written by the screen in its
+ * locale. STATUS and CRITICALITY values are FHIR codes, one per [codes] entry,
+ * which the screen puts in words where it knows them (M-VIEW-7).
+ */
+data class Detail(val kind: DetailKind, val value: String, val codes: List<String> = listOf(value))

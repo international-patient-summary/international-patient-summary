@@ -6,10 +6,22 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.net.Uri
 import android.provider.OpenableColumns
+import androidx.activity.compose.LocalActivity
+import androidx.compose.foundation.draganddrop.dragAndDropTarget
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.draganddrop.DragAndDropEvent
+import androidx.compose.ui.draganddrop.DragAndDropTarget
+import androidx.compose.ui.draganddrop.mimeTypes
+import androidx.compose.ui.draganddrop.toAndroidDragEvent
+import androidx.compose.ui.graphics.Color
+import io.github.internationalpatientsummary.app.Drops
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -22,6 +34,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
@@ -71,14 +85,14 @@ val EXAMPLES = listOf(
     "IPS-examples-Bundle-with-immunization.json",
 )
 
-@OptIn(ExperimentalMaterial3Api::class)
+/** The three ways to open a summary, for the buttons and the keyboard (M-LOAD-*, M-TAB-2). */
 @Composable
-fun SummariesScreen(viewModel: AppViewModel) {
+fun rememberOpenActions(viewModel: AppViewModel): OpenActions {
     val context = LocalContext.current
     val pick = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
         if (uri != null) viewModel.open { readDocument(context, uri) }
     }
-    val actions = OpenActions(
+    return OpenActions(
         onImport = { pick.launch(arrayOf("application/json", "*/*")) },
         onPaste = { paste(context, viewModel) },
         onExamples = {
@@ -87,6 +101,12 @@ fun SummariesScreen(viewModel: AppViewModel) {
             }
         },
     )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun SummariesScreen(viewModel: AppViewModel, actions: OpenActions, selected: Long? = null) {
+    val drop = rememberDropTarget(viewModel)
     Scaffold(
         topBar = {
             TopAppBar(
@@ -99,7 +119,13 @@ fun SummariesScreen(viewModel: AppViewModel) {
             )
         },
     ) { padding ->
-        Column(Modifier.padding(padding).fillMaxSize()) {
+        Column(
+            Modifier
+                .padding(padding)
+                .fillMaxSize()
+                .background(if (drop.hovering) MaterialTheme.colorScheme.secondaryContainer else Color.Transparent)
+                .dragAndDropTarget(shouldStartDragAndDrop = { Drops.accepts(it.mimeTypes().toList()) }, target = drop),
+        ) {
             if (viewModel.busy) {
                 val busy = stringResource(R.string.busy)
                 LinearProgressIndicator(Modifier.fillMaxWidth().semantics { contentDescription = busy })
@@ -112,6 +138,7 @@ fun SummariesScreen(viewModel: AppViewModel) {
                     items(viewModel.summaries, key = { it.id }) { summary ->
                         SummaryRow(
                             summary = summary,
+                            selected = summary.id == selected,
                             onOpen = { viewModel.show(Screen.Open(summary.id)) },
                             onDelete = { viewModel.delete(summary.id) },
                         )
@@ -123,7 +150,64 @@ fun SummariesScreen(viewModel: AppViewModel) {
     }
 }
 
-private class OpenActions(val onImport: () -> Unit, val onPaste: () -> Unit, val onExamples: () -> Unit)
+/**
+ * M-TAB-3: a JSON file or text dropped from another app (split screen, desktop
+ * windows) opens through the same check as Import and Paste. A file is read
+ * under the drop's temporary permission, which is released once read.
+ */
+@Composable
+private fun rememberDropTarget(viewModel: AppViewModel): DropTarget {
+    val context = LocalContext.current
+    val activity = LocalActivity.current
+    return remember(viewModel, activity) {
+        DropTarget { event ->
+            val drag = event.toAndroidDragEvent()
+            val clip = drag.clipData?.takeIf { it.itemCount == 1 } ?: return@DropTarget false
+            val item = clip.getItemAt(0)
+            val uri = item.uri
+            if (uri != null) {
+                val permissions = activity?.requestDragAndDropPermissions(drag)
+                viewModel.open {
+                    try {
+                        readDocument(context, uri)
+                    } finally {
+                        permissions?.release()
+                    }
+                }
+            } else {
+                val text = item.coerceToText(context)?.toString().orEmpty()
+                if (text.isEmpty()) return@DropTarget false
+                viewModel.open { text.toByteArray(Charsets.UTF_8) }
+            }
+            true
+        }
+    }
+}
+
+/** Shows that a drop is welcome while something hovers over the list. */
+private class DropTarget(private val drop: (DragAndDropEvent) -> Boolean) : DragAndDropTarget {
+    var hovering by mutableStateOf(false)
+        private set
+
+    override fun onEntered(event: DragAndDropEvent) {
+        hovering = true
+    }
+
+    override fun onExited(event: DragAndDropEvent) {
+        hovering = false
+    }
+
+    override fun onEnded(event: DragAndDropEvent) {
+        hovering = false
+    }
+
+    override fun onDrop(event: DragAndDropEvent): Boolean {
+        hovering = false
+        return drop(event)
+    }
+}
+
+class OpenActions(val onImport: () -> Unit, val onPaste: () -> Unit, val onExamples: () -> Unit)
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -141,7 +225,8 @@ private fun ActionRow(actions: OpenActions, modifier: Modifier = Modifier) {
 
 @Composable
 private fun Empty(actions: OpenActions) {
-    Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+    // Scrolls, so the buttons stay reachable in a short window or at a large font scale.
+    Column(Modifier.verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         Text(
             stringResource(R.string.empty_title),
             style = MaterialTheme.typography.titleLarge,
@@ -154,7 +239,7 @@ private fun Empty(actions: OpenActions) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun SummaryRow(summary: Summary, onOpen: () -> Unit, onDelete: () -> Unit) {
+private fun SummaryRow(summary: Summary, selected: Boolean, onOpen: () -> Unit, onDelete: () -> Unit) {
     val locale = currentLocale()
     val name = summary.listTitle ?: stringResource(R.string.list_untitled)
     val deleteLabel = stringResource(R.string.action_delete_named, name)
@@ -171,10 +256,14 @@ private fun SummaryRow(summary: Summary, onOpen: () -> Unit, onDelete: () -> Uni
             }
         },
     ) {
+        // The open summary's row (M-TAB-1): a container colour with its paired text colour.
+        val background = if (selected) MaterialTheme.colorScheme.secondaryContainer else MaterialTheme.colorScheme.surface
+        val foreground = if (selected) MaterialTheme.colorScheme.onSecondaryContainer else MaterialTheme.colorScheme.onSurface
+        val quiet = if (selected) MaterialTheme.colorScheme.onSecondaryContainer else MaterialTheme.colorScheme.onSurfaceVariant
         Row(
             Modifier
                 .fillMaxWidth()
-                .background(MaterialTheme.colorScheme.surface)
+                .background(background)
                 .heightIn(min = 72.dp)
                 .padding(start = 16.dp, end = 4.dp, top = 8.dp, bottom = 8.dp),
             verticalAlignment = Alignment.CenterVertically,
@@ -182,19 +271,19 @@ private fun SummaryRow(summary: Summary, onOpen: () -> Unit, onDelete: () -> Uni
             Column(
                 Modifier
                     .weight(1f)
-                    .clickable(onClick = onOpen)
+                    .selectable(selected = selected, onClick = onOpen)
                     .semantics(mergeDescendants = true) {
                         customActions = listOf(CustomAccessibilityAction(deleteLabel) { onDelete(); true })
                     },
             ) {
-                Text(name, style = MaterialTheme.typography.titleMedium)
-                summary.document.title?.let { Text(it, style = MaterialTheme.typography.bodyMedium) }
+                Text(name, style = MaterialTheme.typography.titleMedium, color = foreground)
+                summary.document.title?.let { Text(it, style = MaterialTheme.typography.bodyMedium, color = foreground) }
                 Format.date(summary.document.date, locale, withTime = false)?.let {
-                    Text(it, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text(it, style = MaterialTheme.typography.bodyMedium, color = quiet)
                 }
             }
             IconButton(onClick = onDelete) {
-                Icon(Icons.Filled.Delete, contentDescription = deleteLabel)
+                Icon(Icons.Filled.Delete, contentDescription = deleteLabel, tint = foreground)
             }
         }
     }

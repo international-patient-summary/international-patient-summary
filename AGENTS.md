@@ -8,12 +8,13 @@ project.
 
 | Folder                                            | What                                                                                  | Rules                                                         |
 | ------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
-| `locales/<code>/index.md`                         | The one-page IPS introduction, in 45 locales                                          | Content; the website vendors it                               |
+| `locales/<code>/index.md`                         | The one-page IPS introduction, in 116 locales                                         | Content; the website vendors it                               |
 | `international-patient-summary.github.io/`        | The website (SvelteKit 3, Lily Design System, GitHub Pages), published by `bin/publish` | its `README.md`                                             |
 | `international-patient-summary-ui-with-svelte/`   | The viewer, the **frontend** (Svelte 5, SvelteKit 3, Lily), with a backendless tour   | [its AGENTS.md](international-patient-summary-ui-with-svelte/AGENTS.md)   |
-| `international-patient-summary-service-with-axum/` | The service, the **backend** (Rust, Axum, Axa 0.13, sqlx, Postgres)                  | [its AGENTS.md](international-patient-summary-service-with-axum/AGENTS.md) |
+| `international-patient-summary-service-with-axum/` | The service, the **backend** (Rust, Axum, Axa 0.15, sqlx, Postgres)                  | [its AGENTS.md](international-patient-summary-service-with-axum/AGENTS.md) |
 | `international-patient-summary-app-with-swift/`   | The iOS app (Swift, UIKit in code, no SwiftUI)                                         | [its AGENTS.md](international-patient-summary-app-with-swift/AGENTS.md)   |
 | `international-patient-summary-app-with-kotlin/`  | The Android app (Kotlin, Jetpack Compose)                                              | [its AGENTS.md](international-patient-summary-app-with-kotlin/AGENTS.md)  |
+| `international-patient-summary-app-translations/` | Both mobile apps' translations (65 languages) and the script that writes them in       | [its README.md](international-patient-summary-app-translations/README.md) |
 | `spec/`                                           | Cross-project specifications (GitHub Discussions, locales)                            |                                                               |
 
 ## Rules for every project
@@ -25,7 +26,10 @@ project.
   the viewer's spec §6.8 (`src/lib/service/`). Change them together.
 - One IPS check everywhere: the service's S-API-2, the viewer's
   `checkIps`, and both mobile apps' M-CHECK-1 (same order, codes, pointers).
-- The two mobile apps share spec §1–§7 word for word; change both.
+- The two mobile apps share spec §1–§7 word for word; change both. Their
+  translations live in `international-patient-summary-app-translations/`:
+  after an English string changes, run `translations.py source`, add the
+  string to every `languages/*.json` (`missing` lists them), then `generate`.
 - Patient data is never persisted or sent anywhere it was not asked to go, and
   never logged. The tour uses only published, fictional examples.
 - Supply chain: Cargo enforces a two-day minimum publish age, and pnpm a

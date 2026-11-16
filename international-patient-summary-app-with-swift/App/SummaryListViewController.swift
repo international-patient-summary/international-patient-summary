@@ -3,7 +3,7 @@ import UIKit
 import UniformTypeIdentifiers
 
 /// Home (spec §4.1): the open summaries, and the three ways to open one.
-final class SummaryListViewController: UITableViewController, UIDocumentPickerDelegate {
+final class SummaryListViewController: UITableViewController, UIDocumentPickerDelegate, UITableViewDropDelegate {
     private let store: SummaryStore
     private var observer: (any NSObjectProtocol)?
 
@@ -18,6 +18,8 @@ final class SummaryListViewController: UITableViewController, UIDocumentPickerDe
         super.viewDidLoad()
         title = L10n.text("list.title")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "summary")
+        tableView.accessibilityIdentifier = "summaries"
+        tableView.dropDelegate = self
         let openMenu = UIMenu(children: [
             UIAction(title: L10n.text("list.import"), image: UIImage(systemName: "doc")) { [weak self] _ in
                 self?.importFile()
@@ -49,8 +51,33 @@ final class SummaryListViewController: UITableViewController, UIDocumentPickerDe
         reload()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        clearsSelectionOnViewWillAppear = splitViewController?.isCollapsed ?? true
+    }
+
+    // M-TAB-2: ⌘⌫ deletes the open summary. Declared here, not on the split view, because
+    // the table takes the Delete key before it would reach the split view.
+    override var keyCommands: [UIKeyCommand]? {
+        guard let split = splitViewController as? SplitViewController, split.shownID != nil else { return nil }
+        let delete = UIKeyCommand(
+            title: L10n.text("list.delete"), action: #selector(deleteShown), input: UIKeyCommand.inputDelete,
+            modifierFlags: .command, attributes: .destructive)
+        delete.wantsPriorityOverSystemBehavior = true
+        // The same key as DEL, which some keyboards and the simulator send; not listed twice.
+        let del = UIKeyCommand(action: #selector(deleteShown), input: "\u{7F}", modifierFlags: .command)
+        del.wantsPriorityOverSystemBehavior = true
+        return [delete, del]
+    }
+
+    @objc private func deleteShown() { (splitViewController as? SplitViewController)?.deleteShown() }
+
+    /// The split view collapsed or expanded.
+    func layoutChanged() { reload() }
+
     private func reload() {
         tableView.reloadData()
+        selectShown()
         guard store.documents.isEmpty else {
             tableView.backgroundView = nil
             return
@@ -73,7 +100,7 @@ final class SummaryListViewController: UITableViewController, UIDocumentPickerDe
 
     // MARK: Opening (M-LOAD-1, M-LOAD-2, M-LOAD-3)
 
-    private func importFile() {
+    func importFile() {
         let picker = UIDocumentPickerViewController(forOpeningContentTypes: [.json], asCopy: true)
         picker.delegate = self
         picker.allowsMultipleSelection = false
@@ -84,21 +111,53 @@ final class SummaryListViewController: UITableViewController, UIDocumentPickerDe
         guard let url = urls.first else { return }
         let scoped = url.startAccessingSecurityScopedResource()
         defer { if scoped { url.stopAccessingSecurityScopedResource() } }
-        // M-CHECK-2: refuse an oversized file before reading it.
-        if let size = try? url.resourceValues(forKeys: [.fileSizeKey]).fileSize, size > maximumDocumentBytes {
-            show(.tooLarge)
-            return
-        }
-        guard let data = try? Data(contentsOf: url) else {
-            alert(title: L10n.text("import.unreadable"), message: nil)
-            return
-        }
-        open(data)
+        open(readDocumentFile(at: url))
         // The picker's copy is ours to remove; the summary now lives in memory only.
         try? FileManager.default.removeItem(at: url)
     }
 
-    private func paste() {
+    /// A file's bytes, or why not (M-CHECK-2: an oversized file is refused before it is read).
+    private func open(_ file: Result<Data, DocumentFileProblem>) {
+        switch file {
+        case .success(let data): open(data)
+        case .failure(.refused(let refusal)): show(refusal)
+        case .failure(.unreadable): alert(title: L10n.text("import.unreadable"), message: nil)
+        }
+    }
+
+    // MARK: Drop (M-TAB-3): a JSON file or text from another app, through the same check.
+
+    func tableView(_ tableView: UITableView, canHandle session: any UIDropSession) -> Bool {
+        session.items.count == 1
+            && session.hasItemsConforming(toTypeIdentifiers: [UTType.json.identifier, UTType.plainText.identifier])
+    }
+
+    func tableView(
+        _ tableView: UITableView, dropSessionDidUpdate session: any UIDropSession,
+        withDestinationIndexPath destinationIndexPath: IndexPath?
+    ) -> UITableViewDropProposal {
+        UITableViewDropProposal(operation: .copy, intent: .unspecified)
+    }
+
+    func tableView(_ tableView: UITableView, performDropWith coordinator: any UITableViewDropCoordinator) {
+        guard let provider = coordinator.session.items.first?.itemProvider else { return }
+        if provider.hasItemConformingToTypeIdentifier(UTType.json.identifier) {
+            // The system's copy of the file lasts only for this handler, so it is read here.
+            _ = provider.loadFileRepresentation(for: .json) { [weak self] url, _, _ in
+                let file: Result<Data, DocumentFileProblem> = url.map { readDocumentFile(at: $0) } ?? .failure(.unreadable)
+                Task { @MainActor in self?.open(file) }
+            }
+        } else {
+            _ = provider.loadObject(ofClass: String.self) { [weak self] text, _ in
+                let data = text.map { Data($0.utf8) }
+                Task { @MainActor in
+                    if let data { self?.open(data) } else { self?.alert(title: L10n.text("import.unreadable"), message: nil) }
+                }
+            }
+        }
+    }
+
+    func paste() {
         guard let text = UIPasteboard.general.string else {
             alert(title: L10n.text("paste.empty"), message: nil)
             return
@@ -106,7 +165,7 @@ final class SummaryListViewController: UITableViewController, UIDocumentPickerDe
         open(Data(text.utf8))
     }
 
-    private func loadExamples() {
+    func loadExamples() {
         for data in Examples.data() {
             if case .failure(let refusal) = store.open(data) { show(refusal) }
         }
@@ -120,7 +179,20 @@ final class SummaryListViewController: UITableViewController, UIDocumentPickerDe
     }
 
     private func show(_ document: Document) {
-        navigationController?.pushViewController(SummaryViewController(document: document), animated: true)
+        if let split = splitViewController as? SplitViewController {
+            split.show(document)
+            selectShown()
+        } else {
+            navigationController?.pushViewController(SummaryViewController(document: document), animated: true)
+        }
+    }
+
+    /// Beside the open summary (M-TAB-1), its row stays selected.
+    private func selectShown() {
+        guard let split = splitViewController as? SplitViewController, !split.isCollapsed,
+            let row = store.documents.firstIndex(where: { $0.id == split.shownID })
+        else { return }
+        tableView.selectRow(at: IndexPath(row: row, section: 0), animated: false, scrollPosition: .none)
     }
 
     /// M-LIST-3: the problem in words, and its code; the list is unchanged.
@@ -154,12 +226,12 @@ final class SummaryListViewController: UITableViewController, UIDocumentPickerDe
         content.secondaryTextProperties.numberOfLines = 0
         content.secondaryTextProperties.color = .secondaryLabel
         cell.contentConfiguration = content
-        cell.accessoryType = .disclosureIndicator
+        cell.accessoryType = splitViewController?.isCollapsed ?? true ? .disclosureIndicator : .none
         return cell
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        if splitViewController?.isCollapsed ?? true { tableView.deselectRow(at: indexPath, animated: true) }
         show(store.documents[indexPath.row])
     }
 

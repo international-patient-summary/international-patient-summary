@@ -16,6 +16,8 @@
     <string name="empty_title">No summaries open</string>
     <string name="empty_body">Open an International Patient Summary: import a FHIR JSON file, paste one you have copied, or load the five examples. Summaries stay in memory on this phone only.</string>
     <string name="list_untitled">Untitled summary</string>
+    <!-- Beside the list on a wide screen (M-TAB-1), before a summary is chosen. -->
+    <string name="detail_placeholder">Open a summary</string>
     <string name="busy">Opening…</string>
     <string name="row_delete_background">Delete</string>
 
@@ -70,6 +72,8 @@
     <string name="narrative_show">Show document text</string>
     <string name="narrative_hide">Hide document text</string>
     <string name="detail_line">%1$s: %2$s</string>
+    <!-- Two items in a list, such as a clinical and a verification status. -->
+    <string name="list_pair">%1$s, %2$s</string>
     <string name="detail_status">Status</string>
     <string name="detail_criticality">Criticality</string>
     <string name="detail_reactions">Reactions</string>
@@ -77,9 +81,42 @@
     <string name="detail_date">Date</string>
     <string name="detail_value">Value</string>
     <string name="detail_interpretation">Interpretation</string>
-    <string name="criticality_high">High</string>
-    <string name="criticality_low">Low</string>
-    <string name="criticality_unable_to_assess">Unable to assess</string>
+    <!-- FHIR status, verification, type and criticality codes in words (M-VIEW-7);
+         a code not listed here is shown as the document wrote it. -->
+    <string name="code_active">Active</string>
+    <string name="code_allergy">Allergy</string>
+    <string name="code_amended">Amended</string>
+    <string name="code_cancelled">Cancelled</string>
+    <string name="code_completed">Completed</string>
+    <string name="code_confirmed">Confirmed</string>
+    <string name="code_corrected">Corrected</string>
+    <string name="code_differential">Differential</string>
+    <string name="code_draft">Draft</string>
+    <string name="code_entered_in_error">Entered in error</string>
+    <string name="code_final">Final</string>
+    <string name="code_high">High</string>
+    <string name="code_in_progress">In progress</string>
+    <string name="code_inactive">Inactive</string>
+    <string name="code_intended">Intended</string>
+    <string name="code_intolerance">Intolerance</string>
+    <string name="code_low">Low</string>
+    <string name="code_not_done">Not done</string>
+    <string name="code_not_taken">Not taken</string>
+    <string name="code_on_hold">On hold</string>
+    <string name="code_preliminary">Preliminary</string>
+    <string name="code_preparation">Preparation</string>
+    <string name="code_presumed">Presumed</string>
+    <string name="code_provisional">Provisional</string>
+    <string name="code_recurrence">Recurrence</string>
+    <string name="code_refuted">Refuted</string>
+    <string name="code_registered">Registered</string>
+    <string name="code_relapse">Relapse</string>
+    <string name="code_remission">Remission</string>
+    <string name="code_resolved">Resolved</string>
+    <string name="code_stopped">Stopped</string>
+    <string name="code_unable_to_assess">Unable to assess</string>
+    <string name="code_unconfirmed">Unconfirmed</string>
+    <string name="code_unknown">Unknown</string>
 
     <string name="section_allergies">Allergies and intolerances</string>
     <string name="section_medications">Medications</string>

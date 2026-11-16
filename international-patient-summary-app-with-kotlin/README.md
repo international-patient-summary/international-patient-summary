@@ -74,7 +74,8 @@ app/src/main/kotlin/io/github/internationalpatientsummary/app/
   ui/         Compose screens: Summaries, Summary, About
   MainActivity.kt, AppViewModel.kt, SummaryStore.kt, ShareFiles.kt
 app/src/main/assets/examples/   the five IG examples
-app/src/main/res/values/strings.xml   every interface string
+app/src/main/res/values/strings.xml   every interface string (English)
+app/src/main/res/values-*/            the same strings in 65 languages
 app/src/test/                  JVM unit tests and fixtures
 gradle/libs.versions.toml      every version, each at least two days old when adopted
 spec/                          the specification, one file per section

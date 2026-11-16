@@ -67,8 +67,11 @@ final class SummaryViewController: UITableViewController {
 
         // M-VIEW-3: Composition order, then the missing required sections.
         for (index, section) in document.sections.enumerated() {
-            blocks.append(
-                Block(header: section.title ?? L10n.sectionTitle(section.key), rows: rows(section, index)))
+            // M-VIEW-3: the app's name for a known section; the document's own title beneath it.
+            let header = section.key.map { L10n.sectionTitle($0) } ?? section.title ?? L10n.sectionTitle(nil)
+            var rows = rows(section, index)
+            if section.key != nil, let title = section.title, title != header { rows.insert(.note(title), at: 0) }
+            blocks.append(Block(header: header, rows: rows))
         }
         self.blocks = blocks
     }

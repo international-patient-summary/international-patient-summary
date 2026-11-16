@@ -9,7 +9,7 @@ object EntryReader {
     fun read(resource: JsonObject, index: BundleIndex, absent: SectionState?): Entry.Resolved {
         val type = resource.string("resourceType") ?: ""
         val details = buildList {
-            status(resource)?.let { add(Detail(DetailKind.STATUS, it)) }
+            status(resource).takeIf { it.isNotEmpty() }?.let { add(Detail(DetailKind.STATUS, it.joinToString(", "), it)) }
             if (type == "AllergyIntolerance") {
                 resource.text("criticality")?.let { add(Detail(DetailKind.CRITICALITY, it)) }
                 val reactions = resource.list("reaction").flatMap { it.list("manifestation") }.mapNotNull { Format.displayOf(it) }
@@ -39,13 +39,13 @@ object EntryReader {
             ?: resource.list("category").firstNotNullOfOrNull { Format.displayOf(it) }
     }
 
-    private fun status(resource: JsonElement): String? {
+    /** Clinical then verification status codes, else the resource's own status code. */
+    private fun status(resource: JsonElement): List<String> {
         val coded = listOfNotNull(
-            Format.statusOf(resource.field("clinicalStatus")),
-            Format.statusOf(resource.field("verificationStatus")),
+            Format.statusCode(resource.field("clinicalStatus")),
+            Format.statusCode(resource.field("verificationStatus")),
         )
-        if (coded.isNotEmpty()) return coded.joinToString(", ")
-        return resource.text("status")
+        return coded.ifEmpty { listOfNotNull(resource.text("status")) }
     }
 
     private fun dosage(resource: JsonElement, type: String): String? {

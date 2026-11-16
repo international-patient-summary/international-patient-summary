@@ -56,7 +56,7 @@ import java.time.LocalDate
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SummaryScreen(summary: Summary, onBack: () -> Unit, onShare: () -> Unit, onDelete: () -> Unit) {
+fun SummaryScreen(summary: Summary, onBack: (() -> Unit)?, onShare: () -> Unit, onDelete: () -> Unit) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -69,8 +69,11 @@ fun SummaryScreen(summary: Summary, onBack: () -> Unit, onShare: () -> Unit, onD
                     )
                 },
                 navigationIcon = {
-                    IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.action_back))
+                    // Beside the list (M-TAB-1) there is nothing to go back to.
+                    if (onBack != null) {
+                        IconButton(onClick = onBack) {
+                            Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.action_back))
+                        }
                     }
                 },
                 actions = {
@@ -193,7 +196,12 @@ private fun SectionCard(section: Section) {
     Card(Modifier.fillMaxWidth()) {
         Column(Modifier.padding(vertical = 16.dp)) {
             Column(Modifier.padding(horizontal = 16.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                Heading(sectionTitleText(section))
+                val heading = sectionTitleText(section)
+                Heading(heading)
+                // M-VIEW-3: the document's own title, as written, when it differs from the app's name.
+                section.documentTitle?.takeIf { section.key != null && it != heading }?.let {
+                    Text(it, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                }
                 stateText(section.state)?.let {
                     Text(
                         stringResource(it),
@@ -264,6 +272,7 @@ private fun EntryRow(entry: Entry) {
 @Composable
 private fun detailValue(detail: Detail, locale: java.util.Locale): String = when (detail.kind) {
     DetailKind.DATE -> Format.date(detail.value, locale) ?: detail.value
-    DetailKind.CRITICALITY -> criticalityText(detail.value)
+    DetailKind.STATUS, DetailKind.CRITICALITY ->
+        detail.codes.map { codeText(it) }.reduce { first, second -> stringResource(R.string.list_pair, first, second) }
     else -> detail.value
 }

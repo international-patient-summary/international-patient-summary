@@ -14,11 +14,11 @@ is not Android, so it is tested on the JVM without an emulator. Proven by
 
 ## Phase 2 — Translations
 
-The web viewer's four locales (en-US, en-GB, cy-001, zh-CN) as
-`values-*/strings.xml`, with the same review rule (a clinician who reads the
-language checks every string before release), and `locales_config.xml` so
-Android 13's per-app language setting offers them. Welsh plurals need all
-six quantities.
+Every language of the repository's `locales/` folder (spec M-I18N-2) as
+`values-*/strings.xml`, machine-translated first, with the same review rule
+(a clinician who reads the language checks every string before release),
+and a generated locale config so Android 13's per-app language setting
+offers them. Welsh and Arabic plurals need all six quantities.
 
 ## Phase 3 — Open from other apps
 
@@ -58,3 +58,9 @@ and a clinical-safety review.
 
 Open from and save to `international-patient-summary-service-with-axum` once
 it has authentication (its P3); the same API contract (its spec §4).
+
+## Phase 9 — Tablets
+
+The list beside the open summary in a wide window (spec M-TAB-1), then a
+hardware keyboard's shortcuts and dropping a file onto the list, each
+through the same check as every other way in. Phone behaviour is unchanged.

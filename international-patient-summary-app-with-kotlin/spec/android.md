@@ -19,7 +19,7 @@ Every version was published at least two days before it was adopted
 | JVM            | Java and Kotlin bytecode 21; builds on JDK 21 or later                   |
 | Tests          | JUnit 4.13.2 on the JVM (`testDebugUnitTest`)                            |
 | Lint           | `lintDebug`, warnings are errors; version-freshness checks off (age rule) |
-| Strings        | `app/src/main/res/values/strings.xml` (English), plurals for counts     |
+| Strings        | `res/values/strings.xml` (English) and 65 `values-*/` folders (M-I18N-2), plurals for counts; `generateLocaleConfig` for Android 13's per-app language |
 
 ## 8.2 Architecture
 
@@ -40,13 +40,14 @@ app/src/main/kotlin/io/github/internationalpatientsummary/app/
     Format.kt            M-VIEW-7: displayOf, statusOf, names, dates, ages, quantities
     Narrative.kt         M-VIEW-6: narrative as plain text
   ui/                    Jetpack Compose screens; lay out what the core read
-    App.kt               state-driven navigation, BackHandler, refusal alert, privacy cover
+    App.kt               state-driven navigation, two panes at 840 dp (M-TAB-1), BackHandler, refusal alert, privacy cover
     SummariesScreen.kt   §4.1: list, import, paste, examples
     SummaryScreen.kt     §4.2: alert, banner, document, sections
     AboutScreen.kt       §4.3: safety, privacy, versions, Clear all
-    Words.kt             model values -> string resources
+    Words.kt             model values -> string resources; CODE_WORDS (M-VIEW-7)
     Theme.kt             Material 3, light/dark from the system, dynamic colour
-  MainActivity.kt        M-PRIV-2, share sheet, removes leftover share files
+  MainActivity.kt        M-PRIV-2, share sheet, removes leftover share files, keyboard shortcuts (M-TAB-2)
+  Shortcuts.kt           M-TAB-2: Ctrl+key to action, no android.* imports
   AppViewModel.kt        Screen state, open/examples/delete/clear
   SummaryStore.kt        in-memory store (M-PRIV-1)
   ShareFiles.kt          M-SHARE-1: cacheDir/share/ via FileProvider
@@ -93,5 +94,10 @@ the summaries are gone when the process ends.
   action as well as the swipe and a Delete button with the same name; icon buttons carry
   content descriptions; touch targets are at least 48 dp; text uses `sp`
   through Material typography, so it follows the font scale.
+- **Language folders** (M-I18N-2): Hebrew and Indonesian use the old codes
+  `values-iw` and `values-in`, as `java.util.Locale` still does (lint
+  `LocaleFolder`); three-letter and script codes use the `b+` form
+  (`values-b+bho`, `values-b+zh+Hans`). `res/resources.properties` names
+  `values/` as en-US.
 - **Dates**: a FHIR dateTime is written at the document's own offset, not
   converted to the phone's time zone, so it reads as the document wrote it.
