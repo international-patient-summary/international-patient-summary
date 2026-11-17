@@ -197,7 +197,7 @@ Dim cofnodion strwythuredig. Gweler y naratif o'r ddogfen.
 
 | Brechlyn | Dyddiad | Dos | Statws | Rhif swp | Codau |
 | --- | --- | --- | --- | --- | --- |
-| Bordetella pertussis and Clostridium tetani and Corynebacterium diphtheriae and Human poliovirus antigens only vaccine product | 3 Meh 1998, 23:00 | Dos 1 | Wedi'i gwblhau | AXK23RWERS | SNOMED CT 871878002 · ATC J07CA02 |
+| Bordetella pertussis and Clostridium tetani and Corynebacterium diphtheriae and Human poliovirus antigens only vaccine product | 3 Meh 1998, 22:00 | Dos 1 | Wedi'i gwblhau | AXK23RWERS | SNOMED CT 871878002 · ATC J07CA02 |
 
 **Naratif:**
 
@@ -345,9 +345,9 @@ exports[`Markdown export > matches the snapshot for every fixture in cy-001 > bu
 
 | Prawf neu arsylwad | Canlyniad | Dyddiad | Codau |
 | --- | --- | --- | --- |
-| Body weight | 91.5 kg | 10 Ebr 2024, 10:58 | LOINC 29463-7 |
-| Body mass index (BMI) \\[Ratio\\] | 24.56 kg/m2 | 10 Ebr 2024, 10:58 | LOINC 39156-5 |
-| Blood pressure panel with all children optional | Systolic blood pressure: 140 mmHg; Diastolic blood pressure: 80 mmHg | 30 Awst 2024, 09:32 | LOINC 85354-9 |
+| Body weight | 91.5 kg | 10 Ebr 2024, 09:58 | LOINC 29463-7 |
+| Body mass index (BMI) \\[Ratio\\] | 24.56 kg/m2 | 10 Ebr 2024, 09:58 | LOINC 39156-5 |
+| Blood pressure panel with all children optional | Systolic blood pressure: 140 mmHg; Diastolic blood pressure: 80 mmHg | 30 Awst 2024, 08:32 | LOINC 85354-9 |
 
 **Naratif:**
 
@@ -783,7 +783,7 @@ No structured entries. See the narrative from the document.
 
 | Vaccine | Date | Dose | Status | Lot number | Codes |
 | --- | --- | --- | --- | --- | --- |
-| Bordetella pertussis and Clostridium tetani and Corynebacterium diphtheriae and Human poliovirus antigens only vaccine product | 3 Jun 1998, 23:00 | Dose 1 | Completed | AXK23RWERS | SNOMED CT 871878002 · ATC J07CA02 |
+| Bordetella pertussis and Clostridium tetani and Corynebacterium diphtheriae and Human poliovirus antigens only vaccine product | 3 Jun 1998, 22:00 | Dose 1 | Completed | AXK23RWERS | SNOMED CT 871878002 · ATC J07CA02 |
 
 **Narrative:**
 
@@ -931,9 +931,9 @@ exports[`Markdown export > matches the snapshot for every fixture in en-GB > bun
 
 | Test or observation | Result | Date | Codes |
 | --- | --- | --- | --- |
-| Body weight | 91.5 kg | 10 Apr 2024, 10:58 | LOINC 29463-7 |
-| Body mass index (BMI) \\[Ratio\\] | 24.56 kg/m2 | 10 Apr 2024, 10:58 | LOINC 39156-5 |
-| Blood pressure panel with all children optional | Systolic blood pressure: 140 mmHg; Diastolic blood pressure: 80 mmHg | 30 Aug 2024, 09:32 | LOINC 85354-9 |
+| Body weight | 91.5 kg | 10 Apr 2024, 09:58 | LOINC 29463-7 |
+| Body mass index (BMI) \\[Ratio\\] | 24.56 kg/m2 | 10 Apr 2024, 09:58 | LOINC 39156-5 |
+| Blood pressure panel with all children optional | Systolic blood pressure: 140 mmHg; Diastolic blood pressure: 80 mmHg | 30 Aug 2024, 08:32 | LOINC 85354-9 |
 
 **Narrative:**
 
@@ -1369,7 +1369,7 @@ No structured entries. See the narrative from the document.
 
 | Vaccine | Date | Dose | Status | Lot number | Codes |
 | --- | --- | --- | --- | --- | --- |
-| Bordetella pertussis and Clostridium tetani and Corynebacterium diphtheriae and Human poliovirus antigens only vaccine product | Jun 3, 1998, 11:00 PM | Dose 1 | Completed | AXK23RWERS | SNOMED CT 871878002 · ATC J07CA02 |
+| Bordetella pertussis and Clostridium tetani and Corynebacterium diphtheriae and Human poliovirus antigens only vaccine product | Jun 3, 1998, 10:00 PM | Dose 1 | Completed | AXK23RWERS | SNOMED CT 871878002 · ATC J07CA02 |
 
 **Narrative:**
 
@@ -1517,9 +1517,9 @@ exports[`Markdown export > matches the snapshot for every fixture in en-US > bun
 
 | Test or observation | Result | Date | Codes |
 | --- | --- | --- | --- |
-| Body weight | 91.5 kg | Apr 10, 2024, 10:58 AM | LOINC 29463-7 |
-| Body mass index (BMI) \\[Ratio\\] | 24.56 kg/m2 | Apr 10, 2024, 10:58 AM | LOINC 39156-5 |
-| Blood pressure panel with all children optional | Systolic blood pressure: 140 mmHg; Diastolic blood pressure: 80 mmHg | Aug 30, 2024, 09:32 AM | LOINC 85354-9 |
+| Body weight | 91.5 kg | Apr 10, 2024, 09:58 AM | LOINC 29463-7 |
+| Body mass index (BMI) \\[Ratio\\] | 24.56 kg/m2 | Apr 10, 2024, 09:58 AM | LOINC 39156-5 |
+| Blood pressure panel with all children optional | Systolic blood pressure: 140 mmHg; Diastolic blood pressure: 80 mmHg | Aug 30, 2024, 08:32 AM | LOINC 85354-9 |
 
 **Narrative:**
 
@@ -1955,7 +1955,7 @@ exports[`Markdown export > matches the snapshot for every fixture in zh-CN > IPS
 
 | 疫苗 | 日期 | 剂次 | 状态 | 批号 | 代码 |
 | --- | --- | --- | --- | --- | --- |
-| Bordetella pertussis and Clostridium tetani and Corynebacterium diphtheriae and Human poliovirus antigens only vaccine product | 1998年6月3日 23:00 | 剂量 1 | 已完成 | AXK23RWERS | SNOMED CT 871878002 · ATC J07CA02 |
+| Bordetella pertussis and Clostridium tetani and Corynebacterium diphtheriae and Human poliovirus antigens only vaccine product | 1998年6月3日 22:00 | 剂量 1 | 已完成 | AXK23RWERS | SNOMED CT 871878002 · ATC J07CA02 |
 
 **叙述文本:**
 
@@ -2103,9 +2103,9 @@ exports[`Markdown export > matches the snapshot for every fixture in zh-CN > bun
 
 | 检验或观察项目 | 结果 | 日期 | 代码 |
 | --- | --- | --- | --- |
-| Body weight | 91.5 kg | 2024年4月10日 10:58 | LOINC 29463-7 |
-| Body mass index (BMI) \\[Ratio\\] | 24.56 kg/m2 | 2024年4月10日 10:58 | LOINC 39156-5 |
-| Blood pressure panel with all children optional | Systolic blood pressure: 140 mmHg; Diastolic blood pressure: 80 mmHg | 2024年8月30日 09:32 | LOINC 85354-9 |
+| Body weight | 91.5 kg | 2024年4月10日 09:58 | LOINC 29463-7 |
+| Body mass index (BMI) \\[Ratio\\] | 24.56 kg/m2 | 2024年4月10日 09:58 | LOINC 39156-5 |
+| Blood pressure panel with all children optional | Systolic blood pressure: 140 mmHg; Diastolic blood pressure: 80 mmHg | 2024年8月30日 08:32 | LOINC 85354-9 |
 
 **叙述文本:**
 

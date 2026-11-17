@@ -3,6 +3,10 @@ import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vitest/config';
 
+// Tests format dates in one timezone, so snapshots match on every machine and in
+// CI. The test workers inherit it.
+if (process.env.VITEST) process.env.TZ = 'UTC';
+
 export default defineConfig({
 	plugins: [
 		sveltekit({
