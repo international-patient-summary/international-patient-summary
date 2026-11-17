@@ -73,13 +73,13 @@ Rules for the executing agent:
       `self` plus `https:` for the URL loader).
       Verify: built site loads with no CSP violations in the console.
 
-- [ ] **P1-T8 CI.**
+- [x] **P1-T8 CI.**
       GitHub Actions: install, `pnpm run check`, `pnpm test`, `pnpm run build`,
       `pnpm run test:e2e`.
       The repository's `.github/workflows/viewer-check.yml` runs them in the
       monorepo; this folder's own `ci.yml` also deploys, for when it is its own
       repository.
-      Verify: workflow green on a pushed branch.
+      Verify: workflow green on a pushed branch. (Green 2026-11-17, run 44084966174.)
 
 ## Phase 2 — FHIR core (`src/lib/fhir`)
 
