@@ -133,8 +133,9 @@ hooks against the active theme's tokens, so all Lily themes work.
 
 `pnpm run build` writes a static site to `build/`. For a subpath (such as a
 GitHub Pages project site), set `BASE_PATH`, e.g. `BASE_PATH=/viewer pnpm run
-build`. `.github/workflows/ci.yml` tests and deploys when this folder is its own
-repository.
+build`. In this repository, `.github/workflows/viewer-check.yml` (at the root)
+runs the checks; this folder's own `.github/workflows/ci.yml` tests and deploys
+when it is published as its own repository.
 
 ## Licence
 

@@ -1,0 +1,49 @@
+name: Viewer check
+
+# The viewer's CI (international-patient-summary-ui-with-svelte, tasks.md
+# P1-T8): lint, type-check, unit tests, and the end-to-end tests against a
+# build. The folder's own .github/workflows/ci.yml also deploys, for when it is
+# published as its own repository.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'international-patient-summary-ui-with-svelte/**'
+      - '.github/workflows/viewer-check.yml'
+  pull_request:
+    paths:
+      - 'international-patient-summary-ui-with-svelte/**'
+      - '.github/workflows/viewer-check.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working-directory: international-patient-summary-ui-with-svelte
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+        with:
+          package_json_file: international-patient-summary-ui-with-svelte/package.json
+      - uses: actions/setup-node@v7
+        with:
+          # The Lily packages declare "engines": { "node": ">=26" }.
+          node-version: 26
+          cache: pnpm
+          cache-dependency-path: international-patient-summary-ui-with-svelte/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run lint
+      - run: pnpm run check
+      - run: pnpm test
+      - run: pnpm exec playwright install --with-deps chromium
+      # Builds the site with BASE_PATH unset and serves it for the e2e run.
+      - run: pnpm run test:e2e
+        env:
+          CI: 'true'

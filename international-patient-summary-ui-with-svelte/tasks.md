@@ -76,6 +76,9 @@ Rules for the executing agent:
 - [ ] **P1-T8 CI.**
       GitHub Actions: install, `pnpm run check`, `pnpm test`, `pnpm run build`,
       `pnpm run test:e2e`.
+      The repository's `.github/workflows/viewer-check.yml` runs them in the
+      monorepo; this folder's own `ci.yml` also deploys, for when it is its own
+      repository.
       Verify: workflow green on a pushed branch.
 
 ## Phase 2 — FHIR core (`src/lib/fhir`)

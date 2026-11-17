@@ -13,7 +13,7 @@ requirements to tests.
 - [x] P1-T6 Import, paste, examples, share (M-LOAD-*, M-SHARE-1)
 - [x] P1-T7 Privacy: in memory, privacy cover, share-file cleanup, privacy manifest (M-PRIV-*)
 - [x] P1-T8 XCUITests: examples → summary → Clear all; largest text size; paste, refusal and share (3 tests)
-- [x] P1-T9 CI workflow (macOS runner: `swift test`, `xcodebuild test`)
+- [x] P1-T9 CI workflow (the repository's `.github/workflows/ios-check.yml`; macOS runner: `swift test`, `xcodebuild test`, ad-hoc signed)
 - [ ] P1-T10 Manual checks in spec §9 on a device, with VoiceOver
   - Simulator run (iPhone 17 Pro, iOS 27.2, 2026-11-16): launch, examples, summary,
     paste (with iOS's Allow Paste prompt), `not_json` refusal, share sheet. Still to

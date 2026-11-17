@@ -49,6 +49,10 @@ project.
 
 ## Verify
 
+GitHub runs only the root `.github/workflows/`: `viewer-check`, `service-check`,
+`ios-check`, `android-check` and `site-check` run these on pull requests and on
+pushes to `main` that change their folder.
+
 ```sh
 # viewer
 cd international-patient-summary-ui-with-svelte && pnpm run lint && pnpm run check && pnpm test && pnpm run test:e2e

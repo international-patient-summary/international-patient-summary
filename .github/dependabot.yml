@@ -44,8 +44,5 @@ updates:
     directories:
       - /
       - /international-patient-summary-ui-with-svelte
-      - /international-patient-summary-service-with-axum
-      - /international-patient-summary-app-with-swift
-      - /international-patient-summary-app-with-kotlin
     schedule: { interval: weekly }
     cooldown: { default-days: 2 }

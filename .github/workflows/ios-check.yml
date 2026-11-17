@@ -1,0 +1,38 @@
+name: iOS check
+
+# The iOS app's CI (international-patient-summary-app-with-swift, tasks.md
+# P1-T9): IPSKit's unit tests, then the app's UI tests on a simulator. The app
+# is ad-hoc signed so the Keychain keeps the store's key (M-STORE-2).
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'international-patient-summary-app-with-swift/**'
+      - '.github/workflows/ios-check.yml'
+  pull_request:
+    paths:
+      - 'international-patient-summary-app-with-swift/**'
+      - '.github/workflows/ios-check.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working-directory: international-patient-summary-app-with-swift
+
+jobs:
+  test:
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v7
+      - name: IPSKit unit tests
+        working-directory: international-patient-summary-app-with-swift/IPSKit
+        run: swift test
+      - name: App UI tests on a simulator
+        run: |
+          xcodebuild test -project IPSApp.xcodeproj -scheme IPSApp \
+            -destination 'platform=iOS Simulator,name=iPhone 17' \
+            CODE_SIGN_IDENTITY=- CODE_SIGNING_REQUIRED=NO

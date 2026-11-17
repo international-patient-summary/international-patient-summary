@@ -1,9 +1,26 @@
-# CI (tasks.md P1-T8). Runs when this folder is its own repository.
-name: CI
+name: Service check
+
+# The service's CI (international-patient-summary-service-with-axum, tasks.md
+# P1-T8): format, lint, every test against Postgres, and the MSRV build.
 
 on:
   push:
+    branches: [main]
+    paths:
+      - 'international-patient-summary-service-with-axum/**'
+      - '.github/workflows/service-check.yml'
   pull_request:
+    paths:
+      - 'international-patient-summary-service-with-axum/**'
+      - '.github/workflows/service-check.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working-directory: international-patient-summary-service-with-axum
 
 jobs:
   test:

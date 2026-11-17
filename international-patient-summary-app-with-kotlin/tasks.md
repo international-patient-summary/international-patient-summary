@@ -14,7 +14,7 @@ The checklist for [plans.md](plans.md). `[x]` done, `[ ]` open.
 - [x] P1-T8 Privacy: no network permission, no backup, in-memory store, recents cover (M-PRIV-1..4); `ManifestTest`
 - [x] P1-T9 Accessibility: headings, merged rows, TalkBack Delete action, 48 dp targets, font scale (M-A11Y-1/2)
 - [x] P1-T10 Lint with warnings as errors, clean
-- [x] P1-T11 CI workflow (`.github/workflows/ci.yml`)
+- [x] P1-T11 CI workflow (the repository's `.github/workflows/android-check.yml`)
 - [x] P1-T12 README, AGENTS, spec (one file per section, §1–§7 shared with iOS), llms.txt/llms.json
 - [x] P1-T13 Compose instrumented smoke test (load examples, open one, banner shows the name): `SmokeTest` in `app/src/androidTest/`
   - Verify: `./gradlew :app:connectedDebugAndroidTest` passes on the `Pixel_10_API_37` emulator (2026-11-17): from an

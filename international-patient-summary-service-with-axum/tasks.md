@@ -18,8 +18,9 @@ Checklist for [plans.md](plans.md). Spec: [spec/index.md](spec/index.md).
       `http://localhost:5173`, `403` for a cross-site write, `no-store` on
       Bundles, refusal under `APP_ENV=production`. (Done 2026-11-15.)
 - [x] **P1-T7** `compose.yml`, `.env.example`, CI workflow, README, AGENTS.
-- [ ] **P1-T8** CI run green on GitHub (needs this folder published as its
-      own repository, as the viewer is).
+- [ ] **P1-T8** CI run green on GitHub: the repository's
+      `.github/workflows/service-check.yml` (Postgres 18, fmt, clippy, every
+      test, MSRV build) on a push to `main` that changes this folder.
 
 ## P2 — Viewer integration
 
