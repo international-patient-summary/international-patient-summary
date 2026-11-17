@@ -33,6 +33,32 @@ cargo run -- start            # http://localhost:1241, migrates on boot in devel
 | `cargo test`                          | Unit and request tests that need no database             |
 | `cargo test -- --include-ignored`     | Everything, with `AXA_TEST_DB_URL` set                   |
 
+## Container image
+
+`Containerfile` builds a small image (about 55 MB): the release binary on
+distroless `cc-debian13`, as user 65532, listening on every interface on port
+1241, with `health --ready` as its health check.
+
+```sh
+podman compose --profile image up -d --build   # Postgres and the service; or docker compose
+curl http://localhost:1241/_health/ready
+```
+
+Or on its own, against a Postgres you run:
+
+```sh
+podman build -t ips-service .                  # docker build -f Containerfile -t ips-service .
+podman run --rm -p 127.0.0.1:1241:1241 \
+  -e APP_ENV=development -e DB_URL=postgres://ips:ips@host.containers.internal:5432/international_patient_summary_service_development \
+  ips-service
+```
+
+The image sets no `APP_ENV`, so it assumes production, and refuses to serve
+until authentication lands (spec S-SAFE-1, tasks P3). Production deployment
+notes wait for that: TLS to Postgres (`sslmode=require` or stronger, which Axa
+demands in production), `DB_URL_FILE` for the secret, and the
+`CORS_ALLOWED_ORIGINS` of the deployed viewer.
+
 ## API
 
 | Method   | Path                  | Answer                                                       |
@@ -69,6 +95,7 @@ viewer's dev server can read answers. The viewer's URL loader accepts only
 - `src/lib.rs`: defaults, routes, context, and the production guard.
 - `src/routes.rs`: handlers. `src/ips.rs`: the IPS check. `src/store.rs`: SQL.
 - `migrations/`: sqlx reversible migrations.
+- `Containerfile`, `compose.yml`: the image, and Postgres with it for development.
 - `tests/api.rs`: request tests; `tests/fixtures/`: the IPS IG examples.
 
 ## License

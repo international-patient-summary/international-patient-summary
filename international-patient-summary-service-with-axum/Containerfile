@@ -1,0 +1,29 @@
+# The service's container image (tasks.md P5-T1; README "Container image").
+# Build: podman build -t ips-service .   (or docker build -f Containerfile .)
+#
+# Until authentication lands (tasks P3), the service refuses to start in
+# production (spec S-SAFE-1), so this image runs for development and test only.
+
+# Rust stable, as rust-version is stable minus two; --locked keeps Cargo.lock's
+# versions, which the two-day minimum publish age already chose.
+FROM docker.io/library/rust:1.100.0-slim-trixie AS build
+WORKDIR /src
+COPY Cargo.toml Cargo.lock ./
+COPY src src
+COPY migrations migrations
+RUN cargo build --release --locked --bin international-patient-summary-service-with-axum
+
+# glibc and libgcc, no shell, no package manager, user 65532.
+FROM gcr.io/distroless/cc-debian13:nonroot
+COPY --from=build /src/target/release/international-patient-summary-service-with-axum /usr/local/bin/ips-service
+# Axa binds localhost outside production; in a container it must listen on
+# every interface for the published port to reach it.
+ENV BINDING=0.0.0.0 \
+    PORT=1241
+EXPOSE 1241
+# `health --ready` asks the server in this container (there is no curl).
+# Docker reads this; podman needs --format docker to keep it.
+HEALTHCHECK --interval=10s --timeout=3s --start-period=10s \
+    CMD ["/usr/local/bin/ips-service", "health", "--ready"]
+ENTRYPOINT ["/usr/local/bin/ips-service"]
+CMD ["start"]

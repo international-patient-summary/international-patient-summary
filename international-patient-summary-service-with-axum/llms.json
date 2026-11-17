@@ -19,7 +19,8 @@
     "status": "cargo run -- db status",
     "test": "cargo test",
     "test-all": "AXA_TEST_DB_URL=postgres://... cargo test -- --include-ignored",
-    "lint": "cargo clippy --all-targets -- -D warnings"
+    "lint": "cargo clippy --all-targets -- -D warnings",
+    "image": "podman compose --profile image up -d --build"
   },
   "documentation": {
     "readme": "README.md",
@@ -77,6 +78,11 @@
         "name": "migrations",
         "path": "migrations/",
         "description": "sqlx reversible migrations"
+      },
+      {
+        "name": "Containerfile",
+        "path": "Containerfile",
+        "description": "the distroless image; compose.yml profile image runs it with Postgres"
       },
       {
         "name": "tests",

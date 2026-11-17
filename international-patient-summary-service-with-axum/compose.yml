@@ -1,4 +1,6 @@
 # Local Postgres for development and tests: `podman compose up -d` or `docker compose up -d`.
+# With `--profile image`, also the service from its Containerfile on
+# http://localhost:1241 (development only, spec S-SAFE-1; README "Container image").
 services:
   postgres:
     image: docker.io/library/postgres:18
@@ -8,3 +10,30 @@ services:
       POSTGRES_DB: international_patient_summary_service_development
     ports:
       - "127.0.0.1:5432:5432"
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "ips"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  service:
+    profiles: [image]
+    build:
+      context: .
+      dockerfile: Containerfile
+    environment:
+      # Unset, Axa assumes production, which this service refuses until P3.
+      APP_ENV: development
+      DB_URL: postgres://ips:ips@postgres:5432/international_patient_summary_service_development
+      CORS_ALLOWED_ORIGINS: http://localhost:5173
+    ports:
+      - "127.0.0.1:1241:1241"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    # Also in the Containerfile; podman's OCI images drop that one.
+    healthcheck:
+      test: ["CMD", "/usr/local/bin/ips-service", "health", "--ready"]
+      interval: 10s
+      timeout: 3s
+      start_period: 10s

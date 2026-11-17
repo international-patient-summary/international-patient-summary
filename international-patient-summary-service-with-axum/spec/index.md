@@ -9,7 +9,7 @@ This file is the source of truth. A change in behaviour carries a spec edit, a
 code edit, and a test edit together. Requirement IDs (`S-API-1`) name the test
 that proves them in [§8](#8-verification).
 
-Revision: 2026-11-15 (initial; MSRV 1.98 and S-WEB-3 the same day).
+Revision: 2026-11-17 (container image, §7). Initial 2026-11-15.
 
 ## 1. Scope
 
@@ -146,7 +146,9 @@ patient's record.
 There are no config files. Axa reads the environment; `check` prints the
 effective settings with secrets redacted, and `health [--ready]` asks the
 server on this machine for its probe and exits non-zero unless it answers,
-for a container image with no `curl`. The ones this service relies on:
+for a container image with no `curl`. The image (`Containerfile`) sets
+`BINDING=0.0.0.0` and no `APP_ENV`, so it assumes production unless told
+otherwise. The ones this service relies on:
 
 | Variable               | Default (development)                                                    |
 | ---------------------- | ------------------------------------------------------------------------ |

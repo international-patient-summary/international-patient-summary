@@ -43,5 +43,6 @@ Checklist for [plans.md](plans.md). Spec: [spec/index.md](spec/index.md).
 
 ## P5 — Operations
 
-- [ ] **P5-T1** Container image and deployment notes.
+- [x] **P5-T1** Container image (`Containerfile`, `compose.yml` profile `image`)
+      and the development notes (README). Production notes follow P3.
 - [ ] **P5-T2** Retention, erasure, backup and restore.
