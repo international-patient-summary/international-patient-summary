@@ -16,7 +16,7 @@
 		"sync:lily": "node bin/vendor-lily.mjs",
 		"build": "vite build",
 		"preview": "vite preview",
-		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --threshold error",
+		"check": "node bin/vendor-lily.mjs && svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --threshold error",
 		"test": "vitest run",
 		"test:watch": "vitest",
 		"test:e2e": "playwright test",

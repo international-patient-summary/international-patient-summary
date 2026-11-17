@@ -2,7 +2,8 @@
 // Copy the Lily Design System theme stylesheets into static/assets/themes/, so
 // the theme picker can fetch them by URL (themesUrl + slug) from the app's own
 // origin. Source: the @lilydesignsystem/themes npm dev dependency.
-// Runs before `dev` and `build` (package.json predev/prebuild), and by hand
+// Runs before `dev` and `build` (package.json predev/prebuild), at the start of
+// `check` (the type of `asset()` lists static/ files), and by hand
 // with `pnpm run sync:lily`.
 import { copyFile, mkdir, readdir, rm } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
