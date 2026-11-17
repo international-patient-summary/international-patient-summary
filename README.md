@@ -10,6 +10,7 @@ International Patient Summary - work in progress
 - `international-patient-summary-service-with-axum/`: the service, the backend (Rust, Axum, Axa, sqlx, Postgres). See its README.
 - `international-patient-summary-app-with-swift/`: the Apple iOS app (Swift, UIKit in code, no SwiftUI). See its README.
 - `international-patient-summary-app-with-kotlin/`: the Google Android app (Kotlin, Jetpack Compose). See its README.
+- `international-patient-summary-app-translations/`: both mobile apps' translations (65 languages) and the script that writes them in. See its README.
 
 The two mobile apps share one specification (§1–§7 of each `spec/index.md`), take their privacy model and roadmap from the [MyIPS user guide](https://myips.health/user-guide/), keep summaries in memory only, make no network requests, and check documents exactly as the service does.
 - `bin/publish`: publishes the website folder to its own repository.

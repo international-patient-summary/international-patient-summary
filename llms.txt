@@ -1,6 +1,6 @@
 # international-patient-summary
 
-> International Patient Summary (IPS): an introduction in 45 locales, its website, a browser viewer (frontend), a storage service (backend), and iOS and Android apps.
+> International Patient Summary (IPS): an introduction in 116 locales, its website, a browser viewer (frontend), a storage service (backend), and iOS and Android apps.
 
 ## Docs
 
