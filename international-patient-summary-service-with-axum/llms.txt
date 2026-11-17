@@ -1,6 +1,6 @@
 # international-patient-summary-service-with-axum
 
-> Backend for the IPS viewer: stores HL7 FHIR International Patient Summary document Bundles in Postgres and serves them as application/fhir+json. Refuses production until it has authentication.
+> Backend for the IPS viewer: stores HL7 FHIR International Patient Summary document Bundles in Postgres and serves them as application/fhir+json. Every /fhir route needs a Keycloak or PASETO bearer token, under one role policy, and every access is logged.
 
 ## Docs
 
@@ -27,14 +27,17 @@
 - [POST /fhir/Bundle](src/routes.rs): store an IPS document: 201 + Location, or 422 problem with code and pointer
 - [GET /fhir/Bundle/{id}](src/routes.rs): the stored Bundle, Cache-Control: no-store, or 404
 - [DELETE /fhir/Bundle/{id}](src/routes.rs): 204 or 404
-- [Health](src/lib.rs): /_health/live, /_health/ready (waits on migrations), /_health/startup
+- [Health](src/lib.rs): /_health/live, /_health/ready (waits on migrations and Keycloak's keys), /_health/startup; no token needed
+- Every /fhir route: 401 without a valid bearer token, 403 when the policy refuses; access logged in ips_access_log
 
 ## Modules
 
 - [main](src/main.rs): command line: start, db, check
-- [lib](src/lib.rs): defaults, routes, context, production guard
+- [lib](src/lib.rs): defaults, routes, context, the app behind its guard
+- [auth](src/auth.rs): Keycloak and PASETO guards, the production refusal; [policy](src/policy.json): access by role
 - [ips](src/ips.rs): structural IPS check and refusal codes
 - [store](src/store.rs): SQL
 - [migrations](migrations/): sqlx reversible migrations
 - [Containerfile](Containerfile): the distroless image; `compose.yml` profile `image` runs it with Postgres
-- [tests](tests/api.rs): request tests; fixtures in tests/fixtures/
+- [tests](tests/api.rs): request tests; [auth tests](tests/auth.rs): tokens, policy, access log; fixtures in tests/fixtures/
+- [realm](keycloak/ips-realm.json): the development Keycloak realm (`compose.yml --profile keycloak`)

@@ -1,8 +1,8 @@
 # The service's container image (tasks.md P5-T1; README "Container image").
 # Build: podman build -t ips-service .   (or docker build -f Containerfile .)
 #
-# Until authentication lands (tasks P3), the service refuses to start in
-# production (spec S-SAFE-1), so this image runs for development and test only.
+# It sets no APP_ENV, so it assumes production, where it refuses to start
+# without IPS_KEYCLOAK_URL or IPS_PASETO_KEYS_FILE (spec S-SAFE-1).
 
 # Rust stable, as rust-version is stable minus two; --locked keeps Cargo.lock's
 # versions, which the two-day minimum publish age already chose.

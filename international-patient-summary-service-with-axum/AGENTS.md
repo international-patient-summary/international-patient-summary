@@ -22,8 +22,11 @@ against that project's spec.
   `src/ips.rs` and stays free of HTTP and database code.
 - Never log or echo document content, patient names, or identifiers. Ids only.
 - Every Bundle answer has `Cache-Control: no-store`.
-- Do not remove the production refusal (spec S-SAFE-1) except in the change
-  that adds authentication.
+- Never start without an authenticator outside development and test (spec
+  S-SAFE-1), never turn the guard's enforcement off, and never make a `/fhir`
+  path public. A change to `src/policy.json` is a change to spec S-AUTH-3.
+- Every handler that touches a document id writes `store::log_access` (spec
+  S-AUDIT-1): in the change's transaction, or before a read is sent.
 - Raise any new dependency or Axa feature with the user first.
 - The viewer's backendless tour mirrors this API (spec S-WEB-3): change
   `../international-patient-summary-ui-with-svelte/src/lib/service/` and its

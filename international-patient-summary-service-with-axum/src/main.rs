@@ -8,7 +8,7 @@ use axa::{
     config::Config,
     logger, postgres_sqlx, server,
 };
-use ips_service::{MIGRATOR, app_routes, context, defaults, refuse_unauthenticated_production};
+use ips_service::{MIGRATOR, app, auth, context, defaults};
 
 #[tokio::main]
 async fn main() -> ExitCode {
@@ -49,7 +49,8 @@ async fn run() -> Result<()> {
             if worker || all {
                 return Err(Error::string("this service has no job worker"));
             }
-            refuse_unauthenticated_production(&environment)?;
+            // S-SAFE-1: outside development and test, no authenticator means no start.
+            let auth = auth::from_env(&environment)?;
             let pool = axa::db::connect(&config.database).await?;
             if config.database.auto_migrate {
                 postgres_sqlx::migrate(&pool, &MIGRATOR)
@@ -57,7 +58,7 @@ async fn run() -> Result<()> {
                     .map_err(Error::wrap)?;
             }
             let server_config = config.server.clone();
-            let router = app_routes().into_app(context(environment, pool, config))?;
+            let router = app(context(environment, pool, config, &auth), &auth)?;
             server::serve(router, &server_config).await
         }
         Command::Db { command } => {

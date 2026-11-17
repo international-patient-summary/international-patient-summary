@@ -5,6 +5,7 @@
 //! [`main`](../src/main.rs) is ordinary Axa: configuration, logging, the pool, the
 //! routes of [`app_routes`], and the server. The specification is `spec/index.md`.
 
+pub mod auth;
 pub mod ips;
 pub mod routes;
 pub mod store;
@@ -15,6 +16,9 @@ use axa::{
     context::Db,
     routes::AppRoutes,
 };
+use axum::Router;
+
+use crate::auth::Auth;
 
 /// The migrations in `migrations/`, compiled in.
 pub static MIGRATOR: sqlx::migrate::Migrator = sqlx::migrate!();
@@ -41,29 +45,31 @@ pub fn app_routes() -> AppRoutes {
     AppRoutes::with_default_routes().add_route(routes::bundles())
 }
 
-/// The context handlers receive, with readiness waiting on pending migrations.
+/// The context handlers receive, with readiness waiting on pending migrations and, with
+/// Keycloak, on the realm's keys.
 #[must_use]
-pub fn context(environment: Environment, pool: Db, config: Config) -> AppContext {
+pub fn context(environment: Environment, pool: Db, config: Config, auth: &Auth) -> AppContext {
     let mut ctx = AppContext::new(environment, pool.clone(), config);
     ctx.health_checks = ctx.health_checks.migrations(move || {
         let pool = pool.clone();
         async move { axa::postgres_sqlx::pending(&pool, &MIGRATOR).await }
     });
+    if let Some(verifier) = auth.keycloak() {
+        ctx.health_checks = ctx.health_checks.add("keycloak", move || {
+            let verifier = verifier.clone();
+            async move { verifier.ready() }
+        });
+    }
     ctx
 }
 
-/// Refuse to serve where patient data would be reachable by anyone: this version has no
-/// authentication (spec §6, tasks P3), so it serves only in development and test.
+/// The whole application: [`app_routes`] behind the guard of `auth`, inside Axa's
+/// standard middleware, so a refusal carries the request's id and is logged in its span.
 ///
 /// # Errors
 ///
-/// In a production-like environment.
-pub fn refuse_unauthenticated_production(environment: &Environment) -> Result<()> {
-    if environment.is_production_like() {
-        return Err(axa::Error::string(
-            "this service stores patient data and has no authentication yet; \
-             it serves only in development and test (spec §6, tasks P3)",
-        ));
-    }
-    Ok(())
+/// When Axa's middleware cannot be built from the configuration.
+pub fn app(ctx: AppContext, auth: &Auth) -> Result<Router> {
+    let http = ctx.config.http.clone();
+    axa::middleware::apply(auth.layer(app_routes().into_router(ctx)), &http)
 }

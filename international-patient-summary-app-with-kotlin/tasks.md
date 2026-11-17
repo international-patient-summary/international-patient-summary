@@ -85,7 +85,7 @@ The checklist for [plans.md](plans.md). `[x]` done, `[ ]` open.
 
 ## Phase 8 — The service
 
-- [ ] P8-T1 Once the service has authentication: open from and save to it (its spec §4)
+- [ ] P8-T1 Open from and save to the service (its spec §4): its authentication is in (its spec §6.1); needs sign-in to its Keycloak realm (OIDC with PKCE) and a network spec change (M-PRIV-1, with P5-T1)
 
 ## Phase 9 — Tablets
 

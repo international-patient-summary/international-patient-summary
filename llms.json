@@ -23,7 +23,7 @@
       {
         "name": "Service (backend)",
         "path": "international-patient-summary-service-with-axum/llms.txt",
-        "description": "Rust Axum + Axa 0.16 + sqlx + Postgres store for IPS document Bundles"
+        "description": "Rust Axum + Axa 0.19 + sqlx + Postgres store for IPS document Bundles, behind Keycloak or PASETO tokens"
       },
       {
         "name": "iOS app",

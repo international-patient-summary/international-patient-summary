@@ -1,0 +1,8 @@
+{
+  "rules": [
+    { "effect": "allow", "actions": ["read"], "when": { "access": ["read", "write", "admin"] }, "obligations": ["audit"] },
+    { "effect": "allow", "actions": ["write"], "when": { "access": ["write", "admin"] }, "obligations": ["audit"] },
+    { "effect": "allow", "actions": ["destructive"], "when": { "access": ["admin"] }, "obligations": ["audit"] },
+    { "effect": "deny", "actions": ["*"] }
+  ]
+}

@@ -6,14 +6,21 @@ use axa::{
     extract::{Json, Path},
     prelude::*,
 };
-use axum::http::{
-    HeaderValue, StatusCode,
-    header::{CACHE_CONTROL, CONTENT_TYPE, LOCATION},
+use axum::{
+    Extension,
+    http::{
+        HeaderValue, StatusCode,
+        header::{CACHE_CONTROL, CONTENT_TYPE, LOCATION},
+    },
 };
 use serde_json::{Value, json};
 use uuid::Uuid;
 
-use crate::{ips, store};
+use crate::{
+    auth::Caller,
+    ips,
+    store::{self, Access},
+};
 
 /// The media type of every Bundle this service answers with.
 pub const FHIR_JSON: &str = "application/fhir+json";
@@ -30,12 +37,27 @@ pub fn bundles() -> Routes {
         .add("/{id}", get(read).delete(remove))
 }
 
-/// `POST /fhir/Bundle`: check and store an IPS document, answering `201` with it.
-async fn create(State(ctx): State<AppContext>, Json(mut bundle): Json<Value>) -> Result<Response> {
+/// `POST /fhir/Bundle`: check and store an IPS document, answering `201` with it. The
+/// document and its access-log row are written together, or neither is.
+async fn create(
+    State(ctx): State<AppContext>,
+    Extension(caller): Extension<Caller>,
+    Json(mut bundle): Json<Value>,
+) -> Result<Response> {
     ips::check(&bundle).map_err(refusal)?;
     let id = Uuid::new_v4();
     bundle["id"] = json!(id.to_string());
-    store::insert(&ctx.db, id, &bundle).await?;
+    let mut tx = ctx.db.begin().await?;
+    store::insert(&mut tx, id, &bundle).await?;
+    store::log_access(
+        &mut tx,
+        &caller,
+        Access::Create,
+        id,
+        StatusCode::CREATED.as_u16(),
+    )
+    .await?;
+    tx.commit().await?;
     tracing::info!(%id, "stored an IPS document");
     let mut response = fhir_json(StatusCode::CREATED, &bundle)?;
     response.headers_mut().insert(
@@ -45,23 +67,50 @@ async fn create(State(ctx): State<AppContext>, Json(mut bundle): Json<Value>) ->
     Ok(response)
 }
 
-/// `GET /fhir/Bundle/{id}`: the stored document, or `404`.
-async fn read(State(ctx): State<AppContext>, Path(id): Path<String>) -> Result<Response> {
+/// `GET /fhir/Bundle/{id}`: the stored document, or `404`. The read is logged before
+/// the document is sent, and a read that cannot be logged sends nothing.
+async fn read(
+    State(ctx): State<AppContext>,
+    Extension(caller): Extension<Caller>,
+    Path(id): Path<String>,
+) -> Result<Response> {
     let Some(id) = parse_id(&id) else {
         return not_found();
     };
-    match store::find(&ctx.db, id).await? {
+    let found = store::find(&ctx.db, id).await?;
+    let status = if found.is_some() {
+        StatusCode::OK
+    } else {
+        StatusCode::NOT_FOUND
+    };
+    let mut connection = ctx.db.acquire().await?;
+    store::log_access(&mut connection, &caller, Access::Read, id, status.as_u16()).await?;
+    match found {
         Some(bundle) => fhir_json(StatusCode::OK, &bundle),
         None => not_found(),
     }
 }
 
-/// `DELETE /fhir/Bundle/{id}`: `204` once gone, or `404` if it never was.
-async fn remove(State(ctx): State<AppContext>, Path(id): Path<String>) -> Result<Response> {
+/// `DELETE /fhir/Bundle/{id}`: `204` once gone, or `404` if it never was. The deletion
+/// and its access-log row are written together.
+async fn remove(
+    State(ctx): State<AppContext>,
+    Extension(caller): Extension<Caller>,
+    Path(id): Path<String>,
+) -> Result<Response> {
     let Some(id) = parse_id(&id) else {
         return not_found();
     };
-    if store::delete(&ctx.db, id).await? {
+    let mut tx = ctx.db.begin().await?;
+    let deleted = store::delete(&mut tx, id).await?;
+    let status = if deleted {
+        StatusCode::NO_CONTENT
+    } else {
+        StatusCode::NOT_FOUND
+    };
+    store::log_access(&mut tx, &caller, Access::Delete, id, status.as_u16()).await?;
+    tx.commit().await?;
+    if deleted {
         tracing::info!(%id, "deleted an IPS document");
         Ok(StatusCode::NO_CONTENT.into_response())
     } else {

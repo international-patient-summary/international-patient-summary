@@ -1,6 +1,8 @@
 # Local Postgres for development and tests: `podman compose up -d` or `docker compose up -d`.
 # With `--profile image`, also the service from its Containerfile on
-# http://localhost:1241 (development only, spec S-SAFE-1; README "Container image").
+# http://localhost:1241 (development, authentication off; README "Container image").
+# With `--profile keycloak`, also a development Keycloak on http://localhost:8080 with
+# the `ips` realm of keycloak/ips-realm.json (README "Authentication").
 services:
   postgres:
     image: docker.io/library/postgres:18
@@ -22,7 +24,7 @@ services:
       context: .
       dockerfile: Containerfile
     environment:
-      # Unset, Axa assumes production, which this service refuses until P3.
+      # Unset, Axa assumes production, which needs an authenticator (S-SAFE-1).
       APP_ENV: development
       DB_URL: postgres://ips:ips@postgres:5432/international_patient_summary_service_development
       CORS_ALLOWED_ORIGINS: http://localhost:5173
@@ -37,3 +39,16 @@ services:
       interval: 10s
       timeout: 3s
       start_period: 10s
+
+  keycloak:
+    profiles: [keycloak]
+    image: quay.io/keycloak/keycloak:26.8.2
+    command: ["start-dev", "--import-realm"]
+    environment:
+      # Development only: an admin console at http://localhost:8080/admin, admin/admin.
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+    volumes:
+      - ./keycloak/ips-realm.json:/opt/keycloak/data/import/ips-realm.json:ro,Z
+    ports:
+      - "127.0.0.1:8080:8080"

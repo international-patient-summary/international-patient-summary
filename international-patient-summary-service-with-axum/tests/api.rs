@@ -7,16 +7,16 @@ use std::{net::SocketAddr, time::Duration};
 
 use axa::{Environment, config::Config, context::Db};
 use axa_test::{TestServer, postgres::TestDatabase};
-use ips_service::{MIGRATOR, app_routes, context, defaults};
+use ips_service::{MIGRATOR, app, app_routes, auth::Auth, context, defaults};
 use serde_json::{Value, json};
 use sqlx::postgres::PgPoolOptions;
 
 fn server(pool: Db) -> TestServer {
     let environment = Environment::Test;
     let config = Config::from_lookup(&environment, &defaults(), |_| None).expect("config");
-    let router = app_routes()
-        .into_app(context(environment, pool, config))
-        .expect("router");
+    // Authentication is off, as it may be only in development and test; tests/auth.rs
+    // covers it on.
+    let router = app(context(environment, pool, config, &Auth::Off), &Auth::Off).expect("router");
     TestServer::new(router.into_make_service_with_connect_info::<SocketAddr>())
 }
 
@@ -104,12 +104,6 @@ async fn an_id_this_service_never_issues_is_not_found() {
             404
         );
     }
-}
-
-#[tokio::test]
-async fn production_refuses_to_serve_without_authentication() {
-    assert!(ips_service::refuse_unauthenticated_production(&Environment::Production).is_err());
-    assert!(ips_service::refuse_unauthenticated_production(&Environment::Development).is_ok());
 }
 
 #[tokio::test]

@@ -9,7 +9,7 @@ This file is the source of truth. A change in behaviour carries a spec edit, a
 code edit, and a test edit together. Requirement IDs (`S-API-1`) name the test
 that proves them in [§8](#8-verification).
 
-Revision: 2026-11-17 (container image, §7). Initial 2026-11-15.
+Revision: 2026-11-17 (authentication, §6.1; access log, §3; Axa 0.19; container image, §7). Initial 2026-11-15.
 
 ## 1. Scope
 
@@ -18,12 +18,16 @@ In scope:
 - Accept an IPS document Bundle (FHIR JSON), check that it is one, and store it.
 - Serve a stored Bundle by id, exactly as it was sent apart from `Bundle.id`.
 - Delete a stored Bundle.
+- Bearer-token authentication (Keycloak, PASETO, or both), an access policy by
+  role, and an access log of every create, read, and delete (§6.1).
 - Health probes, configuration, logging, and graceful shutdown, from Axa.
 
 Not in scope yet (see [plans.md](../plans.md)):
 
-- Authentication and authorisation (tasks P3). Until it lands, the service
-  refuses to serve in production (**S-SAFE-1**).
+- Access by record: a patient seeing only their own summaries, a clinician
+  only their patients', break-glass (tasks P3-T4). Access is by role today.
+- Signing people in. The service checks tokens; Keycloak, or the service that
+  issues PASETO tokens, signs people in.
 - Listing or searching stored documents (P4). A list shows which patients
   have records, so it waits for authorisation.
 - Full FHIR profile validation, FHIR search, `_history`, or a FHIR
@@ -40,18 +44,19 @@ Not in scope yet (see [plans.md](../plans.md)):
 | Concern        | Choice                                                         |
 | -------------- | -------------------------------------------------------------- |
 | Language       | Rust, edition 2024, `rust-version` 1.98 (stable minus two)     |
-| HTTP           | Axum 0.8, through Axa 0.16 (`postgres-sqlx` feature)           |
+| HTTP           | Axum 0.8, through Axa 0.19 (`postgres-sqlx`, `keycloak`, `paseto`) |
+| Auth           | `axa::keycloak` and `axa::paseto` guards, one ABAC policy (`src/policy.json`) |
 | Database       | Postgres (16 or newer; developed on 18) through sqlx 0.9       |
 | Migrations     | sqlx reversible migrations in `migrations/`, compiled in       |
 | Errors         | RFC 9457 problem details (`application/problem+json`), by Axa  |
-| Tests          | `cargo test`; `axa-test` 0.4 with a database of its own per test |
+| Tests          | `cargo test`; `axa-test` 0.10 with a database of its own per test, PASETO test keys, a local OIDC provider |
 
 Axa is a library, not a framework: `src/main.rs` reads as ordinary Axum from
 the top down.
 
 ## 3. Data
 
-One table, `ips_documents`:
+Two tables. `ips_documents`:
 
 | Column       | Type          | Notes                                                   |
 | ------------ | ------------- | ------------------------------------------------------- |
@@ -62,6 +67,21 @@ One table, `ips_documents`:
 A check constraint holds `bundle.resourceType = 'Bundle'`, `bundle.type =
 'document'`, and `bundle.id = id`, so no path can store anything else.
 
+`ips_access_log`, one row per request that reached a document's id
+(**S-AUDIT-1**):
+
+| Column      | Type          | Notes                                                       |
+| ----------- | ------------- | ----------------------------------------------------------- |
+| `id`        | `bigint`      | Identity                                                    |
+| `at`        | `timestamptz` | When                                                        |
+| `subject`   | `text`        | The token's `sub`; null only with authentication off        |
+| `issuer`    | `text`        | The token's `iss`                                           |
+| `action`    | `text`        | `create`, `read`, or `delete`                               |
+| `bundle_id` | `uuid`        | The document; no foreign key, so a deletion keeps its log   |
+| `status`    | `smallint`    | The answer's status                                         |
+
+It holds no document content, name, email, or token.
+
 `jsonb` keeps the document's JSON values but not its key order or
 whitespace. The round trip promise (**S-API-3**) is JSON equality, not byte
 equality.
@@ -71,7 +91,9 @@ equality.
 All paths are relative to the service root. Bodies are FHIR JSON
 (`application/fhir+json`; `application/json` is also accepted on input).
 Every answer carrying a Bundle has `Cache-Control: no-store`, because it is a
-patient's record.
+patient's record. Every `/fhir` request needs a bearer token (§6.1): without
+one, or with a bad one, `401`; with one the policy refuses, `403`. Those
+come before anything below.
 
 ### 4.1 `POST /fhir/Bundle` — store a document
 
@@ -130,16 +152,45 @@ patient's record.
 
 ## 6. Safety and privacy
 
-- **S-SAFE-1** With no authentication, `start` refuses to run in any
-  production-like environment (anything but `development` or `test`), and
-  exits non-zero naming the reason. Removing this guard is part of P3, not a
-  configuration switch.
+- **S-SAFE-1** With no authenticator configured (neither `IPS_KEYCLOAK_URL`
+  nor `IPS_PASETO_KEYS_FILE`), `start` refuses to run in any production-like
+  environment (anything but `development` or `test`), and exits non-zero
+  naming the reason. In development and test it serves with every `/fhir`
+  route open, and warns.
 - **S-SAFE-2** Logs carry document ids, never document content, patient
   names, or identifiers. Database errors reach the log only; a client gets a
   generic `500`.
 - **S-SAFE-3** `db down`, `db reset`, and `db truncate` run only in
   development or test with `AXA_DESTROY_DATA=true`, as Axa's command line
   enforces.
+
+### 6.1 Authentication, policy, and the access log
+
+- **S-AUTH-1** Every path but `/_health/*` needs `Authorization: Bearer
+  <token>`. Missing or not verified: `401`, `WWW-Authenticate: Bearer`, a
+  problem with `code` `unauthorized` and `detail` `invalid token`, whatever
+  the cause; the cause goes to the log. Refused by the policy: `403`, `code`
+  `forbidden`, and an `auth_refused` warning in the log with the subject and
+  reason, never the token.
+- **S-AUTH-2** Two kinds of token, configured by the environment (§7):
+  Keycloak access tokens (signature from the realm's keys, issuer
+  `{url}/realms/{realm}`, one of the configured audiences, a verified email
+  when it has one), and PASETO `v4.public` tokens (an Ed25519 key from the key
+  set, the configured issuer and audience). With both, a token beginning
+  `v4.` is PASETO and anything else Keycloak. Readiness (**S-HEALTH-1**) also
+  waits for the realm's keys.
+- **S-AUTH-3** One policy for both (`src/policy.json`), first match wins, on
+  the caller's `access` attribute: `read` reads; `write` reads and stores;
+  `admin` reads, stores, and deletes. Anything else is refused, reads
+  included. A PASETO token carries `access` itself; a Keycloak realm role
+  maps to it: `ips-reader`, `ips-writer`, `ips-admin`, unless
+  `IPS_KEYCLOAK_ROLE_MAP` says otherwise. An unmapped role grants nothing.
+- **S-AUDIT-1** Each allowed rule obliges an audit. Every create, read, and
+  delete of a document id writes an `ips_access_log` row (§3), the `404`s
+  included: a create and a delete in the same transaction as the change, a
+  read before the document is sent. If the row cannot be written the answer
+  is `500` and carries no document. An id that is not a v4 UUID is a `404`
+  with no row, since no document can have it.
 
 ## 7. Configuration
 
@@ -157,6 +208,12 @@ otherwise. The ones this service relies on:
 | `DB_AUTO_MIGRATE`      | `true` outside production                                                |
 | `PORT`                 | `1241`                                                                   |
 | `CORS_ALLOWED_ORIGINS` | none                                                                     |
+| `IPS_KEYCLOAK_URL`     | none: Keycloak off. Its base URL; `https` unless loopback                |
+| `IPS_KEYCLOAK_REALM`, `IPS_KEYCLOAK_AUDIENCES` | required with the URL; audiences comma-separated |
+| `IPS_KEYCLOAK_ROLE_MAP` / `_FILE` | `ips-reader`, `ips-writer`, `ips-admin` (S-AUTH-3)            |
+| `IPS_KEYCLOAK_REQUIRE_VERIFIED_EMAIL` | `true`                                                    |
+| `IPS_PASETO_KEYS_FILE` | none: PASETO off. A JSON key set of Ed25519 public keys                  |
+| `IPS_PASETO_ISSUER`, `IPS_PASETO_AUDIENCE` | required with the key file                           |
 
 ## 8. Verification
 
@@ -174,7 +231,11 @@ AXA_TEST_DB_URL=postgres://… cargo test -- --include-ignored
 | S-API-3/4/6 | `tests/api.rs` `every_example_round_trips` (all five IG examples)         |
 | S-API-5     | `tests/api.rs` `an_id_this_service_never_issues_is_not_found`             |
 | S-HEALTH-1  | `tests/api.rs` `liveness_answers_without_a_database`, `readiness_answers_once_migrated` |
-| S-SAFE-1    | `tests/api.rs` `production_refuses_to_serve_without_authentication`       |
+| S-SAFE-1    | `src/auth.rs` `production_refuses_to_run_without_an_authenticator`, `a_half_configured_authenticator_is_refused` |
+| S-AUTH-1    | `tests/auth.rs` `every_fhir_route_needs_a_token_and_health_does_not`, `a_token_from_another_key_is_refused` |
+| S-AUTH-2    | `tests/auth.rs` `with_both_configured_keycloak_and_paseto_tokens_are_each_accepted`, `keycloak_roles_map_to_access_and_unmapped_roles_grant_nothing` |
+| S-AUTH-3    | `src/auth.rs` `the_policy_grants_by_access_and_refuses_the_rest_reads_included`, `the_default_role_map_applies_only_when_none_is_given`; `tests/auth.rs` `the_policy_refuses_by_access_before_any_handler_runs` |
+| S-AUDIT-1   | `tests/auth.rs` `each_role_does_what_it_may_and_every_access_is_logged`, `a_read_that_cannot_be_logged_sends_nothing`, `a_keycloak_read_is_logged_under_the_tokens_subject` |
 | Routes      | `tests/api.rs` `route_census_matches_the_spec`                            |
 
 S-WEB-1, S-WEB-2, S-SAFE-2, and S-SAFE-3 are Axa's behaviour, proven by Axa's

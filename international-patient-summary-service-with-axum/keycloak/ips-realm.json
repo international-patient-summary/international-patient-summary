@@ -1,0 +1,108 @@
+{
+  "realm": "ips",
+  "enabled": true,
+  "sslRequired": "external",
+  "accessTokenLifespan": 300,
+  "roles": {
+    "realm": [
+      {
+        "name": "ips-reader",
+        "description": "Reads stored summaries"
+      },
+      {
+        "name": "ips-writer",
+        "description": "Reads and stores summaries"
+      },
+      {
+        "name": "ips-admin",
+        "description": "Reads, stores and deletes summaries"
+      }
+    ]
+  },
+  "clients": [
+    {
+      "clientId": "ips-viewer",
+      "name": "IPS viewer (development)",
+      "publicClient": true,
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": true,
+      "redirectUris": [
+        "http://localhost:5173/*"
+      ],
+      "webOrigins": [
+        "http://localhost:5173"
+      ],
+      "attributes": {
+        "pkce.code.challenge.method": "S256"
+      },
+      "protocolMappers": [
+        {
+          "name": "audience ips-service",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-audience-mapper",
+          "config": {
+            "included.custom.audience": "ips-service",
+            "access.token.claim": "true",
+            "id.token.claim": "false"
+          }
+        }
+      ]
+    }
+  ],
+  "users": [
+    {
+      "username": "reader",
+      "enabled": true,
+      "email": "reader@example.invalid",
+      "emailVerified": true,
+      "firstName": "Reader",
+      "lastName": "Example",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "reader",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "ips-reader"
+      ]
+    },
+    {
+      "username": "writer",
+      "enabled": true,
+      "email": "writer@example.invalid",
+      "emailVerified": true,
+      "firstName": "Writer",
+      "lastName": "Example",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "writer",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "ips-writer"
+      ]
+    },
+    {
+      "username": "admin",
+      "enabled": true,
+      "email": "admin@example.invalid",
+      "emailVerified": true,
+      "firstName": "Admin",
+      "lastName": "Example",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "admin",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "ips-admin"
+      ]
+    }
+  ]
+}

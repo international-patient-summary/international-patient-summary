@@ -5,11 +5,13 @@ the frontend. It stores HL7 FHIR **International Patient Summary** (IPS)
 document Bundles in Postgres and serves them back as FHIR JSON, so the viewer
 can open a stored summary by URL.
 
-> **Not for production yet.** It has no authentication, so `start` refuses to
-> run outside `development` and `test`. See [plans.md](plans.md), phase 3.
+Every `/fhir` request needs a bearer token from **Keycloak** or a **PASETO**
+issuer, or either, under one access policy, and every create, read, and
+delete is written to an access log. With no authenticator configured, `start`
+refuses to run outside `development` and `test`.
 
 Built with **Rust**, **Axum** 0.8, [**Axa**](https://crates.io/crates/axa)
-0.13, **sqlx** 0.9, and **Postgres**.
+0.19, **sqlx** 0.9, and **Postgres**.
 
 - Specification: [spec/index.md](spec/index.md)
 - Plan: [plans.md](plans.md) · Checklist: [tasks.md](tasks.md)
@@ -53,11 +55,55 @@ podman run --rm -p 127.0.0.1:1241:1241 \
   ips-service
 ```
 
-The image sets no `APP_ENV`, so it assumes production, and refuses to serve
-until authentication lands (spec S-SAFE-1, tasks P3). Production deployment
-notes wait for that: TLS to Postgres (`sslmode=require` or stronger, which Axa
-demands in production), `DB_URL_FILE` for the secret, and the
+The image sets no `APP_ENV`, so it assumes production, and then refuses to
+start without an authenticator (spec S-SAFE-1). In production it also needs
+TLS to Postgres (`sslmode=require` or stronger, which Axa demands), `DB_URL_FILE`
+for the secret, an `https` Keycloak or a PASETO key set, and the
 `CORS_ALLOWED_ORIGINS` of the deployed viewer.
+
+## Authentication
+
+Every `/fhir` request needs `Authorization: Bearer <token>`; `/_health/*` needs
+none (spec §6.1). One policy, [`src/policy.json`](src/policy.json), decides by the
+caller's `access` attribute:
+
+| `access` | Keycloak realm role | May                      |
+| -------- | ------------------- | ------------------------ |
+| `read`   | `ips-reader`        | read                     |
+| `write`  | `ips-writer`        | read, store              |
+| `admin`  | `ips-admin`         | read, store, delete      |
+| anything else | any other role | nothing: `403`, reads included |
+
+Every create, read, and delete is written to `ips_access_log` with the
+token's subject and issuer, never a name, an email, or the document.
+
+**Keycloak.** Set `IPS_KEYCLOAK_URL`, `IPS_KEYCLOAK_REALM`, and
+`IPS_KEYCLOAK_AUDIENCES` (spec §7). For development, compose runs Keycloak 26.8
+with the `ips` realm of [`keycloak/ips-realm.json`](keycloak/ips-realm.json): a
+public `ips-viewer` client (PKCE, with an audience mapper for `ips-service`)
+and three users whose password is their name: `reader`, `writer`, `admin`.
+
+```sh
+podman compose --profile keycloak up -d        # Postgres and Keycloak on http://localhost:8080
+export IPS_KEYCLOAK_URL=http://localhost:8080 IPS_KEYCLOAK_REALM=ips IPS_KEYCLOAK_AUDIENCES=ips-service
+cargo run -- start
+TOKEN=$(curl -s -d grant_type=password -d client_id=ips-viewer -d username=writer -d password=writer \
+  http://localhost:8080/realms/ips/protocol/openid-connect/token | jq -r .access_token)
+curl -i -X POST http://localhost:1241/fhir/Bundle -H "authorization: Bearer $TOKEN" \
+  -H 'content-type: application/fhir+json' --data-binary @tests/fixtures/IPS-examples-Bundle-01.json
+```
+
+Run the service on the host, as above: Keycloak names its issuer by the
+address the token was asked for (`localhost:8080`), and an `http` Keycloak is
+accepted only on loopback.
+
+**PASETO.** Set `IPS_PASETO_KEYS_FILE` to the issuer's published key set
+(`{"keys":[{"kty":"OKP","crv":"Ed25519","kid":"…","x":"…"}]}`),
+`IPS_PASETO_ISSUER`, and `IPS_PASETO_AUDIENCE`. A token carries `access` in
+its `attrs`. This service checks tokens and issues none.
+
+**Both.** Set both: a token beginning `v4.` is checked as PASETO, any other
+as Keycloak, under the same policy.
 
 ## API
 
@@ -92,11 +138,14 @@ viewer's dev server can read answers. The viewer's URL loader accepts only
 ## Layout
 
 - `src/main.rs`: the command line, `start` and `db`.
-- `src/lib.rs`: defaults, routes, context, and the production guard.
+- `src/lib.rs`: defaults, routes, context, and the app behind its guard.
+- `src/auth.rs`: Keycloak and PASETO, the production refusal; `src/policy.json`: the access policy.
 - `src/routes.rs`: handlers. `src/ips.rs`: the IPS check. `src/store.rs`: SQL.
 - `migrations/`: sqlx reversible migrations.
 - `Containerfile`, `compose.yml`: the image, and Postgres with it for development.
-- `tests/api.rs`: request tests; `tests/fixtures/`: the IPS IG examples.
+- `tests/api.rs`: request tests; `tests/auth.rs`: tokens, policy, and the access log;
+  `tests/fixtures/`: the IPS IG examples.
+- `keycloak/ips-realm.json`: the development realm.
 
 ## License
 

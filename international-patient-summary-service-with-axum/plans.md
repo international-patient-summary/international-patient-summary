@@ -19,7 +19,7 @@ exactly as it went in, with no one able to reach it who should not.
 
 | Decision      | Choice                                                    | Why                                                                                     |
 | ------------- | --------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| Framework     | Axum 0.8 with Axa 0.16                                    | Requested; Axa gives health, config, errors, middleware, shutdown, CLI without a framework |
+| Framework     | Axum 0.8 with Axa 0.19                                    | Requested; Axa gives health, config, errors, middleware, shutdown, CLI without a framework |
 | Database      | Postgres through sqlx 0.9, `axa` feature `postgres-sqlx`  | Requested; sqlx is Axa's preferred database path                                        |
 | SQL           | Runtime-checked `sqlx::query`, not `query!` macros        | Builds with no database at compile time; three queries do not need the macros          |
 | Storage       | Whole Bundle as `jsonb`, one row per document             | The viewer needs the document, not a relational model of it                            |
@@ -27,7 +27,7 @@ exactly as it went in, with no one able to reach it who should not.
 | API shape     | `/fhir/Bundle` paths, `application/fhir+json`             | Familiar to FHIR tools; the viewer's URL loader opens it as-is                         |
 | Validation    | Structural IPS gate (spec §4.1), not profile validation   | Matches what the viewer can display; profile validation is a separate, heavy concern   |
 | Errors        | RFC 9457 problems from Axa, not FHIR `OperationOutcome`   | One error format across the service; revisit if a FHIR client needs `OperationOutcome` |
-| Auth          | None yet; refuse production (S-SAFE-1)                    | Patient data must not be served unauthenticated; P3 adds it                            |
+| Auth          | Keycloak and PASETO through Axa, one ABAC policy by role  | The user chose both; every read is logged; production refuses to start without either  |
 | Layout        | `lib.rs` builds everything; `main.rs` only wires it       | Tests use the same router and context as production                                    |
 
 ## Phases
@@ -48,10 +48,11 @@ service" loader option to the viewer once P3 gives it a way to authenticate.
 
 ### Phase 3 — Authentication and authorisation
 
-Axa's `paseto` or `keycloak` feature (raise the choice with the user first),
-guarding every `/fhir` route. Decide who may read whose summary (patient,
-clinician, break-glass), and log access as an audit record. Remove the
-S-SAFE-1 guard only in the same change.
+Done 2026-11-17: Axa's `keycloak` and `paseto` guards on every `/fhir` route,
+one policy by role (`src/policy.json`), and an access-log row for every
+create, read, and delete (spec §6.1). Left: who may read whose summary
+(patient, clinician, break-glass; P3-T4), which needs a document to record
+whose it is, and a development PASETO issuer (P3-T5).
 
 ### Phase 4 — Listing
 

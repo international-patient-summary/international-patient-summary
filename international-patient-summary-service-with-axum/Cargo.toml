@@ -16,7 +16,8 @@ name = "international-patient-summary-service-with-axum"
 path = "src/main.rs"
 
 [dependencies]
-axa = { version = "0.16", features = ["postgres-sqlx"] }
+axa = { version = "0.19", features = ["postgres-sqlx", "keycloak", "paseto"] }
+authentication-verifier = { version = "0.9", default-features = false, features = ["paseto"] }
 axum = "0.8"
 serde_json = "1"
 sqlx = { version = "0.9", default-features = false, features = ["postgres", "runtime-tokio", "macros", "migrate", "uuid", "json"] }
@@ -25,7 +26,9 @@ tracing = "0.1"
 uuid = { version = "1", features = ["v4"] }
 
 [dev-dependencies]
-axa-test = { version = "0.7", features = ["postgres-sqlx"] }
+axa-test = { version = "0.10", features = ["postgres-sqlx", "paseto"] }
+# A local OIDC provider for the Keycloak tests; never in a release build.
+authentication-verifier = { version = "0.9", default-features = false, features = ["paseto", "test-idp"] }
 
 [lints.rust]
 unsafe_code = "forbid"

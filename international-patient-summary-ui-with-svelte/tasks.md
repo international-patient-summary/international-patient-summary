@@ -352,5 +352,7 @@ Rules for the executing agent:
       `/tour/` added to the axe route sweep. Verify: `pnpm run test:e2e`.
 - [ ] **P9-T6 Translation review** of the new `tour.*` strings in cy-001 and
       zh-cn (part of P7-T4).
-- [ ] **P9-T7 `HttpService`** against the backend, after its P3
-      (authentication).
+- [ ] **P9-T7 `HttpService`** against the backend. Its authentication is in
+      (its spec §6.1, 2026-11-17): needs OIDC sign-in with PKCE to its
+      Keycloak realm (`ips-viewer` client) and a decision on the viewer's
+      F-LOAD-3 `http://localhost` question (its P2-T1).

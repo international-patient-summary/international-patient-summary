@@ -64,7 +64,7 @@ requirements to tests.
 
 ## Phase 8 — The service
 
-- [ ] P8-T1 After the service's P3 (authentication): open and save by API
+- [ ] P8-T1 Open and save by API: the service's authentication is in (its spec §6.1); needs sign-in to its Keycloak realm (OIDC with PKCE) and a network spec change (M-PRIV-1, with P5-T1)
 
 ## Phase 9 — Tablets
 

@@ -4,7 +4,7 @@ Checklist for [plans.md](plans.md). Spec: [spec/index.md](spec/index.md).
 
 ## P1 — Scaffold and the document API
 
-- [x] **P1-T1** Crate with Axa 0.16 (`postgres-sqlx`), sqlx 0.9, strict lints
+- [x] **P1-T1** Crate with Axa 0.16, now 0.19 (`postgres-sqlx`), sqlx 0.9, strict lints
       (`missing_docs`, pedantic clippy, no `unsafe`).
       Verify: `cargo clippy --all-targets -- -D warnings`.
 - [x] **P1-T2** Migration `ips_documents` with the document check constraint (spec §3).
@@ -32,9 +32,21 @@ Checklist for [plans.md](plans.md). Spec: [spec/index.md](spec/index.md).
 
 ## P3 — Authentication and authorisation
 
-- [ ] **P3-T1** Choose `paseto` or `keycloak` with the user.
-- [ ] **P3-T2** Guard every `/fhir` route; access policy; audit log of reads.
-- [ ] **P3-T3** Remove the S-SAFE-1 guard in the same change; update the spec.
+- [x] **P3-T1** The user chose both (2026-11-17), with Axa 0.19.0 (a cooldown
+      exception the user approved, with `axa-test` 0.10.0 and the Keycloak and
+      PASETO crates Axa 0.19 requires).
+- [x] **P3-T2** Guard every `/fhir` route (S-AUTH-1/2), one role policy
+      (S-AUTH-3, `src/policy.json`), and the access log of every create, read,
+      and delete (S-AUDIT-1). Verify: `tests/auth.rs`; by hand against Keycloak
+      26.8.2 with `keycloak/ips-realm.json`, in production mode (2026-11-17).
+- [x] **P3-T3** S-SAFE-1 now refuses production without an authenticator.
+- [ ] **P3-T4** Decide access by record with the user: a patient's own
+      summaries, a clinician's patients, break-glass. The policy supports
+      `resource.*` attributes (`resource.owner: ["$sub"]`) once a document
+      records whose it is.
+- [ ] **P3-T5** A way to mint PASETO tokens for development (the service
+      checks them and issues none), or a pointer to the issuing service.
+- [ ] **P3-T6** Retention of `ips_access_log` (with P5-T2).
 
 ## P4 — Listing
 

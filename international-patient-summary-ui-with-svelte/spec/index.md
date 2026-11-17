@@ -135,7 +135,9 @@ fixtures (§9).
   `text` as supplied.
 - Any storage of patient data server-side or in browser storage.
 - Real sign-in, and calls to the backend service. The tour's sign-in is a
-  demonstration; the backend has no authentication yet (its plan P3).
+  demonstration. The backend now needs a Keycloak or PASETO bearer token on
+  every `/fhir` request (its spec §6.1); signing in to its Keycloak realm
+  (OIDC with PKCE) is the `HttpService`'s first step (§11).
 
 ## 4. Technology
 
@@ -576,7 +578,8 @@ viewer will work with the backend service, without needing it.
   IPS check with its five refusal codes and JSON pointers (`not_a_bundle`,
   `not_a_document`, `no_composition`, `not_a_patient_summary`,
   `no_subject`); `404` for an unknown or malformed id; deep copies in and
-  out. Signing in seeds it with the five bundled examples (§2.2), fetched
+  out. The backend's `401` and `403` (its S-AUTH-1) have no counterpart:
+  the tour's only account may do everything. Signing in seeds it with the five bundled examples (§2.2), fetched
   from the app's own origin. No other request is made.
 - **F-TOUR-3 Steps.** A Lily `StepList` shows three steps (Sign in, Your
   summaries, View a summary) with words for each status; a Lily `Tour`
@@ -684,8 +687,10 @@ lossless.
 - Validation hand-off to the HL7 FHIR Validator.
 - Tagged (accessible) PDF / PDF/UA for the one-page summary.
 - Multi-page full-summary PDF export.
-- An `HttpService` implementing `IpsService` against the backend, once it
-  has authentication: "Save to service" and "Open from service".
+- An `HttpService` implementing `IpsService` against the backend, which
+  now has authentication (its spec §6.1): sign-in to its Keycloak realm with
+  OIDC and PKCE (the development realm's public `ips-viewer` client), a
+  bearer token on each request, "Save to service" and "Open from service".
 
 ## 12. References
 
