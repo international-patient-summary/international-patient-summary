@@ -51,5 +51,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: dtolnay/rust-toolchain@1.98
+      - uses: dtolnay/rust-toolchain@1.120
       - run: cargo build --locked --all-targets
