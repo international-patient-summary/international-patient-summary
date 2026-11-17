@@ -78,7 +78,10 @@ fun AboutScreen(viewModel: AppViewModel) {
     if (confirming) {
         AlertDialog(
             onDismissRequest = { confirming = false },
-            title = { Text(stringResource(R.string.clear_all_title)) },
+            title = {
+                TrackPopupFocus()
+                Text(stringResource(R.string.clear_all_title))
+            },
             text = { Text(stringResource(R.string.clear_all_body)) },
             confirmButton = {
                 TextButton(onClick = {

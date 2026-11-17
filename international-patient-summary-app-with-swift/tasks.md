@@ -18,7 +18,10 @@ requirements to tests.
   - Simulator run (iPhone 17 Pro, iOS 27.2, 2026-11-16): launch, examples, summary,
     paste (with iOS's Allow Paste prompt), `not_json` refusal, share sheet. Still to
     do: import from Files, an 11 MB file, VoiceOver, the app switcher cover.
-- [ ] P1-T11 App icon and accent colour (asset catalog)
+- [x] P1-T11 App icon and accent colour (asset catalog)
+      The Android adaptive icon's design (a white document with a cross on #0B5CAD), drawn at
+      1024 px by `bin/draw-app-icon.swift`; AccentColor #0B5CAD. Verify: the built app has
+      `AppIcon60x60@2x.png` and `AppIcon76x76@2x~ipad.png`.
 - [ ] P1-T12 Signing team and App Store privacy answers ("Data Not Collected")
 
 ## Phase 2 — Translations
@@ -27,15 +30,23 @@ requirements to tests.
       Verify: `CatalogTests` (every key in every language, placeholders match English).
 - [x] P2-T4 The home-screen name in every language (`App/InfoPlist.xcstrings`, from `app.name`)
 - [ ] P2-T2 Clinical review of each translation (as the web viewer's `locales/*/REVIEW.md`); mark reviewed strings `translated`
-- [ ] P2-T3 Screenshots in a right-to-left language (ar, he) and a long one (de, fi) at the largest text size
+- [x] P2-T3 Screenshots in a right-to-left language (ar, he) and a long one (de, fi) at the largest text size
+      Verify: UI `testLanguagesAtTheLargestTextSize` on iPhone 18 Pro Max (2026-11-17): every string
+      present; long words hyphenate, nothing clipped, right to left in ar and he.
 
 ## Phase 3 — Open from other apps
 
-- [ ] P3-T1 Document types and an exported UTI for FHIR JSON; `scene(_:openURLContexts:)`
+- [x] P3-T1 Document types and an imported UTI for FHIR JSON; `scene(_:openURLContexts:)` (M-LOAD-4)
+      Verify: on the iPhone 18 Pro Max simulator, `simctl openurl` with `bundle-minimal.json` opened
+      Martha DeLarosa at launch; with the app running, `{"resourceType":"Patient"}` showed the
+      `not_a_bundle` alert; `Documents/Inbox` was empty after both (2026-11-17). The UTI is imported,
+      not exported: HL7, not this app, owns `application/fhir+json`.
 
 ## Phase 4 — PDF
 
-- [ ] P4-T1 One-page PDF with the web viewer's trimming rules
+- [x] P4-T1 One-page PDF with the web viewer's trimming rules (M-PDF-1..3)
+      Verify: `PDFPlanTests` (6); UI `testShareAsPDF`. Patricia JORDANA's PDF (2026-11-17): one Letter
+      page, title the file name, Immunizations, Results, Vital Signs and Social History trimmed and named.
 
 ## Phase 5 — SMART Health Links
 
@@ -44,7 +55,8 @@ requirements to tests.
 
 ## Phase 6 — Keep summaries
 
-- [ ] P6-T1 Spec change to M-PRIV-1; encrypted opt-in store
+- [x] P6-T1 Spec change to M-PRIV-1; encrypted opt-in store
+      Superseded by Phase 12 (M-STORE-1..4): the store is always on, not opt-in.
 
 ## Phase 7 — Write your own summary
 
@@ -68,3 +80,50 @@ requirements to tests.
 - [x] P9-T4 Screenshots on a tablet in both orientations, in a right-to-left language
       Verify: `testRightToLeftOnIPad` (ar; the list on the right, no missing string). Found and fixed:
       known sections were headed with the document's English title; now the app's name (M-VIEW-3).
+
+## Phase 10 — Families and carers
+
+- [x] P10-T1 Group summaries by person: same identifier, or same name and birth date (M-PEOPLE-1, M-PEOPLE-2)
+      Verify: `PeopleTests` (the examples are three people; identifiers need the same system; case,
+      accents and spacing; transitive links); UI `testFamiliesAndCarers`.
+- [x] P10-T2 A relationship per person, in the heading and the banner; only one Me (M-PEOPLE-3)
+      Verify: `PeopleTests` (kept when another summary opens or one is deleted; one Me); UI
+      `testFamiliesAndCarers`.
+- [x] P10-T3 Forget this person (M-PEOPLE-4); Share names the patient when several are open (M-SHARE-2)
+      Verify: UI `testFamiliesAndCarers` (Forget James Judge; the share question for Martha).
+- [x] P10-T4 The 21 new strings in all 65 localizations (M-I18N-2)
+      Verify: `CatalogTests`. Machine-made, `needs_review`: kinship words differ by language (several
+      have no neutral word for grandparent or sibling, or split a parent's side).
+- [x] P10-T5 Decide whether people and relationships may be kept between launches
+      Decided 2026-11-17: yes, in the encrypted on-device store (Phase 12).
+
+## Phase 11 — iPhone Duo
+
+- [x] P11-T1 Layout by window, not device: the UI tests pick the phone or side-by-side flow by what
+      the app shows (M-TAB-1)
+      Verify: all UI tests on iPhone 18 Pro Max and iPad Air 13-inch (M4), iOS 27.2.
+- [ ] P11-T2 Fold and unfold on an iPhone Duo with a summary open and a relationship set (M-TAB-4)
+      Blocked: Xcode 27.2's Duo profile needs simulator runtime 24B8118, which cannot be downloaded
+      yet (24B8117 refuses the device). Check on a device, or when the runtime comes.
+- [x] P11-T3 Screenshots on the newest runtime and iPhone (spec §8.4)
+- [ ] P11-T4 `testPasteRefusalAndShare` on iOS 27.2: tapping Paste after the runner writes the
+      pasteboard shows neither iOS's paste prompt nor the app's alert (SpringBoard reports the app
+      switcher). The test skips on iOS 27 and passes on iOS 26.1 (iPhone 17, 308 s). Check Paste by
+      hand on iOS 27, and find what the 27.2 simulator needs.
+
+## Phase 12 — Encrypted on-device store
+
+- [x] P12-T1 Spec §5.2 M-STORE-1..4, M-PRIV-1/3 and the root rule: on the device only, encrypted
+- [x] P12-T2 `EncryptedStore`: sealed summaries and index, fresh nonces, role as associated data;
+      damaged files left out, a missing key empties the store, a locked key leaves it alone
+      Verify: `EncryptedStoreTests` (10 tests).
+- [x] P12-T3 The key in the Keychain (this device only, when unlocked); the store in Application
+      Support, complete file protection, excluded from backup; saved after every change
+      Verify: UI `testSummariesOutlastARelaunch` (relaunch keeps five summaries and a relationship;
+      Clear all leaves nothing). The UI tests now sign ad hoc (`CODE_SIGN_IDENTITY=-`).
+- [x] P12-T4 The privacy words in the app, the README and all 65 localizations
+      Verify: `CatalogTests`.
+- [x] P12-T5 A restart: summaries and a relationship saved, the iPhone 18 Pro Max simulator shut
+      down and booted, then the app opened with all five and the relationship (2026-11-17)
+- [ ] P12-T6 By hand on a device: restart; launch while locked; delete and reinstall (starts empty)
+

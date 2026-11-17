@@ -1,22 +1,22 @@
 # international-patient-summary-app-with-kotlin
 
-> Google Android app (Kotlin, Jetpack Compose, Material 3; no Java) that opens and shows HL7 FHIR International Patient Summary documents. In memory only, no network; checks documents exactly as the backend service does.
+> Google Android app (Kotlin, Jetpack Compose, Material 3; no Java) that opens and shows HL7 FHIR International Patient Summary documents. Saved on the phone only, encrypted (Android Keystore key), no network; checks documents exactly as the backend service does.
 
 ## Docs
 
-- [README](README.md): privacy, use, build and test, layout
+- [README](README.md): the user guide (getting started, opening, reading, sharing, families and carers, privacy, tablets, languages, refusal codes, examples, FAQ, screenshots in `screenshots/`), then build, test and layout
 - [AGENTS](AGENTS.md): rules
 - [Specification](spec/index.md): contents; single source of truth; §1-§7 shared with the iOS app
 - [Spec §1](spec/purpose.md): Purpose, and the ideas taken from MyIPS
 - [Spec §2](spec/scope.md): Scope
 - [Spec §3](spec/documents.md): The check (M-CHECK), reading (M-READ), loading (M-LOAD)
-- [Spec §4](spec/screens.md): List, summary and About screens (M-LIST, M-VIEW, M-ABOUT)
-- [Spec §5](spec/sharing-and-privacy.md): M-SHARE, M-PRIV
+- [Spec §4](spec/screens.md): List, summary and About screens (M-LIST, M-VIEW, M-ABOUT, M-TAB, M-PEOPLE)
+- [Spec §5](spec/sharing-and-privacy.md): M-SHARE, M-PDF (the one-page PDF), M-PRIV, M-STORE (the encrypted store)
 - [Spec §6](spec/accessibility-and-language.md): M-A11Y, M-I18N
 - [Spec §7](spec/fixtures.md): The five IG examples
 - [Spec §8](spec/android.md): Stack, architecture, platform notes
 - [Spec §9](spec/verification.md): Requirement-to-test map, manual checks
-- [Plan](plans.md): phases 1-8
+- [Plan](plans.md): phases 1-11
 - [Tasks](tasks.md): checklist
 - [Changelog](CHANGELOG.md)
 
@@ -27,6 +27,7 @@
 - lint: `./gradlew :app:lintDebug`
 - install: `./gradlew :app:installDebug`
 - verify: `./gradlew :app:testDebugUnitTest :app:assembleDebug :app:lintDebug`
+- smoke test (running emulator or phone): `./gradlew :app:connectedDebugAndroidTest`
 
 ## Core (ips)
 
@@ -37,17 +38,26 @@
 - [SummaryReader](app/src/main/kotlin/io/github/internationalpatientsummary/app/ips/SummaryReader.kt): patient, document, sections, allergy alert
 - [EntryReader](app/src/main/kotlin/io/github/internationalpatientsummary/app/ips/EntryReader.kt): one entry as a row with detail lines
 - [Format](app/src/main/kotlin/io/github/internationalpatientsummary/app/ips/Format.kt): displayOf, names, dates, ages, quantities
+- [People](app/src/main/kotlin/io/github/internationalpatientsummary/app/ips/People.kt): M-PEOPLE-1, which summaries are the same person (identifier, or name and birth date; transitive)
 - [Narrative](app/src/main/kotlin/io/github/internationalpatientsummary/app/ips/Narrative.kt): narrative as plain text
+- [OnePage](app/src/main/kotlin/io/github/internationalpatientsummary/app/ips/OnePage.kt): M-PDF-1/2, the one-page PDF's blocks, priority, plans and fitting (a page counter passed in); paper, file name, title metadata
 
 ## App
 
-- [MainActivity](app/src/main/kotlin/io/github/internationalpatientsummary/app/MainActivity.kt): privacy cover, share sheet, share-file cleanup
-- [AppViewModel](app/src/main/kotlin/io/github/internationalpatientsummary/app/AppViewModel.kt): screen state, open, examples, delete, clear
-- [SummaryStore](app/src/main/kotlin/io/github/internationalpatientsummary/app/SummaryStore.kt): in-memory store
-- [ShareFiles](app/src/main/kotlin/io/github/internationalpatientsummary/app/ShareFiles.kt): FileProvider share file
+- [MainActivity](app/src/main/kotlin/io/github/internationalpatientsummary/app/MainActivity.kt): privacy cover, share sheet, share-file cleanup, a document from another app (M-LOAD-4; onCreate and onNewIntent, launchMode singleTask)
+- [Incoming](app/src/main/kotlin/io/github/internationalpatientsummary/app/Incoming.kt): M-LOAD-4, which part of an ACTION_VIEW or ACTION_SEND intent holds the document; the JSON types the manifest names
+- [DocumentFiles](app/src/main/kotlin/io/github/internationalpatientsummary/app/DocumentFiles.kt): the size-first, capped read of a picked, dropped or sent file (M-CHECK-2)
+- [AppViewModel](app/src/main/kotlin/io/github/internationalpatientsummary/app/AppViewModel.kt): screen state (kept through a fold, M-TAB-4), people, open, examples, delete, relationship, forget a person, clear; loads and saves the encrypted store on one thread
+- [SummaryStore](app/src/main/kotlin/io/github/internationalpatientsummary/app/SummaryStore.kt): the summaries and each person's relationship in memory (M-PEOPLE-3); index and restore for the encrypted store
+- [EncryptedStore](app/src/main/kotlin/io/github/internationalpatientsummary/app/EncryptedStore.kt): M-STORE-1..4, AES-256-GCM files in noBackupFilesDir/store/, checked again at launch
+- [KeystoreKeys](app/src/main/kotlin/io/github/internationalpatientsummary/app/KeystoreKeys.kt): the store's non-exportable AES-256 key in the Android Keystore
+- [ShareFiles](app/src/main/kotlin/io/github/internationalpatientsummary/app/ShareFiles.kt): FileProvider share file, the JSON or the PDF (M-SHARE-1, M-PDF-3)
+- [OnePagePdf](app/src/main/kotlin/io/github/internationalpatientsummary/app/OnePagePdf.kt): M-PDF-1/2, the PDF in the reader's words, laid out with StaticLayout and drawn with PdfDocument
 - [SummariesScreen](app/src/main/kotlin/io/github/internationalpatientsummary/app/ui/SummariesScreen.kt): home, import, paste, examples
-- [SummaryScreen](app/src/main/kotlin/io/github/internationalpatientsummary/app/ui/SummaryScreen.kt): alert, patient, document, sections
+- [SummaryScreen](app/src/main/kotlin/io/github/internationalpatientsummary/app/ui/SummaryScreen.kt): alert, patient, document, sections; the Share menu (file or PDF)
 - [AboutScreen](app/src/main/kotlin/io/github/internationalpatientsummary/app/ui/AboutScreen.kt): safety, privacy, versions, Clear all
 - [Strings](app/src/main/res/values/strings.xml): every interface string, English; `values-*/` has 65 languages
-- [Manifest](app/src/main/AndroidManifest.xml): no network permission, no backup, FileProvider
+- [Manifest](app/src/main/AndroidManifest.xml): no network permission, no backup or device transfer, FileProvider, Open with and Share filters for application/json and application/fhir+json only
 - [Tests](app/src/test/kotlin/io/github/internationalpatientsummary/app/): JVM unit tests; fixtures in app/src/test/resources/fixtures/
+- [SmokeTest](app/src/androidTest/kotlin/io/github/internationalpatientsummary/app/SmokeTest.kt): Compose UI Test on an emulator: load examples, open one, share as PDF, Clear all
+- [OnePagePdfTest](app/src/androidTest/kotlin/io/github/internationalpatientsummary/app/OnePagePdfTest.kt): the PDF of every example (en-US, en-GB, ar) and two crafted summaries on an emulator; pdfOut=1 writes them to cacheDir/share/

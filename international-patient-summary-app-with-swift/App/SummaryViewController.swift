@@ -26,6 +26,8 @@ final class SummaryViewController: UITableViewController {
         case narrativeToggle(section: Int, shown: Bool)
     }
 
+    private var observer: (any NSObjectProtocol)?
+
     init(document: Document) {
         self.document = document
         super.init(style: .insetGrouped)
@@ -37,17 +39,31 @@ final class SummaryViewController: UITableViewController {
         super.viewDidLoad()
         title = document.patientName ?? L10n.text("summary.title")
         navigationItem.largeTitleDisplayMode = .never
-        let share = UIBarButtonItem(
-            image: UIImage(systemName: "square.and.arrow.up"),
-            primaryAction: UIAction { [weak self] action in
-                self?.share(from: action.sender as? UIBarButtonItem)
-            })
+        // M-SHARE-1, M-PDF-1: the file, or a PDF for people.
+        let share = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), menu: nil)
+        share.menu = UIMenu(children: [
+            UIAction(title: L10n.text("summary.share.file"), image: UIImage(systemName: "doc")) {
+                [weak self, weak share] _ in self?.share(.file, from: share)
+            },
+            UIAction(title: L10n.text("summary.share.pdf"), image: UIImage(systemName: "doc.richtext")) {
+                [weak self, weak share] _ in self?.share(.pdf, from: share)
+            },
+        ])
         share.accessibilityLabel = L10n.text("summary.share")
         share.accessibilityIdentifier = "share"
         navigationItem.rightBarButtonItem = share
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "row")
         tableView.register(HeadingView.self, forHeaderFooterViewReuseIdentifier: "heading")
         build()
+        // A relationship given from the list shows in the banner at once (M-PEOPLE-3).
+        observer = NotificationCenter.default.addObserver(
+            forName: SummaryStore.changed, object: SummaryStore.shared, queue: .main
+        ) { [weak self] _ in
+            MainActor.assumeIsolated {
+                self?.build()
+                self?.tableView.reloadData()
+            }
+        }
     }
 
     // MARK: Building the rows
@@ -79,6 +95,10 @@ final class SummaryViewController: UITableViewController {
     private func patientRows() -> [Row] {
         guard document.patient != nil else { return [.note(L10n.text("banner.unknownPatient"))] }
         var lines: [String] = []
+        let store = SummaryStore.shared
+        if let person = store.person(of: document.id), store.relationship(of: person) != .none {
+            lines.append(L10n.text("banner.relationship", L10n.relationship(store.relationship(of: person))))
+        }
         if let born = formatFHIRDate(document.birthDate) {
             lines.append(
                 ageInYears(birthDate: document.birthDate).map { L10n.text("banner.bornAge", born, $0) }
@@ -133,10 +153,33 @@ final class SummaryViewController: UITableViewController {
 
     // MARK: Sharing (M-SHARE-1)
 
-    private func share(from item: UIBarButtonItem?) {
+    enum ShareKind { case file, pdf }
+
+    /// M-SHARE-2: with more than one person open, first confirm whose summary this is.
+    private func share(_ kind: ShareKind, from item: UIBarButtonItem?) {
+        guard SummaryStore.shared.hasSeveralPeople else { return shareNow(kind, from: item) }
+        let name = document.patientName ?? L10n.text("people.notNamed")
+        let confirm = UIAlertController(
+            title: L10n.text("share.confirm.title", name), message: L10n.text("share.confirm.body"),
+            preferredStyle: .alert)
+        confirm.addAction(UIAlertAction(title: L10n.text("cancel"), style: .cancel))
+        let share = UIAlertAction(title: L10n.text("share.confirm.action"), style: .default) { [weak self] _ in
+            self?.shareNow(kind, from: item)
+        }
+        confirm.addAction(share)
+        confirm.preferredAction = share
+        present(confirm, animated: true)
+    }
+
+    private func shareNow(_ kind: ShareKind, from item: UIBarButtonItem?) {
         let url: URL
         do {
-            url = try ShareFile.write(document.data)
+            switch kind {
+            case .file: url = try ShareFile.write(document.data)
+            case .pdf:
+                let pdf = SummaryPDF.make(document)
+                url = try ShareFile.write(pdf.data, name: pdf.name)
+            }
         } catch {
             return
         }

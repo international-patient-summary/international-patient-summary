@@ -21,7 +21,7 @@ jobs:
     env:
       AXA_TEST_DB_URL: postgres://ips:ips@localhost:5432/postgres
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: dtolnay/rust-toolchain@stable
         with:
           components: rustfmt, clippy
@@ -33,6 +33,6 @@ jobs:
     # rust-version in Cargo.toml: stable minus two. Change both together.
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: dtolnay/rust-toolchain@1.98
       - run: cargo build --locked --all-targets

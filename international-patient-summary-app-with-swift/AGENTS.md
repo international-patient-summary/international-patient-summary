@@ -18,9 +18,13 @@ change in behaviour carries a spec edit, a code edit and a test edit together.
 - The check (`Check.swift`) mirrors the service's S-API-2
   (`../international-patient-summary-service-with-axum/src/ips.rs`) and the web
   viewer's `src/lib/service/service.ts`: same order, codes and pointers.
-- Patient data stays in memory: no files (except the share file, deleted
-  after sharing and at launch), no UserDefaults, Keychain, Core Data,
-  SwiftData, or backup. No network code. No logging of document content.
+- Patient data is kept only in the encrypted store (spec §5.2, M-STORE):
+  `IPSKit/EncryptedStore.swift`, AES-256-GCM, its key in the Keychain
+  (`App/KeychainKeys.swift`, this device only, when unlocked), files in
+  Application Support/Store with complete file protection, excluded from
+  backup. Nothing else holds it: no UserDefaults, Core Data, SwiftData,
+  other files (except the share file, deleted after sharing and at launch).
+  No network code. No logging of document content.
 - Every interface string is in `App/Localizable.xcstrings`, looked up with
   `L10n.text`; a missing key shows as ⟦key⟧ and fails the UI tests.
   Clinical text from a document is never translated. A new key needs a
@@ -43,5 +47,5 @@ change in behaviour carries a spec edit, a code edit and a test edit together.
 ```sh
 cd IPSKit && swift test && cd ..
 xcodebuild test -project IPSApp.xcodeproj -scheme IPSApp \
-  -destination 'platform=iOS Simulator,name=iPhone 17' CODE_SIGNING_ALLOWED=NO
+  -destination 'platform=iOS Simulator,name=iPhone 18 Pro Max' CODE_SIGN_IDENTITY=- CODE_SIGNING_REQUIRED=NO
 ```

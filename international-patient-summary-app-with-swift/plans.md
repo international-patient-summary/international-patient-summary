@@ -62,3 +62,29 @@ once it has authentication (its P3); the same API contract (its spec §4).
 The list beside the open summary in a wide window (spec M-TAB-1), then a
 hardware keyboard's shortcuts and dropping a file onto the list, each
 through the same check as every other way in. Phone behaviour is unchanged.
+
+## Phase 10 — Families and carers
+
+One person often reads summaries for several: a parent for their children,
+an adult for their parents, a carer for the people they look after. The
+list groups summaries by person (spec M-PEOPLE-1, M-PEOPLE-2), each person
+can be given their relationship to the reader (M-PEOPLE-3) and forgotten
+at once (M-PEOPLE-4), and Share names the patient first when more than one
+person is open (M-SHARE-2). People and relationships are saved with the
+summaries in the encrypted store (Phase 12).
+
+## Phase 11 — iPhone Duo
+
+The folding iPhone: one screen at a time folded, the list beside the
+summary unfolded (M-TAB-1), and nothing lost on folding or unfolding
+(M-TAB-4). Screenshots move to the newest runtime and iPhone (spec §8.4).
+
+## Phase 12 — Encrypted on-device store
+
+So the app works offline and after a restart, every summary and
+relationship is saved on the device, encrypted (spec §5.2, M-STORE-1..4):
+AES-256-GCM files under a Keychain key that never leaves the device, out of
+backups. Deleting deletes the files; Clear all deletes the key too. The
+repository's rule changed with it (root AGENTS.md): the mobile apps may keep
+patient data, on the device only and encrypted; nothing else persists it.
+

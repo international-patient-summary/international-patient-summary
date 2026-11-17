@@ -501,7 +501,9 @@ naming the source and noting that YAML is not an official FHIR format.
   converted to plain text, never embedded as HTML); include codes
   (default off; `system|code` after each display);
 - clinical text escaped so `|`, `*`, `_`, `#`, `<`, and backticks cannot
-  break the table or inject HTML;
+  break the table or inject HTML, and no URL in it becomes a link;
+- passes markdownlint's default rules except line length (checked in
+  `export.test.ts`);
 - footer: generated-at timestamp, source Composition identifier and
   date, IPS version, and the "not a medical device" notice.
 

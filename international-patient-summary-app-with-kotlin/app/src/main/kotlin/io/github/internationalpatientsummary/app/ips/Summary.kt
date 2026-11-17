@@ -4,7 +4,7 @@ package io.github.internationalpatientsummary.app.ips
 
 /** An open summary: the exact bytes it was opened from, and what they say. */
 class Summary(
-    /** In-memory id, unique for this run of the app; never written anywhere. */
+    /** Its id on this device, kept across launches by the encrypted store (M-STORE-1); never shown or shared. */
     val id: Long,
     /** The exact bytes it was opened from, for Share (M-SHARE-1). */
     val bytes: ByteArray,
@@ -27,7 +27,11 @@ data class PatientInfo(
     val identifiers: List<IdentifierLabel>,
 )
 
-data class IdentifierLabel(val system: String, val value: String, val type: String?)
+/**
+ * One identifier: [system] is the label to show; [systemUri] is the system as
+ * written, for telling people apart (M-PEOPLE-1), or null when it has none.
+ */
+data class IdentifierLabel(val system: String, val value: String, val type: String?, val systemUri: String? = null)
 
 data class DocumentInfo(val title: String?, val date: String?, val authors: List<String>)
 

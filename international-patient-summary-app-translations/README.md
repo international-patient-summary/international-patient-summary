@@ -47,3 +47,13 @@ Known questions for reviewers: words for remission, relapse, recurrence and
 differential (several languages barely distinguish them); "advance
 directives"; "Sex" for FHIR's administrative gender in fr, es, it and pt;
 and the Irish, Luxembourgish, Scottish Gaelic and Javanese files throughout.
+
+The relationship words for families and carers (M-PEOPLE-3) need a native
+reader in every language. Several languages have no neutral word for
+grandparent, grandchild or sibling, or split a parent's side, so the
+translation names both (hi, gu, pa, ur, bho, bn, te, sv, lb). In some the
+grandchild word also means nephew or niece (it, ro, mt, vi). "Partner" may
+read as spouse (ta, ur, th, tr), and "Someone I care for" was reworded to
+avoid a gendered verb (ur, mr, pa, hi, cy, he). To avoid declining a
+person's name, several titles put it after "person" or a colon (cs, sk, sl,
+hr, hu, et, fi, eu, lt, lv, pl, ro, ru, uk).

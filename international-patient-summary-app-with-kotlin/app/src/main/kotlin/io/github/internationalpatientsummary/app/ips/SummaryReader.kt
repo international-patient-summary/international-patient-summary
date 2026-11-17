@@ -55,7 +55,8 @@ object SummaryReader {
         gender = patient.text("gender"),
         identifiers = patient.list("identifier").mapNotNull { identifier ->
             val value = identifier.text("value") ?: return@mapNotNull null
-            IdentifierLabel(Format.systemLabel(identifier.string("system")), value, Format.displayOf(identifier.field("type")))
+            val system = identifier.string("system")
+            IdentifierLabel(Format.systemLabel(system), value, Format.displayOf(identifier.field("type")), identifier.text("system"))
         },
     )
 

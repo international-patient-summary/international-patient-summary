@@ -57,7 +57,7 @@ exports[`Markdown export > matches the snapshot for every fixture in cy-001 > IP
 
 | Cyflwr | Statws clinigol | Statws dilysu | Difrifoldeb | Cychwyn | Wedi gwella | Codau |
 | --- | --- | --- | --- | --- | --- | --- |
-| Malignant tumor of breast | Wedi cilio | Wedi'i gadarnhau | Severe | Ion 2015 | Maw 2015 | SNOMED CT 254837009 · http://terminology.hl7.org/CodeSystem/icd-o-3 8500/3 |
+| Malignant tumor of breast | Wedi cilio | Wedi'i gadarnhau | Severe | Ion 2015 | Maw 2015 | SNOMED CT 254837009 · http\\://terminology.hl7.org/CodeSystem/icd-o-3 8500/3 |
 
 **Naratif:**
 
@@ -65,7 +65,7 @@ exports[`Markdown export > matches the snapshot for every fixture in cy-001 > IP
 
 ## Cynllun gofal
 
-*Dim cofnodion strwythuredig. Gweler y naratif o'r ddogfen.*
+Dim cofnodion strwythuredig. Gweler y naratif o'r ddogfen.
 
 **Naratif:**
 
@@ -75,7 +75,7 @@ exports[`Markdown export > matches the snapshot for every fixture in cy-001 > IP
 
 | Prawf neu arsylwad | Canlyniad | Dyddiad | Codau |
 | --- | --- | --- | --- |
-| Blood typing | ABO and Rh group \\[Type\\] in Blood: Blood group A Rh(D) positive; C Ab \\[Presence\\] in Serum or Plasma: Positive; E Ab \\[Presence\\] in Serum or Plasma: Positive; little c Ab \\[Presence\\] in Serum or Plasma: Negative | 10 Hyd 2015 |   |
+| Blood typing | ABO and Rh group \\[Type\\] in Blood: Blood group A Rh(D) positive; C Ab \\[Presence\\] in Serum or Plasma: Positive; E Ab \\[Presence\\] in Serum or Plasma: Positive; little c Ab \\[Presence\\] in Serum or Plasma: Negative | 10 Hyd 2015 | |
 | Hemoglobin A1c/Hemoglobin.total in Blood by HPLC | 7.5 % | 10 Tach 2017, 07:20 | LOINC 17856-6 |
 | Bacteria identified in Isolate | Methicillin resistant Staphylococcus aureus | 10 Rhag 2017, 07:20 | LOINC 42803-7 |
 
@@ -158,7 +158,7 @@ exports[`Markdown export > matches the snapshot for every fixture in cy-001 > IP
 
 | Cyflwr | Statws clinigol | Statws dilysu | Difrifoldeb | Cychwyn | Wedi gwella | Codau |
 | --- | --- | --- | --- | --- | --- | --- |
-| Malignant tumor of breast | Wedi cilio | Wedi'i gadarnhau | Severe | Ion 2015 | Maw 2015 | SNOMED CT 254837009 · http://terminology.hl7.org/CodeSystem/icd-o-3 8500/3 |
+| Malignant tumor of breast | Wedi cilio | Wedi'i gadarnhau | Severe | Ion 2015 | Maw 2015 | SNOMED CT 254837009 · http\\://terminology.hl7.org/CodeSystem/icd-o-3 8500/3 |
 
 **Naratif:**
 
@@ -166,7 +166,7 @@ exports[`Markdown export > matches the snapshot for every fixture in cy-001 > IP
 
 ## Cynllun gofal
 
-*Dim cofnodion strwythuredig. Gweler y naratif o'r ddogfen.*
+Dim cofnodion strwythuredig. Gweler y naratif o'r ddogfen.
 
 **Naratif:**
 
@@ -176,7 +176,7 @@ exports[`Markdown export > matches the snapshot for every fixture in cy-001 > IP
 
 | Prawf neu arsylwad | Canlyniad | Dyddiad | Codau |
 | --- | --- | --- | --- |
-| Blood typing | ABO and Rh group \\[Type\\] in Blood: Blood group A Rh(D) positive; C Ab \\[Presence\\] in Serum or Plasma: Positive; E Ab \\[Presence\\] in Serum or Plasma: Positive; little c Ab \\[Presence\\] in Serum or Plasma: Negative | 10 Hyd 2015 |   |
+| Blood typing | ABO and Rh group \\[Type\\] in Blood: Blood group A Rh(D) positive; C Ab \\[Presence\\] in Serum or Plasma: Positive; E Ab \\[Presence\\] in Serum or Plasma: Positive; little c Ab \\[Presence\\] in Serum or Plasma: Negative | 10 Hyd 2015 | |
 | Hemoglobin A1c/Hemoglobin.total in Blood by HPLC | 7.5 % | 10 Tach 2017, 07:20 | LOINC 17856-6 |
 | Bacteria identified in Isolate | Methicillin resistant Staphylococcus aureus | 10 Rhag 2017, 07:20 | LOINC 42803-7 |
 
@@ -222,7 +222,7 @@ exports[`Markdown export > matches the snapshot for every fixture in cy-001 > bu
 - **Enw:** Patricia JORDANA
 - **Dyddiad geni:** 30 Medi 1956 (70 o flynyddoedd)
 - **Rhywedd:** Benyw
-- **Dynodwyr:** ABC1234 (https://standards.digital.health.nz/ns/nhi-id)
+- **Dynodwyr:** ABC1234 (https\\://standards.digital.health.nz/ns/nhi-id)
 
 ## Ynglŷn â'r ddogfen hon
 
@@ -384,7 +384,7 @@ exports[`Markdown export > matches the snapshot for every fixture in cy-001 > bu
 
 | Eitem | Disgrifiad | Statws | Dyddiad | Dogfen ffynhonnell | Codau |
 | --- | --- | --- | --- | --- | --- |
-| Do Not Resuscitate | Not for resuscitation | Gweithredol | 1 Medi 2021 | Advance Directive Document | http://terminology.hl7.org/CodeSystem/consentcategorycodes dnr |
+| Do Not Resuscitate | Not for resuscitation | Gweithredol | 1 Medi 2021 | Advance Directive Document | http\\://terminology.hl7.org/CodeSystem/consentcategorycodes dnr |
 
 **Naratif:**
 
@@ -394,7 +394,7 @@ exports[`Markdown export > matches the snapshot for every fixture in cy-001 > bu
 
 | Eitem | Disgrifiad | Statws | Dyddiad | Dogfen ffynhonnell | Codau |
 | --- | --- | --- | --- | --- | --- |
-| Do Not Resuscitate | Not for resuscitation | Gweithredol | 1 Medi 2021 | Advance Directive Document | http://terminology.hl7.org/CodeSystem/consentcategorycodes dnr |
+| Do Not Resuscitate | Not for resuscitation | Gweithredol | 1 Medi 2021 | Advance Directive Document | http\\://terminology.hl7.org/CodeSystem/consentcategorycodes dnr |
 
 **Naratif:**
 
@@ -438,7 +438,7 @@ exports[`Markdown export > matches the snapshot for every fixture in cy-001 > bu
 
 | Eitem | Statws | Dyddiad | Gweithgareddau | Codau |
 | --- | --- | --- | --- | --- |
-| Manage obesity and weight loss | Gweithredol | Tan 1 Meh 2017 | Weight Measured |   |
+| Manage obesity and weight loss | Gweithredol | Tan 1 Meh 2017 | Weight Measured | |
 
 **Naratif:**
 
@@ -528,7 +528,7 @@ exports[`Markdown export > matches the snapshot for every fixture in cy-001 > bu
 - **Enw:** James Judge
 - **Dyddiad geni:** 25 Ebr 1985 (41 o flynyddoedd)
 - **Rhywedd:** Gwryw
-- **Dynodwyr:** AAA1234 (https://standards.digital.health.nz/ns/nhi-id)
+- **Dynodwyr:** AAA1234 (https\\://standards.digital.health.nz/ns/nhi-id)
 
 ## Ynglŷn â'r ddogfen hon
 
@@ -542,7 +542,7 @@ exports[`Markdown export > matches the snapshot for every fixture in cy-001 > bu
 
 ## Alergeddau ac anoddefiadau
 
-*Gwybodaeth ddim ar gael — No information available*
+Gwybodaeth ddim ar gael — No information available
 
 **Naratif:**
 
@@ -550,7 +550,7 @@ exports[`Markdown export > matches the snapshot for every fixture in cy-001 > bu
 
 ## Rhestr problemau
 
-*Gwybodaeth ddim ar gael — No information available*
+Gwybodaeth ddim ar gael — No information available
 
 **Naratif:**
 
@@ -558,7 +558,7 @@ exports[`Markdown export > matches the snapshot for every fixture in cy-001 > bu
 
 ## Crynodeb o feddyginiaethau
 
-*Gwybodaeth ddim ar gael — No information available*
+Gwybodaeth ddim ar gael — No information available
 
 **Naratif:**
 
@@ -643,7 +643,7 @@ exports[`Markdown export > matches the snapshot for every fixture in en-GB > IPS
 
 | Condition | Clinical status | Verification status | Severity | Onset | Resolved | Codes |
 | --- | --- | --- | --- | --- | --- | --- |
-| Malignant tumor of breast | Remission | Confirmed | Severe | Jan 2015 | Mar 2015 | SNOMED CT 254837009 · http://terminology.hl7.org/CodeSystem/icd-o-3 8500/3 |
+| Malignant tumor of breast | Remission | Confirmed | Severe | Jan 2015 | Mar 2015 | SNOMED CT 254837009 · http\\://terminology.hl7.org/CodeSystem/icd-o-3 8500/3 |
 
 **Narrative:**
 
@@ -651,7 +651,7 @@ exports[`Markdown export > matches the snapshot for every fixture in en-GB > IPS
 
 ## Plan of care
 
-*No structured entries. See the narrative from the document.*
+No structured entries. See the narrative from the document.
 
 **Narrative:**
 
@@ -661,7 +661,7 @@ exports[`Markdown export > matches the snapshot for every fixture in en-GB > IPS
 
 | Test or observation | Result | Date | Codes |
 | --- | --- | --- | --- |
-| Blood typing | ABO and Rh group \\[Type\\] in Blood: Blood group A Rh(D) positive; C Ab \\[Presence\\] in Serum or Plasma: Positive; E Ab \\[Presence\\] in Serum or Plasma: Positive; little c Ab \\[Presence\\] in Serum or Plasma: Negative | 10 Oct 2015 |   |
+| Blood typing | ABO and Rh group \\[Type\\] in Blood: Blood group A Rh(D) positive; C Ab \\[Presence\\] in Serum or Plasma: Positive; E Ab \\[Presence\\] in Serum or Plasma: Positive; little c Ab \\[Presence\\] in Serum or Plasma: Negative | 10 Oct 2015 | |
 | Hemoglobin A1c/Hemoglobin.total in Blood by HPLC | 7.5 % | 10 Nov 2017, 07:20 | LOINC 17856-6 |
 | Bacteria identified in Isolate | Methicillin resistant Staphylococcus aureus | 10 Dec 2017, 07:20 | LOINC 42803-7 |
 
@@ -744,7 +744,7 @@ exports[`Markdown export > matches the snapshot for every fixture in en-GB > IPS
 
 | Condition | Clinical status | Verification status | Severity | Onset | Resolved | Codes |
 | --- | --- | --- | --- | --- | --- | --- |
-| Malignant tumor of breast | Remission | Confirmed | Severe | Jan 2015 | Mar 2015 | SNOMED CT 254837009 · http://terminology.hl7.org/CodeSystem/icd-o-3 8500/3 |
+| Malignant tumor of breast | Remission | Confirmed | Severe | Jan 2015 | Mar 2015 | SNOMED CT 254837009 · http\\://terminology.hl7.org/CodeSystem/icd-o-3 8500/3 |
 
 **Narrative:**
 
@@ -752,7 +752,7 @@ exports[`Markdown export > matches the snapshot for every fixture in en-GB > IPS
 
 ## Plan of care
 
-*No structured entries. See the narrative from the document.*
+No structured entries. See the narrative from the document.
 
 **Narrative:**
 
@@ -762,7 +762,7 @@ exports[`Markdown export > matches the snapshot for every fixture in en-GB > IPS
 
 | Test or observation | Result | Date | Codes |
 | --- | --- | --- | --- |
-| Blood typing | ABO and Rh group \\[Type\\] in Blood: Blood group A Rh(D) positive; C Ab \\[Presence\\] in Serum or Plasma: Positive; E Ab \\[Presence\\] in Serum or Plasma: Positive; little c Ab \\[Presence\\] in Serum or Plasma: Negative | 10 Oct 2015 |   |
+| Blood typing | ABO and Rh group \\[Type\\] in Blood: Blood group A Rh(D) positive; C Ab \\[Presence\\] in Serum or Plasma: Positive; E Ab \\[Presence\\] in Serum or Plasma: Positive; little c Ab \\[Presence\\] in Serum or Plasma: Negative | 10 Oct 2015 | |
 | Hemoglobin A1c/Hemoglobin.total in Blood by HPLC | 7.5 % | 10 Nov 2017, 07:20 | LOINC 17856-6 |
 | Bacteria identified in Isolate | Methicillin resistant Staphylococcus aureus | 10 Dec 2017, 07:20 | LOINC 42803-7 |
 
@@ -808,7 +808,7 @@ exports[`Markdown export > matches the snapshot for every fixture in en-GB > bun
 - **Name:** Patricia JORDANA
 - **Date of birth:** 30 Sept 1956 (70 years)
 - **Gender:** Female
-- **Identifiers:** ABC1234 (https://standards.digital.health.nz/ns/nhi-id)
+- **Identifiers:** ABC1234 (https\\://standards.digital.health.nz/ns/nhi-id)
 
 ## About this document
 
@@ -970,7 +970,7 @@ exports[`Markdown export > matches the snapshot for every fixture in en-GB > bun
 
 | Item | Description | Status | Date | Source document | Codes |
 | --- | --- | --- | --- | --- | --- |
-| Do Not Resuscitate | Not for resuscitation | Active | 1 Sept 2021 | Advance Directive Document | http://terminology.hl7.org/CodeSystem/consentcategorycodes dnr |
+| Do Not Resuscitate | Not for resuscitation | Active | 1 Sept 2021 | Advance Directive Document | http\\://terminology.hl7.org/CodeSystem/consentcategorycodes dnr |
 
 **Narrative:**
 
@@ -980,7 +980,7 @@ exports[`Markdown export > matches the snapshot for every fixture in en-GB > bun
 
 | Item | Description | Status | Date | Source document | Codes |
 | --- | --- | --- | --- | --- | --- |
-| Do Not Resuscitate | Not for resuscitation | Active | 1 Sept 2021 | Advance Directive Document | http://terminology.hl7.org/CodeSystem/consentcategorycodes dnr |
+| Do Not Resuscitate | Not for resuscitation | Active | 1 Sept 2021 | Advance Directive Document | http\\://terminology.hl7.org/CodeSystem/consentcategorycodes dnr |
 
 **Narrative:**
 
@@ -1024,7 +1024,7 @@ exports[`Markdown export > matches the snapshot for every fixture in en-GB > bun
 
 | Item | Status | Date | Activities | Codes |
 | --- | --- | --- | --- | --- |
-| Manage obesity and weight loss | Active | Until 1 Jun 2017 | Weight Measured |   |
+| Manage obesity and weight loss | Active | Until 1 Jun 2017 | Weight Measured | |
 
 **Narrative:**
 
@@ -1114,7 +1114,7 @@ exports[`Markdown export > matches the snapshot for every fixture in en-GB > bun
 - **Name:** James Judge
 - **Date of birth:** 25 Apr 1985 (41 years)
 - **Gender:** Male
-- **Identifiers:** AAA1234 (https://standards.digital.health.nz/ns/nhi-id)
+- **Identifiers:** AAA1234 (https\\://standards.digital.health.nz/ns/nhi-id)
 
 ## About this document
 
@@ -1128,7 +1128,7 @@ exports[`Markdown export > matches the snapshot for every fixture in en-GB > bun
 
 ## Allergies and intolerances
 
-*Information unavailable — No information available*
+Information unavailable — No information available
 
 **Narrative:**
 
@@ -1136,7 +1136,7 @@ exports[`Markdown export > matches the snapshot for every fixture in en-GB > bun
 
 ## Problem list
 
-*Information unavailable — No information available*
+Information unavailable — No information available
 
 **Narrative:**
 
@@ -1144,7 +1144,7 @@ exports[`Markdown export > matches the snapshot for every fixture in en-GB > bun
 
 ## Medication summary
 
-*Information unavailable — No information available*
+Information unavailable — No information available
 
 **Narrative:**
 
@@ -1229,7 +1229,7 @@ exports[`Markdown export > matches the snapshot for every fixture in en-US > IPS
 
 | Condition | Clinical status | Verification status | Severity | Onset | Resolved | Codes |
 | --- | --- | --- | --- | --- | --- | --- |
-| Malignant tumor of breast | Remission | Confirmed | Severe | Jan 2015 | Mar 2015 | SNOMED CT 254837009 · http://terminology.hl7.org/CodeSystem/icd-o-3 8500/3 |
+| Malignant tumor of breast | Remission | Confirmed | Severe | Jan 2015 | Mar 2015 | SNOMED CT 254837009 · http\\://terminology.hl7.org/CodeSystem/icd-o-3 8500/3 |
 
 **Narrative:**
 
@@ -1237,7 +1237,7 @@ exports[`Markdown export > matches the snapshot for every fixture in en-US > IPS
 
 ## Plan of care
 
-*No structured entries. See the narrative from the document.*
+No structured entries. See the narrative from the document.
 
 **Narrative:**
 
@@ -1247,7 +1247,7 @@ exports[`Markdown export > matches the snapshot for every fixture in en-US > IPS
 
 | Test or observation | Result | Date | Codes |
 | --- | --- | --- | --- |
-| Blood typing | ABO and Rh group \\[Type\\] in Blood: Blood group A Rh(D) positive; C Ab \\[Presence\\] in Serum or Plasma: Positive; E Ab \\[Presence\\] in Serum or Plasma: Positive; little c Ab \\[Presence\\] in Serum or Plasma: Negative | Oct 10, 2015 |   |
+| Blood typing | ABO and Rh group \\[Type\\] in Blood: Blood group A Rh(D) positive; C Ab \\[Presence\\] in Serum or Plasma: Positive; E Ab \\[Presence\\] in Serum or Plasma: Positive; little c Ab \\[Presence\\] in Serum or Plasma: Negative | Oct 10, 2015 | |
 | Hemoglobin A1c/Hemoglobin.total in Blood by HPLC | 7.5 % | Nov 10, 2017, 07:20 AM | LOINC 17856-6 |
 | Bacteria identified in Isolate | Methicillin resistant Staphylococcus aureus | Dec 10, 2017, 07:20 AM | LOINC 42803-7 |
 
@@ -1330,7 +1330,7 @@ exports[`Markdown export > matches the snapshot for every fixture in en-US > IPS
 
 | Condition | Clinical status | Verification status | Severity | Onset | Resolved | Codes |
 | --- | --- | --- | --- | --- | --- | --- |
-| Malignant tumor of breast | Remission | Confirmed | Severe | Jan 2015 | Mar 2015 | SNOMED CT 254837009 · http://terminology.hl7.org/CodeSystem/icd-o-3 8500/3 |
+| Malignant tumor of breast | Remission | Confirmed | Severe | Jan 2015 | Mar 2015 | SNOMED CT 254837009 · http\\://terminology.hl7.org/CodeSystem/icd-o-3 8500/3 |
 
 **Narrative:**
 
@@ -1338,7 +1338,7 @@ exports[`Markdown export > matches the snapshot for every fixture in en-US > IPS
 
 ## Plan of care
 
-*No structured entries. See the narrative from the document.*
+No structured entries. See the narrative from the document.
 
 **Narrative:**
 
@@ -1348,7 +1348,7 @@ exports[`Markdown export > matches the snapshot for every fixture in en-US > IPS
 
 | Test or observation | Result | Date | Codes |
 | --- | --- | --- | --- |
-| Blood typing | ABO and Rh group \\[Type\\] in Blood: Blood group A Rh(D) positive; C Ab \\[Presence\\] in Serum or Plasma: Positive; E Ab \\[Presence\\] in Serum or Plasma: Positive; little c Ab \\[Presence\\] in Serum or Plasma: Negative | Oct 10, 2015 |   |
+| Blood typing | ABO and Rh group \\[Type\\] in Blood: Blood group A Rh(D) positive; C Ab \\[Presence\\] in Serum or Plasma: Positive; E Ab \\[Presence\\] in Serum or Plasma: Positive; little c Ab \\[Presence\\] in Serum or Plasma: Negative | Oct 10, 2015 | |
 | Hemoglobin A1c/Hemoglobin.total in Blood by HPLC | 7.5 % | Nov 10, 2017, 07:20 AM | LOINC 17856-6 |
 | Bacteria identified in Isolate | Methicillin resistant Staphylococcus aureus | Dec 10, 2017, 07:20 AM | LOINC 42803-7 |
 
@@ -1394,7 +1394,7 @@ exports[`Markdown export > matches the snapshot for every fixture in en-US > bun
 - **Name:** Patricia JORDANA
 - **Date of birth:** Sep 30, 1956 (70 years)
 - **Gender:** Female
-- **Identifiers:** ABC1234 (https://standards.digital.health.nz/ns/nhi-id)
+- **Identifiers:** ABC1234 (https\\://standards.digital.health.nz/ns/nhi-id)
 
 ## About this document
 
@@ -1556,7 +1556,7 @@ exports[`Markdown export > matches the snapshot for every fixture in en-US > bun
 
 | Item | Description | Status | Date | Source document | Codes |
 | --- | --- | --- | --- | --- | --- |
-| Do Not Resuscitate | Not for resuscitation | Active | Sep 1, 2021 | Advance Directive Document | http://terminology.hl7.org/CodeSystem/consentcategorycodes dnr |
+| Do Not Resuscitate | Not for resuscitation | Active | Sep 1, 2021 | Advance Directive Document | http\\://terminology.hl7.org/CodeSystem/consentcategorycodes dnr |
 
 **Narrative:**
 
@@ -1566,7 +1566,7 @@ exports[`Markdown export > matches the snapshot for every fixture in en-US > bun
 
 | Item | Description | Status | Date | Source document | Codes |
 | --- | --- | --- | --- | --- | --- |
-| Do Not Resuscitate | Not for resuscitation | Active | Sep 1, 2021 | Advance Directive Document | http://terminology.hl7.org/CodeSystem/consentcategorycodes dnr |
+| Do Not Resuscitate | Not for resuscitation | Active | Sep 1, 2021 | Advance Directive Document | http\\://terminology.hl7.org/CodeSystem/consentcategorycodes dnr |
 
 **Narrative:**
 
@@ -1610,7 +1610,7 @@ exports[`Markdown export > matches the snapshot for every fixture in en-US > bun
 
 | Item | Status | Date | Activities | Codes |
 | --- | --- | --- | --- | --- |
-| Manage obesity and weight loss | Active | Until Jun 1, 2017 | Weight Measured |   |
+| Manage obesity and weight loss | Active | Until Jun 1, 2017 | Weight Measured | |
 
 **Narrative:**
 
@@ -1700,7 +1700,7 @@ exports[`Markdown export > matches the snapshot for every fixture in en-US > bun
 - **Name:** James Judge
 - **Date of birth:** Apr 25, 1985 (41 years)
 - **Gender:** Male
-- **Identifiers:** AAA1234 (https://standards.digital.health.nz/ns/nhi-id)
+- **Identifiers:** AAA1234 (https\\://standards.digital.health.nz/ns/nhi-id)
 
 ## About this document
 
@@ -1714,7 +1714,7 @@ exports[`Markdown export > matches the snapshot for every fixture in en-US > bun
 
 ## Allergies and intolerances
 
-*Information unavailable — No information available*
+Information unavailable — No information available
 
 **Narrative:**
 
@@ -1722,7 +1722,7 @@ exports[`Markdown export > matches the snapshot for every fixture in en-US > bun
 
 ## Problem list
 
-*Information unavailable — No information available*
+Information unavailable — No information available
 
 **Narrative:**
 
@@ -1730,7 +1730,7 @@ exports[`Markdown export > matches the snapshot for every fixture in en-US > bun
 
 ## Medication summary
 
-*Information unavailable — No information available*
+Information unavailable — No information available
 
 **Narrative:**
 
@@ -1815,7 +1815,7 @@ exports[`Markdown export > matches the snapshot for every fixture in zh-CN > IPS
 
 | 疾病/问题 | 临床状态 | 确认状态 | 严重程度 | 发病 | 缓解 | 代码 |
 | --- | --- | --- | --- | --- | --- | --- |
-| Malignant tumor of breast | 缓解 | 已确认 | Severe | 2015年1月 | 2015年3月 | SNOMED CT 254837009 · http://terminology.hl7.org/CodeSystem/icd-o-3 8500/3 |
+| Malignant tumor of breast | 缓解 | 已确认 | Severe | 2015年1月 | 2015年3月 | SNOMED CT 254837009 · http\\://terminology.hl7.org/CodeSystem/icd-o-3 8500/3 |
 
 **叙述文本:**
 
@@ -1823,7 +1823,7 @@ exports[`Markdown export > matches the snapshot for every fixture in zh-CN > IPS
 
 ## 诊疗计划
 
-*无结构化条目。请参阅文档中的叙述文本。*
+无结构化条目。请参阅文档中的叙述文本。
 
 **叙述文本:**
 
@@ -1833,7 +1833,7 @@ exports[`Markdown export > matches the snapshot for every fixture in zh-CN > IPS
 
 | 检验或观察项目 | 结果 | 日期 | 代码 |
 | --- | --- | --- | --- |
-| Blood typing | ABO and Rh group \\[Type\\] in Blood: Blood group A Rh(D) positive; C Ab \\[Presence\\] in Serum or Plasma: Positive; E Ab \\[Presence\\] in Serum or Plasma: Positive; little c Ab \\[Presence\\] in Serum or Plasma: Negative | 2015年10月10日 |   |
+| Blood typing | ABO and Rh group \\[Type\\] in Blood: Blood group A Rh(D) positive; C Ab \\[Presence\\] in Serum or Plasma: Positive; E Ab \\[Presence\\] in Serum or Plasma: Positive; little c Ab \\[Presence\\] in Serum or Plasma: Negative | 2015年10月10日 | |
 | Hemoglobin A1c/Hemoglobin.total in Blood by HPLC | 7.5 % | 2017年11月10日 07:20 | LOINC 17856-6 |
 | Bacteria identified in Isolate | Methicillin resistant Staphylococcus aureus | 2017年12月10日 07:20 | LOINC 42803-7 |
 
@@ -1916,7 +1916,7 @@ exports[`Markdown export > matches the snapshot for every fixture in zh-CN > IPS
 
 | 疾病/问题 | 临床状态 | 确认状态 | 严重程度 | 发病 | 缓解 | 代码 |
 | --- | --- | --- | --- | --- | --- | --- |
-| Malignant tumor of breast | 缓解 | 已确认 | Severe | 2015年1月 | 2015年3月 | SNOMED CT 254837009 · http://terminology.hl7.org/CodeSystem/icd-o-3 8500/3 |
+| Malignant tumor of breast | 缓解 | 已确认 | Severe | 2015年1月 | 2015年3月 | SNOMED CT 254837009 · http\\://terminology.hl7.org/CodeSystem/icd-o-3 8500/3 |
 
 **叙述文本:**
 
@@ -1924,7 +1924,7 @@ exports[`Markdown export > matches the snapshot for every fixture in zh-CN > IPS
 
 ## 诊疗计划
 
-*无结构化条目。请参阅文档中的叙述文本。*
+无结构化条目。请参阅文档中的叙述文本。
 
 **叙述文本:**
 
@@ -1934,7 +1934,7 @@ exports[`Markdown export > matches the snapshot for every fixture in zh-CN > IPS
 
 | 检验或观察项目 | 结果 | 日期 | 代码 |
 | --- | --- | --- | --- |
-| Blood typing | ABO and Rh group \\[Type\\] in Blood: Blood group A Rh(D) positive; C Ab \\[Presence\\] in Serum or Plasma: Positive; E Ab \\[Presence\\] in Serum or Plasma: Positive; little c Ab \\[Presence\\] in Serum or Plasma: Negative | 2015年10月10日 |   |
+| Blood typing | ABO and Rh group \\[Type\\] in Blood: Blood group A Rh(D) positive; C Ab \\[Presence\\] in Serum or Plasma: Positive; E Ab \\[Presence\\] in Serum or Plasma: Positive; little c Ab \\[Presence\\] in Serum or Plasma: Negative | 2015年10月10日 | |
 | Hemoglobin A1c/Hemoglobin.total in Blood by HPLC | 7.5 % | 2017年11月10日 07:20 | LOINC 17856-6 |
 | Bacteria identified in Isolate | Methicillin resistant Staphylococcus aureus | 2017年12月10日 07:20 | LOINC 42803-7 |
 
@@ -1980,7 +1980,7 @@ exports[`Markdown export > matches the snapshot for every fixture in zh-CN > bun
 - **姓名:** Patricia JORDANA
 - **出生日期:** 1956年9月30日 (70 岁)
 - **性别:** 女
-- **标识符:** ABC1234 (https://standards.digital.health.nz/ns/nhi-id)
+- **标识符:** ABC1234 (https\\://standards.digital.health.nz/ns/nhi-id)
 
 ## 关于本文档
 
@@ -2142,7 +2142,7 @@ exports[`Markdown export > matches the snapshot for every fixture in zh-CN > bun
 
 | 项目 | 描述 | 状态 | 日期 | 源文档 | 代码 |
 | --- | --- | --- | --- | --- | --- |
-| Do Not Resuscitate | Not for resuscitation | 活动 | 2021年9月1日 | Advance Directive Document | http://terminology.hl7.org/CodeSystem/consentcategorycodes dnr |
+| Do Not Resuscitate | Not for resuscitation | 活动 | 2021年9月1日 | Advance Directive Document | http\\://terminology.hl7.org/CodeSystem/consentcategorycodes dnr |
 
 **叙述文本:**
 
@@ -2152,7 +2152,7 @@ exports[`Markdown export > matches the snapshot for every fixture in zh-CN > bun
 
 | 项目 | 描述 | 状态 | 日期 | 源文档 | 代码 |
 | --- | --- | --- | --- | --- | --- |
-| Do Not Resuscitate | Not for resuscitation | 活动 | 2021年9月1日 | Advance Directive Document | http://terminology.hl7.org/CodeSystem/consentcategorycodes dnr |
+| Do Not Resuscitate | Not for resuscitation | 活动 | 2021年9月1日 | Advance Directive Document | http\\://terminology.hl7.org/CodeSystem/consentcategorycodes dnr |
 
 **叙述文本:**
 
@@ -2196,7 +2196,7 @@ exports[`Markdown export > matches the snapshot for every fixture in zh-CN > bun
 
 | 项目 | 状态 | 日期 | 活动 | 代码 |
 | --- | --- | --- | --- | --- |
-| Manage obesity and weight loss | 活动 | 至 2017年6月1日 止 | Weight Measured |   |
+| Manage obesity and weight loss | 活动 | 至 2017年6月1日 止 | Weight Measured | |
 
 **叙述文本:**
 
@@ -2286,7 +2286,7 @@ exports[`Markdown export > matches the snapshot for every fixture in zh-CN > bun
 - **姓名:** James Judge
 - **出生日期:** 1985年4月25日 (41 岁)
 - **性别:** 男
-- **标识符:** AAA1234 (https://standards.digital.health.nz/ns/nhi-id)
+- **标识符:** AAA1234 (https\\://standards.digital.health.nz/ns/nhi-id)
 
 ## 关于本文档
 
@@ -2300,7 +2300,7 @@ exports[`Markdown export > matches the snapshot for every fixture in zh-CN > bun
 
 ## 过敏与不耐受
 
-*信息不可用 — No information available*
+信息不可用 — No information available
 
 **叙述文本:**
 
@@ -2308,7 +2308,7 @@ exports[`Markdown export > matches the snapshot for every fixture in zh-CN > bun
 
 ## 问题列表
 
-*信息不可用 — No information available*
+信息不可用 — No information available
 
 **叙述文本:**
 
@@ -2316,7 +2316,7 @@ exports[`Markdown export > matches the snapshot for every fixture in zh-CN > bun
 
 ## 用药摘要
 
-*信息不可用 — No information available*
+信息不可用 — No information available
 
 **叙述文本:**
 

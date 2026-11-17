@@ -29,10 +29,10 @@ app's privacy rules, and are taken up in version 1:
 | Medications, allergies, problems must be present or "none known" | **M-VIEW-3**, **M-VIEW-5**     |
 | Sample data to explore                                  | **M-LOAD-3** (the five IG examples)     |
 | Clear all data                                          | **M-PRIV-3**                            |
+| An encrypted on-device store                            | **M-STORE-1** to **M-STORE-4**          |
 | Section-by-section summary home                         | **M-VIEW-3**                            |
 
 These wait for a later version ([plans.md](../plans.md)): writing and
-editing your own summary (MyIPS's thirteen sections); an encrypted on-device
-store; SMART Health Links and QR codes, scanned or shown, with passcodes;
-a PDF for people; import history and receipts; a display-language picker;
+editing your own summary (MyIPS's thirteen sections); SMART Health Links
+and QR codes, scanned or shown, with passcodes; a PDF for people; import history and receipts; a display-language picker;
 choosing what to share (active and recent only, provenance).

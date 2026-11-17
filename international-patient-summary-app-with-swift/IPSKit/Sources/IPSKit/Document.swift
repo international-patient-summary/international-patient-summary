@@ -12,13 +12,14 @@ public struct Document: Sendable, Identifiable {
     public let sections: [Section]
     let index: [String: JSON]
 
-    /// Check `data` (M-CHECK-1, M-CHECK-2) and read it.
-    public static func open(_ data: Data) -> Result<Document, Refusal> {
-        check(data).map { Document(data: data, bundle: $0) }
+    /// Check `data` (M-CHECK-1, M-CHECK-2) and read it. A summary read back from
+    /// the store (M-STORE-3) keeps the ID it was saved with.
+    public static func open(_ data: Data, id: UUID = UUID()) -> Result<Document, Refusal> {
+        check(data).map { Document(id: id, data: data, bundle: $0) }
     }
 
-    init(data: Data, bundle: JSON) {
-        id = UUID()
+    init(id: UUID = UUID(), data: Data, bundle: JSON) {
+        self.id = id
         self.data = data
         self.bundle = bundle
         let composition = bundle["entry"]?[0]?["resource"] ?? .null
@@ -187,14 +188,18 @@ public struct Entry: Sendable {
     /// Set when the entry is itself a statement of absence ("no known allergies").
     public let absent: SectionState?
     public let criticality: String?
+    /// The entry's own date as the document writes it (ISO 8601), for "most recent
+    /// first" (M-PDF-2): effective, occurrence, performed, onset, timing, or date.
+    public let date: String?
 
     static let unresolved = Entry(
         resourceType: nil, text: "", details: [], resolved: false, absent: nil, criticality: nil)
 
     init(
         resourceType: String?, text: String, details: [(kind: DetailKind, value: String)],
-        resolved: Bool, absent: SectionState?, criticality: String?
+        resolved: Bool, absent: SectionState?, criticality: String?, date: String? = nil
     ) {
+        self.date = date
         self.resourceType = resourceType
         self.text = text
         self.details = details
@@ -208,6 +213,12 @@ public struct Entry: Sendable {
         resourceType = type
         resolved = true
         criticality = type == "AllergyIntolerance" ? r["criticality"]?.text : nil
+        let dated: [JSON?] = [
+            r["effectiveDateTime"], r["effectivePeriod"]?["start"], r["occurrenceDateTime"],
+            r["performedDateTime"], r["performedPeriod"]?["start"], r["onsetDateTime"],
+            r["onsetPeriod"]?["start"], r["timingPeriod"]?["start"], r["date"], r["recordedDate"],
+        ]
+        date = dated.lazy.compactMap { $0?.text }.first
 
         let concept: JSON?
         switch type {

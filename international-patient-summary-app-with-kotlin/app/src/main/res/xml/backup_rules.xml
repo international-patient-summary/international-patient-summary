@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Android 11 and earlier: nothing is backed up (spec M-PRIV-1). -->
+<!-- Android 11 and earlier: nothing is backed up (spec M-PRIV-1, M-STORE-2). -->
 <full-backup-content>
     <exclude domain="root" path="." />
     <exclude domain="file" path="." />

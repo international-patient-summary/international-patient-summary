@@ -232,7 +232,7 @@ Rules for the executing agent:
       and every `yaml-edge/` value; switch `bin/make-yaml-twins` to use it
       and confirm the regenerated twins are unchanged or still deep-equal.
 
-- [ ] **P6-T4 Markdown exporter (`markdown.ts`).** Title, patient block,
+- [x] **P6-T4 Markdown exporter (`markdown.ts`).** Title, patient block,
       document metadata, `##` per section in Composition order, tables,
       absent states in words, required sections always present; options:
       narrative (plain text) and codes; escaping of `|` `*` `_` `#` `<` and
@@ -242,7 +242,11 @@ Rules for the executing agent:
       inert; output passes `markdownlint`.
       Status: implemented; snapshots, the injection test, and a structural
       test (one h1, blank lines around headings and tables, consistent table
-      columns, no trailing spaces) pass. A real `markdownlint` run is still to do.
+      columns, no trailing spaces) pass. markdownlint 0.42.1 (dev only) now runs
+      in `export.test.ts` on every fixture × four locales, default rules but line
+      length (2026-11-17); it found bare URLs (MD034, now escaped so clinical text
+      never becomes a link), emphasis-only absent states (MD036, now plain words)
+      and empty-cell spacing (MD060, now `| |`), all fixed.
 
 - [x] **P6-T5 PDF fonts.** Self-host Noto Sans (regular, bold) and
       Noto Sans SC in `static/fonts/` with OFL licence files; CJK detector

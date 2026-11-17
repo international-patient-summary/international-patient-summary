@@ -62,3 +62,10 @@ A section with another code is shown with its own title ("generic").
 - **M-LOAD-2** Paste: reads the clipboard only when the person taps Paste.
 - **M-LOAD-3** Load examples: the five fixtures, each checked like any
   other document.
+- **M-LOAD-4** Open from another app: a JSON file sent to the app ("Open
+  in", "Open with" or Share from Files, Mail, a browser, a messaging app)
+  opens exactly as if imported (M-LOAD-1): refused by its size before it is
+  read when over 10 MB (M-CHECK-2), then the same check (M-CHECK-1); a
+  refusal shows the same alert (M-LIST-3) and the list does not change. A
+  summary that opens is saved like any other (M-STORE-1); the app keeps no
+  other copy of the file.

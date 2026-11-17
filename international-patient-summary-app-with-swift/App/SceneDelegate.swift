@@ -14,6 +14,20 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.rootViewController = SplitViewController(store: SummaryStore.shared)
         window.makeKeyAndVisible()
         self.window = window
+        // M-LOAD-4: launched by "Open in" from another app.
+        if let url = connectionOptions.urlContexts.first?.url { open(url) }
+    }
+
+    // M-LOAD-4: "Open in" while the app is running.
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        if let url = URLContexts.first?.url { open(url) }
+    }
+
+    private func open(_ url: URL) {
+        guard url.isFileURL, let split = window?.rootViewController as? SplitViewController else { return }
+        // Over any sheet or menu the app had open, so the result is seen.
+        split.dismiss(animated: false)
+        split.openIncoming(url)
     }
 
     // M-PRIV-2: the app switcher shows a cover, never a patient's record.

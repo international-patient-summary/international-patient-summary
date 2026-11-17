@@ -9,7 +9,13 @@ In scope for version 1:
 - Show it: patient banner, document details, sections in order, entries,
   absent and unknown data, narrative as plain text.
 - Share it on request as the exact bytes it was opened from.
-- Keep it in memory only; forget it on request or when the app ends.
+- Group summaries by person, and note each person's relationship to the
+  reader, for families and carers.
+- Keep it on the device, encrypted, across restarts and with no network,
+  until the person deletes it (M-STORE).
 
-Out of scope for version 1: editing, storage, any network use, YAML, FHIR
-profile validation, terminology lookups, PDF, QR codes, accounts.
+Also in scope: a one-page PDF for people (M-PDF).
+
+Out of scope for version 1: editing, storage off the device (cloud,
+backup, sync), any network use, YAML, FHIR
+profile validation, terminology lookups, QR codes, accounts.

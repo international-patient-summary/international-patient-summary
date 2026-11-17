@@ -24,6 +24,9 @@ export function escapeMarkdown(text: string): string {
 			.replace(/&/g, '&amp;')
 			.replace(/</g, '&lt;')
 			.replace(/[\\`*_{}[\]#|~>]/g, (c) => `\\${c}`)
+			// No bare URL becomes a link (markdownlint MD034): clinical text stays inert.
+			.replace(/:\/\//g, '\\://')
+			.replace(/\bwww\./gi, (w) => `${w.slice(0, 3)}\\.`)
 			.trim()
 			// A list or heading marker only matters at the start of a line.
 			.replace(/^([-+]|\d+\.)(\s)/, '\\$1$2')
@@ -31,7 +34,12 @@ export function escapeMarkdown(text: string): string {
 }
 
 function cell(text: string): string {
-	return escapeMarkdown(text) || ' ';
+	return escapeMarkdown(text);
+}
+
+/** One table row in markdownlint's compact style (MD060): `| a | b |`, `| |` when empty. */
+function tableRow(cells: string[]): string {
+	return `|${cells.map((c) => (c ? ` ${c} ` : ' ')).join('|')}|`;
 }
 
 function table(
@@ -55,13 +63,13 @@ function table(
 	if (keys.length === 1 && !includeCodes)
 		return rows.map((r) => `- ${escapeMarkdown(r[0]?.value ?? '')}`);
 	const lines = [
-		`| ${keys.map((k) => cell(labels.get(k) ?? k)).join(' | ')} |`,
-		`| ${keys.map(() => '---').join(' | ')} |`
+		tableRow(keys.map((k) => cell(labels.get(k) ?? k))),
+		tableRow(keys.map(() => '---'))
 	];
 	rows.forEach((row, i) => {
 		const byKey = new Map(row.map((f) => [f.key, f.value]));
 		if (includeCodes) byKey.set('__codes', codesText(models[i].codes));
-		lines.push(`| ${keys.map((k) => cell(byKey.get(k) ?? '')).join(' | ')} |`);
+		lines.push(tableRow(keys.map((k) => cell(byKey.get(k) ?? ''))));
 	});
 	return lines;
 }
@@ -130,7 +138,8 @@ export function exportMarkdown(
 		out.push(`## ${escapeMarkdown(t(`sections.${section.key}.title`))}`, '');
 		const models = section.state === 'known' ? sectionModels(section, doc, ctx) : [];
 		if (models.length === 0) {
-			out.push(`*${escapeMarkdown(stateLabel(section, t))}*`, '');
+			// In words, not emphasis alone (markdownlint MD036: emphasis used as a heading).
+			out.push(escapeMarkdown(stateLabel(section, t)), '');
 		} else {
 			const rows = models.flatMap(rowsOf);
 			out.push(

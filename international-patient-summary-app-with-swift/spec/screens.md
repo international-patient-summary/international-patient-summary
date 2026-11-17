@@ -52,14 +52,15 @@
 
 ## 4.3 About
 
-- **M-ABOUT-1** Says the app is not a medical device; what it keeps (in
-  memory only) and sends (nothing, unless you share); the IPS version
+- **M-ABOUT-1** Says the app is not a medical device; what it keeps (on
+  this device only, encrypted, until deleted: M-STORE-1, M-STORE-2) and
+  sends (nothing, unless you share); the IPS version
   (2.0.1); the app version; and offers **Clear all** (M-PRIV-3).
 
 ## 4.4 Tablets and wide windows
 
-- **M-TAB-1 Side by side.** In a wide window (an iPad, or Android at
-  840 dp and wider) the summaries list stays on the leading side and the
+- **M-TAB-1 Side by side.** In a wide window (an iPad, an unfolded iPhone
+  Duo, or Android at 840 dp and wider) the summaries list stays on the leading side and the
   open summary fills the rest, with no Back. The open summary's row is
   selected; before one is chosen the other side says "Open a summary".
   Deleting or clearing the open summary empties that side too (M-PRIV-3).
@@ -74,3 +75,41 @@
   is refused by its size before it is read (M-CHECK-2), and everything
   else goes through the same check. The list shows that it will take the
   drop. The app keeps no copy of the dropped file.
+- **M-TAB-4 Fold.** On a phone that folds (an iPhone Duo, or an Android
+  foldable), folding or unfolding keeps every open summary, every
+  relationship (M-PEOPLE-3) and the summary being read; the layout follows
+  the new window as M-TAB-1 says.
+
+## 4.5 People: families and carers
+
+One person often reads summaries for several: a parent for their children,
+an adult for their parents, a carer for the people they look after.
+
+- **M-PEOPLE-1 Same person.** Two summaries are about the same person when
+  their patients share an identifier (the same `system` and `value`; an
+  identifier without a `system` links nothing), or
+  when both have a name and a birth date and these are the same (the name
+  as the banner writes it, ignoring case, accents and spacing). The link is
+  transitive. A summary whose patient has no identifier and lacks a name or
+  a birth date is a person of its own. Linking is for display only: no
+  document is merged or changed.
+- **M-PEOPLE-2 Grouped list.** The Summaries list is grouped by person.
+  Each person has a heading (their name from their newest summary, or
+  "Patient not named"; their relationship, if set; and their birth date)
+  with their summaries beneath, newest first. People are in the order of
+  their newest summary. The heading is a heading to the screen reader.
+- **M-PEOPLE-3 Relationship.** Each person can be given their relationship
+  to the person using the app: Me, My partner, My parent, My child, My
+  sibling, My grandparent, My grandchild, Other family, Someone I care for,
+  or Not set (the default). It is chosen from the person's heading (a
+  button labelled "Options for" and the name), and shown in the heading and
+  in the summary's banner. Only one person can be Me: choosing Me for one
+  person sets the last one back to Not set. When a new summary joins two
+  people, or a deletion parts one, each person takes the relationship of
+  their newest summary that has one, and if two are then Me, the one with
+  the newer summary stays Me. A relationship is the app's
+  note, never part of a document: it is saved with the summaries
+  (M-STORE-1), deleted with them (M-PRIV-3), and never shared.
+- **M-PEOPLE-4 Forget a person.** The same button offers Forget this
+  person, which, after confirming, deletes every summary about them and
+  their relationship (M-STORE-4).

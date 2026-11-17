@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Nothing is backed up or transferred (spec M-PRIV-1). -->
+<!-- Nothing is backed up or transferred (spec M-PRIV-1, M-STORE-2): a new phone starts empty. -->
 <data-extraction-rules>
     <cloud-backup>
         <exclude domain="root" />

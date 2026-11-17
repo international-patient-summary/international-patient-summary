@@ -1,11 +1,11 @@
-// Summaries, the home screen (spec M-LIST-1, M-LIST-2, M-LOAD-*): the open
-// summaries newest first, and the three ways to open one.
+// Summaries, the home screen (spec M-LIST-1, M-LIST-2, M-LOAD-*, M-PEOPLE-*):
+// the open summaries grouped by person, newest first, and the three ways to
+// open one.
 package io.github.internationalpatientsummary.app.ui
 
 import android.content.ClipboardManager
 import android.content.Context
 import android.net.Uri
-import android.provider.OpenableColumns
 import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.draganddrop.dragAndDropTarget
 import androidx.compose.runtime.getValue
@@ -17,6 +17,7 @@ import androidx.compose.ui.draganddrop.DragAndDropTarget
 import androidx.compose.ui.draganddrop.mimeTypes
 import androidx.compose.ui.draganddrop.toAndroidDragEvent
 import androidx.compose.ui.graphics.Color
+import io.github.internationalpatientsummary.app.DocumentFiles
 import io.github.internationalpatientsummary.app.Drops
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -38,7 +39,19 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.TextButton
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.size
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.semantics.selected
+import io.github.internationalpatientsummary.app.Person
+import io.github.internationalpatientsummary.app.Relationship
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -71,10 +84,7 @@ import io.github.internationalpatientsummary.app.R
 import io.github.internationalpatientsummary.app.Screen
 import io.github.internationalpatientsummary.app.ips.Format
 import io.github.internationalpatientsummary.app.ips.IpsCheck
-import io.github.internationalpatientsummary.app.ips.Refusal
-import io.github.internationalpatientsummary.app.ips.RefusedException
 import io.github.internationalpatientsummary.app.ips.Summary
-import java.io.IOException
 
 /** The bundled examples (M-LOAD-3), the service's tests/fixtures/. */
 val EXAMPLES = listOf(
@@ -107,6 +117,7 @@ fun rememberOpenActions(viewModel: AppViewModel): OpenActions {
 @Composable
 fun SummariesScreen(viewModel: AppViewModel, actions: OpenActions, selected: Long? = null) {
     val drop = rememberDropTarget(viewModel)
+    var forgetting by rememberSaveable { mutableStateOf<Long?>(null) }
     Scaffold(
         topBar = {
             TopAppBar(
@@ -135,16 +146,126 @@ fun SummariesScreen(viewModel: AppViewModel, actions: OpenActions, selected: Lon
             } else {
                 LazyColumn(contentPadding = PaddingValues(bottom = 16.dp)) {
                     item { ActionRow(actions, Modifier.padding(16.dp)) }
-                    items(viewModel.summaries, key = { it.id }) { summary ->
-                        SummaryRow(
-                            summary = summary,
-                            selected = summary.id == selected,
-                            onOpen = { viewModel.show(Screen.Open(summary.id)) },
-                            onDelete = { viewModel.delete(summary.id) },
-                        )
-                        HorizontalDivider()
+                    viewModel.people.forEach { person ->
+                        item(key = "person-${person.key}") {
+                            PersonHeading(
+                                person = person,
+                                onRelationship = { viewModel.setRelationship(person.newest.id, it) },
+                                onForget = { forgetting = person.newest.id },
+                            )
+                        }
+                        items(person.summaries, key = { it.id }) { summary ->
+                            SummaryRow(
+                                summary = summary,
+                                selected = summary.id == selected,
+                                onOpen = { viewModel.show(Screen.Open(summary.id)) },
+                                onDelete = { viewModel.delete(summary.id) },
+                            )
+                            HorizontalDivider()
+                        }
                     }
                 }
+            }
+        }
+    }
+    // M-PEOPLE-4: forget a person only after confirming.
+    forgetting?.let { id ->
+        val person = viewModel.personOf(id)
+        if (person == null) {
+            forgetting = null
+        } else {
+            val name = personName(person)
+            AlertDialog(
+                onDismissRequest = { forgetting = null },
+                title = {
+                    TrackPopupFocus()
+                    // A dialog is a window above the cover: while covered it leaves out the name.
+                    if (!LocalCovered.current) Text(stringResource(R.string.people_forget_title, name))
+                },
+                text = { Text(stringResource(R.string.people_forget_body)) },
+                confirmButton = {
+                    TextButton(onClick = {
+                        forgetting = null
+                        viewModel.forgetPerson(id)
+                    }) { Text(stringResource(R.string.people_forget_confirm)) }
+                },
+                dismissButton = {
+                    TextButton(onClick = { forgetting = null }) { Text(stringResource(R.string.action_cancel)) }
+                },
+            )
+        }
+    }
+}
+
+/** A person's name from their newest summary (M-PEOPLE-2). */
+@Composable
+fun personName(person: Person): String = person.newest.patient?.name ?: stringResource(R.string.people_not_named)
+
+/**
+ * A person's heading (M-PEOPLE-2): name, relationship and birth date, and a
+ * button for their relationship and Forget this person (M-PEOPLE-3, M-PEOPLE-4).
+ */
+@Composable
+private fun PersonHeading(person: Person, onRelationship: (Relationship) -> Unit, onForget: () -> Unit) {
+    val locale = currentLocale()
+    val name = personName(person)
+    var menu by remember { mutableStateOf(false) }
+    Row(
+        Modifier
+            .fillMaxWidth()
+            .background(MaterialTheme.colorScheme.surfaceContainer)
+            .heightIn(min = 56.dp)
+            .padding(start = 16.dp, end = 4.dp, top = 8.dp, bottom = 8.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Column(Modifier.weight(1f).semantics(mergeDescendants = true) { heading() }) {
+            Text(name, style = MaterialTheme.typography.titleLarge)
+            if (person.relationship != Relationship.NONE) {
+                Text(stringResource(relationshipText(person.relationship)), style = MaterialTheme.typography.bodyMedium)
+            }
+            Format.date(person.newest.patient?.birthDate, locale)?.let {
+                Text(
+                    stringResource(R.string.patient_born, it),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
+        }
+        Box {
+            IconButton(onClick = { menu = true }) {
+                Icon(Icons.Filled.MoreVert, contentDescription = stringResource(R.string.people_options, name))
+            }
+            DropdownMenu(expanded = menu, onDismissRequest = { menu = false }) {
+                TrackPopupFocus()
+                Text(
+                    stringResource(R.string.people_relationship),
+                    style = MaterialTheme.typography.labelLarge,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp).semantics { heading() },
+                )
+                Relationship.entries.forEach { choice ->
+                    val chosen = choice == person.relationship
+                    DropdownMenuItem(
+                        text = { Text(stringResource(relationshipText(choice))) },
+                        onClick = {
+                            menu = false
+                            onRelationship(choice)
+                        },
+                        leadingIcon = {
+                            if (chosen) Icon(Icons.Filled.Check, contentDescription = null) else Spacer(Modifier.size(24.dp))
+                        },
+                        modifier = Modifier.semantics { selected = chosen },
+                    )
+                }
+                HorizontalDivider()
+                DropdownMenuItem(
+                    text = { Text(stringResource(R.string.people_forget)) },
+                    onClick = {
+                        menu = false
+                        onForget()
+                    },
+                    leadingIcon = { Icon(Icons.Filled.Delete, contentDescription = null) },
+                )
             }
         }
     }
@@ -292,17 +413,8 @@ private fun SummaryRow(summary: Summary, selected: Boolean, onOpen: () -> Unit, 
 @Composable
 fun currentLocale(): java.util.Locale = LocalConfiguration.current.locales[0]
 
-/** Read a picked file, refusing one over the limit before reading it all (M-CHECK-2). */
-private fun readDocument(context: Context, uri: Uri): ByteArray {
-    val resolver = context.contentResolver
-    resolver.query(uri, arrayOf(OpenableColumns.SIZE), null, null, null)?.use { cursor ->
-        if (cursor.moveToFirst() && !cursor.isNull(0) && cursor.getLong(0) > IpsCheck.MAX_BYTES) {
-            throw RefusedException(Refusal.TOO_LARGE)
-        }
-    }
-    val input = resolver.openInputStream(uri) ?: throw IOException("no stream")
-    return input.use { IpsCheck.readCapped(it) }
-}
+/** Read a picked or dropped file, refusing one over the limit before reading it all (M-CHECK-2). */
+private fun readDocument(context: Context, uri: Uri): ByteArray = DocumentFiles.read(context.contentResolver, uri)
 
 /** Read the clipboard, only now that the person has tapped Paste (M-LOAD-2). */
 private fun paste(context: Context, viewModel: AppViewModel) {

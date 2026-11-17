@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest';
 import { parse } from 'yaml';
 import { exportFilename } from './filename.ts';
 import { exportJson } from './json.ts';
+import { lint } from 'markdownlint/sync';
 import { escapeMarkdown, exportMarkdown } from './markdown.ts';
 import { exportYaml } from './yaml.ts';
 import { parseText } from '../fhir/parse.ts';
@@ -111,8 +112,31 @@ describe('Markdown export', () => {
 			'Immunizations'
 		])
 			expect(md).toContain(`## ${title}`);
-		expect(md).toContain('*Information unavailable — No information available*');
+		expect(md).toContain('\nInformation unavailable — No information available\n');
 		expect(md).toContain('Not a medical device');
+	});
+
+	// P6-T4: markdownlint's default rules, except line length (table rows and
+	// clinical text are long by nature).
+	it('passes markdownlint for every fixture and locale', () => {
+		const all: string[] = [];
+		for (const locale of ['en-US', 'en-GB', 'cy-001', 'zh-CN'])
+			for (const name of IG_FIXTURES) {
+				const where = `${locale} ${name}`;
+				const md = exportMarkdown(exampleDoc(name), context(locale), {
+					now: NOW,
+					includeCodes: true,
+					includeNarrative: true
+				});
+				const result = lint({ strings: { [where]: md }, config: { default: true, MD013: false } });
+				all.push(
+					...result[where].map(
+						(e) =>
+							`${where}: ${e.lineNumber} ${e.ruleNames[0]} ${e.errorDetail ?? ''} ${e.errorContext ?? ''}`
+					)
+				);
+			}
+		expect(all).toEqual([]);
 	});
 
 	it('is well-formed Markdown for every fixture and locale', () => {

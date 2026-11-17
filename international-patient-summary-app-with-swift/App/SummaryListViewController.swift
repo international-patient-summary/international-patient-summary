@@ -6,6 +6,21 @@ import UniformTypeIdentifiers
 final class SummaryListViewController: UITableViewController, UIDocumentPickerDelegate, UITableViewDropDelegate {
     private let store: SummaryStore
     private var observer: (any NSObjectProtocol)?
+    /// M-PEOPLE-2: one table section per person, as of the last reload.
+    private var people: [Person] = []
+
+    private func document(at indexPath: IndexPath) -> Document {
+        people[indexPath.section].documents[indexPath.row]
+    }
+
+    private func indexPath(of id: Document.ID?) -> IndexPath? {
+        for (section, person) in people.enumerated() {
+            if let row = person.documents.firstIndex(where: { $0.id == id }) {
+                return IndexPath(row: row, section: section)
+            }
+        }
+        return nil
+    }
 
     init(store: SummaryStore) {
         self.store = store
@@ -18,6 +33,9 @@ final class SummaryListViewController: UITableViewController, UIDocumentPickerDe
         super.viewDidLoad()
         title = L10n.text("list.title")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "summary")
+        tableView.register(PersonHeaderView.self, forHeaderFooterViewReuseIdentifier: "person")
+        tableView.sectionHeaderHeight = UITableView.automaticDimension
+        tableView.estimatedSectionHeaderHeight = 56
         tableView.accessibilityIdentifier = "summaries"
         tableView.dropDelegate = self
         let openMenu = UIMenu(children: [
@@ -76,6 +94,7 @@ final class SummaryListViewController: UITableViewController, UIDocumentPickerDe
     func layoutChanged() { reload() }
 
     private func reload() {
+        people = store.people
         tableView.reloadData()
         selectShown()
         guard store.documents.isEmpty else {
@@ -114,6 +133,18 @@ final class SummaryListViewController: UITableViewController, UIDocumentPickerDe
         open(readDocumentFile(at: url))
         // The picker's copy is ours to remove; the summary now lives in memory only.
         try? FileManager.default.removeItem(at: url)
+    }
+
+    /// M-LOAD-4: a file sent from another app ("Open in", Share), read like an import.
+    /// iOS hands the app its own copy (in Documents/Inbox); it is deleted once read, so
+    /// the summary lives only in the store.
+    func openIncoming(_ url: URL) {
+        let scoped = url.startAccessingSecurityScopedResource()
+        defer { if scoped { url.stopAccessingSecurityScopedResource() } }
+        open(readDocumentFile(at: url))
+        if url.path(percentEncoded: false).contains("/Documents/Inbox/") {
+            try? FileManager.default.removeItem(at: url)
+        }
     }
 
     /// A file's bytes, or why not (M-CHECK-2: an oversized file is refused before it is read).
@@ -190,9 +221,9 @@ final class SummaryListViewController: UITableViewController, UIDocumentPickerDe
     /// Beside the open summary (M-TAB-1), its row stays selected.
     private func selectShown() {
         guard let split = splitViewController as? SplitViewController, !split.isCollapsed,
-            let row = store.documents.firstIndex(where: { $0.id == split.shownID })
+            let indexPath = indexPath(of: split.shownID)
         else { return }
-        tableView.selectRow(at: IndexPath(row: row, section: 0), animated: false, scrollPosition: .none)
+        tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
     }
 
     /// M-LIST-3: the problem in words, and its code; the list is unchanged.
@@ -208,15 +239,62 @@ final class SummaryListViewController: UITableViewController, UIDocumentPickerDe
         present(alert, animated: true)
     }
 
-    // MARK: The list (M-LIST-1, M-LIST-2)
+    // MARK: The list (M-LIST-1, M-LIST-2), by person (M-PEOPLE-2)
+
+    override func numberOfSections(in tableView: UITableView) -> Int { people.count }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        store.documents.count
+        people[section].documents.count
+    }
+
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let person = people[section]
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "person") as? PersonHeaderView
+        let name = person.name ?? L10n.text("people.notNamed")
+        let relationship = store.relationship(of: person)
+        header?.set(
+            name: name,
+            details: [
+                relationship == .none ? nil : L10n.relationship(relationship),
+                formatFHIRDate(person.birthDate).map { L10n.text("banner.born", $0) },
+            ].compactMap { $0 }.joined(separator: "\n"),
+            menu: menu(for: person, named: name, relationship: relationship))
+        return header
+    }
+
+    /// M-PEOPLE-3, M-PEOPLE-4: the person's relationship, and Forget this person.
+    private func menu(for person: Person, named name: String, relationship current: Relationship) -> UIMenu {
+        let choices = Relationship.allCases.map { relationship in
+            UIAction(title: L10n.relationship(relationship), state: relationship == current ? .on : .off) {
+                [weak self] _ in self?.store.setRelationship(relationship, for: person)
+            }
+        }
+        let forget = UIAction(
+            title: L10n.text("people.forget"), image: UIImage(systemName: "trash"), attributes: .destructive
+        ) { [weak self] _ in self?.confirmForget(person, named: name) }
+        return UIMenu(
+            title: name,
+            children: [
+                UIMenu(title: L10n.text("people.relationship"), options: .singleSelection, children: choices),
+                UIMenu(options: .displayInline, children: [forget]),
+            ])
+    }
+
+    private func confirmForget(_ person: Person, named name: String) {
+        let alert = UIAlertController(
+            title: L10n.text("people.forget.confirm.title", name), message: L10n.text("people.forget.confirm.body"),
+            preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: L10n.text("cancel"), style: .cancel))
+        alert.addAction(
+            UIAlertAction(title: L10n.text("people.forget.confirm.action"), style: .destructive) { [weak self] _ in
+                self?.store.forget(person)
+            })
+        present(alert, animated: true)
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "summary", for: indexPath)
-        let document = store.documents[indexPath.row]
+        let document = document(at: indexPath)
         var content = UIListContentConfiguration.subtitleCell()
         let title = document.title ?? L10n.text("list.untitled")
         content.text = document.patientName ?? title
@@ -232,13 +310,13 @@ final class SummaryListViewController: UITableViewController, UIDocumentPickerDe
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if splitViewController?.isCollapsed ?? true { tableView.deselectRow(at: indexPath, animated: true) }
-        show(store.documents[indexPath.row])
+        show(document(at: indexPath))
     }
 
     override func tableView(
         _ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
     ) -> UISwipeActionsConfiguration? {
-        let id = store.documents[indexPath.row].id
+        let id = document(at: indexPath).id
         let delete = UIContextualAction(style: .destructive, title: L10n.text("list.delete")) {
             [weak self] _, _, done in
             self?.store.remove(id)
@@ -250,7 +328,7 @@ final class SummaryListViewController: UITableViewController, UIDocumentPickerDe
     override func tableView(
         _ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint
     ) -> UIContextMenuConfiguration? {
-        let id = store.documents[indexPath.row].id
+        let id = document(at: indexPath).id
         return UIContextMenuConfiguration(actionProvider: { [weak self] _ in
             UIMenu(children: [
                 UIAction(
@@ -262,7 +340,7 @@ final class SummaryListViewController: UITableViewController, UIDocumentPickerDe
 
     // VoiceOver users delete without a swipe: the rotor's actions list has Delete too.
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let id = store.documents[indexPath.row].id
+        let id = document(at: indexPath).id
         cell.accessibilityCustomActions = [
             UIAccessibilityCustomAction(name: L10n.text("list.delete")) { [weak self] _ in
                 self?.store.remove(id)
@@ -322,3 +400,61 @@ final class SummaryListViewController: UITableViewController, UIDocumentPickerDe
         return button
     }
 }
+
+/// A person's heading (M-PEOPLE-2): their name, relationship and birth date, and a
+/// button for their relationship and Forget (M-PEOPLE-3, M-PEOPLE-4).
+final class PersonHeaderView: UITableViewHeaderFooterView {
+    private let name = UILabel()
+    private let details = UILabel()
+    private let options = UIButton(type: .system)
+
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
+        name.font = .preferredFont(forTextStyle: .headline)
+        details.font = .preferredFont(forTextStyle: .subheadline)
+        details.textColor = .secondaryLabel
+        for label in [name, details] {
+            label.numberOfLines = 0
+            label.adjustsFontForContentSizeCategory = true
+        }
+        let labels = UIStackView(arrangedSubviews: [name, details])
+        labels.axis = .vertical
+        labels.spacing = 2
+        labels.isAccessibilityElement = true
+        labels.accessibilityTraits = .header
+        options.setImage(UIImage(systemName: "ellipsis.circle"), for: .normal)
+        options.showsMenuAsPrimaryAction = true
+        options.accessibilityIdentifier = "person.options"
+        options.setContentHuggingPriority(.required, for: .horizontal)
+        options.setContentCompressionResistancePriority(.required, for: .horizontal)
+        let row = UIStackView(arrangedSubviews: [labels, options])
+        row.alignment = .center
+        row.spacing = 8
+        row.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(row)
+        self.labels = labels
+        let margins = contentView.layoutMarginsGuide
+        NSLayoutConstraint.activate([
+            row.topAnchor.constraint(equalTo: margins.topAnchor),
+            row.bottomAnchor.constraint(equalTo: margins.bottomAnchor),
+            row.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
+            row.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
+            options.widthAnchor.constraint(greaterThanOrEqualToConstant: 44),
+            options.heightAnchor.constraint(greaterThanOrEqualToConstant: 44),
+        ])
+    }
+
+    required init?(coder: NSCoder) { fatalError("not used") }
+
+    private var labels: UIStackView?
+
+    func set(name: String, details: String, menu: UIMenu) {
+        self.name.text = name
+        self.details.text = details
+        self.details.isHidden = details.isEmpty
+        labels?.accessibilityLabel = details.isEmpty ? name : "\(name), \(details.replacingOccurrences(of: "\n", with: ", "))"
+        options.menu = menu
+        options.accessibilityLabel = L10n.text("people.options", name)
+    }
+}
+

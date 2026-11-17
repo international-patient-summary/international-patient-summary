@@ -1,6 +1,6 @@
 {
   "name": "international-patient-summary-app-with-swift",
-  "description": "Apple iOS app (Swift, UIKit in code, no SwiftUI) that opens and shows HL7 FHIR International Patient Summary documents. In memory only, no network; checks documents exactly as the backend service does.",
+  "description": "Apple iOS app (Swift, UIKit in code, no SwiftUI) that opens and shows HL7 FHIR International Patient Summary documents. Saved on the device only, encrypted (works offline and after a restart), no network; checks documents exactly as the backend service does.",
   "license": "MIT OR Apache-2.0 OR BSD-3-Clause OR GPL-2.0-only OR GPL-3.0-only",
   "language": "Swift",
   "swift_language_mode": "6",
@@ -8,13 +8,13 @@
   "deployment_target": "iOS 18.0",
   "stack": [
     "UIKit (programmatic)",
-    "IPSKit local Swift package (Foundation only)",
+    "IPSKit local Swift package (Foundation, CryptoKit)",
     "Swift Testing",
     "XCUITest"
   ],
   "commands": {
     "test-core": "cd IPSKit && swift test",
-    "test-app": "xcodebuild test -project IPSApp.xcodeproj -scheme IPSApp -destination 'platform=iOS Simulator,name=iPhone 17' CODE_SIGNING_ALLOWED=NO",
+    "test-app": "xcodebuild test -project IPSApp.xcodeproj -scheme IPSApp -destination 'platform=iOS Simulator,name=iPhone 18 Pro Max' CODE_SIGN_IDENTITY=- CODE_SIGNING_REQUIRED=NO",
     "open": "open IPSApp.xcodeproj"
   },
   "documentation": {
@@ -45,7 +45,7 @@
       {
         "name": "Spec §4",
         "path": "spec/screens.md",
-        "description": "List, summary and About screens (M-LIST, M-VIEW, M-ABOUT)"
+        "description": "List, summary and About screens (M-LIST, M-VIEW, M-ABOUT), tablets and folding (M-TAB), people: families and carers (M-PEOPLE)"
       },
       {
         "name": "Spec §5",
@@ -65,7 +65,7 @@
       {
         "name": "Spec §8",
         "path": "spec/ios.md",
-        "description": "Stack, architecture, platform notes"
+        "description": "Stack, architecture, platform notes (iPhone Duo, people), screenshots (newest runtime and iPhone)"
       },
       {
         "name": "Spec §9",
@@ -98,18 +98,43 @@
         "name": "Format",
         "path": "IPSKit/Sources/IPSKit/Format.swift",
         "description": "displayOf, names, dates, ages, quantities, narrative as plain text"
+      },
+      {
+        "name": "People",
+        "path": "IPSKit/Sources/IPSKit/People.swift",
+        "description": "M-PEOPLE-1/3: which summaries are one person; relationships, one Me"
+      },
+      {
+        "name": "DocumentFile",
+        "path": "IPSKit/Sources/IPSKit/DocumentFile.swift",
+        "description": "size first, then bytes (Import and drop)"
+      },
+      {
+        "name": "EncryptedStore",
+        "path": "IPSKit/Sources/IPSKit/EncryptedStore.swift",
+        "description": "M-STORE-1..4: AES-256-GCM sealed summaries and index; StoreKeys"
+      },
+      {
+        "name": "PDFPlan",
+        "path": "IPSKit/Sources/IPSKit/PDFPlan.swift",
+        "description": "M-PDF-1/2: what goes on the one-page PDF and how it is fitted"
       }
     ],
     "App": [
       {
+        "name": "SplitViewController",
+        "path": "App/SplitViewController.swift",
+        "description": "the list beside the summary (iPad, unfolded iPhone Duo); keyboard shortcuts"
+      },
+      {
         "name": "SummaryListViewController",
         "path": "App/SummaryListViewController.swift",
-        "description": "home, import, paste, examples"
+        "description": "home, import, paste, examples; grouped by person, relationship menu, Forget; drop"
       },
       {
         "name": "SummaryViewController",
         "path": "App/SummaryViewController.swift",
-        "description": "alerts, patient, document, sections, share"
+        "description": "alerts, patient (with relationship), document, sections, share (asks whose with several people)"
       },
       {
         "name": "AboutViewController",
@@ -119,12 +144,27 @@
       {
         "name": "SummaryStore",
         "path": "App/SummaryStore.swift",
-        "description": "in-memory store, examples, share file"
+        "description": "the open summaries, people and relationships, saved to the encrypted store; examples, share file"
       },
       {
         "name": "Strings",
         "path": "App/Localizable.xcstrings",
         "description": "every interface string"
+      },
+      {
+        "name": "KeychainKeys",
+        "path": "App/KeychainKeys.swift",
+        "description": "M-STORE-2: the store's key in the Keychain, this device only"
+      },
+      {
+        "name": "IPSApp-Info.plist",
+        "path": "IPSApp-Info.plist",
+        "description": "document types for Open in (M-LOAD-4)"
+      },
+      {
+        "name": "SummaryPDF",
+        "path": "App/SummaryPDF.swift",
+        "description": "M-PDF-1..3: draws the one-page PDF"
       }
     ]
   }

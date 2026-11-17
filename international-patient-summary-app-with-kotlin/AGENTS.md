@@ -27,9 +27,13 @@ edit and a test edit in the same commit, and updates `tasks.md`.
   neither; Android-only matters go in `spec/android.md`.
 - No network: never add `INTERNET` or any network permission, and no
   library that brings one (`ManifestTest` checks the merged manifest).
-- No persistence of patient data: no files (except the share file in
+- Patient data is saved only in the encrypted store (spec M-STORE-1..4):
+  `EncryptedStore`, AES-256-GCM files in `noBackupFilesDir/store/` under a
+  non-exportable Android Keystore key (`KeystoreKeys`), using only
+  `javax.crypto` and `android.security.keystore` (no `androidx.security` or
+  other crypto library). No other file (except the share file in
   `cacheDir/share/`, on a Share tap), no database, no DataStore or
-  SharedPreferences, no backup. `SummaryStore` stays in memory.
+  SharedPreferences for patient data, no backup or device transfer.
 - Never log document content, names or identifiers; the app writes no logs.
 - File names never contain the patient's name or identifiers.
 - Narrative is shown as plain text (`Narrative.plainText`); never a WebView.
@@ -59,7 +63,15 @@ edit and a test edit in the same commit, and updates `tasks.md`.
 ```
 
 All must pass. The JDK must be 21 or later; `local.properties` names the
-SDK. Then stop the daemon (`./gradlew --stop`).
+SDK. When a screen changes, also run the Compose smoke test (`SmokeTest`),
+which needs a running emulator or phone (for example `emulator -avd
+Pixel_10_API_37`) and empties the app's saved summaries:
+
+```sh
+./gradlew :app:connectedDebugAndroidTest
+```
+
+Then stop the daemon (`./gradlew --stop`) and the emulator (`adb emu kill`).
 
 ## Where things are
 
@@ -69,8 +81,13 @@ SDK. Then stop the daemon (`./gradlew --stop`).
 - Absent/unknown mapping: `ips/Absent.kt`
 - Bundle to Summary: `ips/SummaryReader.kt`, `ips/EntryReader.kt`
 - Words for codes, names, dates, quantities: `ips/Format.kt`
+- Same person (M-PEOPLE-1): `ips/People.kt`; relationships: `SummaryStore.kt`
+- Encrypted store (M-STORE): `EncryptedStore.kt`, `KeystoreKeys.kt`; loaded and saved by `AppViewModel.kt`
 - Navigation and state: `AppViewModel.kt`; screens in `ui/`
 - Share: `ShareFiles.kt`, `res/xml/share_paths.xml`
+- One-page PDF (M-PDF-1..3): rules and fitting in `ips/OnePage.kt`; words, layout and drawing in `OnePagePdf.kt`
 - Privacy cover and share sheet: `MainActivity.kt`
+- Open from another app (M-LOAD-4): `Incoming.kt` (which part of the intent), `MainActivity.openIncoming`,
+  `DocumentFiles.kt` (the size-first read shared with Import file and drops); filters in the manifest
 - Fixtures: `app/src/main/assets/examples/` and `app/src/test/resources/fixtures/`
   (the same five files as the service's `tests/fixtures/`)

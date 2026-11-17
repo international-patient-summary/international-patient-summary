@@ -37,6 +37,11 @@ enum L10n {
         Bundle.main.localizedString(forKey: "code.\(code)", value: code, table: nil)
     }
 
+    /// M-PEOPLE-3: a relationship in words ("My parent").
+    static func relationship(_ relationship: Relationship) -> String {
+        text("relationship.\(relationship.rawValue)")
+    }
+
     static func gender(_ code: String) -> String {
         ["male", "female", "other", "unknown"].contains(code) ? text("gender.\(code)") : code
     }

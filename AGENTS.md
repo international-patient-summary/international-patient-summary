@@ -30,8 +30,11 @@ project.
   translations live in `international-patient-summary-app-translations/`:
   after an English string changes, run `translations.py source`, add the
   string to every `languages/*.json` (`missing` lists them), then `generate`.
-- Patient data is never persisted or sent anywhere it was not asked to go, and
-  never logged. The tour uses only published, fictional examples.
+- Patient data is never sent anywhere it was not asked to go, and never
+  logged. The web viewer keeps it in memory only. The mobile apps keep it on
+  the device only, encrypted at rest under a key that never leaves the
+  device, out of backups and device transfer (their spec M-STORE); nothing
+  else persists it. The tour uses only published, fictional examples.
 - Supply chain: Cargo enforces a two-day minimum publish age, and pnpm a
   minimum release age. Never disable either; exempt only an exact version the
   user names (`pnpm-workspace.yaml` `minimumReleaseAgeExclude`; for Cargo,
@@ -54,7 +57,9 @@ cd international-patient-summary-service-with-axum && cargo fmt --check && cargo
 # website
 cd international-patient-summary.github.io && pnpm run lint && pnpm run check && pnpm run build
 # iOS app
-cd international-patient-summary-app-with-swift/IPSKit && swift test && cd .. && xcodebuild test -project IPSApp.xcodeproj -scheme IPSApp -destination 'platform=iOS Simulator,name=iPhone 17' CODE_SIGNING_ALLOWED=NO
+cd international-patient-summary-app-with-swift/IPSKit && swift test && cd .. && xcodebuild test -project IPSApp.xcodeproj -scheme IPSApp -destination 'platform=iOS Simulator,name=iPhone 18 Pro Max' CODE_SIGN_IDENTITY=- CODE_SIGNING_REQUIRED=NO
 # Android app
 cd international-patient-summary-app-with-kotlin && ./gradlew testDebugUnitTest assembleDebug lintDebug
+# Android smoke test (optional; needs a running emulator or phone)
+cd international-patient-summary-app-with-kotlin && ./gradlew connectedDebugAndroidTest
 ```

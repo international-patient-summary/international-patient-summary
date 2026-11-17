@@ -56,6 +56,9 @@ final class SplitViewController: UISplitViewController, UISplitViewControllerDel
         (viewController(for: .primary) as? UINavigationController)?.viewControllers.first as? SummaryListViewController
     }
 
+    /// M-LOAD-4: a file from another app.
+    func openIncoming(_ url: URL) { list?.openIncoming(url) }
+
     @objc private func importFile() { list?.importFile() }
     @objc private func pasteSummary() { list?.paste() }
     @objc private func loadExamples() { list?.loadExamples() }

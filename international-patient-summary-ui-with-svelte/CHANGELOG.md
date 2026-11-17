@@ -2,6 +2,10 @@
 
 ## 0.1.0 — unreleased
 
+- Markdown export passes markdownlint (checked in the tests): URLs in clinical text are
+  escaped so they never become links, absent states are plain words, and empty table
+  cells use the compact `| |` (F-EXP-2).
+
 First implementation of the specification (spec/index.md).
 
 - Public, backendless tour at `/tour/` (spec §6.8): demonstration sign-in as

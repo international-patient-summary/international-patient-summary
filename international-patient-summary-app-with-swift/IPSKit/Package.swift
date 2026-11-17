@@ -1,6 +1,6 @@
 // swift-tools-version: 6.0
-// IPSKit: the app's framework-free core (spec §3). Foundation only, so
-// `swift test` proves it on a Mac without a simulator.
+// IPSKit: the app's UIKit-free core (spec §3). Foundation, and CryptoKit for
+// the encrypted store, so `swift test` proves it on a Mac without a simulator.
 import PackageDescription
 
 let package = Package(

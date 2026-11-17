@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- No INTERNET permission, no backup (spec M-PRIV-1). A unit test keeps it so. -->
+<!-- No INTERNET permission, no backup or device transfer (spec M-PRIV-1, M-STORE-2).
+     The encrypted store is in noBackupFilesDir as well. A unit test keeps it so. -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
@@ -15,10 +16,27 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
+            android:launchMode="singleTask"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <!-- M-LOAD-4: "Open with" and Share from another app, for JSON only (not
+                 text/plain or */*, so the app is not offered for every link or file).
+                 singleTask: one activity and one store, also when sent from another app.
+                 ManifestTest keeps these types the same as Incoming.TYPES. -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="application/json" />
+                <data android:mimeType="application/fhir+json" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="application/json" />
+                <data android:mimeType="application/fhir+json" />
             </intent-filter>
         </activity>
 

@@ -16,7 +16,10 @@ The checklist for [plans.md](plans.md). `[x]` done, `[ ]` open.
 - [x] P1-T10 Lint with warnings as errors, clean
 - [x] P1-T11 CI workflow (`.github/workflows/ci.yml`)
 - [x] P1-T12 README, AGENTS, spec (one file per section, §1–§7 shared with iOS), llms.txt/llms.json
-- [ ] P1-T13 Compose instrumented smoke test (load examples, open one, banner shows the name); until then, spec §9 step 1 by hand
+- [x] P1-T13 Compose instrumented smoke test (load examples, open one, banner shows the name): `SmokeTest` in `app/src/androidTest/`
+  - Verify: `./gradlew :app:connectedDebugAndroidTest` passes on the `Pixel_10_API_37` emulator (2026-11-17): from an
+    empty store, Load examples shows three people and five summaries; Martha's newest opens with her name in the
+    banner and the penicillin alert; About, Clear all leaves the empty state.
 - [ ] P1-T14 Run the manual checks of spec §9 on an API 29 and an API 33+ emulator before the first release
   - Done on an API 33 emulator (2026-11-16): launch, Load examples, open,
     alert first, Share (chooser names `international-patient-summary.json`;
@@ -39,13 +42,30 @@ The checklist for [plans.md](plans.md). `[x]` done, `[ ]` open.
 
 ## Phase 3 — Open from other apps
 
-- [ ] P3-T1 Intent filters for `ACTION_VIEW`/`ACTION_SEND` with JSON types
-- [ ] P3-T2 The same size check and refusal alert for an incoming document
+- [x] P3-T1 Intent filters for `ACTION_VIEW`/`ACTION_SEND` with JSON types (M-LOAD-4)
+      `application/json` and `application/fhir+json` only, category DEFAULT; not `text/plain`, `application/octet-stream` or `*/*`,
+      so the app is not offered for every shared link or file (a shared `EXTRA_TEXT` with a JSON type is still read).
+      `launchMode="singleTask"`: one activity and one store; `onNewIntent` while running; not again on recreation or from Recents.
+      The app's own Share leaves the app out of its chooser.
+      Verify: `ManifestTest.theAppOpensJsonFilesFromOtherAppsOnly`, `oneActivityHoldsTheStore`; `IncomingTest`
+- [x] P3-T2 The same size check and refusal alert for an incoming document (M-CHECK-2, M-LIST-3)
+      `DocumentFiles.read`, shared with Import file and drops; opened through `AppViewModel.open` after the store loads.
+      Verify: `DocumentFilesTest`; spec §9 manual step 13 (API 37 emulator, 2026-11-17)
 
 ## Phase 4 — PDF
 
-- [ ] P4-T1 Port the web viewer's one-page fitting rules to the core, with tests
-- [ ] P4-T2 Draw with `PdfDocument`; share as `application/pdf`
+- [x] P4-T1 Port the web viewer's one-page fitting rules to the core, with tests
+      `ips/OnePage.kt`: blocks, `SectionKey.pdfPriority`, current medications as must-show, most recent first,
+      `plans()` in the web viewer's order, `fit` with a page counter; `Paper` (Letter for en-US), `PdfFile.name`, `PdfInfo.withTitle`.
+      Verify: `ips.OnePageTest` (14 tests, a fake page counter for the fitting and the continued case)
+- [x] P4-T2 Draw with `PdfDocument`; share as `application/pdf`
+      `OnePagePdf.kt` (StaticLayout, system fonts, right to left by the language, isolates for the document's text);
+      the Share menu offers "Share the file (FHIR JSON)" or "Share as PDF", both after M-SHARE-2's question;
+      made off the main thread, written to `cacheDir/share/` and deleted with it. 13 new strings in `values/` only;
+      the 65 languages wait for `translations.py` (`TranslationsTest` and lint's `MissingTranslation` fail until then).
+      Verify: `OnePagePdfTest` and `SmokeTest` (`connectedDebugAndroidTest`, Pixel_10_API_37, 2026-11-17): all five
+      examples fit on one page at 10 pt in en-US (Letter), en-GB and ar (A4), Title metadata the file name (`pdfinfo`);
+      a crafted 150-problem summary is capped to one page at 8 pt; 150 current medicines run to 3 pages marked CONTINUED.
 
 ## Phase 5 — SMART Health Links
 
@@ -55,8 +75,8 @@ The checklist for [plans.md](plans.md). `[x]` done, `[ ]` open.
 
 ## Phase 6 — Keep summaries
 
-- [ ] P6-T1 Spec change to M-PRIV-1 and the root persistence rule
-- [ ] P6-T2 Keystore-backed encrypted store, opt-in; Clear all deletes the key
+- [x] P6-T1 Spec change to M-PRIV-1 and the root persistence rule (done in Phase 11)
+- [x] P6-T2 Keystore-backed encrypted store; always on, not opt-in (Phase 11)
 
 ## Phase 7 — Write your own summary
 
@@ -79,3 +99,24 @@ The checklist for [plans.md](plans.md). `[x]` done, `[ ]` open.
       Seen on a Pixel Tablet API 35 emulator in ar (2026-11-16): landscape (1280 dp) two panes, the list
       on the right; portrait (800 dp) one screen, as M-TAB-1's 840 dp says. The document's own section
       title now shows beneath the app's name (M-VIEW-3).
+
+## Phase 10 — Families and carers
+
+- [x] P10-T1 Same person by identifier, or by name and birth date, transitively (M-PEOPLE-1, `ips.People`, `ips.PeopleTest`)
+- [x] P10-T2 The list grouped by person, with a heading for each (M-PEOPLE-2, `SummaryStore.people`, `SummaryStoreTest`)
+- [x] P10-T3 A relationship per person, in the heading and the banner; only one Me; memory only (M-PEOPLE-3, M-PRIV-1, M-PRIV-3, `SummaryStoreTest`)
+- [x] P10-T4 Forget this person, after confirming (M-PEOPLE-4, `SummaryStoreTest.forgetAPersonForgetsTheirSummariesAndRelationshipOnly`)
+- [x] P10-T5 Share asks first when more than one person is open (M-SHARE-2)
+- [x] P10-T6 Folding keeps the summaries, relationships and the open summary (M-TAB-4, `AppViewModelTest`)
+- [x] P10-T7 Translations of the 21 new strings in every `values-*/` (generated from `../international-patient-summary-app-translations/`)
+
+## Phase 11 — Encrypted on-device store
+
+- [x] P11-T1 `EncryptedStore`: each summary and the index in its own AES-256-GCM file, fresh nonce, file role as AAD, atomic writes, in `noBackupFilesDir/store/` (M-STORE-1, M-STORE-2, `EncryptedStoreTest`)
+- [x] P11-T2 `KeystoreKeys`: AES-256 GCM key in the Android Keystore, randomized encryption required, not exportable (M-STORE-2)
+- [x] P11-T3 Load at launch off the main thread; each summary checked again; a bad summary deleted; a missing key or bad index deletes the store (M-STORE-3, `EncryptedStoreTest`)
+- [x] P11-T4 Save every change in order on one thread; Delete, Forget this person and Clear all delete the files; Clear all deletes the key (M-STORE-4, `EncryptedStoreTest.deleteForgetAndClearRemoveFiles`)
+- [x] P11-T5 Ids kept across launches (`SummaryStore.index`, `restore`)
+- [x] P11-T6 Backup and device transfer stay off (`ManifestTest.theBackupRulesExcludeEveryDomain`)
+- [x] P11-T7 Docs: spec §8, §9, AGENTS.md, README, plans, llms
+- [x] P11-T8 Translations of the changed strings (`empty_body`, `about_privacy_body`, `clear_all_body`, `people_forget_body`) in every `values-*/`

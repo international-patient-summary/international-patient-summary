@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import io.github.internationalpatientsummary.app.Problem
 import io.github.internationalpatientsummary.app.R
+import io.github.internationalpatientsummary.app.Relationship
 import io.github.internationalpatientsummary.app.ips.DetailKind
 import io.github.internationalpatientsummary.app.ips.Refusal
 import io.github.internationalpatientsummary.app.ips.Section
@@ -20,6 +21,19 @@ fun refusalText(refusal: Refusal): Int = when (refusal) {
     Refusal.NO_COMPOSITION -> R.string.refusal_no_composition
     Refusal.NOT_A_PATIENT_SUMMARY -> R.string.refusal_not_a_patient_summary
     Refusal.NO_SUBJECT -> R.string.refusal_no_subject
+}
+
+fun relationshipText(relationship: Relationship): Int = when (relationship) {
+    Relationship.NONE -> R.string.relationship_none
+    Relationship.SELF -> R.string.relationship_self
+    Relationship.PARTNER -> R.string.relationship_partner
+    Relationship.PARENT -> R.string.relationship_parent
+    Relationship.CHILD -> R.string.relationship_child
+    Relationship.SIBLING -> R.string.relationship_sibling
+    Relationship.GRANDPARENT -> R.string.relationship_grandparent
+    Relationship.GRANDCHILD -> R.string.relationship_grandchild
+    Relationship.FAMILY -> R.string.relationship_family
+    Relationship.CARED_FOR -> R.string.relationship_cared_for
 }
 
 fun problemText(problem: Problem): Int = when (problem) {
@@ -113,11 +127,14 @@ val CODE_WORDS: Map<String, Int> = mapOf(
 @Composable
 fun codeText(code: String): String = CODE_WORDS[code]?.let { stringResource(it) } ?: code
 
-@Composable
-fun genderText(code: String): String = when (code) {
-    "male" -> stringResource(R.string.gender_male)
-    "female" -> stringResource(R.string.gender_female)
-    "other" -> stringResource(R.string.gender_other)
-    "unknown" -> stringResource(R.string.gender_unknown)
-    else -> code
+/** The words for a FHIR gender code, or null for a code the app does not know. */
+fun genderWord(code: String): Int? = when (code) {
+    "male" -> R.string.gender_male
+    "female" -> R.string.gender_female
+    "other" -> R.string.gender_other
+    "unknown" -> R.string.gender_unknown
+    else -> null
 }
+
+@Composable
+fun genderText(code: String): String = genderWord(code)?.let { stringResource(it) } ?: code

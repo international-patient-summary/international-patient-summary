@@ -1,6 +1,6 @@
 {
   "name": "international-patient-summary-app-with-kotlin",
-  "description": "Google Android app (Kotlin, Jetpack Compose, Material 3; no Java) that opens and shows HL7 FHIR International Patient Summary documents. In memory only, no network; checks documents exactly as the backend service does.",
+  "description": "Google Android app (Kotlin, Jetpack Compose, Material 3; no Java) that opens and shows HL7 FHIR International Patient Summary documents. Saved on the phone only, encrypted (Android Keystore key), no network; checks documents exactly as the backend service does.",
   "license": "MIT OR Apache-2.0 OR BSD-3-Clause OR GPL-2.0-only OR GPL-3.0-only",
   "language": "Kotlin",
   "kotlin": "2.4.21",
@@ -20,7 +20,8 @@
     "build": "./gradlew :app:assembleDebug",
     "lint": "./gradlew :app:lintDebug",
     "install": "./gradlew :app:installDebug",
-    "verify": "./gradlew :app:testDebugUnitTest :app:assembleDebug :app:lintDebug"
+    "verify": "./gradlew :app:testDebugUnitTest :app:assembleDebug :app:lintDebug",
+    "smoke-test": "./gradlew :app:connectedDebugAndroidTest"
   },
   "documentation": {
     "readme": "README.md",
@@ -50,12 +51,12 @@
       {
         "name": "Spec §4",
         "path": "spec/screens.md",
-        "description": "List, summary and About screens (M-LIST, M-VIEW, M-ABOUT)"
+        "description": "List, summary and About screens (M-LIST, M-VIEW, M-ABOUT, M-TAB, M-PEOPLE)"
       },
       {
         "name": "Spec §5",
         "path": "spec/sharing-and-privacy.md",
-        "description": "M-SHARE, M-PRIV"
+        "description": "M-SHARE, M-PDF (the one-page PDF), M-PRIV, M-STORE (the encrypted store)"
       },
       {
         "name": "Spec §6",
@@ -115,31 +116,66 @@
         "description": "displayOf, names, dates, ages, quantities"
       },
       {
+        "name": "People",
+        "path": "app/src/main/kotlin/io/github/internationalpatientsummary/app/ips/People.kt",
+        "description": "M-PEOPLE-1, which summaries are the same person (identifier, or name and birth date; transitive)"
+      },
+      {
         "name": "Narrative",
         "path": "app/src/main/kotlin/io/github/internationalpatientsummary/app/ips/Narrative.kt",
         "description": "narrative as plain text"
+      },
+      {
+        "name": "OnePage",
+        "path": "app/src/main/kotlin/io/github/internationalpatientsummary/app/ips/OnePage.kt",
+        "description": "M-PDF-1/2, the one-page PDF's blocks, priority, plans and fitting (a page counter passed in); paper, file name, title metadata"
       }
     ],
     "App": [
       {
         "name": "MainActivity",
         "path": "app/src/main/kotlin/io/github/internationalpatientsummary/app/MainActivity.kt",
-        "description": "privacy cover, share sheet, share-file cleanup"
+        "description": "privacy cover, share sheet, share-file cleanup, a document from another app (M-LOAD-4; onCreate and onNewIntent, launchMode singleTask)"
+      },
+      {
+        "name": "Incoming",
+        "path": "app/src/main/kotlin/io/github/internationalpatientsummary/app/Incoming.kt",
+        "description": "M-LOAD-4, which part of an ACTION_VIEW or ACTION_SEND intent holds the document; the JSON types the manifest names"
+      },
+      {
+        "name": "DocumentFiles",
+        "path": "app/src/main/kotlin/io/github/internationalpatientsummary/app/DocumentFiles.kt",
+        "description": "the size-first, capped read of a picked, dropped or sent file (M-CHECK-2)"
       },
       {
         "name": "AppViewModel",
         "path": "app/src/main/kotlin/io/github/internationalpatientsummary/app/AppViewModel.kt",
-        "description": "screen state, open, examples, delete, clear"
+        "description": "screen state (kept through a fold, M-TAB-4), people, open, examples, delete, relationship, forget a person, clear; loads and saves the encrypted store on one thread"
       },
       {
         "name": "SummaryStore",
         "path": "app/src/main/kotlin/io/github/internationalpatientsummary/app/SummaryStore.kt",
-        "description": "in-memory store"
+        "description": "the summaries and each person's relationship in memory (M-PEOPLE-3); index and restore for the encrypted store"
+      },
+      {
+        "name": "EncryptedStore",
+        "path": "app/src/main/kotlin/io/github/internationalpatientsummary/app/EncryptedStore.kt",
+        "description": "M-STORE-1..4: AES-256-GCM files in noBackupFilesDir/store/, checked again at launch"
+      },
+      {
+        "name": "KeystoreKeys",
+        "path": "app/src/main/kotlin/io/github/internationalpatientsummary/app/KeystoreKeys.kt",
+        "description": "the store's non-exportable AES-256 key in the Android Keystore"
       },
       {
         "name": "ShareFiles",
         "path": "app/src/main/kotlin/io/github/internationalpatientsummary/app/ShareFiles.kt",
-        "description": "FileProvider share file"
+        "description": "FileProvider share file, the JSON or the PDF (M-SHARE-1, M-PDF-3)"
+      },
+      {
+        "name": "OnePagePdf",
+        "path": "app/src/main/kotlin/io/github/internationalpatientsummary/app/OnePagePdf.kt",
+        "description": "M-PDF-1/2, the PDF in the reader's words, laid out with StaticLayout and drawn with PdfDocument"
       },
       {
         "name": "SummariesScreen",
@@ -149,7 +185,7 @@
       {
         "name": "SummaryScreen",
         "path": "app/src/main/kotlin/io/github/internationalpatientsummary/app/ui/SummaryScreen.kt",
-        "description": "alert, patient, document, sections"
+        "description": "alert, patient, document, sections; the Share menu (file or PDF)"
       },
       {
         "name": "AboutScreen",
@@ -164,12 +200,22 @@
       {
         "name": "Manifest",
         "path": "app/src/main/AndroidManifest.xml",
-        "description": "no network permission, no backup, FileProvider"
+        "description": "no network permission, no backup or device transfer, FileProvider, Open with and Share filters for application/json and application/fhir+json only"
       },
       {
         "name": "Tests",
         "path": "app/src/test/kotlin/io/github/internationalpatientsummary/app/",
         "description": "JVM unit tests; fixtures in app/src/test/resources/fixtures/"
+      },
+      {
+        "name": "SmokeTest",
+        "path": "app/src/androidTest/kotlin/io/github/internationalpatientsummary/app/SmokeTest.kt",
+        "description": "Compose UI Test on an emulator: load examples, open one, share as PDF, Clear all"
+      },
+      {
+        "name": "OnePagePdfTest",
+        "path": "app/src/androidTest/kotlin/io/github/internationalpatientsummary/app/OnePagePdfTest.kt",
+        "description": "the PDF of every example (en-US, en-GB, ar) and two crafted summaries on an emulator; pdfOut=1 writes them to cacheDir/share/"
       }
     ]
   }

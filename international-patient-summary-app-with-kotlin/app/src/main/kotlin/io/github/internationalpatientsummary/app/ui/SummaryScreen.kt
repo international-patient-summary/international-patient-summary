@@ -4,6 +4,7 @@
 package io.github.internationalpatientsummary.app.ui
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,6 +20,8 @@ import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -42,6 +45,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import io.github.internationalpatientsummary.app.R
+import io.github.internationalpatientsummary.app.Relationship
+import io.github.internationalpatientsummary.app.ShareFormat
 import io.github.internationalpatientsummary.app.ips.AllergyAlert
 import io.github.internationalpatientsummary.app.ips.Detail
 import io.github.internationalpatientsummary.app.ips.DetailKind
@@ -56,7 +61,14 @@ import java.time.LocalDate
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SummaryScreen(summary: Summary, onBack: (() -> Unit)?, onShare: () -> Unit, onDelete: () -> Unit) {
+fun SummaryScreen(
+    summary: Summary,
+    relationship: Relationship,
+    onBack: (() -> Unit)?,
+    /** M-SHARE-1: the file (FHIR JSON) or the one-page PDF (M-PDF-1). */
+    onShare: (ShareFormat) -> Unit,
+    onDelete: () -> Unit,
+) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -77,9 +89,7 @@ fun SummaryScreen(summary: Summary, onBack: (() -> Unit)?, onShare: () -> Unit, 
                     }
                 },
                 actions = {
-                    IconButton(onClick = onShare) {
-                        Icon(Icons.Filled.Share, contentDescription = stringResource(R.string.action_share))
-                    }
+                    ShareMenu(onShare)
                     IconButton(onClick = onDelete) {
                         Icon(Icons.Filled.Delete, contentDescription = stringResource(R.string.action_delete_summary))
                     }
@@ -93,11 +103,39 @@ fun SummaryScreen(summary: Summary, onBack: (() -> Unit)?, onShare: () -> Unit, 
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             if (!summary.allergyAlert.isEmpty) item(key = "alert") { AlertBox(summary.allergyAlert) }
-            item(key = "patient") { Banner(summary.patient) }
+            item(key = "patient") { Banner(summary.patient, relationship) }
             item(key = "document") { DocumentCard(summary.document) }
             itemsIndexed(summary.sections, key = { index, _ -> "section-$index" }) { _, section ->
                 SectionCard(section)
             }
+        }
+    }
+}
+
+/** Share offers two things (M-SHARE-1): the file as it was opened, or a PDF for people. */
+@Composable
+private fun ShareMenu(onShare: (ShareFormat) -> Unit) {
+    var open by rememberSaveable { mutableStateOf(false) }
+    Box {
+        IconButton(onClick = { open = true }) {
+            Icon(Icons.Filled.Share, contentDescription = stringResource(R.string.action_share))
+        }
+        DropdownMenu(expanded = open, onDismissRequest = { open = false }) {
+            TrackPopupFocus()
+            DropdownMenuItem(
+                text = { Text(stringResource(R.string.share_file)) },
+                onClick = {
+                    open = false
+                    onShare(ShareFormat.FILE)
+                },
+            )
+            DropdownMenuItem(
+                text = { Text(stringResource(R.string.share_pdf)) },
+                onClick = {
+                    open = false
+                    onShare(ShareFormat.PDF)
+                },
+            )
         }
     }
 }
@@ -131,7 +169,7 @@ private fun AlertBox(alert: AllergyAlert) {
 }
 
 @Composable
-private fun Banner(patient: PatientInfo?) {
+private fun Banner(patient: PatientInfo?, relationship: Relationship) {
     val locale = currentLocale()
     Card(Modifier.fillMaxWidth()) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
@@ -140,8 +178,15 @@ private fun Banner(patient: PatientInfo?) {
                 style = MaterialTheme.typography.labelLarge,
                 modifier = Modifier.semantics { heading() },
             )
+            // M-PEOPLE-3: the app's note about this person, not part of the document.
+            val relationshipLine: @Composable () -> Unit = {
+                if (relationship != Relationship.NONE) {
+                    Text(stringResource(R.string.patient_relationship, stringResource(relationshipText(relationship))))
+                }
+            }
             if (patient == null) {
                 Text(stringResource(R.string.patient_not_in_document), style = MaterialTheme.typography.titleLarge)
+                relationshipLine()
                 return@Column
             }
             Text(
@@ -149,6 +194,7 @@ private fun Banner(patient: PatientInfo?) {
                 style = MaterialTheme.typography.headlineSmall,
                 fontWeight = FontWeight.SemiBold,
             )
+            relationshipLine()
             Format.date(patient.birthDate, locale)?.let { born ->
                 val age = Format.ageInYears(patient.birthDate, LocalDate.now())
                 Text(

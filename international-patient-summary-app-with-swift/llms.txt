@@ -1,29 +1,29 @@
 # international-patient-summary-app-with-swift
 
-> Apple iOS app (Swift, UIKit in code, no SwiftUI) that opens and shows HL7 FHIR International Patient Summary documents. In memory only, no network; checks documents exactly as the backend service does.
+> Apple iOS app (Swift, UIKit in code, no SwiftUI) that opens and shows HL7 FHIR International Patient Summary documents. Saved on the device only, encrypted (works offline and after a restart), no network; checks documents exactly as the backend service does.
 
 ## Docs
 
-- [README](README.md): privacy, use, build and test, layout
+- [README](README.md): the user guide (getting started, opening, reading, sharing, families and carers, privacy, iPad and iPhone Duo, languages, refusal codes, examples, FAQ, screenshots in `screenshots/`), then build, test and layout
 - [AGENTS](AGENTS.md): rules
 - [Specification](spec/index.md): contents; single source of truth; §1-§7 shared with the Android app
 - [Spec §1](spec/purpose.md): Purpose, and the ideas taken from MyIPS
 - [Spec §2](spec/scope.md): Scope
 - [Spec §3](spec/documents.md): The check (M-CHECK), reading (M-READ), loading (M-LOAD)
-- [Spec §4](spec/screens.md): List, summary and About screens (M-LIST, M-VIEW, M-ABOUT)
+- [Spec §4](spec/screens.md): List, summary and About screens (M-LIST, M-VIEW, M-ABOUT), tablets and folding (M-TAB), people: families and carers (M-PEOPLE)
 - [Spec §5](spec/sharing-and-privacy.md): M-SHARE, M-PRIV
 - [Spec §6](spec/accessibility-and-language.md): M-A11Y, M-I18N
 - [Spec §7](spec/fixtures.md): The five IG examples
-- [Spec §8](spec/ios.md): Stack, architecture, platform notes
+- [Spec §8](spec/ios.md): Stack, architecture, platform notes (iPhone Duo, people), screenshots (newest runtime and iPhone)
 - [Spec §9](spec/verification.md): Requirement-to-test map, manual checks
-- [Plan](plans.md): phases 1-8
+- [Plan](plans.md): phases 1-12
 - [Tasks](tasks.md): checklist
 - [Changelog](CHANGELOG.md)
 
 ## Commands
 
 - test-core: `cd IPSKit && swift test`
-- test-app: `xcodebuild test -project IPSApp.xcodeproj -scheme IPSApp -destination 'platform=iOS Simulator,name=iPhone 17' CODE_SIGNING_ALLOWED=NO`
+- test-app: `xcodebuild test -project IPSApp.xcodeproj -scheme IPSApp -destination 'platform=iOS Simulator,name=iPhone 18 Pro Max' CODE_SIGN_IDENTITY=- CODE_SIGNING_REQUIRED=NO`
 - open: `open IPSApp.xcodeproj`
 
 ## Core (IPSKit)
@@ -33,11 +33,20 @@
 - [Sections](IPSKit/Sources/IPSKit/Sections.swift): IPS 2.0.1 section registry
 - [Absent](IPSKit/Sources/IPSKit/Absent.swift): none known, not recorded, unavailable, omitted
 - [Format](IPSKit/Sources/IPSKit/Format.swift): displayOf, names, dates, ages, quantities, narrative as plain text
+- [EncryptedStore](IPSKit/Sources/IPSKit/EncryptedStore.swift): M-STORE-1..4: AES-256-GCM sealed summaries and index; StoreKeys
+- [PDFPlan](IPSKit/Sources/IPSKit/PDFPlan.swift): M-PDF-1/2: what goes on the one-page PDF and how it is fitted
+- [People](IPSKit/Sources/IPSKit/People.swift): M-PEOPLE-1/3: which summaries are one person; relationships, one Me
+- [DocumentFile](IPSKit/Sources/IPSKit/DocumentFile.swift): size first, then bytes (Import and drop)
 
 ## App
 
-- [SummaryListViewController](App/SummaryListViewController.swift): home, import, paste, examples
-- [SummaryViewController](App/SummaryViewController.swift): alerts, patient, document, sections, share
+- [SummaryListViewController](App/SummaryListViewController.swift): home, import, paste, examples; grouped by person, relationship menu, Forget; drop
+- [IPSApp-Info.plist](IPSApp-Info.plist): document types for Open in (M-LOAD-4)
+- [SplitViewController](App/SplitViewController.swift): the list beside the summary (iPad, unfolded iPhone Duo); keyboard shortcuts
+- [SummaryViewController](App/SummaryViewController.swift): alerts, patient (with relationship), document, sections, share (asks whose with several people)
+- [SummaryPDF](App/SummaryPDF.swift): M-PDF-1..3: draws the one-page PDF
+- [KeychainKeys](App/KeychainKeys.swift): M-STORE-2: the store's key, this device only
 - [AboutViewController](App/AboutViewController.swift): safety, privacy, versions, Clear all
-- [SummaryStore](App/SummaryStore.swift): in-memory store, examples, share file
+- [SummaryStore](App/SummaryStore.swift): the open summaries, people and relationships, saved to the encrypted store; examples, share file
+- [Assets](App/Assets.xcassets): app icon and accent colour; `bin/draw-app-icon.swift` redraws the icon
 - [Strings](App/Localizable.xcstrings): every interface string, in English and 65 localizations

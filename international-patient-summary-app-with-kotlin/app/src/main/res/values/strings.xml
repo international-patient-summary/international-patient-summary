@@ -14,7 +14,7 @@
     <!-- A list row's delete button names its summary, so a screen reader says which. -->
     <string name="action_delete_named">Delete %1$s</string>
     <string name="empty_title">No summaries open</string>
-    <string name="empty_body">Open an International Patient Summary: import a FHIR JSON file, paste one you have copied, or load the five examples. Summaries stay in memory on this phone only.</string>
+    <string name="empty_body">Open an International Patient Summary: import a FHIR JSON file, paste one you have copied, or load the five examples. Summaries are saved on this phone only, encrypted, until you delete them.</string>
     <string name="list_untitled">Untitled summary</string>
     <!-- Beside the list on a wide screen (M-TAB-1), before a summary is chosen. -->
     <string name="detail_placeholder">Open a summary</string>
@@ -39,6 +39,26 @@
     <string name="action_back">Back</string>
     <string name="action_share">Share</string>
     <string name="share_title">Share summary</string>
+    <!-- Share offers two things (M-SHARE-1): keep "FHIR JSON" as is. -->
+    <string name="share_file">Share the file (FHIR JSON)</string>
+    <string name="share_pdf">Share as PDF</string>
+
+    <!-- The one-page PDF for people (M-PDF-1, M-PDF-2) -->
+    <string name="pdf_title">International Patient Summary</string>
+    <string name="pdf_alerts">Alerts and allergies</string>
+    <!-- %1$s: the date and time the PDF was made. -->
+    <string name="pdf_generated">Generated %1$s</string>
+    <!-- %1$s: the date of the source document. -->
+    <string name="pdf_source">Source document: %1$s</string>
+    <string name="pdf_version">IPS 2.0.1 (HL7 FHIR R4)</string>
+    <string name="pdf_not_device">Not a medical device: check important decisions against the source record.</string>
+    <string name="pdf_page">Page %1$d of %2$d</string>
+    <!-- %1$d: how many entries are left out, as "label: number" to avoid plural forms. -->
+    <string name="pdf_more">More not shown: %1$d</string>
+    <string name="pdf_section_not_shown">Section present — not shown on this one-page summary</string>
+    <!-- %1$s: the names of the sections left out to fit one page. -->
+    <string name="pdf_not_shown">Not shown on this page: %1$s</string>
+    <string name="pdf_continued">CONTINUED — this summary exceeds one page</string>
     <string name="alert_heading">Alert</string>
     <string name="alert_high_criticality">High-criticality allergy: %1$s</string>
     <string name="alert_allergies_missing">The allergies section is missing from this document. Allergies are not known from it.</string>
@@ -141,13 +161,35 @@
     <string name="about_safety_heading">Not a medical device</string>
     <string name="about_safety_body">This app shows what a document says and never changes its clinical content. Clinical decisions belong to the clinician reading the source record.</string>
     <string name="about_privacy_heading">Your data</string>
-    <string name="about_privacy_body">Summaries are kept in memory only, and are forgotten when the app ends. The app sends nothing anywhere and has no internet access. A summary leaves the phone only when you tap Share.</string>
+    <string name="about_privacy_body">Summaries are saved on this phone only, encrypted, and kept until you delete them, even after the phone restarts. The app sends nothing anywhere and has no internet access. A summary leaves the phone only when you tap Share.</string>
     <string name="about_versions_heading">Versions</string>
     <string name="about_ips_version">International Patient Summary 2.0.1 (HL7 FHIR R4)</string>
     <string name="about_app_version">App version %1$s</string>
     <string name="action_clear_all">Clear all</string>
     <string name="clear_all_title">Clear all summaries?</string>
-    <string name="clear_all_body">Every open summary will be forgotten. This cannot be undone.</string>
+    <string name="clear_all_body">Every summary will be deleted from this phone. This cannot be undone.</string>
     <string name="clear_all_confirm">Clear all</string>
     <string name="action_cancel">Cancel</string>
+    <!-- People: families and carers, M-PEOPLE-1 to M-PEOPLE-4 and M-SHARE-2 -->
+    <string name="people_not_named">Patient not named</string>
+    <string name="people_options">Options for %1$s</string>
+    <string name="people_relationship">Relationship</string>
+    <string name="relationship_none">Not set</string>
+    <string name="relationship_self">Me</string>
+    <string name="relationship_partner">My partner</string>
+    <string name="relationship_parent">My parent</string>
+    <string name="relationship_child">My child</string>
+    <string name="relationship_sibling">My sibling</string>
+    <string name="relationship_grandparent">My grandparent</string>
+    <string name="relationship_grandchild">My grandchild</string>
+    <string name="relationship_family">Other family</string>
+    <string name="relationship_cared_for">Someone I care for</string>
+    <string name="people_forget">Forget this person</string>
+    <string name="people_forget_title">Forget %1$s?</string>
+    <string name="people_forget_body">Every summary about this person is deleted from this phone. This cannot be undone.</string>
+    <string name="people_forget_confirm">Forget</string>
+    <string name="patient_relationship">Relationship: %1$s</string>
+    <string name="share_confirm_title">Share the summary of %1$s?</string>
+    <string name="share_confirm_body">Summaries of more than one person are open. Check that this is the person you mean to share.</string>
+    <string name="share_confirm_action">Share</string>
 </resources>

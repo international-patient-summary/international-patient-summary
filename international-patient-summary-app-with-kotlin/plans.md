@@ -24,13 +24,19 @@ offers them. Welsh and Arabic plurals need all six quantities.
 
 An `ACTION_VIEW` and `ACTION_SEND` intent filter for `application/json` and
 `application/fhir+json`, so "Open with" from Files, Gmail and Chrome reaches
-the app; the same check and 10 MB limit.
+the app; the same check and 10 MB limit. Done: the same reader as Import
+file (`DocumentFiles`), one activity (`singleTask`) so one store, and no
+`text/plain` or catch-all type (spec §8.3).
 
 ## Phase 4 — A PDF for people
 
-The web viewer's one-page PDF rules (its spec §6.7): identity, alerts,
-allergies and active medications are never trimmed. Drawn with
-`android.graphics.pdf.PdfDocument`, shared like the JSON.
+The web viewer's one-page PDF rules (its spec §6.7, `src/lib/export/pdf.ts`):
+identity, alerts, allergies and current medications are never trimmed.
+Done: the rules (content, priority, plans, fitting with a page counter) in
+the core (`ips/OnePage.kt`) with JVM tests; measured and drawn with
+`StaticLayout` and `android.graphics.pdf.PdfDocument` and the system fonts
+(`OnePagePdf.kt`), no new dependency; Share offers the file or the PDF,
+shared like the JSON (spec M-PDF-1..3, §8.3).
 
 ## Phase 5 — SMART Health Links and QR codes
 
@@ -42,10 +48,8 @@ gave. Showing one's own summary as a QR code follows.
 
 ## Phase 6 — Keep summaries (opt-in)
 
-An encrypted on-device store, off until the person turns it on: a key in the
-Android Keystore (`setUserAuthenticationRequired` optional), files in
-`noBackupFilesDir`, still excluded from backup, and Clear all deletes the
-key. Needs a spec change to M-PRIV-1 and the root rule on persistence.
+Superseded by Phase 11: the store is always on, so the app works offline and
+after a restart.
 
 ## Phase 7 — Write your own summary
 
@@ -64,3 +68,31 @@ it has authentication (its P3); the same API contract (its spec §4).
 The list beside the open summary in a wide window (spec M-TAB-1), then a
 hardware keyboard's shortcuts and dropping a file onto the list, each
 through the same check as every other way in. Phone behaviour is unchanged.
+
+## Phase 10 — Families and carers
+
+One person often reads summaries for several: their children, their
+parents, someone they care for. The list is grouped by person (spec
+M-PEOPLE-1, M-PEOPLE-2), matched in the `ips` core (`People`) by a shared
+identifier or by name and birth date, so it is tested on the JVM. Each
+person can be given a relationship and forgotten at once (M-PEOPLE-3,
+M-PEOPLE-4); the relationship is the app's note, kept (encrypted on the phone since Phase 11) in
+`SummaryStore` beside the summaries and never shared. Share asks first when
+more than one person's summaries are open (M-SHARE-2), and folding keeps
+everything (M-TAB-4).
+
+## Phase 11 — Encrypted on-device store
+
+The app must work offline and after the phone restarts, so every open
+summary and every relationship is saved on the phone, encrypted (spec
+M-STORE-1..4, M-PRIV-1, M-PRIV-3). `EncryptedStore` keeps each summary's
+exact bytes and an index (order, ids, relationships) in their own
+AES-256-GCM files in `noBackupFilesDir/store/`, with a fresh nonce for each
+write and the file's role as additional data, under one non-exportable key
+in the Android Keystore (`KeystoreKeys`). It uses only `java.*` and
+`javax.crypto`, so it is tested on the JVM with a plain AES key. At launch
+each summary is checked again; a bad one is deleted, and a missing key or a
+bad index deletes the store. Delete, Forget this person and Clear all delete
+the files at once; Clear all deletes the key. `AppViewModel` loads and
+saves on one background thread, in order. Backup and device transfer stay
+off.
