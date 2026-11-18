@@ -58,19 +58,34 @@ public func displayOfAny(_ concepts: JSON?) -> String? {
     concepts?.items.lazy.compactMap(displayOf).first
 }
 
-/// A person's name: `text`, or given names then family name. Prefers an `official`
-/// then `usual` name over the first.
+/// Pick the first readable name in the highest-priority use category.
 public func formatHumanName(_ names: JSON?) -> String? {
-    let all = names?.items ?? []
-    let preferred =
-        all.first { $0["use"]?.string == "official" } ?? all.first { $0["use"]?.string == "usual" }
-        ?? all.first
-    guard let name = preferred else { return nil }
+    var best: String?
+    var bestRank = 4
+    for name in names?.items ?? [] {
+        let rank = switch name["use"]?.string {
+        case "official": 0
+        case "usual": 1
+        case "old", "maiden": 3
+        default: 2
+        }
+        if rank < bestRank, let words = nameText(name) {
+            if rank == 0 { return words }
+            best = words
+            bestRank = rank
+        }
+    }
+    return best
+}
+
+private func nameText(_ name: JSON) -> String? {
     if let text = name["text"]?.text { return text }
-    let parts =
-        (name["prefix"]?.items ?? []).compactMap(\.text) + (name["given"]?.items ?? []).compactMap(\.text)
-        + [name["family"]?.text].compactMap { $0 } + (name["suffix"]?.items ?? []).compactMap(\.text)
-    return parts.isEmpty ? nil : parts.joined(separator: " ")
+    let given = (name["given"]?.items ?? []).compactMap(\.text)
+    let family = name["family"]?.text
+    guard !given.isEmpty || family != nil else { return nil }
+    let parts = (name["prefix"]?.items ?? []).compactMap(\.text)
+        + given + [family].compactMap { $0 } + (name["suffix"]?.items ?? []).compactMap(\.text)
+    return parts.joined(separator: " ")
 }
 
 /// The parts of a FHIR date, dateTime or instant: year, and month and day when given.

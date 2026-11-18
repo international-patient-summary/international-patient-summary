@@ -51,7 +51,8 @@ project.
 
 GitHub runs only the root `.github/workflows/`: `viewer-check`, `service-check`,
 `ios-check`, `android-check` and `site-check` run these on pull requests and on
-pushes to `main` that change their folder.
+pushes to `main` that change their folder. On mobile app or translation changes,
+`mobile-parity` also compares the shared specs and regenerates the catalogs.
 
 ```sh
 # viewer

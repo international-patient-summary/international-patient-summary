@@ -6,6 +6,12 @@ phases come from [spec §1.1](spec/purpose.md), the MyIPS ideas this version
 leaves for later. Each is a spec change first, made in the iOS app's spec
 too where it touches §1–§7.
 
+## Release readiness
+
+Prioritize storage failure recovery, clinical display parity and language review
+before the network and authoring phases. The [mobile release plan](../plan.md)
+sets the acceptance criteria and the [shared checklist](../tasks.md) tracks them.
+
 ## Phase 1 — Viewer (version 0.1, done)
 
 Open, check, show, share, forget. The `ips` package holds every rule that

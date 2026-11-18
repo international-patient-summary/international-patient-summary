@@ -39,6 +39,12 @@ import Testing
         #expect(formatHumanName(Self.json("[]")) == nil)
     }
 
+    @Test func firstReadableNameInThePreferredCategory() {
+        #expect(formatHumanName(Self.json(#"[{"use":"official","text":" "},{"use":"official","text":"山田 太郎"},{"use":"usual","text":"Taro"}]"#)) == "山田 太郎")
+        #expect(formatHumanName(Self.json(#"[{"use":"old","text":"Former"},{"family":"الحسن"},{"text":"Later"}]"#)) == "الحسن")
+        #expect(formatHumanName(Self.json(#"[{"use":"official","prefix":["Dr"],"given":[" "],"suffix":["III"]},{"use":"maiden","family":"Former"}]"#)) == "Former")
+    }
+
     @Test func datesWriteTheMonthAsText() {
         let locale = Locale(identifier: "en_GB")
         #expect(formatFHIRDate("2017-12-11T14:30:00+01:00", locale: locale) == "11 December 2017")

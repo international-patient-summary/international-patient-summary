@@ -4,6 +4,12 @@ How the specification (spec/index.md) gets built. [tasks.md](tasks.md) is the
 checklist. Each phase ships on its own; later phases come from spec §1.1,
 the MyIPS ideas this version leaves for later. Each is a spec change first.
 
+## Release readiness
+
+Prioritize storage failure recovery, clinical display parity and language review
+before the network and authoring phases. The [mobile release plan](../plan.md)
+sets the acceptance criteria and the [shared checklist](../tasks.md) tracks them.
+
 ## Phase 1 — Viewer (version 0.1, done)
 
 Open, check, show, share, forget. `IPSKit` holds every rule that is not
@@ -39,11 +45,7 @@ Showing one's own summary as a QR code follows.
 
 ## Phase 6 — Keep summaries (opt-in)
 
-An encrypted on-device store, off until the person turns it on: Data
-Protection class Complete, a key in the Keychain
-(`kSecAttrAccessibleWhenUnlockedThisDeviceOnly`), excluded from backup, and
-Clear all removes the key. Needs a spec change to M-PRIV-1 and the root
-rule on persistence.
+Phase 12 superseded this proposal. The encrypted store is always on.
 
 ## Phase 7 — Write your own summary
 

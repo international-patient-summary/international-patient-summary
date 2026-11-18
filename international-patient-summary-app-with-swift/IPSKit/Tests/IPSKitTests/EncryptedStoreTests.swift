@@ -61,6 +61,19 @@ final class MemoryKeys: StoreKeys {
         #expect(files().count == 6, "five summaries and the index")
     }
 
+    @Test func backupExclusionSurvivesClearingAndReimporting() throws {
+        let document = try DocumentTests.open("bundle-minimal")
+        let saved = store()
+        defer { saved.clear() }
+        for _ in 0..<2 {
+            saved.save([document], relationships: [:])
+            let url = URL(fileURLWithPath: directory.path(percentEncoded: false))
+            #expect(try url.resourceValues(forKeys: [.isExcludedFromBackupKey]).isExcludedFromBackup == true)
+            #expect(saved.load().documents.map(\.id) == [document.id])
+            saved.clear()
+        }
+    }
+
     @Test func nothingIsReadableOnDisk() throws {
         store().save(try examples(), relationships: [:])
         for url in files() {

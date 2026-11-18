@@ -49,6 +49,12 @@ class FormatTest {
         assertNull(Format.humanName(emptyList()))
     }
 
+    @Test fun firstReadableNameInThePreferredCategory() {
+        assertEquals("山田 太郎", Format.humanName(json("""[{"use":"official","text":" "},{"use":"official","text":"山田 太郎"},{"use":"usual","text":"Taro"}]""") as kotlinx.serialization.json.JsonArray))
+        assertEquals("الحسن", Format.humanName(json("""[{"use":"old","text":"Former"},{"family":"الحسن"},{"text":"Later"}]""") as kotlinx.serialization.json.JsonArray))
+        assertEquals("Former", Format.humanName(json("""[{"use":"official","prefix":["Dr"],"given":[" "],"suffix":["III"]},{"use":"maiden","family":"Former"}]""") as kotlinx.serialization.json.JsonArray))
+    }
+
     @Test fun datesWriteTheMonthAsTextAndStayPartial() {
         assertEquals("2017", Format.date("2017", Locale.UK))
         assertEquals("Jan 2017", Format.date("2017-01", Locale.UK))

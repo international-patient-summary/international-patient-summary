@@ -93,6 +93,8 @@ saved on the device, encrypted.
   cannot be exported. The files use the platform's file protection where it
   has one, and are kept out of backups and device transfer, so a summary
   never leaves the phone in a backup and a new phone starts empty.
+  Backup exclusion must apply before writing any file, including the
+  first import after Clear all.
 - **M-STORE-3 Checked again when read.** At launch each saved summary is
   decrypted and checked again (M-CHECK-1, M-CHECK-2). One that cannot be
   decrypted or no longer passes is left out and deleted; the others open as

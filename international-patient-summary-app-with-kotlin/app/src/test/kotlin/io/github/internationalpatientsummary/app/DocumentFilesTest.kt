@@ -24,11 +24,16 @@ class DocumentFilesTest {
 
     @Test fun aStreamOverTheLimitIsRefusedWhileRead() {
         // No stated size (a provider may not give one); the stream is endless.
+        var consumed = 0
         val endless = object : InputStream() {
-            override fun read(): Int = '{'.code
+            override fun read(): Int {
+                consumed++
+                return 0
+            }
         }
         val error = assertThrows(RefusedException::class.java) { DocumentFiles.readSized(null) { endless } }
         assertEquals(Refusal.TOO_LARGE, error.refusal)
+        assertEquals(IpsCheck.MAX_BYTES + 1, consumed)
     }
 
     @Test fun aFileAtTheLimitIsReadWhole() {

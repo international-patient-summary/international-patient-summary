@@ -3,6 +3,14 @@
 The checklist for [plans.md](plans.md). IDs are stable; spec §9 maps
 requirements to tests.
 
+## Release readiness
+
+See the [shared release checklist](../tasks.md) for cross-platform work.
+
+- [x] M-LOAD-1. Apply the import limit while streaming and preserve the bytes at the limit.
+- [x] M-VIEW-1. Skip unreadable names and use the preferred readable name in the banner.
+- [x] M-STORE-2. Reapply backup exclusion before writing the recreated store.
+
 ## Phase 1 — Viewer
 
 - [x] P1-T1 `IPSKit` package: JSON, check (M-CHECK-1/2), Refusal codes and pointers

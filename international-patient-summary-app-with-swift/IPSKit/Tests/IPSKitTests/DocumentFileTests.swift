@@ -24,6 +24,12 @@ import Testing
         #expect(readDocumentFile(at: url) == .failure(.refused(.tooLarge)))
     }
 
+    @Test func theStreamLimitAppliesEvenWithoutAFileSize() {
+        let bytes = Data(repeating: 42, count: maximumDocumentBytes)
+        #expect(readDocumentStream(InputStream(data: bytes)) == .success(bytes))
+        #expect(readDocumentStream(InputStream(data: bytes + Data([42]))) == .failure(.refused(.tooLarge)))
+    }
+
     @Test func aMissingFileIsUnreadable() {
         let url = FileManager.default.temporaryDirectory.appending(path: "ipskit-missing-\(UUID().uuidString).json")
         #expect(readDocumentFile(at: url) == .failure(.unreadable))

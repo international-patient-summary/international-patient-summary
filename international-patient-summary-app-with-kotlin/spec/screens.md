@@ -20,6 +20,12 @@
   number, and so on, as the web viewer's `systemLabel`). Above everything
   else, an alert box lists allergies with criticality `high`, and says so
   when the allergies section is missing. Words, not colour alone.
+  For patient and author names, prefer a readable official name, then
+  usual, then another use, then old or maiden. Use the first readable name
+  within each group. Prefer its nonblank text as written, otherwise join
+  its nonblank prefix, given, family and suffix parts in that order. A
+  parts-only name needs a given or family name so a title alone cannot
+  identify someone in the banner or family list.
 - **M-VIEW-2 Document.** Title, date, and authors' names.
 - **M-VIEW-3 Sections.** In Composition order, then any required section
   the Composition lacks, labelled "Section missing from document".

@@ -123,7 +123,8 @@ IPSApp.xcodeproj           project (objectVersion 77, synchronized folders)
   key is 256 random bits in a generic-password Keychain item
   (`kSecAttrAccessibleWhenUnlockedThisDeviceOnly`, data-protection
   keychain). Files are written atomically with `.completeFileProtection`,
-  and the directory is `isExcludedFromBackup`. `SummaryStore` loads at
+  and the store applies `isExcludedFromBackup` when loading an existing
+  store and before writing to a new or existing directory. `SummaryStore` loads at
   launch and saves after every change, on the main actor; a summary's file
   is written once, the index each time. If the key exists but cannot be
   read (the device is locked), the store is not touched and nothing is

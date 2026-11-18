@@ -2,6 +2,10 @@
 
 # 9. Verification
 
+The [mobile parity workflow](../../.github/workflows/mobile-parity.yml) compares
+§1–§7 byte for byte and regenerates both apps' language resources from the shared
+source. The generated files must match the checkout.
+
 ```sh
 cd IPSKit && swift test
 xcodebuild test -project IPSApp.xcodeproj -scheme IPSApp \
@@ -27,8 +31,9 @@ xcodebuild test -project IPSApp.xcodeproj -scheme IPSApp \
 | M-READ-1              | `DocumentTests.patientBanner` (Type/id), `anUnresolvedReferenceIsKeptAndMarked` |
 | M-READ-2              | `DocumentTests.aSubjectNotInTheBundleStillOpens`                         |
 | M-READ-3              | `DocumentTests.sectionsKeepCompositionOrder` (all 16 sections known)     |
+| M-LOAD-1              | `DocumentFileTests` (file size, stream boundary, missing file) |
 | M-LOAD-3, M-LIST-1    | `DocumentTests.everyExampleOpens`; UI `testTheExamplesOpenAndClear`      |
-| M-VIEW-1              | `DocumentTests.patientBanner`; UI `testTheExamplesOpenAndClear`          |
+| M-VIEW-1              | `FormatTests.firstReadableNameInThePreferredCategory`; `DocumentTests.patientBanner`; UI `testTheExamplesOpenAndClear`          |
 | M-VIEW-2              | `DocumentTests.documentDetails`                                          |
 | M-VIEW-3              | `DocumentTests.sectionsKeepCompositionOrder`, `aMissingRequiredSectionIsListedLast` |
 | M-VIEW-4              | `DocumentTests.medicationsResolveTheirMedication`, `observationsHaveAValue` |
@@ -52,7 +57,7 @@ xcodebuild test -project IPSApp.xcodeproj -scheme IPSApp \
 | M-PDF-2               | `PDFPlanTests.thePlansShrinkThenCapThenOmitLowestPriorityFirst`, `mustShowEntriesAreNeverTrimmed`, `currentMedicinesAreMustShowAndOthersAreNewestFirst`, `fittingStopsAtTheFirstPlanThatFitsOrRunsOn` |
 | M-PDF-3               | UI `testShareAsPDF` (M-SHARE-2's question first, then the sheet); by hand: the PDF in `tmp/share` until the next launch |
 | M-STORE-1             | `EncryptedStoreTests.whatIsSavedComesBackAfterARestart`; UI `testSummariesOutlastARelaunch` (the five summaries and a relationship after the app is ended) |
-| M-STORE-2             | `EncryptedStoreTests.nothingIsReadableOnDisk`, `theSameBytesSealTwiceDiffer`, `oneSummaryCannotStandInForAnother` |
+| M-STORE-2             | `EncryptedStoreTests.backupExclusionSurvivesClearingAndReimporting`, `nothingIsReadableOnDisk`, `theSameBytesSealTwiceDiffer`, `oneSummaryCannotStandInForAnother` |
 | M-STORE-3             | `EncryptedStoreTests.aDamagedSummaryIsLeftOutAndDeleted`, `aDamagedIndexOrAnotherKeyStartsEmpty`, `withoutTheKeyTheStoreIsDeleted`, `aKeyThatCannotBeReadNowLeavesTheStoreAlone` |
 | M-STORE-4             | `EncryptedStoreTests.deletingASummaryDeletesItsFile`, `clearAllDeletesEveryFileAndTheKey`; UI `testSummariesOutlastARelaunch` (empty after Clear all) |
 

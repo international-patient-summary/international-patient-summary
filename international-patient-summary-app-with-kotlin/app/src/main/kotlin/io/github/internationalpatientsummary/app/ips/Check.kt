@@ -82,10 +82,11 @@ object IpsCheck {
         val out = java.io.ByteArrayOutputStream()
         val buffer = ByteArray(64 * 1024)
         while (true) {
-            val read = input.read(buffer)
+            val remaining = MAX_BYTES - out.size()
+            val read = input.read(buffer, 0, minOf(buffer.size, remaining + 1))
             if (read < 0) break
+            if (read > remaining) throw RefusedException(Refusal.TOO_LARGE)
             out.write(buffer, 0, read)
-            if (out.size() > MAX_BYTES) throw RefusedException(Refusal.TOO_LARGE)
         }
         return out.toByteArray()
     }

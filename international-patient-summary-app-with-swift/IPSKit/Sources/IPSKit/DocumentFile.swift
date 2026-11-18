@@ -15,7 +15,22 @@ public func readDocumentFile(at url: URL) -> Result<Data, DocumentFileProblem> {
     if let size = try? url.resourceValues(forKeys: [.fileSizeKey]).fileSize, size > maximumDocumentBytes {
         return .failure(.refused(.tooLarge))
     }
-    guard let data = try? Data(contentsOf: url) else { return .failure(.unreadable) }
-    // A file that grew after its size was read is still refused.
-    return data.count > maximumDocumentBytes ? .failure(.refused(.tooLarge)) : .success(data)
+    guard let stream = InputStream(url: url) else { return .failure(.unreadable) }
+    return readDocumentStream(stream)
+}
+
+func readDocumentStream(_ stream: InputStream) -> Result<Data, DocumentFileProblem> {
+    stream.open()
+    defer { stream.close() }
+    var data = Data()
+    var buffer = [UInt8](repeating: 0, count: 64 * 1024)
+    while true {
+        let remaining = maximumDocumentBytes - data.count
+        let length = min(buffer.count, remaining + 1)
+        let count = stream.read(&buffer, maxLength: length)
+        if count < 0 { return .failure(.unreadable) }
+        if count == 0 { return .success(data) }
+        if count > remaining { return .failure(.refused(.tooLarge)) }
+        data.append(buffer, count: count)
+    }
 }

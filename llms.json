@@ -6,6 +6,9 @@
   "documentation": {
     "readme": "README.md",
     "agents": "AGENTS.md",
+    "mobileReleasePlan": "plan.md",
+    "mobileReleaseTasks": "tasks.md",
+    "mobileParityCheck": ".github/workflows/mobile-parity.yml",
     "dependabot": ".github/dependabot.yml"
   },
   "sections": {
@@ -28,12 +31,12 @@
       {
         "name": "iOS app",
         "path": "international-patient-summary-app-with-swift/llms.txt",
-        "description": "Swift + UIKit (no SwiftUI) IPS viewer; in memory only, no network"
+        "description": "Swift + UIKit (no SwiftUI) IPS viewer; encrypted on-device storage, no network"
       },
       {
         "name": "Android app",
         "path": "international-patient-summary-app-with-kotlin/llms.txt",
-        "description": "Kotlin + Jetpack Compose IPS viewer; in memory only, no network"
+        "description": "Kotlin + Jetpack Compose IPS viewer; encrypted on-device storage, no network"
       },
       {
         "name": "Mobile app translations",

@@ -36,7 +36,7 @@
 - [EncryptedStore](IPSKit/Sources/IPSKit/EncryptedStore.swift): M-STORE-1..4: AES-256-GCM sealed summaries and index; StoreKeys
 - [PDFPlan](IPSKit/Sources/IPSKit/PDFPlan.swift): M-PDF-1/2: what goes on the one-page PDF and how it is fitted
 - [People](IPSKit/Sources/IPSKit/People.swift): M-PEOPLE-1/3: which summaries are one person; relationships, one Me
-- [DocumentFile](IPSKit/Sources/IPSKit/DocumentFile.swift): size first, then bytes (Import and drop)
+- [DocumentFile](IPSKit/Sources/IPSKit/DocumentFile.swift): size-first, capped reads for import, drop and Open in
 
 ## App
 

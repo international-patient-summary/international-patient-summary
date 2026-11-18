@@ -107,7 +107,7 @@
       {
         "name": "DocumentFile",
         "path": "IPSKit/Sources/IPSKit/DocumentFile.swift",
-        "description": "size first, then bytes (Import and drop)"
+        "description": "size-first, capped reads for import, drop and Open in"
       },
       {
         "name": "EncryptedStore",

@@ -4,8 +4,7 @@ import IPSKit
 /// The open summaries, newest first, and the relationships given to the people
 /// they are about. Every change is saved at once to the encrypted store on this
 /// device (M-STORE-1, M-STORE-2), and read back at launch, so they outlast closing
-/// the app and restarting the phone. Nothing else holds them (M-PRIV-1). Nothing here is
-/// written to a file, the keychain, preferences, or a backup.
+/// the app and restarting the phone. Only the encrypted store persists this state (M-PRIV-1).
 @MainActor
 final class SummaryStore {
     static let shared: SummaryStore = {
@@ -18,12 +17,7 @@ final class SummaryStore {
 
     /// Application Support/Store, kept out of backups and device transfer (M-STORE-2).
     static var directory: URL {
-        var url = URL.applicationSupportDirectory.appending(path: "Store", directoryHint: .isDirectory)
-        try? FileManager.default.createDirectory(at: url, withIntermediateDirectories: true)
-        var values = URLResourceValues()
-        values.isExcludedFromBackup = true
-        try? url.setResourceValues(values)
-        return url
+        URL.applicationSupportDirectory.appending(path: "Store", directoryHint: .isDirectory)
     }
 
     private let saved: EncryptedStore?

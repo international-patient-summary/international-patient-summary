@@ -2,12 +2,23 @@
 
 # 9. Verification
 
+The [mobile parity workflow](../../.github/workflows/mobile-parity.yml) compares
+§1–§7 byte for byte and regenerates both apps' language resources from the shared
+source. The generated files must match the checkout.
+
 ```sh
 ./gradlew :app:testDebugUnitTest :app:assembleDebug :app:lintDebug
 
 # on a running emulator or a phone (for example the Pixel_10_API_37 AVD)
 ./gradlew :app:connectedDebugAndroidTest
 ```
+
+Wait for the emulator to finish booting before running the instrumented
+suite. Verify the new XML report under
+`app/build/outputs/androidTest-results/connected/debug/` lists the smoke
+test and all three PDF tests with zero failures, errors or skips. Gradle
+can report a successful build after the APK installer reports that the
+device is still booting.
 
 JVM tests are in `app/src/test/kotlin/io/github/internationalpatientsummary/app/`.
 The instrumented test, `SmokeTest` in `app/src/androidTest/kotlin/io/github/internationalpatientsummary/app/`,
@@ -33,9 +44,10 @@ on to three pages, each marked CONTINUED); with
 | M-READ-2              | `ips.SummaryReaderTest.anUnresolvedSubjectStillOpens`                    |
 | M-READ-3              | `ips.SummaryReaderTest.sectionsFollowCompositionOrder` (all 16 sections known), `aSectionWithAnotherCodeIsGeneric` |
 | M-LOAD-4              | `IncomingTest` (VIEW, SEND stream before text, `content:` only, not from Recents); `DocumentFilesTest` (refused by stated size without opening, and while read); `ManifestTest.theAppOpensJsonFilesFromOtherAppsOnly` (exactly the two JSON types, source and merged), `oneActivityHoldsTheStore`; manual 13 |
+| M-LOAD-1, M-TAB-3     | `DocumentFilesTest` (reported size, exact limit and bounded stream read) |
 | M-LOAD-3              | `ips.SummaryReaderTest.everyExampleIsAcceptedWithItsPatient`; `ManifestTest.theExamplesShipInTheApp`; `SmokeTest.loadOpenAndClearAll` (the button loads all five) |
 | M-LIST-1              | `SummaryStoreTest.newestFirstAndClearAll`; `SmokeTest.loadOpenAndClearAll` (five rows) |
-| M-VIEW-1              | `ips.SummaryReaderTest.readsPatientAndDocumentDetails`, `theBannerAlertListsHighCriticalityAllergies`; `ips.FormatTest.agesAreWholeYearsAndNeverGuessed`; `SmokeTest.loadOpenAndClearAll` (banner name and alert on screen) |
+| M-VIEW-1              | `ips.FormatTest.firstReadableNameInThePreferredCategory`; `ips.SummaryReaderTest.readsPatientAndDocumentDetails`, `theBannerAlertListsHighCriticalityAllergies`; `ips.FormatTest.agesAreWholeYearsAndNeverGuessed`; `SmokeTest.loadOpenAndClearAll` (banner name and alert on screen) |
 | M-VIEW-2              | `ips.SummaryReaderTest.readsPatientAndDocumentDetails`                   |
 | M-VIEW-3              | `ips.SummaryReaderTest.sectionsFollowCompositionOrder`, `missingRequiredSectionsComeLast` |
 | M-VIEW-4              | `ips.SummaryReaderTest.entriesCarryTheirDetails`; `ips.FormatTest.quantitiesAreWrittenAsGiven` |

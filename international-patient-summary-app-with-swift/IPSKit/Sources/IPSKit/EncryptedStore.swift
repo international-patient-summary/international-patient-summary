@@ -58,6 +58,7 @@ public final class EncryptedStore {
                 removeFiles()
                 return ([], [:])
             }
+            try prepareDirectory()
             key = existing
         } catch {
             isWritable = false
@@ -109,7 +110,7 @@ public final class EncryptedStore {
         }
         do {
             let key = try keys.existing() ?? keys.create()
-            try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+            try prepareDirectory()
             let present = Set(
                 (try? FileManager.default.contentsOfDirectory(atPath: directory.path(percentEncoded: false))) ?? [])
             for document in documents where !present.contains(Self.summaryName(document.id)) {
@@ -155,6 +156,16 @@ public final class EncryptedStore {
     static func summaryName(_ id: UUID) -> String { "\(id.uuidString).sealed" }
 
     private func file(_ name: String) -> URL { directory.appending(path: name, directoryHint: .notDirectory) }
+
+    /// Clear all and an empty store remove the directory. Apply the backup
+    /// exclusion before each write and repair existing installs when loading.
+    private func prepareDirectory() throws {
+        try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+        var url = directory
+        var values = URLResourceValues()
+        values.isExcludedFromBackup = true
+        try url.setResourceValues(values)
+    }
 
     private func removeFiles() {
         try? FileManager.default.removeItem(at: directory)

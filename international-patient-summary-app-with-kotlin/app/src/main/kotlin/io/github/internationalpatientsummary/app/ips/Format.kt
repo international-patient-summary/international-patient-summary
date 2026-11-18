@@ -74,16 +74,31 @@ object Format {
 
     /** The name to show: official, then usual, then any current; text, else parts. */
     fun humanName(names: List<JsonElement>): String? {
-        if (names.isEmpty()) return null
-        val pick = names.firstOrNull { it.string("use") == "official" }
-            ?: names.firstOrNull { it.string("use") == "usual" }
-            ?: names.firstOrNull { it.string("use") != "old" && it.string("use") != "maiden" }
-            ?: names.first()
-        pick.text("text")?.let { return it }
-        val parts = (pick.list("prefix") + pick.list("given")).mapNotNull { it.asString() } +
-            listOfNotNull(pick.string("family")) +
-            pick.list("suffix").mapNotNull { it.asString() }
-        return parts.map { it.trim() }.filter { it.isNotEmpty() }.joinToString(" ").ifEmpty { null }
+        var best: String? = null
+        var bestRank = 4
+        for (name in names) {
+            val rank = when (name.string("use")) {
+                "official" -> 0
+                "usual" -> 1
+                "old", "maiden" -> 3
+                else -> 2
+            }
+            if (rank >= bestRank) continue
+            val words = nameText(name) ?: continue
+            if (rank == 0) return words
+            best = words
+            bestRank = rank
+        }
+        return best
+    }
+
+    private fun nameText(name: JsonElement): String? {
+        name.text("text")?.let { return it }
+        fun parts(field: String) = name.list(field).mapNotNull { it.asString()?.trim()?.takeIf(String::isNotEmpty) }
+        val given = parts("given")
+        val family = name.text("family")
+        if (given.isEmpty() && family == null) return null
+        return (parts("prefix") + given + listOfNotNull(family) + parts("suffix")).joinToString(" ")
     }
 
     /** "5 mg", "<5 mmol/L": comparator, the value as written, a no-break space, the unit. */

@@ -58,7 +58,10 @@ A section with another code is shown with its own title ("generic").
 
 ## 3.3 Loading
 
-- **M-LOAD-1** Import file: the system document picker, JSON files.
+- **M-LOAD-1** Import file: the system document picker, JSON files. For
+  picked, dropped and incoming files, check the reported size first. When
+  reading, retain at most 10 MiB and read at most one further byte to
+  detect overflow, including when a provider omits or understates the size.
 - **M-LOAD-2** Paste: reads the clipboard only when the person taps Paste.
 - **M-LOAD-3** Load examples: the five fixtures, each checked like any
   other document.

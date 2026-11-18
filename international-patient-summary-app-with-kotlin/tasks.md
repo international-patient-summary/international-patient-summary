@@ -2,6 +2,13 @@
 
 The checklist for [plans.md](plans.md). `[x]` done, `[ ]` open.
 
+## Release readiness
+
+See the [shared release checklist](../tasks.md) for cross-platform work.
+
+- [x] M-LOAD-1. Apply the import limit while streaming and preserve the bytes at the limit.
+- [x] M-VIEW-1. Skip unreadable names and use the preferred readable name in the banner.
+
 ## Phase 1 — Viewer
 
 - [x] P1-T1 Gradle 9.9.1 wrapper, Kotlin DSL, version catalog; AGP 9.5.1 with built-in Kotlin 2.4.21; every version checked against the two-day age rule

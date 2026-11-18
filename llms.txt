@@ -6,6 +6,8 @@
 
 - [README](README.md): contents and how the projects fit together
 - [AGENTS](AGENTS.md): rules for every project, supply-chain policy, verify commands
+- [Mobile release plan](plan.md) and [checklist](tasks.md) for the offline iOS and Android apps
+- [Mobile parity check](.github/workflows/mobile-parity.yml) verifies shared specifications and translation resources
 - [Dependabot](.github/dependabot.yml): weekly updates with a two-day cooldown
 
 ## Projects
