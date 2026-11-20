@@ -617,7 +617,8 @@ viewer will work with the backend service, without needing it.
   unsanitised input; URL loader fetches `https:` except for explicit literal
   loopback HTTP while the development server is running.
 - **Performance**: renders `bundle-ips-all-sections` in under 200 ms on
-  a mid-range laptop; initial JS budget 250 KB gzipped for v1, excluding
+  a mid-range laptop (the browser check uses the median of three runs to
+  exclude one-off scheduler noise); initial JS budget 250 KB gzipped for v1, excluding
   the lazy-loaded PDF chunk and fonts. PDF generation for
   `bundle-ips-all-sections` completes in under 3 s.
 - **Responsive**: usable from 320 px width; tables collapse to cards on

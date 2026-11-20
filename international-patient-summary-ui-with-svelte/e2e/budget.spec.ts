@@ -17,23 +17,29 @@ test('initial JavaScript is at most 250 KB gzipped (PDF chunk excluded)', async 
 });
 
 test('bundle-ips-all-sections renders in under 200 ms; its PDF in under 3 s', async ({ page }) => {
-	await page.goto('/?lang=en-US');
-	await page.locator('h1').waitFor();
 	const text = await (await page.request.get('/examples/bundle-ips-all-sections.json')).text();
-	await page.getByRole('tab', { name: 'Paste' }).click();
-	await page.getByLabel('Paste a FHIR Bundle').fill(text);
-	const ms = await page.evaluate(async () => {
-		const button = [...document.querySelectorAll('button')].find((b) =>
-			b.textContent?.includes('Open pasted')
-		)!;
-		const start = performance.now();
-		button.click();
-		while (!document.querySelector('.export-menu'))
-			await new Promise((r) => requestAnimationFrame(r));
-		return performance.now() - start;
-	});
-	console.log(`render: ${ms.toFixed(0)} ms`);
-	expect(ms).toBeLessThan(200);
+	const samples: number[] = [];
+	for (let sample = 0; sample < 3; sample += 1) {
+		await page.goto('/?lang=en-US');
+		await page.locator('h1').waitFor();
+		await page.getByRole('tab', { name: 'Paste' }).click();
+		await page.getByLabel('Paste a FHIR Bundle').fill(text);
+		samples.push(
+			await page.evaluate(async () => {
+				const button = [...document.querySelectorAll('button')].find((b) =>
+					b.textContent?.includes('Open pasted')
+				)!;
+				const start = performance.now();
+				button.click();
+				while (!document.querySelector('.export-menu'))
+					await new Promise((r) => requestAnimationFrame(r));
+				return performance.now() - start;
+			})
+		);
+	}
+	const medianMs = [...samples].sort((a, b) => a - b)[1];
+	console.log(`render samples: ${samples.map((ms) => ms.toFixed(0)).join(', ')} ms`);
+	expect(medianMs).toBeLessThan(200);
 
 	await page.getByRole('radio', { name: 'PDF (one page)' }).check();
 	const started = Date.now();

@@ -46,8 +46,10 @@ Checklist for [plans.md](plans.md). Spec: [spec/index.md](spec/index.md).
       summaries, a clinician's patients, break-glass. The policy supports
       `resource.*` attributes (`resource.owner: ["$sub"]`) once a document
       records whose it is.
-- [ ] **P3-T5** A way to mint PASETO tokens for development (the service
-      checks them and issues none), or a pointer to the issuing service.
+- [x] **P3-T5** A way to mint PASETO tokens for development (the service
+      checks them and issues none): `development_paseto` uses Axa's public,
+      throwaway test key and is documented as unsafe for deployment.
+      Verify: its unit tests mint a token accepted by the matching verifier.
 - [ ] **P3-T6** Retention of `ips_access_log` (with P5-T2).
 
 ## P4 — Listing

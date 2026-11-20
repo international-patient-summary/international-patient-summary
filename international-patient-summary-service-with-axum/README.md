@@ -105,6 +105,18 @@ accepted only on loopback.
 `IPS_PASETO_ISSUER`, and `IPS_PASETO_AUDIENCE`. A token carries `access` in
 its `attrs`. This service checks tokens and issues none.
 
+For local development only, the `development_paseto` example mints tokens
+under Axa's public throwaway test key. Anyone can mint one, so never configure
+this key in a deployed service:
+
+```sh
+cargo run --quiet --example development_paseto -- keys > /tmp/ips-development-keys.json
+export IPS_PASETO_KEYS_FILE=/tmp/ips-development-keys.json
+export IPS_PASETO_ISSUER=authentication-service IPS_PASETO_AUDIENCE=ips-service
+TOKEN=$(cargo run --quiet --example development_paseto -- token developer write)
+cargo run -- start
+```
+
 **Both.** Set both: a token beginning `v4.` is checked as PASETO, any other
 as Keycloak, under the same policy.
 

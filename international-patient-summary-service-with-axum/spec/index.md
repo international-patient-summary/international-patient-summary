@@ -9,7 +9,7 @@ This file is the source of truth. A change in behaviour carries a spec edit, a
 code edit, and a test edit together. Requirement IDs (`S-API-1`) name the test
 that proves them in [§8](#8-verification).
 
-Revision: 2026-11-19 (local viewer transport, §5). Authentication, access log, Axa 0.19 and container image 2026-11-17. Initial 2026-11-15.
+Revision: 2026-11-20 (development PASETO issuer, §6.2). Local viewer transport 2026-11-19. Authentication, access log, Axa 0.19 and container image 2026-11-17. Initial 2026-11-15.
 
 ## 1. Scope
 
@@ -196,6 +196,15 @@ come before anything below.
   is `500` and carries no document. An id that is not a v4 UUID is a `404`
   with no row, since no document can have it.
 
+### 6.2 Development PASETO tokens
+
+- **S-DEV-1** `cargo run --example development_paseto -- keys` prints the
+  public key set for Axa's published throwaway test key. The same example's
+  `token <subject> [read|write|admin ...]` command prints a `v4.public` token
+  for this service. It refuses blank subjects, unknown access values and
+  malformed commands. This predictable key protects nothing and is for local
+  development only; a deployed service uses a real issuer's public key set.
+
 ## 7. Configuration
 
 There are no config files. Axa reads the environment; `check` prints the
@@ -240,6 +249,7 @@ AXA_TEST_DB_URL=postgres://… cargo test -- --include-ignored
 | S-AUTH-2    | `tests/auth.rs` `with_both_configured_keycloak_and_paseto_tokens_are_each_accepted`, `keycloak_roles_map_to_access_and_unmapped_roles_grant_nothing` |
 | S-AUTH-3    | `src/auth.rs` `the_policy_grants_by_access_and_refuses_the_rest_reads_included`, `the_default_role_map_applies_only_when_none_is_given`; `tests/auth.rs` `the_policy_refuses_by_access_before_any_handler_runs` |
 | S-AUDIT-1   | `tests/auth.rs` `each_role_does_what_it_may_and_every_access_is_logged`, `a_read_that_cannot_be_logged_sends_nothing`, `a_keycloak_read_is_logged_under_the_tokens_subject` |
+| S-DEV-1     | `examples/development_paseto.rs` unit tests                              |
 | S-WEB-4     | Viewer `load.test.ts` loopback rules; browser check from a stored `bundle-minimal` service URL (tasks P2-T2) |
 | Routes      | `tests/api.rs` `route_census_matches_the_spec`                            |
 
