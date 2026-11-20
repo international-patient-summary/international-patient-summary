@@ -66167,6 +66167,1610 @@
         }
       }
     },
+    "retry" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "حاول مرة أخرى"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Опитайте отново"
+          }
+        },
+        "bho" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "फेर कोशिश करीं"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "আবার চেষ্টা করুন"
+          }
+        },
+        "cs" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Zkusit znovu"
+          }
+        },
+        "cy" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Rhowch gynnig arall arni"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Prøv igen"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Erneut versuchen"
+          }
+        },
+        "el" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Δοκιμάστε ξανά"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Try again"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Try again"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Intentar de nuevo"
+          }
+        },
+        "et" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Proovi uuesti"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Saiatu berriro"
+          }
+        },
+        "fa" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "تلاش دوباره"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Yritä uudelleen"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Subukan muli"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Réessayer"
+          }
+        },
+        "ga" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Bain triail eile as"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Feuch ris a-rithist"
+          }
+        },
+        "gu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ફરી પ્રયાસ કરો"
+          }
+        },
+        "ha" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sake gwadawa"
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ניסיון חוזר"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "फिर से कोशिश करें"
+          }
+        },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Pokušaj ponovno"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Próbálja újra"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Coba lagi"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Reyna aftur"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Riprova"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "もう一度試す"
+          }
+        },
+        "jv" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Coba maneh"
+          }
+        },
+        "km" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "សាកល្បងម្តងទៀត"
+          }
+        },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "다시 시도"
+          }
+        },
+        "lb" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nach eng Kéier probéieren"
+          }
+        },
+        "lo" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ລອງໃໝ່"
+          }
+        },
+        "lt" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Bandyti dar kartą"
+          }
+        },
+        "lv" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Mēģināt vēlreiz"
+          }
+        },
+        "mr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "पुन्हा प्रयत्न करा"
+          }
+        },
+        "ms" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cuba lagi"
+          }
+        },
+        "mt" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Erġa’ pprova"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Prøv igjen"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Opnieuw proberen"
+          }
+        },
+        "pa" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ਮੁੜ ਕੋਸ਼ਿਸ਼ ਕਰੋ"
+          }
+        },
+        "pcm" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Try again"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Spróbuj ponownie"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tentar novamente"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tentar novamente"
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Încercați din nou"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Повторить попытку"
+          }
+        },
+        "sco" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Try again"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Skúsiť znova"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Poskusi znova"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Försök igen"
+          }
+        },
+        "sw" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Jaribu tena"
+          }
+        },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "மீண்டும் முயலவும்"
+          }
+        },
+        "te" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "మళ్లీ ప్రయత్నించండి"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ลองอีกครั้ง"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tekrar deneyin"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Спробувати ще раз"
+          }
+        },
+        "ur" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "دوبارہ کوشش کریں"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Thử lại"
+          }
+        },
+        "wuu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "再试一趟"
+          }
+        },
+        "yue-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "再試一次"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "重试"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "再試一次"
+          }
+        }
+      }
+    },
+    "storage.notSaved.body" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "لا تزال ملخصاتك مفتوحة، ولكن تعذّر حفظ التغييرات على هذا الهاتف."
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Резюметата ви все още са отворени, но промените не можаха да бъдат запазени на този телефон."
+          }
+        },
+        "bho" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "राउर सारांश अबहियों खुलल बा, बाकिर बदलाव एह फोन पर सेव ना हो सकल।"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "আপনার সারাংশগুলো এখনও খোলা আছে, কিন্তু এই ফোনে পরিবর্তনগুলো সংরক্ষণ করা যায়নি।"
+          }
+        },
+        "cs" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Vaše souhrny jsou stále otevřené, ale změny se do tohoto telefonu nepodařilo uložit."
+          }
+        },
+        "cy" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Mae eich crynodebau yn dal ar agor, ond ni fu modd cadw'r newidiadau ar y ffôn hwn."
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Dine resuméer er stadig åbne, men ændringerne kunne ikke gemmes på denne telefon."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ihre Zusammenfassungen sind noch geöffnet, aber die Änderungen konnten auf diesem Telefon nicht gespeichert werden."
+          }
+        },
+        "el" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Οι περιλήψεις σας παραμένουν ανοιχτές, αλλά οι αλλαγές δεν μπόρεσαν να αποθηκευτούν σε αυτό το τηλέφωνο."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your summaries are still open, but changes could not be saved on this device."
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Your summaries are still open, but changes could not be saved on this phone."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sus resúmenes siguen abiertos, pero no se pudieron guardar los cambios en este teléfono."
+          }
+        },
+        "et" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Teie kokkuvõtted on endiselt avatud, kuid muudatusi ei saanud sellesse telefoni salvestada."
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Zure laburpenak irekita daude oraindik, baina aldaketak ezin izan dira telefono honetan gorde."
+          }
+        },
+        "fa" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "خلاصه‌های شما همچنان باز هستند، اما تغییرات در این تلفن ذخیره نشدند."
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Yhteenvedot ovat edelleen avoinna, mutta muutoksia ei voitu tallentaa tähän puhelimeen."
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Bukas pa rin ang iyong mga buod, ngunit hindi ma-save ang mga pagbabago sa teleponong ito."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Vos résumés sont toujours ouverts, mais les modifications n’ont pas pu être enregistrées sur ce téléphone."
+          }
+        },
+        "ga" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tá d’achoimrí fós oscailte, ach níorbh fhéidir na hathruithe a shábháil ar an bhfón seo."
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tha na geàrr-chunntasan agad fosgailte fhathast, ach cha b’ urrainn na h-atharraichean a shàbhaladh air an fhòn seo."
+          }
+        },
+        "gu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "તમારા સારાંશ હજુ ખુલ્લા છે, પરંતુ ફેરફારો આ ફોન પર સાચવી શકાયા નથી."
+          }
+        },
+        "ha" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Takaitattunku suna nan a buɗe, amma ba a iya ajiye sauye-sauyen a wannan wayar ba."
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "הסיכומים שלך עדיין פתוחים, אך לא ניתן היה לשמור את השינויים בטלפון הזה."
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "आपके सारांश अभी भी खुले हैं, लेकिन बदलाव इस फ़ोन पर सहेजे नहीं जा सके।"
+          }
+        },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Vaši su sažeci još otvoreni, ali promjene se nisu mogle spremiti na ovaj telefon."
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Az összefoglalók még nyitva vannak, de a módosításokat nem sikerült menteni erre a telefonra."
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ringkasan Anda masih terbuka, tetapi perubahan tidak dapat disimpan di ponsel ini."
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Samantektirnar þínar eru enn opnar, en ekki tókst að vista breytingarnar í þessum síma."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "I riepiloghi sono ancora aperti, ma non è stato possibile salvare le modifiche su questo telefono."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "サマリーは開いたままですが、変更をこのスマートフォンに保存できませんでした。"
+          }
+        },
+        "jv" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ringkesan sampeyan isih mbukak, nanging owah-owahan ora bisa disimpen ing telpon iki."
+          }
+        },
+        "km" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "សេចក្តីសង្ខេបរបស់អ្នកនៅតែបើក ប៉ុន្តែមិនអាចរក្សាទុកការផ្លាស់ប្តូរនៅលើទូរសព្ទនេះបានទេ។"
+          }
+        },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ನಿಮ್ಮ ಸಾರಾಂಶಗಳು ಇನ್ನೂ ತೆರೆದಿವೆ, ಆದರೆ ಬದಲಾವಣೆಗಳನ್ನು ಈ ಫೋನ್‌ನಲ್ಲಿ ಉಳಿಸಲಾಗಲಿಲ್ಲ."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "요약은 아직 열려 있지만 변경 사항을 이 휴대전화에 저장할 수 없습니다."
+          }
+        },
+        "lb" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Är Zesummefaassunge sinn nach op, mee d’Ännerunge konnten net op dësem Telefon gespäichert ginn."
+          }
+        },
+        "lo" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ບົດສະຫຼຸບຂອງທ່ານຍັງເປີດຢູ່ ແຕ່ບໍ່ສາມາດບັນທຶກການປ່ຽນແປງໃນໂທລະສັບນີ້ໄດ້."
+          }
+        },
+        "lt" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Jūsų suvestinės vis dar atidarytos, bet pakeitimų nepavyko išsaugoti šiame telefone."
+          }
+        },
+        "lv" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Jūsu kopsavilkumi joprojām ir atvērti, taču izmaiņas nevarēja saglabāt šajā tālrunī."
+          }
+        },
+        "mr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "तुमचे सारांश अजूनही उघडे आहेत, पण बदल या फोनवर जतन करता आले नाहीत."
+          }
+        },
+        "ms" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ringkasan anda masih terbuka, tetapi perubahan tidak dapat disimpan pada telefon ini."
+          }
+        },
+        "mt" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Is-sommarji tiegħek għadhom miftuħa, iżda l-bidliet ma setgħux jiġu ssejvjati fuq dan it-telefon."
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sammendragene dine er fortsatt åpne, men endringene kunne ikke lagres på denne telefonen."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Uw samenvattingen zijn nog geopend, maar de wijzigingen konden niet op deze telefoon worden opgeslagen."
+          }
+        },
+        "pa" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ਤੁਹਾਡੇ ਸਾਰ ਅਜੇ ਵੀ ਖੁੱਲ੍ਹੇ ਹਨ, ਪਰ ਤਬਦੀਲੀਆਂ ਇਸ ਫ਼ੋਨ ਉੱਤੇ ਸੁਰੱਖਿਅਤ ਨਹੀਂ ਹੋ ਸਕੀਆਂ।"
+          }
+        },
+        "pcm" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Your summary dem still open, but di changes no fit save for dis phone."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Podsumowania są nadal otwarte, ale nie udało się zapisać zmian na tym telefonie."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Seus resumos ainda estão abertos, mas não foi possível salvar as alterações neste telefone."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Os seus resumos continuam abertos, mas não foi possível guardar as alterações neste telemóvel."
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Rezumatele sunt încă deschise, dar modificările nu au putut fi salvate pe acest telefon."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ваши сводки всё ещё открыты, но изменения не удалось сохранить на этом телефоне."
+          }
+        },
+        "sco" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Yer summaries are still open, but the chynges couldnae be saved on this phone."
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Vaše súhrny sú stále otvorené, ale zmeny sa nepodarilo uložiť do tohto telefónu."
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Vaši povzetki so še vedno odprti, vendar sprememb ni bilo mogoče shraniti v ta telefon."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Dina sammanfattningar är fortfarande öppna, men ändringarna kunde inte sparas på den här telefonen."
+          }
+        },
+        "sw" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Muhtasari wako bado uko wazi, lakini mabadiliko hayakuweza kuhifadhiwa kwenye simu hii."
+          }
+        },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "உங்கள் சுருக்கங்கள் இன்னும் திறந்துள்ளன, ஆனால் மாற்றங்களை இந்தத் தொலைபேசியில் சேமிக்க முடியவில்லை."
+          }
+        },
+        "te" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "మీ సారాంశాలు ఇంకా తెరిచే ఉన్నాయి, కానీ మార్పులను ఈ ఫోన్‌లో సేవ్ చేయడం సాధ్యపడలేదు."
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ข้อมูลสรุปของคุณยังเปิดอยู่ แต่ไม่สามารถบันทึกการเปลี่ยนแปลงไว้ในโทรศัพท์เครื่องนี้ได้"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Özetleriniz hâlâ açık, ancak değişiklikler bu telefona kaydedilemedi."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ваші зведення все ще відкриті, але зміни не вдалося зберегти на цьому телефоні."
+          }
+        },
+        "ur" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "آپ کے خلاصے اب بھی کھلے ہیں، لیکن تبدیلیاں اس فون پر محفوظ نہیں ہو سکیں۔"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Các bản tóm tắt vẫn đang mở nhưng không thể lưu thay đổi trên điện thoại này."
+          }
+        },
+        "wuu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "侬个摘要还开勒浪向，不过改动呒没办法保存到搿只手机浪。"
+          }
+        },
+        "yue-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "你嘅摘要仍然開啟，但變更未能儲存喺呢部電話。"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "您的摘要仍处于打开状态，但更改无法保存到此手机。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "您的摘要仍為開啟狀態，但無法將變更儲存到此手機。"
+          }
+        }
+      }
+    },
+    "storage.notSaved.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "لم يتم الحفظ"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Не е запазено"
+          }
+        },
+        "bho" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "सेव नइखे भइल"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "সংরক্ষিত হয়নি"
+          }
+        },
+        "cs" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Neuloženo"
+          }
+        },
+        "cy" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Heb ei gadw"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ikke gemt"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nicht gespeichert"
+          }
+        },
+        "el" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Δεν αποθηκεύτηκε"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not saved"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Not saved"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "No guardado"
+          }
+        },
+        "et" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Salvestamata"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Gorde gabe"
+          }
+        },
+        "fa" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ذخیره نشد"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ei tallennettu"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Hindi na-save"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Non enregistré"
+          }
+        },
+        "ga" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Gan sábháil"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Gun a shàbhaladh"
+          }
+        },
+        "gu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "સાચવાયું નથી"
+          }
+        },
+        "ha" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ba a ajiye ba"
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "לא נשמר"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "सहेजा नहीं गया"
+          }
+        },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nije spremljeno"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nincs mentve"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Belum disimpan"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ekki vistað"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Non salvato"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "保存されていません"
+          }
+        },
+        "jv" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Durung disimpen"
+          }
+        },
+        "km" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "មិនបានរក្សាទុក"
+          }
+        },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ಉಳಿಸಲಾಗಿಲ್ಲ"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "저장되지 않음"
+          }
+        },
+        "lb" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Net gespäichert"
+          }
+        },
+        "lo" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ບໍ່ໄດ້ບັນທຶກ"
+          }
+        },
+        "lt" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Neišsaugota"
+          }
+        },
+        "lv" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nav saglabāts"
+          }
+        },
+        "mr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "जतन केले नाही"
+          }
+        },
+        "ms" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tidak disimpan"
+          }
+        },
+        "mt" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Mhux issejvjat"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ikke lagret"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Niet opgeslagen"
+          }
+        },
+        "pa" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ਸੁਰੱਖਿਅਤ ਨਹੀਂ ਹੋਇਆ"
+          }
+        },
+        "pcm" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "E no save"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nie zapisano"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Não salvo"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Não guardado"
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nesalvat"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Не сохранено"
+          }
+        },
+        "sco" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "No saved"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Neuložené"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ni shranjeno"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Inte sparat"
+          }
+        },
+        "sw" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Haijahifadhiwa"
+          }
+        },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "சேமிக்கப்படவில்லை"
+          }
+        },
+        "te" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "సేవ్ కాలేదు"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ไม่ได้บันทึก"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Kaydedilmedi"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Не збережено"
+          }
+        },
+        "ur" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "محفوظ نہیں ہوا"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Chưa lưu"
+          }
+        },
+        "wuu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "呒没保存"
+          }
+        },
+        "yue-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "未儲存"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "未保存"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "未儲存"
+          }
+        }
+      }
+    },
+    "storage.unavailable.body" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "لا يمكن قراءة الملخصات المحفوظة الآن. تُركت دون تغيير على هذا الهاتف."
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Запазените резюмета не могат да бъдат прочетени в момента. Те са оставени непроменени на този телефон."
+          }
+        },
+        "bho" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "सेव कइल सारांश अभी पढ़ल नइखे जा सकत। एह फोन पर ओकरा के बिना बदलाव के छोड़ दिहल गइल बा।"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "সংরক্ষিত সারাংশগুলো এখন পড়া যাচ্ছে না। এই ফোনে সেগুলো অপরিবর্তিত রাখা হয়েছে।"
+          }
+        },
+        "cs" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Uložené souhrny nyní nelze přečíst. V tomto telefonu zůstaly beze změny."
+          }
+        },
+        "cy" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ni ellir darllen y crynodebau sydd wedi'u cadw ar hyn o bryd. Maent wedi'u gadael heb eu newid ar y ffôn hwn."
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Gemte resuméer kan ikke læses lige nu. De er ikke blevet ændret på denne telefon."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Gespeicherte Zusammenfassungen können derzeit nicht gelesen werden. Sie wurden auf diesem Telefon unverändert belassen."
+          }
+        },
+        "el" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Οι αποθηκευμένες περιλήψεις δεν μπορούν να διαβαστούν αυτήν τη στιγμή. Έχουν παραμείνει αμετάβλητες σε αυτό το τηλέφωνο."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saved summaries cannot be read right now. They have been left unchanged on this device."
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Saved summaries cannot be read right now. They have been left unchanged on this phone."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Los resúmenes guardados no se pueden leer ahora. Se han dejado sin cambios en este teléfono."
+          }
+        },
+        "et" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Salvestatud kokkuvõtteid ei saa praegu lugeda. Need jäeti selles telefonis muutmata."
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Gordetako laburpenak ezin dira irakurri une honetan. Aldatu gabe utzi dira telefono honetan."
+          }
+        },
+        "fa" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "خلاصه‌های ذخیره‌شده اکنون قابل خواندن نیستند. آن‌ها در این تلفن بدون تغییر باقی مانده‌اند."
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tallennettuja yhteenvetoja ei voi lukea juuri nyt. Ne on jätetty muuttamatta tähän puhelimeen."
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Hindi mabasa ngayon ang mga naka-save na buod. Iniwan ang mga ito nang walang pagbabago sa teleponong ito."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Les résumés enregistrés ne peuvent pas être lus pour le moment. Ils ont été laissés inchangés sur ce téléphone."
+          }
+        },
+        "ga" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ní féidir na hachoimrí sábháilte a léamh faoi láthair. Fágadh gan athrú iad ar an bhfón seo."
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cha ghabh na geàrr-chunntasan a chaidh a shàbhaladh a leughadh an-dràsta. Chaidh am fàgail gun atharrachadh air an fhòn seo."
+          }
+        },
+        "gu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "સાચવેલા સારાંશ અત્યારે વાંચી શકાતા નથી. તેમને આ ફોન પર બદલ્યા વિના રાખવામાં આવ્યા છે."
+          }
+        },
+        "ha" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ba za a iya karanta takaitattun da aka ajiye yanzu ba. An bar su ba tare da canji ba a wannan wayar."
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "לא ניתן לקרוא כרגע את הסיכומים השמורים. הם נשארו ללא שינוי בטלפון הזה."
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "सहेजे गए सारांश अभी पढ़े नहीं जा सकते। उन्हें इस फ़ोन पर बिना बदलाव के रखा गया है।"
+          }
+        },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Spremljeni sažeci trenutačno se ne mogu pročitati. Ostavljeni su nepromijenjeni na ovom telefonu."
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "A mentett összefoglalók jelenleg nem olvashatók. Változatlanul maradtak ezen a telefonon."
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ringkasan tersimpan tidak dapat dibaca saat ini. Ringkasan tersebut dibiarkan tanpa perubahan di ponsel ini."
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ekki er hægt að lesa vistaðar samantektir núna. Þær voru látnar óbreyttar í þessum síma."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Al momento non è possibile leggere i riepiloghi salvati. Sono rimasti invariati su questo telefono."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "保存済みのサマリーを現在読み取れません。このスマートフォン上では変更されずに残っています。"
+          }
+        },
+        "jv" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ringkesan sing wis disimpen saiki ora bisa diwaca. Ringkesan kasebut ditinggal tanpa owah-owahan ing telpon iki."
+          }
+        },
+        "km" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "មិនអាចអានសេចក្តីសង្ខេបដែលបានរក្សាទុកនៅពេលនេះទេ។ វាត្រូវបានទុកឱ្យនៅដដែលលើទូរសព្ទនេះ។"
+          }
+        },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ಉಳಿಸಿದ ಸಾರಾಂಶಗಳನ್ನು ಈಗ ಓದಲು ಸಾಧ್ಯವಿಲ್ಲ. ಅವುಗಳನ್ನು ಈ ಫೋನ್‌ನಲ್ಲಿ ಬದಲಾಯಿಸದೆ ಬಿಡಲಾಗಿದೆ."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "저장된 요약을 지금 읽을 수 없습니다. 이 휴대전화에서 변경되지 않은 상태로 유지되었습니다."
+          }
+        },
+        "lb" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Gespäichert Zesummefaassunge kënnen elo net gelies ginn. Si goufen op dësem Telefon onverännert gelooss."
+          }
+        },
+        "lo" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ບໍ່ສາມາດອ່ານບົດສະຫຼຸບທີ່ບັນທຶກໄວ້ໃນຕອນນີ້. ມັນຖືກປະໄວ້ໂດຍບໍ່ປ່ຽນແປງໃນໂທລະສັບນີ້."
+          }
+        },
+        "lt" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Išsaugotų suvestinių dabar perskaityti negalima. Jos paliktos nepakeistos šiame telefone."
+          }
+        },
+        "lv" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Saglabātos kopsavilkumus pašlaik nevar nolasīt. Tie šajā tālrunī ir atstāti nemainīti."
+          }
+        },
+        "mr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "जतन केलेले सारांश सध्या वाचता येत नाहीत. ते या फोनवर न बदलता ठेवले आहेत."
+          }
+        },
+        "ms" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ringkasan yang disimpan tidak dapat dibaca sekarang. Ringkasan tersebut dibiarkan tanpa perubahan pada telefon ini."
+          }
+        },
+        "mt" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Is-sommarji ssejvjati ma jistgħux jinqraw bħalissa. Tħallew kif inhuma fuq dan it-telefon."
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Lagrede sammendrag kan ikke leses akkurat nå. De er ikke endret på denne telefonen."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Opgeslagen samenvattingen kunnen nu niet worden gelezen. Ze zijn ongewijzigd op deze telefoon gelaten."
+          }
+        },
+        "pa" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ਸੁਰੱਖਿਅਤ ਕੀਤੇ ਸਾਰ ਇਸ ਵੇਲੇ ਪੜ੍ਹੇ ਨਹੀਂ ਜਾ ਸਕਦੇ। ਉਨ੍ਹਾਂ ਨੂੰ ਇਸ ਫ਼ੋਨ ਉੱਤੇ ਬਿਨਾਂ ਬਦਲਾਅ ਦੇ ਛੱਡਿਆ ਗਿਆ ਹੈ।"
+          }
+        },
+        "pcm" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Di summary dem wey save no fit read now. Dem leave dem as dem be for dis phone."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nie można teraz odczytać zapisanych podsumowań. Pozostawiono je bez zmian na tym telefonie."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Os resumos salvos não podem ser lidos agora. Eles foram mantidos sem alterações neste telefone."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Os resumos guardados não podem ser lidos neste momento. Foram deixados sem alterações neste telemóvel."
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Rezumatele salvate nu pot fi citite acum. Au fost lăsate neschimbate pe acest telefon."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Сохранённые сводки сейчас невозможно прочитать. На этом телефоне они оставлены без изменений."
+          }
+        },
+        "sco" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Saved summaries cannae be read juist noo. They hae been left unchynged on this phone."
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Uložené súhrny sa momentálne nedajú prečítať. V tomto telefóne zostali nezmenené."
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Shranjenih povzetkov trenutno ni mogoče prebrati. V tem telefonu so ostali nespremenjeni."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sparade sammanfattningar kan inte läsas just nu. De har lämnats oförändrade på den här telefonen."
+          }
+        },
+        "sw" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Muhtasari uliohifadhiwa hauwezi kusomwa sasa. Umeachwa bila kubadilishwa kwenye simu hii."
+          }
+        },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "சேமித்த சுருக்கங்களை இப்போது படிக்க முடியவில்லை. அவை இந்தத் தொலைபேசியில் மாற்றப்படாமல் விடப்பட்டுள்ளன."
+          }
+        },
+        "te" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "సేవ్ చేసిన సారాంశాలను ప్రస్తుతం చదవడం సాధ్యపడదు. వాటిని ఈ ఫోన్‌లో మార్చకుండా ఉంచారు."
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ไม่สามารถอ่านข้อมูลสรุปที่บันทึกไว้ได้ในขณะนี้ ข้อมูลยังคงอยู่โดยไม่มีการเปลี่ยนแปลงในโทรศัพท์เครื่องนี้"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Kaydedilmiş özetler şu anda okunamıyor. Bu telefonda değiştirilmeden bırakıldılar."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Збережені зведення зараз неможливо прочитати. На цьому телефоні їх залишено без змін."
+          }
+        },
+        "ur" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "محفوظ شدہ خلاصے اس وقت پڑھے نہیں جا سکتے۔ انہیں اس فون پر بغیر تبدیلی کے چھوڑ دیا گیا ہے۔"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Hiện không thể đọc các bản tóm tắt đã lưu. Chúng được giữ nguyên trên điện thoại này."
+          }
+        },
+        "wuu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "现在呒没办法读取已经保存个摘要。伊拉勒搿只手机浪保持原样。"
+          }
+        },
+        "yue-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "而家無法讀取已儲存嘅摘要。佢哋喺呢部電話保持不變。"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "目前无法读取已保存的摘要。它们在此手机上保持不变。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "目前無法讀取已儲存的摘要。它們在此手機上保持不變。"
+          }
+        }
+      }
+    },
     "summary.title" : {
       "extractionState" : "manual",
       "localizations" : {

@@ -33,16 +33,17 @@ xcodebuild test -project IPSApp.xcodeproj -scheme IPSApp \
 | M-READ-3              | `DocumentTests.sectionsKeepCompositionOrder` (all 16 sections known)     |
 | M-LOAD-1              | `DocumentFileTests` (file size, stream boundary, missing file) |
 | M-LOAD-3, M-LIST-1    | `DocumentTests.everyExampleOpens`; UI `testTheExamplesOpenAndClear`      |
-| M-VIEW-1              | `FormatTests.firstReadableNameInThePreferredCategory`; `DocumentTests.patientBanner`; UI `testTheExamplesOpenAndClear`          |
+| M-VIEW-1              | `FormatTests.firstReadableNameInThePreferredCategory`, `datesWriteTheMonthAsText`, `ages`; `DocumentTests.patientBanner`, `bannerScreenAndPDFKeepSourceDatesAndClinicalDecimals`; UI `testTheExamplesOpenAndClear`          |
 | M-VIEW-2              | `DocumentTests.documentDetails`                                          |
 | M-VIEW-3              | `DocumentTests.sectionsKeepCompositionOrder`, `aMissingRequiredSectionIsListedLast` |
-| M-VIEW-4              | `DocumentTests.medicationsResolveTheirMedication`, `observationsHaveAValue` |
+| M-VIEW-4              | `FormatTests.quantities`; `DocumentTests.medicationsResolveTheirMedication`, `observationsHaveAValue`, `bannerScreenAndPDFKeepSourceDatesAndClinicalDecimals` |
 | M-VIEW-5              | `DocumentTests.absentStatesFromEmptyReason`, `aMixedAllergyListIsKnown`, `sectionStatesFollowTheViewersOrder`; `FormatTests.absentStates`; UI |
 | M-VIEW-6              | `FormatTests.narrativeBecomesPlainText`                                  |
 | M-VIEW-7              | `FormatTests.displayPrefersDisplayThenTextThenSystemAndCode`, `statusesAreCodes` |
 | M-LOAD-4              | By hand on a simulator: `xcrun simctl openurl <device> file:///path/bundle-minimal.json` opens Martha DeLarosa (cold and warm); a JSON that is not a Bundle shows the `not_a_bundle` alert; nothing is left in `Documents/Inbox` |
 | M-LOAD-2, M-LIST-3    | UI `testPasteRefusalAndShare` (plain text refused as `not_json`, list unchanged; an IPS opens) |
 | M-SHARE-1             | `DocumentTests.sharingGivesBackTheExactBytes`; UI `testPasteRefusalAndShare` (the sheet names `international-patient-summary`, JSON) |
+| M-PRIV-1              | `TemporaryShareTests` (same name for two patients, cancellation, delayed recipient, relaunch cleanup); no networking code or entitlement; UI share tests |
 | M-PRIV-3, M-ABOUT-1   | UI `testTheExamplesOpenAndClear`                                         |
 | M-A11Y-2              | UI `testTheLargestTextSize`; `testLanguagesAtTheLargestTextSize` (ar, he, de, fi)                                              |
 | M-I18N-1              | UI: no ⟦key⟧ on any screen visited                                       |
@@ -53,13 +54,14 @@ xcodebuild test -project IPSApp.xcodeproj -scheme IPSApp \
 | M-PEOPLE-3            | `PeopleTests.aPersonKeepsTheirRelationshipWhenAnotherSummaryOpens`, `onlyOnePersonIsMe`, `deletingTheSummaryThatHeldTheRelationshipKeepsIt`, `everyRelationshipHasAString`; UI `testFamiliesAndCarers` (heading and banner) |
 | M-PEOPLE-4            | `PeopleTests.forgettingSummariesForgetsTheirRelationship`; UI `testFamiliesAndCarers` |
 | M-SHARE-2             | UI `testFamiliesAndCarers` (three people: Share asks first); `testPasteRefusalAndShare` (one person: no question) |
-| M-PDF-1               | `PDFPlanTests.sectionsFollowThePriorityOrderAfterTheBox`, `paperAndFileName`; UI `testShareAsPDF` (the sheet names `international-patient-summary-2024-09-13`, PDF) |
+| M-PDF-1               | `PDFPlanTests.sectionsFollowThePriorityOrderAfterTheBox`, `paperAndFileName`; `DocumentTests.bannerScreenAndPDFKeepSourceDatesAndClinicalDecimals`; UI `testShareAsPDF` (the sheet names `international-patient-summary-2024-09-13`, PDF) |
 | M-PDF-2               | `PDFPlanTests.thePlansShrinkThenCapThenOmitLowestPriorityFirst`, `mustShowEntriesAreNeverTrimmed`, `currentMedicinesAreMustShowAndOthersAreNewestFirst`, `fittingStopsAtTheFirstPlanThatFitsOrRunsOn` |
-| M-PDF-3               | UI `testShareAsPDF` (M-SHARE-2's question first, then the sheet); by hand: the PDF in `tmp/share` until the next launch |
+| M-PDF-3               | `TemporaryShareTests` (isolated PDF/JSON lifetimes and cleanup); UI `testShareAsPDF` (M-SHARE-2's question first, then the sheet) |
 | M-STORE-1             | `EncryptedStoreTests.whatIsSavedComesBackAfterARestart`; UI `testSummariesOutlastARelaunch` (the five summaries and a relationship after the app is ended) |
 | M-STORE-2             | `EncryptedStoreTests.backupExclusionSurvivesClearingAndReimporting`, `nothingIsReadableOnDisk`, `theSameBytesSealTwiceDiffer`, `oneSummaryCannotStandInForAnother` |
-| M-STORE-3             | `EncryptedStoreTests.aDamagedSummaryIsLeftOutAndDeleted`, `aDamagedIndexOrAnotherKeyStartsEmpty`, `withoutTheKeyTheStoreIsDeleted`, `aKeyThatCannotBeReadNowLeavesTheStoreAlone` |
+| M-STORE-3             | `EncryptedStoreTests.aDamagedSummaryIsLeftOutAndDeleted`, `aDamagedIndexOrAnotherKeyStartsEmpty`, `withoutTheKeyTheStoreIsDeleted`, `aKeyThatCannotBeReadNowLeavesTheStoreAlone`, `aFileThatCannotBeReadNowLeavesTheStoreAlone` |
 | M-STORE-4             | `EncryptedStoreTests.deletingASummaryDeletesItsFile`, `clearAllDeletesEveryFileAndTheKey`; UI `testSummariesOutlastARelaunch` (empty after Clear all) |
+| M-STORE-5             | `EncryptedStoreTests.aFailedSummaryWriteRetriesTheExactDocumentsAfterRestart`, `aFailedIndexWriteRetriesTheExactRelationshipAfterRestart`, `aFileThatCannotBeReadNowLeavesTheStoreAlone`; `PeopleTests.reopeningPutsSummariesOpenedWhileUnavailableAboveSavedOnes`; `CatalogTests` (localized message and Try again) |
 
 Manual, before a release: the PDF of every example opened and read
 (`pdfinfo`, `pdftotext`; Patricia JORDANA's fits one page with four sections

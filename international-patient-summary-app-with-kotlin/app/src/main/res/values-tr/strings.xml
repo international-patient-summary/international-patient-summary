@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Composition\'da subject referansı yok.</string>
     <string name="problem_unreadable">Dosya okunamadı.</string>
     <string name="problem_empty_clipboard">Panoda yapıştırılacak metin yok.</string>
+    <string name="storage_problem_title">Kaydedilmedi</string>
+    <string name="storage_unsaved">Özetleriniz hâlâ açık, ancak değişiklikler bu telefona kaydedilemedi.</string>
+    <string name="storage_unavailable">Kaydedilmiş özetler şu anda okunamıyor. Bu telefonda değiştirilmeden bırakıldılar.</string>
+    <string name="action_retry">Tekrar deneyin</string>
     <string name="action_back">Geri</string>
     <string name="action_share">Paylaş</string>
     <string name="share_title">Özeti paylaş</string>

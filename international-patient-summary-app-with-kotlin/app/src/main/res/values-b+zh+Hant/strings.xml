@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Composition 沒有 subject 參照。</string>
     <string name="problem_unreadable">無法讀取該檔案。</string>
     <string name="problem_empty_clipboard">剪貼簿中沒有可貼上的文字。</string>
+    <string name="storage_problem_title">未儲存</string>
+    <string name="storage_unsaved">您的摘要仍為開啟狀態，但無法將變更儲存到此手機。</string>
+    <string name="storage_unavailable">目前無法讀取已儲存的摘要。它們在此手機上保持不變。</string>
+    <string name="action_retry">再試一次</string>
     <string name="action_back">返回</string>
     <string name="action_share">分享</string>
     <string name="share_title">分享摘要</string>

@@ -146,3 +146,21 @@ public struct Relationships: Sendable {
 
     public var isEmpty: Bool { bySummary.isEmpty }
 }
+
+/// M-STORE-5: what is open once the saved summaries can be read again, after
+/// some were opened while they could not be: those opened meanwhile on top,
+/// newest first, then the saved ones, each with the relationship it had. A
+/// summary in both is kept once, as saved.
+public func reopen(
+    saved: [Document], savedRelationships: [Document.ID: Relationship],
+    opened: [Document], openedRelationships: Relationships
+) -> (documents: [Document], relationships: Relationships) {
+    let savedIDs = Set(saved.map(\.id))
+    let meanwhile = opened.filter { !savedIDs.contains($0.id) }
+    var all = savedRelationships
+    for document in meanwhile { all[document.id] = openedRelationships.all[document.id] }
+    let documents = meanwhile + saved
+    var relationships = Relationships(all)
+    relationships.settle(people(documents))
+    return (documents, relationships)
+}

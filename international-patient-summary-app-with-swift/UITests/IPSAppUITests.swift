@@ -40,6 +40,17 @@ final class IPSAppUITests: XCTestCase {
         visible.tap()
     }
 
+    /// Go back from a compact summary. iOS 27 can expose UIKit's automatic back
+    /// item as `Other` despite its button trait, so use the standard edge-swipe
+    /// gesture instead of resolving it through a contradictory element type.
+    private func goBack(_ app: XCUIApplication, file: StaticString = #filePath, line: UInt = #line) {
+        let bar = app.navigationBars.firstMatch
+        XCTAssertTrue(bar.waitForExistence(timeout: 5), "navigation bar", file: file, line: line)
+        let start = app.coordinate(withNormalizedOffset: CGVector(dx: 0.01, dy: 0.5))
+        let end = app.coordinate(withNormalizedOffset: CGVector(dx: 0.8, dy: 0.5))
+        start.press(forDuration: 0.1, thenDragTo: end)
+    }
+
     /// A screenshot kept with the test results, for review (`xcresulttool export attachments`).
     private func screenshot(_ app: XCUIApplication, _ name: String) {
         let attachment = XCTAttachment(screenshot: app.screenshot())
@@ -82,7 +93,7 @@ final class IPSAppUITests: XCTestCase {
         screenshot(app, "3-summary")
         app.swipeUp()
         screenshot(app, "4-sections")
-        app.navigationBars.buttons.element(boundBy: 0).tap()
+        goBack(app)
 
         // M-VIEW-5: "Information unavailable" for withheld required sections.
         table.staticTexts["James Judge"].tap()
@@ -90,7 +101,7 @@ final class IPSAppUITests: XCTestCase {
             app.staticTexts.containing(NSPredicate(format: "label BEGINSWITH %@", "Information unavailable"))
                 .firstMatch.waitForExistence(timeout: 5))
         screenshot(app, "5-unavailable")
-        app.navigationBars.buttons.element(boundBy: 0).tap()
+        goBack(app)
 
         // M-PRIV-3: Clear all, after confirming.
         app.buttons["about"].tap()
@@ -271,7 +282,7 @@ final class IPSAppUITests: XCTestCase {
         XCTAssertTrue(confirm.waitForExistence(timeout: 5))
         screenshot(app, "people-2-share")
         confirm.buttons["Cancel"].tap()
-        if !sideBySide { app.navigationBars.buttons.element(boundBy: 0).tap() }
+        if !sideBySide { goBack(app) }
 
         // M-PEOPLE-4: Forget James Judge: his summary goes, the others stay.
         tapVisible(app, "Options for James Judge")
@@ -306,7 +317,7 @@ final class IPSAppUITests: XCTestCase {
         list.staticTexts["Patricia JORDANA"].firstMatch.tap()
         XCTAssertTrue(again.navigationBars["Patricia JORDANA"].waitForExistence(timeout: 5))
         screenshot(again, "store-1-relaunched")
-        if !sideBySide { again.navigationBars.buttons.element(boundBy: 0).tap() }
+        if !sideBySide { goBack(again) }
 
         again.buttons["about"].tap()
         let clear = again.cells["clearAll"]

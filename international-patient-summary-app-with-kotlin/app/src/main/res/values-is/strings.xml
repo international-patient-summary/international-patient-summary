@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Composition hefur enga tilvísun í subject.</string>
     <string name="problem_unreadable">Ekki tókst að lesa skrána.</string>
     <string name="problem_empty_clipboard">Enginn texti er á klemmuspjaldinu til að líma.</string>
+    <string name="storage_problem_title">Ekki vistað</string>
+    <string name="storage_unsaved">Samantektirnar þínar eru enn opnar, en ekki tókst að vista breytingarnar í þessum síma.</string>
+    <string name="storage_unavailable">Ekki er hægt að lesa vistaðar samantektir núna. Þær voru látnar óbreyttar í þessum síma.</string>
+    <string name="action_retry">Reyna aftur</string>
     <string name="action_back">Til baka</string>
     <string name="action_share">Deila</string>
     <string name="share_title">Deila yfirliti</string>

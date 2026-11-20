@@ -5,7 +5,7 @@ import globals from 'globals';
 import ts from 'typescript-eslint';
 
 export default ts.config(
-	{ ignores: ['build/', '.svelte-kit/', 'node_modules/', 'static/'] },
+	{ ignores: ['build/', 'coverage/', '.svelte-kit/', 'node_modules/', 'static/'] },
 	js.configs.recommended,
 	...ts.configs.recommended,
 	...svelte.configs.recommended,

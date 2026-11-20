@@ -1,4 +1,4 @@
-// The encrypted store (spec M-STORE-1..4): every open summary's exact bytes,
+// The encrypted store (spec M-STORE-1..5): every open summary's exact bytes,
 // and an index of their order, ids and relationships, each in its own file,
 // each encrypted with AES-256-GCM under one key. Plain Kotlin, java.* and
 // javax.crypto only, so it runs in JVM tests with a plain AES key; the app
@@ -53,20 +53,35 @@ data class StoreIndex(val nextId: Long, val entries: List<Entry>) {
 /** What a load found: the summaries that opened, in index order, and the index they came from. */
 class Loaded<T>(val index: StoreIndex, val items: List<T>)
 
-class EncryptedStore(private val dir: File, private val keys: KeyProvider) {
+/** The saved files exist but cannot be read just now; they must be left alone. */
+class StoreUnavailable(cause: Throwable? = null) : IOException(cause)
+
+/** The disk seam used by the view model's failure-and-retry tests. */
+interface SummaryDisk {
+    fun <T : Any> load(open: (Long, ByteArray) -> T?): Loaded<T>
+    fun save(index: StoreIndex, added: Map<Long, ByteArray> = emptyMap(), removed: Collection<Long> = emptyList())
+    fun clear()
+}
+
+class EncryptedStore(private val dir: File, private val keys: KeyProvider) : SummaryDisk {
     private val summaries = File(dir, "summaries")
     private val indexFile = File(dir, "index.bin")
+
+    /** Test seams for a temporary read failure or a failed summary/index write. */
+    internal var beforeRead: (File) -> Unit = {}
+    internal var beforeWrite: (File) -> Unit = {}
 
     /**
      * Read the store (M-STORE-1, M-STORE-3). [open] turns a summary's id and
      * bytes into a summary, checking it again; it returns null, or throws, to
      * refuse it. A summary that cannot be decrypted or is refused is left out
      * and its file deleted, and the index is rewritten without it. When the
-     * key cannot be had, or the index cannot be decrypted or read (a missing
-     * or replaced key, or a damaged index), the whole store and the key are
-     * deleted and the result is empty. Never throws.
+     * A missing or replaced key, an index that cannot be authenticated, or an
+     * index that is not an index is confirmed damage: the store and key are
+     * deleted. A key or file that cannot be accessed just now is not damage:
+     * [StoreUnavailable] is thrown and no file is changed (M-STORE-5).
      */
-    fun <T : Any> load(open: (Long, ByteArray) -> T?): Loaded<T> {
+    override fun <T : Any> load(open: (Long, ByteArray) -> T?): Loaded<T> {
         File(dir, "index.tmp").delete()
         summaries.listFiles { file -> file.name.endsWith(".tmp") }?.forEach { it.delete() }
         if (!indexFile.exists()) {
@@ -74,14 +89,28 @@ class EncryptedStore(private val dir: File, private val keys: KeyProvider) {
             summaries.deleteRecursively()
             return Loaded(StoreIndex.EMPTY, emptyList())
         }
-        val index = try {
-            parseIndex(decrypt(keys.key(), indexFile.readBytes(), INDEX_AAD))
+        val key = try {
+            keys.key()
+        } catch (error: Exception) {
+            throw StoreUnavailable(error)
+        }
+        val sealed = try {
+            beforeRead(indexFile)
+            indexFile.readBytes()
+        } catch (error: IOException) {
+            throw StoreUnavailable(error)
+        } catch (error: SecurityException) {
+            throw StoreUnavailable(error)
+        }
+        val plain = try {
+            decrypt(key, sealed, INDEX_AAD)
         } catch (_: GeneralSecurityException) {
             null
-        } catch (_: IOException) {
-            null
+        }
+        val index = try {
+            plain?.let(::parseIndex)
         } catch (_: RuntimeException) {
-            // A Keystore failure, or JSON that is not an index.
+            // It authenticated under this key, but is not an index.
             null
         }
         if (index == null) {
@@ -91,10 +120,12 @@ class EncryptedStore(private val dir: File, private val keys: KeyProvider) {
         val kept = ArrayList<StoreIndex.Entry>()
         val items = ArrayList<T>()
         for (entry in index.entries) {
-            val item = try {
-                read(entry.id)?.let { open(entry.id, it) }
-            } catch (_: Exception) {
-                null
+            val item = read(entry.id)?.let { bytes ->
+                try {
+                    open(entry.id, bytes)
+                } catch (_: Exception) {
+                    null
+                }
             }
             if (item == null) {
                 fileOf(entry.id).delete()
@@ -117,18 +148,22 @@ class EncryptedStore(private val dir: File, private val keys: KeyProvider) {
      * delete the removed ones', then write the index. Throws when it cannot
      * write; what was written before still loads.
      */
-    fun save(index: StoreIndex, added: Map<Long, ByteArray> = emptyMap(), removed: Collection<Long> = emptyList()) {
+    override fun save(index: StoreIndex, added: Map<Long, ByteArray>, removed: Collection<Long>) {
         if (added.isNotEmpty()) {
             val key = keys.key()
             summaries.mkdirs()
             added.forEach { (id, bytes) -> write(fileOf(id), encrypt(key, bytes, summaryAad(id))) }
         }
-        removed.forEach { fileOf(it).delete() }
         saveIndex(index)
+        // Only remove files after the new index is durable. Retry can therefore
+        // always write the complete current state after any earlier failure.
+        val kept = index.entries.map { fileOf(it.id).name }.toSet()
+        summaries.listFiles()?.filter { it.name !in kept }?.forEach { it.delete() }
+        removed.forEach { fileOf(it).delete() }
     }
 
     /** Delete every file and the key (M-PRIV-3, M-STORE-4); the next save makes a new key. */
-    fun clear() = wipe()
+    override fun clear() = wipe()
 
     private fun wipe() {
         dir.deleteRecursively()
@@ -144,11 +179,22 @@ class EncryptedStore(private val dir: File, private val keys: KeyProvider) {
     private fun read(id: Long): ByteArray? {
         val file = fileOf(id)
         if (!file.exists()) return null
+        val key = try {
+            keys.key()
+        } catch (error: Exception) {
+            throw StoreUnavailable(error)
+        }
+        val sealed = try {
+            beforeRead(file)
+            file.readBytes()
+        } catch (error: IOException) {
+            throw StoreUnavailable(error)
+        } catch (error: SecurityException) {
+            throw StoreUnavailable(error)
+        }
         return try {
-            decrypt(keys.key(), file.readBytes(), summaryAad(id))
+            decrypt(key, sealed, summaryAad(id))
         } catch (_: GeneralSecurityException) {
-            null
-        } catch (_: IOException) {
             null
         }
     }
@@ -156,6 +202,7 @@ class EncryptedStore(private val dir: File, private val keys: KeyProvider) {
     private fun fileOf(id: Long) = File(summaries, "$id.bin")
 
     private fun write(file: File, bytes: ByteArray) {
+        beforeWrite(file)
         val temporary = File(file.parentFile, file.nameWithoutExtension + ".tmp")
         FileOutputStream(temporary).use { out ->
             out.write(bytes)

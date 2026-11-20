@@ -124,6 +124,9 @@ its details beneath (status, criticality and reactions, dosage, dates,
 values and units). Codes such as "active" or "confirmed" are written in
 your language. Clinical text from the document (names of conditions and
 medicines, notes) is shown exactly as written and never translated.
+Numeric clinical values keep the exact JSON token, including trailing zeroes
+and high precision. Partial dates stay partial; an invalid date is shown as
+its source text and never produces an age.
 
 ### When information is missing
 
@@ -159,9 +162,11 @@ sheet:
   document's date, such as `international-patient-summary-2024-09-13.pdf`.
 
 Neither file is ever named after the patient, so the name gives nothing
-away in a download folder or a message preview. The temporary copy made for
-sharing is deleted when the share sheet returns, and again at the next
-launch; the app keeps no copy. When summaries of more than one person are
+away in a download folder or a message preview. Each Share tap makes its own
+temporary directory, so one share can never replace or delete another
+recipient's file. Its copy is deleted when that share finishes or is
+cancelled, and abandoned copies are deleted at the next launch; the app
+keeps no copy. When summaries of more than one person are
 open, the app first asks **Share the summary of** and the name, so you
 don't send the wrong person's record. Nothing is sent until you tap
 **Share**.
@@ -237,7 +242,9 @@ This app is built so that it has nothing to leak.
   encrypted with a key that never leaves the phone (Android's Keystore).
   Nothing else on the phone, and nothing outside it, holds them.
 - **Checked again.** Each time the app starts, it checks every saved
-  summary again. One that cannot be read is deleted.
+  summary again. Confirmed damage is deleted. If the key or a file is only
+  temporarily unavailable, every encrypted file is left unchanged; the app
+  says it could not save and **Try again** reads and saves the full set.
 - **No network.** The app doesn't ask for the internet permission, so
   Android won't let it connect anywhere. A test checks this on every build.
   There is no account, no analytics and no crash reporting.

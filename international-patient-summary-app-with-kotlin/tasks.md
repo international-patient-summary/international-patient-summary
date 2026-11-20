@@ -127,3 +127,6 @@ See the [shared release checklist](../tasks.md) for cross-platform work.
 - [x] P11-T6 Backup and device transfer stay off (`ManifestTest.theBackupRulesExcludeEveryDomain`)
 - [x] P11-T7 Docs: spec §8, §9, AGENTS.md, README, plans, llms
 - [x] P11-T8 Translations of the changed strings (`empty_body`, `about_privacy_body`, `clear_all_body`, `people_forget_body`) in every `values-*/`
+- [x] P11-T9 Failed summary/index saves keep the summaries open, show a localized retry, and restore exact bytes and relationships after retry; temporary key/file access failures preserve the store (M-STORE-5, `EncryptedStoreTest`, `SummaryStoreTest`)
+- [x] P11-T10 Every export owns a unique temporary directory; completion/cancellation removes only that export and launch removes abandoned exports (`ShareFilesTest`)
+- [x] P11-T11 Preserve exact JSON numeric tokens and source text for invalid dates; never show an age for an invalid, partial or future birth date; prove the banner, entry detail and PDF input agree (`FormatTest`, `SummaryReaderTest.bannerScreenAndPdfKeepSourceDatesAndClinicalDecimals`)

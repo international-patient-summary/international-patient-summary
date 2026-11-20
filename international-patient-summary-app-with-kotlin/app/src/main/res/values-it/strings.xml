@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">La Composition non ha un riferimento al soggetto (subject).</string>
     <string name="problem_unreadable">Impossibile leggere il file.</string>
     <string name="problem_empty_clipboard">Gli appunti non contengono testo da incollare.</string>
+    <string name="storage_problem_title">Non salvato</string>
+    <string name="storage_unsaved">I riepiloghi sono ancora aperti, ma non è stato possibile salvare le modifiche su questo telefono.</string>
+    <string name="storage_unavailable">Al momento non è possibile leggere i riepiloghi salvati. Sono rimasti invariati su questo telefono.</string>
+    <string name="action_retry">Riprova</string>
     <string name="action_back">Indietro</string>
     <string name="action_share">Condividi</string>
     <string name="share_title">Condividi riepilogo</string>

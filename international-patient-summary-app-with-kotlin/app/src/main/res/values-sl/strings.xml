@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Composition nima sklica na subjekt (subject).</string>
     <string name="problem_unreadable">Datoteke ni bilo mogoče prebrati.</string>
     <string name="problem_empty_clipboard">V odložišču ni besedila, ki bi ga lahko prilepili.</string>
+    <string name="storage_problem_title">Ni shranjeno</string>
+    <string name="storage_unsaved">Vaši povzetki so še vedno odprti, vendar sprememb ni bilo mogoče shraniti v ta telefon.</string>
+    <string name="storage_unavailable">Shranjenih povzetkov trenutno ni mogoče prebrati. V tem telefonu so ostali nespremenjeni.</string>
+    <string name="action_retry">Poskusi znova</string>
     <string name="action_back">Nazaj</string>
     <string name="action_share">Deli</string>
     <string name="share_title">Deli povzetek</string>

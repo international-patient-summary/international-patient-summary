@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Composition nie ma odwołania do pacjenta (subject).</string>
     <string name="problem_unreadable">Nie można odczytać pliku.</string>
     <string name="problem_empty_clipboard">Schowek nie zawiera tekstu do wklejenia.</string>
+    <string name="storage_problem_title">Nie zapisano</string>
+    <string name="storage_unsaved">Podsumowania są nadal otwarte, ale nie udało się zapisać zmian na tym telefonie.</string>
+    <string name="storage_unavailable">Nie można teraz odczytać zapisanych podsumowań. Pozostawiono je bez zmian na tym telefonie.</string>
+    <string name="action_retry">Spróbuj ponownie</string>
     <string name="action_back">Wstecz</string>
     <string name="action_share">Udostępnij</string>
     <string name="share_title">Udostępnij podsumowanie</string>

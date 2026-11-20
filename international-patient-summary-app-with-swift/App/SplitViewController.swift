@@ -7,6 +7,7 @@ import UIKit
 final class SplitViewController: UISplitViewController, UISplitViewControllerDelegate {
     private let store: SummaryStore
     private var observer: (any NSObjectProtocol)?
+    private weak var storageAlert: UIAlertController?
     /// The summary in the secondary column, if any.
     private(set) var shownID: Document.ID?
 
@@ -31,8 +32,17 @@ final class SplitViewController: UISplitViewController, UISplitViewControllerDel
         observer = NotificationCenter.default.addObserver(
             forName: SummaryStore.changed, object: store, queue: .main
         ) { [weak self] _ in
-            MainActor.assumeIsolated { self?.forgetIfGone() }
+            MainActor.assumeIsolated {
+                self?.forgetIfGone()
+                self?.showStorageProblemIfNeeded()
+            }
         }
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        // An unavailable store was found before the view began observing.
+        showStorageProblemIfNeeded()
     }
 
     /// Show a summary: beside the list when expanded, pushed over it when collapsed.
@@ -74,6 +84,36 @@ final class SplitViewController: UISplitViewController, UISplitViewControllerDel
         if isCollapsed, let list = viewController(for: .primary) as? UINavigationController {
             list.popToRootViewController(animated: true)
         }
+    }
+
+    /// M-STORE-5: patient data stays open after a failed save, with an explicit retry.
+    private func showStorageProblemIfNeeded() {
+        guard store.saving != .saved else {
+            storageAlert?.dismiss(animated: true)
+            storageAlert = nil
+            return
+        }
+        guard storageAlert == nil else { return }
+        let message = switch store.saving {
+        case .saved: ""
+        case .unsaved: L10n.text("storage.notSaved.body")
+        case .unavailable: L10n.text("storage.unavailable.body")
+        }
+        let alert = UIAlertController(
+            title: L10n.text("storage.notSaved.title"), message: message, preferredStyle: .alert)
+        alert.view.accessibilityIdentifier = "storageProblem"
+        alert.addAction(UIAlertAction(title: L10n.text("retry"), style: .default) { [weak self, weak alert] _ in
+            self?.storageAlert = nil
+            alert?.dismiss(animated: true) {
+                self?.store.retry()
+                self?.showStorageProblemIfNeeded()
+            }
+        })
+        alert.addAction(UIAlertAction(title: L10n.text("ok"), style: .cancel) { [weak self] _ in
+            self?.storageAlert = nil
+        })
+        storageAlert = alert
+        present(alert, animated: true)
     }
 
     // Collapsing (iPhone, narrow windows): the list is on top unless a summary is open.

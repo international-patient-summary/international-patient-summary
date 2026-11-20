@@ -47,10 +47,10 @@ on to three pages, each marked CONTINUED); with
 | M-LOAD-1, M-TAB-3     | `DocumentFilesTest` (reported size, exact limit and bounded stream read) |
 | M-LOAD-3              | `ips.SummaryReaderTest.everyExampleIsAcceptedWithItsPatient`; `ManifestTest.theExamplesShipInTheApp`; `SmokeTest.loadOpenAndClearAll` (the button loads all five) |
 | M-LIST-1              | `SummaryStoreTest.newestFirstAndClearAll`; `SmokeTest.loadOpenAndClearAll` (five rows) |
-| M-VIEW-1              | `ips.FormatTest.firstReadableNameInThePreferredCategory`; `ips.SummaryReaderTest.readsPatientAndDocumentDetails`, `theBannerAlertListsHighCriticalityAllergies`; `ips.FormatTest.agesAreWholeYearsAndNeverGuessed`; `SmokeTest.loadOpenAndClearAll` (banner name and alert on screen) |
+| M-VIEW-1              | `ips.FormatTest.firstReadableNameInThePreferredCategory`, `datesNeverInventMissingParts`, `agesAreWholeYearsAndNeverGuessed`; `ips.SummaryReaderTest.readsPatientAndDocumentDetails`, `theBannerAlertListsHighCriticalityAllergies`, `bannerScreenAndPdfKeepSourceDatesAndClinicalDecimals`; `SmokeTest.loadOpenAndClearAll` (banner name and alert on screen) |
 | M-VIEW-2              | `ips.SummaryReaderTest.readsPatientAndDocumentDetails`                   |
 | M-VIEW-3              | `ips.SummaryReaderTest.sectionsFollowCompositionOrder`, `missingRequiredSectionsComeLast` |
-| M-VIEW-4              | `ips.SummaryReaderTest.entriesCarryTheirDetails`; `ips.FormatTest.quantitiesAreWrittenAsGiven` |
+| M-VIEW-4              | `ips.SummaryReaderTest.entriesCarryTheirDetails`, `bannerScreenAndPdfKeepSourceDatesAndClinicalDecimals`; `ips.FormatTest.quantitiesAreWrittenAsGiven` |
 | M-VIEW-5              | `ips.SummaryReaderTest.noInfoSectionsAreUnavailable`, `emptyReasonsAndAbsentCodesMapToTheirStates` |
 | M-VIEW-6              | `ips.FormatTest.narrativeBecomesPlainText`; `ips.SummaryReaderTest.narrativeWithoutEntriesIsKept` |
 | M-VIEW-7              | `ips.FormatTest.displayPrefersCodingDisplayThenTextThenSystemAndCode`, `statusIsAWordNotAUri`, `systemLabels` |
@@ -61,15 +61,16 @@ on to three pages, each marked CONTINUED); with
 | M-PEOPLE-4            | `SummaryStoreTest.forgetAPersonForgetsTheirSummariesAndRelationshipOnly`; manual |
 | M-SHARE-1             | `ips.SummaryReaderTest.keepsTheExactBytes`; `SmokeTest.loadOpenAndClearAll` (the menu offers the file and the PDF); manual |
 | M-SHARE-2             | `SmokeTest.loadOpenAndClearAll` (asked first with three people); manual (`AppViewModel.shareAsksFirst` is more than one person) |
-| M-PDF-1               | `ips.OnePageTest` (`sectionsAreInPdfPriorityOrderOutsideTheBox`, `priorityIsTheWebViewers`, `theBoxHasTheAlertsSectionThenAllergiesThenTheMissingNotice`, `everyFixtureHasAPage`, `paperIsLetterOnlyForUsEnglish`, `fileNameHasTheDocumentDateOnly`, `titleIsAddedAsAnIncrementalUpdate`); `OnePagePdfTest.everyExampleIsOnePageWithItsTitle`; manual 14 |
+| M-PDF-1               | `ips.OnePageTest` (`sectionsAreInPdfPriorityOrderOutsideTheBox`, `priorityIsTheWebViewers`, `theBoxHasTheAlertsSectionThenAllergiesThenTheMissingNotice`, `everyFixtureHasAPage`, `paperIsLetterOnlyForUsEnglish`, `fileNameHasTheDocumentDateOnly`, `titleIsAddedAsAnIncrementalUpdate`); `ips.SummaryReaderTest.bannerScreenAndPdfKeepSourceDatesAndClinicalDecimals`; `OnePagePdfTest.everyExampleIsOnePageWithItsTitle`; manual 14 |
 | M-PDF-2               | `ips.OnePageTest` (`plansAreTriedInTheWebViewersOrder`, `currentMedicationsAreMustShowAndTheRestMostRecentFirst`, `currentMedicationsAreNeverTrimmedAndTheSectionNeverReplaced`, `trimmedAndReplacedSectionsAreNamedOnTheNotShownLine`, `fitTakesTheFirstPlanOnOnePage`, `whatNeverTrimsRunsToASecondPageMarkedContinued`, `absentSectionsAreNotTrimmable`); `OnePagePdfTest.aLongSummaryIsTrimmedToOnePage`, `tooManyCurrentMedicinesRunToASecondPage` |
-| M-PDF-3               | `SmokeTest.loadOpenAndClearAll` (written to `cacheDir/share/`, gone when the sheet closes); manual 14 |
-| M-PRIV-1              | `ManifestTest` (source and merged manifest: no network permission, no backup; `theBackupRulesExcludeEveryDomain`; `theTestApkAsksForNoNetworkEither`); summaries and relationships are written only by `EncryptedStore`; Share sends `Summary.bytes` only |
+| M-PDF-3               | `ShareFilesTest` (isolated PDF/JSON lifetimes and cleanup); `SmokeTest.loadOpenAndClearAll`; manual 14 |
+| M-PRIV-1              | `ManifestTest` (source and merged manifest: no network permission, no backup; `theBackupRulesExcludeEveryDomain`; `theTestApkAsksForNoNetworkEither`); `ShareFilesTest` (same name for two patients, cancellation, delayed recipient, relaunch cleanup); summaries and relationships are written only by `EncryptedStore` |
 | M-PRIV-3              | `SummaryStoreTest.newestFirstAndClearAll`, `clearAllForgetsEveryRelationship`; `SmokeTest.loadOpenAndClearAll` (About, confirm, empty state); manual |
 | M-STORE-1             | `EncryptedStoreTest.aRoundTripKeepsOrderIdsRelationshipsAndBytes`, `nothingSavedLoadsEmpty`; manual 12 |
 | M-STORE-2             | `EncryptedStoreTest.theFilesHoldNoPlaintext`, `eachWriteHasAFreshNonce`, `aSwappedSummaryFileIsDropped`; `ManifestTest.theBackupRulesExcludeEveryDomain`; manual 12 (`run-as` shows no plaintext) |
-| M-STORE-3             | `EncryptedStoreTest.aTamperedSummaryIsDroppedAndDeleted`, `aSummaryThatNoLongerPassesTheCheckIsDropped`, `aCorruptIndexStartsEmptyWithoutACrash`, `anIndexThatIsNotAnIndexStartsEmpty`, `aWrongKeyDeletesTheStore`, `aMissingKeyDeletesTheStore`, `leftoversFromAStoppedWriteAreRemoved` |
+| M-STORE-3             | `EncryptedStoreTest.aTamperedSummaryIsDroppedAndDeleted`, `aSummaryThatNoLongerPassesTheCheckIsDropped`, `aCorruptIndexStartsEmptyWithoutACrash`, `anIndexThatIsNotAnIndexStartsEmpty`, `aWrongKeyDeletesTheStore`, `aKeyThatCannotBeReadNowLeavesTheStoreAlone`, `aFileThatCannotBeReadNowLeavesTheStoreAlone`, `leftoversFromAStoppedWriteAreRemoved` |
 | M-STORE-4             | `EncryptedStoreTest.deleteForgetAndClearRemoveFiles` (and the key on Clear all); manual 12 |
+| M-STORE-5             | `EncryptedStoreTest.aFailedSummaryWriteRetriesTheExactDocumentsAfterRestart`, `aFailedIndexWriteRetriesTheExactRelationshipAfterRestart`; `SummaryStoreTest.reopenPutsSummariesOpenedWhileUnavailableAboveSavedOnes`; `TranslationsTest` (localized message and Try again) |
 | M-I18N-1              | `lintDebug` (`HardcodedText`, `SetTextI18n`; warnings are errors)        |
 | Robustness            | `ips.SummaryReaderTest.wrongJsonTypesReadAsAbsent`                       |
 
@@ -116,7 +117,7 @@ Manual, before a release, on an emulator or phone (`./gradlew
    between a narrow and an 840 dp+ width), open a summary, give its person
    a relationship, and fold and unfold: every summary, the relationship and
    the open summary stay; the layout follows the width (M-TAB-1).
-12. **M-STORE-1..4**: Load examples and give Martha a relationship. Force
+12. **M-STORE-1..5**: Load examples and give Martha a relationship. Force
    stop the app (`adb shell am force-stop
    io.github.internationalpatientsummary.app`) and open it again: the same
    summaries in the same order, with the relationship, and the list (not a

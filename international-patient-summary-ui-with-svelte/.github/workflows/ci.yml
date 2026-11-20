@@ -31,7 +31,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm run lint
       - run: pnpm run check
-      - run: pnpm test
+      - run: pnpm run test:coverage
       - run: pnpm exec playwright install --with-deps chromium
       # Builds the site with BASE_PATH unset and serves it for the e2e run.
       - run: pnpm run test:e2e

@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">В Composition нет ссылки на субъект (subject).</string>
     <string name="problem_unreadable">Не удалось прочитать файл.</string>
     <string name="problem_empty_clipboard">В буфере обмена нет текста для вставки.</string>
+    <string name="storage_problem_title">Не сохранено</string>
+    <string name="storage_unsaved">Ваши сводки всё ещё открыты, но изменения не удалось сохранить на этом телефоне.</string>
+    <string name="storage_unavailable">Сохранённые сводки сейчас невозможно прочитать. На этом телефоне они оставлены без изменений.</string>
+    <string name="action_retry">Повторить попытку</string>
     <string name="action_back">Назад</string>
     <string name="action_share">Поделиться</string>
     <string name="share_title">Поделиться сводкой</string>

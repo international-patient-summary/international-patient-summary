@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Composition nav subject atsauces.</string>
     <string name="problem_unreadable">Failu nevarēja nolasīt.</string>
     <string name="problem_empty_clipboard">Starpliktuvē nav teksta, ko ielīmēt.</string>
+    <string name="storage_problem_title">Nav saglabāts</string>
+    <string name="storage_unsaved">Jūsu kopsavilkumi joprojām ir atvērti, taču izmaiņas nevarēja saglabāt šajā tālrunī.</string>
+    <string name="storage_unavailable">Saglabātos kopsavilkumus pašlaik nevar nolasīt. Tie šajā tālrunī ir atstāti nemainīti.</string>
+    <string name="action_retry">Mēģināt vēlreiz</string>
     <string name="action_back">Atpakaļ</string>
     <string name="action_share">Kopīgot</string>
     <string name="share_title">Kopīgot kopsavilkumu</string>

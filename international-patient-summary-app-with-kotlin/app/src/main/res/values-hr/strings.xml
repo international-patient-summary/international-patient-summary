@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Composition nema referencu na subjekt (subject).</string>
     <string name="problem_unreadable">Datoteku nije moguće pročitati.</string>
     <string name="problem_empty_clipboard">U međuspremniku nema teksta za lijepljenje.</string>
+    <string name="storage_problem_title">Nije spremljeno</string>
+    <string name="storage_unsaved">Vaši su sažeci još otvoreni, ali promjene se nisu mogle spremiti na ovaj telefon.</string>
+    <string name="storage_unavailable">Spremljeni sažeci trenutačno se ne mogu pročitati. Ostavljeni su nepromijenjeni na ovom telefonu.</string>
+    <string name="action_retry">Pokušaj ponovno</string>
     <string name="action_back">Natrag</string>
     <string name="action_share">Podijeli</string>
     <string name="share_title">Podijeli sažetak</string>

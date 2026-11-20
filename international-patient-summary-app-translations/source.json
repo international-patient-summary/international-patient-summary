@@ -165,6 +165,10 @@
   "summary.share": "Share",
   "summary.share.file": "Share the file (FHIR JSON)",
   "summary.share.pdf": "Share as PDF",
+  "retry": "Try again",
+  "storage.notSaved.body": "Your summaries are still open, but changes could not be saved on this device.",
+  "storage.notSaved.title": "Not saved",
+  "storage.unavailable.body": "Saved summaries cannot be read right now. They have been left unchanged on this device.",
   "summary.title": "Summary"
  },
  "android": {
@@ -195,6 +199,10 @@
    "refusal_no_subject": "The Composition has no subject reference.",
    "problem_unreadable": "The file could not be read.",
    "problem_empty_clipboard": "The clipboard has no text to paste.",
+   "storage_problem_title": "Not saved",
+   "storage_unsaved": "Your summaries are still open, but changes could not be saved on this phone.",
+   "storage_unavailable": "Saved summaries cannot be read right now. They have been left unchanged on this phone.",
+   "action_retry": "Try again",
    "action_back": "Back",
    "action_share": "Share",
    "share_title": "Share summary",

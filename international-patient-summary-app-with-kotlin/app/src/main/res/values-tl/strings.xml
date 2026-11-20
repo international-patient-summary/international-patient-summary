@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Walang subject reference ang Composition.</string>
     <string name="problem_unreadable">Hindi mabasa ang file.</string>
     <string name="problem_empty_clipboard">Walang tekstong mai-paste sa clipboard.</string>
+    <string name="storage_problem_title">Hindi na-save</string>
+    <string name="storage_unsaved">Bukas pa rin ang iyong mga buod, ngunit hindi ma-save ang mga pagbabago sa teleponong ito.</string>
+    <string name="storage_unavailable">Hindi mabasa ngayon ang mga naka-save na buod. Iniwan ang mga ito nang walang pagbabago sa teleponong ito.</string>
+    <string name="action_retry">Subukan muli</string>
     <string name="action_back">Bumalik</string>
     <string name="action_share">Ibahagi</string>
     <string name="share_title">Ibahagi ang buod</string>

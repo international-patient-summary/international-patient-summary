@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">A Composition não tem referência ao sujeito (subject).</string>
     <string name="problem_unreadable">Não foi possível ler o arquivo.</string>
     <string name="problem_empty_clipboard">A área de transferência não tem texto para colar.</string>
+    <string name="storage_problem_title">Não salvo</string>
+    <string name="storage_unsaved">Seus resumos ainda estão abertos, mas não foi possível salvar as alterações neste telefone.</string>
+    <string name="storage_unavailable">Os resumos salvos não podem ser lidos agora. Eles foram mantidos sem alterações neste telefone.</string>
+    <string name="action_retry">Tentar novamente</string>
     <string name="action_back">Voltar</string>
     <string name="action_share">Compartilhar</string>
     <string name="share_title">Compartilhar resumo</string>

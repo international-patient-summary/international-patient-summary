@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Il-Composition m’għandhiex referenza subject.</string>
     <string name="problem_unreadable">Il-fajl ma setax jinqara.</string>
     <string name="problem_empty_clipboard">Il-clipboard m’għandux test x’twaħħal.</string>
+    <string name="storage_problem_title">Mhux issejvjat</string>
+    <string name="storage_unsaved">Is-sommarji tiegħek għadhom miftuħa, iżda l-bidliet ma setgħux jiġu ssejvjati fuq dan it-telefon.</string>
+    <string name="storage_unavailable">Is-sommarji ssejvjati ma jistgħux jinqraw bħalissa. Tħallew kif inhuma fuq dan it-telefon.</string>
+    <string name="action_retry">Erġa’ pprova</string>
     <string name="action_back">Lura</string>
     <string name="action_share">Aqsam</string>
     <string name="share_title">Aqsam is-sommarju</string>

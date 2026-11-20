@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Die Composition hat keinen Verweis auf ein Subjekt.</string>
     <string name="problem_unreadable">Die Datei konnte nicht gelesen werden.</string>
     <string name="problem_empty_clipboard">Die Zwischenablage enthält keinen Text zum Einfügen.</string>
+    <string name="storage_problem_title">Nicht gespeichert</string>
+    <string name="storage_unsaved">Ihre Zusammenfassungen sind noch geöffnet, aber die Änderungen konnten auf diesem Telefon nicht gespeichert werden.</string>
+    <string name="storage_unavailable">Gespeicherte Zusammenfassungen können derzeit nicht gelesen werden. Sie wurden auf diesem Telefon unverändert belassen.</string>
+    <string name="action_retry">Erneut versuchen</string>
     <string name="action_back">Zurück</string>
     <string name="action_share">Teilen</string>
     <string name="share_title">Übersicht teilen</string>

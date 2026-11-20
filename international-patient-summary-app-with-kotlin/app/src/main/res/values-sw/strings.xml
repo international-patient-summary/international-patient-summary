@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Composition haina rejeleo la subject.</string>
     <string name="problem_unreadable">Faili haikuweza kusomwa.</string>
     <string name="problem_empty_clipboard">Ubao wa kunakili hauna maandishi ya kubandika.</string>
+    <string name="storage_problem_title">Haijahifadhiwa</string>
+    <string name="storage_unsaved">Muhtasari wako bado uko wazi, lakini mabadiliko hayakuweza kuhifadhiwa kwenye simu hii.</string>
+    <string name="storage_unavailable">Muhtasari uliohifadhiwa hauwezi kusomwa sasa. Umeachwa bila kubadilishwa kwenye simu hii.</string>
+    <string name="action_retry">Jaribu tena</string>
     <string name="action_back">Rudi</string>
     <string name="action_share">Shiriki</string>
     <string name="share_title">Shiriki muhtasari</string>

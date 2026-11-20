@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Níl tagairt don ábhar (subject) ag an Composition.</string>
     <string name="problem_unreadable">Níorbh fhéidir an comhad a léamh.</string>
     <string name="problem_empty_clipboard">Níl aon téacs sa ghearrthaisce le greamú.</string>
+    <string name="storage_problem_title">Gan sábháil</string>
+    <string name="storage_unsaved">Tá d’achoimrí fós oscailte, ach níorbh fhéidir na hathruithe a shábháil ar an bhfón seo.</string>
+    <string name="storage_unavailable">Ní féidir na hachoimrí sábháilte a léamh faoi láthair. Fágadh gan athrú iad ar an bhfón seo.</string>
+    <string name="action_retry">Bain triail eile as</string>
     <string name="action_back">Siar</string>
     <string name="action_share">Comhroinn</string>
     <string name="share_title">Comhroinn achoimre</string>

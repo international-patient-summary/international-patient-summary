@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Composition ba shi da nuni na subject.</string>
     <string name="problem_unreadable">Ba a iya karanta fayil ɗin ba.</string>
     <string name="problem_empty_clipboard">Babu rubutu a allon kwafi da za a liƙa.</string>
+    <string name="storage_problem_title">Ba a ajiye ba</string>
+    <string name="storage_unsaved">Takaitattunku suna nan a buɗe, amma ba a iya ajiye sauye-sauyen a wannan wayar ba.</string>
+    <string name="storage_unavailable">Ba za a iya karanta takaitattun da aka ajiye yanzu ba. An bar su ba tare da canji ba a wannan wayar.</string>
+    <string name="action_retry">Sake gwadawa</string>
     <string name="action_back">Koma baya</string>
     <string name="action_share">Tura</string>
     <string name="share_title">Tura taƙaitaccen bayani</string>

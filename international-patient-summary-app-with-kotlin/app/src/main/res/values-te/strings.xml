@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Compositionలో subject సూచన లేదు.</string>
     <string name="problem_unreadable">ఫైల్‌ను చదవలేకపోయాము.</string>
     <string name="problem_empty_clipboard">క్లిప్‌బోర్డ్‌లో పేస్ట్ చేయడానికి టెక్స్ట్ ఏదీ లేదు.</string>
+    <string name="storage_problem_title">సేవ్ కాలేదు</string>
+    <string name="storage_unsaved">మీ సారాంశాలు ఇంకా తెరిచే ఉన్నాయి, కానీ మార్పులను ఈ ఫోన్‌లో సేవ్ చేయడం సాధ్యపడలేదు.</string>
+    <string name="storage_unavailable">సేవ్ చేసిన సారాంశాలను ప్రస్తుతం చదవడం సాధ్యపడదు. వాటిని ఈ ఫోన్‌లో మార్చకుండా ఉంచారు.</string>
+    <string name="action_retry">మళ్లీ ప్రయత్నించండి</string>
     <string name="action_back">వెనుకకు</string>
     <string name="action_share">షేర్ చేయండి</string>
     <string name="share_title">సారాంశాన్ని షేర్ చేయండి</string>

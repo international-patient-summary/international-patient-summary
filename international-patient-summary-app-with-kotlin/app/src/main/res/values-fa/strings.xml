@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Composition ارجاع subject ندارد.</string>
     <string name="problem_unreadable">فایل خوانده نشد.</string>
     <string name="problem_empty_clipboard">کلیپ‌بورد متنی برای جای‌گذاری ندارد.</string>
+    <string name="storage_problem_title">ذخیره نشد</string>
+    <string name="storage_unsaved">خلاصه‌های شما همچنان باز هستند، اما تغییرات در این تلفن ذخیره نشدند.</string>
+    <string name="storage_unavailable">خلاصه‌های ذخیره‌شده اکنون قابل خواندن نیستند. آن‌ها در این تلفن بدون تغییر باقی مانده‌اند.</string>
+    <string name="action_retry">تلاش دوباره</string>
     <string name="action_back">بازگشت</string>
     <string name="action_share">هم‌رسانی</string>
     <string name="share_title">هم‌رسانی خلاصه</string>

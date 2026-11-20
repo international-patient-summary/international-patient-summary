@@ -80,6 +80,11 @@
         "description": "M-CHECK-1/2: Refusal codes and pointers, the service's S-API-2"
       },
       {
+        "name": "JSON",
+        "path": "IPSKit/Sources/IPSKit/JSON.swift",
+        "description": "RFC 8259 values with clinical number lexemes preserved exactly"
+      },
+      {
         "name": "Document",
         "path": "IPSKit/Sources/IPSKit/Document.swift",
         "description": "references, patient, sections, entries"
@@ -97,7 +102,7 @@
       {
         "name": "Format",
         "path": "IPSKit/Sources/IPSKit/Format.swift",
-        "description": "displayOf, names, dates, ages, quantities, narrative as plain text"
+        "description": "displayOf, names, strict dates and ages, exact-token quantities, narrative as plain text"
       },
       {
         "name": "People",
@@ -112,7 +117,12 @@
       {
         "name": "EncryptedStore",
         "path": "IPSKit/Sources/IPSKit/EncryptedStore.swift",
-        "description": "M-STORE-1..4: AES-256-GCM sealed summaries and index; StoreKeys"
+        "description": "M-STORE-1..5: AES-256-GCM sealed summaries and index; retryable writes and temporary-access preservation; StoreKeys"
+      },
+      {
+        "name": "TemporaryShare",
+        "path": "IPSKit/Sources/IPSKit/TemporaryShare.swift",
+        "description": "Isolated directory per JSON or PDF export, with per-share and relaunch cleanup (M-PRIV-1, M-PDF-3)"
       },
       {
         "name": "PDFPlan",

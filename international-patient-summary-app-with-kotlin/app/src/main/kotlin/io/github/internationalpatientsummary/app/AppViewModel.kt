@@ -3,7 +3,7 @@
 // refusal. A ViewModel outlives the activity being recreated, so folding or
 // unfolding (M-TAB-4) keeps the summaries, relationships and open summary.
 // With an EncryptedStore (the app's; tests may leave it out) it loads the
-// saved summaries at launch and saves every change (M-STORE-1..4), all on one
+// saved summaries at launch and saves every change (M-STORE-1..5), all on one
 // background thread, in order, so a later change never overtakes an earlier.
 package io.github.internationalpatientsummary.app
 
@@ -39,14 +39,19 @@ sealed interface Problem {
     data object EmptyClipboard : Problem
 }
 
-class AppViewModel(private val disk: EncryptedStore?) : ViewModel() {
+/** Whether everything open is safely represented by the encrypted store. */
+enum class Saving { SAVED, UNSAVED, UNAVAILABLE }
+
+class AppViewModel internal constructor(
+    private val disk: SummaryDisk?,
+    private val writer: ExecutorService?,
+) : ViewModel() {
+    constructor(disk: EncryptedStore?) : this(disk, disk?.let { Executors.newSingleThreadExecutor() })
+
     /** Without a store: in memory only (the JVM tests). */
-    constructor() : this(null)
+    constructor() : this(null, null)
 
     private val store = SummaryStore()
-
-    /** The one thread that reads and writes the encrypted store, in order. */
-    private val writer: ExecutorService? = disk?.let { Executors.newSingleThreadExecutor() }
 
     var screen: Screen by mutableStateOf(Screen.Summaries)
         private set
@@ -59,6 +64,10 @@ class AppViewModel(private val disk: EncryptedStore?) : ViewModel() {
     var problem: Problem? by mutableStateOf(null)
         private set
     var busy: Boolean by mutableStateOf(false)
+        private set
+    var saving: Saving by mutableStateOf(Saving.SAVED)
+        private set
+    var storageProblemVisible: Boolean by mutableStateOf(false)
         private set
 
     /** A keyboard shortcut for the screen to carry out (it holds the file picker and clipboard). */
@@ -73,24 +82,81 @@ class AppViewModel(private val disk: EncryptedStore?) : ViewModel() {
         val writer = writer ?: return CompletableDeferred(Unit)
         return viewModelScope.launch {
             busy = true
-            val result = withContext(writer.asCoroutineDispatcher()) {
-                // Each saved summary is checked again as it is read (M-STORE-3).
-                disk.load { id, bytes -> SummaryReader.open(bytes, id) }
+            val result = try {
+                withContext(writer.asCoroutineDispatcher()) {
+                    // Each saved summary is checked again as it is read (M-STORE-3).
+                    disk.load { id, bytes -> SummaryReader.open(bytes, id) }
+                }
+            } catch (_: StoreUnavailable) {
+                saving = Saving.UNAVAILABLE
+                storageProblemVisible = true
+                null
             }
-            store.restore(result.index, result.items)
-            refresh()
+            if (result != null) {
+                store.restore(result.index, result.items)
+                refresh()
+            }
             busy = false
         }
     }
 
     /** Save the current state after a change, with the summaries added and removed (M-STORE-1, M-STORE-4). */
-    private fun persist(added: List<Summary> = emptyList(), removed: Collection<Long> = emptyList()) {
+    private fun persist(removed: Collection<Long> = emptyList()) {
         val disk = disk ?: return
+        if (saving == Saving.UNAVAILABLE) {
+            // Do not replace saved summaries we have not been able to read.
+            // Retry reads and merges them before writing anything (M-STORE-5).
+            storageProblemVisible = true
+            return
+        }
         val index = store.index()
-        val bytes = added.associate { it.id to it.bytes }
+        // Always offer every exact byte. If an earlier summary write failed,
+        // the next change or Retry can complete it rather than only its index.
+        val bytes = store.all().associate { it.id to it.bytes }
         writer?.execute {
-            // A failed write leaves what was saved before; the next change writes the index again.
-            runCatching { disk.save(index, bytes, removed) }
+            try {
+                disk.save(index, bytes, removed)
+                saving = Saving.SAVED
+                storageProblemVisible = false
+            } catch (_: Exception) {
+                // Nothing is logged (M-PRIV-4); what is open stays in memory.
+                saving = Saving.UNSAVED
+                storageProblemVisible = true
+            }
+        }
+    }
+
+    fun dismissStorageProblem() {
+        storageProblemVisible = false
+    }
+
+    /** M-STORE-5: retry an unavailable read, or save the complete current state again. */
+    fun retryStorage() {
+        val disk = disk ?: return
+        val writer = writer ?: return
+        storageProblemVisible = false
+        if (saving != Saving.UNAVAILABLE) {
+            persist()
+            return
+        }
+        viewModelScope.launch {
+            busy = true
+            val result = try {
+                withContext(writer.asCoroutineDispatcher()) {
+                    disk.load { id, bytes -> SummaryReader.open(bytes, id) }
+                }
+            } catch (_: StoreUnavailable) {
+                saving = Saving.UNAVAILABLE
+                storageProblemVisible = true
+                null
+            }
+            if (result != null) {
+                store.reopen(result.index, result.items)
+                refresh()
+                saving = Saving.UNSAVED
+                persist()
+            }
+            busy = false
         }
     }
 
@@ -186,7 +252,7 @@ class AppViewModel(private val disk: EncryptedStore?) : ViewModel() {
             result.onSuccess { summary ->
                 store.add(summary)
                 refresh()
-                persist(added = listOf(summary))
+                persist()
                 screen = Screen.Open(summary.id)
             }.onFailure { error ->
                 problem = if (error is RefusedException) Problem.Refused(error.refusal) else Problem.Unreadable
@@ -214,7 +280,7 @@ class AppViewModel(private val disk: EncryptedStore?) : ViewModel() {
             // Added in reverse so the first example ends up at the top.
             opened.reversed().forEach { result -> result.onSuccess(store::add) }
             refresh()
-            persist(added = opened.mapNotNull { it.getOrNull() })
+            persist()
             opened.firstNotNullOfOrNull { it.exceptionOrNull() }?.let { error ->
                 problem = if (error is RefusedException) Problem.Refused(error.refusal) else Problem.Unreadable
             }

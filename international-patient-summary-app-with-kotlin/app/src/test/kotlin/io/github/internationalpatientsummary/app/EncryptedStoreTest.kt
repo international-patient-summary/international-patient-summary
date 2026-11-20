@@ -12,8 +12,10 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotEquals
 import org.junit.Assert.assertTrue
+import org.junit.Assert.assertThrows
 import org.junit.Test
 import java.io.File
+import java.io.IOException
 import java.nio.file.Files
 import javax.crypto.KeyGenerator
 import javax.crypto.SecretKey
@@ -169,15 +171,67 @@ class EncryptedStoreTest {
         assertEquals(1, load().items.size)
     }
 
-    @Test fun aMissingKeyDeletesTheStore() {
+    @Test fun aKeyThatCannotBeReadNowLeavesTheStoreAlone() {
         saved("bundle-minimal")
         val broken = object : KeyProvider {
             override fun key(): SecretKey = throw java.security.InvalidKeyException("gone")
             override fun delete() = keys.delete()
         }
-        assertTrue(load(newStore(broken)).items.isEmpty())
-        assertFalse(dir.exists())
-        assertEquals(1, keys.deletes)
+        assertThrows(StoreUnavailable::class.java) { load(newStore(broken)) }
+        assertTrue(dir.exists())
+        assertEquals(0, keys.deletes)
+        assertEquals(1, load().items.size)
+    }
+
+    @Test fun aFileThatCannotBeReadNowLeavesTheStoreAlone() {
+        saved("bundle-minimal", "bundle-ips-all-sections")
+        val filesBefore = dir.walkTopDown().filter { it.isFile }.associate { it.relativeTo(dir).path to it.readBytes().toList() }
+        val store = newStore()
+        store.beforeRead = { file -> if (file.name == "2.bin") throw IOException("busy") }
+
+        assertThrows(StoreUnavailable::class.java) { load(store) }
+        val filesAfter = dir.walkTopDown().filter { it.isFile }.associate { it.relativeTo(dir).path to it.readBytes().toList() }
+        assertEquals(filesBefore, filesAfter)
+        assertEquals(listOf(2L, 1L), load().items.map { it.id })
+    }
+
+    @Test fun aFailedSummaryWriteRetriesTheExactDocumentsAfterRestart() {
+        val memory = saved("bundle-minimal")
+        val second = SummaryReader.open(Fixtures.bytes("bundle-ips-all-sections"), memory.newId())
+        memory.add(second)
+        memory.setRelationship(second.id, Relationship.PARENT)
+        val store = newStore()
+        store.beforeWrite = { file -> if (file.name == "2.bin") throw IOException("full") }
+
+        assertThrows(IOException::class.java) {
+            store.save(memory.index(), memory.all().associate { it.id to it.bytes })
+        }
+        // The durable index still describes only the first document.
+        assertEquals(listOf(1L), load().items.map { it.id })
+
+        store.beforeWrite = {}
+        store.save(memory.index(), memory.all().associate { it.id to it.bytes })
+        val restarted = load(newStore())
+        assertEquals(memory.index(), restarted.index)
+        memory.all().zip(restarted.items).forEach { (expected, actual) ->
+            assertArrayEquals(expected.bytes, actual.bytes)
+        }
+    }
+
+    @Test fun aFailedIndexWriteRetriesTheExactRelationshipAfterRestart() {
+        val memory = saved("bundle-minimal", "bundle-ips-all-sections")
+        val store = newStore()
+        memory.setRelationship(2, Relationship.CARED_FOR)
+        store.beforeWrite = { file -> if (file.name == "index.bin") throw IOException("full") }
+
+        assertThrows(IOException::class.java) {
+            store.save(memory.index(), memory.all().associate { it.id to it.bytes })
+        }
+        assertEquals(Relationship.NONE, load().index.entries.first { it.id == 2L }.relationship)
+
+        store.beforeWrite = {}
+        store.save(memory.index(), memory.all().associate { it.id to it.bytes })
+        assertEquals(Relationship.CARED_FOR, load(newStore()).index.entries.first { it.id == 2L }.relationship)
     }
 
     @Test fun deleteForgetAndClearRemoveFiles() {

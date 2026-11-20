@@ -1,3 +1,4 @@
+import IPSKit
 import UIKit
 
 /// UIKit's entry point. The one scene is configured in code, so there is no storyboard.
@@ -8,8 +9,12 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
         // M-PRIV-1: a share file left by a previous run is removed at launch.
-        ShareFile.removeAll()
+        TemporaryShare.removeAll(under: Self.shareDirectory)
         return true
+    }
+
+    static var shareDirectory: URL {
+        FileManager.default.temporaryDirectory.appending(path: "share", directoryHint: .isDirectory)
     }
 
     func application(

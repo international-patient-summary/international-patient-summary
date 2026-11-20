@@ -93,6 +93,22 @@ class SummaryStore {
         settle()
     }
 
+    /**
+     * M-STORE-5: after temporarily unavailable saved summaries can be read,
+     * put summaries opened meanwhile above them. A duplicate keeps its saved
+     * copy and relationship, matching the iOS app's `reopen` rule.
+     */
+    fun reopen(index: StoreIndex, saved: List<Summary>) {
+        val savedIds = saved.map { it.id }.toSet()
+        val meanwhile = items.filter { it.id !in savedIds }
+        val meanwhileRelationships = relationships.filterKeys { it !in savedIds }
+        restore(index, saved)
+        items.addAll(0, meanwhile)
+        relationships.putAll(meanwhileRelationships)
+        nextId.set(maxOf(nextId.get(), (items.maxOfOrNull { it.id } ?: 0) + 1))
+        settle()
+    }
+
     /** Forget every summary and every relationship (M-PRIV-3). */
     fun clear() {
         items.clear()

@@ -25,6 +25,7 @@ exactly as it went in, with no one able to reach it who should not.
 | Storage       | Whole Bundle as `jsonb`, one row per document             | The viewer needs the document, not a relational model of it                            |
 | Ids           | Server-issued v4 UUIDs, written into `Bundle.id`          | Unguessable; FHIR servers own resource ids                                              |
 | API shape     | `/fhir/Bundle` paths, `application/fhir+json`             | Familiar to FHIR tools; the viewer's URL loader opens it as-is                         |
+| Local TLS     | No certificate; viewer permits literal loopback HTTP in development only | Keeps production HTTPS-only without local certificate setup                            |
 | Validation    | Structural IPS gate (spec §4.1), not profile validation   | Matches what the viewer can display; profile validation is a separate, heavy concern   |
 | Errors        | RFC 9457 problems from Axa, not FHIR `OperationOutcome`   | One error format across the service; revisit if a FHIR client needs `OperationOutcome` |
 | Auth          | Keycloak and PASETO through Axa, one ABAC policy by role  | The user chose both; every read is logged; production refuses to start without either  |
@@ -40,11 +41,10 @@ five IG examples as fixtures), compose file for local Postgres, CI.
 
 ### Phase 2 — Viewer integration
 
-The viewer's URL loader accepts only `https:`. For local development, either
-put TLS in front of this service, or let the viewer also accept
-`http://localhost` in development builds (a change to the viewer's spec
-F-LOAD-3, made there). Add a "Save to service" export and an "Open from
-service" loader option to the viewer once P3 gives it a way to authenticate.
+The viewer now accepts `http:` only for literal loopback hosts in development
+builds (viewer F-LOAD-3); deployed builds remain HTTPS-only. Add a "Save to
+service" export and an "Open from service" loader option to the viewer once
+P3 gives it a way to authenticate.
 
 ### Phase 3 — Authentication and authorisation
 

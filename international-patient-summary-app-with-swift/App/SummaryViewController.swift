@@ -172,20 +172,25 @@ final class SummaryViewController: UITableViewController {
     }
 
     private func shareNow(_ kind: ShareKind, from item: UIBarButtonItem?) {
-        let url: URL
+        let exported: TemporaryShare
         do {
             switch kind {
-            case .file: url = try ShareFile.write(document.data)
+            case .file:
+                exported = try TemporaryShare.write(
+                    document.data, name: "international-patient-summary.json", under: AppDelegate.shareDirectory,
+                    options: [.atomic, .completeFileProtection])
             case .pdf:
                 let pdf = SummaryPDF.make(document)
-                url = try ShareFile.write(pdf.data, name: pdf.name)
+                exported = try TemporaryShare.write(
+                    pdf.data, name: pdf.name, under: AppDelegate.shareDirectory,
+                    options: [.atomic, .completeFileProtection])
             }
         } catch {
             return
         }
-        let activity = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        let activity = UIActivityViewController(activityItems: [exported.url], applicationActivities: nil)
         activity.popoverPresentationController?.sourceItem = item
-        activity.completionWithItemsHandler = { _, _, _, _ in ShareFile.removeAll() }
+        activity.completionWithItemsHandler = { _, _, _, _ in exported.remove() }
         present(activity, animated: true)
     }
 

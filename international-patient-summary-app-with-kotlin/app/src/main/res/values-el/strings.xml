@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Το Composition δεν έχει αναφορά subject.</string>
     <string name="problem_unreadable">Δεν ήταν δυνατή η ανάγνωση του αρχείου.</string>
     <string name="problem_empty_clipboard">Το πρόχειρο δεν έχει κείμενο για επικόλληση.</string>
+    <string name="storage_problem_title">Δεν αποθηκεύτηκε</string>
+    <string name="storage_unsaved">Οι περιλήψεις σας παραμένουν ανοιχτές, αλλά οι αλλαγές δεν μπόρεσαν να αποθηκευτούν σε αυτό το τηλέφωνο.</string>
+    <string name="storage_unavailable">Οι αποθηκευμένες περιλήψεις δεν μπορούν να διαβαστούν αυτήν τη στιγμή. Έχουν παραμείνει αμετάβλητες σε αυτό το τηλέφωνο.</string>
+    <string name="action_retry">Δοκιμάστε ξανά</string>
     <string name="action_back">Πίσω</string>
     <string name="action_share">Κοινοποίηση</string>
     <string name="share_title">Κοινοποίηση σύνοψης</string>

@@ -4,8 +4,11 @@ import {
 	formatAge,
 	formatFhirDate,
 	formatHumanName,
+	formatPeriod,
+	formatQuantityNumber,
 	formatQuantityValue,
 	formatRange,
+	formatRatio,
 	summariseDosage
 } from './format.ts';
 import { translator } from '../test-helpers.ts';
@@ -85,5 +88,34 @@ describe('formatters', () => {
 			frequency: '2 times every 1 day',
 			dose: '500 mg'
 		});
+	});
+
+	it('handles open periods, one-sided ranges, partial ratios and as-needed doses', () => {
+		expect(displayOf({})).toBeUndefined();
+		expect(formatPeriod({}, 'en-US', t)).toBeUndefined();
+		expect(formatPeriod({ start: '2026-01-01' }, 'en-US', t)).toBe('From Jan 1, 2026');
+		expect(formatPeriod({ end: '2026-12-31' }, 'en-US', t)).toBe('Until Dec 31, 2026');
+		expect(formatQuantityNumber({ unit: 'mg' }, 'en-US')).toBeUndefined();
+		expect(formatRange({ low: { value: 3, unit: 'mg' } }, 'en-US', t)).toBe('At least 3 mg');
+		expect(formatRange({ high: { value: 5, unit: 'mg' } }, 'en-US', t)).toBe('At most 5 mg');
+		expect(formatRange({}, 'en-US', t)).toBeUndefined();
+		expect(formatRatio(undefined, 'en-US')).toBeUndefined();
+		expect(formatRatio({ numerator: { value: 1 }, denominator: { value: 2 } }, 'en-US')).toBe(
+			'1 / 2'
+		);
+		expect(formatRatio({ numerator: { value: 1 } }, 'en-US')).toBe('1');
+		expect(formatRatio({ denominator: { value: 2 } }, 'en-US')).toBe('2');
+		expect(
+			summariseDosage(
+				[
+					{
+						asNeededBoolean: true,
+						doseAndRate: [{ doseRange: { low: { value: 1, unit: 'tablet' } } }]
+					}
+				],
+				'en-US',
+				t
+			)
+		).toMatchObject({ frequency: 'as needed', dose: 'At least 1 tablet' });
 	});
 });

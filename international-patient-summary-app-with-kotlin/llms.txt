@@ -37,7 +37,7 @@
 - [Absent](app/src/main/kotlin/io/github/internationalpatientsummary/app/ips/Absent.kt): none known, not recorded, unavailable, missing
 - [SummaryReader](app/src/main/kotlin/io/github/internationalpatientsummary/app/ips/SummaryReader.kt): patient, document, sections, allergy alert
 - [EntryReader](app/src/main/kotlin/io/github/internationalpatientsummary/app/ips/EntryReader.kt): one entry as a row with detail lines
-- [Format](app/src/main/kotlin/io/github/internationalpatientsummary/app/ips/Format.kt): displayOf, names, dates, ages, quantities
+- [Format](app/src/main/kotlin/io/github/internationalpatientsummary/app/ips/Format.kt): displayOf, names, strict dates and ages, exact-token quantities
 - [People](app/src/main/kotlin/io/github/internationalpatientsummary/app/ips/People.kt): M-PEOPLE-1, which summaries are the same person (identifier, or name and birth date; transitive)
 - [Narrative](app/src/main/kotlin/io/github/internationalpatientsummary/app/ips/Narrative.kt): narrative as plain text
 - [OnePage](app/src/main/kotlin/io/github/internationalpatientsummary/app/ips/OnePage.kt): M-PDF-1/2, the one-page PDF's blocks, priority, plans and fitting (a page counter passed in); paper, file name, title metadata
@@ -47,11 +47,11 @@
 - [MainActivity](app/src/main/kotlin/io/github/internationalpatientsummary/app/MainActivity.kt): privacy cover, share sheet, share-file cleanup, a document from another app (M-LOAD-4; onCreate and onNewIntent, launchMode singleTask)
 - [Incoming](app/src/main/kotlin/io/github/internationalpatientsummary/app/Incoming.kt): M-LOAD-4, which part of an ACTION_VIEW or ACTION_SEND intent holds the document; the JSON types the manifest names
 - [DocumentFiles](app/src/main/kotlin/io/github/internationalpatientsummary/app/DocumentFiles.kt): the size-first, capped read of a picked, dropped or sent file (M-CHECK-2)
-- [AppViewModel](app/src/main/kotlin/io/github/internationalpatientsummary/app/AppViewModel.kt): screen state (kept through a fold, M-TAB-4), people, open, examples, delete, relationship, forget a person, clear; loads and saves the encrypted store on one thread
+- [AppViewModel](app/src/main/kotlin/io/github/internationalpatientsummary/app/AppViewModel.kt): screen state (kept through a fold, M-TAB-4), people, open, examples, delete, relationship, forget a person, clear; loads and saves the encrypted store on one thread, and exposes retryable unsaved/unavailable state
 - [SummaryStore](app/src/main/kotlin/io/github/internationalpatientsummary/app/SummaryStore.kt): the summaries and each person's relationship in memory (M-PEOPLE-3); index and restore for the encrypted store
-- [EncryptedStore](app/src/main/kotlin/io/github/internationalpatientsummary/app/EncryptedStore.kt): M-STORE-1..4, AES-256-GCM files in noBackupFilesDir/store/, checked again at launch
+- [EncryptedStore](app/src/main/kotlin/io/github/internationalpatientsummary/app/EncryptedStore.kt): M-STORE-1..5, AES-256-GCM files in noBackupFilesDir/store/, checked again at launch; temporary access failures preserve every file
 - [KeystoreKeys](app/src/main/kotlin/io/github/internationalpatientsummary/app/KeystoreKeys.kt): the store's non-exportable AES-256 key in the Android Keystore
-- [ShareFiles](app/src/main/kotlin/io/github/internationalpatientsummary/app/ShareFiles.kt): FileProvider share file, the JSON or the PDF (M-SHARE-1, M-PDF-3)
+- [ShareFiles](app/src/main/kotlin/io/github/internationalpatientsummary/app/ShareFiles.kt): isolated per-export FileProvider directories for the JSON or PDF, with completion and relaunch cleanup (M-PRIV-1, M-SHARE-1, M-PDF-3)
 - [OnePagePdf](app/src/main/kotlin/io/github/internationalpatientsummary/app/OnePagePdf.kt): M-PDF-1/2, the PDF in the reader's words, laid out with StaticLayout and drawn with PdfDocument
 - [SummariesScreen](app/src/main/kotlin/io/github/internationalpatientsummary/app/ui/SummariesScreen.kt): home, import, paste, examples
 - [SummaryScreen](app/src/main/kotlin/io/github/internationalpatientsummary/app/ui/SummaryScreen.kt): alert, patient, document, sections; the Share menu (file or PDF)

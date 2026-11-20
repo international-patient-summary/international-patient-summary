@@ -3,6 +3,7 @@ build/
 .svelte-kit/
 test-results/
 playwright-report/
+coverage/
 /static/assets/themes/
 .DS_Store
 *.log

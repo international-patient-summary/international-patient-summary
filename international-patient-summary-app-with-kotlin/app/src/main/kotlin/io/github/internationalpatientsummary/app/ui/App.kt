@@ -37,6 +37,7 @@ import io.github.internationalpatientsummary.app.Problem
 import io.github.internationalpatientsummary.app.R
 import io.github.internationalpatientsummary.app.Relationship
 import io.github.internationalpatientsummary.app.Screen
+import io.github.internationalpatientsummary.app.Saving
 import io.github.internationalpatientsummary.app.ShareFormat
 import io.github.internationalpatientsummary.app.Shortcut
 import io.github.internationalpatientsummary.app.ips.Summary
@@ -77,10 +78,34 @@ fun App(viewModel: AppViewModel, covered: Boolean, onShare: (Summary, ShareForma
                     }
                 }
                 viewModel.problem?.let { ProblemAlert(it, viewModel::dismissProblem) }
+                if (viewModel.storageProblemVisible) {
+                    StorageAlert(viewModel.saving, viewModel::retryStorage, viewModel::dismissStorageProblem)
+                }
                 if (covered) Cover()
             }
         }
     }
+}
+
+@Composable
+private fun StorageAlert(saving: Saving, onRetry: () -> Unit, onDismiss: () -> Unit) {
+    if (saving == Saving.SAVED) return
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        confirmButton = { TextButton(onClick = onRetry) { Text(stringResource(R.string.action_retry)) } },
+        dismissButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.problem_ok)) } },
+        title = {
+            TrackPopupFocus()
+            Text(stringResource(R.string.storage_problem_title))
+        },
+        text = {
+            Text(
+                stringResource(
+                    if (saving == Saving.UNAVAILABLE) R.string.storage_unavailable else R.string.storage_unsaved,
+                ),
+            )
+        },
+    )
 }
 
 /** The open summary, or (beside the list, before one is chosen) what to do. */

@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Composition मध्ये subject संदर्भ नाही.</string>
     <string name="problem_unreadable">फाइल वाचता आली नाही.</string>
     <string name="problem_empty_clipboard">क्लिपबोर्डवर पेस्ट करण्यासाठी कोणताही मजकूर नाही.</string>
+    <string name="storage_problem_title">जतन केले नाही</string>
+    <string name="storage_unsaved">तुमचे सारांश अजूनही उघडे आहेत, पण बदल या फोनवर जतन करता आले नाहीत.</string>
+    <string name="storage_unavailable">जतन केलेले सारांश सध्या वाचता येत नाहीत. ते या फोनवर न बदलता ठेवले आहेत.</string>
+    <string name="action_retry">पुन्हा प्रयत्न करा</string>
     <string name="action_back">मागे</string>
     <string name="action_share">शेअर करा</string>
     <string name="share_title">सारांश शेअर करा</string>

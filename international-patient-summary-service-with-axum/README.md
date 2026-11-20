@@ -26,6 +26,9 @@ cp .env.example .env && set -a && . ./.env && set +a
 cargo run -- start            # http://localhost:1241, migrates on boot in development
 ```
 
+The viewer's development server can open this loopback HTTP URL directly;
+production viewer builds and every non-loopback service URL require HTTPS.
+
 | Command                               | What it does                                             |
 | ------------------------------------- | -------------------------------------------------------- |
 | `cargo run -- start`                  | Serve                                                    |

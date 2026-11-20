@@ -29,7 +29,7 @@ app's privacy rules, and are taken up in version 1:
 | Medications, allergies, problems must be present or "none known" | **M-VIEW-3**, **M-VIEW-5**     |
 | Sample data to explore                                  | **M-LOAD-3** (the five IG examples)     |
 | Clear all data                                          | **M-PRIV-3**                            |
-| An encrypted on-device store                            | **M-STORE-1** to **M-STORE-4**          |
+| An encrypted on-device store with retryable failures    | **M-STORE-1** to **M-STORE-5**          |
 | Section-by-section summary home                         | **M-VIEW-3**                            |
 
 These wait for a later version ([plans.md](../plans.md)): writing and

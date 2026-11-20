@@ -9,6 +9,9 @@ the MyIPS ideas this version leaves for later. Each is a spec change first.
 Prioritize storage failure recovery, clinical display parity and language review
 before the network and authoring phases. The [mobile release plan](../plan.md)
 sets the acceptance criteria and the [shared checklist](../tasks.md) tracks them.
+Storage recovery and display parity are complete: both apps preserve the exact
+JSON token for clinical numbers, keep invalid date source text, and derive an
+age only from a valid full birth date.
 
 ## Phase 1 — Viewer (version 0.1, done)
 
@@ -33,7 +36,9 @@ the same 10 MB limit.
 
 The web viewer's one-page PDF rules (spec §6.7 there): identity, alerts,
 allergies and active medications are never trimmed. Rendered with
-`UIGraphicsPDFRenderer`, shared like the JSON.
+`UIGraphicsPDFRenderer`, shared like the JSON. Every export owns a unique
+temporary directory; completion or cancellation removes that export only,
+and the next launch clears any abandoned directories.
 
 ## Phase 5 — SMART Health Links and QR codes
 
@@ -84,9 +89,12 @@ summary unfolded (M-TAB-1), and nothing lost on folding or unfolding
 ## Phase 12 — Encrypted on-device store
 
 So the app works offline and after a restart, every summary and
-relationship is saved on the device, encrypted (spec §5.2, M-STORE-1..4):
+relationship is saved on the device, encrypted (spec §5.2, M-STORE-1..5):
 AES-256-GCM files under a Keychain key that never leaves the device, out of
 backups. Deleting deletes the files; Clear all deletes the key too. The
 repository's rule changed with it (root AGENTS.md): the mobile apps may keep
-patient data, on the device only and encrypted; nothing else persists it.
+patient data, on the device only and encrypted; nothing else persists it. A
+failed write leaves the summaries open and offers a localized retry of the
+complete state. A temporary key or file access failure preserves every
+encrypted file until the store can be read and merged.
 

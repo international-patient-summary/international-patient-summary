@@ -3,6 +3,7 @@
 	// Examples tabs. A file can also be dropped anywhere on the page. The
 	// document is held in memory only (state.svelte.ts).
 	import { asset } from '$app/paths';
+	import { dev } from '$app/env';
 	import {
 		Button,
 		FileUpload,
@@ -148,7 +149,7 @@
 			class="loader-form"
 			onsubmit={(event) => {
 				event.preventDefault();
-				run(() => loadUrl(url));
+				run(() => loadUrl(url, fetch, undefined, dev));
 			}}
 		>
 			<label for="loader-url">{t('loader.urlLabel')}</label>

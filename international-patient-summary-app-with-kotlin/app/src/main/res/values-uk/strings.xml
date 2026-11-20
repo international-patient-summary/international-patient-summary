@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">У Composition немає посилання на суб’єкт (subject).</string>
     <string name="problem_unreadable">Не вдалося прочитати файл.</string>
     <string name="problem_empty_clipboard">У буфері обміну немає тексту для вставлення.</string>
+    <string name="storage_problem_title">Не збережено</string>
+    <string name="storage_unsaved">Ваші зведення все ще відкриті, але зміни не вдалося зберегти на цьому телефоні.</string>
+    <string name="storage_unavailable">Збережені зведення зараз неможливо прочитати. На цьому телефоні їх залишено без змін.</string>
+    <string name="action_retry">Спробувати ще раз</string>
     <string name="action_back">Назад</string>
     <string name="action_share">Поділитися</string>
     <string name="share_title">Поділитися зведенням</string>

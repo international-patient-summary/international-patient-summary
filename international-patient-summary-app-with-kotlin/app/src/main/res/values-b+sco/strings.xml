@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">The Composition haes nae subject reference.</string>
     <string name="problem_unreadable">The file couldnae be read.</string>
     <string name="problem_empty_clipboard">The clipboard haes nae text tae paste.</string>
+    <string name="storage_problem_title">No saved</string>
+    <string name="storage_unsaved">Yer summaries are still open, but the chynges couldnae be saved on this phone.</string>
+    <string name="storage_unavailable">Saved summaries cannae be read juist noo. They hae been left unchynged on this phone.</string>
+    <string name="action_retry">Try again</string>
     <string name="action_back">Back</string>
     <string name="action_share">Share</string>
     <string name="share_title">Share summary</string>

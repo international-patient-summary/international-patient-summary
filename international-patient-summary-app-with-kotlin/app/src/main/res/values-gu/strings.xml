@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Compositionમાં subject સંદર્ભ નથી.</string>
     <string name="problem_unreadable">ફાઇલ વાંચી શકાઈ નથી.</string>
     <string name="problem_empty_clipboard">ક્લિપબોર્ડમાં પેસ્ટ કરવા માટે કોઈ ટેક્સ્ટ નથી.</string>
+    <string name="storage_problem_title">સાચવાયું નથી</string>
+    <string name="storage_unsaved">તમારા સારાંશ હજુ ખુલ્લા છે, પરંતુ ફેરફારો આ ફોન પર સાચવી શકાયા નથી.</string>
+    <string name="storage_unavailable">સાચવેલા સારાંશ અત્યારે વાંચી શકાતા નથી. તેમને આ ફોન પર બદલ્યા વિના રાખવામાં આવ્યા છે.</string>
+    <string name="action_retry">ફરી પ્રયાસ કરો</string>
     <string name="action_back">પાછળ</string>
     <string name="action_share">શેર કરો</string>
     <string name="share_title">સારાંશ શેર કરો</string>

@@ -1,6 +1,15 @@
 import { describe, expect, it } from 'vitest';
-import { sectionModels, stateLabel, type EntryModel } from './models.ts';
+import type { FhirResource } from 'fhir/r4';
+import {
+	modelOf,
+	sectionModels,
+	stateLabel,
+	type EntryModel,
+	type ObservationModel,
+	type ReportModel
+} from './models.ts';
 import { context, exampleDoc, fixtureDoc } from '../test-helpers.ts';
+import type { IpsSection } from './types.ts';
 
 const ctx = context('en-US');
 function models(name: string, key: string): EntryModel[] {
@@ -10,6 +19,12 @@ function models(name: string, key: string): EntryModel[] {
 		doc,
 		ctx
 	);
+}
+
+function model(resource: FhirResource, resolved: Record<string, FhirResource> = {}): EntryModel {
+	const doc = exampleDoc('bundle-minimal');
+	doc.resolve = (reference) => (reference ? resolved[reference] : undefined);
+	return modelOf({ reference: `${resource.resourceType}/test`, resource }, doc, ctx);
 }
 
 describe('view models', () => {
@@ -58,5 +73,159 @@ describe('view models', () => {
 			(s) => s.key === 'allergies'
 		)!;
 		expect(stateLabel(omitted, ctx.t)).toBe('Section missing from document');
+	});
+
+	it('groups a DiagnosticReport result instead of showing its Observation twice', () => {
+		const observation = {
+			resourceType: 'Observation',
+			id: 'result',
+			status: 'final',
+			code: { text: 'Blood glucose' },
+			valueInteger: 7
+		} as FhirResource;
+		const report = {
+			resourceType: 'DiagnosticReport',
+			id: 'report',
+			status: 'amended',
+			code: { text: 'Laboratory report' },
+			effectiveDateTime: '2026-11-15',
+			result: [{ reference: 'Observation/result' }],
+			conclusion: 'Reviewed'
+		} as FhirResource;
+		const doc = exampleDoc('bundle-minimal');
+		doc.resolve = (reference) => (reference === 'Observation/result' ? observation : undefined);
+		const section: IpsSection = {
+			...doc.sections[0],
+			entries: [
+				{ reference: 'DiagnosticReport/report', resource: report },
+				{ reference: 'Observation/result', resource: observation }
+			]
+		};
+		const grouped = sectionModels(section, doc, ctx);
+		expect(grouped).toHaveLength(1);
+		expect(grouped[0].kind).toBe('report');
+		const result = grouped[0] as ReportModel;
+		expect(result.results[0].value).toBe('7');
+		expect(result).toMatchObject({
+			statusLabel: 'Amended',
+			effectiveLabel: 'Nov 15, 2026',
+			conclusion: 'Reviewed'
+		});
+	});
+
+	it('maps uncommon Observation value and reference-range forms', () => {
+		const observation = (fields: Record<string, unknown>) =>
+			model({
+				resourceType: 'Observation',
+				status: 'registered',
+				code: { text: 'Test' },
+				...fields
+			} as unknown as FhirResource) as ObservationModel;
+
+		expect(observation({ valueBoolean: false }).value).toBe('No');
+		expect(observation({ valueInteger: 1234 }).value).toMatch(/1,234/);
+		expect(observation({ valueQuantity: { unit: 'mg' } }).value).toBe('mg');
+		expect(
+			observation({
+				valueString: 'high',
+				interpretation: [{ coding: [{ code: 'HH', display: 'Critical high' }] }],
+				referenceRange: [{ low: { value: 3, unit: 'mg' }, high: { value: 5, unit: 'mg' } }]
+			})
+		).toMatchObject({ range: '3 mg to 5 mg', interpretation: 'HH', flagLabel: 'Critically high' });
+		expect(
+			observation({ valueString: 'low', referenceRange: [{ low: { value: 3, unit: 'mg' } }] }).range
+		).toBe('At least 3 mg');
+		expect(
+			observation({ valueString: 'high', referenceRange: [{ high: { value: 5, unit: 'mg' } }] })
+				.range
+		).toBe('At most 5 mg');
+		expect(observation({ valueString: 'x', referenceRange: [{}] }).range).toBeUndefined();
+	});
+
+	it('maps ClinicalImpression, DocumentReference and ImmunizationRecommendation generically', () => {
+		const impression = model({
+			resourceType: 'ClinicalImpression',
+			status: 'completed',
+			code: { text: 'Clinical assessment' },
+			summary: 'Stable',
+			effectiveDateTime: '2026-11-15',
+			finding: [{ itemCodeableConcept: { text: 'Finding one' } }]
+		} as FhirResource);
+		expect(impression).toMatchObject({
+			kind: 'generic',
+			title: 'Clinical assessment',
+			description: 'Stable',
+			date: '2026-11-15'
+		});
+		expect(impression.fields.some((field) => field.value === 'Finding one')).toBe(true);
+
+		const document = model({
+			resourceType: 'DocumentReference',
+			status: 'current',
+			description: 'Advance directive',
+			date: '2026-10-01',
+			content: [{ attachment: { title: 'Directive PDF' } }]
+		} as FhirResource);
+		expect(document).toMatchObject({ title: 'Advance directive', date: '2026-10-01' });
+
+		const recommendation = model({
+			resourceType: 'ImmunizationRecommendation',
+			date: '2026-09-01',
+			patient: {},
+			recommendation: [
+				{
+					vaccineCode: [{ text: 'Influenza vaccine' }],
+					forecastStatus: { coding: [{ code: 'due', display: 'Due' }] },
+					dateCriterion: [{ code: {}, value: '2026-10-01' }]
+				}
+			]
+		} as FhirResource);
+		expect(recommendation).toMatchObject({
+			title: 'Influenza vaccine',
+			status: 'due',
+			description: 'Due',
+			date: '2026-10-01'
+		});
+	});
+
+	it('falls back safely for an otherwise unknown resource shape', () => {
+		const fallback = model({
+			resourceType: 'Basic',
+			code: { text: 'Basic record' },
+			subject: {},
+			status: 'entered-in-error',
+			effectiveDateTime: '2026-08-20'
+		} as unknown as FhirResource);
+		expect(fallback).toMatchObject({
+			kind: 'generic',
+			title: 'Basic record',
+			status: 'entered-in-error',
+			date: '2026-08-20',
+			enteredInError: true
+		});
+	});
+
+	it('uses absent-entry clinical words and unresolved-reference wording', () => {
+		const doc = exampleDoc('bundle-minimal');
+		const base = doc.sections.find((section) => section.key === 'allergies')!;
+		const absent = {
+			...base,
+			state: 'none-known' as const,
+			absentEntries: [
+				{
+					reference: 'MedicationStatement/none',
+					resource: {
+						resourceType: 'MedicationStatement',
+						status: 'unknown',
+						medicationCodeableConcept: { text: 'No known medicines' },
+						subject: {}
+					} as FhirResource
+				}
+			]
+		};
+		expect(stateLabel(absent, ctx.t)).toBe('None known: No known medicines');
+		expect(
+			stateLabel({ ...base, state: 'unavailable', absentEntries: [], unresolved: ['x'] }, ctx.t)
+		).toBe('The entries could not be found in the document.');
 	});
 });

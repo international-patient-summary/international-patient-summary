@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Chan eil iomradh subject aig a’ Composition.</string>
     <string name="problem_unreadable">Cha b’ urrainn dhuinn am faidhle a leughadh.</string>
     <string name="problem_empty_clipboard">Chan eil teacsa air an stòr-bhòrd ri chur ann.</string>
+    <string name="storage_problem_title">Gun a shàbhaladh</string>
+    <string name="storage_unsaved">Tha na geàrr-chunntasan agad fosgailte fhathast, ach cha b’ urrainn na h-atharraichean a shàbhaladh air an fhòn seo.</string>
+    <string name="storage_unavailable">Cha ghabh na geàrr-chunntasan a chaidh a shàbhaladh a leughadh an-dràsta. Chaidh am fàgail gun atharrachadh air an fhòn seo.</string>
+    <string name="action_retry">Feuch ris a-rithist</string>
     <string name="action_back">Air ais</string>
     <string name="action_share">Co-roinn</string>
     <string name="share_title">Co-roinn an geàrr-chunntas</string>

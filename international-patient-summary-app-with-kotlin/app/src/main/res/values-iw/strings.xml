@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">ל-Composition אין הפניית subject.</string>
     <string name="problem_unreadable">לא ניתן לקרוא את הקובץ.</string>
     <string name="problem_empty_clipboard">אין בלוח טקסט להדבקה.</string>
+    <string name="storage_problem_title">לא נשמר</string>
+    <string name="storage_unsaved">הסיכומים שלך עדיין פתוחים, אך לא ניתן היה לשמור את השינויים בטלפון הזה.</string>
+    <string name="storage_unavailable">לא ניתן לקרוא כרגע את הסיכומים השמורים. הם נשארו ללא שינוי בטלפון הזה.</string>
+    <string name="action_retry">ניסיון חוזר</string>
     <string name="action_back">חזרה</string>
     <string name="action_share">שיתוף</string>
     <string name="share_title">שיתוף הסיכום</string>

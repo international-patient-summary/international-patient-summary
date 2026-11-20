@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Composition har ingen subject-referanse.</string>
     <string name="problem_unreadable">Filen kunne ikke leses.</string>
     <string name="problem_empty_clipboard">Utklippstavlen har ingen tekst å lime inn.</string>
+    <string name="storage_problem_title">Ikke lagret</string>
+    <string name="storage_unsaved">Sammendragene dine er fortsatt åpne, men endringene kunne ikke lagres på denne telefonen.</string>
+    <string name="storage_unavailable">Lagrede sammendrag kan ikke leses akkurat nå. De er ikke endret på denne telefonen.</string>
+    <string name="action_retry">Prøv igjen</string>
     <string name="action_back">Tilbake</string>
     <string name="action_share">Del</string>
     <string name="share_title">Del sammendrag</string>

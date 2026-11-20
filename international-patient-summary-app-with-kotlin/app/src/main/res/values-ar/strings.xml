@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">لا يحتوي Composition على مرجع subject.</string>
     <string name="problem_unreadable">تعذّرت قراءة الملف.</string>
     <string name="problem_empty_clipboard">لا يوجد في الحافظة نص للصقه.</string>
+    <string name="storage_problem_title">لم يتم الحفظ</string>
+    <string name="storage_unsaved">لا تزال ملخصاتك مفتوحة، ولكن تعذّر حفظ التغييرات على هذا الهاتف.</string>
+    <string name="storage_unavailable">لا يمكن قراءة الملخصات المحفوظة الآن. تُركت دون تغيير على هذا الهاتف.</string>
+    <string name="action_retry">حاول مرة أخرى</string>
     <string name="action_back">رجوع</string>
     <string name="action_share">مشاركة</string>
     <string name="share_title">مشاركة الملخص</string>

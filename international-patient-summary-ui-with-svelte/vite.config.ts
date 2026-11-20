@@ -24,7 +24,8 @@ export default defineConfig({
 			},
 			// A strict Content-Security-Policy (spec §7). SvelteKit hashes its own
 			// bootstrap script, so no inline script runs without a hash. connect-src
-			// allows https: only for the URL loader, which the person asks for.
+			// allows https: for the URL loader and literal loopback HTTP only in
+			// development, which the person explicitly asks it to fetch.
 			csp: {
 				mode: 'hash',
 				directives: {
@@ -33,7 +34,10 @@ export default defineConfig({
 					'style-src': ['self', 'unsafe-inline'],
 					'img-src': ['self', 'data:', 'blob:'],
 					'font-src': ['self', 'data:'],
-					'connect-src': ['self', 'https:'],
+					'connect-src':
+						process.env.NODE_ENV === 'development'
+							? ['self', 'https:', 'http://localhost:*', 'http://127.0.0.1:*']
+							: ['self', 'https:'],
 					'object-src': ['none'],
 					'base-uri': ['self'],
 					'form-action': ['self'],
@@ -54,7 +58,14 @@ export default defineConfig({
 		include: ['src/**/*.test.ts', 'locales/**/*.test.ts'],
 		environment: 'jsdom',
 		setupFiles: ['./vitest-setup.ts'],
-		testTimeout: 30_000
+		testTimeout: 30_000,
+		coverage: {
+			provider: 'v8',
+			reporter: ['text', 'html'],
+			include: ['src/lib/**/*.{ts,svelte}'],
+			exclude: ['src/**/*.test.ts', 'src/lib/test-helpers.ts', 'src/lib/**/*.d.ts'],
+			thresholds: { lines: 95 }
+		}
 	},
 	resolve: process.env.VITEST ? { conditions: ['browser'] } : undefined
 });

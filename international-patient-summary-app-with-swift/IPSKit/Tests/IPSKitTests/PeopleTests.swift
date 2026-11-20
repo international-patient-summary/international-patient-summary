@@ -168,6 +168,22 @@ import Testing
         #expect(relationships.isEmpty)
     }
 
+    @Test func reopeningPutsSummariesOpenedWhileUnavailableAboveSavedOnes() throws {
+        let saved = try Self.summary(identifiers: [(Self.nhi, "saved")])
+        let meanwhile = try Self.summary(identifiers: [(Self.nhi, "meanwhile")])
+        var openedRelationships = Relationships()
+        openedRelationships.set(.sibling, for: people([meanwhile])[0], among: people([meanwhile]))
+
+        let result = reopen(
+            saved: [saved], savedRelationships: [saved.id: .parent],
+            opened: [meanwhile], openedRelationships: openedRelationships)
+
+        #expect(result.documents.map(\.id) == [meanwhile.id, saved.id])
+        let everyone = people(result.documents)
+        #expect(result.relationships.of(everyone[0]) == .sibling)
+        #expect(result.relationships.of(everyone[1]) == .parent)
+    }
+
     @Test func everyRelationshipHasAString() throws {
         let catalog = try CatalogTests.load()
         for relationship in Relationship.allCases {

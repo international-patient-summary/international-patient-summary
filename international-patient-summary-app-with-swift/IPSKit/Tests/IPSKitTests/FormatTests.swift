@@ -50,7 +50,9 @@ import Testing
         #expect(formatFHIRDate("2017-12-11T14:30:00+01:00", locale: locale) == "11 December 2017")
         #expect(formatFHIRDate("2017-12", locale: locale) == "December 2017")
         #expect(formatFHIRDate("2017", locale: locale) == "2017")
-        #expect(formatFHIRDate("someday", locale: locale) == nil)
+        #expect(formatFHIRDate("someday", locale: locale) == "someday", "an invalid source value is not invented")
+        #expect(formatFHIRDate("2023-02-31", locale: locale) == "2023-02-31")
+        #expect(formatFHIRDate("2017-12-", locale: locale) == "2017-12-")
         #expect(formatFHIRDate("2017-12-11", locale: Locale(identifier: "en_US")) == "December 11, 2017")
     }
 
@@ -60,11 +62,19 @@ import Testing
         #expect(ageInYears(birthDate: "1972-11-17", today: today) == 53)
         #expect(ageInYears(birthDate: "1972-11-16", today: today) == 54)
         #expect(ageInYears(birthDate: "1972", today: today) == nil)
+        #expect(ageInYears(birthDate: "1972-05", today: today) == nil)
+        #expect(ageInYears(birthDate: "2023-02-31", today: today) == nil)
+        #expect(ageInYears(birthDate: "2030-01-01", today: today) == nil)
     }
 
     @Test func quantities() {
         #expect(formatQuantity(Self.json(#"{"value":120,"unit":"mm[Hg]"}"#)) == "120\u{00A0}mm[Hg]")
         #expect(formatQuantity(Self.json(#"{"value":1.5,"comparator":"<","code":"mg"}"#)) == "<1.5\u{00A0}mg")
+        #expect(formatQuantity(Self.json(#"{"value":5.0,"unit":"mg"}"#)) == "5.0\u{00A0}mg")
+        #expect(
+            formatQuantity(Self.json(#"{"value":0.12345678901234567890,"unit":"mmol/L"}"#))
+                == "0.12345678901234567890\u{00A0}mmol/L")
+        #expect(formatQuantity(Self.json(#"{"value":1.2300e-7}"#)) == "1.2300e-7")
         #expect(formatQuantity(Self.json(#"{"unit":"mg"}"#)) == nil)
         #expect(formatRange(Self.json(#"{"low":{"value":4},"high":{"value":10,"unit":"%"}}"#)) == "4–10\u{00A0}%")
     }

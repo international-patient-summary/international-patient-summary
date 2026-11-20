@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Composition គ្មានឯកសារយោងទៅ subject ទេ។</string>
     <string name="problem_unreadable">មិនអាចអានឯកសារនេះបានទេ។</string>
     <string name="problem_empty_clipboard">ក្ដារតម្បៀតខ្ទាស់គ្មានអត្ថបទសម្រាប់បិទភ្ជាប់ទេ។</string>
+    <string name="storage_problem_title">មិនបានរក្សាទុក</string>
+    <string name="storage_unsaved">សេចក្តីសង្ខេបរបស់អ្នកនៅតែបើក ប៉ុន្តែមិនអាចរក្សាទុកការផ្លាស់ប្តូរនៅលើទូរសព្ទនេះបានទេ។</string>
+    <string name="storage_unavailable">មិនអាចអានសេចក្តីសង្ខេបដែលបានរក្សាទុកនៅពេលនេះទេ។ វាត្រូវបានទុកឱ្យនៅដដែលលើទូរសព្ទនេះ។</string>
+    <string name="action_retry">សាកល្បងម្តងទៀត</string>
     <string name="action_back">ថយក្រោយ</string>
     <string name="action_share">ចែករំលែក</string>
     <string name="share_title">ចែករំលែកសេចក្ដីសង្ខេប</string>

@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Composition-resurssissa ei ole subject-viittausta.</string>
     <string name="problem_unreadable">Tiedostoa ei voitu lukea.</string>
     <string name="problem_empty_clipboard">Leikepöydällä ei ole liitettävää tekstiä.</string>
+    <string name="storage_problem_title">Ei tallennettu</string>
+    <string name="storage_unsaved">Yhteenvedot ovat edelleen avoinna, mutta muutoksia ei voitu tallentaa tähän puhelimeen.</string>
+    <string name="storage_unavailable">Tallennettuja yhteenvetoja ei voi lukea juuri nyt. Ne on jätetty muuttamatta tähän puhelimeen.</string>
+    <string name="action_retry">Yritä uudelleen</string>
     <string name="action_back">Takaisin</string>
     <string name="action_share">Jaa</string>
     <string name="share_title">Jaa yhteenveto</string>

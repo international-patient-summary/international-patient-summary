@@ -5,6 +5,8 @@ import IPSKit
 /// they are about. Every change is saved at once to the encrypted store on this
 /// device (M-STORE-1, M-STORE-2), and read back at launch, so they outlast closing
 /// the app and restarting the phone. Only the encrypted store persists this state (M-PRIV-1).
+/// When a save fails, or the saved summaries cannot be read now, `saving` says so
+/// and `retry()` tries again (M-STORE-5).
 @MainActor
 final class SummaryStore {
     static let shared: SummaryStore = {
@@ -22,6 +24,17 @@ final class SummaryStore {
 
     private let saved: EncryptedStore?
 
+    /// M-STORE-5: whether what is open is saved on this device.
+    enum Saving {
+        case saved
+        /// The last save failed; what is open stays open, in memory.
+        case unsaved
+        /// The saved summaries cannot be read now; nothing is written until they can.
+        case unavailable
+    }
+
+    private(set) var saving = Saving.saved
+
     /// - Parameter saving: the encrypted store, read now; nil keeps everything in memory.
     init(saving: EncryptedStore?) {
         saved = saving
@@ -29,6 +42,7 @@ final class SummaryStore {
             self.documents = documents
             self.relationships = Relationships(relationships)
         }
+        if saving?.isWritable == false { self.saving = .unavailable }
     }
     static let changed = Notification.Name("SummaryStore.changed")
 
@@ -87,8 +101,30 @@ final class SummaryStore {
         changed()
     }
 
+    /// M-STORE-5 Try again: read the saved summaries again if they could not be
+    /// read, putting any opened meanwhile on top, then save everything open.
+    func retry() {
+        if let saved, !saved.isWritable {
+            let (documents, relationships) = saved.load()
+            if saved.isWritable {
+                (self.documents, self.relationships) = reopen(
+                    saved: documents, savedRelationships: relationships,
+                    opened: self.documents, openedRelationships: self.relationships)
+            }
+        }
+        changed()
+    }
+
     private func changed() {
-        saved?.save(documents, relationships: relationships.all)
+        if let saved {
+            do {
+                try saved.save(documents, relationships: relationships.all)
+                saving = .saved
+            } catch {
+                // Nothing is logged (M-PRIV-4); what is open stays open.
+                saving = saved.isWritable ? .unsaved : .unavailable
+            }
+        }
         NotificationCenter.default.post(name: Self.changed, object: self)
     }
 }

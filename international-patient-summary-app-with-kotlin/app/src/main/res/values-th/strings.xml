@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Composition ไม่มีการอ้างอิงถึง subject</string>
     <string name="problem_unreadable">ไม่สามารถอ่านไฟล์ได้</string>
     <string name="problem_empty_clipboard">ไม่มีข้อความในคลิปบอร์ดให้วาง</string>
+    <string name="storage_problem_title">ไม่ได้บันทึก</string>
+    <string name="storage_unsaved">ข้อมูลสรุปของคุณยังเปิดอยู่ แต่ไม่สามารถบันทึกการเปลี่ยนแปลงไว้ในโทรศัพท์เครื่องนี้ได้</string>
+    <string name="storage_unavailable">ไม่สามารถอ่านข้อมูลสรุปที่บันทึกไว้ได้ในขณะนี้ ข้อมูลยังคงอยู่โดยไม่มีการเปลี่ยนแปลงในโทรศัพท์เครื่องนี้</string>
+    <string name="action_retry">ลองอีกครั้ง</string>
     <string name="action_back">กลับ</string>
     <string name="action_share">แชร์</string>
     <string name="share_title">แชร์สรุป</string>

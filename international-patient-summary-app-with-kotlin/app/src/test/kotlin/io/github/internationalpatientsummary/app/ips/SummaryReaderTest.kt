@@ -6,6 +6,8 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
+import java.time.LocalDate
+import java.util.Locale
 
 class SummaryReaderTest {
     @Test fun everyExampleIsAcceptedWithItsPatient() {
@@ -141,6 +143,21 @@ class SummaryReaderTest {
         assertTrue(medications.all { it.text != null })
         val results = summary.sections.first { it.key == SectionKey.RESULTS }.entries.filterIsInstance<Entry.Resolved>()
         assertTrue(results.isNotEmpty())
+    }
+
+    @Test fun bannerScreenAndPdfKeepSourceDatesAndClinicalDecimals() {
+        val source = Fixtures.bytes("bundle-ips-all-sections").toString(Charsets.UTF_8)
+            .replace("\"birthDate\" : \"1956-09-30\"", "\"birthDate\" : \"2023-02-31\"")
+            .replaceFirst("\"value\" : 4.1", "\"value\" : 0.12345678901234567890")
+        val summary = SummaryReader.open(source.toByteArray(), 1)
+
+        assertEquals("2023-02-31", summary.patient?.birthDate)
+        assertEquals("2023-02-31", Format.date(summary.patient?.birthDate, Locale.UK))
+        assertNull(Format.ageInYears(summary.patient?.birthDate, LocalDate.of(2026, 11, 19)))
+        val entry = summary.sections.flatMap { it.entries }.filterIsInstance<Entry.Resolved>()
+            .first { row -> row.details.any { it.kind == DetailKind.VALUE && it.value == "0.12345678901234567890\u00a0mmol/L" } }
+        val pdfRows = OnePage.of(summary).boxBlocks() + OnePage.of(summary).bodyBlocks(PdfPlan(10f))
+        assertTrue(pdfRows.any { it == PdfBlock.Row(PdfRow.Item(entry)) })
     }
 
     @Test fun statusDetailsKeepEachCode() {

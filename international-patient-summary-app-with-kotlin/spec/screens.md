@@ -26,6 +26,9 @@
   its nonblank prefix, given, family and suffix parts in that order. A
   parts-only name needs a given or family name so a title alone cannot
   identify someone in the banner or family list.
+  A valid partial birth date stays partial. If a birth date cannot be
+  parsed, show its source text rather than inventing a date. Show an age
+  only for a valid, full birth date that is not in the future.
 - **M-VIEW-2 Document.** Title, date, and authors' names.
 - **M-VIEW-3 Sections.** In Composition order, then any required section
   the Composition lacks, labelled "Section missing from document".
@@ -38,7 +41,10 @@
   present: status (clinical, verification, or `status`); criticality and
   reactions (allergies); dosage text (medications); onset or effective or
   occurrence date; value with unit, or value text, and interpretation
-  (observations). Other types use their `code` and `status`.
+  (observations). A JSON numeric clinical value is written with its exact
+  source token, including trailing zeroes, precision and exponent, without
+  rounding or normalisation. The detail shown on screen and in the PDF is
+  the same value. Other types use their `code` and `status`.
 - **M-VIEW-5 Absent and unknown.** Four states in words: "None known"
   (`emptyReason` `nilknown`, IPS `no-known-…`, SNOMED CT "no known" codes);
   "Not recorded" (`notasked`, `notstarted`, IPS `no-…-info`, or no entries);

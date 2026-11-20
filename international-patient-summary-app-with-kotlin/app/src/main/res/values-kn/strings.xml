@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Compositionನಲ್ಲಿ subject ಉಲ್ಲೇಖವಿಲ್ಲ.</string>
     <string name="problem_unreadable">ಫೈಲ್ ಓದಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ.</string>
     <string name="problem_empty_clipboard">ಕ್ಲಿಪ್‌ಬೋರ್ಡ್‌ನಲ್ಲಿ ಅಂಟಿಸಲು ಯಾವುದೇ ಪಠ್ಯವಿಲ್ಲ.</string>
+    <string name="storage_problem_title">ಉಳಿಸಲಾಗಿಲ್ಲ</string>
+    <string name="storage_unsaved">ನಿಮ್ಮ ಸಾರಾಂಶಗಳು ಇನ್ನೂ ತೆರೆದಿವೆ, ಆದರೆ ಬದಲಾವಣೆಗಳನ್ನು ಈ ಫೋನ್‌ನಲ್ಲಿ ಉಳಿಸಲಾಗಲಿಲ್ಲ.</string>
+    <string name="storage_unavailable">ಉಳಿಸಿದ ಸಾರಾಂಶಗಳನ್ನು ಈಗ ಓದಲು ಸಾಧ್ಯವಿಲ್ಲ. ಅವುಗಳನ್ನು ಈ ಫೋನ್‌ನಲ್ಲಿ ಬದಲಾಯಿಸದೆ ಬಿಡಲಾಗಿದೆ.</string>
+    <string name="action_retry">ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ</string>
     <string name="action_back">ಹಿಂದೆ</string>
     <string name="action_share">ಹಂಚಿಕೊಳ್ಳಿ</string>
     <string name="share_title">ಸಾರಾಂಶ ಹಂಚಿಕೊಳ್ಳಿ</string>

@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Composition har ingen subject-reference.</string>
     <string name="problem_unreadable">Filen kunne ikke læses.</string>
     <string name="problem_empty_clipboard">Udklipsholderen har ingen tekst at indsætte.</string>
+    <string name="storage_problem_title">Ikke gemt</string>
+    <string name="storage_unsaved">Dine resuméer er stadig åbne, men ændringerne kunne ikke gemmes på denne telefon.</string>
+    <string name="storage_unavailable">Gemte resuméer kan ikke læses lige nu. De er ikke blevet ændret på denne telefon.</string>
+    <string name="action_retry">Prøv igen</string>
     <string name="action_back">Tilbage</string>
     <string name="action_share">Del</string>
     <string name="share_title">Del oversigt</string>

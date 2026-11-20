@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">La Composition no tiene referencia al sujeto (subject).</string>
     <string name="problem_unreadable">No se pudo leer el archivo.</string>
     <string name="problem_empty_clipboard">El portapapeles no tiene texto que pegar.</string>
+    <string name="storage_problem_title">No guardado</string>
+    <string name="storage_unsaved">Sus resúmenes siguen abiertos, pero no se pudieron guardar los cambios en este teléfono.</string>
+    <string name="storage_unavailable">Los resúmenes guardados no se pueden leer ahora. Se han dejado sin cambios en este teléfono.</string>
+    <string name="action_retry">Intentar de nuevo</string>
     <string name="action_back">Atrás</string>
     <string name="action_share">Compartir</string>
     <string name="share_title">Compartir resumen</string>

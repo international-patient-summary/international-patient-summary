@@ -4,13 +4,16 @@ import { render, screen, within } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
 import { locale, waitLocale } from '@sveltia/i18n';
 import { beforeAll, beforeEach, describe, expect, it } from 'vitest';
+import DocumentChecks from './DocumentChecks.svelte';
 import ErrorList from './ErrorList.svelte';
 import PatientBanner from './PatientBanner.svelte';
 import SectionView from './SectionView.svelte';
 import Viewer from './Viewer.svelte';
+import ResultsTable from './sections/ResultsTable.svelte';
+import { sectionModels, type ObservationModel, type ReportModel } from '../fhir/models.ts';
 import { setupI18n } from '../i18n.ts';
 import { viewer } from '../state.svelte.ts';
-import { exampleDoc, fixtureDoc } from '../test-helpers.ts';
+import { context, exampleDoc, fixtureDoc } from '../test-helpers.ts';
 
 beforeAll(async () => {
 	setupI18n();
@@ -20,6 +23,7 @@ beforeAll(async () => {
 
 beforeEach(async () => {
 	await locale.set('en-US');
+	viewer.clear();
 	viewer.showCodes = false;
 });
 
@@ -119,6 +123,39 @@ describe('SectionView and the absent states', () => {
 		expect(narrative.querySelector('script')).toBeNull();
 		expect(narrative.innerHTML).not.toMatch(/onclick|javascript:/);
 	});
+
+	it('shows grouped DiagnosticReport results and source JSON on request', async () => {
+		const user = userEvent.setup();
+		const doc = exampleDoc('bundle-ips-all-sections');
+		const section = doc.sections.find((s) => s.key === 'results')!;
+		const observations = sectionModels(section, doc, context()).filter(
+			(model): model is ObservationModel => model.kind === 'observation'
+		);
+		const report: ReportModel = {
+			id: 'report/1',
+			kind: 'report',
+			resourceType: 'DiagnosticReport',
+			title: 'Laboratory report',
+			codes: [],
+			fields: [],
+			resource: { resourceType: 'DiagnosticReport', status: 'final', code: {} },
+			enteredInError: false,
+			statusLabel: 'Final',
+			effective: '2026-11-15',
+			effectiveLabel: 'Nov 15, 2026',
+			conclusion: 'Results reviewed',
+			results: observations.slice(0, 1)
+		};
+		const { container } = render(ResultsTable, {
+			models: [report],
+			label: 'Results',
+			lang: 'en'
+		});
+		expect(container.querySelector('.results-group')).not.toBeNull();
+		const source = screen.getAllByText('Source data (JSON)')[0];
+		await user.click(source);
+		expect(container.querySelector('.entry-source-json')?.textContent).toContain('resourceType');
+	});
 });
 
 describe('Timeline view', () => {
@@ -153,6 +190,31 @@ describe('Viewer', () => {
 		const nav = screen.getByRole('navigation', { name: 'Contents' });
 		expect(within(nav).getAllByRole('link').length).toBe(doc.sections.length);
 	});
+
+	it('expands disclosures for printing, restores them, and can close the document', async () => {
+		const user = userEvent.setup();
+		const doc = exampleDoc('bundle-minimal');
+		viewer.loaded = {
+			data: doc.bundle,
+			format: 'json',
+			source: { kind: 'text' }
+		};
+		viewer.doc = doc;
+		const { container } = render(Viewer, { doc });
+		expect(text(container.querySelector('.viewer-loaded')!)).toContain('JSON document loaded');
+		const initiallyClosed = [
+			...container.querySelectorAll<HTMLDetailsElement>('details:not([open])')
+		];
+		expect(initiallyClosed.length).toBeGreaterThan(0);
+		window.dispatchEvent(new Event('beforeprint'));
+		expect(initiallyClosed.every((details) => details.open)).toBe(true);
+		window.dispatchEvent(new Event('afterprint'));
+		expect(initiallyClosed.every((details) => !details.open)).toBe(true);
+
+		await user.click(screen.getByRole('button', { name: 'Open another document' }));
+		expect(viewer.doc).toBeUndefined();
+		expect(viewer.loaded).toBeUndefined();
+	});
 });
 
 describe('ErrorList', () => {
@@ -171,5 +233,24 @@ describe('ErrorList', () => {
 		if (message) expect(text(summary)).toContain(message);
 		if (tag === 'cy-001') expect(text(summary)).not.toContain('There is a problem');
 		expect(text(summary)).toMatch(/3/);
+	});
+});
+
+describe('DocumentChecks', () => {
+	it('stays absent without findings and words every finding by severity', () => {
+		const empty = render(DocumentChecks, { checks: [] });
+		expect(empty.container.querySelector('.document-checks')).toBeNull();
+		empty.unmount();
+
+		const { container } = render(DocumentChecks, {
+			checks: [
+				{ severity: 'warning', key: 'requiredSectionMissing', values: { code: '48765-2' } },
+				{ severity: 'info', key: 'noIpsProfile' }
+			]
+		});
+		expect(container.querySelectorAll('.document-checks-list li')).toHaveLength(2);
+		expect(text(container)).toContain('Warning:');
+		expect(text(container)).toContain('Information:');
+		expect(text(container)).toContain('48765-2');
 	});
 });

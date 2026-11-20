@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">La Composition n’a pas de référence au sujet (subject).</string>
     <string name="problem_unreadable">Impossible de lire le fichier.</string>
     <string name="problem_empty_clipboard">Le presse-papiers ne contient aucun texte à coller.</string>
+    <string name="storage_problem_title">Non enregistré</string>
+    <string name="storage_unsaved">Vos résumés sont toujours ouverts, mais les modifications n’ont pas pu être enregistrées sur ce téléphone.</string>
+    <string name="storage_unavailable">Les résumés enregistrés ne peuvent pas être lus pour le moment. Ils ont été laissés inchangés sur ce téléphone.</string>
+    <string name="action_retry">Réessayer</string>
     <string name="action_back">Retour</string>
     <string name="action_share">Partager</string>
     <string name="share_title">Partager le résumé</string>

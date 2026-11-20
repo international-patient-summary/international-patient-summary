@@ -25,10 +25,12 @@ Checklist for [plans.md](plans.md). Spec: [spec/index.md](spec/index.md).
 
 ## P2 — Viewer integration
 
-- [ ] **P2-T1** Decide local TLS vs. viewer accepting `http://localhost` in
-      development (change in the viewer's spec F-LOAD-3).
-- [ ] **P2-T2** End-to-end check: store an example here, open its URL in the
-      viewer, see it render.
+- [x] **P2-T1** The viewer accepts HTTP only for literal loopback hosts while
+      its development server is running; production remains HTTPS-only
+      (viewer F-LOAD-3 and `load.test.ts`).
+- [x] **P2-T2** End-to-end check: stored `bundle-minimal` in a development
+      service, opened its loopback URL in the viewer's development build, and
+      saw Martha DeLarosa render (headless Chromium, 2026-11-19).
 
 ## P3 — Authentication and authorisation
 

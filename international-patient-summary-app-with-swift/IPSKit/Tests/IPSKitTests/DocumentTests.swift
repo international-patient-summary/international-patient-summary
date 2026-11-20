@@ -147,6 +147,20 @@ import Testing
         #expect(vitals.entries.contains { $0.detail(.value) != nil })
     }
 
+    @Test func bannerScreenAndPDFKeepSourceDatesAndClinicalDecimals() throws {
+        var source = try #require(String(data: Self.data("bundle-ips-all-sections"), encoding: .utf8))
+        source = source.replacingOccurrences(of: #""birthDate" : "1956-09-30""#, with: #""birthDate" : "2023-02-31""#)
+        source = source.replacingOccurrences(of: #""value" : 4.1"#, with: #""value" : 0.12345678901234567890"#, options: [], range: source.range(of: #""value" : 4.1"#))
+        let document = try Document.open(try #require(source.data(using: .utf8))).get()
+
+        #expect(document.birthDate == "2023-02-31")
+        #expect(formatFHIRDate(document.birthDate, locale: Locale(identifier: "en_GB")) == "2023-02-31")
+        #expect(ageInYears(birthDate: document.birthDate) == nil)
+        let entry = try #require(document.sections.flatMap(\.entries).first { $0.detail(.value) == "0.12345678901234567890\u{00A0}mmol/L" })
+        let pdfEntries = PDFLayout.sections(of: document).flatMap { $0.mustShow + $0.others }
+        #expect(pdfEntries.contains { $0.detail(.value) == entry.detail(.value) })
+    }
+
     static func data(_ name: String) throws -> Data {
         let url = try #require(
             Bundle.module.url(forResource: name, withExtension: "json", subdirectory: "Fixtures"))

@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">D’Composition huet keng Referenz op e Subject.</string>
     <string name="problem_unreadable">De Fichier konnt net gelies ginn.</string>
     <string name="problem_empty_clipboard">Am Tëschespäicher ass keen Text fir anzefügen.</string>
+    <string name="storage_problem_title">Net gespäichert</string>
+    <string name="storage_unsaved">Är Zesummefaassunge sinn nach op, mee d’Ännerunge konnten net op dësem Telefon gespäichert ginn.</string>
+    <string name="storage_unavailable">Gespäichert Zesummefaassunge kënnen elo net gelies ginn. Si goufen op dësem Telefon onverännert gelooss.</string>
+    <string name="action_retry">Nach eng Kéier probéieren</string>
     <string name="action_back">Zréck</string>
     <string name="action_share">Deelen</string>
     <string name="share_title">Iwwersiicht deelen</string>

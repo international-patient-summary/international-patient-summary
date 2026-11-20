@@ -111,20 +111,22 @@ See the [shared release checklist](../tasks.md) for cross-platform work.
       the app shows (M-TAB-1)
       Verify: all UI tests on iPhone 18 Pro Max and iPad Air 13-inch (M4), iOS 27.2.
 - [ ] P11-T2 Fold and unfold on an iPhone Duo with a summary open and a relationship set (M-TAB-4)
-      Blocked: Xcode 27.2's Duo profile needs simulator runtime 24B8118, which cannot be downloaded
-      yet (24B8117 refuses the device). Check on a device, or when the runtime comes.
+      The iOS 27.2 Duo runtime 24B91016s now boots and `testFamiliesAndCarers` passes on it with the
+      relationship set. The actual pose transition remains manual: `simctl` has no fold command,
+      and Device Hub's Fold/Unfold controls must be used in an interactive macOS session.
 - [x] P11-T3 Screenshots on the newest runtime and iPhone (spec §8.4)
 - [ ] P11-T4 `testPasteRefusalAndShare` on iOS 27.2: tapping Paste after the runner writes the
       pasteboard shows neither iOS's paste prompt nor the app's alert (SpringBoard reports the app
-      switcher). The test skips on iOS 27 and passes on iOS 26.1 (iPhone 17, 308 s). Check Paste by
-      hand on iOS 27, and find what the 27.2 simulator needs.
+      switcher). `simctl pbcopy` also remains visible to `simctl pbpaste` but `UIPasteboard.general`
+      returns nil in the app, on both iPhone 18 Pro Max and Duo. The test skips on iOS 27 and passes
+      on iOS 26.1 (iPhone 17, 308 s). Check Paste by hand on iOS 27 or after a runtime fix.
 
 ## Phase 12 — Encrypted on-device store
 
 - [x] P12-T1 Spec §5.2 M-STORE-1..4, M-PRIV-1/3 and the root rule: on the device only, encrypted
 - [x] P12-T2 `EncryptedStore`: sealed summaries and index, fresh nonces, role as associated data;
       damaged files left out, a missing key empties the store, a locked key leaves it alone
-      Verify: `EncryptedStoreTests` (10 tests).
+      Verify: `EncryptedStoreTests` (14 tests).
 - [x] P12-T3 The key in the Keychain (this device only, when unlocked); the store in Application
       Support, complete file protection, excluded from backup; saved after every change
       Verify: UI `testSummariesOutlastARelaunch` (relaunch keeps five summaries and a relationship;
@@ -134,4 +136,7 @@ See the [shared release checklist](../tasks.md) for cross-platform work.
 - [x] P12-T5 A restart: summaries and a relationship saved, the iPhone 18 Pro Max simulator shut
       down and booted, then the app opened with all five and the relationship (2026-11-17)
 - [ ] P12-T6 By hand on a device: restart; launch while locked; delete and reinstall (starts empty)
+- [x] P12-T7 Failed summary/index saves keep the summaries open, show a localized retry, and restore exact bytes and relationships after retry; temporary key/file access failures preserve the store (M-STORE-5, `EncryptedStoreTests`, `PeopleTests`)
+- [x] P12-T8 Every export owns a unique temporary directory; completion/cancellation removes only that export and launch removes abandoned exports (`TemporaryShareTests`)
+- [x] P12-T9 Preserve exact JSON numeric tokens and source text for invalid dates; never show an age for an invalid, partial or future birth date; prove the banner, entry detail and PDF input agree (`FormatTests`, `DocumentTests.bannerScreenAndPDFKeepSourceDatesAndClinicalDecimals`)
 

@@ -79,4 +79,20 @@ class SummaryStoreTest {
         assertTrue(store.people().isEmpty())
         assertEquals(Relationship.NONE, relationshipOf(add("bundle-minimal")))
     }
+
+    @Test fun reopenPutsSummariesOpenedWhileUnavailableAboveSavedOnes() {
+        val saved = add("bundle-ips-all-sections")
+        store.setRelationship(saved.id, Relationship.PARENT)
+        val index = store.index()
+        store.clear()
+        val meanwhile = add("bundle-no-info-required-sections")
+        store.setRelationship(meanwhile.id, Relationship.SIBLING)
+
+        store.reopen(index, listOf(saved))
+
+        assertEquals(listOf(meanwhile.id, saved.id), store.all().map { it.id })
+        assertEquals(Relationship.SIBLING, relationshipOf(meanwhile))
+        assertEquals(Relationship.PARENT, relationshipOf(saved))
+        assertTrue(store.newId() > maxOf(meanwhile.id, saved.id))
+    }
 }

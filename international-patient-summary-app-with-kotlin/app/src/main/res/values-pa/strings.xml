@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Composition ਵਿੱਚ subject ਹਵਾਲਾ ਨਹੀਂ ਹੈ।</string>
     <string name="problem_unreadable">ਫ਼ਾਈਲ ਪੜ੍ਹੀ ਨਹੀਂ ਜਾ ਸਕੀ।</string>
     <string name="problem_empty_clipboard">ਕਲਿੱਪਬੋਰਡ ਵਿੱਚ ਪੇਸਟ ਕਰਨ ਲਈ ਕੋਈ ਟੈਕਸਟ ਨਹੀਂ ਹੈ।</string>
+    <string name="storage_problem_title">ਸੁਰੱਖਿਅਤ ਨਹੀਂ ਹੋਇਆ</string>
+    <string name="storage_unsaved">ਤੁਹਾਡੇ ਸਾਰ ਅਜੇ ਵੀ ਖੁੱਲ੍ਹੇ ਹਨ, ਪਰ ਤਬਦੀਲੀਆਂ ਇਸ ਫ਼ੋਨ ਉੱਤੇ ਸੁਰੱਖਿਅਤ ਨਹੀਂ ਹੋ ਸਕੀਆਂ।</string>
+    <string name="storage_unavailable">ਸੁਰੱਖਿਅਤ ਕੀਤੇ ਸਾਰ ਇਸ ਵੇਲੇ ਪੜ੍ਹੇ ਨਹੀਂ ਜਾ ਸਕਦੇ। ਉਨ੍ਹਾਂ ਨੂੰ ਇਸ ਫ਼ੋਨ ਉੱਤੇ ਬਿਨਾਂ ਬਦਲਾਅ ਦੇ ਛੱਡਿਆ ਗਿਆ ਹੈ।</string>
+    <string name="action_retry">ਮੁੜ ਕੋਸ਼ਿਸ਼ ਕਰੋ</string>
     <string name="action_back">ਪਿੱਛੇ</string>
     <string name="action_share">ਸਾਂਝਾ ਕਰੋ</string>
     <string name="share_title">ਸੰਖੇਪ ਸਾਂਝਾ ਕਰੋ</string>

@@ -1,6 +1,6 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { loadFile, loadText, loadUrl } from './load.ts';
-import { LoadError } from './parse.ts';
+import { LoadError, MAX_INPUT_BYTES } from './parse.ts';
 import { exampleText } from '../test-helpers.ts';
 
 async function rejection(p: Promise<unknown>): Promise<LoadError> {
@@ -33,6 +33,18 @@ describe('loaders', () => {
 	it('fetches https URLs only', async () => {
 		expect((await rejection(loadUrl('http://example.org/x.json'))).key).toBe('urlNotHttps');
 		expect((await rejection(loadUrl('not a url'))).key).toBe('urlInvalid');
+	});
+
+	it('allows plain HTTP only for literal loopback hosts when development opts in', async () => {
+		const ok = vi.fn(async () => new Response(exampleText('bundle-minimal')));
+		for (const host of ['localhost', '127.0.0.1']) {
+			const result = await loadUrl(`http://${host}:1241/fhir/Bundle/id`, ok, MAX_INPUT_BYTES, true);
+			expect(result.source.name).toBe(`http://${host}:1241/fhir/Bundle/id`);
+		}
+		expect((await rejection(loadUrl('http://localhost/x', ok))).key).toBe('urlNotHttps');
+		expect((await rejection(loadUrl('http://example.org/x', ok, MAX_INPUT_BYTES, true))).key).toBe(
+			'urlNotHttps'
+		);
 	});
 
 	it('explains a network or CORS failure in plain language', async () => {

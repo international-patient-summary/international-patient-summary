@@ -11,6 +11,9 @@ too where it touches §1–§7.
 Prioritize storage failure recovery, clinical display parity and language review
 before the network and authoring phases. The [mobile release plan](../plan.md)
 sets the acceptance criteria and the [shared checklist](../tasks.md) tracks them.
+Storage recovery and display parity are complete: both apps preserve the exact
+JSON token for clinical numbers, keep invalid date source text, and derive an
+age only from a valid full birth date.
 
 ## Phase 1 — Viewer (version 0.1, done)
 
@@ -42,7 +45,9 @@ Done: the rules (content, priority, plans, fitting with a page counter) in
 the core (`ips/OnePage.kt`) with JVM tests; measured and drawn with
 `StaticLayout` and `android.graphics.pdf.PdfDocument` and the system fonts
 (`OnePagePdf.kt`), no new dependency; Share offers the file or the PDF,
-shared like the JSON (spec M-PDF-1..3, §8.3).
+shared like the JSON (spec M-PDF-1..3, §8.3). Every export owns a unique
+temporary directory; completion or cancellation removes that export only,
+and the next launch clears any abandoned directories.
 
 ## Phase 5 — SMART Health Links and QR codes
 
@@ -91,14 +96,16 @@ everything (M-TAB-4).
 
 The app must work offline and after the phone restarts, so every open
 summary and every relationship is saved on the phone, encrypted (spec
-M-STORE-1..4, M-PRIV-1, M-PRIV-3). `EncryptedStore` keeps each summary's
+M-STORE-1..5, M-PRIV-1, M-PRIV-3). `EncryptedStore` keeps each summary's
 exact bytes and an index (order, ids, relationships) in their own
 AES-256-GCM files in `noBackupFilesDir/store/`, with a fresh nonce for each
 write and the file's role as additional data, under one non-exportable key
 in the Android Keystore (`KeystoreKeys`). It uses only `java.*` and
 `javax.crypto`, so it is tested on the JVM with a plain AES key. At launch
-each summary is checked again; a bad one is deleted, and a missing key or a
-bad index deletes the store. Delete, Forget this person and Clear all delete
-the files at once; Clear all deletes the key. `AppViewModel` loads and
-saves on one background thread, in order. Backup and device transfer stay
-off.
+each summary is checked again; confirmed damage is deleted, while a
+temporary key or file access failure leaves every file alone. A failed
+summary or index write keeps the full state open and offers a localized
+retry that writes its exact bytes and relationships. Delete, Forget this
+person and Clear all delete the files at once; Clear all deletes the key.
+`AppViewModel` loads and saves on one background thread, in order. Backup
+and device transfer stay off.

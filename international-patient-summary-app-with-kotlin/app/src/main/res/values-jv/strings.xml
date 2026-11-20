@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Composition ora duwé rujukan subjek.</string>
     <string name="problem_unreadable">Berkas ora bisa diwaca.</string>
     <string name="problem_empty_clipboard">Ora ana tèks ing clipboard kanggo ditèmpèl.</string>
+    <string name="storage_problem_title">Durung disimpen</string>
+    <string name="storage_unsaved">Ringkesan sampeyan isih mbukak, nanging owah-owahan ora bisa disimpen ing telpon iki.</string>
+    <string name="storage_unavailable">Ringkesan sing wis disimpen saiki ora bisa diwaca. Ringkesan kasebut ditinggal tanpa owah-owahan ing telpon iki.</string>
+    <string name="action_retry">Coba maneh</string>
     <string name="action_back">Bali</string>
     <string name="action_share">Bagèkaké</string>
     <string name="share_title">Bagèkaké ringkesan</string>

@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Composition-இல் subject குறிப்பு இல்லை.</string>
     <string name="problem_unreadable">கோப்பைப் படிக்க முடியவில்லை.</string>
     <string name="problem_empty_clipboard">ஒட்டக் கிளிப்போர்டில் உரை எதுவும் இல்லை.</string>
+    <string name="storage_problem_title">சேமிக்கப்படவில்லை</string>
+    <string name="storage_unsaved">உங்கள் சுருக்கங்கள் இன்னும் திறந்துள்ளன, ஆனால் மாற்றங்களை இந்தத் தொலைபேசியில் சேமிக்க முடியவில்லை.</string>
+    <string name="storage_unavailable">சேமித்த சுருக்கங்களை இப்போது படிக்க முடியவில்லை. அவை இந்தத் தொலைபேசியில் மாற்றப்படாமல் விடப்பட்டுள்ளன.</string>
+    <string name="action_retry">மீண்டும் முயலவும்</string>
     <string name="action_back">பின்செல்</string>
     <string name="action_share">பகிர்</string>
     <string name="share_title">சுருக்கத்தைப் பகிர்</string>

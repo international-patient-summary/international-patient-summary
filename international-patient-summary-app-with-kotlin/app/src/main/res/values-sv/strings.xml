@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Composition saknar referens till subject.</string>
     <string name="problem_unreadable">Filen kunde inte läsas.</string>
     <string name="problem_empty_clipboard">Urklipp innehåller ingen text att klistra in.</string>
+    <string name="storage_problem_title">Inte sparat</string>
+    <string name="storage_unsaved">Dina sammanfattningar är fortfarande öppna, men ändringarna kunde inte sparas på den här telefonen.</string>
+    <string name="storage_unavailable">Sparade sammanfattningar kan inte läsas just nu. De har lämnats oförändrade på den här telefonen.</string>
+    <string name="action_retry">Försök igen</string>
     <string name="action_back">Tillbaka</string>
     <string name="action_share">Dela</string>
     <string name="share_title">Dela sammanfattning</string>

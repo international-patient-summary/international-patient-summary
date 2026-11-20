@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Composition 呒没 subject 引用。</string>
     <string name="problem_unreadable">搿个文件读勿出来。</string>
     <string name="problem_empty_clipboard">剪贴板里向呒没好粘贴个文字。</string>
+    <string name="storage_problem_title">呒没保存</string>
+    <string name="storage_unsaved">侬个摘要还开勒浪向，不过改动呒没办法保存到搿只手机浪。</string>
+    <string name="storage_unavailable">现在呒没办法读取已经保存个摘要。伊拉勒搿只手机浪保持原样。</string>
+    <string name="action_retry">再试一趟</string>
     <string name="action_back">返回</string>
     <string name="action_share">分享</string>
     <string name="share_title">分享摘要</string>

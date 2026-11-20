@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Composition ບໍ່ມີການອ້າງອີງເຖິງ subject.</string>
     <string name="problem_unreadable">ບໍ່ສາມາດອ່ານໄຟລ໌ໄດ້.</string>
     <string name="problem_empty_clipboard">ບໍ່ມີຂໍ້ຄວາມໃນຄລິບບອດໃຫ້ວາງ.</string>
+    <string name="storage_problem_title">ບໍ່ໄດ້ບັນທຶກ</string>
+    <string name="storage_unsaved">ບົດສະຫຼຸບຂອງທ່ານຍັງເປີດຢູ່ ແຕ່ບໍ່ສາມາດບັນທຶກການປ່ຽນແປງໃນໂທລະສັບນີ້ໄດ້.</string>
+    <string name="storage_unavailable">ບໍ່ສາມາດອ່ານບົດສະຫຼຸບທີ່ບັນທຶກໄວ້ໃນຕອນນີ້. ມັນຖືກປະໄວ້ໂດຍບໍ່ປ່ຽນແປງໃນໂທລະສັບນີ້.</string>
+    <string name="action_retry">ລອງໃໝ່</string>
     <string name="action_back">ກັບຄືນ</string>
     <string name="action_share">ແບ່ງປັນ</string>
     <string name="share_title">ແບ່ງປັນບົດສະຫຼຸບ</string>

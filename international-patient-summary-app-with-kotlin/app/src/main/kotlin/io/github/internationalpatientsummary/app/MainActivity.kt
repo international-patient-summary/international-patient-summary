@@ -60,8 +60,12 @@ class MainActivity : ComponentActivity() {
     private val focused = mutableStateOf(true)
     private val popups = PopupFocus()
 
+    private var sharing: ShareFiles.Prepared? = null
     private val share = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-        ShareFiles.clear(this)
+        // Completion or cancellation removes this share only. Another export,
+        // including one a delayed recipient still reads, has its own directory.
+        sharing?.remove()
+        sharing = null
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -158,15 +162,20 @@ class MainActivity : ComponentActivity() {
     private fun shareSummary(summary: Summary, format: ShareFormat) {
         val title = getString(R.string.share_title)
         when (format) {
-            ShareFormat.FILE -> share.launch(ShareFiles.intent(this, summary.bytes, title))
+            ShareFormat.FILE -> launchShare(ShareFiles.intent(this, summary.bytes, title))
             ShareFormat.PDF -> {
                 if (making?.isActive == true) return
                 // Laid out and drawn off the main thread; shared once it is written.
                 making = lifecycleScope.launch {
-                    val intent = withContext(Dispatchers.Default) { ShareFiles.pdfIntent(this@MainActivity, summary, title) }
-                    share.launch(intent)
+                    val prepared = withContext(Dispatchers.Default) { ShareFiles.pdfIntent(this@MainActivity, summary, title) }
+                    launchShare(prepared)
                 }
             }
         }
+    }
+
+    private fun launchShare(prepared: ShareFiles.Prepared) {
+        sharing = prepared
+        share.launch(prepared.intent)
     }
 }

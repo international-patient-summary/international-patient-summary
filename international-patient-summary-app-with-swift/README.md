@@ -105,6 +105,9 @@ details beneath (status, criticality and reactions, dosage, dates, values
 and units). Codes such as "active" or "confirmed" are written in your
 language. Clinical text from the document (names of conditions and
 medicines, notes) is shown exactly as written and never translated.
+Numeric clinical values keep the exact JSON token, including trailing zeroes
+and high precision. Partial dates stay partial; an invalid date is shown as
+its source text and never produces an age.
 
 ### When information is missing
 
@@ -146,9 +149,10 @@ Tap **Share** (the square with an arrow) on an open summary and choose:
 
 Then send it with AirDrop, Mail, Messages, Files, a printer, or any other
 app on the share sheet. With summaries of more than one person open, the
-app first asks whose summary you're sending. The temporary copy made for
-sharing is deleted when the share sheet closes, and again at the next
-launch.
+app first asks whose summary you're sending. Each Share tap has its own
+temporary directory, so one share cannot replace or delete another
+recipient's file. Its copy is deleted when that share finishes or is
+cancelled; abandoned copies are deleted at the next launch.
 
 ## Families and carers
 
@@ -184,6 +188,10 @@ This app is built so that it has nothing to leak.
   network. Each file is encrypted (AES-256-GCM) with a key kept in the
   Keychain for this device only, which can be read only while the device is
   unlocked. iOS's file protection is on too.
+- **A failed save is visible and retryable.** The summaries stay open in
+  memory, and the app says they are not saved. **Try again** writes the full
+  set. If the key or a file is only temporarily unavailable, the encrypted
+  store is left unchanged until it can be read and merged safely.
 - **Not in backups.** The store is left out of iCloud and computer backups,
   and the key never leaves the device, so a new or restored device starts
   empty.

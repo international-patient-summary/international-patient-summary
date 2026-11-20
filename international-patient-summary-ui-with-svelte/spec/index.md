@@ -360,7 +360,10 @@ Principles:
   drag-and-drop (`accept=".json,.yaml,.yml,application/json,application/fhir+json,application/yaml"`).
 - **F-LOAD-2** Accept pasted JSON or YAML text.
 - **F-LOAD-3** Accept an `https://` URL and fetch it client-side; report
-  CORS or network failures in plain language.
+  CORS or network failures in plain language. While the development server
+  is running, also accept `http://` only for the literal loopback hosts
+  `localhost` and `127.0.0.1`, so a local service needs no local
+  certificate. Production still accepts HTTPS only.
 - **F-LOAD-4** Offer the bundled IG example fixtures (§2.2).
 - **F-LOAD-5** Reject input over a configurable size (default 10 MB),
   and input that is neither valid JSON nor valid YAML, with an
@@ -611,7 +614,8 @@ viewer will work with the backend service, without needing it.
   Welsh strings or CJK text.
 - **Privacy and security**: client-side only; no analytics; strict
   Content-Security-Policy; narrative XHTML sanitised; no `{@html}` of
-  unsanitised input; URL loader only fetches `https:`.
+  unsanitised input; URL loader fetches `https:` except for explicit literal
+  loopback HTTP while the development server is running.
 - **Performance**: renders `bundle-ips-all-sections` in under 200 ms on
   a mid-range laptop; initial JS budget 250 KB gzipped for v1, excluding
   the lazy-loaded PDF chunk and fonts. PDF generation for
@@ -640,6 +644,9 @@ lossless.
   1.x document, hostile narrative XHTML).
 - **Component (vitest + Testing Library)**: each section renderer, the
   banner, the three absent states, the loader error paths.
+- **Coverage**: `pnpm run test:coverage` measures every TypeScript and Svelte
+  source under `src/lib` (excluding tests, declarations and test helpers) and
+  fails below 95% line coverage.
 - **Parsing**: YAML and JSON forms of every fixture parse to deep-equal
   objects; YAML edge cases (`no`, `on`, `0123`, `1.10`, dates, `.inf`,
   duplicate keys, aliases bomb, multi-document stream).

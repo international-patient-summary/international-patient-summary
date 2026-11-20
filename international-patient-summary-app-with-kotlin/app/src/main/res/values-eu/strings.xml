@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Composition-ak ez du subjekturako erreferentziarik (subject).</string>
     <string name="problem_unreadable">Ezin izan da fitxategia irakurri.</string>
     <string name="problem_empty_clipboard">Arbelean ez dago itsasteko testurik.</string>
+    <string name="storage_problem_title">Gorde gabe</string>
+    <string name="storage_unsaved">Zure laburpenak irekita daude oraindik, baina aldaketak ezin izan dira telefono honetan gorde.</string>
+    <string name="storage_unavailable">Gordetako laburpenak ezin dira irakurri une honetan. Aldatu gabe utzi dira telefono honetan.</string>
+    <string name="action_retry">Saiatu berriro</string>
     <string name="action_back">Atzera</string>
     <string name="action_share">Partekatu</string>
     <string name="share_title">Partekatu laburpena</string>

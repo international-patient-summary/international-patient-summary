@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Composition-এ কোনো subject রেফারেন্স নেই।</string>
     <string name="problem_unreadable">ফাইলটি পড়া যায়নি।</string>
     <string name="problem_empty_clipboard">ক্লিপবোর্ডে পেস্ট করার মতো কোনো টেক্সট নেই।</string>
+    <string name="storage_problem_title">সংরক্ষিত হয়নি</string>
+    <string name="storage_unsaved">আপনার সারাংশগুলো এখনও খোলা আছে, কিন্তু এই ফোনে পরিবর্তনগুলো সংরক্ষণ করা যায়নি।</string>
+    <string name="storage_unavailable">সংরক্ষিত সারাংশগুলো এখন পড়া যাচ্ছে না। এই ফোনে সেগুলো অপরিবর্তিত রাখা হয়েছে।</string>
+    <string name="action_retry">আবার চেষ্টা করুন</string>
     <string name="action_back">ফিরে যান</string>
     <string name="action_share">শেয়ার করুন</string>
     <string name="share_title">সারসংক্ষেপ শেয়ার করুন</string>

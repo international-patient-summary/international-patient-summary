@@ -32,10 +32,12 @@
 - [Document](IPSKit/Sources/IPSKit/Document.swift): references, patient, sections, entries
 - [Sections](IPSKit/Sources/IPSKit/Sections.swift): IPS 2.0.1 section registry
 - [Absent](IPSKit/Sources/IPSKit/Absent.swift): none known, not recorded, unavailable, omitted
-- [Format](IPSKit/Sources/IPSKit/Format.swift): displayOf, names, dates, ages, quantities, narrative as plain text
-- [EncryptedStore](IPSKit/Sources/IPSKit/EncryptedStore.swift): M-STORE-1..4: AES-256-GCM sealed summaries and index; StoreKeys
+- [Format](IPSKit/Sources/IPSKit/Format.swift): displayOf, names, strict dates and ages, exact-token quantities, narrative as plain text
+- [JSON](IPSKit/Sources/IPSKit/JSON.swift): RFC 8259 values with clinical number lexemes preserved exactly
+- [EncryptedStore](IPSKit/Sources/IPSKit/EncryptedStore.swift): M-STORE-1..5: AES-256-GCM sealed summaries and index; retryable writes and temporary-access preservation; StoreKeys
+- [TemporaryShare](IPSKit/Sources/IPSKit/TemporaryShare.swift): an isolated directory per JSON or PDF export, with per-share and relaunch cleanup (M-PRIV-1, M-PDF-3)
 - [PDFPlan](IPSKit/Sources/IPSKit/PDFPlan.swift): M-PDF-1/2: what goes on the one-page PDF and how it is fitted
-- [People](IPSKit/Sources/IPSKit/People.swift): M-PEOPLE-1/3: which summaries are one person; relationships, one Me
+- [People](IPSKit/Sources/IPSKit/People.swift): M-PEOPLE-1/3 and M-STORE-5: which summaries are one person; relationships, one Me; merge summaries opened while storage was unavailable
 - [DocumentFile](IPSKit/Sources/IPSKit/DocumentFile.swift): size-first, capped reads for import, drop and Open in
 
 ## App

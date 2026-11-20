@@ -1,4 +1,4 @@
-// Load an IPS from a file, pasted text, or an https: URL (spec §6.1).
+// Load an IPS from a file, pasted text, or a safe web URL (spec §6.1).
 // Every path ends in parseText, so size limits and format rules are shared.
 import { LoadError, MAX_INPUT_BYTES, parseText, type ParseResult } from './parse.ts';
 
@@ -23,13 +23,15 @@ export function loadText(text: string): LoadResult {
 }
 
 /**
- * Fetch an https: URL in the browser and parse it. Only https: is allowed
- * (spec §7). CORS and network failures become a plain-language error.
+ * Fetch a URL in the browser and parse it. HTTPS is always allowed; a caller
+ * may opt into plain HTTP only for a literal loopback host during development.
+ * CORS and network failures become a plain-language error.
  */
 export async function loadUrl(
 	input: string,
 	fetchImpl: typeof fetch = fetch,
-	maxBytes = MAX_INPUT_BYTES
+	maxBytes = MAX_INPUT_BYTES,
+	allowHttpLoopback = false
 ): Promise<LoadResult> {
 	let url: URL;
 	try {
@@ -37,7 +39,10 @@ export async function loadUrl(
 	} catch {
 		throw new LoadError('urlInvalid');
 	}
-	if (url.protocol !== 'https:') throw new LoadError('urlNotHttps');
+	const loopback = url.hostname === 'localhost' || url.hostname === '127.0.0.1';
+	if (url.protocol !== 'https:' && !(allowHttpLoopback && url.protocol === 'http:' && loopback)) {
+		throw new LoadError('urlNotHttps');
+	}
 
 	let response: Response;
 	try {

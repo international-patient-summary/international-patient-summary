@@ -56,7 +56,8 @@ register them in `src/lib/i18n.ts`; detect locale client-side in the
 root `+layout.ts`; wire the PickerBar locale picker to `locale.set()`
 and all PickerBar labels to `_()`; add the key-parity/MF2 check. Add a
 strict CSP and CI
-(`pnpm test`, `pnpm run check`, `pnpm run build`, e2e).
+(`pnpm run test:coverage` with a 95% line-coverage floor, `pnpm run check`,
+`pnpm run build`, e2e).
 
 Exit: `pnpm run dev` shows an empty, themed, keyboard-navigable shell
 that switches between all four locales, with zero axe violations.
@@ -81,6 +82,9 @@ all spec §6.2 checks covered by tests.
 Examples; file picker and drag-and-drop accept `.json`, `.yaml`,
 `.yml`; paste accepts either; "Loaded as JSON/YAML" shown; `Loading` state; `ErrorSummary` for failures.
 Document held in `$state` only.
+URLs require HTTPS, except that the development server permits HTTP for the
+three literal loopback hosts so it can use the local IPS service without a
+development certificate.
 
 Exit: each loader path loads each fixture; errors are announced and
 focus moves to the error summary.

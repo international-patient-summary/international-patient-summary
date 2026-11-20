@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Composition میں subject کا حوالہ نہیں ہے۔</string>
     <string name="problem_unreadable">فائل پڑھی نہیں جا سکی۔</string>
     <string name="problem_empty_clipboard">کلپ بورڈ میں چسپاں کرنے کے لیے کوئی متن نہیں۔</string>
+    <string name="storage_problem_title">محفوظ نہیں ہوا</string>
+    <string name="storage_unsaved">آپ کے خلاصے اب بھی کھلے ہیں، لیکن تبدیلیاں اس فون پر محفوظ نہیں ہو سکیں۔</string>
+    <string name="storage_unavailable">محفوظ شدہ خلاصے اس وقت پڑھے نہیں جا سکتے۔ انہیں اس فون پر بغیر تبدیلی کے چھوڑ دیا گیا ہے۔</string>
+    <string name="action_retry">دوبارہ کوشش کریں</string>
     <string name="action_back">واپس</string>
     <string name="action_share">شیئر کریں</string>
     <string name="share_title">خلاصہ شیئر کریں</string>

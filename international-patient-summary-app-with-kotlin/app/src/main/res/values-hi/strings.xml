@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Composition में subject संदर्भ नहीं है।</string>
     <string name="problem_unreadable">फ़ाइल पढ़ी नहीं जा सकी।</string>
     <string name="problem_empty_clipboard">क्लिपबोर्ड में पेस्ट करने के लिए कोई टेक्स्ट नहीं है।</string>
+    <string name="storage_problem_title">सहेजा नहीं गया</string>
+    <string name="storage_unsaved">आपके सारांश अभी भी खुले हैं, लेकिन बदलाव इस फ़ोन पर सहेजे नहीं जा सके।</string>
+    <string name="storage_unavailable">सहेजे गए सारांश अभी पढ़े नहीं जा सकते। उन्हें इस फ़ोन पर बिना बदलाव के रखा गया है।</string>
+    <string name="action_retry">फिर से कोशिश करें</string>
     <string name="action_back">वापस</string>
     <string name="action_share">शेयर करें</string>
     <string name="share_title">सारांश शेयर करें</string>

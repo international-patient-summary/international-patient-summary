@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Composition’il puudub subject-viide.</string>
     <string name="problem_unreadable">Faili ei saanud lugeda.</string>
     <string name="problem_empty_clipboard">Lõikelaual pole kleebitavat teksti.</string>
+    <string name="storage_problem_title">Salvestamata</string>
+    <string name="storage_unsaved">Teie kokkuvõtted on endiselt avatud, kuid muudatusi ei saanud sellesse telefoni salvestada.</string>
+    <string name="storage_unavailable">Salvestatud kokkuvõtteid ei saa praegu lugeda. Need jäeti selles telefonis muutmata.</string>
+    <string name="action_retry">Proovi uuesti</string>
     <string name="action_back">Tagasi</string>
     <string name="action_share">Jaga</string>
     <string name="share_title">Jaga kokkuvõtet</string>

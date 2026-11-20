@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Composition में subject संदर्भ नइखे।</string>
     <string name="problem_unreadable">फ़ाइल पढ़ल ना जा सकल।</string>
     <string name="problem_empty_clipboard">क्लिपबोर्ड में पेस्ट करे खातिर कवनो टेक्स्ट नइखे।</string>
+    <string name="storage_problem_title">सेव नइखे भइल</string>
+    <string name="storage_unsaved">राउर सारांश अबहियों खुलल बा, बाकिर बदलाव एह फोन पर सेव ना हो सकल।</string>
+    <string name="storage_unavailable">सेव कइल सारांश अभी पढ़ल नइखे जा सकत। एह फोन पर ओकरा के बिना बदलाव के छोड़ दिहल गइल बा।</string>
+    <string name="action_retry">फेर कोशिश करीं</string>
     <string name="action_back">पीछे</string>
     <string name="action_share">शेयर करीं</string>
     <string name="share_title">सारांश शेयर करीं</string>

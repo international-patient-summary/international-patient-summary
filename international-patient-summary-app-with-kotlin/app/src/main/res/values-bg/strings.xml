@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Composition няма препратка към субект (subject).</string>
     <string name="problem_unreadable">Файлът не можа да бъде прочетен.</string>
     <string name="problem_empty_clipboard">В клипборда няма текст за поставяне.</string>
+    <string name="storage_problem_title">Не е запазено</string>
+    <string name="storage_unsaved">Резюметата ви все още са отворени, но промените не можаха да бъдат запазени на този телефон.</string>
+    <string name="storage_unavailable">Запазените резюмета не могат да бъдат прочетени в момента. Те са оставени непроменени на този телефон.</string>
+    <string name="action_retry">Опитайте отново</string>
     <string name="action_back">Назад</string>
     <string name="action_share">Споделяне</string>
     <string name="share_title">Споделяне на резюмето</string>

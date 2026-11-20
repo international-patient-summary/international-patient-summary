@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Composition không có tham chiếu đối tượng (subject).</string>
     <string name="problem_unreadable">Không đọc được tệp.</string>
     <string name="problem_empty_clipboard">Bảng nhớ tạm không có văn bản để dán.</string>
+    <string name="storage_problem_title">Chưa lưu</string>
+    <string name="storage_unsaved">Các bản tóm tắt vẫn đang mở nhưng không thể lưu thay đổi trên điện thoại này.</string>
+    <string name="storage_unavailable">Hiện không thể đọc các bản tóm tắt đã lưu. Chúng được giữ nguyên trên điện thoại này.</string>
+    <string name="action_retry">Thử lại</string>
     <string name="action_back">Quay lại</string>
     <string name="action_share">Chia sẻ</string>
     <string name="share_title">Chia sẻ bản tóm tắt</string>

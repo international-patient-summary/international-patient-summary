@@ -17,6 +17,7 @@
 		"dev": "pnpm run dev",
 		"build": "pnpm run build",
 		"test": "pnpm test",
+		"coverage": "pnpm run test:coverage",
 		"e2e": "pnpm run test:e2e",
 		"check": "pnpm run check",
 		"lint": "pnpm run lint"

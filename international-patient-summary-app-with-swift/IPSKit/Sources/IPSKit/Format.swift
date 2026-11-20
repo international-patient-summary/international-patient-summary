@@ -95,20 +95,37 @@ public struct FHIRDate: Sendable, Equatable {
     public let day: Int?
 
     public init?(_ text: String?) {
-        guard let text, text.count >= 4 else { return nil }
-        let digits = text.split(separator: "T", maxSplits: 1).first.map(String.init) ?? text
+        guard let text else { return nil }
+        let dateTime = text.split(separator: "T", maxSplits: 1, omittingEmptySubsequences: false)
+        guard dateTime.count <= 2, dateTime.count == 1 || !dateTime[1].isEmpty else { return nil }
+        let digits = String(dateTime[0])
+        guard [4, 7, 10].contains(digits.count), dateTime.count == 1 || digits.count == 10 else { return nil }
+        let characters = Array(digits)
+        guard characters.enumerated().allSatisfy({ index, character in
+            (index == 4 || index == 7) ? character == "-" : character.isNumber
+        }) else { return nil }
         let parts = digits.split(separator: "-", omittingEmptySubsequences: false).map { Int($0) }
         guard let year = parts.first ?? nil, (1...9999).contains(year) else { return nil }
         self.year = year
         month = parts.count > 1 ? parts[1].flatMap { (1...12).contains($0) ? $0 : nil } : nil
         day = month != nil && parts.count > 2 ? parts[2].flatMap { (1...31).contains($0) ? $0 : nil } : nil
+        guard parts.count == 1 || month != nil, parts.count < 3 || day != nil else { return nil }
+        if let month, let day {
+            var calendar = Calendar(identifier: .gregorian)
+            calendar.timeZone = TimeZone(identifier: "UTC")!
+            guard let date = calendar.date(from: DateComponents(year: year, month: month, day: day)),
+                calendar.dateComponents([.year, .month, .day], from: date)
+                    == DateComponents(year: year, month: month, day: day)
+            else { return nil }
+        }
     }
 }
 
 /// A FHIR date written with the month as text ("11 December 2017"), so it cannot be
 /// read two ways. Partial dates stay partial. The time of day is not shown.
 public func formatFHIRDate(_ text: String?, locale: Locale = .current) -> String? {
-    guard let date = FHIRDate(text) else { return nil }
+    guard let source = text?.trimmingCharacters(in: .whitespacesAndNewlines), !source.isEmpty else { return nil }
+    guard let date = FHIRDate(source) else { return source }
     var calendar = Calendar(identifier: .gregorian)
     calendar.timeZone = TimeZone(identifier: "UTC")!
     let components = DateComponents(year: date.year, month: date.month ?? 1, day: date.day ?? 1)
@@ -133,11 +150,8 @@ public func ageInYears(birthDate: String?, today: Date = Date()) -> Int? {
     return age >= 0 ? age : nil
 }
 
-/// A number as FHIR gave it, without a trailing ".0".
-public func formatNumber(_ value: Double) -> String {
-    if value.rounded() == value, abs(value) < 1e15 { return String(Int64(value)) }
-    return String(value)
-}
+/// A clinical JSON number exactly as FHIR gave it: no rounding or normalisation.
+public func formatNumber(_ value: String) -> String { value }
 
 /// A Quantity: comparator, value, a no-break space, and the unit.
 public func formatQuantity(_ quantity: JSON?) -> String? {

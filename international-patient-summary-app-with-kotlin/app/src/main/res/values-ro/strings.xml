@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Composition nu are o referință la subiect (subject).</string>
     <string name="problem_unreadable">Fișierul nu a putut fi citit.</string>
     <string name="problem_empty_clipboard">Clipboardul nu conține text de lipit.</string>
+    <string name="storage_problem_title">Nesalvat</string>
+    <string name="storage_unsaved">Rezumatele sunt încă deschise, dar modificările nu au putut fi salvate pe acest telefon.</string>
+    <string name="storage_unavailable">Rezumatele salvate nu pot fi citite acum. Au fost lăsate neschimbate pe acest telefon.</string>
+    <string name="action_retry">Încercați din nou</string>
     <string name="action_back">Înapoi</string>
     <string name="action_share">Partajați</string>
     <string name="share_title">Partajați rezumatul</string>

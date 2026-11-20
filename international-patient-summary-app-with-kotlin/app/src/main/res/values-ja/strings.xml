@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Composition に subject の参照がありません。</string>
     <string name="problem_unreadable">ファイルを読み込めませんでした。</string>
     <string name="problem_empty_clipboard">クリップボードに貼り付けられるテキストがありません。</string>
+    <string name="storage_problem_title">保存されていません</string>
+    <string name="storage_unsaved">サマリーは開いたままですが、変更をこのスマートフォンに保存できませんでした。</string>
+    <string name="storage_unavailable">保存済みのサマリーを現在読み取れません。このスマートフォン上では変更されずに残っています。</string>
+    <string name="action_retry">もう一度試す</string>
     <string name="action_back">戻る</string>
     <string name="action_share">共有</string>
     <string name="share_title">サマリーを共有</string>

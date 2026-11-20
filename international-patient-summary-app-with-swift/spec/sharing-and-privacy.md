@@ -16,8 +16,11 @@
   (M-PEOPLE-3), are kept on the device only, in the encrypted store
   (M-STORE-1, M-STORE-2): no server, account, cloud, backup, preferences or
   database outside that store holds them. The app asks for no network
-  permission and makes no network request. A temporary share file is
-  deleted when sharing ends, or on the next launch.
+  permission and makes no network request. Every Share tap gets its own
+  temporary directory, even when two records use the same public file name.
+  Completion or cancellation deletes that share only, after a selected
+  recipient has finished reading it; it cannot delete another recipient's
+  file. The next launch deletes every abandoned share directory.
 - **M-PRIV-2** When the app leaves the foreground, its window is covered,
   so the app switcher shows no patient data.
 - **M-PRIV-3** "Clear all" (with confirmation) deletes every summary and
@@ -71,8 +74,8 @@
 - **M-PDF-3 Shared like the file.** The PDF goes to the share sheet as a
   temporary file (with M-SHARE-2's question first when several people
   are open), written with file protection where the platform has it, and
-  deleted when sharing ends and at the next launch (M-PRIV-1). It is
-  never saved in the store, and the app keeps no copy.
+  given the isolated lifetime and cleanup in M-PRIV-1. It is never saved
+  in the store, and the app keeps no copy.
 
 ## 5.2 The encrypted store
 
@@ -98,11 +101,22 @@ saved on the device, encrypted.
 - **M-STORE-3 Checked again when read.** At launch each saved summary is
   decrypted and checked again (M-CHECK-1, M-CHECK-2). One that cannot be
   decrypted or no longer passes is left out and deleted; the others open as
-  before. If the key is gone (for example, after a restore to another
-  device), or the index cannot be decrypted or read, the store is deleted
-  and the app starts empty; summaries are not guessed without their index.
+  before. Confirmed damage — the key is gone or replaced (for example, after
+  a restore to another device), or the index cannot be authenticated or
+  decoded — deletes the store and the app starts empty; summaries are not
+  guessed without their index. A temporary key-access or file-read failure
+  is not damage: no saved file or key is changed (M-STORE-5).
 - **M-STORE-4 Deleting deletes.** Delete (M-LIST-2), Forget this person
   (M-PEOPLE-4) and Clear all (M-PRIV-3) remove those summaries' files at
   once, and the index with them. Clear all also deletes the key, so nothing
   left on the device's storage can be read.
+- **M-STORE-5 Save failures can be retried.** If a summary or index write
+  fails, every summary remains open in memory and the app says, in the
+  selected language, that the changes are not saved. **Try again** writes the
+  complete current summaries, order and relationships, so a restart after a
+  successful retry restores their exact bytes and relationships. If the
+  saved store cannot temporarily be read, it is not overwritten: summaries
+  opened meanwhile remain in memory. Try again first reads the saved
+  summaries, puts those opened meanwhile above them, then saves the combined
+  state. Storage errors and patient data are never logged (M-PRIV-4).
 

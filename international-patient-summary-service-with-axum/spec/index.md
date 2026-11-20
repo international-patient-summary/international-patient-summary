@@ -9,7 +9,7 @@ This file is the source of truth. A change in behaviour carries a spec edit, a
 code edit, and a test edit together. Requirement IDs (`S-API-1`) name the test
 that proves them in [§8](#8-verification).
 
-Revision: 2026-11-17 (authentication, §6.1; access log, §3; Axa 0.19; container image, §7). Initial 2026-11-15.
+Revision: 2026-11-19 (local viewer transport, §5). Authentication, access log, Axa 0.19 and container image 2026-11-17. Initial 2026-11-15.
 
 ## 1. Scope
 
@@ -149,6 +149,10 @@ come before anything below.
   `TourService` (viewer spec §6.8), which mirrors §4: ids, the S-API-2 check
   order, codes and pointers, and `404`s. A change to §4 changes the viewer's
   `src/lib/service/` and its spec in the same commit.
+- **S-WEB-4** Local development uses this service's ordinary loopback HTTP
+  endpoint. Viewer F-LOAD-3 permits HTTP only for literal loopback hosts while
+  its development server is running; deployed viewers and non-loopback hosts
+  remain HTTPS-only.
 
 ## 6. Safety and privacy
 
@@ -236,6 +240,7 @@ AXA_TEST_DB_URL=postgres://… cargo test -- --include-ignored
 | S-AUTH-2    | `tests/auth.rs` `with_both_configured_keycloak_and_paseto_tokens_are_each_accepted`, `keycloak_roles_map_to_access_and_unmapped_roles_grant_nothing` |
 | S-AUTH-3    | `src/auth.rs` `the_policy_grants_by_access_and_refuses_the_rest_reads_included`, `the_default_role_map_applies_only_when_none_is_given`; `tests/auth.rs` `the_policy_refuses_by_access_before_any_handler_runs` |
 | S-AUDIT-1   | `tests/auth.rs` `each_role_does_what_it_may_and_every_access_is_logged`, `a_read_that_cannot_be_logged_sends_nothing`, `a_keycloak_read_is_logged_under_the_tokens_subject` |
+| S-WEB-4     | Viewer `load.test.ts` loopback rules; browser check from a stored `bundle-minimal` service URL (tasks P2-T2) |
 | Routes      | `tests/api.rs` `route_census_matches_the_spec`                            |
 
 S-WEB-1, S-WEB-2, S-SAFE-2, and S-SAFE-3 are Axa's behaviour, proven by Axa's

@@ -39,6 +39,7 @@ pnpm run dev        # http://localhost:5173
 | `pnpm run build`           | Static, fully prerendered site in `build/`                             |
 | `pnpm run preview`         | Serve the built site                                                   |
 | `pnpm test`                | Unit, component, locale and export tests (vitest)                      |
+| `pnpm run test:coverage`   | The same tests with a 95% line-coverage gate over `src/lib`            |
 | `pnpm run test:e2e`        | End-to-end, accessibility, privacy and budget tests (Playwright + axe) |
 | `pnpm run check`           | Type-check (svelte-check)                                              |
 | `pnpm run lint` / `format` | Prettier and ESLint                                                    |
@@ -47,7 +48,9 @@ pnpm run dev        # http://localhost:5173
 
 **Input.** A FHIR `Bundle` of type `document` whose first entry is a
 `Composition`, by file picker or drag-and-drop (`.json`, `.yaml`, `.yml`),
-pasted text, an `https://` URL, or one of the five bundled IG examples. YAML is
+pasted text, an `https://` URL, or one of the five bundled IG examples. The
+development server also permits `http://localhost` and `http://127.0.0.1`
+for a local backend; production remains HTTPS-only. YAML is
 treated as another spelling of FHIR JSON: YAML 1.2 core schema only, unique
 keys, a low alias limit, no tags, one document. The viewer targets IPS IG 2.0.1
 (FHIR R4) and tolerates 1.x.
@@ -106,7 +109,7 @@ strings are machine-drafted and await clinical review (see each
 ```text
 src/lib/fhir/        framework-free FHIR layer
   parse.ts           JSON/YAML text → data (format detection, limits, YAML rules)
-  load.ts            file / text / https URL / example → parse
+  load.ts            file / text / safe web URL / example → parse
   bundle.ts          entry index; urn:uuid:, Type/id and absolute references
   composition.ts     Bundle → IpsDocument: sections, states, structural checks
   sections.ts        LOINC section registry (16 IPS 2.0.1 sections)

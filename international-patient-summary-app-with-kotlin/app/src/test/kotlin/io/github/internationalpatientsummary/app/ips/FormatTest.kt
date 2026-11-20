@@ -64,6 +64,8 @@ class FormatTest {
         assertTrue(withTime, withTime.startsWith("11 Dec 2020") && withTime.contains("14:30"))
         assertEquals("11 Dec 2020", Format.date("2020-12-11T14:30:00+01:00", Locale.UK, withTime = false))
         assertEquals("not a date", Format.date("not a date", Locale.UK))
+        assertEquals("2023-02-31", Format.date("2023-02-31", Locale.UK))
+        assertEquals("2017-12-", Format.date("2017-12-", Locale.UK))
         assertNull(Format.date(null, Locale.UK))
     }
 
@@ -88,12 +90,18 @@ class FormatTest {
         assertEquals(53, Format.ageInYears("1972-11-17", today))
         assertEquals(54, Format.ageInYears("1972-11-16", today))
         assertNull(Format.ageInYears("1972-05", today))
+        assertNull(Format.ageInYears("2023-02-31", today))
         assertNull(Format.ageInYears("2030-01-01", today))
         assertNull(Format.ageInYears(null, today))
     }
 
     @Test fun quantitiesAreWrittenAsGiven() {
         assertEquals("5.0 mg", Format.quantity(json("""{"value":5.0,"unit":"mg"}""")))
+        assertEquals(
+            "0.12345678901234567890 mmol/L",
+            Format.quantity(json("""{"value":0.12345678901234567890,"unit":"mmol/L"}""")),
+        )
+        assertEquals("1.2300e-7", Format.quantity(json("""{"value":1.2300e-7}""")))
         assertEquals("<5 mmol/L", Format.quantity(json("""{"value":5,"comparator":"<","code":"mmol/L"}""")))
         assertEquals("12", Format.quantity(json("""{"value":12}""")))
         assertNull(Format.quantity(json("""{}""")))

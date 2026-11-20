@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Di Composition no get subject reference.</string>
     <string name="problem_unreadable">Di file no fit read.</string>
     <string name="problem_empty_clipboard">Di clipboard no get text wey you fit paste.</string>
+    <string name="storage_problem_title">E no save</string>
+    <string name="storage_unsaved">Your summary dem still open, but di changes no fit save for dis phone.</string>
+    <string name="storage_unavailable">Di summary dem wey save no fit read now. Dem leave dem as dem be for dis phone.</string>
+    <string name="action_retry">Try again</string>
     <string name="action_back">Go back</string>
     <string name="action_share">Share</string>
     <string name="share_title">Share summary</string>

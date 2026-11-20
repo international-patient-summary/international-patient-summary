@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Composition neturi subject nuorodos.</string>
     <string name="problem_unreadable">Failo nepavyko perskaityti.</string>
     <string name="problem_empty_clipboard">Iškarpinėje nėra teksto, kurį būtų galima įklijuoti.</string>
+    <string name="storage_problem_title">Neišsaugota</string>
+    <string name="storage_unsaved">Jūsų suvestinės vis dar atidarytos, bet pakeitimų nepavyko išsaugoti šiame telefone.</string>
+    <string name="storage_unavailable">Išsaugotų suvestinių dabar perskaityti negalima. Jos paliktos nepakeistos šiame telefone.</string>
+    <string name="action_retry">Bandyti dar kartą</string>
     <string name="action_back">Atgal</string>
     <string name="action_share">Bendrinti</string>
     <string name="share_title">Bendrinti santrauką</string>

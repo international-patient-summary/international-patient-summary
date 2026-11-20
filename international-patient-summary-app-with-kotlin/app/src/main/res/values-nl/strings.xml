@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">De Composition heeft geen verwijzing naar een subject.</string>
     <string name="problem_unreadable">Het bestand kon niet worden gelezen.</string>
     <string name="problem_empty_clipboard">Het klembord bevat geen tekst om te plakken.</string>
+    <string name="storage_problem_title">Niet opgeslagen</string>
+    <string name="storage_unsaved">Uw samenvattingen zijn nog geopend, maar de wijzigingen konden niet op deze telefoon worden opgeslagen.</string>
+    <string name="storage_unavailable">Opgeslagen samenvattingen kunnen nu niet worden gelezen. Ze zijn ongewijzigd op deze telefoon gelaten.</string>
+    <string name="action_retry">Opnieuw proberen</string>
     <string name="action_back">Terug</string>
     <string name="action_share">Delen</string>
     <string name="share_title">Samenvatting delen</string>

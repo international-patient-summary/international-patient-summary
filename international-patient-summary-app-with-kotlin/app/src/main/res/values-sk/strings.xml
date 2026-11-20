@@ -28,6 +28,10 @@
     <string name="refusal_no_subject">Composition nemá odkaz na subjekt (subject).</string>
     <string name="problem_unreadable">Súbor sa nepodarilo prečítať.</string>
     <string name="problem_empty_clipboard">V schránke nie je žiadny text na vloženie.</string>
+    <string name="storage_problem_title">Neuložené</string>
+    <string name="storage_unsaved">Vaše súhrny sú stále otvorené, ale zmeny sa nepodarilo uložiť do tohto telefónu.</string>
+    <string name="storage_unavailable">Uložené súhrny sa momentálne nedajú prečítať. V tomto telefóne zostali nezmenené.</string>
+    <string name="action_retry">Skúsiť znova</string>
     <string name="action_back">Späť</string>
     <string name="action_share">Zdieľať</string>
     <string name="share_title">Zdieľať sumár</string>

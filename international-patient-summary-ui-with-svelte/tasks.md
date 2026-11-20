@@ -111,8 +111,9 @@ Rules for the executing agent:
       Verify: JSON and YAML twins deep-equal for every IG fixture; each
       `yaml-edge/` case accepted or rejected as the spec says.
 
-- [x] **P2-T3b Loader (`load.ts`).** File, text, and `https:` URL →
-      `parse.ts`; size limit (default 10 MB); typed errors (§6.1).
+- [x] **P2-T3b Loader (`load.ts`).** File, text, and safe web URL →
+      `parse.ts`; HTTPS everywhere and literal loopback HTTP in development
+      only; size limit (default 10 MB); typed errors (§6.1).
       Verify: unit tests for each path and each error.
 
 - [x] **P2-T4 Bundle index and reference resolver (`bundle.ts`).**
@@ -320,6 +321,11 @@ Rules for the executing agent:
       Verify: `bundle-ips-all-sections` render < 200 ms; initial JS ≤ 250 KB
       gzipped (PDF chunk and fonts excluded, loaded lazily); PDF generation < 3 s.
 
+- [x] **P7-T8 Test coverage gate.** Measure all TypeScript and Svelte sources
+      under `src/lib`, excluding test-only files, and keep line coverage at
+      95% or higher.
+      Verify: `pnpm run test:coverage` passes its configured threshold.
+
 ## Phase 8 — Documentation and release
 
 - [x] **P8-T1 README.** Purpose, safety notice, quick start
@@ -354,5 +360,5 @@ Rules for the executing agent:
       zh-cn (part of P7-T4).
 - [ ] **P9-T7 `HttpService`** against the backend. Its authentication is in
       (its spec §6.1, 2026-11-17): needs OIDC sign-in with PKCE to its
-      Keycloak realm (`ips-viewer` client) and a decision on the viewer's
-      F-LOAD-3 `http://localhost` question (its P2-T1).
+      Keycloak realm (`ips-viewer` client). F-LOAD-3 now permits literal
+      loopback HTTP in development only (the service's P2-T1).
