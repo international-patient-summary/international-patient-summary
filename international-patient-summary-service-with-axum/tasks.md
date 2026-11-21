@@ -62,3 +62,18 @@ Checklist for [plans.md](plans.md). Spec: [spec/index.md](spec/index.md).
 - [x] **P5-T1** Container image (`Containerfile`, `compose.yml` profile `image`)
       and the development notes (README). Production notes follow P3.
 - [ ] **P5-T2** Retention, erasure, backup and restore.
+
+## P6 — Test coverage
+
+- [x] **P6-T1** Measure: `AXA_TEST_DB_URL=postgres://… cargo llvm-cov --summary-only -- --include-ignored`
+      (cargo-llvm-cov; `--lcov` for per-line misses). First reading with Postgres:
+      81% of lines; without it, 65% (the database tests are ignored).
+- [x] **P6-T2** Unit tests for the refusals' words and pointers, the PASETO
+      configuration errors, and the authenticator's debug print (`tests/main/units.rs`):
+      86% of lines.
+- [x] **P6-T3** The built binary run from a test (`tests/main/binary.rs`: `check`,
+      no tasks, no worker, production without authentication, `health` with no
+      server, and with Postgres `db migrate|status|truncate` and `start` with
+      `health` live and ready): 95% of lines.
+- [ ] **P6-T4** The rest: `db down` and `db reset` in `main.rs`, the Keycloak
+      health check in `lib.rs`, and the last lines of `auth.rs` and `ips.rs`.
