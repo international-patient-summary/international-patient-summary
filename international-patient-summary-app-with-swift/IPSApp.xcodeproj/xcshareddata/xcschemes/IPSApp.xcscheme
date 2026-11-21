@@ -11,6 +11,10 @@
    <TestAction buildConfiguration = "Debug" selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB" selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB" shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference skipped = "NO" parallelizable = "NO">
+            <BuildableReference BuildableIdentifier = "primary" BlueprintIdentifier = "A1000000000000000000A003" BuildableName = "IPSAppTests.xctest" BlueprintName = "IPSAppTests" ReferencedContainer = "container:IPSApp.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference skipped = "NO" parallelizable = "NO">
             <BuildableReference BuildableIdentifier = "primary" BlueprintIdentifier = "A1000000000000000000A002" BuildableName = "IPSAppUITests.xctest" BlueprintName = "IPSAppUITests" ReferencedContainer = "container:IPSApp.xcodeproj">
             </BuildableReference>
          </TestableReference>

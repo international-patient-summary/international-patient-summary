@@ -37,8 +37,10 @@ change in behaviour carries a spec edit, a code edit and a test edit together.
 - Accessibility: headings get the header trait; cells use
   `UIListContentConfiguration` so they follow Dynamic Type; controls are at
   least 44 pt; every icon button has an accessibility label.
-- `App/` and `UITests/` are synchronized folders: new files join their
-  target with no project edit. Keep `IPSApp.xcodeproj` hand-readable.
+- `App/`, `AppTests/` and `UITests/` are synchronized folders: new files join
+  their target with no project edit. `AppTests/` (target `IPSAppTests`, Swift
+  Testing, hosted in the app) holds the app's unit tests; run them alone with
+  `-only-testing:IPSAppTests`. Keep `IPSApp.xcodeproj` hand-readable.
 - Deployment target: current iOS minus two majors (iOS 18 while iOS 27 is
   current). Warnings are errors.
 

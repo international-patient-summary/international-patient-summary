@@ -168,7 +168,7 @@ public struct Section: Sendable {
 }
 
 /// What a detail line is, so the app can label it.
-public enum DetailKind: String, Sendable {
+public enum DetailKind: String, Sendable, CaseIterable {
     case status, verification, type, criticality, reaction, dosage
     case onset, abatement, effective, occurrence, recorded
     case value, interpretation, referenceRange, dose, lot
