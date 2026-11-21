@@ -140,3 +140,9 @@ See the [shared release checklist](../tasks.md) for cross-platform work.
 - [x] P12-T8 Every export owns a unique temporary directory; completion/cancellation removes only that export and launch removes abandoned exports (`TemporaryShareTests`)
 - [x] P12-T9 Preserve exact JSON numeric tokens and source text for invalid dates; never show an age for an invalid, partial or future birth date; prove the banner, entry detail and PDF input agree (`FormatTests`, `DocumentTests.bannerScreenAndPDFKeepSourceDatesAndClinicalDecimals`)
 
+
+## Phase 13 — Test coverage
+
+- [x] P13-T1 Measure line coverage. `IPSKit`: `cd IPSKit && swift test --enable-code-coverage`, then `swift test --show-codecov-path` (98.4% of 2,231 lines; the rest is mostly defensive guards). The app: `xcodebuild test … -enableCodeCoverage YES -resultBundlePath <dir>.xcresult`, then `xcrun xccov view --report --files-for-target IPSApp.app <dir>.xcresult` (the UI tests alone: 75% of 1,383 lines in `App/`: `SceneDelegate` 29%, `SplitViewController` 54%, `SummaryListViewController` 65%, `SummaryStore` 68%)
+- [x] P13-T2 `IPSKit` tests for sections, entry fallbacks, format and JSON edges, PDF priorities, store edge paths and relationships (`SectionsTests`, `FormatEdgeTests`, `JSONEdgeTests`, `PDFPlanTests`, `StoreEdgeTests`)
+- [ ] P13-T3 Cover `App/` with a hosted unit-test target (`IPSAppTests`), so the view controllers, `SummaryStore` and `SceneDelegate` are tested without the 3-minute UI run; adds a target to `IPSApp.xcodeproj`
