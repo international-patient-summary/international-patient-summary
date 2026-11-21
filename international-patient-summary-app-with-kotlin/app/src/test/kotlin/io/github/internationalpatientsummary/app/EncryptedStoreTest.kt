@@ -271,4 +271,18 @@ class EncryptedStoreTest {
         assertEquals(setOf("1.bin"), summaryFiles())
         assertFalse(File(dir, "index.tmp").exists())
     }
+
+    @Test fun anIndexOrSummaryThatIsDeniedOrBusyLeavesTheStoreAlone() {
+        saved("bundle-minimal", "bundle-ips-all-sections")
+        val before = dir.walkTopDown().filter { it.isFile }.associate { it.relativeTo(dir).path to it.readBytes().toList() }
+        for (failure in listOf<(String) -> Exception>({ IOException(it) }, { SecurityException(it) })) {
+            for (name in listOf("index.bin", "2.bin")) {
+                val store = newStore()
+                store.beforeRead = { file -> if (file.name == name) throw failure("no") }
+                assertThrows(StoreUnavailable::class.java) { load(store) }
+            }
+        }
+        assertEquals(before, dir.walkTopDown().filter { it.isFile }.associate { it.relativeTo(dir).path to it.readBytes().toList() })
+        assertEquals(2, load().items.size)
+    }
 }

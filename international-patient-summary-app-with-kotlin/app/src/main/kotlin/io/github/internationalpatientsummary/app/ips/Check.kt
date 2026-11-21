@@ -4,7 +4,6 @@
 // together, in the same order, with the same codes and pointers.
 package io.github.internationalpatientsummary.app.ips
 
-import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
@@ -62,9 +61,8 @@ object IpsCheck {
         val element = try {
             val start = if (bytes.size >= 3 && bytes.copyOfRange(0, 3).contentEquals(UTF8_BOM)) 3 else 0
             Json.parseToJsonElement(String(bytes, start, bytes.size - start, Charsets.UTF_8))
-        } catch (_: SerializationException) {
-            throw RefusedException(Refusal.NOT_JSON)
         } catch (_: IllegalArgumentException) {
+            // SerializationException is an IllegalArgumentException.
             throw RefusedException(Refusal.NOT_JSON)
         }
         check(element)?.let { throw RefusedException(it) }

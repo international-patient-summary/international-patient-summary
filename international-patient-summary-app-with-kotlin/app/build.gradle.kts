@@ -1,3 +1,5 @@
+import org.gradle.testing.jacoco.plugins.JacocoTaskExtension
+
 // The one module. AGP 9 compiles Kotlin itself (built-in Kotlin), so the
 // org.jetbrains.kotlin.android plugin is not applied.
 plugins {
@@ -47,6 +49,18 @@ android {
         targetCompatibility = JavaVersion.VERSION_21
     }
 
+    testOptions {
+        unitTests.isIncludeAndroidResources = true
+        // Robolectric loads the app's classes through its own class loader; JaCoCo
+        // must still count them.
+        unitTests.all {
+            it.extensions.configure<JacocoTaskExtension>("jacoco") {
+                isIncludeNoLocationClasses = true
+                excludes = listOf("jdk.internal.*")
+            }
+        }
+    }
+
     lint {
         abortOnError = true
         warningsAsErrors = true
@@ -67,6 +81,12 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
 
     testImplementation(libs.junit)
+    testImplementation(libs.kotlinx.coroutines.test)
+    // Android code on the JVM (P13-T3): Robolectric, and Compose's test rule over it.
+    testImplementation(libs.robolectric)
+    testImplementation(libs.androidx.test.core)
+    testImplementation(platform(libs.compose.bom))
+    testImplementation(libs.compose.ui.test.junit4)
 
     // Instrumented tests only: these go in the test APK's manifest, never the app's.
     androidTestImplementation(platform(libs.compose.bom))
