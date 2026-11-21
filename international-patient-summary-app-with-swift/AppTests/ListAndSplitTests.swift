@@ -173,4 +173,33 @@ import UIKit
         #expect(alert.actions.count == 2)
         #expect(alert.view.accessibilityIdentifier == "storageProblem")
     }
+
+    @Test func droppingAFileOrTextOpensItThroughTheSameCheck() async throws {
+        let app = try launched()
+        defer { withExtendedLifetime(app.window) {} }
+        let table: UITableView = app.list.tableView
+        let example = try #require(Examples.data().first)
+        let file = FileManager.default.temporaryDirectory.appending(path: "drop-\(UUID().uuidString).json")
+        try example.write(to: file)
+        defer { try? FileManager.default.removeItem(at: file) }
+
+        let json = NSItemProvider(contentsOf: file)!
+        let text = NSItemProvider(object: String(decoding: example, as: UTF8.self) as NSString)
+        let other = NSItemProvider(object: NSString("x"))
+        #expect(app.list.tableView(table, canHandle: FakeDropSession([json])))
+        #expect(app.list.tableView(table, canHandle: FakeDropSession([text])))
+        #expect(!app.list.tableView(table, canHandle: FakeDropSession([json, text])))
+        _ = other
+        let proposal = app.list.tableView(
+            table, dropSessionDidUpdate: FakeDropSession([json]), withDestinationIndexPath: nil)
+        #expect(proposal.operation == .copy)
+
+        app.list.tableView(table, performDropWith: FakeDropCoordinator([]))
+        app.list.tableView(table, performDropWith: FakeDropCoordinator([json]))
+        try await settle()
+        #expect(app.store.documents.count == 1)
+        app.list.tableView(table, performDropWith: FakeDropCoordinator([text]))
+        try await settle()
+        #expect(app.store.documents.count == 2)
+    }
 }
