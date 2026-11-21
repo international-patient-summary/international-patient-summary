@@ -194,3 +194,21 @@ describe('Markdown export', () => {
 		void fixtureText;
 	});
 });
+
+describe('markdown of unusual entries', () => {
+	it('keeps a bare web address inert', () => {
+		expect(escapeMarkdown('see www.example.org now')).toBe('see www\\.example.org now');
+	});
+
+	it('lists a report and then its results, and says when an entry could not be found', () => {
+		const ctx = context('en-US');
+		const mixed = exportMarkdown(fixtureDoc('mixed-entries.json'), ctx, {
+			now: NOW,
+			includeCodes: true
+		});
+		expect(mixed).toContain('Blood panel');
+		expect(mixed).toContain('Heart rate');
+		const broken = exportMarkdown(fixtureDoc('broken-reference.json'), ctx, { now: NOW });
+		expect(broken).toContain('could not be found');
+	});
+});

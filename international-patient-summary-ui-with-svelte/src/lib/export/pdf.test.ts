@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { describe, expect, it } from 'vitest';
-import { containsCjk, exportPdf, paperFor, type PdfDeps } from './pdf.ts';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import { browserPdfDeps, containsCjk, exportPdf, paperFor, type PdfDeps } from './pdf.ts';
 import { context, exampleDoc, fixtureDoc, IG_FIXTURES } from '../test-helpers.ts';
 import { sectionModels } from '../fhir/models.ts';
 import type { IpsDocument } from '../fhir/types.ts';
@@ -110,5 +110,29 @@ describe('one-page PDF', () => {
 		expect(paperFor('en-US')).toBe('LETTER');
 		expect(paperFor('en-GB')).toBe('A4');
 		expect(paperFor('en-US', 'A4')).toBe('A4');
+	});
+});
+
+describe('browserPdfDeps', () => {
+	afterEach(() => vi.unstubAllGlobals());
+
+	it('loads a font file from the base address as base64, in chunks', async () => {
+		const bytes = new Uint8Array(0x8000 * 2 + 5).map((_, i) => i % 251);
+		const fetched: string[] = [];
+		vi.stubGlobal('fetch', async (url: string) => {
+			fetched.push(url);
+			return { ok: true, status: 200, arrayBuffer: async () => bytes.buffer };
+		});
+		const { pdfMake, loadFont } = await browserPdfDeps('/fonts/');
+		expect(typeof pdfMake.createPdf).toBe('function');
+		const base64 = await loadFont('Font.ttf');
+		expect(fetched).toEqual(['/fonts/Font.ttf']);
+		expect(Uint8Array.from(atob(base64), (c) => c.charCodeAt(0))).toEqual(bytes);
+	});
+
+	it('refuses a font file the server does not have', async () => {
+		vi.stubGlobal('fetch', async () => ({ ok: false, status: 404 }));
+		const { loadFont } = await browserPdfDeps('/fonts/');
+		await expect(loadFont('Missing.ttf')).rejects.toThrow('font Missing.ttf: HTTP 404');
 	});
 });

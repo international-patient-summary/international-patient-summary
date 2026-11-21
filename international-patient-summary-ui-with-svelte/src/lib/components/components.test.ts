@@ -254,3 +254,16 @@ describe('DocumentChecks', () => {
 		expect(text(container)).toContain('48765-2');
 	});
 });
+
+describe('a section made of mixed kinds of entry', () => {
+	it('draws a device, an observation, a report and an alert each in its own way', () => {
+		const doc = fixtureDoc('mixed-entries.json');
+		const section = doc.sections.find((s) => s.key === 'problems')!;
+		const { container } = render(SectionView, { section, doc });
+		const body = text(container);
+		expect(body).toContain('Insulin pump');
+		expect(body).toContain('Heart rate');
+		expect(body).toContain('Blood panel');
+		expect(body).toContain('Needs interpreter');
+	});
+});
