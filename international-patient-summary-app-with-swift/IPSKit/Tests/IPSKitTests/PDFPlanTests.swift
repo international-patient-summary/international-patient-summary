@@ -87,3 +87,40 @@ import Testing
         #expect(PDFLayout.fileName(documentDate: nil) == "international-patient-summary.pdf")
     }
 }
+
+/// Priorities and what a plan shows, section by section.
+@Suite struct PDFPriorityTests {
+    @Test func everySectionHasADistinctPriorityInTheWebViewersOrder() {
+        let order: [SectionKey] = [
+            .alerts, .allergies, .medications, .problems, .immunizations, .results, .procedures,
+            .devices, .advanceDirectives, .vitalSigns, .pastIllness, .planOfCare, .socialHistory,
+            .functional, .pregnancy, .patientStory,
+        ]
+        #expect(order.count == SectionKey.allCases.count)
+        #expect(order.map(\.pdfPriority) == Array(0..<order.count))
+    }
+
+    @Test func aSectionWithoutAKnownKeyComesLast() {
+        #expect(PDFPlanTests.section(nil, others: 1).priority == 99)
+    }
+
+    @Test func aPlanShowsTheWholeSectionOmitsItOrLimitsIt() {
+        let section = PDFPlanTests.section(.medications, mustShow: 1, others: 4)
+        let whole = PDFPlan(fontSize: 10, caps: [:])
+        #expect(whole.entries(of: section, at: 0)?.shown.count == 5)
+        #expect(whole.entries(of: section, at: 0)?.hidden == 0)
+        let omitted = PDFPlan(fontSize: 8, caps: [0: .omit])
+        #expect(omitted.entries(of: section, at: 0) == nil)
+        let limited = PDFPlan(fontSize: 8, caps: [0: .limit(1)])
+        #expect(limited.entries(of: section, at: 0)?.shown.count == 2)
+        #expect(limited.entries(of: section, at: 0)?.hidden == 3)
+        let generous = PDFPlan(fontSize: 8, caps: [0: .limit(9)])
+        #expect(generous.entries(of: section, at: 0)?.hidden == 0)
+    }
+
+    @Test func aFitThatNeedsTwoPagesIsContinued() {
+        let plan = PDFPlan(fontSize: 8, caps: [:])
+        #expect(PDFFit(plan: plan, pageCount: 2).continued)
+        #expect(!PDFFit(plan: plan, pageCount: 1).continued)
+    }
+}

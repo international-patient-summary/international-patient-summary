@@ -62,6 +62,10 @@ edit and a test edit in the same commit, and updates `tasks.md`.
 ./gradlew :app:testDebugUnitTest :app:assembleDebug :app:lintDebug
 ```
 
+Coverage of the unit tests (JaCoCo, built into AGP; tasks.md Phase 13):
+`./gradlew :app:createDebugUnitTestCoverageReport`, then
+`app/build/reports/coverage/test/debug/index.html`.
+
 All must pass. The JDK must be 21 or later; `local.properties` names the
 SDK. When a screen changes, also run the Compose smoke test (`SmokeTest`),
 which needs a running emulator or phone (for example `emulator -avd

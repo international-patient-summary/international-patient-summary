@@ -130,3 +130,9 @@ See the [shared release checklist](../tasks.md) for cross-platform work.
 - [x] P11-T9 Failed summary/index saves keep the summaries open, show a localized retry, and restore exact bytes and relationships after retry; temporary key/file access failures preserve the store (M-STORE-5, `EncryptedStoreTest`, `SummaryStoreTest`)
 - [x] P11-T10 Every export owns a unique temporary directory; completion/cancellation removes only that export and launch removes abandoned exports (`ShareFilesTest`)
 - [x] P11-T11 Preserve exact JSON numeric tokens and source text for invalid dates; never show an age for an invalid, partial or future birth date; prove the banner, entry detail and PDF input agree (`FormatTest`, `SummaryReaderTest.bannerScreenAndPdfKeepSourceDatesAndClinicalDecimals`)
+
+## Phase 13 — Test coverage
+
+- [x] P13-T1 Measure unit-test line coverage with AGP's JaCoCo (`enableUnitTestCoverage` on the debug build type): `./gradlew :app:createDebugUnitTestCoverageReport`, report in `app/build/reports/coverage/test/debug/` (no new dependency). First reading: 60% of lines (821 of 2048); the core (`ips/`, `SummaryStore`, `EncryptedStore`) is above 95%, the Compose screens and `OnePagePdf`, `MainActivity` and `KeystoreKeys` are not covered by unit tests
+- [ ] P13-T2 Close the gaps in the core (`ips/`, `SummaryStore`, `EncryptedStore`, `ShareFiles`, `DocumentFiles`) with unit tests
+- [ ] P13-T3 Cover the Compose screens, `OnePagePdf`, `MainActivity` and `KeystoreKeys`: needs Robolectric or the instrumented tests (`connectedDebugAndroidTest`), each a new dependency or an emulator in CI; decide which
