@@ -75,5 +75,8 @@ Checklist for [plans.md](plans.md). Spec: [spec/index.md](spec/index.md).
       no tasks, no worker, production without authentication, `health` with no
       server, and with Postgres `db migrate|status|truncate` and `start` with
       `health` live and ready): 95% of lines.
-- [ ] **P6-T4** The rest: `db down` and `db reset` in `main.rs`, the Keycloak
-      health check in `lib.rs`, and the last lines of `auth.rs` and `ips.rs`.
+- [x] **P6-T4** `db down` and `db reset` through the binary, and the authenticators'
+      debug print: 96% of lines (25 of 631 missed). What is left runs only in the
+      `start` child, which the test kills, so its coverage is never written
+      (`main.rs`), plus the Keycloak health check (`lib.rs`), the warning when
+      authentication is off, and one fixture line in `ips.rs`.

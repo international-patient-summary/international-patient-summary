@@ -371,6 +371,9 @@ async fn with_both_configured_keycloak_and_paseto_tokens_are_each_accepted() {
     let idp = TestIdp::start().await;
     let keys = TestKeys::new();
     let auth = keycloak_auth(&idp, Some(key_file(&keys, "both"))).await;
+    // Nothing about keys is in what a log would show.
+    assert_eq!(format!("{auth:?}"), "Auth::Keycloak");
+    assert_eq!(format!("{:?}", paseto_auth(&keys, "debug")), "Auth::Paseto");
     let server = server(no_database(), &auth);
     let id = "/fhir/Bundle/2b39610e-a2d8-4548-9e5f-eaa9ecd0fc08";
     let keycloak_reader = format!("Bearer {}", idp.token(realm_roles(&["ips-reader"])));

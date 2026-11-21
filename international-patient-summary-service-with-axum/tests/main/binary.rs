@@ -91,9 +91,20 @@ async fn db_commands_migrate_report_and_truncate() {
         ("APP_ENV", "test"),
         ("AXA_DESTROY_DATA", "true"),
     ];
-    for command in ["migrate", "status", "truncate"] {
-        let output = run(&["db", command], &env);
-        assert!(output.status.success(), "db {command}: {}", stderr(&output));
+    for command in [
+        &["migrate"][..],
+        &["status"],
+        &["truncate"],
+        &["down", "1"],
+        &["reset"],
+    ] {
+        let args = [&["db"][..], command].concat();
+        let output = run(&args, &env);
+        assert!(
+            output.status.success(),
+            "db {command:?}: {}",
+            stderr(&output)
+        );
     }
     assert!(stdout(&run(&["db", "status"], &env)).contains("applied"));
 }
