@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { loadFile, loadText, loadUrl } from './load.ts';
+import { loadExample, loadFile, loadText, loadUrl } from './load.ts';
 import { LoadError, MAX_INPUT_BYTES } from './parse.ts';
 import { exampleText } from '../test-helpers.ts';
 
@@ -71,5 +71,22 @@ describe('loaders', () => {
 		const result = await loadUrl('https://example.org/ips', ok);
 		expect(result.format).toBe('json');
 		expect(result.source.kind).toBe('url');
+	});
+
+	it('refuses a non-success status and a declared size over the limit', async () => {
+		const status = vi.fn(async () => new Response('nope', { status: 404 }));
+		expect((await rejection(loadUrl('https://example.org/x.json', status))).key).toBe('urlStatus');
+		const big = vi.fn(
+			async () => new Response('{}', { headers: { 'content-length': String(MAX_INPUT_BYTES + 1) } })
+		);
+		expect((await rejection(loadUrl('https://example.org/x.json', big))).key).toBe('tooLarge');
+	});
+
+	it('loads a bundled example from the app origin, and refuses one that is missing', async () => {
+		const ok = vi.fn(async () => new Response(exampleText('bundle-minimal')));
+		const result = await loadExample('/examples/minimal.json', 'Minimal', ok);
+		expect(result.source).toEqual({ kind: 'example', name: 'Minimal' });
+		const missing = vi.fn(async () => new Response('', { status: 404 }));
+		expect((await rejection(loadExample('/examples/x.json', 'X', missing))).key).toBe('urlStatus');
 	});
 });

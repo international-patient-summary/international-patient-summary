@@ -118,4 +118,12 @@ describe('formatters', () => {
 			)
 		).toMatchObject({ frequency: 'as needed', dose: 'At least 1 tablet' });
 	});
+
+	it('falls back to the raw value for a locale the platform cannot format', () => {
+		expect(formatFhirDate('2020-03-04T10:00:00Z', 'not a locale!')).toBe('2020-03-04T10:00:00Z');
+	});
+
+	it('never guesses an age from a date that is not a date', () => {
+		expect(formatAge('9999-99-99', t)).toBeUndefined();
+	});
 });

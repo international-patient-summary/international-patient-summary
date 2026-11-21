@@ -172,5 +172,9 @@ describe('document summary', () => {
 
 		doc.declaresIps = false;
 		expect(documentSummary(doc, ctx).versionLabel).toBe('Not stated');
+
+		// A language tag the platform cannot name is shown as written.
+		doc.language = 'not a tag!';
+		expect(documentSummary(doc, ctx).languageLabel).toBe('not a tag! (not a tag!)');
 	});
 });

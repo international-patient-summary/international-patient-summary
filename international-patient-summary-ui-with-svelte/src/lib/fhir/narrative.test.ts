@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { narrativeToText, sanitizeNarrative } from './narrative.ts';
 import { fixtureDoc } from '../test-helpers.ts';
 
@@ -25,5 +25,18 @@ describe('narrative', () => {
 				'<div><p>One</p><p>Two <b>three</b></p><table><tr><td>a</td><td>b</td></tr></table></div>'
 			)
 		).toBe('One\nTwo three\na b');
+	});
+
+	it('turns narrative into text without a DOM, as in a worker or on the server', () => {
+		vi.stubGlobal('DOMParser', undefined);
+		try {
+			expect(
+				narrativeToText(
+					'<div><p>One &amp; two<br/>three &lt;4&gt;</p><ul><li>a</li><li>b</li></ul></div>'
+				)
+			).toBe('One & two\nthree <4>\na\nb');
+		} finally {
+			vi.unstubAllGlobals();
+		}
 	});
 });
