@@ -142,6 +142,6 @@ when it is published as its own repository.
 
 ## Licence
 
-Code: any of MIT, Apache-2.0, GPL-2.0-only, GPL-3.0-only or BSD-3-Clause, at
-your option ([LICENSE.md](LICENSE.md)). Fonts: SIL OFL 1.1. Example fixtures:
+Code: any of MIT, Apache-2.0, GPL-2.0-only, GPL-3.0-only, BSD-3-Clause, OGL-UK-3.0 or
+CC-BY-NC-SA-4.0, at your option ([LICENSE.md](LICENSE.md)). Fonts: SIL OFL 1.1. Example fixtures:
 from the HL7 FHIR IPS Implementation Guide; see the guide for its licence.
