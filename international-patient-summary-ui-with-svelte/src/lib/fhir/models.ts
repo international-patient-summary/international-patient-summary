@@ -163,6 +163,14 @@ export type ObservationViewStatus =
 	| 'not-recorded'
 	| 'unavailable';
 
+export interface ObservationMeter {
+	value: number;
+	min: number;
+	max: number;
+	low?: number;
+	high?: number;
+}
+
 export interface ObservationModel extends BaseModel {
 	kind: 'observation';
 	value: string;
@@ -170,6 +178,12 @@ export interface ObservationModel extends BaseModel {
 	interpretation?: string;
 	flagLabel?: string;
 	range?: string;
+	/**
+	 * Where a numeric value sits against a numeric reference range, for the
+	 * picture beside the words (Lily ObservationView `meter*`, 0.12). Only when
+	 * the value and the range are numbers in the same unit.
+	 */
+	meter?: ObservationMeter;
 	status: ObservationViewStatus;
 	statusLabel?: string;
 	effective?: string;
@@ -652,6 +666,42 @@ function interpretationOf(
 	};
 }
 
+/**
+ * The meter for a number against its reference range: the scale runs half a
+ * range beyond each end of a two-sided range (or from 0 to half as far again
+ * past a one-sided one), and always holds the value.
+ */
+export function meterOf(o: Observation | ObservationComponent): ObservationMeter | undefined {
+	const value = o.valueQuantity?.value;
+	const range = o.referenceRange?.[0];
+	if (typeof value !== 'number' || !Number.isFinite(value) || !range) return undefined;
+	const number = (q: { value?: number; unit?: string; code?: string } | undefined) =>
+		typeof q?.value === 'number' && Number.isFinite(q.value) ? q.value : undefined;
+	const sameUnit = (q: { unit?: string; code?: string } | undefined) =>
+		!q ||
+		(q.unit ?? q.code ?? o.valueQuantity?.unit ?? o.valueQuantity?.code) ===
+			(o.valueQuantity?.unit ?? o.valueQuantity?.code);
+	if (!sameUnit(range.low) || !sameUnit(range.high)) return undefined;
+	const low = number(range.low);
+	const high = number(range.high);
+	if (low === undefined && high === undefined) return undefined;
+	if (low !== undefined && high !== undefined && low >= high) return undefined;
+	let min: number;
+	let max: number;
+	if (low !== undefined && high !== undefined) {
+		const pad = (high - low) / 2;
+		min = low - pad;
+		max = high + pad;
+	} else if (high !== undefined) {
+		min = Math.min(0, high);
+		max = Math.max(high * 1.5, high + 1);
+	} else {
+		min = Math.min(0, low!);
+		max = Math.max(low! * 2, low! + 1);
+	}
+	return { value, min: Math.min(min, value), max: Math.max(max, value), low, high };
+}
+
 function referenceRangeOf(
 	o: Observation | ObservationComponent,
 	ctx: FormatContext
@@ -727,6 +777,7 @@ function observationModel(
 			interpretation: ci.code,
 			flagLabel: ci.code && ci.code !== 'N' ? ci.label : undefined,
 			range: referenceRangeOf(c, ctx),
+			meter: meterOf(c),
 			status: cs.status,
 			statusLabel: cs.statusLabel,
 			components: [],
@@ -751,6 +802,7 @@ function observationModel(
 		flagLabel:
 			interpretation.code && interpretation.code !== 'N' ? interpretation.label : undefined,
 		range: referenceRangeOf(o, ctx),
+		meter: meterOf(o),
 		status: !value && components.length > 0 && status !== 'masked' ? 'final' : status,
 		statusLabel: !value && components.length > 0 && status !== 'masked' ? undefined : statusLabel,
 		effective: isoDatePart(effective),

@@ -150,3 +150,31 @@ describe('buildDocument', () => {
 		expect(documentError(noSubject).checks[0].key).toBe('noSubject');
 	});
 });
+
+describe('document checks the IG leaves to a note', () => {
+	const checksOf = (change: (bundle: Bundle) => void) => {
+		const bundle = structuredClone(exampleJson('bundle-minimal')) as Bundle;
+		change(bundle);
+		return buildDocument(bundle).checks.map((c) => c.key);
+	};
+	const composition = (bundle: Bundle) =>
+		bundle.entry![0].resource as { meta?: { profile?: string[] }; type?: unknown };
+
+	it('notes a profile version this viewer does not know', () => {
+		expect(
+			checksOf((b) => {
+				b.meta = {
+					profile: ['http://hl7.org/fhir/uv/ips/StructureDefinition/Bundle-uv-ips|9.9.9']
+				};
+			})
+		).toContain('unknownVersion');
+	});
+
+	it('notes a Composition that is not the patient summary type', () => {
+		expect(
+			checksOf((b) => {
+				composition(b).type = { coding: [{ system: 'http://loinc.org', code: '11488-4' }] };
+			})
+		).toContain('notPatientSummaryType');
+	});
+});

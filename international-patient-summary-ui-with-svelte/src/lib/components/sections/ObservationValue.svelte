@@ -1,6 +1,7 @@
 <script lang="ts">
 	// One observation's value through Lily ObservationView: value, unit, flag
-	// in words, range and missing states. Panel components (blood pressure)
+	// in words, range and missing states, and (0.12) a meter beside a number
+	// that has a numeric reference range. Panel components (blood pressure)
 	// are listed under it.
 	import { ObservationView } from '@lilydesignsystem/svelte-headless';
 	import type { ObservationModel } from '#lib/fhir/models.ts';
@@ -20,6 +21,11 @@
 		interpretation={model.interpretation}
 		flagLabel={model.flagLabel}
 		range={model.range ? `(${t('fields.referenceRange')}: ${model.range})` : undefined}
+		meterValue={model.meter?.value}
+		meterMin={model.meter?.min}
+		meterMax={model.meter?.max}
+		meterLow={model.meter?.low}
+		meterHigh={model.meter?.high}
 		status={model.status}
 		statusLabel={model.status === 'final'
 			? undefined
@@ -37,6 +43,11 @@
 					interpretation={part.interpretation}
 					flagLabel={part.flagLabel}
 					range={part.range ? `(${t('fields.referenceRange')}: ${part.range})` : undefined}
+					meterValue={part.meter?.value}
+					meterMin={part.meter?.min}
+					meterMax={part.meter?.max}
+					meterLow={part.meter?.low}
+					meterHigh={part.meter?.high}
 					status={part.status}
 					statusLabel={part.status === 'final'
 						? undefined

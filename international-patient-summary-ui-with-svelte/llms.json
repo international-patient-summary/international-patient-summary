@@ -6,7 +6,7 @@
 	"stack": [
 		"Svelte 5.57",
 		"SvelteKit 3.2",
-		"Lily Design System headless 0.11.0",
+		"Lily Design System headless 0.12.0",
 		"Sveltia I18n (MF2)",
 		"pdfmake 0.3",
 		"vitest 5",

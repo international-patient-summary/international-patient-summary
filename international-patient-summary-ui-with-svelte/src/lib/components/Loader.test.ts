@@ -90,4 +90,20 @@ describe('Loader', () => {
 		await fireEvent(document, leave);
 		expect(container.querySelector('.drop-overlay')).toBeNull();
 	});
+
+	it('opens a file dropped on the page, and ignores a drop with no file', async () => {
+		render(Loader);
+		const drop = (files: File[]) => {
+			const event = new Event('drop', { bubbles: true, cancelable: true });
+			Object.defineProperty(event, 'dataTransfer', { value: { files } });
+			document.dispatchEvent(event);
+			return event;
+		};
+		expect(drop([]).defaultPrevented).toBe(false);
+		const file = new File([exampleText('bundle-minimal')], 'dropped.json', {
+			type: 'application/json'
+		});
+		expect(drop([file]).defaultPrevented).toBe(true);
+		await waitFor(() => expect(viewer.doc).toBeDefined());
+	});
 });

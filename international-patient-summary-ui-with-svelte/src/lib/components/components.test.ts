@@ -159,6 +159,15 @@ describe('SectionView and the absent states', () => {
 });
 
 describe('Timeline view', () => {
+	it('lists procedures the same way when the section has more than one', async () => {
+		const user = userEvent.setup();
+		const doc = fixtureDoc('mixed-timeline.json');
+		const section = doc.sections.find((s) => s.key === 'procedures')!;
+		const { container } = render(SectionView, { section, doc });
+		await user.click(screen.getByRole('button', { name: 'Show as timeline' }));
+		expect(container.querySelectorAll('.timeline-list-item').length).toBe(section.entries.length);
+	});
+
 	it('lists immunizations newest first as a Lily TimelineList', async () => {
 		const user = userEvent.setup();
 		const doc = exampleDoc('bundle-ips-all-sections');
@@ -265,5 +274,40 @@ describe('a section made of mixed kinds of entry', () => {
 		expect(body).toContain('Heart rate');
 		expect(body).toContain('Blood panel');
 		expect(body).toContain('Needs interpreter');
+	});
+});
+
+describe('PatientBanner with little to show', () => {
+	it('says what is not stated, marks a deceased patient and puts high-risk allergies first', () => {
+		const doc = fixtureDoc('sparse-patient.json');
+		const { container } = render(PatientBanner, { doc });
+		const body = text(container);
+		expect(container.querySelector('.patient-deceased')).not.toBeNull();
+		expect(body.match(/Not stated/g)?.length).toBeGreaterThanOrEqual(3);
+		const items = [...container.querySelectorAll('.allergy-record-list-item')];
+		expect(items.map((i) => i.getAttribute('data-criticality'))).toEqual(['high', 'low']);
+	});
+});
+
+describe('the meter beside a result with a numeric reference range (Lily 0.12)', () => {
+	it('draws a native meter, hidden from assistive technology, where the range is numeric', () => {
+		let meters = 0;
+		for (const doc of [fixtureDoc('mixed-entries.json')]) {
+			for (const section of doc.sections) {
+				const { container, unmount } = render(SectionView, { section, doc });
+				for (const meter of container.querySelectorAll('meter.observation-view-meter')) {
+					meters++;
+					expect(meter.getAttribute('aria-hidden')).toBe('true');
+					expect(Number(meter.getAttribute('min'))).toBeLessThanOrEqual(
+						Number(meter.getAttribute('value'))
+					);
+					expect(Number(meter.getAttribute('max'))).toBeGreaterThanOrEqual(
+						Number(meter.getAttribute('value'))
+					);
+				}
+				unmount();
+			}
+		}
+		expect(meters).toBeGreaterThan(0);
 	});
 });

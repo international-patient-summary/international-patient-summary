@@ -235,7 +235,19 @@
         "valueQuantity": {
           "value": 72,
           "unit": "beats/min"
-        }
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 60,
+              "unit": "beats/min"
+            },
+            "high": {
+              "value": 100,
+              "unit": "beats/min"
+            }
+          }
+        ]
       }
     },
     {

@@ -829,6 +829,10 @@ button:disabled {
 
 .viewer-main {
 	display: grid;
+	/* One column that may shrink below the widest section's min-content: with
+	 * an auto column a wide child (a record list, a table) stretches every
+	 * section past the screen (seen at 320 px with themes 0.7.0). */
+	grid-template-columns: minmax(0, 1fr);
 	gap: var(--lily-space-lg);
 	min-width: 0;
 }

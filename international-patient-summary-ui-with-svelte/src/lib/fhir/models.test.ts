@@ -1,7 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import type { FhirResource } from 'fhir/r4';
 import {
+	meterOf,
 	modelOf,
+	observationText,
 	sectionModels,
 	stateLabel,
 	type EntryModel,
@@ -227,5 +229,131 @@ describe('view models', () => {
 		expect(
 			stateLabel({ ...base, state: 'unavailable', absentEntries: [], unresolved: ['x'] }, ctx.t)
 		).toBe('The entries could not be found in the document.');
+	});
+});
+
+describe('model fallbacks', () => {
+	const doc = fixtureDoc('edge-models.json');
+	const ctx = context('en-US');
+	const modelsOf = (key: string) =>
+		sectionModels(
+			doc.sections.find((s) => s.key === key)!,
+			doc,
+			ctx
+		);
+
+	it('finds the severity on a later reaction when the first has none', () => {
+		const [allergy] = modelsOf('allergies');
+		expect(JSON.stringify(allergy)).toContain('severe');
+	});
+
+	it('writes each ingredient strength of a referenced medication, joined', () => {
+		const [medication] = modelsOf('medications');
+		expect(JSON.stringify(medication)).toContain('Compound cream');
+		expect(JSON.stringify(medication)).toMatch(/1.*g.*\+.*5.*g/s);
+	});
+
+	it('words a masked result and an unknown reason as unavailable', () => {
+		const [masked, other] = modelsOf('results');
+		expect(masked).toMatchObject({ kind: 'observation', status: 'masked' });
+		expect(other).toMatchObject({ kind: 'observation', status: 'unavailable' });
+		expect(observationText(masked as never)).toBe((masked as { statusLabel?: string }).statusLabel);
+	});
+
+	it('names an absent entry by the concept of its resource, whatever its type', () => {
+		const t = ctx.t;
+		const entry = (resource: unknown) => ({ resource }) as never;
+		const section = (resources: unknown[]) =>
+			({
+				key: 'problems',
+				state: 'none-known',
+				narrativeOnly: false,
+				absentEntries: resources.map(entry),
+				unresolved: []
+			}) as unknown as IpsSection;
+		const label = stateLabel(
+			section([
+				{ resourceType: 'Condition', code: { text: 'No known problems' } },
+				{
+					resourceType: 'MedicationRequest',
+					medicationCodeableConcept: { text: 'No known medication' }
+				},
+				{ resourceType: 'Immunization', vaccineCode: { text: 'No known vaccines' } },
+				{ resourceType: 'Device', type: { text: 'ignored' } }
+			]),
+			t
+		);
+		expect(label).toContain('No known problems');
+		expect(label).toContain('No known medication');
+		expect(label).toContain('No known vaccines');
+		expect(label).not.toContain('ignored');
+	});
+});
+
+describe('meterOf', () => {
+	const obs = (value: unknown, range: unknown) =>
+		({
+			resourceType: 'Observation',
+			valueQuantity: value,
+			referenceRange: range ? [range] : undefined
+		}) as never;
+
+	it('scales a two-sided range with half a range either side, and always holds the value', () => {
+		expect(
+			meterOf(
+				obs(
+					{ value: 5, unit: 'mmol/L' },
+					{ low: { value: 4, unit: 'mmol/L' }, high: { value: 6, unit: 'mmol/L' } }
+				)
+			)
+		).toEqual({ value: 5, min: 3, max: 7, low: 4, high: 6 });
+		expect(
+			meterOf(
+				obs(
+					{ value: 20, unit: 'g' },
+					{ low: { value: 4, unit: 'g' }, high: { value: 6, unit: 'g' } }
+				)
+			)?.max
+		).toBe(20);
+		expect(
+			meterOf(
+				obs(
+					{ value: -5, unit: 'g' },
+					{ low: { value: 4, unit: 'g' }, high: { value: 6, unit: 'g' } }
+				)
+			)?.min
+		).toBe(-5);
+	});
+
+	it('scales a one-sided range from zero', () => {
+		expect(meterOf(obs({ value: 2, unit: 'g' }, { high: { value: 4, unit: 'g' } }))).toEqual({
+			value: 2,
+			min: 0,
+			max: 6,
+			low: undefined,
+			high: 4
+		});
+		expect(meterOf(obs({ value: 9, unit: 'g' }, { low: { value: 4, unit: 'g' } }))).toMatchObject({
+			min: 0,
+			max: 9,
+			low: 4
+		});
+		expect(
+			meterOf(obs({ value: 0, unit: 'g' }, { high: { value: 0.1, unit: 'g' } }))
+		).toMatchObject({ max: 1.1 });
+	});
+
+	it('draws nothing without a number, a numeric range, or the same unit', () => {
+		expect(meterOf(obs({ value: 5, unit: 'g' }, undefined))).toBeUndefined();
+		expect(meterOf(obs(undefined, { low: { value: 1 } }))).toBeUndefined();
+		expect(meterOf(obs({ value: Number.NaN }, { low: { value: 1 } }))).toBeUndefined();
+		expect(meterOf(obs({ value: 5, unit: 'g' }, { text: 'normal' }))).toBeUndefined();
+		expect(
+			meterOf(obs({ value: 5, unit: 'g' }, { low: { value: 6 }, high: { value: 4 } }))
+		).toBeUndefined();
+		expect(
+			meterOf(obs({ value: 5, unit: 'g' }, { low: { value: 1, unit: 'mg' } }))
+		).toBeUndefined();
+		expect(meterOf(obs({ value: 5, unit: 'g' }, { high: { value: 9, code: 'g' } }))).toBeDefined();
 	});
 });

@@ -90,4 +90,14 @@ describe('ExportMenu', () => {
 		await user.click(confirm);
 		expect(URL.createObjectURL).toHaveBeenCalledOnce();
 	});
+
+	it('says so, and logs the error, when the export fails', async () => {
+		pdf.exportPdf.mockRejectedValueOnce(new Error('no fonts'));
+		const error = vi.spyOn(console, 'error').mockImplementation(() => undefined);
+		const user = userEvent.setup();
+		render(ExportMenu, { doc: exampleDoc('bundle-minimal') });
+		await user.click(screen.getByRole('button', { name: 'Download' }));
+		await waitFor(() => expect(error).toHaveBeenCalledOnce());
+		expect(await screen.findByRole('alert')).toBeDefined();
+	});
 });

@@ -27,8 +27,8 @@ with nothing hidden, nothing guessed, and no data leaving the browser.
 | Framework       | Svelte 5 (runes) + SvelteKit 3, TypeScript                               | Requested; matches Lily's canonical framework                                                              |
 | Package manager | pnpm (packages from npmjs.com)                                           | Lily convention (`AGENTS/sveltekit.md`)                                                                    |
 | Adapter         | `@sveltejs/adapter-static`, fully prerendered                            | No server; patient data stays client-side; GitHub Pages deploy                                             |
-| UI components   | `@lilydesignsystem/svelte-headless` 0.11.0                               | Headless catalog incl. the medical record lists, `MedicationView`, `ObservationView`, `MedicalBanner`      |
-| Header controls | `@lilydesignsystem/svelte-picker-bar` 0.7.0                              | One component for theme, locale, text size, share                                                          |
+| UI components   | `@lilydesignsystem/svelte-headless` 0.12.0                               | Headless catalog incl. the medical record lists, `MedicationView`, `ObservationView`, `MedicalBanner`      |
+| Header controls | `@lilydesignsystem/svelte-picker-bar` 0.8.0                              | One component for theme, locale, text size, share                                                          |
 | UI i18n         | `@sveltia/i18n` (MF2 messages), client-side detection only               | Lily bundles no i18n; MF2 handles Welsh's six plural forms in the message files; Sveltia warns against SSR |
 | Locales         | `./locales/{cy-001,en-us,en-gb,zh-cn}/messages.yaml`; fallback `en-US`   | Requested; lowercase dirs, canonical BCP 47 tags when registered                                           |
 | FHIR target     | IPS IG 2.0.1 on FHIR R4                                                  | Current STU release; tolerate 1.x                                                                          |
