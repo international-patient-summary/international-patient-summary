@@ -176,8 +176,8 @@ fixtures (§9).
 
 | Package                                     | Version (pinned) | Use                                                      |
 | ------------------------------------------- | ---------------- | -------------------------------------------------------- |
-| `@lilydesignsystem/svelte-headless`         | 0.9.0            | All page components, incl. the medical components (§4.2) |
-| `@lilydesignsystem/svelte-picker-bar`       | 0.6.0            | Header row: pages, theme, locale, text size, share       |
+| `@lilydesignsystem/svelte-headless`         | 0.11.0           | All page components, incl. the medical components (§4.2) |
+| `@lilydesignsystem/svelte-picker-bar`       | 0.7.0            | Header row: pages, theme, locale, text size, share       |
 | `@lilydesignsystem/themes`                  | 0.6.2 (dev)      | Theme stylesheets, vendored into `static/assets/themes/` |
 | `@lilydesignsystem/svelte-data-grid`        | —                | Not used: see below                                      |
 | `@lilydesignsystem/svelte-date-time-picker` | —                | Not needed in v1 (viewer is read-only)                   |

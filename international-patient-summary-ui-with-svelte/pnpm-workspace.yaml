@@ -1,4 +1,2 @@
 minimumReleaseAgeExclude:
-  - '@lilydesignsystem/svelte-headless@0.9.0'
-  - '@lilydesignsystem/svelte-picker-bar@0.6.0'
   - dompurify@3.4.18
