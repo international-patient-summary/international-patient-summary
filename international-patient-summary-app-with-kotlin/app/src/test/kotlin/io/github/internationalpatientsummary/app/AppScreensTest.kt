@@ -139,6 +139,33 @@ class AppScreensTest {
         }
     }
 
+    @Test fun anUnresolvedEntryAndMissingAllergiesAreStatedOnTheSummary() {
+        ActivityScenario.launch(MainActivity::class.java).use {
+            val bundle = Fixtures.bundle(
+                """{"code":{"coding":[{"system":"http://loinc.org","code":"11450-4"}]},"entry":[{"reference":"Condition/nowhere"}]}""",
+            )
+            val clipboard = context.getSystemService(android.content.ClipboardManager::class.java)
+            clipboard.setPrimaryClip(android.content.ClipData.newPlainText("summary", String(bundle, Charsets.UTF_8)))
+            compose.onNodeWithText(text(R.string.action_paste)).performClick()
+            waitFor(hasText(text(R.string.entry_not_found)), 1)
+            compose.onNodeWithText(text(R.string.alert_allergies_missing)).assertExists()
+        }
+    }
+
+    @Test fun aSummaryWithNoPatientAndANarrativeOnlySectionSaysSo() {
+        ActivityScenario.launch(MainActivity::class.java).use {
+            val bundle = Fixtures.bundle(
+                """{"code":{"coding":[{"system":"http://loinc.org","code":"11450-4"}]},"text":{"status":"generated","div":"<div xmlns=\"http://www.w3.org/1999/xhtml\">Only a narrative</div>"}}""",
+                subject = "Patient/elsewhere",
+            )
+            val clipboard = context.getSystemService(android.content.ClipboardManager::class.java)
+            clipboard.setPrimaryClip(android.content.ClipData.newPlainText("summary", String(bundle, Charsets.UTF_8)))
+            compose.onNodeWithText(text(R.string.action_paste)).performClick()
+            waitFor(hasText(text(R.string.patient_not_in_document)), 1)
+            compose.onNodeWithText("Only a narrative").assertExists()
+        }
+    }
+
     private companion object {
         const val TIMEOUT = 10_000L
         const val MARTHA = "Martha DeLarosa"
