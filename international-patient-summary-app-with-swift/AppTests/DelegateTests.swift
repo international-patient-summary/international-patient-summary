@@ -46,6 +46,25 @@ import UIKit
         withExtendedLifetime(delegate) {}
     }
 
+    @Test func aFileHandedToTheRunningAppIsCheckedAndRefusedAndAWebAddressIsIgnored() async throws {
+        let scene = try scene()
+        let delegate = SceneDelegate()
+        delegate.open(URL(string: "https://example.test/x.json")!)  // no window yet, and not a file
+        delegate.scene(scene, willConnectTo: scene.session, options: options())
+        let window = try #require(delegate.window)
+        delegate.open(URL(string: "https://example.test/x.json")!)
+
+        // A file that is not a patient summary is refused; nothing is stored.
+        let file = FileManager.default.temporaryDirectory.appending(path: "incoming-\(UUID().uuidString).json")
+        try Data("{}".utf8).write(to: file)
+        defer { try? FileManager.default.removeItem(at: file) }
+        let before = SummaryStore.shared.documents.count
+        delegate.open(file)
+        try await Task.sleep(for: .milliseconds(500))
+        #expect(SummaryStore.shared.documents.count == before)
+        #expect(window.rootViewController is SplitViewController)
+    }
+
     @Test func theAppSwitcherSeesACoverUntilTheAppIsActiveAgain() throws {
         let scene = try scene()
         let delegate = SceneDelegate()

@@ -89,6 +89,49 @@ import UIKit
         #expect(app.split.shownID == nil)
     }
 
+    @Test func theContextMenuTheRotorAndTheKeyboardAllDeleteASummary() async throws {
+        let app = try launched()
+        defer { withExtendedLifetime(app.window) {} }
+        app.list.loadExamples()
+        try await settle()
+        let table: UITableView = app.list.tableView
+        #expect(app.list.keyCommands == nil, "nothing is open, so there is nothing to delete")
+
+        app.list.tableView(table, didSelectRowAt: IndexPath(row: 0, section: 0))
+        try await settle()
+        let shown = try #require(app.split.shownID)
+        let commands = try #require(app.list.keyCommands)
+        #expect(commands.count == 2)
+        #expect(app.list.indexPath(of: shown) != nil)
+        #expect(app.list.indexPath(of: nil) == nil)
+
+        // The context menu's Delete removes the row's summary.
+        let first = IndexPath(row: 0, section: 0)
+        #expect(app.list.tableView(table, contextMenuConfigurationForRowAt: first, point: .zero) != nil)
+        let item = try #require(app.list.menu(deleting: shown).children.first as? UIAction)
+        item.performWithSender(nil, target: nil)
+        try await settle()
+        #expect(!app.store.documents.contains(where: { $0.id == shown }))
+        #expect(app.split.shownID == nil)
+
+        // The rotor's Delete removes the next one.
+        let cell = app.list.tableView(table, cellForRowAt: first)
+        app.list.tableView(table, willDisplay: cell, forRowAt: first)
+        let before = app.store.documents.count
+        let rotor = try #require(cell.accessibilityCustomActions?.first)
+        #expect(rotor.actionHandler?(rotor) == true)
+        try await settle()
+        #expect(app.store.documents.count == before - 1)
+
+        // ⌘⌫ deletes the shown summary.
+        app.list.tableView(table, didSelectRowAt: first)
+        try await settle()
+        let open = try #require(app.split.shownID)
+        app.list.perform(NSSelectorFromString("deleteShown"))
+        try await settle()
+        #expect(!app.store.documents.contains(where: { $0.id == open }))
+    }
+
     @Test func pasteOpensTextAndShowsARefusalInWords() async throws {
         let app = try launched()
         defer { withExtendedLifetime(app.window) {} }
@@ -172,6 +215,37 @@ import UIKit
         let alert = try #require(presented(app) as? UIAlertController)
         #expect(alert.actions.count == 2)
         #expect(alert.view.accessibilityIdentifier == "storageProblem")
+    }
+
+    @Test func theProblemAlertsButtonsAndTheCommandKeysRunTheListsActions() async throws {
+        let directory = FileManager.default.temporaryDirectory.appending(path: "locked-\(UUID().uuidString)")
+        try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: directory) }
+        let store = SummaryStore(saving: EncryptedStore(directory: directory, keys: LockedKeys()))
+        let app = try launched(store)
+        defer { withExtendedLifetime(app.window) {} }
+        try await settle()
+
+        // OK dismisses the alert's record of itself; the problem is not shown twice.
+        let alert = try #require(presented(app) as? UIAlertController)
+        let ok = try #require(alert.actions.first(where: { $0.style == .cancel }))
+        let okHandler = unsafeBitCast(ok.value(forKey: "handler") as AnyObject, to: (@convention(block) (UIAlertAction) -> Void).self)
+        okHandler(ok)
+
+        // Retry dismisses, tries the store again, and shows the problem again while it persists.
+        let retry = try #require(alert.actions.first(where: { $0.style == .default }))
+        let retryHandler = unsafeBitCast(retry.value(forKey: "handler") as AnyObject, to: (@convention(block) (UIAlertAction) -> Void).self)
+        retryHandler(retry)
+        try await settle()
+
+        // The command keys name the three ways to open, and each runs the list's action.
+        let keys = try #require(app.split.keyCommands)
+        #expect(keys.compactMap(\.input) == ["o", "v", "e"])
+        UIPasteboard.general.string = "{}"
+        for key in keys where key.input != "o" {
+            app.split.perform(key.action)
+            try await settle()
+        }
     }
 
     @Test func droppingAFileOrTextOpensItThroughTheSameCheck() async throws {

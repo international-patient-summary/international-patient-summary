@@ -13,7 +13,7 @@ final class SummaryListViewController: UITableViewController, UIDocumentPickerDe
         people[indexPath.section].documents[indexPath.row]
     }
 
-    private func indexPath(of id: Document.ID?) -> IndexPath? {
+    func indexPath(of id: Document.ID?) -> IndexPath? {
         for (section, person) in people.enumerated() {
             if let row = person.documents.firstIndex(where: { $0.id == id }) {
                 return IndexPath(row: row, section: section)
@@ -329,13 +329,16 @@ final class SummaryListViewController: UITableViewController, UIDocumentPickerDe
         _ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint
     ) -> UIContextMenuConfiguration? {
         let id = document(at: indexPath).id
-        return UIContextMenuConfiguration(actionProvider: { [weak self] _ in
-            UIMenu(children: [
-                UIAction(
-                    title: L10n.text("list.delete"), image: UIImage(systemName: "trash"), attributes: .destructive
-                ) { _ in self?.store.remove(id) }
-            ])
-        })
+        return UIContextMenuConfiguration(actionProvider: { [weak self] _ in self?.menu(deleting: id) })
+    }
+
+    /// The long-press menu of one row: Delete.
+    func menu(deleting id: Document.ID) -> UIMenu {
+        UIMenu(children: [
+            UIAction(
+                title: L10n.text("list.delete"), image: UIImage(systemName: "trash"), attributes: .destructive
+            ) { [weak self] _ in self?.store.remove(id) }
+        ])
     }
 
     // VoiceOver users delete without a swipe: the rotor's actions list has Delete too.

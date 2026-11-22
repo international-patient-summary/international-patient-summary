@@ -23,7 +23,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let url = URLContexts.first?.url { open(url) }
     }
 
-    private func open(_ url: URL) {
+    func open(_ url: URL) {
         guard url.isFileURL, let split = window?.rootViewController as? SplitViewController else { return }
         // Over any sheet or menu the app had open, so the result is seen.
         split.dismiss(animated: false)
