@@ -289,7 +289,7 @@ async fn keycloak_auth(idp: &TestIdp, with_paseto: Option<String>) -> Auth {
     };
     let auth = auth::from_lookup(&Environment::Production, &lookup).expect("Keycloak auth");
     let verifier = auth.keycloak().expect("a Keycloak verifier");
-    for _ in 0..100 {
+    for _ in 0_u32..100_u32 {
         if verifier.ready().is_ok() {
             return auth;
         }

@@ -84,3 +84,9 @@ Checklist for [plans.md](plans.md). Spec: [spec/index.md](spec/index.md).
       and release `overflow-checks`. `unwrap_or` with a cited fallback stays allowed
       (the status `smallint` in `store.rs`); the bundle `id` is set without indexing; the three
       embedded-constant `expect`s are recorded with `#[expect(..., reason)]`.
+- [x] **P6-T6** The updated checked-arithmetic rules (input validation RCA-IN, no `clamp`, no `panic!`,
+      `unreachable!`, `todo!`, no default numeric fallback): lints and `clippy.toml` extended; the
+      `ips_access_log.status` fallback became an error (`store::status_column`); a non-text environment
+      variable stops startup instead of reading as unset (`auth::from_vars`); the `unreachable!` in
+      `main.rs` became an error; figures declared in spec §7.1. Left as the spec says: a malformed id is a
+      `404` (S-API-5).

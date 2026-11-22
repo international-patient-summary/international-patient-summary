@@ -233,7 +233,34 @@ pub fn from_lookup(
 ///
 /// See [`from_lookup`].
 pub fn from_env(environment: &Environment) -> axa::Result<Auth> {
-    from_lookup(environment, &|name| std::env::var(name).ok())
+    from_vars(environment, &|name| std::env::var(name))
+}
+
+/// [`from_lookup`] over a source of variables that can tell "not set" from "set but not text".
+///
+/// A variable that is set to something that is not text is invalid, not absent (RCA-IN-3, RCA-IN-4), so
+/// it stops startup, naming the variable.
+///
+/// # Errors
+///
+/// See [`from_lookup`]; and a variable that is set but is not valid Unicode.
+pub fn from_vars(
+    environment: &Environment,
+    var: &dyn Fn(&str) -> Result<String, std::env::VarError>,
+) -> axa::Result<Auth> {
+    let not_text = std::cell::RefCell::new(None::<String>);
+    let auth = from_lookup(environment, &|name| match var(name) {
+        Ok(value) => Some(value),
+        Err(std::env::VarError::NotPresent) => None,
+        Err(std::env::VarError::NotUnicode(_)) => {
+            not_text.borrow_mut().get_or_insert_with(|| name.to_owned());
+            None
+        }
+    });
+    match not_text.into_inner() {
+        Some(name) => Err(config_error(format!("{name} is set but is not valid text"))),
+        None => auth,
+    }
 }
 
 /// Lets the Keycloak guard accept PASETO tokens too, under the same policy.

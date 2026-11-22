@@ -89,3 +89,18 @@ fn authentication_is_off_in_test_but_never_in_production() {
     // From the process environment, which holds none of the settings here.
     assert!(auth::from_env(&Environment::Test).is_ok());
 }
+
+#[test]
+fn a_variable_that_is_set_but_not_text_stops_startup_naming_it() {
+    use std::env::VarError;
+    // Not set: absent, as before.
+    assert!(auth::from_vars(&Environment::Test, &|_| Err(VarError::NotPresent)).is_ok());
+    // Set to text: used as before.
+    assert!(auth::from_vars(&Environment::Test, &|_| Err(VarError::NotPresent)).is_ok());
+    // Set but not text: invalid, never absent (RCA-IN-3, RCA-IN-4).
+    let error = auth::from_vars(&Environment::Test, &|_| {
+        Err(VarError::NotUnicode(std::ffi::OsString::new()))
+    })
+    .expect_err("invalid, not absent");
+    assert!(error.to_string().contains("is set but is not valid text"));
+}

@@ -44,6 +44,7 @@ pub async fn log_access(
     id: Uuid,
     status: u16,
 ) -> Result<(), sqlx::Error> {
+    let status = status_column(status)?;
     sqlx::query(
         "INSERT INTO ips_access_log (subject, issuer, action, bundle_id, status) \
          VALUES ($1, $2, $3, $4, $5)",
@@ -52,8 +53,7 @@ pub async fn log_access(
     .bind(caller.issuer.as_deref())
     .bind(access.as_str())
     .bind(id)
-    // Fallback `i16::MAX`: an HTTP status is at most 599, so it always fits; the column is a `smallint`.
-    .bind(i16::try_from(status).unwrap_or(i16::MAX))
+    .bind(status)
     .execute(connection)
     .await?;
     Ok(())
@@ -102,4 +102,29 @@ pub async fn delete(connection: &mut PgConnection, id: Uuid) -> Result<bool, sql
         .execute(connection)
         .await?;
     Ok(done.rows_affected() > 0)
+}
+
+/// The `ips_access_log.status` column is a `smallint`. An HTTP status always fits; one that does not is a defect,
+/// so it is refused, not logged as some other value (RCA-P-9, RCA-IN-2).
+fn status_column(status: u16) -> Result<i16, sqlx::Error> {
+    i16::try_from(status)
+        .map_err(|_| sqlx::Error::Protocol("ips_access_log.status: does not fit a smallint".into()))
+}
+
+#[cfg(test)]
+mod tests {
+    use super::status_column;
+
+    #[test]
+    fn a_status_that_fits_the_column_is_kept_and_one_that_does_not_is_refused() {
+        assert_eq!(status_column(200).expect("fits"), 200);
+        assert_eq!(status_column(599).expect("fits"), 599);
+        assert_eq!(
+            status_column(i16::MAX.unsigned_abs()).expect("the largest"),
+            i16::MAX
+        );
+        let error = status_column(i16::MAX.unsigned_abs() + 1).expect_err("one past the largest");
+        assert!(error.to_string().contains("ips_access_log.status"));
+        assert!(status_column(u16::MAX).is_err());
+    }
 }

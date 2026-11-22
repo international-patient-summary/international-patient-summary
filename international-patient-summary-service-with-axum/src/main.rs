@@ -66,7 +66,10 @@ async fn run() -> Result<()> {
             database(&pool, &command).await
         }
         Command::Task { .. } => Err(Error::string("this service has no tasks")),
-        Command::Check | Command::Health { .. } => unreachable!("answered before configuration"),
+        // Both were answered above, before the configuration was read; if one gets here, say so.
+        Command::Check | Command::Health { .. } => Err(Error::string(
+            "a command that is answered before configuration reached it",
+        )),
     }
 }
 

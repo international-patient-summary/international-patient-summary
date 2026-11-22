@@ -228,6 +228,20 @@ otherwise. The ones this service relies on:
 | `IPS_PASETO_KEYS_FILE` | none: PASETO off. A JSON key set of Ed25519 public keys                  |
 | `IPS_PASETO_ISSUER`, `IPS_PASETO_AUDIENCE` | required with the key file                           |
 
+### 7.1 Numeric figures and input (RCA-DECL-1, RCA-IN)
+
+The service computes almost nothing; its numbers are limits and identifiers. Each is
+declared here, and an input outside its range is an error, never a bound or a default
+(RCA-IN-2).
+
+| Figure | Type and range | Unknown / absent | Out of range or malformed | Fallback |
+| ------ | -------------- | ---------------- | ------------------------- | -------- |
+| Body size | at most 10 MB (S-API-1) | an empty body is not JSON: `400`/`422` | `413`, never truncated | none |
+| Bundle id | a version 4 UUID (S-API-5) | no route without one | `404`, as for an id not stored | none |
+| `ips_access_log.status` | `u16` HTTP status, stored as `smallint` (`i16`) | always supplied | the write is refused with an error naming the column, and so the request fails; no other value is logged (RCA-P-9) | none |
+| `PORT` and other settings | as Axa declares them | the default in §7 applies only when the variable is not set | startup fails naming the setting | none |
+| Any environment variable | text | not set: absent | set but not text: startup fails naming it (`auth::from_vars`) | none |
+
 ## 8. Verification
 
 ```sh
@@ -252,6 +266,7 @@ AXA_TEST_DB_URL=postgres://… cargo test -- --include-ignored
 | S-DEV-1     | `examples/development_paseto.rs` unit tests                              |
 | S-WEB-4     | Viewer `load.test.ts` loopback rules; browser check from a stored `bundle-minimal` service URL (tasks P2-T2) |
 | Routes      | `tests/api.rs` `route_census_matches_the_spec`                            |
+| §7.1        | `src/store.rs` `a_status_that_fits_the_column_is_kept_and_one_that_does_not_is_refused`; `tests/main/units.rs` `a_variable_that_is_set_but_not_text_stops_startup_naming_it` |
 
 S-WEB-1, S-WEB-2, S-SAFE-2, and S-SAFE-3 are Axa's behaviour, proven by Axa's
 own tests; the service checks them by hand (see tasks P1-T6).

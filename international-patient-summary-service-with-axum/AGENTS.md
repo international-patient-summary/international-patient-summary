@@ -45,7 +45,9 @@ operators, `as`, indexing, `unwrap` or `expect` on external figures, and no
 `overflow-checks`. `unwrap_or`, `unwrap_or_else`, `map_or` and `map_or_else`
 are allowed when the fallback is declared, in range and cited in a comment
 (RCA-NONE-2, RCA-NONE-3); an exception is `#[expect(lint, reason = "...")]` on
-one item (RCA-EXC-6), never `#[allow]`.
+one item (RCA-EXC-6), never `#[allow]`. An input outside its range is an
+error, never clamped or replaced by a default (RCA-IN-2); a default applies only
+to an input that is absent (RCA-IN-3). Spec §7.1 declares the figures.
 
 ## Verify before you finish
 

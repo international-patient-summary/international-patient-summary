@@ -137,17 +137,17 @@ mod tests {
     #[test]
     fn accepts_every_bundled_example() {
         let dir = concat!(env!("CARGO_MANIFEST_DIR"), "/tests/fixtures");
-        let mut seen = 0;
+        let mut seen = 0_u32;
         for entry in std::fs::read_dir(dir).expect("fixtures directory") {
             let path = entry.expect("entry").path();
             if path.extension().is_some_and(|ext| ext == "json") {
                 let text = std::fs::read_to_string(&path).expect("readable fixture");
                 let value: Value = serde_json::from_str(&text).expect("JSON fixture");
                 assert_eq!(check(&value), Ok(()), "{}", path.display());
-                seen += 1;
+                seen += 1_u32;
             }
         }
-        assert!(seen >= 5, "expected the five IG examples, saw {seen}");
+        assert!(seen >= 5_u32, "expected the five IG examples, saw {seen}");
     }
 
     #[test]
