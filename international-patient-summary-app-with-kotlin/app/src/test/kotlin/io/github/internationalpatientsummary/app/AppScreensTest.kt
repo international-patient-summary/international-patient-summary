@@ -17,6 +17,7 @@ import androidx.compose.ui.test.isRoot
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.printToString
 import android.os.Looper
+import io.github.internationalpatientsummary.app.ips.Fixtures
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import org.junit.Assert.assertEquals
@@ -124,6 +125,17 @@ class AppScreensTest {
             waitFor(hasText(text(R.string.problem_empty_clipboard)), 1)
             compose.onNode(hasText(text(R.string.problem_ok)) and hasAnyAncestor(isDialog())).performClick()
             waitFor(hasText(text(R.string.problem_empty_clipboard)), 0)
+        }
+    }
+
+    @Test fun pastedTextFromTheClipboardOpensAsASummary() {
+        ActivityScenario.launch(MainActivity::class.java).use {
+            val clipboard = context.getSystemService(android.content.ClipboardManager::class.java)
+            clipboard.setPrimaryClip(
+                android.content.ClipData.newPlainText("summary", String(Fixtures.bytes("bundle-minimal"), Charsets.UTF_8)),
+            )
+            compose.onNodeWithText(text(R.string.action_paste)).performClick()
+            waitFor(hasText(text(R.string.patient_heading)), 1)
         }
     }
 
