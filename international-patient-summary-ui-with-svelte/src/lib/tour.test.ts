@@ -56,4 +56,31 @@ describe('tour session', () => {
 		await tour.open(first);
 		expect(tour.error).toBe('notFound');
 	});
+
+	it('moves from sign-in to the list to the viewer', async () => {
+		expect(tour.step).toBe('signIn');
+		await tour.signIn(TOUR_EMAIL, TOUR_PASSWORD, href, fetchExamples);
+		expect(tour.step).toBe('summaries');
+		await tour.open(tour.summaries[0]);
+		expect(tour.step).toBe('view');
+	});
+
+	it('says the service failed when an example cannot be fetched', async () => {
+		const failing = vi.fn(async () => new Response('', { status: 500 })) as unknown as typeof fetch;
+		await tour.signIn(TOUR_EMAIL, TOUR_PASSWORD, href, failing);
+		expect(tour.error).toBe('service');
+	});
+
+	it('says the service failed when asked to open while signed out', async () => {
+		await tour.open({ id: 'x' } as (typeof tour.summaries)[number]);
+		expect(tour.error).toBe('service');
+		expect(viewer.doc).toBeUndefined();
+	});
+
+	it('names an opened summary by its id when it has no title', async () => {
+		await tour.signIn(TOUR_EMAIL, TOUR_PASSWORD, href, fetchExamples);
+		const [first] = tour.summaries;
+		await tour.open({ ...first, title: undefined });
+		expect(viewer.loaded?.source).toEqual({ kind: 'service', name: first.id });
+	});
 });
