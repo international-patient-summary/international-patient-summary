@@ -13,7 +13,8 @@ import ResultsTable from './sections/ResultsTable.svelte';
 import { sectionModels, type ObservationModel, type ReportModel } from '../fhir/models.ts';
 import { setupI18n } from '../i18n.ts';
 import { viewer } from '../state.svelte.ts';
-import { context, exampleDoc, fixtureDoc } from '../test-helpers.ts';
+import { buildDocument } from '../fhir/composition.ts';
+import { context, exampleDoc, fixtureDoc, fixtureText } from '../test-helpers.ts';
 
 beforeAll(async () => {
 	setupI18n();
@@ -290,6 +291,20 @@ describe('a section made of mixed kinds of entry', () => {
 		expect(body).toContain('Heart rate');
 		expect(body).toContain('Blood panel');
 		expect(body).toContain('Needs interpreter');
+	});
+});
+
+describe('a mixed section whose observation is not part of a report', () => {
+	it('draws the observation as a list item of its own, with its value', () => {
+		const json = JSON.parse(fixtureText('mixed-entries.json'));
+		for (const e of json.entry)
+			if (e.resource.resourceType === 'DiagnosticReport') delete e.resource.result;
+		const doc = buildDocument(json);
+		const section = doc.sections.find((s) => s.key === 'problems')!;
+		const { container } = render(SectionView, { section, doc });
+		const body = text(container);
+		expect(body).toContain('Heart rate');
+		expect(container.querySelectorAll('.record-list-item').length).toBe(3);
 	});
 });
 
