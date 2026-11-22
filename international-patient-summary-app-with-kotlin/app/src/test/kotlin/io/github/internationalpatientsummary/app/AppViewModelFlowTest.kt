@@ -41,8 +41,12 @@ class AppViewModelFlowTest {
         var saveFails = false
         var cleared = 0
 
+        /** When set, a load waits for it, so the model is still loading while a test acts. */
+        var gate: java.util.concurrent.CountDownLatch? = null
+
         @Suppress("UNCHECKED_CAST")
         override fun <T : Any> load(open: (Long, ByteArray) -> T?): Loaded<T> {
+            gate?.await()
             if (loadFails > 0) {
                 loadFails--
                 throw StoreUnavailable(IOException("busy"))
@@ -216,8 +220,13 @@ class AppViewModelFlowTest {
 
     @Test fun clearingWhileStillLoadingWaitsForTheLoad() {
         val disk = MemoryDisk()
-        val (vm, _) = model(disk)
+        disk.gate = java.util.concurrent.CountDownLatch(1)
+        val executor = java.util.concurrent.Executors.newSingleThreadExecutor()
+        val vm = AppViewModel(disk, executor)
         vm.clearAll()
+        assertEquals(0, disk.cleared)
+        disk.gate!!.countDown()
         waitFor("cleared") { disk.cleared >= 1 }
+        executor.shutdown()
     }
 }
