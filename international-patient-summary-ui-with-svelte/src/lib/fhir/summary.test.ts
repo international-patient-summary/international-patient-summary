@@ -178,3 +178,13 @@ describe('document summary', () => {
 		expect(documentSummary(doc, ctx).languageLabel).toBe('not a tag! (not a tag!)');
 	});
 });
+
+describe('referenceName for a resource that has no name', () => {
+	it('falls back to the reference display, then the reference itself', () => {
+		const doc = exampleDoc('bundle-minimal');
+		doc.resolve = () =>
+			({ resourceType: 'Encounter', status: 'finished' }) as unknown as FhirResource;
+		expect(referenceName({ reference: 'Encounter/1', display: 'A visit' }, doc)).toBe('A visit');
+		expect(referenceName({ reference: 'Encounter/1' }, doc)).toBe('Encounter/1');
+	});
+});

@@ -110,3 +110,17 @@ describe('absent and unknown data', () => {
 		expect(absentKindOfResource(statement)).toBeUndefined();
 	});
 });
+
+describe('absent kinds of resources with nothing to look at', () => {
+	it('finds no absence in a device use statement without a resolver, or in other resource types', () => {
+		const statement = {
+			resourceType: 'DeviceUseStatement',
+			status: 'active',
+			subject: { reference: 'Patient/1' },
+			device: { reference: 'Device/1' }
+		} as FhirResource;
+		expect(absentKindOfResource(statement)).toBeUndefined();
+		const encounter = { resourceType: 'Encounter', status: 'finished' } as unknown as FhirResource;
+		expect(absentKindOfResource(encounter)).toBeUndefined();
+	});
+});
