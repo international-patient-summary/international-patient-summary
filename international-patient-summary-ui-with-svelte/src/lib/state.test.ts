@@ -34,5 +34,14 @@ describe('viewer state', () => {
 			key: 'load.errors.notJsonOrYaml',
 			detail: 'unexpected detail'
 		});
+
+		viewer.fail('a thrown string');
+		expect(viewer.errors[0]).toMatchObject({
+			key: 'load.errors.notJsonOrYaml',
+			detail: 'a thrown string'
+		});
+
+		viewer.fail(new LoadError('invalidJson'));
+		expect(viewer.errors[0].detail).toBeUndefined();
 	});
 });

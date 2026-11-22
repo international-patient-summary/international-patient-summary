@@ -92,29 +92,33 @@ describe('DocumentMeta', () => {
 			expect(seen).toContain(term);
 	});
 
-	it('says "not stated" for a missing date, author and language', () => {
+	it('says "not stated" for a missing date, author and language, and leaves out the optional rows', () => {
 		const doc = exampleDoc('bundle-minimal');
-		const bare = {
-			...doc,
-			bundle: {
-				...doc.bundle,
-				entry: (doc.bundle.entry ?? []).map((e) =>
-					e.resource?.resourceType === 'Composition'
-						? {
-								...e,
-								resource: {
-									...e.resource,
-									date: undefined,
-									author: [],
-									language: undefined
-								}
-							}
-						: e
-				)
-			},
-			language: undefined
-		} as unknown as typeof doc;
+		const composition = {
+			...doc.composition,
+			title: undefined,
+			date: undefined,
+			author: [],
+			custodian: undefined,
+			attester: [],
+			confidentiality: undefined,
+			status: undefined,
+			identifier: undefined
+		} as unknown as typeof doc.composition;
+		const bundle = { ...doc.bundle, identifier: undefined } as typeof doc.bundle;
+		const bare = { ...doc, composition, bundle, language: undefined, version: undefined };
 		const { container } = render(DocumentMeta, { doc: bare });
-		expect(text(container).match(/Not stated/g)?.length).toBeGreaterThanOrEqual(1);
+		const terms = [...container.querySelectorAll('dt')].map((d) => text(d));
+		for (const left of [
+			'Title',
+			'Custodian',
+			'Attested by',
+			'Status',
+			'Confidentiality',
+			'Identifier'
+		])
+			expect(terms).not.toContain(left);
+		expect(text(container).match(/Not stated/g)?.length).toBe(3);
+		expect(container.querySelector('time')).toBeNull();
 	});
 });

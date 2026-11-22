@@ -184,6 +184,22 @@ describe('Timeline view', () => {
 });
 
 describe('Viewer', () => {
+	it('shows no source name when the document was not loaded through the loader', () => {
+		const { container } = render(Viewer, { doc: exampleDoc('bundle-minimal') });
+		expect(container.querySelector('.viewer-loaded')).toBeNull();
+	});
+
+	it('names the file a document was loaded from', () => {
+		const doc = exampleDoc('bundle-minimal');
+		viewer.loaded = {
+			data: doc.bundle,
+			format: 'json',
+			source: { kind: 'file', name: 'mine.json' }
+		};
+		const { container } = render(Viewer, { doc });
+		expect(text(container.querySelector('.viewer-loaded')!)).toContain('mine.json');
+	});
+
 	it('reveals codes only when Show codes is pressed', async () => {
 		const user = userEvent.setup();
 		const { container } = render(Viewer, { doc: exampleDoc('IPS-examples-Bundle-01') });
