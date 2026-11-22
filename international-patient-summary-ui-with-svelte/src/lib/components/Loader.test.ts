@@ -106,4 +106,31 @@ describe('Loader', () => {
 		expect(drop([file]).defaultPrevented).toBe(true);
 		await waitFor(() => expect(viewer.doc).toBeDefined());
 	});
+
+	it('ignores a drag with no files, and a leave that stays inside the page', async () => {
+		const { container } = render(Loader);
+		const over = new Event('dragover', { bubbles: true, cancelable: true });
+		Object.defineProperty(over, 'dataTransfer', { value: { types: ['text/plain'] } });
+		document.dispatchEvent(over);
+		expect(over.defaultPrevented).toBe(false);
+		const noTransfer = new Event('dragover', { bubbles: true, cancelable: true });
+		document.dispatchEvent(noTransfer);
+		expect(noTransfer.defaultPrevented).toBe(false);
+
+		await fireEvent.dragOver(document, { dataTransfer: { types: ['Files'] } });
+		const leave = new Event('dragleave', { bubbles: true });
+		Object.defineProperty(leave, 'relatedTarget', { value: document.body });
+		await fireEvent(document, leave);
+		expect(container.querySelector('.drop-overlay')).not.toBeNull();
+	});
+
+	it('selects a tab when it takes focus', async () => {
+		render(Loader);
+		screen.getByRole('tab', { name: 'Web address' }).focus();
+		await waitFor(() =>
+			expect(screen.getByRole('tab', { name: 'Web address' }).getAttribute('aria-selected')).toBe(
+				'true'
+			)
+		);
+	});
 });
