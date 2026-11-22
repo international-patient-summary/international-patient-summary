@@ -212,3 +212,16 @@ describe('markdown of unusual entries', () => {
 		expect(broken).toContain('could not be found');
 	});
 });
+
+describe('exportFilename dates', () => {
+	const named = (date: string | undefined, format: 'json' | 'pdf' = 'json') =>
+		exportFilename({ composition: { date } } as never, format);
+
+	it('uses the Composition date at the precision it has, and never anything else', () => {
+		expect(named('2026-09-30T10:00:00Z')).toBe('international-patient-summary-2026-09-30.json');
+		expect(named('2026-09')).toBe('international-patient-summary-2026-09.json');
+		expect(named('2026', 'pdf')).toBe('international-patient-summary-2026.pdf');
+		expect(named(undefined)).toBe('international-patient-summary.json');
+		expect(named('last week')).toBe('international-patient-summary.json');
+	});
+});
