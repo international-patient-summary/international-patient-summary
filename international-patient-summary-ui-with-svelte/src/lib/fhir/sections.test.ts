@@ -7,7 +7,7 @@ import {
 	ipsMissingRequired
 } from '@lilydesignsystem/svelte-headless';
 import { describe, expect, it } from 'vitest';
-import { SECTIONS } from './sections.ts';
+import { pdfPriority, sectionByCode, sectionByKey, SECTIONS } from './sections.ts';
 
 const kebab = (key: string) => key.replace(/[A-Z]/g, (c) => `-${c.toLowerCase()}`);
 
@@ -23,5 +23,16 @@ describe('the section registry', () => {
 			IPS_REQUIRED_SECTIONS
 		);
 		expect(ipsMissingRequired([{ key: 'allergies' }])).toEqual(['medications', 'problems']);
+	});
+});
+
+describe('section lookups', () => {
+	it('finds nothing for no code, or the generic key, and puts unknown sections last in the PDF', () => {
+		expect(sectionByCode(undefined)).toBeUndefined();
+		expect(sectionByCode('')).toBeUndefined();
+		expect(sectionByCode(SECTIONS[0].code)?.key).toBe(SECTIONS[0].key);
+		expect(sectionByKey('generic')).toBeUndefined();
+		expect(sectionByKey(SECTIONS[0].key)).toBe(SECTIONS[0]);
+		expect(pdfPriority('generic')).toBe(99);
 	});
 });

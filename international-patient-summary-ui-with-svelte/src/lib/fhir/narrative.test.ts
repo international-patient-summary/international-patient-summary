@@ -40,3 +40,17 @@ describe('narrative', () => {
 		}
 	});
 });
+
+describe('narrative links and images', () => {
+	it('keeps in-page links without a rel, drops unsafe links and images, and leaves bare anchors alone', () => {
+		const out = sanitizeNarrative(
+			'<div xmlns="http://www.w3.org/1999/xhtml"><a href="#top">in page</a>' +
+				'<a href="javascript:alert(1)">bad</a><a name="x">bare</a>' +
+				'<img src="javascript:alert(1)" alt="bad"/><img src="data:image/png;base64,AAAA" alt="ok"/></div>'
+		);
+		expect(out).toContain('href="#top"');
+		expect(out).not.toMatch(/javascript:/i);
+		expect(out).toContain('name="x"');
+		expect(out).toContain('alt="bad"');
+	});
+});

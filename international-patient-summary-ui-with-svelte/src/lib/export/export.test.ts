@@ -225,3 +225,26 @@ describe('exportFilename dates', () => {
 		expect(named('last week')).toBe('international-patient-summary.json');
 	});
 });
+
+describe('exportMarkdown with little stated', () => {
+	it('says "not stated" for a patient and document that state nothing', () => {
+		const doc = exampleDoc('bundle-minimal');
+		const bare = {
+			...doc,
+			patient: undefined,
+			composition: { ...doc.composition, title: undefined, date: undefined, author: [] },
+			language: undefined,
+			version: undefined
+		} as unknown as typeof doc;
+		const md = exportMarkdown(bare, context(), { now: NOW });
+		expect(md).toContain('Not stated');
+		expect(md).not.toContain('undefined');
+	});
+
+	it('lists a deceased patient, and a record with only one field as a bullet', () => {
+		const doc = fixtureDoc('sparse-patient.json');
+		const md = exportMarkdown(doc, context(), { now: NOW, includeCodes: false });
+		expect(md).toMatch(/^- \*\*/m);
+		expect(md).toMatch(/^- /m);
+	});
+});
