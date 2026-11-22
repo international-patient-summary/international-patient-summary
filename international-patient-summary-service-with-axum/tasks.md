@@ -80,3 +80,7 @@ Checklist for [plans.md](plans.md). Spec: [spec/index.md](spec/index.md).
       `start` child, which the test kills, so its coverage is never written
       (`main.rs`), plus the Keycloak health check (`lib.rs`), the warning when
       authentication is off, and one fixture line in `ips.rs`.
+- [x] **P6-T5** Checked arithmetic (RCA-ENF-1, -2, -4): the lint set in `Cargo.toml`, `clippy.toml`,
+      and release `overflow-checks`. `unwrap_or` with a cited fallback stays allowed
+      (the status `smallint` in `store.rs`); the bundle `id` is set without indexing; the three
+      embedded-constant `expect`s are recorded with `#[expect(..., reason)]`.

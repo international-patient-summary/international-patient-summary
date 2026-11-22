@@ -36,6 +36,17 @@ against that project's spec.
 - `Cargo.lock` is committed. This machine's Cargo enforces a minimum publish
   age; do not override it for anything the user has not named.
 
+## Checked arithmetic
+
+Production code follows the Rust checked arithmetic rules (RCA-*): no plain
+operators, `as`, indexing, `unwrap` or `expect` on external figures, and no
+`saturating_*`, `wrapping_*`, `clamp` or `unwrap_or_default`. `Cargo.toml`
+`[lints.clippy]` and `clippy.toml` enforce them, and release builds keep
+`overflow-checks`. `unwrap_or`, `unwrap_or_else`, `map_or` and `map_or_else`
+are allowed when the fallback is declared, in range and cited in a comment
+(RCA-NONE-2, RCA-NONE-3); an exception is `#[expect(lint, reason = "...")]` on
+one item (RCA-EXC-6), never `#[allow]`.
+
 ## Verify before you finish
 
 ```sh

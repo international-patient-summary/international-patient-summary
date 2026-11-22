@@ -93,6 +93,10 @@ fn config_error(what: impl std::fmt::Display) -> axa::Error {
 ///
 /// Never: [`POLICY`] is checked by this crate's tests.
 #[must_use]
+#[expect(
+    clippy::expect_used,
+    reason = "src/policy.json is embedded at compile time and checked by this crate's tests"
+)]
 pub fn keycloak_policy() -> keycloak::Policy {
     keycloak::Policy::from_json(POLICY).expect("src/policy.json is a valid policy")
 }
@@ -103,6 +107,10 @@ pub fn keycloak_policy() -> keycloak::Policy {
 ///
 /// Never: [`POLICY`] is checked by this crate's tests.
 #[must_use]
+#[expect(
+    clippy::expect_used,
+    reason = "src/policy.json is embedded at compile time and checked by this crate's tests"
+)]
 pub fn paseto_policy() -> authentication_verifier::Policy {
     authentication_verifier::Policy::from_json(POLICY).expect("src/policy.json is a valid policy")
 }
@@ -304,6 +312,10 @@ async fn caller(State(auth): State<Auth>, mut request: Request, next: Next) -> R
 ///
 /// Never: the map is checked by this crate's tests.
 #[must_use]
+#[expect(
+    clippy::expect_used,
+    reason = "DEFAULT_ROLE_MAP is embedded at compile time and checked by this crate's tests"
+)]
 pub fn default_role_map() -> BTreeMap<String, BTreeMap<String, Vec<String>>> {
     serde_json::from_str(DEFAULT_ROLE_MAP).expect("DEFAULT_ROLE_MAP is valid JSON")
 }

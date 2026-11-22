@@ -46,7 +46,10 @@ async fn create(
 ) -> Result<Response> {
     ips::check(&bundle).map_err(refusal)?;
     let id = Uuid::new_v4();
-    bundle["id"] = json!(id.to_string());
+    if let Some(object) = bundle.as_object_mut() {
+        // `ips::check` has already refused anything but an object.
+        object.insert("id".to_owned(), json!(id.to_string()));
+    }
     let mut tx = ctx.db.begin().await?;
     store::insert(&mut tx, id, &bundle).await?;
     store::log_access(

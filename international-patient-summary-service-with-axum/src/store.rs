@@ -52,6 +52,7 @@ pub async fn log_access(
     .bind(caller.issuer.as_deref())
     .bind(access.as_str())
     .bind(id)
+    // Fallback `i16::MAX`: an HTTP status is at most 599, so it always fits; the column is a `smallint`.
     .bind(i16::try_from(status).unwrap_or(i16::MAX))
     .execute(connection)
     .await?;
