@@ -139,4 +139,4 @@ See the [shared release checklist](../tasks.md) for cross-platform work.
 
 ## Phase 14 — Lily Design System
 
-- [ ] P14-T1 Adopt Lily's mobile packages (decided: local checkout, composite build). Done: `lily-core` and `lily-compose` in `settings.gradle.kts` and the version catalog, `compileSdk` 37.2, the summary screen's section as `InternationalPatientSummarySection` and the allergy alert as `LilyAlert` (spec §8, "Lily Design System"). Left: the banner, the contents (`InternationalPatientSummary`), the record rows (`RecordList`), the theme (`lily-compose-themes`), and a CI checkout of Lily
+- [ ] P14-T1 Adopt Lily's mobile packages (decided: local checkout, composite build). Done: `lily-core` and `lily-compose` in `settings.gradle.kts` and the version catalog, `compileSdk` 37.2, the summary screen's section as `InternationalPatientSummarySection` and the allergy alert as `LilyAlert` (spec §8, "Lily Design System"). Left: the banner, the contents (`InternationalPatientSummary`), the record rows (`RecordList`), the theme (`lily-compose-themes`), CI checks out Lily into `lily/` and passes `-Plily.dir` (`android-check.yml`).

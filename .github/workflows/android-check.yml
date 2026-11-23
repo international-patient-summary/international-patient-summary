@@ -1,7 +1,7 @@
 name: Android check
 
 # The Android app's CI (international-patient-summary-app-with-kotlin,
-# tasks.md P1-T11): unit tests, a debug build, and lint.
+# tasks.md P1-T11): unit tests, a debug build, and lint. It also checks out Lily.
 
 on:
   push:
@@ -27,10 +27,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+      # The app builds against Lily's Kotlin packages from a checkout (composite build, tasks.md P14-T1).
+      - uses: actions/checkout@v7
+        with:
+          repository: LilyDesignSystem/lily-design-system
+          path: lily
       - uses: actions/setup-java@v6
         with:
           distribution: temurin
           java-version: "21"
       - uses: android-actions/setup-android@v4
       - uses: gradle/actions/setup-gradle@v6
-      - run: ./gradlew --no-daemon :app:testDebugUnitTest :app:assembleDebug :app:lintDebug
+      - run: ./gradlew --no-daemon -Plily.dir=$GITHUB_WORKSPACE/lily/lily-design-system-kotlin :app:testDebugUnitTest :app:assembleDebug :app:lintDebug
