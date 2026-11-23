@@ -183,6 +183,20 @@ class EncryptedStoreTest {
         assertEquals(1, load().items.size)
     }
 
+    @Test fun aKeyThatFailsWhileReadingASummaryLeavesTheStoreAlone() {
+        saved("bundle-minimal")
+        var calls = 0
+        val flaky = object : KeyProvider {
+            // The index opens; the key is then lost before the first summary is read.
+            override fun key(): SecretKey = if (++calls == 1) keys.key() else throw java.security.InvalidKeyException("gone")
+            override fun delete() = keys.delete()
+        }
+        assertThrows(StoreUnavailable::class.java) { load(newStore(flaky)) }
+        assertTrue(dir.exists())
+        assertEquals(0, keys.deletes)
+        assertEquals(1, load().items.size)
+    }
+
     @Test fun aFileThatCannotBeReadNowLeavesTheStoreAlone() {
         saved("bundle-minimal", "bundle-ips-all-sections")
         val filesBefore = dir.walkTopDown().filter { it.isFile }.associate { it.relativeTo(dir).path to it.readBytes().toList() }
