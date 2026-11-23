@@ -69,7 +69,7 @@ class SmokeTest {
 
             // M-VIEW-1: the high-criticality allergy alert, and the banner with her name.
             val alert = text(R.string.alert_high_criticality, PENICILLIN)
-            waitFor(hasText(alert), 1)
+            waitFor(hasContentDescription(alert, substring = true), 1)
             compose.onNodeWithText(text(R.string.patient_heading)).assertExists()
             compose.onNode(hasText(MARTHA) and !isSelectable() and !isHeading()).assertExists()
 

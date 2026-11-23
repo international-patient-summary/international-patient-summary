@@ -225,3 +225,16 @@ not.
   `values/` as en-US.
 - **Dates**: a FHIR dateTime is written at the document's own offset, not
   converted to the phone's time zone, so it reads as the document wrote it.
+- **Lily Design System** (§8.1): the app builds Lily's `lily-core` and `lily-compose`
+  from a local checkout through a Gradle composite build (`includeBuild` in
+  `settings.gradle.kts`; the path defaults to
+  `../../../lilydesignsystem/lily-design-system/lily-design-system-kotlin`, or `-Plily.dir=...`).
+  Lily is not published to a registry, so the checkout is required to build; CI must
+  check it out beside this repository. `compileSdk` is 37.2, as Lily's library requires.
+  A section on the summary screen is Lily's `InternationalPatientSummarySection`
+  (heading, the section's state in words, then the entries); `SectionState.MISSING`
+  is Lily's `Omitted`. Lily's own lint findings are not this app's, so
+  `lint.checkDependencies` is off. The allergy alert is Lily's `LilyAlert` (kind Error) inside the error-coloured
+  card: one TalkBack stop, spoken as its heading then its lines, and announced when it
+  appears; its text is exposed as a content description, not as separate text nodes.
+  Adopted so far: the section and the alert. Next: the banner and the contents.

@@ -32,6 +32,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import io.github.lilydesignsystem.compose.AlertKind
+import io.github.lilydesignsystem.compose.InternationalPatientSummarySection
+import io.github.lilydesignsystem.compose.LilyAlert
+import io.github.lilydesignsystem.core.IpsSectionStatus
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -159,11 +163,17 @@ private fun AlertBox(alert: AllergyAlert) {
         ),
         modifier = Modifier.fillMaxWidth(),
     ) {
-        Column(Modifier.padding(16.dp).semantics(mergeDescendants = true) {}, verticalArrangement = Arrangement.spacedBy(4.dp)) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
             Icon(Icons.Filled.Warning, contentDescription = null)
-            Heading(stringResource(R.string.alert_heading))
-            if (alert.sectionMissing) Text(stringResource(R.string.alert_allergies_missing))
-            alert.highCriticality.forEach { Text(stringResource(R.string.alert_high_criticality, it)) }
+            // Lily's alert: one TalkBack stop, announced when it appears (spec §8, "Lily Design System").
+            LilyAlert(
+                heading = stringResource(R.string.alert_heading),
+                message = buildList {
+                    if (alert.sectionMissing) add(stringResource(R.string.alert_allergies_missing))
+                    alert.highCriticality.forEach { add(stringResource(R.string.alert_high_criticality, it)) }
+                }.joinToString("\n"),
+                kind = AlertKind.Error,
+            )
         }
     }
 }
@@ -239,22 +249,25 @@ private fun SectionCard(section: Section) {
     // beside entries is behind a toggle, since the entries already say it.
     var showNarrative by rememberSaveable { mutableStateOf(false) }
     val hasRows = section.entries.isNotEmpty()
+    val heading = sectionTitleText(section)
+    val state = stateText(section.state)?.let { stringResource(it) }
     Card(Modifier.fillMaxWidth()) {
-        Column(Modifier.padding(vertical = 16.dp)) {
-            Column(Modifier.padding(horizontal = 16.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                val heading = sectionTitleText(section)
-                Heading(heading)
-                // M-VIEW-3: the document's own title, as written, when it differs from the app's name.
-                section.documentTitle?.takeIf { section.key != null && it != heading }?.let {
-                    Text(it, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                }
-                stateText(section.state)?.let {
-                    Text(
-                        stringResource(it),
-                        style = MaterialTheme.typography.bodyLarge,
-                        fontWeight = if (section.state == SectionState.MISSING) FontWeight.Bold else FontWeight.Normal,
-                    )
-                }
+        // Lily's section: the heading, the state in words, then the entries (spec §9.1).
+        InternationalPatientSummarySection(
+            section = section.key?.key ?: "other",
+            heading = heading,
+            modifier = Modifier.padding(vertical = 16.dp),
+            status = lilyStatus(section.state),
+            statusLabel = state,
+        ) {
+            // M-VIEW-3: the document's own title, as written, when it differs from the app's name.
+            section.documentTitle?.takeIf { section.key != null && it != heading }?.let {
+                Text(
+                    it,
+                    Modifier.padding(horizontal = 16.dp),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
             }
             section.entries.forEachIndexed { index, entry ->
                 if (index > 0) HorizontalDivider(Modifier.padding(horizontal = 16.dp))
@@ -277,6 +290,14 @@ private fun SectionCard(section: Section) {
             }
         }
     }
+}
+
+private fun lilyStatus(state: SectionState): IpsSectionStatus = when (state) {
+    SectionState.KNOWN -> IpsSectionStatus.Known
+    SectionState.NONE_KNOWN -> IpsSectionStatus.NoneKnown
+    SectionState.NOT_RECORDED -> IpsSectionStatus.NotRecorded
+    SectionState.UNAVAILABLE -> IpsSectionStatus.Unavailable
+    SectionState.MISSING -> IpsSectionStatus.Omitted
 }
 
 /** One entry, read by a screen reader as one sentence (M-A11Y-1). */

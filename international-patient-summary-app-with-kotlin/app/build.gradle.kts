@@ -10,7 +10,7 @@ plugins {
 android {
     namespace = "io.github.internationalpatientsummary.app"
     // 37: Compose UI 1.12 and core-ktx 1.19 require it. targetSdk stays 36.
-    compileSdk = 37
+    compileSdk { version = release(37) { minorApiLevel = 2 } }
 
     defaultConfig {
         applicationId = "io.github.internationalpatientsummary.app"
@@ -64,7 +64,8 @@ android {
     lint {
         abortOnError = true
         warningsAsErrors = true
-        checkDependencies = true
+        // Lily is checked by its own build; its lint findings are not this app's.
+        checkDependencies = false
         lintConfig = file("lint.xml")
     }
 }
@@ -79,6 +80,8 @@ dependencies {
     implementation(libs.compose.material3)
     implementation(libs.compose.material.icons.core)
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.lily.core)
+    implementation(libs.lily.compose)
 
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)

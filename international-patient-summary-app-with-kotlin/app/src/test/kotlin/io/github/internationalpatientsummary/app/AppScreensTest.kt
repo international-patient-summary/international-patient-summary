@@ -64,7 +64,7 @@ class AppScreensTest {
             assertEquals(3, compose.count(isSelectable() and hasText(MARTHA)))
 
             compose.onAllNodes(isSelectable() and hasText(MARTHA))[0].performClick()
-            waitFor(hasText(text(R.string.alert_high_criticality, PENICILLIN)), 1)
+            waitFor(hasContentDescription(text(R.string.alert_high_criticality, PENICILLIN), substring = true), 1)
             compose.onNodeWithText(text(R.string.patient_heading)).assertExists()
 
             compose.onNode(hasContentDescription(text(R.string.action_back))).performClick()
@@ -108,7 +108,7 @@ class AppScreensTest {
         ActivityScenario.launch(MainActivity::class.java).use {
             loadExamples()
             compose.onAllNodes(isSelectable() and hasText(MARTHA))[0].performClick()
-            waitFor(hasText(text(R.string.alert_high_criticality, PENICILLIN)), 1)
+            waitFor(hasContentDescription(text(R.string.alert_high_criticality, PENICILLIN), substring = true), 1)
             compose.onNode(hasContentDescription(text(R.string.action_share))).performClick()
             compose.onNodeWithText(text(R.string.share_file)).performClick()
             compose.onNode(hasText(text(R.string.share_confirm_action)) and hasAnyAncestor(isDialog())).performClick()
@@ -148,7 +148,7 @@ class AppScreensTest {
             clipboard.setPrimaryClip(android.content.ClipData.newPlainText("summary", String(bundle, Charsets.UTF_8)))
             compose.onNodeWithText(text(R.string.action_paste)).performClick()
             waitFor(hasText(text(R.string.entry_not_found)), 1)
-            compose.onNodeWithText(text(R.string.alert_allergies_missing)).assertExists()
+            compose.onNode(hasContentDescription(text(R.string.alert_allergies_missing), substring = true)).assertExists()
         }
     }
 

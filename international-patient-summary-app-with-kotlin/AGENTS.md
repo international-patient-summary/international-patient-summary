@@ -56,6 +56,13 @@ edit and a test edit in the same commit, and updates `tasks.md`.
   commands or features change.
 - Commit or push only when asked.
 
+## Lily
+
+The app depends on Lily Design System from a local checkout (composite build, spec
+`android.md`, "Lily Design System"). Put it at `~/git/lilydesignsystem/lily-design-system`
+or pass `-Plily.dir=<path to lily-design-system-kotlin>`. The Android SDK it needs is found
+through `ANDROID_HOME`, not Lily's `local.properties`.
+
 ## Verify before you finish
 
 ```sh
