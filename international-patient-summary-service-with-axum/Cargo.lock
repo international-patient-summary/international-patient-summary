@@ -171,6 +171,33 @@ checksum = "5a9ca3054501e57d018b879e5c32b450668e842143fea719af6585eb31491ab0"
 dependencies = [
  "async-trait",
  "axa-environment",
+ "axa-problem",
+ "axum",
+ "clap",
+ "http-body-util",
+ "hyper",
+ "hyper-util",
+ "ppp",
+ "serde",
+ "serde_json",
+ "serde_path_to_error",
+ "thiserror 2.0.21",
+ "tokio",
+ "tower-http 0.7.1",
+ "tower-service",
+ "tracing",
+ "tracing-subscriber",
+ "uuid",
+]
+
+[[package]]
+name = "axa"
+version = "0.21.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8fa587d5e9e7930c656a839d99b1716dbd637060291c32b123125e60508ce7f3"
+dependencies = [
+ "async-trait",
+ "axa-environment",
  "axa-keycloak-auth",
  "axa-paseto-auth",
  "axa-postgres-sqlx",
@@ -181,6 +208,7 @@ dependencies = [
  "hyper",
  "hyper-util",
  "ppp",
+ "rustls",
  "serde",
  "serde_json",
  "serde_path_to_error",
@@ -203,23 +231,24 @@ checksum = "b9bdc35432012724d2a1a528ae83fc1117640f64ef910bbb46df8ad0261ebb15"
 
 [[package]]
 name = "axa-keycloak-auth"
-version = "0.5.2"
+version = "0.5.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "dd74652e67879c7db1d2fe80b907aa6760da73d3f8bed998aba85b5bfd549b68"
+checksum = "e346ca28631200ce7556fe7bb3f3fa509c114b4fe6408b1120ac76f333d074e9"
 dependencies = [
  "axum",
  "axum-keycloak-auth",
  "serde",
  "serde_json",
  "thiserror 2.0.21",
+ "tokio",
  "tracing",
 ]
 
 [[package]]
 name = "axa-paseto-auth"
-version = "0.7.2"
+version = "0.7.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "720a892726c1fe0d48f785c73c951981313841b1c0bb992125a7b91aae7c2561"
+checksum = "72259a5833790cc6c779094bcfab4448c466b847c07e11387b460f659a00e1a3"
 dependencies = [
  "authentication-verifier",
  "axa-problem",
@@ -254,7 +283,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f5a8c9d0a4a5c351886d9f8dbe28e4525469233ce275f5683760df869f03cb76"
 dependencies = [
  "authentication-verifier",
- "axa",
+ "axa 0.19.0",
  "axa-postgres-sqlx",
  "axum-test",
  "base64 0.23.1",
@@ -1589,7 +1618,7 @@ name = "international-patient-summary-service-with-axum"
 version = "0.1.0"
 dependencies = [
  "authentication-verifier",
- "axa",
+ "axa 0.21.0",
  "axa-test",
  "axum",
  "serde_json",

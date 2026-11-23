@@ -16,7 +16,7 @@ name = "international-patient-summary-service-with-axum"
 path = "src/main.rs"
 
 [dependencies]
-axa = { version = "0.19", features = ["postgres-sqlx", "keycloak", "paseto"] }
+axa = { version = "0.21", features = ["postgres-sqlx", "keycloak", "paseto"] }
 authentication-verifier = { version = "0.9", default-features = false, features = ["paseto"] }
 axum = "0.8"
 serde_json = "1"
