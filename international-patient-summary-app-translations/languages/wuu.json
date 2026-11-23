@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "%d 岁",
-    "many": "%d 岁",
-    "one": "%d 岁",
-    "other": "%d 岁",
-    "two": "%d 岁",
-    "zero": "%d 岁"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "应用版本 %1$s",
    "about_ips_version": "国际病人摘要 2.0.1（HL7 FHIR R4）",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "过敏，高危：%@",
   "app.name": "病人摘要",
   "banner.born": "出生 %@",
-  "banner.bornAge": "出生 %1$@（%2$ld 岁）",
+  "banner.bornAge": "出生 %1$@（%2$@ 岁）",
   "banner.gender": "性别：%@",
   "banner.heading": "病人",
   "banner.identifier": "标识符",

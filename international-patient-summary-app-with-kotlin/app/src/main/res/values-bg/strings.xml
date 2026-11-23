@@ -169,8 +169,4 @@
     <string name="share_confirm_title">Споделяне на резюмето на %1$s?</string>
     <string name="share_confirm_body">Отворени са резюмета на повече от един човек. Проверете дали това е човекът, чието резюме искате да споделите.</string>
     <string name="share_confirm_action">Споделяне</string>
-    <plurals name="age_years">
-        <item quantity="one">%d година</item>
-        <item quantity="other">%d години</item>
-    </plurals>
 </resources>

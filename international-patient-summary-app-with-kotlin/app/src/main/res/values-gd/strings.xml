@@ -169,10 +169,4 @@
     <string name="share_confirm_title">A bheil thu airson an geàrr-chunntas air %1$s a cho-roinneadh?</string>
     <string name="share_confirm_body">Tha geàrr-chunntasan air barrachd air aon duine fosgailte. Dèan cinnteach gur e seo an duine a tha thu airson a cho-roinneadh.</string>
     <string name="share_confirm_action">Co-roinn</string>
-    <plurals name="age_years">
-        <item quantity="one">%d bhliadhna</item>
-        <item quantity="two">%d bhliadhna</item>
-        <item quantity="few">%d bliadhnaichean</item>
-        <item quantity="other">%d bliadhna</item>
-    </plurals>
 </resources>

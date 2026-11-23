@@ -169,10 +169,4 @@
     <string name="share_confirm_title">Udostępnić podsumowanie osoby %1$s?</string>
     <string name="share_confirm_body">Otwarte są podsumowania więcej niż jednej osoby. Sprawdź, czy to osoba, której podsumowanie chcesz udostępnić.</string>
     <string name="share_confirm_action">Udostępnij</string>
-    <plurals name="age_years">
-        <item quantity="one">%d rok</item>
-        <item quantity="few">%d lata</item>
-        <item quantity="many">%d lat</item>
-        <item quantity="other">%d roku</item>
-    </plurals>
 </resources>

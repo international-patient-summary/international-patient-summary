@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "%d vuotta",
-    "many": "%d vuotta",
-    "one": "%d vuosi",
-    "other": "%d vuotta",
-    "two": "%d vuotta",
-    "zero": "%d vuotta"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "Sovelluksen versio %1$s",
    "about_ips_version": "International Patient Summary 2.0.1 (HL7 FHIR R4)",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "Allergia, suuri kriittisyys: %@",
   "app.name": "Potilasyhteenveto",
   "banner.born": "Syntynyt %@",
-  "banner.bornAge": "Syntynyt %1$@ (ikä %2$ld)",
+  "banner.bornAge": "Syntynyt %1$@ (ikä %2$@)",
   "banner.gender": "Sukupuoli: %@",
   "banner.heading": "Potilas",
   "banner.identifier": "Tunniste",

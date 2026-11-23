@@ -51,8 +51,6 @@ class TranslationsTest {
         for ((folder, strings) in translations) {
             val got = strings.keys.filterNot { it.contains('[') }.toSet()
             assertEquals("$folder: missing ${names - got}, extra ${got - names}", names, got)
-            assertTrue("$folder: no age_years plural", strings.keys.any { it.startsWith("age_years[") })
-            assertTrue("$folder: age_years has no 'other'", strings.containsKey("age_years[other]"))
         }
     }
 
@@ -66,7 +64,7 @@ class TranslationsTest {
     @Test fun placeholdersMatchEnglish() {
         for ((folder, strings) in translations) {
             for ((name, text) in strings) {
-                val source = english[name] ?: english.getValue("age_years[other]")
+                val source = english.getValue(name)
                 assertEquals("$folder $name", placeholders(source), placeholders(text))
                 assertTrue("$folder $name is empty", text.isNotBlank())
             }

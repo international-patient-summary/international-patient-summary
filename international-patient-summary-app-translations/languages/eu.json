@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "%d urte",
-    "many": "%d urte",
-    "one": "%d urte",
-    "other": "%d urte",
-    "two": "%d urte",
-    "zero": "%d urte"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "Aplikazioaren bertsioa: %1$s",
    "about_ips_version": "International Patient Summary 2.0.1 (HL7 FHIR R4)",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "Alergia, kritikotasun handia: %@",
   "app.name": "Pazientearen laburpena",
   "banner.born": "Jaiotza: %@",
-  "banner.bornAge": "Jaiotza: %1$@ (adina: %2$ld)",
+  "banner.bornAge": "Jaiotza: %1$@ (adina: %2$@)",
   "banner.gender": "Sexua: %@",
   "banner.heading": "Pazientea",
   "banner.identifier": "Identifikatzailea",

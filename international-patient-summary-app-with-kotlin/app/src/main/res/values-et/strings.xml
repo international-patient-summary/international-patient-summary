@@ -169,8 +169,4 @@
     <string name="share_confirm_title">Kas jagada inimese %1$s kokkuvõtet?</string>
     <string name="share_confirm_body">Avatud on rohkem kui ühe inimese kokkuvõtted. Kontrolli, et see on inimene, kelle kokkuvõtet soovid jagada.</string>
     <string name="share_confirm_action">Jaga</string>
-    <plurals name="age_years">
-        <item quantity="one">%d aasta</item>
-        <item quantity="other">%d aastat</item>
-    </plurals>
 </resources>

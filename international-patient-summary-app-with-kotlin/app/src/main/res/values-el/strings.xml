@@ -169,8 +169,4 @@
     <string name="share_confirm_title">Κοινοποίηση της σύνοψης για %1$s;</string>
     <string name="share_confirm_body">Είναι ανοιχτές συνόψεις για περισσότερα από ένα άτομα. Ελέγξτε ότι αυτό είναι το άτομο του οποίου τη σύνοψη θέλετε να κοινοποιήσετε.</string>
     <string name="share_confirm_action">Κοινοποίηση</string>
-    <plurals name="age_years">
-        <item quantity="one">%d έτος</item>
-        <item quantity="other">%d έτη</item>
-    </plurals>
 </resources>

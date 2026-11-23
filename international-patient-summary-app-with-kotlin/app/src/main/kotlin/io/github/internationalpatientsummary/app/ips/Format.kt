@@ -4,11 +4,15 @@
 // write the month as text so a date cannot be read two ways.
 package io.github.internationalpatientsummary.app.ips
 
+import android.icu.text.MeasureFormat
+import android.icu.util.Measure
+import android.icu.util.MeasureUnit
 import kotlinx.serialization.json.JsonElement
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.OffsetDateTime
 import java.time.Period
+import java.time.temporal.ChronoUnit
 import java.time.Year
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
@@ -156,14 +160,33 @@ object Format {
     private fun digits(formatter: DateTimeFormatter, locale: Locale): DateTimeFormatter =
         formatter.withDecimalStyle(DecimalStyle.of(locale))
 
-    /** Age in whole years on [today], or null for a partial, missing or future birth date. */
-    fun ageInYears(birthDate: String?, today: LocalDate): Int? {
+    /**
+     * The age for a clinician (spec M-VIEW-1) on [today]: days under 28 days; weeks and days under a year; months and
+     * days under two; years and months under 18; then years alone. Whole calendar units, in the reader's words from
+     * ICU (no strings of ours, so every language has them); a zero second part is left out. Null for a partial,
+     * missing, invalid or future birth date.
+     */
+    fun ageText(birthDate: String?, today: LocalDate, locale: Locale): String? {
         if (birthDate == null || !FULL_DATE.matches(birthDate)) return null
-        return try {
-            val born = LocalDate.parse(birthDate)
-            if (born.isAfter(today)) null else Period.between(born, today).years
+        val born = try {
+            LocalDate.parse(birthDate)
         } catch (_: DateTimeParseException) {
-            null
+            return null
         }
+        if (born.isAfter(today)) return null
+        val span = Period.between(born, today)
+        val totalDays = ChronoUnit.DAYS.between(born, today)
+        val parts = when {
+            totalDays < 28 -> listOf(MeasureUnit.DAY to totalDays)
+            span.years < 1 -> listOf(MeasureUnit.WEEK to totalDays / 7, MeasureUnit.DAY to totalDays % 7)
+            span.years < 2 -> listOf(MeasureUnit.MONTH to span.years * 12L + span.months, MeasureUnit.DAY to span.days.toLong())
+            span.years < 18 -> listOf(MeasureUnit.YEAR to span.years.toLong(), MeasureUnit.MONTH to span.months.toLong())
+            else -> listOf(MeasureUnit.YEAR to span.years.toLong())
+        }
+        // A zero second part is left out ("3 years", not "3 years 0 months"); a zero first part ("0 days") stays.
+        val shown = parts.filterIndexed { index, (_, value) -> index == 0 || value != 0L }
+        // Each part is worded alone and the parts are joined by a space, as on iOS: "2 years 1 month".
+        val words = MeasureFormat.getInstance(locale, MeasureFormat.FormatWidth.WIDE)
+        return shown.joinToString(" ") { (unit, value) -> words.format(Measure(value, unit)) }
     }
 }

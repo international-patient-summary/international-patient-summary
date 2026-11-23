@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "%d বছর",
-    "many": "%d বছর",
-    "one": "%d বছর",
-    "other": "%d বছর",
-    "two": "%d বছর",
-    "zero": "%d বছর"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "অ্যাপের সংস্করণ %1$s",
    "about_ips_version": "আন্তর্জাতিক রোগী সারসংক্ষেপ 2.0.1 (HL7 FHIR R4)",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "অ্যালার্জি, উচ্চ গুরুত্ব: %@",
   "app.name": "রোগী সারসংক্ষেপ",
   "banner.born": "জন্ম %@",
-  "banner.bornAge": "জন্ম %1$@ (বয়স %2$ld)",
+  "banner.bornAge": "জন্ম %1$@ (বয়স %2$@)",
   "banner.gender": "লিঙ্গ: %@",
   "banner.heading": "রোগী",
   "banner.identifier": "শনাক্তকারী",

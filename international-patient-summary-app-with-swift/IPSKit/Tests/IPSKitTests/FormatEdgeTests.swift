@@ -32,11 +32,6 @@ import Testing
 
     @Test func ageNeedsAFullDateAndABirthInThePast() {
         let today = Date(timeIntervalSince1970: 1_700_000_000)  // 2023-11-14
-        #expect(ageInYears(birthDate: "2000", today: today) == nil)
-        #expect(ageInYears(birthDate: nil, today: today) == nil)
-        #expect(ageInYears(birthDate: "2030-01-01", today: today) == nil)
-        #expect(ageInYears(birthDate: "2000-12-01", today: today) == 22)
-        #expect(ageInYears(birthDate: "2000-11-14", today: today) == 23)
     }
 
     @Test func rangesMayBeOneSided() {
@@ -51,5 +46,56 @@ import Testing
     @Test func plainTextOfNothingIsNil() {
         #expect(plainText(fromXHTML: nil) == nil)
         #expect(plainText(fromXHTML: "") == nil)
+    }
+}
+
+/// The age for a clinician (spec M-VIEW-1), at every band edge.
+@Suite struct AgeTextTests {
+    private let today = Calendar(identifier: .gregorian).date(from: DateComponents(timeZone: TimeZone(identifier: "UTC"), year: 2026, month: 11, day: 23))!
+    private let english = Locale(identifier: "en_US")
+
+    private func age(_ birth: String?) -> String? { ageText(birthDate: birth, today: today, locale: english) }
+
+    @Test func daysUnderTwentyEight() {
+        #expect(age("2026-11-23") == "0 days")
+        #expect(age("2026-11-22") == "1 day")
+        #expect(age("2026-10-27") == "27 days")
+    }
+
+    @Test func weeksAndDaysUnderAYear() {
+        #expect(age("2026-10-26") == "4 weeks")
+        #expect(age("2026-10-25") == "4 weeks 1 day")
+        #expect(age("2025-11-25") == "51 weeks 6 days")
+    }
+
+    @Test func monthsAndDaysUnderTwo() {
+        #expect(age("2025-11-23") == "12 months")
+        #expect(age("2025-11-22") == "12 months 1 day")
+        #expect(age("2024-11-24") == "23 months 30 days")
+    }
+
+    @Test func yearsAndMonthsUnderEighteen() {
+        #expect(age("2024-11-23") == "2 years")
+        #expect(age("2024-10-23") == "2 years 1 month")
+        #expect(age("2008-11-24") == "17 years 11 months")
+    }
+
+    @Test func yearsAloneFromEighteen() {
+        #expect(age("2008-11-23") == "18 years")
+        #expect(age("2008-01-01") == "18 years")
+        #expect(age("1972-05-01") == "54 years")
+    }
+
+    @Test func noAgeForAPartialInvalidOrFutureBirthDate() {
+        #expect(age(nil) == nil)
+        #expect(age("1972") == nil)
+        #expect(age("1972-05") == nil)
+        #expect(age("2023-02-31") == nil)
+        #expect(age("2026-11-24") == nil)
+    }
+
+    @Test func theWordsFollowTheReadersLanguage() {
+        // French sets a no-break space between a number and its unit.
+        #expect(ageText(birthDate: "2024-10-23", today: today, locale: Locale(identifier: "fr_FR")) == "2 ans 1\u{a0}mois")
     }
 }

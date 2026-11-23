@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "%d éves",
-    "many": "%d éves",
-    "one": "%d éves",
-    "other": "%d éves",
-    "two": "%d éves",
-    "zero": "%d éves"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "Alkalmazás verziója: %1$s",
    "about_ips_version": "International Patient Summary 2.0.1 (HL7 FHIR R4)",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "Allergia, magas kritikusság: %@",
   "app.name": "Betegösszefoglaló",
   "banner.born": "Született: %@",
-  "banner.bornAge": "Született: %1$@ (életkor: %2$ld)",
+  "banner.bornAge": "Született: %1$@ (életkor: %2$@)",
   "banner.gender": "Nem: %@",
   "banner.heading": "Beteg",
   "banner.identifier": "Azonosító",

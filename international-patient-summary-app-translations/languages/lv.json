@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "%d gadi",
-    "many": "%d gadi",
-    "one": "%d gads",
-    "other": "%d gadi",
-    "two": "%d gadi",
-    "zero": "%d gadu"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "Lietotnes versija %1$s",
    "about_ips_version": "International Patient Summary 2.0.1 (HL7 FHIR R4)",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "Alerģija, augsta kritiskuma pakāpe: %@",
   "app.name": "Pacienta kopsavilkums",
   "banner.born": "Dzimšanas datums: %@",
-  "banner.bornAge": "Dzimšanas datums: %1$@ (vecums: %2$ld)",
+  "banner.bornAge": "Dzimšanas datums: %1$@ (vecums: %2$@)",
   "banner.gender": "Dzimums: %@",
   "banner.heading": "Pacients",
   "banner.identifier": "Identifikators",

@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "%d세",
-    "many": "%d세",
-    "one": "%d세",
-    "other": "%d세",
-    "two": "%d세",
-    "zero": "%d세"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "앱 버전 %1$s",
    "about_ips_version": "국제 환자 요약 2.0.1 (HL7 FHIR R4)",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "알레르기, 위험도 높음: %@",
   "app.name": "환자 요약",
   "banner.born": "생년월일 %@",
-  "banner.bornAge": "생년월일 %1$@ (%2$ld세)",
+  "banner.bornAge": "생년월일 %1$@ (%2$@세)",
   "banner.gender": "성별: %@",
   "banner.heading": "환자",
   "banner.identifier": "식별자",

@@ -169,8 +169,4 @@
     <string name="share_confirm_title">خلاصهٔ %1$s هم‌رسانی شود؟</string>
     <string name="share_confirm_body">خلاصه‌های بیش از یک نفر باز است. بررسی کنید که این همان فردی است که می‌خواهید خلاصه‌اش را هم‌رسانی کنید.</string>
     <string name="share_confirm_action">هم‌رسانی</string>
-    <plurals name="age_years">
-        <item quantity="one">%d سال</item>
-        <item quantity="other">%d سال</item>
-    </plurals>
 </resources>

@@ -169,7 +169,4 @@
     <string name="share_confirm_title">ចែករំលែកសេចក្ដីសង្ខេបរបស់ %1$s ឬ?</string>
     <string name="share_confirm_body">សេចក្ដីសង្ខេបរបស់មនុស្សច្រើនជាងម្នាក់កំពុងបើក។ សូមពិនិត្យថា នេះជាបុគ្គលដែលអ្នកចង់ចែករំលែក។</string>
     <string name="share_confirm_action">ចែករំលែក</string>
-    <plurals name="age_years">
-        <item quantity="other">%d ឆ្នាំ</item>
-    </plurals>
 </resources>

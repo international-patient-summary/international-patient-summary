@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "%d سنوات",
-    "many": "%d سنة",
-    "one": "%d سنة",
-    "other": "%d سنة",
-    "two": "%d سنة",
-    "zero": "%d سنة"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "إصدار التطبيق %1$s",
    "about_ips_version": "الملخص الدولي للمريض 2.0.1 (HL7 FHIR R4)",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "حساسية شديدة الخطورة: %@",
   "app.name": "ملخص المريض",
   "banner.born": "تاريخ الميلاد: %@",
-  "banner.bornAge": "تاريخ الميلاد: %1$@ (العمر %2$ld)",
+  "banner.bornAge": "تاريخ الميلاد: %1$@ (العمر %2$@)",
   "banner.gender": "الجنس: %@",
   "banner.heading": "المريض",
   "banner.identifier": "المعرّف",

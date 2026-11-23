@@ -84,15 +84,12 @@ class FormatTest {
         assertTrue(Format.date("1972-05-01", Locale.forLanguageTag("ar-EG"))!!.contains('\u0661'))
     }
 
-    @Test fun agesAreWholeYearsAndNeverGuessed() {
+    @Test fun noAgeIsGuessedFromAPartialInvalidOrFutureBirthDate() {
         val today = LocalDate.of(2026, 11, 16)
-        assertEquals(54, Format.ageInYears("1972-05-01", today))
-        assertEquals(53, Format.ageInYears("1972-11-17", today))
-        assertEquals(54, Format.ageInYears("1972-11-16", today))
-        assertNull(Format.ageInYears("1972-05", today))
-        assertNull(Format.ageInYears("2023-02-31", today))
-        assertNull(Format.ageInYears("2030-01-01", today))
-        assertNull(Format.ageInYears(null, today))
+        assertNull(Format.ageText("1972-05", today, Locale.US))
+        assertNull(Format.ageText("2023-02-31", today, Locale.US))
+        assertNull(Format.ageText("2030-01-01", today, Locale.US))
+        assertNull(Format.ageText(null, today, Locale.US))
     }
 
     @Test fun quantitiesAreWrittenAsGiven() {

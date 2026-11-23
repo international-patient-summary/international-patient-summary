@@ -169,7 +169,4 @@
     <string name="share_confirm_title">Chia sẻ bản tóm tắt của %1$s?</string>
     <string name="share_confirm_body">Đang mở bản tóm tắt của nhiều người. Hãy kiểm tra đây đúng là người bạn muốn chia sẻ.</string>
     <string name="share_confirm_action">Chia sẻ</string>
-    <plurals name="age_years">
-        <item quantity="other">%d tuổi</item>
-    </plurals>
 </resources>

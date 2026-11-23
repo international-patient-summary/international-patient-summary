@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "%d leta",
-    "many": "%d let",
-    "one": "%d leto",
-    "other": "%d let",
-    "two": "%d leti",
-    "zero": "%d let"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "Različica aplikacije %1$s",
    "about_ips_version": "International Patient Summary 2.0.1 (HL7 FHIR R4)",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "Alergija, visoka kritičnost: %@",
   "app.name": "Povzetek o pacientu",
   "banner.born": "Datum rojstva: %@",
-  "banner.bornAge": "Datum rojstva: %1$@ (starost: %2$ld)",
+  "banner.bornAge": "Datum rojstva: %1$@ (starost: %2$@)",
   "banner.gender": "Spol: %@",
   "banner.heading": "Pacient",
   "banner.identifier": "Identifikator",

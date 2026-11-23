@@ -169,8 +169,4 @@
     <string name="share_confirm_title">%1$s pertsonaren laburpena partekatu?</string>
     <string name="share_confirm_body">Pertsona batek baino gehiagoren laburpenak daude irekita. Egiaztatu hau dela partekatu nahi duzun pertsona.</string>
     <string name="share_confirm_action">Partekatu</string>
-    <plurals name="age_years">
-        <item quantity="one">%d urte</item>
-        <item quantity="other">%d urte</item>
-    </plurals>
 </resources>

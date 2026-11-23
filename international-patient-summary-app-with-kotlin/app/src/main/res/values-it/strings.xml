@@ -169,9 +169,4 @@
     <string name="share_confirm_title">Condividere il riepilogo di %1$s?</string>
     <string name="share_confirm_body">Sono aperti i riepiloghi di più persone. Verifica che sia la persona che vuoi condividere.</string>
     <string name="share_confirm_action">Condividi</string>
-    <plurals name="age_years">
-        <item quantity="one">%d anno</item>
-        <item quantity="many">%d anni</item>
-        <item quantity="other">%d anni</item>
-    </plurals>
 </resources>

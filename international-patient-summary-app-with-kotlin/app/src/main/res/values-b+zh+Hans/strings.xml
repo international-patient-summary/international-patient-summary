@@ -169,7 +169,4 @@
     <string name="share_confirm_title">分享 %1$s 的摘要？</string>
     <string name="share_confirm_body">当前打开了不止一个人的摘要。请确认这是你要分享的人。</string>
     <string name="share_confirm_action">分享</string>
-    <plurals name="age_years">
-        <item quantity="other">%d 岁</item>
-    </plurals>
 </resources>

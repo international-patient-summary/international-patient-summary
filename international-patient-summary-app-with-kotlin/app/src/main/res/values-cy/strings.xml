@@ -169,12 +169,4 @@
     <string name="share_confirm_title">Rhannu crynodeb %1$s?</string>
     <string name="share_confirm_body">Mae crynodebau mwy nag un person ar agor. Gwiriwch mai hwn yw’r person rydych chi’n bwriadu ei rannu.</string>
     <string name="share_confirm_action">Rhannu</string>
-    <plurals name="age_years">
-        <item quantity="zero">%d oed</item>
-        <item quantity="one">%d oed</item>
-        <item quantity="two">%d oed</item>
-        <item quantity="few">%d oed</item>
-        <item quantity="many">%d oed</item>
-        <item quantity="other">%d oed</item>
-    </plurals>
 </resources>

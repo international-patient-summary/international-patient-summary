@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "%d વર્ષ",
-    "many": "%d વર્ષ",
-    "one": "%d વર્ષ",
-    "other": "%d વર્ષ",
-    "two": "%d વર્ષ",
-    "zero": "%d વર્ષ"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "ઍપ સંસ્કરણ %1$s",
    "about_ips_version": "International Patient Summary 2.0.1 (HL7 FHIR R4)",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "એલર્જી, ઉચ્ચ ગંભીરતા: %@",
   "app.name": "દર્દી સારાંશ",
   "banner.born": "જન્મ %@",
-  "banner.bornAge": "જન્મ %1$@ (ઉંમર %2$ld)",
+  "banner.bornAge": "જન્મ %1$@ (ઉંમર %2$@)",
   "banner.gender": "લિંગ: %@",
   "banner.heading": "દર્દી",
   "banner.identifier": "ઓળખકર્તા",

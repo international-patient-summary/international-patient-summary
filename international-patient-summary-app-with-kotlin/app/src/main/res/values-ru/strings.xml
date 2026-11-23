@@ -169,10 +169,4 @@
     <string name="share_confirm_title">Поделиться сводкой пациента %1$s?</string>
     <string name="share_confirm_body">Открыты сводки нескольких человек. Убедитесь, что это тот человек, чьей сводкой вы хотите поделиться.</string>
     <string name="share_confirm_action">Поделиться</string>
-    <plurals name="age_years">
-        <item quantity="one">%d год</item>
-        <item quantity="few">%d года</item>
-        <item quantity="many">%d лет</item>
-        <item quantity="other">%d года</item>
-    </plurals>
 </resources>

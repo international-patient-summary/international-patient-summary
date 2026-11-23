@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "%d yaş",
-    "many": "%d yaş",
-    "one": "%d yaş",
-    "other": "%d yaş",
-    "two": "%d yaş",
-    "zero": "%d yaş"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "Uygulama sürümü %1$s",
    "about_ips_version": "Uluslararası Hasta Özeti 2.0.1 (HL7 FHIR R4)",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "Alerji, yüksek kritiklik: %@",
   "app.name": "Hasta Özeti",
   "banner.born": "Doğum: %@",
-  "banner.bornAge": "Doğum: %1$@ (yaş %2$ld)",
+  "banner.bornAge": "Doğum: %1$@ (yaş %2$@)",
   "banner.gender": "Cinsiyet: %@",
   "banner.heading": "Hasta",
   "banner.identifier": "Kimlik numarası",

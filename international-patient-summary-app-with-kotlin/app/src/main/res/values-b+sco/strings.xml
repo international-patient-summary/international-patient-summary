@@ -169,8 +169,4 @@
     <string name="share_confirm_title">Share the summary o %1$s?</string>
     <string name="share_confirm_body">Summaries o mair nor ae person are open. Check that this is the person ye mean tae share.</string>
     <string name="share_confirm_action">Share</string>
-    <plurals name="age_years">
-        <item quantity="one">%d year auld</item>
-        <item quantity="other">%d year auld</item>
-    </plurals>
 </resources>

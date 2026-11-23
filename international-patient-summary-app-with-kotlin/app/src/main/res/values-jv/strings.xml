@@ -169,7 +169,4 @@
     <string name="share_confirm_title">Bagèkaké ringkesan %1$s?</string>
     <string name="share_confirm_body">Ringkesan luwih saka siji wong lagi kabukak. Priksa manawa iki wong sing arep panjenengan bagèkaké.</string>
     <string name="share_confirm_action">Bagèkaké</string>
-    <plurals name="age_years">
-        <item quantity="other">%d taun</item>
-    </plurals>
 </resources>

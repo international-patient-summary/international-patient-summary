@@ -169,8 +169,4 @@
     <string name="share_confirm_title">D’Iwwersiicht vun %1$s deelen?</string>
     <string name="share_confirm_body">Iwwersiichte vu méi wéi enger Persoun sinn op. Kuckt no, ob dat d’Persoun ass, där hir Iwwersiicht Dir deele wëllt.</string>
     <string name="share_confirm_action">Deelen</string>
-    <plurals name="age_years">
-        <item quantity="one">%d Joer</item>
-        <item quantity="other">%d Joer</item>
-    </plurals>
 </resources>

@@ -169,8 +169,4 @@
     <string name="share_confirm_title">Ibahagi ang buod ni %1$s?</string>
     <string name="share_confirm_body">Bukas ang mga buod ng higit sa isang tao. Tiyaking ito ang taong gusto mong ibahagi.</string>
     <string name="share_confirm_action">Ibahagi</string>
-    <plurals name="age_years">
-        <item quantity="one">%d taon</item>
-        <item quantity="other">%d taon</item>
-    </plurals>
 </resources>

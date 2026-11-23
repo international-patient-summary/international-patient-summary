@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "%d snin",
-    "many": "%d-il sena",
-    "one": "%d sena",
-    "other": "%d sena",
-    "two": "%d snin",
-    "zero": "%d sena"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "Verżjoni tal-app %1$s",
    "about_ips_version": "International Patient Summary 2.0.1 (HL7 FHIR R4)",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "Allerġija, kritikalità għolja: %@",
   "app.name": "Sommarju tal-pazjent",
   "banner.born": "Data tat-twelid: %@",
-  "banner.bornAge": "Data tat-twelid: %1$@ (età: %2$ld)",
+  "banner.bornAge": "Data tat-twelid: %1$@ (età: %2$@)",
   "banner.gender": "Sess: %@",
   "banner.heading": "Pazjent",
   "banner.identifier": "Identifikatur",

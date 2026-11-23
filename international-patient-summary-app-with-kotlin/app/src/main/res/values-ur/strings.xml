@@ -169,8 +169,4 @@
     <string name="share_confirm_title">%1$s کا خلاصہ شیئر کریں؟</string>
     <string name="share_confirm_body">ایک سے زیادہ افراد کے خلاصے کھلے ہیں۔ تسلی کر لیں کہ یہ وہی شخص ہے جس کا خلاصہ آپ شیئر کرنا چاہتے ہیں۔</string>
     <string name="share_confirm_action">شیئر کریں</string>
-    <plurals name="age_years">
-        <item quantity="one">%d سال</item>
-        <item quantity="other">%d سال</item>
-    </plurals>
 </resources>

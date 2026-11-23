@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "%d lata",
-    "many": "%d lat",
-    "one": "%d rok",
-    "other": "%d roku",
-    "two": "%d lata",
-    "zero": "%d lat"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "Wersja aplikacji %1$s",
    "about_ips_version": "International Patient Summary 2.0.1 (HL7 FHIR R4)",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "Alergia, wysoka krytyczność: %@",
   "app.name": "Podsumowanie pacjenta",
   "banner.born": "Data urodzenia: %@",
-  "banner.bornAge": "Data urodzenia: %1$@ (wiek: %2$ld)",
+  "banner.bornAge": "Data urodzenia: %1$@ (wiek: %2$@)",
   "banner.gender": "Płeć: %@",
   "banner.heading": "Pacjent",
   "banner.identifier": "Identyfikator",

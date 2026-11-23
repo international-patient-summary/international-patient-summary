@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "%d años",
-    "many": "%d años",
-    "one": "%d año",
-    "other": "%d años",
-    "two": "%d años",
-    "zero": "%d años"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "Versión de la app %1$s",
    "about_ips_version": "Resumen Internacional del Paciente 2.0.1 (HL7 FHIR R4)",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "Alergia de criticidad alta: %@",
   "app.name": "Resumen del paciente",
   "banner.born": "Nacimiento: %@",
-  "banner.bornAge": "Nacimiento: %1$@ (edad: %2$ld)",
+  "banner.bornAge": "Nacimiento: %1$@ (edad: %2$@)",
   "banner.gender": "Sexo: %@",
   "banner.heading": "Paciente",
   "banner.identifier": "Identificador",

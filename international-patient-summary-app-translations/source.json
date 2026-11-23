@@ -17,7 +17,7 @@
   "alerts.highCriticality": "Allergy, high criticality: %@",
   "app.name": "Patient Summary",
   "banner.born": "Born %@",
-  "banner.bornAge": "Born %1$@ (age %2$ld)",
+  "banner.bornAge": "Born %1$@ (age %2$@)",
   "banner.gender": "Gender: %@",
   "banner.heading": "Patient",
   "banner.identifier": "Identifier",
@@ -341,12 +341,7 @@
    "share_confirm_body": "Summaries of more than one person are open. Check that this is the person you mean to share.",
    "share_confirm_action": "Share"
   },
-  "plurals": {
-   "age_years": {
-    "one": "%d year",
-    "other": "%d years"
-   }
-  }
+  "plurals": {}
  },
  "notes": {
   "code.*": "FHIR status and category codes beside a condition, allergy, medication, immunization or result: clinical status (Active, Resolved), verification status (Confirmed, Refuted), result status (Final, Preliminary), medication status (Intended, Not taken). One or two words. Stopped (discontinued) and Cancelled (never started) must differ.",

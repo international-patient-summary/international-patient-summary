@@ -169,8 +169,4 @@
     <string name="share_confirm_title">Vil du dele oversigten for %1$s?</string>
     <string name="share_confirm_body">Oversigter for mere end én person er åbne. Kontrollér, at det er den person, du vil dele.</string>
     <string name="share_confirm_action">Del</string>
-    <plurals name="age_years">
-        <item quantity="one">%d år</item>
-        <item quantity="other">%d år</item>
-    </plurals>
 </resources>

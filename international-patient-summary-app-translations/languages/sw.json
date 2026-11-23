@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "miaka %d",
-    "many": "miaka %d",
-    "one": "mwaka %d",
-    "other": "miaka %d",
-    "two": "miaka %d",
-    "zero": "miaka %d"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "Toleo la programu %1$s",
    "about_ips_version": "Muhtasari wa Kimataifa wa Mgonjwa 2.0.1 (HL7 FHIR R4)",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "Mzio, hatari kubwa: %@",
   "app.name": "Muhtasari wa Mgonjwa",
   "banner.born": "Alizaliwa %@",
-  "banner.bornAge": "Alizaliwa %1$@ (umri %2$ld)",
+  "banner.bornAge": "Alizaliwa %1$@ (umri %2$@)",
   "banner.gender": "Jinsia: %@",
   "banner.heading": "Mgonjwa",
   "banner.identifier": "Kitambulisho",

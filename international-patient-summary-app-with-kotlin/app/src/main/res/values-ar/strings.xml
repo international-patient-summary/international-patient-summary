@@ -169,12 +169,4 @@
     <string name="share_confirm_title">مشاركة ملخص %1$s؟</string>
     <string name="share_confirm_body">ملخصات أكثر من شخص واحد مفتوحة. تحقّق من أن هذا هو الشخص الذي تقصد مشاركة ملخصه.</string>
     <string name="share_confirm_action">مشاركة</string>
-    <plurals name="age_years">
-        <item quantity="zero">%d سنة</item>
-        <item quantity="one">%d سنة</item>
-        <item quantity="two">%d سنة</item>
-        <item quantity="few">%d سنوات</item>
-        <item quantity="many">%d سنة</item>
-        <item quantity="other">%d سنة</item>
-    </plurals>
 </resources>

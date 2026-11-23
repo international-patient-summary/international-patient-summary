@@ -101,7 +101,7 @@ final class SummaryViewController: UITableViewController {
         }
         if let born = formatFHIRDate(document.birthDate) {
             lines.append(
-                ageInYears(birthDate: document.birthDate).map { L10n.text("banner.bornAge", born, $0) }
+                ageText(birthDate: document.birthDate).map { L10n.text("banner.bornAge", born, $0) }
                     ?? L10n.text("banner.born", born))
         }
         if let gender = document.gender { lines.append(L10n.text("banner.gender", L10n.gender(gender))) }

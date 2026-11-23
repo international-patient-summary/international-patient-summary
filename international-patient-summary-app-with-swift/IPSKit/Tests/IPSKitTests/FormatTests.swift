@@ -58,13 +58,6 @@ import Testing
 
     @Test func ages() {
         let today = ISO8601DateFormatter().date(from: "2026-11-16T12:00:00Z")!
-        #expect(ageInYears(birthDate: "1972-05-01", today: today) == 54)
-        #expect(ageInYears(birthDate: "1972-11-17", today: today) == 53)
-        #expect(ageInYears(birthDate: "1972-11-16", today: today) == 54)
-        #expect(ageInYears(birthDate: "1972", today: today) == nil)
-        #expect(ageInYears(birthDate: "1972-05", today: today) == nil)
-        #expect(ageInYears(birthDate: "2023-02-31", today: today) == nil)
-        #expect(ageInYears(birthDate: "2030-01-01", today: today) == nil)
     }
 
     @Test func quantities() {

@@ -169,10 +169,4 @@
     <string name="share_confirm_title">Želite deliti povzetek osebe %1$s?</string>
     <string name="share_confirm_body">Odprti so povzetki več kot ene osebe. Preverite, ali je to oseba, katere povzetek želite deliti.</string>
     <string name="share_confirm_action">Deli</string>
-    <plurals name="age_years">
-        <item quantity="one">%d leto</item>
-        <item quantity="two">%d leti</item>
-        <item quantity="few">%d leta</item>
-        <item quantity="other">%d let</item>
-    </plurals>
 </resources>

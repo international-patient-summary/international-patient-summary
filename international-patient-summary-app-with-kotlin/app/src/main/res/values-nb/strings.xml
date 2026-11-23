@@ -169,8 +169,4 @@
     <string name="share_confirm_title">Dele sammendraget for %1$s?</string>
     <string name="share_confirm_body">Sammendrag for mer enn én person er åpne. Sjekk at dette er personen du vil dele sammendraget for.</string>
     <string name="share_confirm_action">Del</string>
-    <plurals name="age_years">
-        <item quantity="one">%d år</item>
-        <item quantity="other">%d år</item>
-    </plurals>
 </resources>

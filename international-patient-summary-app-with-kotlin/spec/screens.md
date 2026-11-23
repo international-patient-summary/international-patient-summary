@@ -36,7 +36,8 @@
   1 year to under 2, the months and days; from 2 years to under 18, the
   years and months; from 18, the years alone. A birth date has no time of
   day, so hours and minutes are never shown; a baby born today is 0 days. A
-  zero second part is left out ("3 years", not "3 years 0 months"). The
+  zero second part is left out ("3 years", not "3 years 0 months"); the parts
+  are separated by a space, with no "and" or comma ("2 years 1 month"). The
   banner and the PDF header (M-PDF-1) say the age the same way. The banner's
   sentence puts the age beside the birth date as before; only the age's
   words are longer for a child.

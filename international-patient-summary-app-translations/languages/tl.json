@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "%d taon",
-    "many": "%d taon",
-    "one": "%d taon",
-    "other": "%d taon",
-    "two": "%d taon",
-    "zero": "%d taon"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "Bersyon ng app %1$s",
    "about_ips_version": "International Patient Summary 2.0.1 (HL7 FHIR R4)",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "Allergy, mataas ang panganib: %@",
   "app.name": "Buod ng Pasyente",
   "banner.born": "Ipinanganak %@",
-  "banner.bornAge": "Ipinanganak %1$@ (edad %2$ld)",
+  "banner.bornAge": "Ipinanganak %1$@ (edad %2$@)",
   "banner.gender": "Kasarian: %@",
   "banner.heading": "Pasyente",
   "banner.identifier": "Identifier",

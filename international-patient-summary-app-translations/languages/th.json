@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "%d ปี",
-    "many": "%d ปี",
-    "one": "%d ปี",
-    "other": "%d ปี",
-    "two": "%d ปี",
-    "zero": "%d ปี"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "เวอร์ชันแอป %1$s",
    "about_ips_version": "สรุปข้อมูลผู้ป่วยระหว่างประเทศ 2.0.1 (HL7 FHIR R4)",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "การแพ้ ความรุนแรงสูง: %@",
   "app.name": "สรุปข้อมูลผู้ป่วย",
   "banner.born": "เกิด %@",
-  "banner.bornAge": "เกิด %1$@ (อายุ %2$ld ปี)",
+  "banner.bornAge": "เกิด %1$@ (อายุ %2$@ ปี)",
   "banner.gender": "เพศ: %@",
   "banner.heading": "ผู้ป่วย",
   "banner.identifier": "ตัวระบุ",

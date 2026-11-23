@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "shekara %d",
-    "many": "shekara %d",
-    "one": "shekara %d",
-    "other": "shekara %d",
-    "two": "shekara %d",
-    "zero": "shekara %d"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "Sigar manhaja %1$s",
    "about_ips_version": "International Patient Summary 2.0.1 (HL7 FHIR R4)",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "Alerji, haɗari mai tsanani: %@",
   "app.name": "Taƙaitaccen Bayanin Majiyyaci",
   "banner.born": "Ranar haihuwa: %@",
-  "banner.bornAge": "Ranar haihuwa: %1$@ (shekaru %2$ld)",
+  "banner.bornAge": "Ranar haihuwa: %1$@ (shekaru %2$@)",
   "banner.gender": "Jinsi: %@",
   "banner.heading": "Majiyyaci",
   "banner.identifier": "Lambar shaida",

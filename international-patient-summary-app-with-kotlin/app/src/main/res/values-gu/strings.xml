@@ -169,8 +169,4 @@
     <string name="share_confirm_title">%1$s નો સારાંશ શેર કરીએ?</string>
     <string name="share_confirm_body">એક કરતાં વધુ વ્યક્તિના સારાંશ ખુલ્લા છે. ખાતરી કરો કે તમે જે વ્યક્તિનો સારાંશ શેર કરવા માગો છો તે આ જ છે.</string>
     <string name="share_confirm_action">શેર કરો</string>
-    <plurals name="age_years">
-        <item quantity="one">%d વર્ષ</item>
-        <item quantity="other">%d વર્ષ</item>
-    </plurals>
 </resources>

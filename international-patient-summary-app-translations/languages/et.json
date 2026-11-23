@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "%d aastat",
-    "many": "%d aastat",
-    "one": "%d aasta",
-    "other": "%d aastat",
-    "two": "%d aastat",
-    "zero": "%d aastat"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "Rakenduse versioon %1$s",
    "about_ips_version": "International Patient Summary 2.0.1 (HL7 FHIR R4)",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "Allergia, kõrge kriitilisus: %@",
   "app.name": "Patsiendikokkuvõte",
   "banner.born": "Sündinud %@",
-  "banner.bornAge": "Sündinud %1$@ (vanus %2$ld)",
+  "banner.bornAge": "Sündinud %1$@ (vanus %2$@)",
   "banner.gender": "Sugu: %@",
   "banner.heading": "Patsient",
   "banner.identifier": "Identifikaator",

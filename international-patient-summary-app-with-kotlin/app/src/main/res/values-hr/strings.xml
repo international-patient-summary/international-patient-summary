@@ -169,9 +169,4 @@
     <string name="share_confirm_title">Podijeliti sažetak za osobu %1$s?</string>
     <string name="share_confirm_body">Otvoreni su sažeci više osoba. Provjerite je li to osoba čiji sažetak želite podijeliti.</string>
     <string name="share_confirm_action">Podijeli</string>
-    <plurals name="age_years">
-        <item quantity="one">%d godina</item>
-        <item quantity="few">%d godine</item>
-        <item quantity="other">%d godina</item>
-    </plurals>
 </resources>

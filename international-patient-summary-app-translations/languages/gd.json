@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "%d bliadhnaichean",
-    "many": "%d bliadhna",
-    "one": "%d bhliadhna",
-    "other": "%d bliadhna",
-    "two": "%d bhliadhna",
-    "zero": "%d bliadhna"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "Tionndadh na h-aplacaid %1$s",
    "about_ips_version": "International Patient Summary 2.0.1 (HL7 FHIR R4)",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "Aileardsaidh, cunnart àrd: %@",
   "app.name": "Geàrr-chunntas euslainteach",
   "banner.born": "Rugadh: %@",
-  "banner.bornAge": "Rugadh: %1$@ (aois: %2$ld)",
+  "banner.bornAge": "Rugadh: %1$@ (aois: %2$@)",
   "banner.gender": "Gnè: %@",
   "banner.heading": "Euslainteach",
   "banner.identifier": "Aithnichear",

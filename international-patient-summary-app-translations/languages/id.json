@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "%d tahun",
-    "many": "%d tahun",
-    "one": "%d tahun",
-    "other": "%d tahun",
-    "two": "%d tahun",
-    "zero": "%d tahun"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "Versi aplikasi %1$s",
    "about_ips_version": "Ringkasan Pasien Internasional 2.0.1 (HL7 FHIR R4)",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "Alergi, kekritisan tinggi: %@",
   "app.name": "Ringkasan Pasien",
   "banner.born": "Lahir %@",
-  "banner.bornAge": "Lahir %1$@ (usia %2$ld)",
+  "banner.bornAge": "Lahir %1$@ (usia %2$@)",
   "banner.gender": "Jenis kelamin: %@",
   "banner.heading": "Pasien",
   "banner.identifier": "Identitas",

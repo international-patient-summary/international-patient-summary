@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "%d ឆ្នាំ",
-    "many": "%d ឆ្នាំ",
-    "one": "%d ឆ្នាំ",
-    "other": "%d ឆ្នាំ",
-    "two": "%d ឆ្នាំ",
-    "zero": "%d ឆ្នាំ"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "កំណែកម្មវិធី %1$s",
    "about_ips_version": "សង្ខេបអ្នកជំងឺអន្តរជាតិ 2.0.1 (HL7 FHIR R4)",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "អាឡែហ្ស៊ី កម្រិតគ្រោះថ្នាក់ខ្ពស់៖ %@",
   "app.name": "សង្ខេបអ្នកជំងឺ",
   "banner.born": "កើត %@",
-  "banner.bornAge": "កើត %1$@ (អាយុ %2$ld ឆ្នាំ)",
+  "banner.bornAge": "កើត %1$@ (អាយុ %2$@ ឆ្នាំ)",
   "banner.gender": "ភេទ៖ %@",
   "banner.heading": "អ្នកជំងឺ",
   "banner.identifier": "លេខសម្គាល់",

@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "%d ஆண்டுகள்",
-    "many": "%d ஆண்டுகள்",
-    "one": "%d ஆண்டு",
-    "other": "%d ஆண்டுகள்",
-    "two": "%d ஆண்டுகள்",
-    "zero": "%d ஆண்டுகள்"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "ஆப்ஸ் பதிப்பு %1$s",
    "about_ips_version": "International Patient Summary 2.0.1 (HL7 FHIR R4)",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "ஒவ்வாமை, அதிக தீவிரம்: %@",
   "app.name": "நோயாளி சுருக்கம்",
   "banner.born": "பிறப்பு %@",
-  "banner.bornAge": "பிறப்பு %1$@ (வயது %2$ld)",
+  "banner.bornAge": "பிறப்பு %1$@ (வயது %2$@)",
   "banner.gender": "பாலினம்: %@",
   "banner.heading": "நோயாளி",
   "banner.identifier": "அடையாளங்காட்டி",

@@ -169,8 +169,4 @@
     <string name="share_confirm_title">Jaetaanko henkilön %1$s yhteenveto?</string>
     <string name="share_confirm_body">Useamman kuin yhden henkilön yhteenvedot ovat auki. Tarkista, että tämä on henkilö, jonka yhteenvedon haluat jakaa.</string>
     <string name="share_confirm_action">Jaa</string>
-    <plurals name="age_years">
-        <item quantity="one">%d vuosi</item>
-        <item quantity="other">%d vuotta</item>
-    </plurals>
 </resources>

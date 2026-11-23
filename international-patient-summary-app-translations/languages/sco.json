@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "%d year auld",
-    "many": "%d year auld",
-    "one": "%d year auld",
-    "other": "%d year auld",
-    "two": "%d year auld",
-    "zero": "%d year auld"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "App version %1$s",
    "about_ips_version": "International Patient Summary 2.0.1 (HL7 FHIR R4)",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "Allergy, heich criticality: %@",
   "app.name": "Patient Summary",
   "banner.born": "Born %@",
-  "banner.bornAge": "Born %1$@ (%2$ld year auld)",
+  "banner.bornAge": "Born %1$@ (%2$@ year auld)",
   "banner.gender": "Gender: %@",
   "banner.heading": "Patient",
   "banner.identifier": "Identifier",

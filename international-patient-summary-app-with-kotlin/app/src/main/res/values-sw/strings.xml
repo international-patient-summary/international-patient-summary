@@ -169,8 +169,4 @@
     <string name="share_confirm_title">Ungependa kushiriki muhtasari wa %1$s?</string>
     <string name="share_confirm_body">Muhtasari wa zaidi ya mtu mmoja iko wazi. Hakikisha kuwa huyu ndiye mtu unayekusudia kushiriki.</string>
     <string name="share_confirm_action">Shiriki</string>
-    <plurals name="age_years">
-        <item quantity="one">mwaka %d</item>
-        <item quantity="other">miaka %d</item>
-    </plurals>
 </resources>

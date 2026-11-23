@@ -6825,397 +6825,397 @@
         "ar" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "تاريخ الميلاد: %1$@ (العمر %2$ld)"
+            "value" : "تاريخ الميلاد: %1$@ (العمر %2$@)"
           }
         },
         "bg" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Дата на раждане: %1$@ (възраст: %2$ld)"
+            "value" : "Дата на раждане: %1$@ (възраст: %2$@)"
           }
         },
         "bho" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "जनम %1$@ (उमिर %2$ld)"
+            "value" : "जनम %1$@ (उमिर %2$@)"
           }
         },
         "bn" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "জন্ম %1$@ (বয়স %2$ld)"
+            "value" : "জন্ম %1$@ (বয়স %2$@)"
           }
         },
         "cs" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Datum narození: %1$@ (věk: %2$ld)"
+            "value" : "Datum narození: %1$@ (věk: %2$@)"
           }
         },
         "cy" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Ganwyd %1$@ (%2$ld oed)"
+            "value" : "Ganwyd %1$@ (%2$@ oed)"
           }
         },
         "da" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Født %1$@ (%2$ld år)"
+            "value" : "Født %1$@ (%2$@ år)"
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Geboren %1$@ (%2$ld Jahre)"
+            "value" : "Geboren %1$@ (%2$@ Jahre)"
           }
         },
         "el" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Γέννηση: %1$@ (ηλικία %2$ld)"
+            "value" : "Γέννηση: %1$@ (ηλικία %2$@)"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Born %1$@ (age %2$ld)"
+            "value" : "Born %1$@ (age %2$@)"
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Born %1$@ (age %2$ld)"
+            "value" : "Born %1$@ (age %2$@)"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Nacimiento: %1$@ (edad: %2$ld)"
+            "value" : "Nacimiento: %1$@ (edad: %2$@)"
           }
         },
         "et" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Sündinud %1$@ (vanus %2$ld)"
+            "value" : "Sündinud %1$@ (vanus %2$@)"
           }
         },
         "eu" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Jaiotza: %1$@ (adina: %2$ld)"
+            "value" : "Jaiotza: %1$@ (adina: %2$@)"
           }
         },
         "fa" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "تاریخ تولد: %1$@ (سن %2$ld)"
+            "value" : "تاریخ تولد: %1$@ (سن %2$@)"
           }
         },
         "fi" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Syntynyt %1$@ (ikä %2$ld)"
+            "value" : "Syntynyt %1$@ (ikä %2$@)"
           }
         },
         "fil" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Ipinanganak %1$@ (edad %2$ld)"
+            "value" : "Ipinanganak %1$@ (edad %2$@)"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Date de naissance : %1$@ (âge : %2$ld)"
+            "value" : "Date de naissance : %1$@ (âge : %2$@)"
           }
         },
         "ga" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Rugadh %1$@ (aois %2$ld)"
+            "value" : "Rugadh %1$@ (aois %2$@)"
           }
         },
         "gd" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Rugadh: %1$@ (aois: %2$ld)"
+            "value" : "Rugadh: %1$@ (aois: %2$@)"
           }
         },
         "gu" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "જન્મ %1$@ (ઉંમર %2$ld)"
+            "value" : "જન્મ %1$@ (ઉંમર %2$@)"
           }
         },
         "ha" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Ranar haihuwa: %1$@ (shekaru %2$ld)"
+            "value" : "Ranar haihuwa: %1$@ (shekaru %2$@)"
           }
         },
         "he" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "תאריך לידה: %1$@ (גיל %2$ld)"
+            "value" : "תאריך לידה: %1$@ (גיל %2$@)"
           }
         },
         "hi" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "जन्म %1$@ (आयु %2$ld)"
+            "value" : "जन्म %1$@ (आयु %2$@)"
           }
         },
         "hr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Datum rođenja: %1$@ (dob: %2$ld)"
+            "value" : "Datum rođenja: %1$@ (dob: %2$@)"
           }
         },
         "hu" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Született: %1$@ (életkor: %2$ld)"
+            "value" : "Született: %1$@ (életkor: %2$@)"
           }
         },
         "id" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Lahir %1$@ (usia %2$ld)"
+            "value" : "Lahir %1$@ (usia %2$@)"
           }
         },
         "is" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Fædd(ur) %1$@ (%2$ld ára)"
+            "value" : "Fædd(ur) %1$@ (%2$@ ára)"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Data di nascita: %1$@ (età: %2$ld)"
+            "value" : "Data di nascita: %1$@ (età: %2$@)"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "生年月日 %1$@（%2$ld歳）"
+            "value" : "生年月日 %1$@（%2$@歳）"
           }
         },
         "jv" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Lair %1$@ (umur %2$ld)"
+            "value" : "Lair %1$@ (umur %2$@)"
           }
         },
         "km" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "កើត %1$@ (អាយុ %2$ld ឆ្នាំ)"
+            "value" : "កើត %1$@ (អាយុ %2$@ ឆ្នាំ)"
           }
         },
         "kn" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "ಜನನ %1$@ (ವಯಸ್ಸು %2$ld)"
+            "value" : "ಜನನ %1$@ (ವಯಸ್ಸು %2$@)"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "생년월일 %1$@ (%2$ld세)"
+            "value" : "생년월일 %1$@ (%2$@세)"
           }
         },
         "lb" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Gebuer %1$@ (%2$ld Joer)"
+            "value" : "Gebuer %1$@ (%2$@ Joer)"
           }
         },
         "lo" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "ເກີດ %1$@ (ອາຍຸ %2$ld ປີ)"
+            "value" : "ເກີດ %1$@ (ອາຍຸ %2$@ ປີ)"
           }
         },
         "lt" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Gimimo data: %1$@ (amžius: %2$ld)"
+            "value" : "Gimimo data: %1$@ (amžius: %2$@)"
           }
         },
         "lv" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Dzimšanas datums: %1$@ (vecums: %2$ld)"
+            "value" : "Dzimšanas datums: %1$@ (vecums: %2$@)"
           }
         },
         "mr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "जन्म %1$@ (वय %2$ld)"
+            "value" : "जन्म %1$@ (वय %2$@)"
           }
         },
         "ms" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Lahir %1$@ (umur %2$ld)"
+            "value" : "Lahir %1$@ (umur %2$@)"
           }
         },
         "mt" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Data tat-twelid: %1$@ (età: %2$ld)"
+            "value" : "Data tat-twelid: %1$@ (età: %2$@)"
           }
         },
         "nb" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Født %1$@ (%2$ld år)"
+            "value" : "Født %1$@ (%2$@ år)"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Geboren %1$@ (%2$ld jaar)"
+            "value" : "Geboren %1$@ (%2$@ jaar)"
           }
         },
         "pa" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "ਜਨਮ %1$@ (ਉਮਰ %2$ld)"
+            "value" : "ਜਨਮ %1$@ (ਉਮਰ %2$@)"
           }
         },
         "pcm" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Born %1$@ (age %2$ld)"
+            "value" : "Born %1$@ (age %2$@)"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Data urodzenia: %1$@ (wiek: %2$ld)"
+            "value" : "Data urodzenia: %1$@ (wiek: %2$@)"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Nascimento: %1$@ (idade: %2$ld)"
+            "value" : "Nascimento: %1$@ (idade: %2$@)"
           }
         },
         "pt-PT" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Nascimento: %1$@ (idade: %2$ld)"
+            "value" : "Nascimento: %1$@ (idade: %2$@)"
           }
         },
         "ro" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Data nașterii: %1$@ (vârsta: %2$ld)"
+            "value" : "Data nașterii: %1$@ (vârsta: %2$@)"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Дата рождения: %1$@ (возраст: %2$ld)"
+            "value" : "Дата рождения: %1$@ (возраст: %2$@)"
           }
         },
         "sco" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Born %1$@ (%2$ld year auld)"
+            "value" : "Born %1$@ (%2$@ year auld)"
           }
         },
         "sk" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Dátum narodenia: %1$@ (vek: %2$ld)"
+            "value" : "Dátum narodenia: %1$@ (vek: %2$@)"
           }
         },
         "sl" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Datum rojstva: %1$@ (starost: %2$ld)"
+            "value" : "Datum rojstva: %1$@ (starost: %2$@)"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Född %1$@ (%2$ld år)"
+            "value" : "Född %1$@ (%2$@ år)"
           }
         },
         "sw" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Alizaliwa %1$@ (umri %2$ld)"
+            "value" : "Alizaliwa %1$@ (umri %2$@)"
           }
         },
         "ta" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "பிறப்பு %1$@ (வயது %2$ld)"
+            "value" : "பிறப்பு %1$@ (வயது %2$@)"
           }
         },
         "te" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "జననం %1$@ (వయస్సు %2$ld)"
+            "value" : "జననం %1$@ (వయస్సు %2$@)"
           }
         },
         "th" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "เกิด %1$@ (อายุ %2$ld ปี)"
+            "value" : "เกิด %1$@ (อายุ %2$@ ปี)"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Doğum: %1$@ (yaş %2$ld)"
+            "value" : "Doğum: %1$@ (yaş %2$@)"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Дата народження: %1$@ (вік: %2$ld)"
+            "value" : "Дата народження: %1$@ (вік: %2$@)"
           }
         },
         "ur" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "تاریخ پیدائش: %1$@ (عمر %2$ld)"
+            "value" : "تاریخ پیدائش: %1$@ (عمر %2$@)"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Sinh %1$@ (%2$ld tuổi)"
+            "value" : "Sinh %1$@ (%2$@ tuổi)"
           }
         },
         "wuu" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "出生 %1$@（%2$ld 岁）"
+            "value" : "出生 %1$@（%2$@ 岁）"
           }
         },
         "yue-Hant" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "出生日期 %1$@（%2$ld 歲）"
+            "value" : "出生日期 %1$@（%2$@ 歲）"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "出生于 %1$@（%2$ld 岁）"
+            "value" : "出生于 %1$@（%2$@ 岁）"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "出生於 %1$@（%2$ld 歲）"
+            "value" : "出生於 %1$@（%2$@ 歲）"
           }
         }
       }

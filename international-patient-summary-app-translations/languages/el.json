@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "%d έτη",
-    "many": "%d έτη",
-    "one": "%d έτος",
-    "other": "%d έτη",
-    "two": "%d έτη",
-    "zero": "%d έτη"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "Έκδοση εφαρμογής %1$s",
    "about_ips_version": "International Patient Summary 2.0.1 (HL7 FHIR R4)",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "Αλλεργία, υψηλή κρισιμότητα: %@",
   "app.name": "Σύνοψη ασθενούς",
   "banner.born": "Γέννηση: %@",
-  "banner.bornAge": "Γέννηση: %1$@ (ηλικία %2$ld)",
+  "banner.bornAge": "Γέννηση: %1$@ (ηλικία %2$@)",
   "banner.gender": "Φύλο: %@",
   "banner.heading": "Ασθενής",
   "banner.identifier": "Αναγνωριστικό",

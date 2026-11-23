@@ -169,7 +169,4 @@
     <string name="share_confirm_title">แชร์สรุปของ %1$s ใช่ไหม</string>
     <string name="share_confirm_body">มีสรุปของมากกว่าหนึ่งคนเปิดอยู่ ตรวจสอบว่านี่คือบุคคลที่คุณต้องการแชร์</string>
     <string name="share_confirm_action">แชร์</string>
-    <plurals name="age_years">
-        <item quantity="other">%d ปี</item>
-    </plurals>
 </resources>

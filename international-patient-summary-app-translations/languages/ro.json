@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "%d ani",
-    "many": "%d de ani",
-    "one": "%d an",
-    "other": "%d de ani",
-    "two": "%d ani",
-    "zero": "%d ani"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "Versiunea aplicației %1$s",
    "about_ips_version": "International Patient Summary 2.0.1 (HL7 FHIR R4)",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "Alergie, criticitate ridicată: %@",
   "app.name": "Rezumatul pacientului",
   "banner.born": "Data nașterii: %@",
-  "banner.bornAge": "Data nașterii: %1$@ (vârsta: %2$ld)",
+  "banner.bornAge": "Data nașterii: %1$@ (vârsta: %2$@)",
   "banner.gender": "Sex: %@",
   "banner.heading": "Pacient",
   "banner.identifier": "Identificator",

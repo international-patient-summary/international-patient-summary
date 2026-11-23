@@ -169,10 +169,4 @@
     <string name="share_confirm_title">Bendrinti asmens %1$s santrauką?</string>
     <string name="share_confirm_body">Atidarytos daugiau nei vieno asmens santraukos. Patikrinkite, ar tai tas asmuo, kurio santrauką norite bendrinti.</string>
     <string name="share_confirm_action">Bendrinti</string>
-    <plurals name="age_years">
-        <item quantity="one">%d metai</item>
-        <item quantity="few">%d metai</item>
-        <item quantity="many">%d metų</item>
-        <item quantity="other">%d metų</item>
-    </plurals>
 </resources>

@@ -169,8 +169,4 @@
     <string name="share_confirm_title">%1$s-এর সারসংক্ষেপ শেয়ার করবেন?</string>
     <string name="share_confirm_body">একাধিক ব্যক্তির সারসংক্ষেপ খোলা আছে। নিশ্চিত হয়ে নিন যে এটিই সেই ব্যক্তি যাঁর সারসংক্ষেপ আপনি শেয়ার করতে চান।</string>
     <string name="share_confirm_action">শেয়ার করুন</string>
-    <plurals name="age_years">
-        <item quantity="one">%d বছর</item>
-        <item quantity="other">%d বছর</item>
-    </plurals>
 </resources>

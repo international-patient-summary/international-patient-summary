@@ -139,15 +139,52 @@ public func formatFHIRDate(_ text: String?, locale: Locale = .current) -> String
     return formatter.string(from: instant)
 }
 
-/// Whole years from a full birth date to `today`; nil for a partial date.
-public func ageInYears(birthDate: String?, today: Date = Date()) -> Int? {
+/// The age for a clinician (spec M-VIEW-1): days under 28 days; weeks and days under a year; months and days under
+/// two; years and months under 18; then years alone. Whole calendar units from a full birth date to `today`, in the
+/// reader's words; a zero second part is left out. nil for a partial, invalid or future birth date.
+public func ageText(birthDate: String?, today: Date = Date(), locale: Locale = .current) -> String? {
     guard let birth = FHIRDate(birthDate), let month = birth.month, let day = birth.day else { return nil }
     var calendar = Calendar(identifier: .gregorian)
     calendar.timeZone = TimeZone(identifier: "UTC")!
-    let now = calendar.dateComponents([.year, .month, .day], from: today)
-    guard let year = now.year, let nowMonth = now.month, let nowDay = now.day else { return nil }
-    let age = year - birth.year - ((nowMonth, nowDay) < (month, day) ? 1 : 0)
-    return age >= 0 ? age : nil
+    calendar.locale = locale
+    guard let born = calendar.date(from: DateComponents(year: birth.year, month: month, day: day)) else { return nil }
+    let now = calendar.startOfDay(for: today)
+    guard now >= born else { return nil }
+    let span = calendar.dateComponents([.year, .month, .day], from: born, to: now)
+    guard let years = span.year, let months = span.month, let days = span.day else { return nil }
+    let totalDays = calendar.dateComponents([.day], from: born, to: now).day ?? 0
+    // The units, largest first; each is worded alone, so the system cannot rebalance days into weeks.
+    var parts: [(NSCalendar.Unit, Int)]
+    if totalDays < 28 {
+        parts = [(.day, totalDays)]
+    } else if years < 1 {
+        parts = [(.weekOfMonth, totalDays / 7), (.day, totalDays % 7)]
+    } else if years < 2 {
+        parts = [(.month, years * 12 + months), (.day, days)]
+    } else if years < 18 {
+        parts = [(.year, years), (.month, months)]
+    } else {
+        parts = [(.year, years)]
+    }
+    // A zero second part is left out ("3 years", not "3 years 0 months").
+    parts = parts.enumerated().filter { $0.offset == 0 || $0.element.1 != 0 }.map(\.element)
+    let words = parts.compactMap { unit, value -> String? in
+        var components = DateComponents()
+        switch unit {
+        case .year: components.year = value
+        case .month: components.month = value
+        case .weekOfMonth: components.weekOfMonth = value
+        default: components.day = value
+        }
+        let formatter = DateComponentsFormatter()
+        formatter.calendar = calendar
+        formatter.unitsStyle = .full
+        formatter.allowedUnits = unit
+        formatter.zeroFormattingBehavior = .pad
+        return formatter.string(from: components)
+    }
+    guard words.count == parts.count else { return nil }
+    return words.joined(separator: " ")
 }
 
 /// A clinical JSON number exactly as FHIR gave it: no rounding or normalisation.

@@ -169,10 +169,4 @@
     <string name="share_confirm_title">Sdílet souhrn osoby %1$s?</string>
     <string name="share_confirm_body">Jsou otevřené souhrny více než jedné osoby. Zkontrolujte, že jde o osobu, jejíž souhrn chcete sdílet.</string>
     <string name="share_confirm_action">Sdílet</string>
-    <plurals name="age_years">
-        <item quantity="one">%d rok</item>
-        <item quantity="few">%d roky</item>
-        <item quantity="many">%d roku</item>
-        <item quantity="other">%d let</item>
-    </plurals>
 </resources>

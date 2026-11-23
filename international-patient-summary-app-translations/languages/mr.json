@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "%d वर्षे",
-    "many": "%d वर्षे",
-    "one": "%d वर्ष",
-    "other": "%d वर्षे",
-    "two": "%d वर्षे",
-    "zero": "%d वर्षे"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "ॲप आवृत्ती %1$s",
    "about_ips_version": "International Patient Summary 2.0.1 (HL7 FHIR R4)",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "अ‍ॅलर्जी, उच्च गंभीरता: %@",
   "app.name": "रुग्ण सारांश",
   "banner.born": "जन्म %@",
-  "banner.bornAge": "जन्म %1$@ (वय %2$ld)",
+  "banner.bornAge": "जन्म %1$@ (वय %2$@)",
   "banner.gender": "लिंग: %@",
   "banner.heading": "रुग्ण",
   "banner.identifier": "ओळख क्रमांक",

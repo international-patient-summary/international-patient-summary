@@ -169,9 +169,4 @@
     <string name="share_confirm_title">לשתף את הסיכום של %1$s?</string>
     <string name="share_confirm_body">פתוחים סיכומים של יותר מאדם אחד. כדאי לוודא שזה האדם שרוצים לשתף.</string>
     <string name="share_confirm_action">שיתוף</string>
-    <plurals name="age_years">
-        <item quantity="one">%d שנה</item>
-        <item quantity="two">%d שנים</item>
-        <item quantity="other">%d שנים</item>
-    </plurals>
 </resources>

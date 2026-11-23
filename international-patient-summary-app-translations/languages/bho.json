@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "%d बरिस",
-    "many": "%d बरिस",
-    "one": "%d बरिस",
-    "other": "%d बरिस",
-    "two": "%d बरिस",
-    "zero": "%d बरिस"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "ऐप संस्करण %1$s",
    "about_ips_version": "International Patient Summary 2.0.1 (HL7 FHIR R4)",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "एलर्जी, बहुत गंभीर: %@",
   "app.name": "मरीज सारांश",
   "banner.born": "जनम %@",
-  "banner.bornAge": "जनम %1$@ (उमिर %2$ld)",
+  "banner.bornAge": "जनम %1$@ (उमिर %2$@)",
   "banner.gender": "लिंग: %@",
   "banner.heading": "मरीज",
   "banner.identifier": "पहचान",

@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "%d ਸਾਲ",
-    "many": "%d ਸਾਲ",
-    "one": "%d ਸਾਲ",
-    "other": "%d ਸਾਲ",
-    "two": "%d ਸਾਲ",
-    "zero": "%d ਸਾਲ"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "ਐਪ ਵਰਜਨ %1$s",
    "about_ips_version": "International Patient Summary 2.0.1 (HL7 FHIR R4)",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "ਐਲਰਜੀ, ਉੱਚ ਗੰਭੀਰਤਾ: %@",
   "app.name": "ਮਰੀਜ਼ ਸੰਖੇਪ",
   "banner.born": "ਜਨਮ %@",
-  "banner.bornAge": "ਜਨਮ %1$@ (ਉਮਰ %2$ld)",
+  "banner.bornAge": "ਜਨਮ %1$@ (ਉਮਰ %2$@)",
   "banner.gender": "ਲਿੰਗ: %@",
   "banner.heading": "ਮਰੀਜ਼",
   "banner.identifier": "ਪਛਾਣਕਰਤਾ",

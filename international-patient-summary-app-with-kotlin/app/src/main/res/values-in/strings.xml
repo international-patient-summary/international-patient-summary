@@ -169,7 +169,4 @@
     <string name="share_confirm_title">Bagikan ringkasan %1$s?</string>
     <string name="share_confirm_body">Ringkasan lebih dari satu orang sedang terbuka. Pastikan ini orang yang ingin Anda bagikan.</string>
     <string name="share_confirm_action">Bagikan</string>
-    <plurals name="age_years">
-        <item quantity="other">%d tahun</item>
-    </plurals>
 </resources>

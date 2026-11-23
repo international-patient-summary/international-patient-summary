@@ -169,8 +169,4 @@
     <string name="share_confirm_title">Deila yfirliti fyrir %1$s?</string>
     <string name="share_confirm_body">Yfirlit fleiri en eins einstaklings eru opin. Gakktu úr skugga um að þetta sé einstaklingurinn sem þú ætlar að deila.</string>
     <string name="share_confirm_action">Deila</string>
-    <plurals name="age_years">
-        <item quantity="one">%d árs</item>
-        <item quantity="other">%d ára</item>
-    </plurals>
 </resources>

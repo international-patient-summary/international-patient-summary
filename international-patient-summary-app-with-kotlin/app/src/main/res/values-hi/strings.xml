@@ -169,8 +169,4 @@
     <string name="share_confirm_title">%1$s का सारांश शेयर करें?</string>
     <string name="share_confirm_body">एक से अधिक व्यक्तियों के सारांश खुले हैं। जाँच लें कि आप इसी व्यक्ति का सारांश शेयर करना चाहते हैं।</string>
     <string name="share_confirm_action">शेयर करें</string>
-    <plurals name="age_years">
-        <item quantity="one">%d वर्ष</item>
-        <item quantity="other">%d वर्ष</item>
-    </plurals>
 </resources>

@@ -41,7 +41,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
@@ -206,12 +205,12 @@ private fun Banner(patient: PatientInfo?, relationship: Relationship) {
             )
             relationshipLine()
             Format.date(patient.birthDate, locale)?.let { born ->
-                val age = Format.ageInYears(patient.birthDate, LocalDate.now())
+                val age = Format.ageText(patient.birthDate, LocalDate.now(), locale)
                 Text(
                     if (age == null) {
                         stringResource(R.string.patient_born, born)
                     } else {
-                        stringResource(R.string.patient_born_with_age, born, pluralStringResource(R.plurals.age_years, age, age))
+                        stringResource(R.string.patient_born_with_age, born, age)
                     },
                 )
             }

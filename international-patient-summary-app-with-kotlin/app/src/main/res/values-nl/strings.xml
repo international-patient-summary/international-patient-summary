@@ -169,8 +169,4 @@
     <string name="share_confirm_title">De samenvatting van %1$s delen?</string>
     <string name="share_confirm_body">Er zijn samenvattingen van meer dan één persoon geopend. Controleer of dit de persoon is wiens samenvatting je wilt delen.</string>
     <string name="share_confirm_action">Delen</string>
-    <plurals name="age_years">
-        <item quantity="one">%d jaar</item>
-        <item quantity="other">%d jaar</item>
-    </plurals>
 </resources>

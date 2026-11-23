@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "%d שנים",
-    "many": "%d שנים",
-    "one": "%d שנה",
-    "other": "%d שנים",
-    "two": "%d שנים",
-    "zero": "%d שנים"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "גרסת האפליקציה %1$s",
    "about_ips_version": "International Patient Summary 2.0.1 (HL7 FHIR R4)",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "אלרגיה, חומרה גבוהה: %@",
   "app.name": "סיכום מטופל",
   "banner.born": "תאריך לידה: %@",
-  "banner.bornAge": "תאריך לידה: %1$@ (גיל %2$ld)",
+  "banner.bornAge": "תאריך לידה: %1$@ (גיל %2$@)",
   "banner.gender": "מגדר: %@",
   "banner.heading": "מטופל",
   "banner.identifier": "מזהה",

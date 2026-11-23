@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "%d года",
-    "many": "%d лет",
-    "one": "%d год",
-    "other": "%d года",
-    "two": "%d года",
-    "zero": "%d лет"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "Версия приложения %1$s",
    "about_ips_version": "Международная сводка о пациенте 2.0.1 (HL7 FHIR R4)",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "Аллергия, высокая критичность: %@",
   "app.name": "Сводка о пациенте",
   "banner.born": "Дата рождения: %@",
-  "banner.bornAge": "Дата рождения: %1$@ (возраст: %2$ld)",
+  "banner.bornAge": "Дата рождения: %1$@ (возраст: %2$@)",
   "banner.gender": "Пол: %@",
   "banner.heading": "Пациент",
   "banner.identifier": "Идентификатор",

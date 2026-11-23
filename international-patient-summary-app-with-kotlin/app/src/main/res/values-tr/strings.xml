@@ -169,8 +169,4 @@
     <string name="share_confirm_title">%1$s adlı kişinin özeti paylaşılsın mı?</string>
     <string name="share_confirm_body">Birden fazla kişinin özetleri açık. Paylaşmak istediğiniz kişinin bu olduğundan emin olun.</string>
     <string name="share_confirm_action">Paylaş</string>
-    <plurals name="age_years">
-        <item quantity="one">%d yaş</item>
-        <item quantity="other">%d yaş</item>
-    </plurals>
 </resources>

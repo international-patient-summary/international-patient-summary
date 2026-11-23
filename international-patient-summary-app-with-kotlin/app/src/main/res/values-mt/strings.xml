@@ -169,11 +169,4 @@
     <string name="share_confirm_title">Taqsam is-sommarju ta’ %1$s?</string>
     <string name="share_confirm_body">Huma miftuħa sommarji ta’ aktar minn persuna waħda. Iċċekkja li din hija l-persuna li trid taqsam is-sommarju tagħha.</string>
     <string name="share_confirm_action">Aqsam</string>
-    <plurals name="age_years">
-        <item quantity="one">%d sena</item>
-        <item quantity="two">%d snin</item>
-        <item quantity="few">%d snin</item>
-        <item quantity="many">%d-il sena</item>
-        <item quantity="other">%d sena</item>
-    </plurals>
 </resources>

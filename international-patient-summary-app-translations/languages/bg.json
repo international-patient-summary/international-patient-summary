@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "%d години",
-    "many": "%d години",
-    "one": "%d година",
-    "other": "%d години",
-    "two": "%d години",
-    "zero": "%d години"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "Версия на приложението %1$s",
    "about_ips_version": "International Patient Summary 2.0.1 (HL7 FHIR R4)",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "Алергия, висока критичност: %@",
   "app.name": "Резюме на пациента",
   "banner.born": "Дата на раждане: %@",
-  "banner.bornAge": "Дата на раждане: %1$@ (възраст: %2$ld)",
+  "banner.bornAge": "Дата на раждане: %1$@ (възраст: %2$@)",
   "banner.gender": "Пол: %@",
   "banner.heading": "Пациент",
   "banner.identifier": "Идентификатор",

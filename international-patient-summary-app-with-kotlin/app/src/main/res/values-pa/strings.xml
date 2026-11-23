@@ -169,8 +169,4 @@
     <string name="share_confirm_title">ਕੀ %1$s ਦਾ ਸੰਖੇਪ ਸਾਂਝਾ ਕਰਨਾ ਹੈ?</string>
     <string name="share_confirm_body">ਇੱਕ ਤੋਂ ਵੱਧ ਵਿਅਕਤੀਆਂ ਦੇ ਸੰਖੇਪ ਖੁੱਲ੍ਹੇ ਹਨ। ਜਾਂਚ ਕਰੋ ਕਿ ਇਹ ਉਹੀ ਵਿਅਕਤੀ ਹੈ ਜਿਸ ਦਾ ਸੰਖੇਪ ਤੁਸੀਂ ਸਾਂਝਾ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ।</string>
     <string name="share_confirm_action">ਸਾਂਝਾ ਕਰੋ</string>
-    <plurals name="age_years">
-        <item quantity="one">%d ਸਾਲ</item>
-        <item quantity="other">%d ਸਾਲ</item>
-    </plurals>
 </resources>

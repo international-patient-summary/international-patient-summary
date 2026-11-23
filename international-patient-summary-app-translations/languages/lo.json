@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "%d ປີ",
-    "many": "%d ປີ",
-    "one": "%d ປີ",
-    "other": "%d ປີ",
-    "two": "%d ປີ",
-    "zero": "%d ປີ"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "ເວີຊັນແອັບ %1$s",
    "about_ips_version": "ບົດສະຫຼຸບຄົນເຈັບສາກົນ 2.0.1 (HL7 FHIR R4)",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "ການແພ້, ຄວາມຮຸນແຮງສູງ: %@",
   "app.name": "ບົດສະຫຼຸບຄົນເຈັບ",
   "banner.born": "ເກີດ %@",
-  "banner.bornAge": "ເກີດ %1$@ (ອາຍຸ %2$ld ປີ)",
+  "banner.bornAge": "ເກີດ %1$@ (ອາຍຸ %2$@ ປີ)",
   "banner.gender": "ເພດ: %@",
   "banner.heading": "ຄົນເຈັບ",
   "banner.identifier": "ເລກລະບຸຕົວຕົນ",

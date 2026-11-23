@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "%d oed",
-    "many": "%d oed",
-    "one": "%d oed",
-    "other": "%d oed",
-    "two": "%d oed",
-    "zero": "%d oed"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "Fersiwn yr ap %1$s",
    "about_ips_version": "Crynodeb Rhyngwladol o Gleifion 2.0.1 (HL7 FHIR R4)",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "Alergedd, critigolrwydd uchel: %@",
   "app.name": "Crynodeb claf",
   "banner.born": "Ganwyd %@",
-  "banner.bornAge": "Ganwyd %1$@ (%2$ld oed)",
+  "banner.bornAge": "Ganwyd %1$@ (%2$@ oed)",
   "banner.gender": "Rhywedd: %@",
   "banner.heading": "Claf",
   "banner.identifier": "Dynodydd",

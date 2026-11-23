@@ -169,7 +169,4 @@
     <string name="share_confirm_title">Kongsi ringkasan %1$s?</string>
     <string name="share_confirm_body">Ringkasan lebih daripada seorang dibuka. Semak bahawa ini ialah orang yang ringkasannya anda mahu kongsi.</string>
     <string name="share_confirm_action">Kongsi</string>
-    <plurals name="age_years">
-        <item quantity="other">%d tahun</item>
-    </plurals>
 </resources>

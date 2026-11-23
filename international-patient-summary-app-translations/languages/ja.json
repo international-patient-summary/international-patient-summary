@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "%d歳",
-    "many": "%d歳",
-    "one": "%d歳",
-    "other": "%d歳",
-    "two": "%d歳",
-    "zero": "%d歳"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "アプリのバージョン %1$s",
    "about_ips_version": "国際患者サマリー 2.0.1（HL7 FHIR R4）",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "アレルギー（重篤度：高）：%@",
   "app.name": "患者サマリー",
   "banner.born": "生年月日 %@",
-  "banner.bornAge": "生年月日 %1$@（%2$ld歳）",
+  "banner.bornAge": "生年月日 %1$@（%2$@歳）",
   "banner.gender": "性別：%@",
   "banner.heading": "患者",
   "banner.identifier": "識別子",

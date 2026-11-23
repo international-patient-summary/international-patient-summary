@@ -169,7 +169,4 @@
     <string name="share_confirm_title">ແບ່ງປັນບົດສະຫຼຸບຂອງ %1$s ບໍ?</string>
     <string name="share_confirm_body">ມີບົດສະຫຼຸບຂອງຫຼາຍກວ່າໜຶ່ງຄົນເປີດຢູ່. ກະລຸນາກວດເບິ່ງວ່ານີ້ແມ່ນບຸກຄົນທີ່ທ່ານຕ້ອງການແບ່ງປັນບົດສະຫຼຸບ.</string>
     <string name="share_confirm_action">ແບ່ງປັນ</string>
-    <plurals name="age_years">
-        <item quantity="other">%d ປີ</item>
-    </plurals>
 </resources>

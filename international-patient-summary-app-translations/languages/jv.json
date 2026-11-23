@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "%d taun",
-    "many": "%d taun",
-    "one": "%d taun",
-    "other": "%d taun",
-    "two": "%d taun",
-    "zero": "%d taun"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "Vèrsi aplikasi %1$s",
    "about_ips_version": "International Patient Summary 2.0.1 (HL7 FHIR R4)",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "Alergi, kritikalitas dhuwur: %@",
   "app.name": "Ringkesan Pasien",
   "banner.born": "Lair %@",
-  "banner.bornAge": "Lair %1$@ (umur %2$ld)",
+  "banner.bornAge": "Lair %1$@ (umur %2$@)",
   "banner.gender": "Jinis kelamin: %@",
   "banner.heading": "Pasien",
   "banner.identifier": "Idhèntitas",

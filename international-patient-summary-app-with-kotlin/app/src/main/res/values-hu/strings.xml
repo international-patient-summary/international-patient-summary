@@ -169,8 +169,4 @@
     <string name="share_confirm_title">Megosztja a következő személy összefoglalóját: %1$s?</string>
     <string name="share_confirm_body">Több személy összefoglalója van megnyitva. Ellenőrizze, hogy valóban ennek a személynek az összefoglalóját kívánja-e megosztani.</string>
     <string name="share_confirm_action">Megosztás</string>
-    <plurals name="age_years">
-        <item quantity="one">%d éves</item>
-        <item quantity="other">%d éves</item>
-    </plurals>
 </resources>

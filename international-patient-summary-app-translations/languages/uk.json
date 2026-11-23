@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "%d роки",
-    "many": "%d років",
-    "one": "%d рік",
-    "other": "%d року",
-    "two": "%d роки",
-    "zero": "%d років"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "Версія застосунку %1$s",
    "about_ips_version": "International Patient Summary 2.0.1 (HL7 FHIR R4)",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "Алергія, висока критичність: %@",
   "app.name": "Зведення про пацієнта",
   "banner.born": "Дата народження: %@",
-  "banner.bornAge": "Дата народження: %1$@ (вік: %2$ld)",
+  "banner.bornAge": "Дата народження: %1$@ (вік: %2$@)",
   "banner.gender": "Стать: %@",
   "banner.heading": "Пацієнт",
   "banner.identifier": "Ідентифікатор",

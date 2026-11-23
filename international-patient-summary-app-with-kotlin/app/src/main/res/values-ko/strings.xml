@@ -169,7 +169,4 @@
     <string name="share_confirm_title">%1$s 님의 요약을 공유할까요?</string>
     <string name="share_confirm_body">여러 사람의 요약이 열려 있습니다. 공유하려는 사람이 맞는지 확인하세요.</string>
     <string name="share_confirm_action">공유</string>
-    <plurals name="age_years">
-        <item quantity="other">%d세</item>
-    </plurals>
 </resources>

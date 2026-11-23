@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "%d سال",
-    "many": "%d سال",
-    "one": "%d سال",
-    "other": "%d سال",
-    "two": "%d سال",
-    "zero": "%d سال"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "نسخهٔ برنامه %1$s",
    "about_ips_version": "International Patient Summary 2.0.1 (HL7 FHIR R4)",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "حساسیت با خطر بالا: %@",
   "app.name": "خلاصهٔ بیمار",
   "banner.born": "تاریخ تولد: %@",
-  "banner.bornAge": "تاریخ تولد: %1$@ (سن %2$ld)",
+  "banner.bornAge": "تاریخ تولد: %1$@ (سن %2$@)",
   "banner.gender": "جنسیت: %@",
   "banner.heading": "بیمار",
   "banner.identifier": "شناسه",

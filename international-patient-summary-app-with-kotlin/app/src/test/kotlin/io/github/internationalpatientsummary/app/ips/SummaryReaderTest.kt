@@ -153,7 +153,7 @@ class SummaryReaderTest {
 
         assertEquals("2023-02-31", summary.patient?.birthDate)
         assertEquals("2023-02-31", Format.date(summary.patient?.birthDate, Locale.UK))
-        assertNull(Format.ageInYears(summary.patient?.birthDate, LocalDate.of(2026, 11, 19)))
+        assertNull(Format.ageText(summary.patient?.birthDate, LocalDate.of(2026, 11, 19), Locale.UK))
         val entry = summary.sections.flatMap { it.entries }.filterIsInstance<Entry.Resolved>()
             .first { row -> row.details.any { it.kind == DetailKind.VALUE && it.value == "0.12345678901234567890\u00a0mmol/L" } }
         val pdfRows = OnePage.of(summary).boxBlocks() + OnePage.of(summary).bodyBlocks(PdfPlan(10f))

@@ -169,8 +169,4 @@
     <string name="share_confirm_title">Übersicht von %1$s teilen?</string>
     <string name="share_confirm_body">Übersichten mehrerer Personen sind geöffnet. Prüfen Sie, ob dies die Person ist, deren Übersicht Sie teilen möchten.</string>
     <string name="share_confirm_action">Teilen</string>
-    <plurals name="age_years">
-        <item quantity="one">%d Jahr</item>
-        <item quantity="other">%d Jahre</item>
-    </plurals>
 </resources>

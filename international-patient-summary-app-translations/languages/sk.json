@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "%d roky",
-    "many": "%d roka",
-    "one": "%d rok",
-    "other": "%d rokov",
-    "two": "%d roky",
-    "zero": "%d rokov"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "Verzia aplikácie %1$s",
    "about_ips_version": "International Patient Summary 2.0.1 (HL7 FHIR R4)",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "Alergia, vysoká kritickosť: %@",
   "app.name": "Pacientsky sumár",
   "banner.born": "Dátum narodenia: %@",
-  "banner.bornAge": "Dátum narodenia: %1$@ (vek: %2$ld)",
+  "banner.bornAge": "Dátum narodenia: %1$@ (vek: %2$@)",
   "banner.gender": "Pohlavie: %@",
   "banner.heading": "Pacient",
   "banner.identifier": "Identifikátor",

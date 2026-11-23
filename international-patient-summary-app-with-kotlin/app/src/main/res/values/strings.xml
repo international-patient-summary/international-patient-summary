@@ -71,10 +71,6 @@
     <string name="patient_not_in_document">The patient is not in this document.</string>
     <string name="patient_born">Born %1$s</string>
     <string name="patient_born_with_age">Born %1$s (%2$s)</string>
-    <plurals name="age_years">
-        <item quantity="one">%d year</item>
-        <item quantity="other">%d years</item>
-    </plurals>
     <string name="patient_gender">Gender: %1$s</string>
     <string name="gender_male">Male</string>
     <string name="gender_female">Female</string>

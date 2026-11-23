@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "%d سال",
-    "many": "%d سال",
-    "one": "%d سال",
-    "other": "%d سال",
-    "two": "%d سال",
-    "zero": "%d سال"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "ایپ ورژن %1$s",
    "about_ips_version": "انٹرنیشنل پیشنٹ سمری 2.0.1 (HL7 FHIR R4)",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "الرجی، شدید خطرہ: %@",
   "app.name": "مریض کا خلاصہ",
   "banner.born": "تاریخ پیدائش: %@",
-  "banner.bornAge": "تاریخ پیدائش: %1$@ (عمر %2$ld)",
+  "banner.bornAge": "تاریخ پیدائش: %1$@ (عمر %2$@)",
   "banner.gender": "جنس: %@",
   "banner.heading": "مریض",
   "banner.identifier": "شناخت کنندہ",

@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "%d jaar",
-    "many": "%d jaar",
-    "one": "%d jaar",
-    "other": "%d jaar",
-    "two": "%d jaar",
-    "zero": "%d jaar"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "App-versie %1$s",
    "about_ips_version": "Internationale patiëntsamenvatting 2.0.1 (HL7 FHIR R4)",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "Allergie, hoge kritikaliteit: %@",
   "app.name": "Patiëntsamenvatting",
   "banner.born": "Geboren %@",
-  "banner.bornAge": "Geboren %1$@ (%2$ld jaar)",
+  "banner.bornAge": "Geboren %1$@ (%2$@ jaar)",
   "banner.gender": "Geslacht: %@",
   "banner.heading": "Patiënt",
   "banner.identifier": "Identificatie",

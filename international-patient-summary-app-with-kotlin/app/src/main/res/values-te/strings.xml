@@ -169,8 +169,4 @@
     <string name="share_confirm_title">%1$s సారాంశాన్ని షేర్ చేయాలా?</string>
     <string name="share_confirm_body">ఒకరి కంటే ఎక్కువ మంది వ్యక్తుల సారాంశాలు తెరిచి ఉన్నాయి. మీరు షేర్ చేయాలనుకుంటున్న వ్యక్తి వీరేనా అని సరిచూసుకోండి.</string>
     <string name="share_confirm_action">షేర్ చేయండి</string>
-    <plurals name="age_years">
-        <item quantity="one">%d సంవత్సరం</item>
-        <item quantity="other">%d సంవత్సరాలు</item>
-    </plurals>
 </resources>

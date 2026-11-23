@@ -169,8 +169,4 @@
     <string name="share_confirm_title">%1$s के सारांश शेयर करीं?</string>
     <string name="share_confirm_body">एक से अधिका व्यक्ति के सारांश खुलल बा। जाँच लीं कि ई उहे व्यक्ति बा जेकर सारांश रउआ शेयर करे के चाहत बानी।</string>
     <string name="share_confirm_action">शेयर करीं</string>
-    <plurals name="age_years">
-        <item quantity="one">%d बरिस</item>
-        <item quantity="other">%d बरिस</item>
-    </plurals>
 </resources>

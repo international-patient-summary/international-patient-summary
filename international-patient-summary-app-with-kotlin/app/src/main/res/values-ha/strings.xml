@@ -169,8 +169,4 @@
     <string name="share_confirm_title">A tura taƙaitaccen bayanin %1$s?</string>
     <string name="share_confirm_body">Taƙaitattun bayanan mutane fiye da ɗaya suna buɗe. Ku tabbatar cewa wannan shi ne mutumin da kuke son turawa.</string>
     <string name="share_confirm_action">Tura</string>
-    <plurals name="age_years">
-        <item quantity="one">shekara %d</item>
-        <item quantity="other">shekara %d</item>
-    </plurals>
 </resources>

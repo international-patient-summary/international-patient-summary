@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "%d metai",
-    "many": "%d metų",
-    "one": "%d metai",
-    "other": "%d metų",
-    "two": "%d metų",
-    "zero": "%d metų"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "Programėlės versija %1$s",
    "about_ips_version": "International Patient Summary 2.0.1 (HL7 FHIR R4)",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "Alergija, didelis kritiškumas: %@",
   "app.name": "Paciento santrauka",
   "banner.born": "Gimimo data: %@",
-  "banner.bornAge": "Gimimo data: %1$@ (amžius: %2$ld)",
+  "banner.bornAge": "Gimimo data: %1$@ (amžius: %2$@)",
   "banner.gender": "Lytis: %@",
   "banner.heading": "Pacientas",
   "banner.identifier": "Identifikatorius",

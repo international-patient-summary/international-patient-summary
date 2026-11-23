@@ -127,12 +127,12 @@ class OnePagePdf(private val context: Context, private val summary: Summary, pri
         val patient = summary.patient ?: return listOf(bold(string(R.string.patient_not_in_document)) to NAME_STEP)
         val facts = buildList {
             Format.date(patient.birthDate, locale)?.let(::isolate)?.let { born ->
-                val age = Format.ageInYears(patient.birthDate, now.toLocalDate())
+                val age = Format.ageText(patient.birthDate, now.toLocalDate(), locale)
                 add(
                     if (age == null) {
                         string(R.string.patient_born, born)
                     } else {
-                        string(R.string.patient_born_with_age, born, context.resources.getQuantityString(R.plurals.age_years, age, age))
+                        string(R.string.patient_born_with_age, born, age)
                     },
                 )
             }

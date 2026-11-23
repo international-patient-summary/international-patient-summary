@@ -169,10 +169,4 @@
     <string name="share_confirm_title">Поділитися зведенням особи %1$s?</string>
     <string name="share_confirm_body">Відкрито зведення кількох людей. Перевірте, що це саме та людина, чиїм зведенням ви хочете поділитися.</string>
     <string name="share_confirm_action">Поділитися</string>
-    <plurals name="age_years">
-        <item quantity="one">%d рік</item>
-        <item quantity="few">%d роки</item>
-        <item quantity="many">%d років</item>
-        <item quantity="other">%d року</item>
-    </plurals>
 </resources>

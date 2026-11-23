@@ -155,7 +155,7 @@ import Testing
 
         #expect(document.birthDate == "2023-02-31")
         #expect(formatFHIRDate(document.birthDate, locale: Locale(identifier: "en_GB")) == "2023-02-31")
-        #expect(ageInYears(birthDate: document.birthDate) == nil)
+        #expect(ageText(birthDate: document.birthDate) == nil)
         let entry = try #require(document.sections.flatMap(\.entries).first { $0.detail(.value) == "0.12345678901234567890\u{00A0}mmol/L" })
         let pdfEntries = PDFLayout.sections(of: document).flatMap { $0.mustShow + $0.others }
         #expect(pdfEntries.contains { $0.detail(.value) == entry.detail(.value) })

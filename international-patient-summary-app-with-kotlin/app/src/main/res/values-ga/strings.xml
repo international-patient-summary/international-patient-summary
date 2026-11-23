@@ -169,11 +169,4 @@
     <string name="share_confirm_title">An achoimre ar %1$s a chomhroinnt?</string>
     <string name="share_confirm_body">Tá achoimrí ar níos mó ná duine amháin oscailte. Seiceáil gurb é seo an duine ar mian leat a achoimre a chomhroinnt.</string>
     <string name="share_confirm_action">Comhroinn</string>
-    <plurals name="age_years">
-        <item quantity="one">%d bhliain</item>
-        <item quantity="two">%d bhliain</item>
-        <item quantity="few">%d bliana</item>
-        <item quantity="many">%d mbliana</item>
-        <item quantity="other">%d bliain</item>
-    </plurals>
 </resources>

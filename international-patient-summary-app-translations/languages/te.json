@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "%d సంవత్సరాలు",
-    "many": "%d సంవత్సరాలు",
-    "one": "%d సంవత్సరం",
-    "other": "%d సంవత్సరాలు",
-    "two": "%d సంవత్సరాలు",
-    "zero": "%d సంవత్సరాలు"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "యాప్ వెర్షన్ %1$s",
    "about_ips_version": "International Patient Summary 2.0.1 (HL7 FHIR R4)",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "అలర్జీ, అధిక తీవ్రత: %@",
   "app.name": "రోగి సారాంశం",
   "banner.born": "జననం %@",
-  "banner.bornAge": "జననం %1$@ (వయస్సు %2$ld)",
+  "banner.bornAge": "జననం %1$@ (వయస్సు %2$@)",
   "banner.gender": "లింగం: %@",
   "banner.heading": "రోగి",
   "banner.identifier": "గుర్తింపు సంఖ్య",

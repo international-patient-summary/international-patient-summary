@@ -169,9 +169,4 @@
     <string name="share_confirm_title">Partager le résumé de %1$s ?</string>
     <string name="share_confirm_body">Des résumés de plusieurs personnes sont ouverts. Vérifiez qu’il s’agit bien de la personne dont vous voulez partager le résumé.</string>
     <string name="share_confirm_action">Partager</string>
-    <plurals name="age_years">
-        <item quantity="one">%d an</item>
-        <item quantity="many">%d ans</item>
-        <item quantity="other">%d ans</item>
-    </plurals>
 </resources>

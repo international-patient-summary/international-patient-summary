@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "%d anni",
-    "many": "%d anni",
-    "one": "%d anno",
-    "other": "%d anni",
-    "two": "%d anni",
-    "zero": "%d anni"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "Versione dell’app %1$s",
    "about_ips_version": "International Patient Summary 2.0.1 (HL7 FHIR R4)",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "Allergia ad alta criticità: %@",
   "app.name": "Sintesi paziente",
   "banner.born": "Data di nascita: %@",
-  "banner.bornAge": "Data di nascita: %1$@ (età: %2$ld)",
+  "banner.bornAge": "Data di nascita: %1$@ (età: %2$@)",
   "banner.gender": "Sesso: %@",
   "banner.heading": "Paziente",
   "banner.identifier": "Identificativo",

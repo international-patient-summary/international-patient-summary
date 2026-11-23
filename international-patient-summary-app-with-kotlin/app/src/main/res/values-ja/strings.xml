@@ -169,7 +169,4 @@
     <string name="share_confirm_title">%1$sのサマリーを共有しますか？</string>
     <string name="share_confirm_body">複数の人のサマリーが開いています。共有したい人で間違いないか確認してください。</string>
     <string name="share_confirm_action">共有</string>
-    <plurals name="age_years">
-        <item quantity="other">%d歳</item>
-    </plurals>
 </resources>

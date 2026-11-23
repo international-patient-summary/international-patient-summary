@@ -169,9 +169,4 @@
     <string name="share_confirm_title">Kopīgot personas %1$s kopsavilkumu?</string>
     <string name="share_confirm_body">Ir atvērti vairāk nekā vienas personas kopsavilkumi. Pārbaudiet, vai šī ir persona, kuras kopsavilkumu vēlaties kopīgot.</string>
     <string name="share_confirm_action">Kopīgot</string>
-    <plurals name="age_years">
-        <item quantity="zero">%d gadu</item>
-        <item quantity="one">%d gads</item>
-        <item quantity="other">%d gadi</item>
-    </plurals>
 </resources>

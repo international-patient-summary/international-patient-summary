@@ -169,8 +169,4 @@
     <string name="share_confirm_title">%1$s ಅವರ ಸಾರಾಂಶವನ್ನು ಹಂಚಿಕೊಳ್ಳಬೇಕೇ?</string>
     <string name="share_confirm_body">ಒಬ್ಬರಿಗಿಂತ ಹೆಚ್ಚು ವ್ಯಕ್ತಿಗಳ ಸಾರಾಂಶಗಳು ತೆರೆದಿವೆ. ನೀವು ಹಂಚಿಕೊಳ್ಳಲು ಬಯಸುವ ವ್ಯಕ್ತಿ ಇವರೇ ಎಂದು ಪರಿಶೀಲಿಸಿ.</string>
     <string name="share_confirm_action">ಹಂಚಿಕೊಳ್ಳಿ</string>
-    <plurals name="age_years">
-        <item quantity="one">%d ವರ್ಷ</item>
-        <item quantity="other">%d ವರ್ಷ</item>
-    </plurals>
 </resources>

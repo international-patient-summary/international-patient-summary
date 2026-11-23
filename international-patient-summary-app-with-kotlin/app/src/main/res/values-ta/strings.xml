@@ -169,8 +169,4 @@
     <string name="share_confirm_title">%1$s இன் சுருக்கத்தைப் பகிரவா?</string>
     <string name="share_confirm_body">ஒருவருக்கு மேற்பட்டவர்களின் சுருக்கங்கள் திறந்துள்ளன. நீங்கள் பகிர விரும்பும் நபர் இவர்தானா எனச் சரிபார்க்கவும்.</string>
     <string name="share_confirm_action">பகிர்</string>
-    <plurals name="age_years">
-        <item quantity="one">%d ஆண்டு</item>
-        <item quantity="other">%d ஆண்டுகள்</item>
-    </plurals>
 </resources>

@@ -1,15 +1,6 @@
 {
  "android": {
-  "plurals": {
-   "age_years": {
-    "few": "%d वर्ष",
-    "many": "%d वर्ष",
-    "one": "%d वर्ष",
-    "other": "%d वर्ष",
-    "two": "%d वर्ष",
-    "zero": "%d वर्ष"
-   }
-  },
+  "plurals": {},
   "strings": {
    "about_app_version": "ऐप संस्करण %1$s",
    "about_ips_version": "अंतरराष्ट्रीय रोगी सारांश 2.0.1 (HL7 FHIR R4)",
@@ -198,7 +189,7 @@
   "alerts.highCriticality": "एलर्जी, उच्च गंभीरता: %@",
   "app.name": "रोगी सारांश",
   "banner.born": "जन्म %@",
-  "banner.bornAge": "जन्म %1$@ (आयु %2$ld)",
+  "banner.bornAge": "जन्म %1$@ (आयु %2$@)",
   "banner.gender": "लिंग: %@",
   "banner.heading": "रोगी",
   "banner.identifier": "पहचानकर्ता",
