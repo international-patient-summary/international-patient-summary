@@ -15,7 +15,7 @@
 
 ## 4.2 Summary
 
-- **M-VIEW-1 Banner.** Patient name, birth date and age in years, gender,
+- **M-VIEW-1 Banner.** Patient name, birth date and age (in years for an adult, in months, weeks or days for a child), gender,
   and identifiers with their system's short name (SNOMED CT, LOINC, NHS
   number, and so on, as the web viewer's `systemLabel`). Above everything
   else, an alert box lists allergies with criticality `high`, and says so
@@ -29,6 +29,17 @@
   A valid partial birth date stays partial. If a birth date cannot be
   parsed, show its source text rather than inventing a date. Show an age
   only for a valid, full birth date that is not in the future.
+  The age is written in the units a clinician reads for that age (the NHS
+  Common User Interface bands, as Lily Design System's `ageParts`), counted
+  in whole calendar units from the birth date to today, in the reader's
+  language: under 28 days, the days; under 1 year, the weeks and days; from
+  1 year to under 2, the months and days; from 2 years to under 18, the
+  years and months; from 18, the years alone. A birth date has no time of
+  day, so hours and minutes are never shown; a baby born today is 0 days. A
+  zero second part is left out ("3 years", not "3 years 0 months"). The
+  banner and the PDF header (M-PDF-1) say the age the same way. The banner's
+  sentence puts the age beside the birth date as before; only the age's
+  words are longer for a child.
 - **M-VIEW-2 Document.** Title, date, and authors' names.
 - **M-VIEW-3 Sections.** In Composition order, then any required section
   the Composition lacks, labelled "Section missing from document".
