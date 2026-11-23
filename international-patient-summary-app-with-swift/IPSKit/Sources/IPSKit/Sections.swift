@@ -35,6 +35,20 @@ public enum SectionKey: String, Sendable, CaseIterable {
         }
     }
 
+    /// The key Lily Design System's `LilyCore` and `LilyUI` use for this section ("vital-signs").
+    public var lilyKey: String {
+        switch self {
+        case .vitalSigns: "vital-signs"
+        case .pastIllness: "past-illness"
+        case .functional: "functional-status"
+        case .planOfCare: "plan-of-care"
+        case .socialHistory: "social-history"
+        case .advanceDirectives: "advance-directives"
+        case .patientStory: "patient-story"
+        default: rawValue
+        }
+    }
+
     /// Whether the IG gives this section entries; Patient Story is narrative only.
     public var expectsEntries: Bool { self != .patientStory }
 

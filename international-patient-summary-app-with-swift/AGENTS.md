@@ -11,7 +11,7 @@ change in behaviour carries a spec edit, a code edit and a test edit together.
   `LilyUI` components. UIKit, built in code, is the fallback where SwiftUI
   cannot do the job (and for the screens not yet moved). No storyboards or
   XIBs, no third-party dependencies beyond Lily.
-- `IPSKit` imports Foundation only, never UIKit, and every rule in it is
+- `IPSKit` imports Foundation and Lily's pure-Swift `LilyCore` only, never UIKit or SwiftUI, and every rule in it is
   tested with Swift Testing (`swift test`). View controllers only lay out
   what `IPSKit` returns.
 - Spec §1–§7 are shared word for word with the Android app

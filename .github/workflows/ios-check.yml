@@ -28,6 +28,17 @@ jobs:
     runs-on: macos-26
     steps:
       - uses: actions/checkout@v7
+      # IPSKit depends on Lily's Swift package by a path beside this repository (spec §8.1): check it out
+      # inside the workspace and link it to where Package.swift looks.
+      - uses: actions/checkout@v7
+        with:
+          repository: LilyDesignSystem/lily-design-system
+          path: lily
+      - name: Link Lily where Package.swift expects it
+        working-directory: ${{ github.workspace }}
+        run: |
+          mkdir -p ../../lilydesignsystem
+          ln -s "$PWD/lily" ../../lilydesignsystem/lily-design-system
       - name: IPSKit unit tests
         working-directory: international-patient-summary-app-with-swift/IPSKit
         run: swift test

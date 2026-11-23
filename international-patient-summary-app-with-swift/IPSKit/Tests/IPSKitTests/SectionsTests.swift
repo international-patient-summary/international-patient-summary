@@ -1,4 +1,5 @@
 import Foundation
+import LilyCore
 import Testing
 
 @testable import IPSKit
@@ -129,5 +130,23 @@ import Testing
     @Test func detailKindsThatAreCodes() {
         for kind in [DetailKind.status, .verification, .type, .criticality] { #expect(kind.isCode) }
         for kind in [DetailKind.dosage, .onset, .value, .lot] { #expect(!kind.isCode) }
+    }
+}
+
+/// The Lily Design System owns the IPS section registry (spec §8.1); these must agree with it.
+@Suite("Sections agree with Lily's registry")
+struct LilySectionsTests {
+    @Test func everySectionIsInLilysRegistryWithTheSameCodeAndLevel() throws {
+        #expect(SectionKey.allCases.count == ipsSections.count)
+        for key in SectionKey.allCases {
+            let lily = try #require(ipsSections.first { $0.key == key.lilyKey }, "\(key)")
+            #expect(lily.code == key.code, "\(key)")
+            #expect(lily.level.rawValue == key.level.rawValue, "\(key)")
+            #expect(ipsSectionIsRequired(key.lilyKey) == (key.level == .required), "\(key)")
+        }
+    }
+
+    @Test func theRequiredSectionsAreTheSameSet() {
+        #expect(Set(ipsRequiredSections) == Set(SectionKey.required.map(\.lilyKey)))
     }
 }
