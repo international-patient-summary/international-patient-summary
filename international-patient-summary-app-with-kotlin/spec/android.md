@@ -225,7 +225,7 @@ not.
   `values/` as en-US.
 - **Dates**: a FHIR dateTime is written at the document's own offset, not
   converted to the phone's time zone, so it reads as the document wrote it.
-- **Lily Design System** (§8.1): the app builds Lily's `lily-core` and `lily-compose`
+- **[Lily Design System](https://lilydesignsystem.com)** (§8.1): the app uses Lily for its interface and for the IPS rules Lily owns, building Lily's `lily-core` and `lily-compose`
   from a local checkout through a Gradle composite build (`includeBuild` in
   `settings.gradle.kts`; the path defaults to
   `../../../lilydesignsystem/lily-design-system/lily-design-system-kotlin`, or `-Plily.dir=...`).

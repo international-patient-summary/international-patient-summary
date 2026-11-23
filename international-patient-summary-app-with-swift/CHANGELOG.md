@@ -31,7 +31,7 @@
 
 First implementation of the specification (spec/index.md).
 
-- UIKit app in Swift 6, built in code (no storyboards, no SwiftUI), for
+- UIKit app in Swift 6, built in code (no storyboards; SwiftUI was ruled out then, UIKit is now the fallback), for
   iPhone and iPad on iOS 18 and later.
 - `IPSKit`, a Foundation-only Swift package: the service's S-API-2 check
   (same codes and pointers), reference resolution, the IPS 2.0.1 section

@@ -12,7 +12,7 @@ project.
 | `international-patient-summary.github.io/`        | The website (SvelteKit 3, Lily Design System, GitHub Pages), published by `bin/publish` | its `README.md`                                             |
 | `international-patient-summary-ui-with-svelte/`   | The viewer, the **frontend** (Svelte 5, SvelteKit 3, Lily), with a backendless tour   | [its AGENTS.md](international-patient-summary-ui-with-svelte/AGENTS.md)   |
 | `international-patient-summary-service-with-axum/` | The service, the **backend** (Rust, Axum, Axa 0.19, sqlx, Postgres)                  | [its AGENTS.md](international-patient-summary-service-with-axum/AGENTS.md) |
-| `international-patient-summary-app-with-swift/`   | The iOS app (Swift, UIKit in code, no SwiftUI)                                         | [its AGENTS.md](international-patient-summary-app-with-swift/AGENTS.md)   |
+| `international-patient-summary-app-with-swift/`   | The iOS app (Swift, SwiftUI first, UIKit fallback)                                     | [its AGENTS.md](international-patient-summary-app-with-swift/AGENTS.md)   |
 | `international-patient-summary-app-with-kotlin/`  | The Android app (Kotlin, Jetpack Compose)                                              | [its AGENTS.md](international-patient-summary-app-with-kotlin/AGENTS.md)  |
 | `international-patient-summary-app-translations/` | Both mobile apps' translations (65 languages) and the script that writes them in       | [its README.md](international-patient-summary-app-translations/README.md) |
 | `spec/`                                           | Cross-project specifications (GitHub Discussions, locales)                            |                                                               |

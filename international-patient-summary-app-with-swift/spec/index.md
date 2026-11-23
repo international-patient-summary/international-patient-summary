@@ -1,7 +1,7 @@
 # International Patient Summary app with Swift — Specification
 
 The Apple iOS app: a phone and tablet viewer for HL7 FHIR International
-Patient Summary documents, written in Swift with UIKit (no SwiftUI). Its
+Patient Summary documents, written in Swift, SwiftUI first with UIKit as the fallback. Its
 Android twin is
 [`international-patient-summary-app-with-kotlin`](../../international-patient-summary-app-with-kotlin/);
 the two share §1–§7 word for word, one file per section, so a requirement

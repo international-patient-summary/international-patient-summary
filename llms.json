@@ -31,7 +31,7 @@
       {
         "name": "iOS app",
         "path": "international-patient-summary-app-with-swift/llms.txt",
-        "description": "Swift + UIKit (no SwiftUI) IPS viewer; encrypted on-device storage, no network"
+        "description": "Swift, SwiftUI first with UIKit as the fallback, IPS viewer; encrypted on-device storage, no network"
       },
       {
         "name": "Android app",

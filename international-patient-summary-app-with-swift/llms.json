@@ -1,13 +1,14 @@
 {
   "name": "international-patient-summary-app-with-swift",
-  "description": "Apple iOS app (Swift, UIKit in code, no SwiftUI) that opens and shows HL7 FHIR International Patient Summary documents. Saved on the device only, encrypted (works offline and after a restart), no network; checks documents exactly as the backend service does.",
+  "description": "Apple iOS app (Swift, SwiftUI first, UIKit as the fallback) that opens and shows HL7 FHIR International Patient Summary documents. Saved on the device only, encrypted (works offline and after a restart), no network; checks documents exactly as the backend service does.",
   "license": "MIT OR Apache-2.0 OR BSD-3-Clause OR GPL-2.0-only OR GPL-3.0-only OR OGL-UK-3.0 OR CC-BY-NC-SA-4.0",
   "language": "Swift",
   "swift_language_mode": "6",
   "xcode": "27.2",
   "deployment_target": "iOS 18.0",
   "stack": [
-    "UIKit (programmatic)",
+    "SwiftUI",
+    "UIKit (fallback, programmatic)",
     "IPSKit local Swift package (Foundation, CryptoKit)",
     "Swift Testing",
     "XCUITest"

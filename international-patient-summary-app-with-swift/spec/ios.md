@@ -7,11 +7,12 @@
 | Concern       | Choice                                                                  |
 | ------------- | ----------------------------------------------------------------------- |
 | Language      | Swift 6 language mode, strict concurrency; Xcode 27.2 (Swift 6.4)        |
-| Interface     | UIKit, built in code: no storyboards, no SwiftUI                         |
+| Interface     | SwiftUI first; UIKit, built in code, as the fallback; no storyboards     |
 | Deployment    | iOS 18.0 and later (current iOS 27 minus two majors), iPhone (including the folding iPhone Duo) and iPad |
 | Core          | `IPSKit`, a local Swift package: Foundation, and CryptoKit for the store; no UIKit |
 | Tests         | Swift Testing for `IPSKit` (`swift test`); XCUITest for the app          |
-| Dependencies  | None outside Apple's SDKs                                                |
+| Design system | The [Lily Design System](https://lilydesignsystem.com): `LilyCore`, `LilyUI` and `LilyThemes` from `lily-design-system-swift`, as a local Swift package path (not published) |
+| Dependencies  | Lily, and nothing else outside Apple's SDKs                              |
 | Strings       | `App/Localizable.xcstrings`: English and 65 localizations (M-I18N-2), state `needs_review`; `App/InfoPlist.xcstrings` names the app on the home screen in each; `knownRegions` lists them |
 
 The app target uses `SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor`; `IPSKit`
@@ -33,7 +34,7 @@ IPSKit/                    Swift package, no UIKit (spec §3, §4.2 readers)
     EncryptedStore.swift   M-STORE-1..4: sealed summary files and index, StoreKeys
     PDFPlan.swift          M-PDF-1/2: sections in priority order, the plans tried, fit(_:pageCount:)
   Tests/IPSKitTests/       Swift Testing suites + the five fixtures
-App/                       the UIKit app (file-system-synchronized group)
+App/                       the app, SwiftUI and UIKit (file-system-synchronized group)
   AppDelegate.swift        @main; scene configuration in code; removes share files
   SceneDelegate.swift      window, navigation, M-PRIV-2 privacy cover
   SummaryStore.swift       the open summaries, saved to the encrypted store (M-STORE-1), Examples, ShareFile
@@ -77,6 +78,16 @@ IPSApp.xcodeproj           project (objectVersion 77, synchronized folders)
   `public.json` by its extension; its contents are FHIR JSON.
 - **Privacy cover** (M-PRIV-2): a plain view with the app's name covers the
   window from `sceneWillResignActive` to `sceneDidBecomeActive`.
+- **[Lily Design System](https://lilydesignsystem.com)**: the app uses Lily for its interface and for the IPS
+  rules Lily owns. `LilyCore` supplies the section keys, headings and status
+  words (`IpsSections`), and clinical formatting; `LilyUI` supplies the
+  SwiftUI components (the summary, a section, the alert, record rows,
+  disclosure); `LilyThemes` the colours and type. A new screen is built from
+  Lily's components first, and a hand-made view is written only where Lily has
+  none. Lily's package is added as a local path to a checkout beside this
+  repository (`../../../lilydesignsystem/lily-design-system/lily-design-system-swift`);
+  it is not published, so CI checks it out. Lily parses no FHIR: `IPSKit` still
+  reads documents, and the app passes Lily plain data.
 - **Network** (M-PRIV-1): the app links no networking code and declares no
   network use; `PrivacyInfo.xcprivacy` declares no tracking and no data
   collection.

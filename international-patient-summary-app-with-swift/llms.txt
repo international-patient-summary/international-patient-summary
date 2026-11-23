@@ -1,6 +1,6 @@
 # international-patient-summary-app-with-swift
 
-> Apple iOS app (Swift, UIKit in code, no SwiftUI) that opens and shows HL7 FHIR International Patient Summary documents. Saved on the device only, encrypted (works offline and after a restart), no network; checks documents exactly as the backend service does.
+> Apple iOS app (Swift, SwiftUI first, UIKit as the fallback) that opens and shows HL7 FHIR International Patient Summary documents. Saved on the device only, encrypted (works offline and after a restart), no network; checks documents exactly as the backend service does.
 
 ## Docs
 

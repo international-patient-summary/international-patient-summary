@@ -390,8 +390,9 @@ iOS 18 or later on iPhone or iPad. The iPhone Duo needs iOS 27.1 or later.
 
 ## For developers
 
-The app is Swift 6 and UIKit, built entirely in code: no SwiftUI, no
-storyboards and no dependencies outside Apple's SDKs. The specification is
+The app is Swift 6 and SwiftUI first, with UIKit built in code as the fallback
+where SwiftUI cannot do the job (the screens not yet moved are UIKit). There are
+no storyboards, and no dependencies outside Apple's SDKs and Lily. The specification is
 [spec/index.md](spec/index.md), one file per section. [plans.md](plans.md)
 and [tasks.md](tasks.md) say what is built and what comes next.
 [AGENTS.md](AGENTS.md) has the rules for changing it.

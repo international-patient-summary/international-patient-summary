@@ -7,8 +7,10 @@ change in behaviour carries a spec edit, a code edit and a test edit together.
 
 ## Rules
 
-- Swift 6 language mode, UIKit built in code. No SwiftUI, no storyboards or
-  XIBs, no third-party dependencies.
+- Swift 6 language mode. SwiftUI first: new screens are SwiftUI, with Lily's
+  `LilyUI` components. UIKit, built in code, is the fallback where SwiftUI
+  cannot do the job (and for the screens not yet moved). No storyboards or
+  XIBs, no third-party dependencies beyond Lily.
 - `IPSKit` imports Foundation only, never UIKit, and every rule in it is
   tested with Swift Testing (`swift test`). View controllers only lay out
   what `IPSKit` returns.

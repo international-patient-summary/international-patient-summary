@@ -8,7 +8,7 @@ International Patient Summary - work in progress
 - `international-patient-summary.github.io/`: the website, published to <https://international-patient-summary.github.io/>. See its README for how to develop, build, and publish it.
 - `international-patient-summary-ui-with-svelte/`: the viewer, the frontend (Svelte 5, SvelteKit 3, Lily Design System), with a public, backendless tour at `/tour/` that signs in as `example@example.com`. See its README.
 - `international-patient-summary-service-with-axum/`: the service, the backend (Rust, Axum, Axa, sqlx, Postgres). See its README.
-- `international-patient-summary-app-with-swift/`: the Apple iOS app (Swift, UIKit in code, no SwiftUI). See its README.
+- `international-patient-summary-app-with-swift/`: the Apple iOS app (Swift, SwiftUI first, UIKit as the fallback). See its README.
 - `international-patient-summary-app-with-kotlin/`: the Google Android app (Kotlin, Jetpack Compose). See its README.
 - `international-patient-summary-app-translations/`: both mobile apps' translations (65 languages) and the script that writes them in. See its README.
 
