@@ -3,6 +3,7 @@
 // open one.
 package io.github.internationalpatientsummary.app.ui
 
+import android.app.Activity
 import android.content.ClipboardManager
 import android.content.Context
 import android.net.Uri
@@ -281,32 +282,35 @@ private fun rememberDropTarget(viewModel: AppViewModel): DropTarget {
     val context = LocalContext.current
     val activity = LocalActivity.current
     return remember(viewModel, activity) {
-        DropTarget { event ->
-            val drag = event.toAndroidDragEvent()
-            val clip = drag.clipData?.takeIf { it.itemCount == 1 } ?: return@DropTarget false
-            val item = clip.getItemAt(0)
-            val uri = item.uri
-            if (uri != null) {
-                val permissions = activity?.requestDragAndDropPermissions(drag)
-                viewModel.open {
-                    try {
-                        readDocument(context, uri)
-                    } finally {
-                        permissions?.release()
-                    }
-                }
-            } else {
-                val text = item.coerceToText(context)?.toString().orEmpty()
-                if (text.isEmpty()) return@DropTarget false
-                viewModel.open { text.toByteArray(Charsets.UTF_8) }
-            }
-            true
-        }
+        DropTarget { event -> dropped(event, context, activity, viewModel::open) }
     }
 }
 
+/** Opens what was dropped; false (not taken) for several items or an empty text (M-TAB-3). */
+internal fun dropped(event: DragAndDropEvent, context: Context, activity: Activity?, open: (suspend () -> ByteArray) -> Unit): Boolean {
+    val drag = event.toAndroidDragEvent()
+    val clip = drag.clipData?.takeIf { it.itemCount == 1 } ?: return false
+    val item = clip.getItemAt(0)
+    val uri = item.uri
+    if (uri != null) {
+        val permissions = activity?.requestDragAndDropPermissions(drag)
+        open {
+            try {
+                readDocument(context, uri)
+            } finally {
+                permissions?.release()
+            }
+        }
+    } else {
+        val text = item.coerceToText(context)?.toString().orEmpty()
+        if (text.isEmpty()) return false
+        open { text.toByteArray(Charsets.UTF_8) }
+    }
+    return true
+}
+
 /** Shows that a drop is welcome while something hovers over the list. */
-private class DropTarget(private val drop: (DragAndDropEvent) -> Boolean) : DragAndDropTarget {
+internal class DropTarget(private val drop: (DragAndDropEvent) -> Boolean) : DragAndDropTarget {
     var hovering by mutableStateOf(false)
         private set
 
