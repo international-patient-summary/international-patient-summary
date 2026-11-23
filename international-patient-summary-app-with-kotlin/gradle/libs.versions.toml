@@ -1,16 +1,16 @@
 # Every version here was published at least two days before it was adopted
 # (AGENTS.md, supply chain). Check the .pom Last-Modified before a bump.
 [versions]
-agp = "9.5.1"
+agp = "9.5.2"
 kotlin = "2.4.21"
-composeBom = "2026.09.00"
+composeBom = "2026.11.01"
 activityCompose = "1.13.0"
 coreKtx = "1.19.1"
 lifecycle = "2.11.0"
 kotlinxSerialization = "1.13.0"
 junit = "4.13.2"
 # Test only: drives AppViewModel's coroutines. Same version as the kotlinx-coroutines-core that Compose and lifecycle already bring (1.9.0).
-kotlinxCoroutines = "1.9.0"
+kotlinxCoroutines = "1.11.0"
 # Test only (JVM tests of the Android code, P13-T3): published 2026-11-18.
 robolectric = "4.18.1"
 androidxTestCore = "1.7.0"
