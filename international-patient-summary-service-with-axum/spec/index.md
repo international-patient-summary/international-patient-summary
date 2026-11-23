@@ -49,7 +49,7 @@ Not in scope yet (see [plans.md](../plans.md)):
 | Database       | Postgres (16 or newer; developed on 18) through sqlx 0.9       |
 | Migrations     | sqlx reversible migrations in `migrations/`, compiled in       |
 | Errors         | RFC 9457 problem details (`application/problem+json`), by Axa  |
-| Tests          | `cargo test`; `axa-test` 0.10 with a database of its own per test, PASETO test keys, a local OIDC provider |
+| Tests          | `cargo nextest run` (cargo-nextest; `.config/nextest.toml`); `axa-test` 0.10 with a database of its own per test, PASETO test keys, a local OIDC provider |
 
 Axa is a library, not a framework: `src/main.rs` reads as ordinary Axum from
 the top down.
@@ -247,8 +247,8 @@ declared here, and an input outside its range is an error, never a bound or a de
 ```sh
 cargo fmt --all --check
 cargo clippy --all-targets -- -D warnings
-cargo test                                   # no database needed
-AXA_TEST_DB_URL=postgres://… cargo test -- --include-ignored
+cargo nextest run                            # no database needed
+AXA_TEST_DB_URL=postgres://… cargo nextest run --run-ignored all
 ```
 
 | Requirement | Test                                                                      |

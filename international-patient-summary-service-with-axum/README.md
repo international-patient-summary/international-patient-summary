@@ -35,8 +35,8 @@ production viewer builds and every non-loopback service URL require HTTPS.
 | `cargo run -- check`                  | Print effective settings, secrets redacted               |
 | `cargo run -- health [--ready]`       | Probe the running server; non-zero unless it answers     |
 | `cargo run -- db migrate` / `status`  | Apply migrations / show which have run                   |
-| `cargo test`                          | Unit and request tests that need no database             |
-| `cargo test -- --include-ignored`     | Everything, with `AXA_TEST_DB_URL` set                   |
+| `cargo nextest run`                   | Unit and request tests that need no database             |
+| `cargo nextest run --run-ignored all` | Everything, with `AXA_TEST_DB_URL` set                   |
 
 ## Container image
 

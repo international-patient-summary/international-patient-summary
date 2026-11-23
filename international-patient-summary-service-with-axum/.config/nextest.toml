@@ -1,0 +1,17 @@
+# cargo-nextest: one process per test, run in parallel, with per-test timing and a clear summary.
+# `cargo nextest run` (no database needed) / `cargo nextest run --run-ignored all` (with AXA_TEST_DB_URL).
+# nextest does not run doc tests; this crate has none (`cargo test --doc` says 0).
+
+[profile.default]
+# Show every failure at the end of a run, not just the first.
+fail-fast = false
+slow-timeout = { period = "30s", terminate-after = 4 }
+
+[profile.ci]
+# GitHub Actions: no retries (a flaky test is a bug here), and a junit file for the run summary.
+fail-fast = false
+retries = 0
+slow-timeout = { period = "30s", terminate-after = 4 }
+
+[profile.ci.junit]
+path = "junit.xml"

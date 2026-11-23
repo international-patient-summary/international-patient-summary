@@ -12,7 +12,7 @@ Checklist for [plans.md](plans.md). Spec: [spec/index.md](spec/index.md).
 - [x] **P1-T3** IPS gate `src/ips.rs` (S-API-2) with unit tests, including
       the five IG examples. Verify: `cargo test ips::`.
 - [x] **P1-T4** Routes `POST`, `GET`, `DELETE /fhir/Bundle` (S-API-1..6).
-      Verify: `cargo test -- --include-ignored` with `AXA_TEST_DB_URL`.
+      Verify: `cargo nextest run --run-ignored all` with `AXA_TEST_DB_URL`.
 - [x] **P1-T5** Health with a migrations check; production refusal (S-SAFE-1).
 - [x] **P1-T6** Manual check against a running service: CORS for
       `http://localhost:5173`, `403` for a cross-site write, `no-store` on
@@ -65,7 +65,7 @@ Checklist for [plans.md](plans.md). Spec: [spec/index.md](spec/index.md).
 
 ## P6 — Test coverage
 
-- [x] **P6-T1** Measure: `AXA_TEST_DB_URL=postgres://… cargo llvm-cov --summary-only -- --include-ignored`
+- [x] **P6-T1** Measure: `AXA_TEST_DB_URL=postgres://… cargo llvm-cov nextest --summary-only --run-ignored all`
       (cargo-llvm-cov; `--lcov` for per-line misses). First reading with Postgres:
       81% of lines; without it, 65% (the database tests are ignored).
 - [x] **P6-T2** Unit tests for the refusals' words and pointers, the PASETO
@@ -90,3 +90,4 @@ Checklist for [plans.md](plans.md). Spec: [spec/index.md](spec/index.md).
       variable stops startup instead of reading as unset (`auth::from_vars`); the `unreachable!` in
       `main.rs` became an error; figures declared in spec §7.1. Left as the spec says: a malformed id is a
       `404` (S-API-5).
+- [x] **P6-T7** Tests run with cargo-nextest (`.config/nextest.toml`, profile `ci` in `service-check.yml`): one process per test, run in parallel, every failure reported. Same tests and coverage: nextest runs the unit, request, and binary tests and the ignored database tests (`--run-ignored all`); it does not run doc tests, and the crate has none. `cargo test` still works.

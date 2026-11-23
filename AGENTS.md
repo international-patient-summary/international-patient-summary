@@ -58,7 +58,7 @@ pushes to `main` that change their folder. On mobile app or translation changes,
 # viewer
 cd international-patient-summary-ui-with-svelte && pnpm run lint && pnpm run check && pnpm test && pnpm run test:e2e
 # service (AXA_TEST_DB_URL: a Postgres role that may create databases)
-cd international-patient-summary-service-with-axum && cargo fmt --check && cargo clippy --all-targets -- -D warnings && cargo test -- --include-ignored
+cd international-patient-summary-service-with-axum && cargo fmt --check && cargo clippy --all-targets -- -D warnings && cargo nextest run --run-ignored all
 # website
 cd international-patient-summary.github.io && pnpm run lint && pnpm run check && pnpm run build
 # iOS app

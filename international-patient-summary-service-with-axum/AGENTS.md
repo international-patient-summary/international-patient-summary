@@ -54,8 +54,8 @@ to an input that is absent (RCA-IN-3). Spec §7.1 declares the figures.
 ```sh
 cargo fmt --all --check
 cargo clippy --all-targets -- -D warnings
-cargo test
-AXA_TEST_DB_URL=postgres://… cargo test -- --include-ignored
+cargo nextest run                       # no database needed
+AXA_TEST_DB_URL=postgres://… cargo nextest run --run-ignored all
 ```
 
 All must pass.
