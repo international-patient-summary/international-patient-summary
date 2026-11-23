@@ -26,7 +26,7 @@ tracing = "0.1"
 uuid = { version = "1", features = ["v4"] }
 
 [dev-dependencies]
-axa-test = { version = "0.10", features = ["postgres-sqlx", "paseto"] }
+axa-test = { version = "0.12", features = ["postgres-sqlx", "paseto"] }
 # A local OIDC provider for the Keycloak tests; never in a release build.
 authentication-verifier = { version = "0.9", default-features = false, features = ["paseto", "test-idp"] }
 
