@@ -1,85 +1,61 @@
 import IPSKit
+import SwiftUI
 import UIKit
 
-/// One summary (spec §4.2): alerts, the patient, the document, then its sections.
-final class SummaryViewController: UITableViewController {
-    private let document: Document
-    private var blocks: [Block] = []
+/// A block of rows under one heading.
+struct SummaryBlock: Equatable {
+    let header: String
+    var rows: [SummaryRow]
+}
+
+enum SummaryRow: Equatable {
+    /// A fact: main text and detail lines.
+    case fact(String, String?)
+    /// Something that must not be missed (M-VIEW-1): words and a symbol, not colour alone.
+    case alert(String)
+    /// What the app says about the data, rather than what the document says.
+    case note(String)
+    /// The document's narrative, as plain text (M-VIEW-6).
+    case narrative(String)
+    /// Shows or hides a section's narrative.
+    case narrativeToggle(section: Int, shown: Bool)
+}
+
+/// One summary (spec §4.2) as rows: alerts, the patient, the document, then its sections. Plain data a test reads without a screen.
+@MainActor @Observable final class SummaryModel {
+    let document: IPSKit.Document
+    private(set) var blocks: [SummaryBlock] = []
     /// Sections whose narrative is shown alongside their entries.
     private var expanded: Set<Int> = []
+    private let store: SummaryStore
 
-    struct Block {
-        let header: String
-        var rows: [Row]
-    }
-
-    enum Row {
-        /// A fact: main text and detail lines.
-        case fact(String, String?)
-        /// Something that must not be missed (M-VIEW-1): words and a symbol, not colour alone.
-        case alert(String)
-        /// What the app says about the data, rather than what the document says.
-        case note(String)
-        /// The document's narrative, as plain text (M-VIEW-6).
-        case narrative(String)
-        /// Shows or hides a section's narrative.
-        case narrativeToggle(section: Int, shown: Bool)
-    }
-
-    private var observer: (any NSObjectProtocol)?
-
-    init(document: Document) {
+    init(document: IPSKit.Document, store: SummaryStore = .shared) {
         self.document = document
-        super.init(style: .insetGrouped)
-    }
-
-    required init?(coder: NSCoder) { fatalError("not used") }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        title = document.patientName ?? L10n.text("summary.title")
-        navigationItem.largeTitleDisplayMode = .never
-        // M-SHARE-1, M-PDF-1: the file, or a PDF for people.
-        let share = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), menu: nil)
-        share.menu = UIMenu(children: [
-            UIAction(title: L10n.text("summary.share.file"), image: UIImage(systemName: "doc")) {
-                [weak self, weak share] _ in self?.share(.file, from: share)
-            },
-            UIAction(title: L10n.text("summary.share.pdf"), image: UIImage(systemName: "doc.richtext")) {
-                [weak self, weak share] _ in self?.share(.pdf, from: share)
-            },
-        ])
-        share.accessibilityLabel = L10n.text("summary.share")
-        share.accessibilityIdentifier = "share"
-        navigationItem.rightBarButtonItem = share
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "row")
-        tableView.register(HeadingView.self, forHeaderFooterViewReuseIdentifier: "heading")
+        self.store = store
         build()
-        // A relationship given from the list shows in the banner at once (M-PEOPLE-3).
-        observer = NotificationCenter.default.addObserver(
-            forName: SummaryStore.changed, object: SummaryStore.shared, queue: .main
-        ) { [weak self] _ in
-            MainActor.assumeIsolated {
-                self?.build()
-                self?.tableView.reloadData()
-            }
-        }
     }
 
-    // MARK: Building the rows
+    /// Shows or hides one section's narrative.
+    func toggleNarrative(_ section: Int) {
+        if expanded.contains(section) { expanded.remove(section) } else { expanded.insert(section) }
+        build()
+    }
+
+    /// A relationship given from the list shows in the banner at once (M-PEOPLE-3).
+    func refresh() { build() }
 
     private func build() {
-        var blocks: [Block] = []
+        var blocks: [SummaryBlock] = []
 
         // M-VIEW-1: alerts first, never collapsed.
         var alerts = document.highCriticalityAllergies.map {
-            Row.alert(L10n.text("alerts.highCriticality", $0))
+            SummaryRow.alert(L10n.text("alerts.highCriticality", $0))
         }
         if document.allergiesMissing { alerts.append(.alert(L10n.text("alerts.allergiesMissing"))) }
-        if !alerts.isEmpty { blocks.append(Block(header: L10n.text("alerts.heading"), rows: alerts)) }
+        if !alerts.isEmpty { blocks.append(SummaryBlock(header: L10n.text("alerts.heading"), rows: alerts)) }
 
-        blocks.append(Block(header: L10n.text("banner.heading"), rows: patientRows()))
-        blocks.append(Block(header: L10n.text("document.heading"), rows: documentRows()))
+        blocks.append(SummaryBlock(header: L10n.text("banner.heading"), rows: patientRows()))
+        blocks.append(SummaryBlock(header: L10n.text("document.heading"), rows: documentRows()))
 
         // M-VIEW-3: Composition order, then the missing required sections.
         for (index, section) in document.sections.enumerated() {
@@ -87,15 +63,15 @@ final class SummaryViewController: UITableViewController {
             let header = section.key.map { L10n.sectionTitle($0) } ?? section.title ?? L10n.sectionTitle(nil)
             var rows = rows(section, index)
             if section.key != nil, let title = section.title, title != header { rows.insert(.note(title), at: 0) }
-            blocks.append(Block(header: header, rows: rows))
+            blocks.append(SummaryBlock(header: header, rows: rows))
         }
         self.blocks = blocks
     }
 
-    private func patientRows() -> [Row] {
+    private func patientRows() -> [SummaryRow] {
         guard document.patient != nil else { return [.note(L10n.text("banner.unknownPatient"))] }
         var lines: [String] = []
-        let store = SummaryStore.shared
+        let store = self.store
         if let person = store.person(of: document.id), store.relationship(of: person) != .none {
             lines.append(L10n.text("banner.relationship", L10n.relationship(store.relationship(of: person))))
         }
@@ -105,7 +81,7 @@ final class SummaryViewController: UITableViewController {
                     ?? L10n.text("banner.born", born))
         }
         if let gender = document.gender { lines.append(L10n.text("banner.gender", L10n.gender(gender))) }
-        var rows: [Row] = [
+        var rows: [SummaryRow] = [
             .fact(document.patientName ?? L10n.text("banner.noName"), lines.isEmpty ? nil : lines.joined(separator: "\n"))
         ]
         rows += document.identifiers.map {
@@ -114,16 +90,16 @@ final class SummaryViewController: UITableViewController {
         return rows
     }
 
-    private func documentRows() -> [Row] {
-        var rows: [Row] = []
+    private func documentRows() -> [SummaryRow] {
+        var rows: [SummaryRow] = []
         if let title = document.title { rows.append(.fact(title, L10n.text("document.title"))) }
         if let date = formatFHIRDate(document.date) { rows.append(.fact(date, L10n.text("document.date"))) }
         for author in document.authors { rows.append(.fact(author, L10n.text("document.author"))) }
         return rows
     }
 
-    private func rows(_ section: Section, _ index: Int) -> [Row] {
-        var rows: [Row] = []
+    private func rows(_ section: IPSKit.Section, _ index: Int) -> [SummaryRow] {
+        var rows: [SummaryRow] = []
         // A section that takes entries but has only a narrative says so, then shows it.
         let narrativeOnly = section.entries.isEmpty && section.narrative != nil
         if narrativeOnly, section.state == .notRecorded {
@@ -149,6 +125,92 @@ final class SummaryViewController: UITableViewController {
             }
         }
         return rows
+    }
+}
+
+/// The summary as a list (spec §4.2), headings first. SwiftUI first.
+struct SummaryView: View {
+    let model: SummaryModel
+
+    var body: some View {
+        List {
+            ForEach(Array(model.blocks.enumerated()), id: \.offset) { _, block in
+                Section {
+                    ForEach(Array(block.rows.enumerated()), id: \.offset) { _, row in
+                        rowView(row)
+                    }
+                } header: {
+                    Text(verbatim: block.header).font(.headline).textCase(nil)
+                }
+            }
+        }
+    }
+
+    @ViewBuilder private func rowView(_ row: SummaryRow) -> some View {
+        switch row {
+        case .fact(let text, let secondary):
+            VStack(alignment: .leading, spacing: 4) {
+                Text(verbatim: text)
+                if let secondary { Text(verbatim: secondary).foregroundStyle(.secondary) }
+            }
+            .accessibilityElement(children: .combine)
+        case .alert(let text):
+            HStack(alignment: .firstTextBaseline, spacing: 8) {
+                Image(systemName: "exclamationmark.triangle.fill").foregroundStyle(.red).accessibilityHidden(true)
+                Text(verbatim: text).fontWeight(.semibold)
+            }
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(Text(verbatim: text))
+            .listRowBackground(Color.red.opacity(0.12))
+        case .note(let text):
+            Text(verbatim: text).italic().foregroundStyle(.secondary)
+        case .narrative(let text):
+            Text(verbatim: text).font(.callout)
+        case .narrativeToggle(let section, let shown):
+            Button { model.toggleNarrative(section) } label: {
+                Text(verbatim: L10n.text(shown ? "narrative.hide" : "narrative.show"))
+            }
+        }
+    }
+}
+
+/// Hosts `SummaryView` in the UIKit navigation stack, with Share in the bar (the menu and the share sheet are UIKit).
+final class SummaryViewController: UIHostingController<SummaryView> {
+    private let document: IPSKit.Document
+    let model: SummaryModel
+    private var observer: (any NSObjectProtocol)?
+
+    init(document: IPSKit.Document) {
+        self.document = document
+        let model = SummaryModel(document: document)
+        self.model = model
+        super.init(rootView: SummaryView(model: model))
+    }
+
+    @available(*, unavailable) required init?(coder: NSCoder) { fatalError("not used") }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = document.patientName ?? L10n.text("summary.title")
+        navigationItem.largeTitleDisplayMode = .never
+        // M-SHARE-1, M-PDF-1: the file, or a PDF for people.
+        let share = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), menu: nil)
+        share.menu = UIMenu(children: [
+            UIAction(title: L10n.text("summary.share.file"), image: UIImage(systemName: "doc")) {
+                [weak self, weak share] _ in self?.share(.file, from: share)
+            },
+            UIAction(title: L10n.text("summary.share.pdf"), image: UIImage(systemName: "doc.richtext")) {
+                [weak self, weak share] _ in self?.share(.pdf, from: share)
+            },
+        ])
+        share.accessibilityLabel = L10n.text("summary.share")
+        share.accessibilityIdentifier = "share"
+        navigationItem.rightBarButtonItem = share
+        observer = NotificationCenter.default.addObserver(
+            forName: SummaryStore.changed, object: SummaryStore.shared, queue: .main
+        ) { [weak self] _ in
+            MainActor.assumeIsolated { self?.model.refresh() }
+        }
     }
 
     // MARK: Sharing (M-SHARE-1)
@@ -192,84 +254,5 @@ final class SummaryViewController: UITableViewController {
         activity.popoverPresentationController?.sourceItem = item
         activity.completionWithItemsHandler = { _, _, _, _ in exported.remove() }
         present(activity, animated: true)
-    }
-
-    // MARK: Table
-
-    override func numberOfSections(in tableView: UITableView) -> Int { blocks.count }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        blocks[section].rows.count
-    }
-
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "heading") as? HeadingView
-        view?.set(blocks[section].header)
-        return view
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "row", for: indexPath)
-        var content = UIListContentConfiguration.subtitleCell()
-        content.textProperties.numberOfLines = 0
-        content.secondaryTextProperties.numberOfLines = 0
-        content.secondaryTextProperties.color = .secondaryLabel
-        content.textToSecondaryTextVerticalPadding = 4
-        cell.selectionStyle = .none
-        cell.accessoryType = .none
-        cell.accessibilityTraits = .staticText
-        cell.backgroundConfiguration = nil
-
-        switch blocks[indexPath.section].rows[indexPath.row] {
-        case .fact(let text, let secondary):
-            content.text = text
-            content.secondaryText = secondary
-        case .alert(let text):
-            content.text = text
-            content.textProperties.font = UIFontMetrics(forTextStyle: .body).scaledFont(
-                for: .systemFont(ofSize: 17, weight: .semibold))
-            content.image = UIImage(systemName: "exclamationmark.triangle.fill")
-            content.imageProperties.tintColor = .systemRed
-            var background = UIBackgroundConfiguration.listCell()
-            background.backgroundColor = .systemRed.withAlphaComponent(0.12)
-            cell.backgroundConfiguration = background
-        case .note(let text):
-            content.text = text
-            content.textProperties.color = .secondaryLabel
-            content.textProperties.font = UIFontMetrics(forTextStyle: .body).scaledFont(
-                for: .italicSystemFont(ofSize: 17))
-        case .narrative(let text):
-            content.text = text
-            content.textProperties.font = .preferredFont(forTextStyle: .callout)
-        case .narrativeToggle(_, let shown):
-            content.text = L10n.text(shown ? "narrative.hide" : "narrative.show")
-            content.textProperties.color = .tintColor
-            cell.selectionStyle = .default
-            cell.accessibilityTraits = .button
-        }
-        cell.contentConfiguration = content
-        return cell
-    }
-
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        guard case .narrativeToggle(let index, let shown) = blocks[indexPath.section].rows[indexPath.row]
-        else { return }
-        if shown { expanded.remove(index) } else { expanded.insert(index) }
-        build()
-        tableView.reloadSections([indexPath.section], with: .automatic)
-    }
-}
-
-/// A section heading that VoiceOver announces as a heading (M-A11Y-1).
-final class HeadingView: UITableViewHeaderFooterView {
-    func set(_ text: String) {
-        var content = UIListContentConfiguration.prominentInsetGroupedHeader()
-        content.text = text
-        content.textProperties.numberOfLines = 0
-        contentConfiguration = content
-        isAccessibilityElement = true
-        accessibilityLabel = text
-        accessibilityTraits = .header
     }
 }

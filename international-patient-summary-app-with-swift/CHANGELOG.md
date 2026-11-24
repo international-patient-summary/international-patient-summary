@@ -2,7 +2,7 @@
 
 ## 0.1.0 — unreleased
 
-- About is the first SwiftUI screen (`AboutView`, hosted in the UIKit navigation stack); the other screens stay UIKit until they move.
+- About and the summary are SwiftUI (`AboutView`, `SummaryView`, hosted in the UIKit navigation stack, with Share's menu and sheet in UIKit); the list screen stays UIKit until it moves.
 - App icon and accent colour, the same design as the Android app's.
 - Share as PDF: a one-page summary for people by the web viewer's rules (identity, alerts and
   allergies first, sections by clinical priority, trimmed to fit and saying what is not shown),

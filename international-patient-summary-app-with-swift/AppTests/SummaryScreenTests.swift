@@ -26,22 +26,53 @@ import UIKit
         return (window, navigation, screen)
     }
 
-    @Test func everyRowOfEveryExampleDrawsAndTheNarrativeToggles() throws {
+    @Test func everyExampleDrawsInAWindowWithItsHeadings() throws {
         for document in try documents() {
-            let (_, _, screen) = shown(document)
-            let table: UITableView = screen.tableView
-            let sections = screen.numberOfSections(in: table)
-            #expect(sections > 0)
-            for section in 0..<sections {
-                #expect(screen.tableView(table, viewForHeaderInSection: section) != nil)
-                for row in 0..<screen.tableView(table, numberOfRowsInSection: section) {
-                    let path = IndexPath(row: row, section: section)
-                    _ = screen.tableView(table, cellForRowAt: path)
-                    // A narrative toggle opens and closes; any other row does nothing.
-                    screen.tableView(table, didSelectRowAt: path)
-                }
+            let (window, _, screen) = shown(document)
+            defer { withExtendedLifetime(window) {} }
+            let blocks = screen.model.blocks
+            #expect(blocks.count >= 2, "the patient and the document, at least")
+            #expect(blocks.allSatisfy { !$0.header.isEmpty && !$0.rows.isEmpty })
+            #expect(screen.title == (document.patientName ?? L10n.text("summary.title")))
+        }
+    }
+
+    @Test func aNarrativeShowsAndHidesBesideItsEntries() throws {
+        var toggled = 0
+        for document in try documents() {
+            let model = SummaryModel(document: document, store: SummaryStore(saving: nil))
+            for (index, block) in model.blocks.enumerated() {
+                guard case .narrativeToggle(let section, false)? = block.rows.first(where: {
+                    if case .narrativeToggle = $0 { true } else { false }
+                }) else { continue }
+                let shownBefore = model.blocks[index].rows.count
+                model.toggleNarrative(section)
+                #expect(model.blocks[index].rows.count == shownBefore + 1, "the narrative joins the section")
+                #expect(model.blocks[index].rows.contains(.narrativeToggle(section: section, shown: true)))
+                model.toggleNarrative(section)
+                #expect(model.blocks[index].rows.count == shownBefore, "and leaves it again")
+                toggled += 1
             }
         }
+        #expect(toggled > 0, "an example has a section with entries and a narrative")
+    }
+
+    @Test func aRelationshipGivenFromTheListShowsInTheBannerAtOnce() throws {
+        let store = SummaryStore(saving: nil)
+        let first = try #require(try documents().first)
+        let document = try store.open(first.data).get()
+        let model = SummaryModel(document: document, store: store)
+        func banner() -> String {
+            guard case .fact(_, let detail)? = model.blocks.first(where: { $0.header == L10n.text("banner.heading") })?.rows.first
+            else { return "" }
+            return detail ?? ""
+        }
+        let relationship = L10n.relationship(.parent)
+        #expect(!banner().contains(relationship))
+        let person = try #require(store.person(of: document.id))
+        store.setRelationship(.parent, for: person)
+        model.refresh()
+        #expect(banner().contains(relationship))
     }
 
     @Test func theOnePagePDFIsOnePageNamedByTheDocumentDate() throws {
