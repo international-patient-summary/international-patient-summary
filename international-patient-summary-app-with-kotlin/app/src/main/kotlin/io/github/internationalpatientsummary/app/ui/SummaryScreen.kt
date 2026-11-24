@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -33,7 +32,9 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import io.github.lilydesignsystem.compose.AlertKind
+import io.github.lilydesignsystem.compose.InternationalPatientSummaryLazy
 import io.github.lilydesignsystem.compose.InternationalPatientSummarySection
+import io.github.lilydesignsystem.core.IpsSectionEntry
 import io.github.lilydesignsystem.compose.LilyAlert
 import io.github.lilydesignsystem.compose.RecordList
 import io.github.lilydesignsystem.compose.RecordListItem
@@ -103,14 +104,29 @@ fun SummaryScreen(
             )
         },
     ) { padding ->
-        LazyColumn(
-            Modifier.padding(padding).fillMaxSize(),
+        // Lily's lazy summary: the banner and the alert first, then one item per section (spec §9.1). The document's own
+        // sections already include a missing required one, in words, so Lily adds none of its own.
+        val entries = summary.sections.map { IpsSectionEntry(it.key?.key ?: "other", sectionTitleText(it), lilyStatus(it.state)) }
+        val headings = mapOf(
+            "medications" to stringResource(R.string.section_medications),
+            "allergies" to stringResource(R.string.section_allergies),
+            "problems" to stringResource(R.string.section_problems),
+        )
+        InternationalPatientSummaryLazy(
+            label = summary.listTitle ?: stringResource(R.string.list_untitled),
+            sections = entries,
+            requiredHeadings = headings,
+            omittedLabel = stringResource(R.string.state_missing),
+            modifier = Modifier.padding(padding).fillMaxSize(),
             contentPadding = PaddingValues(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
+            banner = {
+                Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                    if (!summary.allergyAlert.isEmpty) AlertBox(summary.allergyAlert)
+                    Banner(summary.patient, relationship)
+                    DocumentCard(summary.document)
+                }
+            },
         ) {
-            if (!summary.allergyAlert.isEmpty) item(key = "alert") { AlertBox(summary.allergyAlert) }
-            item(key = "patient") { Banner(summary.patient, relationship) }
-            item(key = "document") { DocumentCard(summary.document) }
             itemsIndexed(summary.sections, key = { index, _ -> "section-$index" }) { _, section ->
                 SectionCard(section)
             }
