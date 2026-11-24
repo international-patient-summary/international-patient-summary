@@ -29,8 +29,8 @@
 		"#lib/*": "./src/lib/*"
 	},
 	"dependencies": {
-		"@lilydesignsystem/svelte-headless": "0.12.0",
-		"@lilydesignsystem/svelte-picker-bar": "0.8.0",
+		"@lilydesignsystem/svelte-headless": "0.13.1",
+		"@lilydesignsystem/svelte-picker-bar": "0.10.0",
 		"@sveltia/i18n": "1.5.0",
 		"dompurify": "3.4.18",
 		"pdfmake": "0.3.14",
@@ -39,7 +39,7 @@
 	"devDependencies": {
 		"@axe-core/playwright": "4.14.0",
 		"@eslint/js": "^10.0.1",
-		"@lilydesignsystem/themes": "0.7.0",
+		"@lilydesignsystem/themes": "0.9.0",
 		"@playwright/test": "1.65.1",
 		"@sveltejs/adapter-static": "4.0.1",
 		"@sveltejs/kit": "3.2.0",
