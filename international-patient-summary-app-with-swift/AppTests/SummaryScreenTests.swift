@@ -30,27 +30,41 @@ import UIKit
         for document in try documents() {
             let (window, _, screen) = shown(document)
             defer { withExtendedLifetime(window) {} }
-            let blocks = screen.model.blocks
-            #expect(blocks.count >= 2, "the patient and the document, at least")
-            #expect(blocks.allSatisfy { !$0.header.isEmpty && !$0.rows.isEmpty })
+            let model = screen.model
+            #expect(model.banner.count >= 2, "the patient and the document, at least")
+            #expect(model.banner.allSatisfy { !$0.header.isEmpty && !$0.rows.isEmpty })
+            #expect(model.sections.count == document.sections.count)
+            #expect(model.sections.allSatisfy { !$0.heading.isEmpty && !$0.key.isEmpty })
             #expect(screen.title == (document.patientName ?? L10n.text("summary.title")))
         }
+    }
+
+    @Test func aSectionSaysItsStatusInWordsExceptWhenItIsKnown() throws {
+        var statuses: Set<String> = []
+        for document in try documents() {
+            let model = SummaryModel(document: document, store: SummaryStore(saving: nil))
+            for section in model.sections {
+                statuses.insert(section.status.rawValue)
+                #expect((section.statusLabel == nil) == (section.status == .known), "\(section.key) \(section.status)")
+            }
+        }
+        #expect(statuses.contains("known"))
     }
 
     @Test func aNarrativeShowsAndHidesBesideItsEntries() throws {
         var toggled = 0
         for document in try documents() {
             let model = SummaryModel(document: document, store: SummaryStore(saving: nil))
-            for (index, block) in model.blocks.enumerated() {
-                guard case .narrativeToggle(let section, false)? = block.rows.first(where: {
+            for (index, section) in model.sections.enumerated() {
+                guard case .narrativeToggle(let number, false)? = section.rows.first(where: {
                     if case .narrativeToggle = $0 { true } else { false }
                 }) else { continue }
-                let shownBefore = model.blocks[index].rows.count
-                model.toggleNarrative(section)
-                #expect(model.blocks[index].rows.count == shownBefore + 1, "the narrative joins the section")
-                #expect(model.blocks[index].rows.contains(.narrativeToggle(section: section, shown: true)))
-                model.toggleNarrative(section)
-                #expect(model.blocks[index].rows.count == shownBefore, "and leaves it again")
+                let before = section.rows.count
+                model.toggleNarrative(number)
+                #expect(model.sections[index].rows.count == before + 1, "the narrative joins the section")
+                #expect(model.sections[index].rows.contains(.narrativeToggle(section: number, shown: true)))
+                model.toggleNarrative(number)
+                #expect(model.sections[index].rows.count == before, "and leaves it again")
                 toggled += 1
             }
         }
@@ -63,7 +77,7 @@ import UIKit
         let document = try store.open(first.data).get()
         let model = SummaryModel(document: document, store: store)
         func banner() -> String {
-            guard case .fact(_, let detail)? = model.blocks.first(where: { $0.header == L10n.text("banner.heading") })?.rows.first
+            guard case .fact(_, let detail)? = model.banner.first(where: { $0.header == L10n.text("banner.heading") })?.rows.first
             else { return "" }
             return detail ?? ""
         }

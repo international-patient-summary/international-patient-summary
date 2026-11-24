@@ -1,4 +1,6 @@
 import IPSKit
+import LilyCore
+import LilyUI
 import SwiftUI
 import UIKit
 
@@ -21,10 +23,22 @@ enum SummaryRow: Equatable {
     case narrativeToggle(section: Int, shown: Bool)
 }
 
-/// One summary (spec §4.2) as rows: alerts, the patient, the document, then its sections. Plain data a test reads without a screen.
+/// One section of the document, as Lily's `InternationalPatientSummarySection` takes it: its key, its heading, its status in words, its rows.
+struct SummarySection: Equatable {
+    /// Lily's key for the section; "other-N" for one this app does not know.
+    let key: String
+    let heading: String
+    let status: IpsSectionStatus
+    /// The status in words; nil only when the status is known.
+    let statusLabel: String?
+    var rows: [SummaryRow]
+}
+
+/// One summary (spec §4.2) as rows: alerts, the patient, the document (the banner), then its sections. Plain data a test reads without a screen.
 @MainActor @Observable final class SummaryModel {
     let document: IPSKit.Document
-    private(set) var blocks: [SummaryBlock] = []
+    private(set) var banner: [SummaryBlock] = []
+    private(set) var sections: [SummarySection] = []
     /// Sections whose narrative is shown alongside their entries.
     private var expanded: Set<Int> = []
     private let store: SummaryStore
@@ -45,27 +59,29 @@ enum SummaryRow: Equatable {
     func refresh() { build() }
 
     private func build() {
-        var blocks: [SummaryBlock] = []
+        var banner: [SummaryBlock] = []
 
         // M-VIEW-1: alerts first, never collapsed.
         var alerts = document.highCriticalityAllergies.map {
             SummaryRow.alert(L10n.text("alerts.highCriticality", $0))
         }
         if document.allergiesMissing { alerts.append(.alert(L10n.text("alerts.allergiesMissing"))) }
-        if !alerts.isEmpty { blocks.append(SummaryBlock(header: L10n.text("alerts.heading"), rows: alerts)) }
+        if !alerts.isEmpty { banner.append(SummaryBlock(header: L10n.text("alerts.heading"), rows: alerts)) }
 
-        blocks.append(SummaryBlock(header: L10n.text("banner.heading"), rows: patientRows()))
-        blocks.append(SummaryBlock(header: L10n.text("document.heading"), rows: documentRows()))
+        banner.append(SummaryBlock(header: L10n.text("banner.heading"), rows: patientRows()))
+        banner.append(SummaryBlock(header: L10n.text("document.heading"), rows: documentRows()))
+        self.banner = banner
 
         // M-VIEW-3: Composition order, then the missing required sections.
-        for (index, section) in document.sections.enumerated() {
+        sections = document.sections.enumerated().map { index, section in
             // M-VIEW-3: the app's name for a known section; the document's own title beneath it.
-            let header = section.key.map { L10n.sectionTitle($0) } ?? section.title ?? L10n.sectionTitle(nil)
-            var rows = rows(section, index)
-            if section.key != nil, let title = section.title, title != header { rows.insert(.note(title), at: 0) }
-            blocks.append(SummaryBlock(header: header, rows: rows))
+            let heading = section.key.map { L10n.sectionTitle($0) } ?? section.title ?? L10n.sectionTitle(nil)
+            var (status, statusLabel, rows) = rows(section, index)
+            if section.key != nil, let title = section.title, title != heading { rows.insert(.note(title), at: 0) }
+            return SummarySection(
+                key: section.key?.lilyKey ?? "other-\(index)", heading: heading, status: status, statusLabel: statusLabel,
+                rows: rows)
         }
-        self.blocks = blocks
     }
 
     private func patientRows() -> [SummaryRow] {
@@ -98,14 +114,16 @@ enum SummaryRow: Equatable {
         return rows
     }
 
-    private func rows(_ section: IPSKit.Section, _ index: Int) -> [SummaryRow] {
+    private func rows(_ section: IPSKit.Section, _ index: Int) -> (IpsSectionStatus, String?, [SummaryRow]) {
         var rows: [SummaryRow] = []
+        var status = Self.status(section.state)
+        var statusLabel = L10n.state(section.state, reason: section.emptyReason)
         // A section that takes entries but has only a narrative says so, then shows it.
         let narrativeOnly = section.entries.isEmpty && section.narrative != nil
         if narrativeOnly, section.state == .notRecorded {
+            status = .known
+            statusLabel = nil
             rows.append(.note(L10n.text("state.narrativeOnly")))
-        } else if let words = L10n.state(section.state, reason: section.emptyReason) {
-            rows.append(.note(words))
         }
         for entry in section.entries {
             guard entry.resolved else {
@@ -124,26 +142,73 @@ enum SummaryRow: Equatable {
                 if shown { rows.append(.narrative(narrative)) }
             }
         }
-        return rows
+        return (status, statusLabel, rows)
+    }
+
+    private static func status(_ state: SectionState) -> IpsSectionStatus {
+        switch state {
+        case .known: .known
+        case .noneKnown: .noneKnown
+        case .notRecorded: .notRecorded
+        case .unavailable: .unavailable
+        case .omitted: .omitted
+        }
     }
 }
 
-/// The summary as a list (spec §4.2), headings first. SwiftUI first.
+/// The summary (spec §4.2) on Lily's `InternationalPatientSummary`: the banner, then each section under its heading with its status in words. SwiftUI first.
 struct SummaryView: View {
     let model: SummaryModel
 
     var body: some View {
-        List {
-            ForEach(Array(model.blocks.enumerated()), id: \.offset) { _, block in
-                Section {
-                    ForEach(Array(block.rows.enumerated()), id: \.offset) { _, row in
-                        rowView(row)
+        ScrollView {
+            // The registry's required sections are always in the document (the document adds the missing ones), so Lily adds none.
+            if let summary = try? InternationalPatientSummary(
+                label: model.document.patientName ?? L10n.text("summary.title"),
+                sections: model.sections.map { IpsSectionEntry(key: $0.key, heading: $0.heading, status: $0.status) },
+                requiredHeadings: Dictionary(
+                    uniqueKeysWithValues: ipsRequiredSections.map { key in (key, L10n.sectionTitle(SectionKey.allCases.first { $0.lilyKey == key })) }),
+                omittedLabel: L10n.text("state.omitted"),
+                banner: {
+                    ForEach(Array(model.banner.enumerated()), id: \.offset) { _, block in card(block.header, block.rows) }
+                },
+                content: {
+                    ForEach(model.sections, id: \.key) { section in
+                        InternationalPatientSummarySection(
+                            section: section.key, heading: section.heading, status: section.status,
+                            statusLabel: section.statusLabel
+                        ) {
+                            VStack(alignment: .leading, spacing: 0) { rows(section.rows) }
+                        }
                     }
-                } header: {
-                    Text(verbatim: block.header).font(.headline).textCase(nil)
-                }
+                },
+                details: { EmptyView() })
+            {
+                summary.padding()
             }
         }
+        .background(Color(.systemGroupedBackground))
+    }
+
+    /// A banner block: its heading, then its rows on a card.
+    private func card(_ header: String, _ rows: [SummaryRow]) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(verbatim: header).font(.title3.bold()).accessibilityAddTraits(.isHeader)
+            VStack(alignment: .leading, spacing: 0) { self.rows(rows) }
+        }
+    }
+
+    private func rows(_ rows: [SummaryRow]) -> some View {
+        ForEach(Array(rows.enumerated()), id: \.offset) { _, row in
+            rowView(row)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(12)
+                .background(background(row))
+        }
+    }
+
+    private func background(_ row: SummaryRow) -> Color {
+        if case .alert = row { Color.red.opacity(0.12) } else { Color(.secondarySystemGroupedBackground) }
     }
 
     @ViewBuilder private func rowView(_ row: SummaryRow) -> some View {
@@ -161,7 +226,6 @@ struct SummaryView: View {
             }
             .accessibilityElement(children: .ignore)
             .accessibilityLabel(Text(verbatim: text))
-            .listRowBackground(Color.red.opacity(0.12))
         case .note(let text):
             Text(verbatim: text).italic().foregroundStyle(.secondary)
         case .narrative(let text):

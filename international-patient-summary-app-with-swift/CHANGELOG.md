@@ -2,7 +2,7 @@
 
 ## 0.1.0 — unreleased
 
-- About and the summary are SwiftUI (`AboutView`, `SummaryView`, hosted in the UIKit navigation stack, with Share's menu and sheet in UIKit); the list screen stays UIKit until it moves.
+- About and the summary are SwiftUI (`AboutView`, `SummaryView` on Lily's `InternationalPatientSummary`, hosted in the UIKit navigation stack, with Share's menu and sheet in UIKit); the list screen stays UIKit until it moves.
 - App icon and accent colour, the same design as the Android app's.
 - Share as PDF: a one-page summary for people by the web viewer's rules (identity, alerts and
   allergies first, sections by clinical priority, trimmed to fit and saying what is not shown),
