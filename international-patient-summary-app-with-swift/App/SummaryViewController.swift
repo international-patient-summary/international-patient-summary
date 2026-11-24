@@ -31,7 +31,14 @@ struct SummarySection: Equatable {
     let status: IpsSectionStatus
     /// The status in words; nil only when the status is known.
     let statusLabel: String?
-    var rows: [SummaryRow]
+    /// What comes before the entries: the document's own title, and the narrative-only note.
+    var lead: [SummaryRow]
+    /// The entries, each a record in Lily's `RecordList`.
+    var entries: [SummaryRow]
+    /// The narrative, and the button that shows or hides it.
+    var trail: [SummaryRow]
+
+    var rows: [SummaryRow] { lead + entries + trail }
 }
 
 /// One summary (spec §4.2) as rows: alerts, the patient, the document (the banner), then its sections. Plain data a test reads without a screen.
@@ -76,11 +83,11 @@ struct SummarySection: Equatable {
         sections = document.sections.enumerated().map { index, section in
             // M-VIEW-3: the app's name for a known section; the document's own title beneath it.
             let heading = section.key.map { L10n.sectionTitle($0) } ?? section.title ?? L10n.sectionTitle(nil)
-            var (status, statusLabel, rows) = rows(section, index)
-            if section.key != nil, let title = section.title, title != heading { rows.insert(.note(title), at: 0) }
+            var built = rows(section, index)
+            if section.key != nil, let title = section.title, title != heading { built.lead.insert(.note(title), at: 0) }
             return SummarySection(
-                key: section.key?.lilyKey ?? "other-\(index)", heading: heading, status: status, statusLabel: statusLabel,
-                rows: rows)
+                key: section.key?.lilyKey ?? "other-\(index)", heading: heading, status: built.status,
+                statusLabel: built.statusLabel, lead: built.lead, entries: built.entries, trail: built.trail)
         }
     }
 
@@ -114,8 +121,12 @@ struct SummarySection: Equatable {
         return rows
     }
 
-    private func rows(_ section: IPSKit.Section, _ index: Int) -> (IpsSectionStatus, String?, [SummaryRow]) {
-        var rows: [SummaryRow] = []
+    private func rows(_ section: IPSKit.Section, _ index: Int) -> (
+        status: IpsSectionStatus, statusLabel: String?, lead: [SummaryRow], entries: [SummaryRow], trail: [SummaryRow]
+    ) {
+        var lead: [SummaryRow] = []
+        var entries: [SummaryRow] = []
+        var trail: [SummaryRow] = []
         var status = Self.status(section.state)
         var statusLabel = L10n.state(section.state, reason: section.emptyReason)
         // A section that takes entries but has only a narrative says so, then shows it.
@@ -123,26 +134,26 @@ struct SummarySection: Equatable {
         if narrativeOnly, section.state == .notRecorded {
             status = .known
             statusLabel = nil
-            rows.append(.note(L10n.text("state.narrativeOnly")))
+            lead.append(.note(L10n.text("state.narrativeOnly")))
         }
         for entry in section.entries {
             guard entry.resolved else {
-                rows.append(.note(L10n.text("entry.unresolved")))
+                entries.append(.note(L10n.text("entry.unresolved")))
                 continue
             }
             let details = entry.details.map { L10n.detail($0.kind, $0.value) }
-            rows.append(.fact(entry.text, details.isEmpty ? nil : details.joined(separator: "\n")))
+            entries.append(.fact(entry.text, details.isEmpty ? nil : details.joined(separator: "\n")))
         }
         if let narrative = section.narrative {
             if section.entries.isEmpty {
-                rows.append(.narrative(narrative))
+                trail.append(.narrative(narrative))
             } else {
                 let shown = expanded.contains(index)
-                rows.append(.narrativeToggle(section: index, shown: shown))
-                if shown { rows.append(.narrative(narrative)) }
+                trail.append(.narrativeToggle(section: index, shown: shown))
+                if shown { trail.append(.narrative(narrative)) }
             }
         }
-        return (status, statusLabel, rows)
+        return (status, statusLabel, lead, entries, trail)
     }
 
     private static func status(_ state: SectionState) -> IpsSectionStatus {
@@ -178,7 +189,16 @@ struct SummaryView: View {
                             section: section.key, heading: section.heading, status: section.status,
                             statusLabel: section.statusLabel
                         ) {
-                            VStack(alignment: .leading, spacing: 0) { rows(section.rows) }
+                            VStack(alignment: .leading, spacing: 0) {
+                                rows(section.lead)
+                                // The entries are records: one list, named for the section, each entry one element.
+                                if !section.entries.isEmpty {
+                                    RecordList(status: .known, statusLabel: section.heading, label: section.heading) {
+                                        records(section.entries)
+                                    }
+                                }
+                                rows(section.trail)
+                            }
                         }
                     }
                 },
@@ -204,6 +224,18 @@ struct SummaryView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(12)
                 .background(background(row))
+        }
+    }
+
+    private func records(_ entries: [SummaryRow]) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            ForEach(Array(entries.enumerated()), id: \.offset) { _, entry in
+                RecordListItem {
+                    rowView(entry)
+                }
+                .padding(12)
+                .background(background(entry))
+            }
         }
     }
 

@@ -35,7 +35,10 @@ import androidx.compose.runtime.Composable
 import io.github.lilydesignsystem.compose.AlertKind
 import io.github.lilydesignsystem.compose.InternationalPatientSummarySection
 import io.github.lilydesignsystem.compose.LilyAlert
+import io.github.lilydesignsystem.compose.RecordList
+import io.github.lilydesignsystem.compose.RecordListItem
 import io.github.lilydesignsystem.core.IpsSectionStatus
+import io.github.lilydesignsystem.core.RecordListStatus
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -268,9 +271,14 @@ private fun SectionCard(section: Section) {
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             }
-            section.entries.forEachIndexed { index, entry ->
-                if (index > 0) HorizontalDivider(Modifier.padding(horizontal = 16.dp))
-                EntryRow(entry)
+            // The entries are records: one list, named for the section, each entry one TalkBack stop.
+            if (hasRows) {
+                RecordList(status = RecordListStatus.Known, statusLabel = heading, label = heading) {
+                    section.entries.forEachIndexed { index, entry ->
+                        if (index > 0) HorizontalDivider(Modifier.padding(horizontal = 16.dp))
+                        RecordListItem { EntryRow(entry) }
+                    }
+                }
             }
             section.narrative?.let { narrative ->
                 if (!hasRows) {

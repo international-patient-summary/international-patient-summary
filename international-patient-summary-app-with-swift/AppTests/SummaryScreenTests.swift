@@ -51,6 +51,22 @@ import UIKit
         #expect(statuses.contains("known"))
     }
 
+    @Test func everyEntryIsOneRecordAndTheNarrativeStaysOutsideTheList() throws {
+        for document in try documents() {
+            let model = SummaryModel(document: document, store: SummaryStore(saving: nil))
+            for (section, source) in zip(model.sections, document.sections) {
+                #expect(section.entries.count == source.entries.count, "\(section.key)")
+                #expect(section.entries.allSatisfy { if case .narrative = $0 { false } else { true } })
+                #expect(section.trail.allSatisfy {
+                    switch $0 {
+                    case .narrative, .narrativeToggle: true
+                    default: false
+                    }
+                })
+            }
+        }
+    }
+
     @Test func aNarrativeShowsAndHidesBesideItsEntries() throws {
         var toggled = 0
         for document in try documents() {
