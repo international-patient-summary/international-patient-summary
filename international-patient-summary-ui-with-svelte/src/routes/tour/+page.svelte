@@ -97,8 +97,9 @@
 		</TourList>
 	</Tour>
 	{#if !guideOpen}
-		<Button class="tour-show-guide" onclick={() => (guideOpen = true)}>{t('tour.showGuide')}</Button
-		>
+		<Button class="tour-show-guide" onclick={() => (guideOpen = true)}>
+			{t('tour.showGuide')}
+		</Button>
 	{/if}
 
 	{#if tour.busy}
@@ -175,14 +176,18 @@
 									<Button
 										label={t('tour.summaries.openNamed', { title: name })}
 										disabled={tour.busy}
-										onclick={() => tour.open(summary)}>{t('tour.summaries.open')}</Button
+										onclick={() => tour.open(summary)}
 									>
+										{t('tour.summaries.open')}
+									</Button>
 									<Button
 										class="tour-delete"
 										label={t('tour.summaries.deleteNamed', { title: name })}
 										disabled={tour.busy}
-										onclick={() => tour.remove(summary.id)}>{t('tour.summaries.delete')}</Button
+										onclick={() => tour.remove(summary.id)}
 									>
+										{t('tour.summaries.delete')}
+									</Button>
 								</div>
 							</DocumentListItem>
 						{/each}
@@ -190,9 +195,9 @@
 				{:else if !tour.busy}
 					<p>{t('tour.summaries.empty')}</p>
 				{/if}
-				<Button disabled={tour.busy} onclick={() => tour.reset(exampleHref)}
-					>{t('tour.summaries.reset')}</Button
-				>
+				<Button disabled={tour.busy} onclick={() => tour.reset(exampleHref)}>
+					{t('tour.summaries.reset')}
+				</Button>
 			</section>
 		{/if}
 	{/if}

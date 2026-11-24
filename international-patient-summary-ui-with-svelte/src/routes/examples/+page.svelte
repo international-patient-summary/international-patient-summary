@@ -22,8 +22,9 @@
 					class="button"
 					href="{resolve('/')}?example={id}"
 					aria-label={t('loader.openExample', { name: t(`examples.${id}.name`) })}
-					>{t('examples.open')}</a
 				>
+					{t('examples.open')}
+				</a>
 			</li>
 		{/each}
 	</ul>

@@ -82,8 +82,10 @@
 			<ToggleButton
 				class="viewer-codes"
 				label={t('viewer.showCodes')}
-				bind:pressed={viewer.showCodes}>{t('viewer.showCodes')}</ToggleButton
+				bind:pressed={viewer.showCodes}
 			>
+				{t('viewer.showCodes')}
+			</ToggleButton>
 		</aside>
 
 		<div class="viewer-main">

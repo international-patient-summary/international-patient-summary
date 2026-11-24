@@ -11,8 +11,8 @@
 {#if codes.length > 0}
 	<span class="entry-codes" hidden={!viewer.showCodes}>
 		<span class="screen-reader-span">{t('viewer.codes')}: </span>
-		{#each codes as code, i (i)}<code
-				>{code.system ? `${code.system} ${code.code}` : code.code}</code
-			>{/each}
+		{#each codes as code, i (i)}<code>
+				{code.system ? `${code.system} ${code.code}` : code.code}
+			</code>{/each}
 	</span>
 {/if}

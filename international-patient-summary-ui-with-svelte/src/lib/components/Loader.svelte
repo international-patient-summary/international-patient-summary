@@ -92,8 +92,10 @@
 				controls="loader-panel-{id}"
 				selected={tab === id}
 				onclick={() => (tab = id)}
-				onfocus={() => (tab = id)}>{t(TAB_LABEL[id])}</TabBarButton
+				onfocus={() => (tab = id)}
 			>
+				{t(TAB_LABEL[id])}
+			</TabBarButton>
 		{/each}
 	</TabBar>
 
@@ -181,8 +183,9 @@
 						class="example-button"
 						onclick={() => openExample(id)}
 						label={t('loader.openExample', { name: t(`examples.${id}.name`) })}
-						>{t(`examples.${id}.name`)}</Button
 					>
+						{t(`examples.${id}.name`)}
+					</Button>
 					<span class="hint">{t(`examples.${id}.description`)}</span>
 				</li>
 			{/each}

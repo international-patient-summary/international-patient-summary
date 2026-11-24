@@ -140,8 +140,9 @@
 					statusLabel={m.statusLabel}
 					lotNumber={m.lotNumber ? `${t('fields.lotNumber')}: ${m.lotNumber}` : undefined}
 				>
-					{#if m.performer}<span class="record-detail">{t('fields.performer')}: {m.performer}</span
-						>{/if}
+					{#if m.performer}<span class="record-detail">
+							{t('fields.performer')}: {m.performer}
+						</span>{/if}
 					{@render extras(m)}
 				</ImmunizationRecordListItem>
 			{:else if m.kind === 'procedure'}

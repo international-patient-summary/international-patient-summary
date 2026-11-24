@@ -108,13 +108,14 @@
 	{#if format === 'markdown' || format === 'pdf'}
 		<Details class="export-options" summary={t('export.options')}>
 			{#if format === 'markdown'}
-				<label class="checkbox"
-					><input type="checkbox" bind:checked={includeNarrative} />
-					{t('export.includeNarrative')}</label
-				>
-				<label class="checkbox"
-					><input type="checkbox" bind:checked={includeCodes} /> {t('export.includeCodes')}</label
-				>
+				<label class="checkbox">
+					<input type="checkbox" bind:checked={includeNarrative} />
+					{t('export.includeNarrative')}
+				</label>
+				<label class="checkbox">
+					<input type="checkbox" bind:checked={includeCodes} />
+					{t('export.includeCodes')}
+				</label>
 			{:else}
 				<RadioGroup class="export-papers" label={t('export.paperSize')}>
 					<legend>{t('export.paperSize')}</legend>
@@ -150,9 +151,9 @@
 		<Alert type="warning" role="alert">
 			<p>{t('export.overflowWarning')}</p>
 			{#if pending}
-				<Button onclick={() => pending && save(pending.blob, pending.filename)}
-					>{t('export.downloadAnyway')}</Button
-				>
+				<Button onclick={() => pending && save(pending.blob, pending.filename)}>
+					{t('export.downloadAnyway')}
+				</Button>
 			{/if}
 		</Alert>
 	{/if}

@@ -42,9 +42,9 @@
 		{#if section.documentTitle && section.documentTitle !== title}
 			<span class="ips-section-document-title" lang={doc.language}>“{section.documentTitle}”</span>
 		{/if}
-		{#if section.code}<code class="ips-section-code" hidden={!viewer.showCodes}
-				>LOINC {section.code}</code
-			>{/if}
+		{#if section.code}<code class="ips-section-code" hidden={!viewer.showCodes}>
+				LOINC {section.code}
+			</code>{/if}
 	</p>
 
 	{#if section.unresolved.length > 0}
@@ -56,9 +56,9 @@
 	{/if}
 
 	{#if canTimeline}
-		<ToggleButton class="ips-section-view" label={t('viewer.timeline')} bind:pressed={timeline}
-			>{t('viewer.timeline')}</ToggleButton
-		>
+		<ToggleButton class="ips-section-view" label={t('viewer.timeline')} bind:pressed={timeline}>
+			{t('viewer.timeline')}
+		</ToggleButton>
 	{/if}
 
 	{#if canTimeline && timeline}

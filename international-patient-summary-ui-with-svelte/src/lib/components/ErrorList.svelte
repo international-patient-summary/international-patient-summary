@@ -21,9 +21,9 @@
 					<li>
 						<span>{t(error.key, error.values)}</span>
 						{#if error.line}
-							<span
-								>{t('loader.errorPosition', { line: error.line, column: error.column ?? 1 })}</span
-							>
+							<span>
+								{t('loader.errorPosition', { line: error.line, column: error.column ?? 1 })}
+							</span>
 						{/if}
 						{#if error.detail}
 							<span class="error-detail">{t('loader.errorDetail', { detail: error.detail })}</span>
