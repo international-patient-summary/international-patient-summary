@@ -108,7 +108,7 @@ final class IPSAppUITests: XCTestCase {
         XCTAssertTrue(
             app.staticTexts.containing(NSPredicate(format: "label BEGINSWITH %@", "This app is not a medical device."))
                 .firstMatch.waitForExistence(timeout: 5))
-        let clear = app.cells["clearAll"]
+        let clear = app.buttons["clearAll"]
         while !clear.isHittable { app.swipeUp() }
         clear.tap()
         app.alerts.buttons["Clear all"].tap()
@@ -151,7 +151,7 @@ final class IPSAppUITests: XCTestCase {
 
         // M-PRIV-3: Clear all leaves no summary in either column.
         app.buttons["about"].tap()
-        let clear = app.cells["clearAll"]
+        let clear = app.buttons["clearAll"]
         XCTAssertTrue(clear.waitForExistence(timeout: 5))
         while !clear.isHittable { app.swipeUp() }
         clear.tap()
@@ -320,7 +320,7 @@ final class IPSAppUITests: XCTestCase {
         if !sideBySide { goBack(again) }
 
         again.buttons["about"].tap()
-        let clear = again.cells["clearAll"]
+        let clear = again.buttons["clearAll"]
         XCTAssertTrue(clear.waitForExistence(timeout: 5))
         while !clear.isHittable { again.swipeUp() }
         clear.tap()

@@ -1,55 +1,68 @@
 import Foundation
 import IPSKit
+import SwiftUI
 import Testing
 import UIKit
 
 @testable import IPSApp
 
-/// About (M-ABOUT-1) and Clear all (M-PRIV-3), in a window.
+/// About (M-ABOUT-1) and Clear all (M-PRIV-3): the content as data, the model's two steps, and the screen in a window.
 @MainActor
 @Suite struct AboutViewControllerTests {
-    private typealias Handler = @convention(block) (UIAlertAction) -> Void
+    @Test func itListsSafetyPrivacyAndVersions() {
+        let content = AboutContent(appVersion: "9.9")
+        #expect(content.sections.map(\.heading) == [
+            L10n.text("about.safety.heading"), L10n.text("about.privacy.heading"), L10n.text("about.versions.heading"),
+        ])
+        #expect(content.sections[0].rows == [.init(text: L10n.text("about.safety.body"), secondary: nil)])
+        #expect(content.sections[2].rows == [
+            .init(text: "9.9", secondary: L10n.text("about.version")),
+            .init(text: "2.0.1", secondary: L10n.text("about.ips")),
+        ])
+    }
 
-    private func shown(_ store: SummaryStore) -> (UIWindow, UINavigationController, AboutViewController) {
-        let about = AboutViewController(store: store)
+    @Test func clearAllAsksFirstAndClearsOnlyWhenConfirmed() {
+        let store = SummaryStore(saving: nil)
+        Examples.data().forEach { store.open($0) }
+        var left = 0
+        let model = AboutModel(store: store) { left += 1 }
+        #expect(!model.confirming)
+        model.askToClearAll()
+        #expect(model.confirming)
+        #expect(!store.documents.isEmpty, "nothing is cleared until confirmed")
+        #expect(left == 0)
+        model.confirmClearAll()
+        #expect(store.documents.isEmpty)
+        #expect(left == 1)
+    }
+
+    @Test func theScreenIsTitledAndDrawsInAWindow() {
+        let about = AboutViewController(store: SummaryStore(saving: nil))
         let navigation = UINavigationController(rootViewController: UIViewController())
         navigation.pushViewController(about, animated: false)
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = navigation
         window.makeKeyAndVisible()
         about.loadViewIfNeeded()
-        return (window, navigation, about)
-    }
-
-    @Test func itListsSafetyPrivacyVersionsAndClearAll() throws {
-        let (_, _, about) = shown(SummaryStore(saving: nil))
+        window.layoutIfNeeded()
         #expect(about.title == L10n.text("about.title"))
-        #expect(about.numberOfSections(in: about.tableView) == 4)
-        #expect(about.tableView(about.tableView, numberOfRowsInSection: 2) == 2)
-        #expect(about.tableView(about.tableView, numberOfRowsInSection: 3) == 1)
-        #expect(about.tableView(about.tableView, viewForHeaderInSection: 3) == nil)
-        #expect(about.tableView(about.tableView, viewForHeaderInSection: 0) != nil)
-        let clear = about.tableView(about.tableView, cellForRowAt: IndexPath(row: 0, section: 3))
-        #expect(clear.accessibilityIdentifier == "clearAll")
-        let safety = about.tableView(about.tableView, cellForRowAt: IndexPath(row: 0, section: 0))
-        #expect(safety.accessibilityTraits == .staticText)
+        #expect(about.navigationItem.largeTitleDisplayMode == .never)
+        about.model.askToClearAll()
+        window.layoutIfNeeded()
+        #expect(about.model.confirming)
     }
 
-    @Test func selectingAnInfoRowDoesNothingAndClearAllAsksFirst() throws {
+    @Test func confirmingClearAllReturnsToTheList() async throws {
         let store = SummaryStore(saving: nil)
-        Examples.data().forEach { store.open($0) }
-        let (_, _, about) = shown(store)
-        about.tableView(about.tableView, didSelectRowAt: IndexPath(row: 0, section: 0))
-        #expect(about.presentedViewController == nil)
-
-        about.tableView(about.tableView, didSelectRowAt: IndexPath(row: 0, section: 3))
-        let alert = try #require(about.presentedViewController as? UIAlertController)
-        #expect(alert.actions.count == 2)
-        #expect(!store.documents.isEmpty, "nothing is cleared until confirmed")
-
-        let confirm = try #require(alert.actions.first { $0.style == .destructive })
-        let handler = try #require(confirm.value(forKey: "handler"))
-        unsafeBitCast(handler as AnyObject, to: Handler.self)(confirm)
-        #expect(store.documents.isEmpty)
+        let root = UIViewController()
+        let navigation = UINavigationController(rootViewController: root)
+        let about = AboutViewController(store: store)
+        navigation.pushViewController(about, animated: false)
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.rootViewController = navigation
+        window.makeKeyAndVisible()
+        about.model.confirmClearAll()
+        try await Task.sleep(for: .seconds(1))
+        #expect(navigation.viewControllers == [root])
     }
 }

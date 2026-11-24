@@ -1,81 +1,108 @@
 import IPSKit
+import SwiftUI
 import UIKit
 
-/// About (spec M-ABOUT-1): safety, privacy, versions, and Clear all (M-PRIV-3).
-final class AboutViewController: UITableViewController {
-    private let store: SummaryStore
-    private let sections: [(header: String, rows: [(String, String?)])]
+/// What About says (spec M-ABOUT-1): safety, privacy, and the versions. Plain data, so a test reads it without a screen.
+struct AboutContent: Equatable {
+    struct Row: Equatable {
+        let text: String
+        let secondary: String?
+    }
+
+    struct Section: Equatable {
+        let heading: String
+        let rows: [Row]
+    }
+
+    let sections: [Section]
+
+    init(appVersion: String) {
+        sections = [
+            Section(heading: L10n.text("about.safety.heading"), rows: [Row(text: L10n.text("about.safety.body"), secondary: nil)]),
+            Section(heading: L10n.text("about.privacy.heading"), rows: [Row(text: L10n.text("about.privacy.body"), secondary: nil)]),
+            Section(
+                heading: L10n.text("about.versions.heading"),
+                rows: [
+                    Row(text: appVersion, secondary: L10n.text("about.version")),
+                    Row(text: "2.0.1", secondary: L10n.text("about.ips")),
+                ]),
+        ]
+    }
+}
+
+/// Clear all (M-PRIV-3): it asks first, and nothing is cleared until it is confirmed.
+@MainActor @Observable final class AboutModel {
+    let store: SummaryStore
+    var confirming = false
+    private let cleared: () -> Void
+
+    init(store: SummaryStore, cleared: @escaping () -> Void) {
+        self.store = store
+        self.cleared = cleared
+    }
+
+    func askToClearAll() { confirming = true }
+
+    func confirmClearAll() {
+        store.clear()
+        cleared()
+    }
+}
+
+/// About (spec M-ABOUT-1): safety, privacy, versions, and Clear all (M-PRIV-3). The first SwiftUI screen (SwiftUI first, UIKit as the fallback).
+struct AboutView: View {
+    @Bindable var model: AboutModel
+    let content: AboutContent
+
+    var body: some View {
+        List {
+            ForEach(content.sections, id: \.heading) { section in
+                Section {
+                    ForEach(section.rows, id: \.text) { row in
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(verbatim: row.text)
+                            if let secondary = row.secondary {
+                                Text(verbatim: secondary).font(.subheadline).foregroundStyle(.secondary)
+                            }
+                        }
+                        .accessibilityElement(children: .combine)
+                    }
+                } header: {
+                    Text(verbatim: section.heading)
+                }
+            }
+            Section {
+                Button(role: .destructive, action: model.askToClearAll) {
+                    Text(verbatim: L10n.text("about.clearAll"))
+                }
+                .accessibilityIdentifier("clearAll")
+            }
+        }
+        .alert(
+            L10n.text("about.clearAll.confirm.title"), isPresented: $model.confirming
+        ) {
+            Button(L10n.text("cancel"), role: .cancel) {}
+            Button(L10n.text("about.clearAll.confirm.action"), role: .destructive, action: model.confirmClearAll)
+        } message: {
+            Text(verbatim: L10n.text("about.clearAll.confirm.body"))
+        }
+    }
+}
+
+/// Hosts `AboutView` for the UIKit navigation stack around it.
+final class AboutViewController: UIHostingController<AboutView> {
+    let model: AboutModel
 
     init(store: SummaryStore) {
-        self.store = store
         let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "?"
-        sections = [
-            (L10n.text("about.safety.heading"), [(L10n.text("about.safety.body"), nil)]),
-            (L10n.text("about.privacy.heading"), [(L10n.text("about.privacy.body"), nil)]),
-            (
-                L10n.text("about.versions.heading"),
-                [(version, L10n.text("about.version")), ("2.0.1", L10n.text("about.ips"))]
-            ),
-        ]
-        super.init(style: .insetGrouped)
-    }
-
-    required init?(coder: NSCoder) { fatalError("not used") }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
+        var cleared: () -> Void = {}
+        let model = AboutModel(store: store) { cleared() }
+        self.model = model
+        super.init(rootView: AboutView(model: model, content: AboutContent(appVersion: version)))
+        cleared = { [weak self] in self?.navigationController?.popToRootViewController(animated: true) }
         title = L10n.text("about.title")
         navigationItem.largeTitleDisplayMode = .never
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "row")
-        tableView.register(HeadingView.self, forHeaderFooterViewReuseIdentifier: "heading")
     }
 
-    override func numberOfSections(in tableView: UITableView) -> Int { sections.count + 1 }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        section < sections.count ? sections[section].rows.count : 1
-    }
-
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard section < sections.count else { return nil }
-        let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "heading") as? HeadingView
-        view?.set(sections[section].header)
-        return view
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "row", for: indexPath)
-        var content = UIListContentConfiguration.subtitleCell()
-        content.textProperties.numberOfLines = 0
-        content.secondaryTextProperties.color = .secondaryLabel
-        if indexPath.section < sections.count {
-            let (text, secondary) = sections[indexPath.section].rows[indexPath.row]
-            content.text = text
-            content.secondaryText = secondary
-            cell.selectionStyle = .none
-            cell.accessibilityTraits = .staticText
-        } else {
-            content.text = L10n.text("about.clearAll")
-            content.textProperties.color = .systemRed
-            cell.accessibilityTraits = .button
-            cell.accessibilityIdentifier = "clearAll"
-        }
-        cell.contentConfiguration = content
-        return cell
-    }
-
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        guard indexPath.section == sections.count else { return }
-        let confirm = UIAlertController(
-            title: L10n.text("about.clearAll.confirm.title"), message: L10n.text("about.clearAll.confirm.body"),
-            preferredStyle: .alert)
-        confirm.addAction(UIAlertAction(title: L10n.text("cancel"), style: .cancel))
-        confirm.addAction(
-            UIAlertAction(title: L10n.text("about.clearAll.confirm.action"), style: .destructive) { [weak self] _ in
-                self?.store.clear()
-                self?.navigationController?.popToRootViewController(animated: true)
-            })
-        present(confirm, animated: true)
-    }
+    @available(*, unavailable) required init?(coder: NSCoder) { fatalError("not used") }
 }
