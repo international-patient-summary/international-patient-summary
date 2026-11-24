@@ -21,6 +21,11 @@ import UIKit
         ])
     }
 
+    @Test func onlyTheVersionsAreTermsAndValues() {
+        let content = AboutContent(appVersion: "9.9")
+        #expect(content.sections.map(\.isTermsAndValues) == [false, false, true])
+    }
+
     @Test func clearAllAsksFirstAndClearsOnlyWhenConfirmed() {
         let store = SummaryStore(saving: nil)
         Examples.data().forEach { store.open($0) }

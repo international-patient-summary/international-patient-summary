@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A1000000000000000000F001 /* IPSKit in Frameworks */ = {isa = PBXBuildFile; productRef = A1000000000000000000D001 /* IPSKit */; };
 		A1000000000000000000F002 /* IPSKit in Frameworks */ = {isa = PBXBuildFile; productRef = A1000000000000000000D002 /* IPSKit */; };
+		A1000000000000000000F003 /* LilyUI in Frameworks */ = {isa = PBXBuildFile; productRef = A1000000000000000000D003 /* LilyUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1000000000000000000F001 /* IPSKit in Frameworks */,
+				A1000000000000000000F003 /* LilyUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,6 +122,7 @@
 			name = IPSApp;
 			packageProductDependencies = (
 				A1000000000000000000D001 /* IPSKit */,
+				A1000000000000000000D003 /* LilyUI */,
 			);
 			productName = IPSApp;
 			productReference = A1000000000000000000E001 /* IPSApp.app */;
@@ -269,6 +272,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				A10000000000000000004001 /* XCLocalSwiftPackageReference "IPSKit" */,
+				A10000000000000000004002 /* XCLocalSwiftPackageReference "lily-design-system-swift" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = A10000000000000000008002 /* Products */;
@@ -562,6 +566,10 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = IPSKit;
 		};
+		A10000000000000000004002 /* XCLocalSwiftPackageReference "lily-design-system-swift" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../../../lilydesignsystem/lily-design-system/lily-design-system-swift";
+		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -572,6 +580,11 @@
 		A1000000000000000000D002 /* IPSKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = IPSKit;
+		};
+		A1000000000000000000D003 /* LilyUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A10000000000000000004002 /* XCLocalSwiftPackageReference "lily-design-system-swift" */;
+			productName = LilyUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

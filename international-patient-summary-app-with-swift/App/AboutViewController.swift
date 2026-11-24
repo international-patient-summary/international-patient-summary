@@ -1,4 +1,5 @@
 import IPSKit
+import LilyUI
 import SwiftUI
 import UIKit
 
@@ -12,6 +13,9 @@ struct AboutContent: Equatable {
     struct Section: Equatable {
         let heading: String
         let rows: [Row]
+
+        /// Every row names what it is (the versions), as against a paragraph.
+        var isTermsAndValues: Bool { rows.allSatisfy { $0.secondary != nil } }
     }
 
     let sections: [Section]
@@ -58,14 +62,15 @@ struct AboutView: View {
         List {
             ForEach(content.sections, id: \.heading) { section in
                 Section {
-                    ForEach(section.rows, id: \.text) { row in
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text(verbatim: row.text)
-                            if let secondary = row.secondary {
-                                Text(verbatim: secondary).font(.subheadline).foregroundStyle(.secondary)
+                    if section.isTermsAndValues {
+                        // The versions: a term and its value, read as one element each (Lily's SummaryList).
+                        SummaryList(label: section.heading) {
+                            ForEach(section.rows, id: \.text) { row in
+                                SummaryListItem(term: row.secondary ?? "") { Text(verbatim: row.text) }
                             }
                         }
-                        .accessibilityElement(children: .combine)
+                    } else {
+                        ForEach(section.rows, id: \.text) { row in Text(verbatim: row.text) }
                     }
                 } header: {
                     Text(verbatim: section.heading)
