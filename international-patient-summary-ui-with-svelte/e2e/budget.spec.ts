@@ -17,6 +17,9 @@ test('initial JavaScript is at most 250 KB gzipped (PDF chunk excluded)', async 
 });
 
 test('bundle-ips-all-sections renders in under 200 ms; its PDF in under 3 s', async ({ page }) => {
+	// The budgets below are measured inside the page. The three fills of a large paste box are not
+	// budgeted and take about 25 s on a CI runner, so the test's own timeout is longer than the default 30 s.
+	test.setTimeout(90_000);
 	const text = await (await page.request.get('/examples/bundle-ips-all-sections.json')).text();
 	const samples: number[] = [];
 	for (let sample = 0; sample < 3; sample += 1) {
