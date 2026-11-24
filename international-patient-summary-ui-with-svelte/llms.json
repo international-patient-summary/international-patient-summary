@@ -1,7 +1,7 @@
 {
 	"name": "international-patient-summary-ui-with-svelte",
 	"description": "Browser-only, read-only viewer for HL7 FHIR International Patient Summary documents (JSON or YAML), with JSON/YAML/Markdown/one-page PDF export, four locales, and a public backendless tour signing in as example@example.com.",
-	"license": "MIT OR Apache-2.0 OR BSD-3-Clause OR GPL-2.0-only OR GPL-3.0-only OR OGL-UK-3.0 OR CC-BY-NC-SA-4.0",
+	"license": "MIT OR Apache-2.0 OR BSD-3-Clause OR GPL-2.0-only OR GPL-3.0-only OR OGL-UK-3.0 OR CC-BY-SA-4.0",
 	"language": "TypeScript",
 	"stack": [
 		"Svelte 5.57",

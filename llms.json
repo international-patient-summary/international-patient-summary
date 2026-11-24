@@ -1,7 +1,7 @@
 {
   "name": "international-patient-summary",
   "description": "International Patient Summary (IPS): an introduction in 116 locales, its website, a browser viewer (frontend), a storage service (backend), and iOS and Android apps.",
-  "license": "MIT OR Apache-2.0 OR BSD-3-Clause OR GPL-2.0-only OR GPL-3.0-only OR OGL-UK-3.0 OR CC-BY-NC-SA-4.0",
+  "license": "MIT OR Apache-2.0 OR BSD-3-Clause OR GPL-2.0-only OR GPL-3.0-only OR OGL-UK-3.0 OR CC-BY-SA-4.0",
   "repository": "https://github.com/international-patient-summary/international-patient-summary",
   "documentation": {
     "readme": "README.md",

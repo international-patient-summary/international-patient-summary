@@ -14,7 +14,7 @@ License is any of these or contact us for custom license options.
 
 * [UK Open Government Licence v3.0](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/) ([SPDX: OGL-UK-3.0](https://spdx.org/licenses/OGL-UK-3.0.html))
 
-* [Creative Commons Attribution Non Commercial Share Alike 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/) ([SPDX: CC-BY-NC-SA-4.0](https://spdx.org/licenses/CC-BY-NC-SA-4.0.html))
+* [Creative Commons Attribution Share Alike 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/) ([SPDX: CC-BY-SA-4.0](https://spdx.org/licenses/CC-BY-SA-4.0.html))
 
 ## Full license texts
 
@@ -26,4 +26,4 @@ The full text of each license is in its own directory:
 - [GPL-2.0-only](LICENSES/gpl-2.0-only/index.md)
 - [GPL-3.0-only](LICENSES/gpl-3.0-only/index.md)
 - [OGL-UK-3.0](LICENSES/ogl-uk-3.0/index.md)
-- [CC-BY-NC-SA-4.0](LICENSES/cc-by-nc-sa-4.0/index.md)
+- [CC-BY-SA-4.0](LICENSES/cc-by-sa-4.0/index.md)
