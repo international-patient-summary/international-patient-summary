@@ -13,7 +13,12 @@ for (const theme of THEMES) {
 			);
 		});
 
-		for (const path of ['/?lang=en-US', '/examples/?lang=en-US', '/tour/?lang=en-US'])
+		for (const path of [
+			'/?lang=en-US',
+			'/examples/?lang=en-US',
+			'/tour/?lang=en-US',
+			'/service/?lang=en-US'
+		])
 			test(`route ${path}`, async ({ page }) => {
 				await page.goto(path);
 				await page.locator('h1').waitFor();

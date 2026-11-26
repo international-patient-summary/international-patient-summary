@@ -46,6 +46,11 @@
 				"name": "/tour/",
 				"path": "src/routes/tour/+page.svelte",
 				"description": "public backendless tour: sign in as example@example.com"
+			},
+			{
+				"name": "/service/",
+				"path": "src/routes/service/+page.svelte",
+				"description": "sign in to the backend (OIDC with PKCE), store, list, open and delete summaries (spec §6.10); VITE_IPS_SERVICE_URL, VITE_IPS_OIDC_ISSUER, VITE_IPS_OIDC_CLIENT_ID"
 			}
 		],
 		"Modules": [
@@ -68,6 +73,16 @@
 				"name": "Tour service",
 				"path": "src/lib/service/tour-service.ts",
 				"description": "in-memory IpsService for the tour"
+			},
+			{
+				"name": "OIDC",
+				"path": "src/lib/service/oidc.ts",
+				"description": "authorization code flow with PKCE, no library; token in memory only"
+			},
+			{
+				"name": "Service session",
+				"path": "src/lib/remote.svelte.ts",
+				"description": "the tab's backend session behind /service/ and the viewer's Save to service"
 			},
 			{
 				"name": "HTTP service",

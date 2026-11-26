@@ -122,7 +122,7 @@ src/lib/export/      framework-free exporters (json, yaml, markdown, pdf, filena
 src/lib/service/     the backend's API as an interface; TourService, in memory
 src/lib/tour.svelte.ts  the tour's session (demo sign-in, open, delete, sign-out)
 src/lib/components/  Svelte components on Lily headless
-src/routes/          / (loader + viewer), /examples/, /tour/
+src/routes/          / (loader + viewer), /examples/, /tour/, /service/
 locales/             UI messages, one directory per locale
 static/examples/     IG 2.0.1 example Bundles and their YAML twins
 static/fonts/        Noto Sans and Noto Sans SC for the PDF (OFL)
@@ -139,6 +139,25 @@ GitHub Pages project site), set `BASE_PATH`, e.g. `BASE_PATH=/viewer pnpm run
 build`. In this repository, `.github/workflows/viewer-check.yml` (at the root)
 runs the checks; this folder's own `.github/workflows/ci.yml` tests and deploys
 when it is published as its own repository.
+
+## Service
+
+`/service/` signs in to the backend's identity provider (OIDC with PKCE) and
+stores, lists, opens and deletes summaries on the backend (spec §6.10). Set
+where they are at build time:
+
+```sh
+VITE_IPS_SERVICE_URL=https://ips.example \
+VITE_IPS_OIDC_ISSUER=https://id.example/realms/ips \
+VITE_IPS_OIDC_CLIENT_ID=ips-viewer \
+pnpm run build
+```
+
+`pnpm run dev` needs none of them: it uses the backend's local service on
+`http://localhost:1241` and its development Keycloak realm on
+`http://localhost:8080` (the backend's README, "Authentication"). Start the
+service with `CORS_ALLOWED_ORIGINS=http://localhost:5173`. A build without
+them has no service page link.
 
 ## Licence
 

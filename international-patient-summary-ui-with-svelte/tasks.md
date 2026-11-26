@@ -364,6 +364,16 @@ Rules for the executing agent:
       `src/lib/service/http-service.test.ts`; by hand on 2026-11-26 against
       the service (PASETO development token): store five examples, list,
       read, delete, 404, 422 with pointer, 401 without a token.
-- [ ] **P9-T8 Sign-in and service pages.** OIDC with PKCE to the
-      backend's Keycloak realm (`ips-viewer` client), the token in memory
-      only, and "Save to service" / "Open from service" over `HttpService`.
+- [x] **P9-T8 Sign-in and service pages** (§6.10, F-SIGN-1…6): OIDC with
+      PKCE (no library), the token in memory only, `/service/` to store,
+      list, open and delete over `HttpService`. Verify: `oidc.test.ts`,
+      `remote.test.ts`, `config.test.ts`, `e2e/service.spec.ts`; by hand on
+      2026-11-26 against Keycloak 26.8.2 (`ips` realm) and the service:
+      sign in as `writer` on Keycloak's form, store, list, open, a `403` on
+      delete (writers may not delete), sign out.
+- [x] **P9-T10 Save to service** from the viewer (F-SIGN-7). Verify:
+      `remote.test.ts`, `e2e/service.spec.ts` (signed in, Home, open a
+      file, save, listed; not offered when signed out or for a document from
+      the service).
+- [ ] **P9-T9 Translation review** of the new `service.*` strings in cy-001
+      and zh-cn (part of P7-T4).

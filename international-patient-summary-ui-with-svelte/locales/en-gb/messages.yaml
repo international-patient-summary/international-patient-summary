@@ -15,6 +15,7 @@ header:
   home: Home
   examples: Examples
   tour: Tour
+  service: Service
 
 picker:
   links: Pages
@@ -606,3 +607,45 @@ tour:
     signIn: That is not the tour account. Use example@example.com with the password “example”.
     notFound: That summary is no longer stored.
     service: The tour could not load its summaries. Reload the page and try again.
+
+service:
+  heading: Service
+  intro: Sign in to your IPS service to store summaries, see the ones you may read, and open one in the viewer.
+  calloutLabel: About the service
+  privacy: Summaries go only to the service you sign in to. Your sign-in and any summary you open are kept in this tab’s memory, and are gone when you sign out or reload.
+  notConfigured: This copy of the viewer is not connected to a service.
+  signIn: Sign in
+  signOut: Sign out
+  signedInAs: 'Signed in as {$name}'
+  signedIn: Signed in
+  loading: Talking to the service
+  store:
+    heading: Store a summary
+    label: Choose an IPS file (JSON or YAML)
+  summaries:
+    heading: Stored summaries
+    list: Stored summaries
+    empty: The service holds no summaries you may see.
+    untitled: Untitled summary
+    date: 'Dated {$date}'
+    open: Open
+    openNamed: 'Open {$title}'
+    delete: Delete
+    deleteNamed: 'Delete {$title}'
+    refresh: Refresh
+  view:
+    back: Back to the stored summaries
+  save:
+    button: Save to service
+    done: Saved to the service.
+  errors:
+    signInFailed: Sign-in did not succeed. Try again.
+    signInStale: That sign-in has expired or was started in another tab. Sign in again.
+    providerUnreachable: The sign-in service could not be reached.
+    expired: Your sign-in has ended. Sign in again.
+    forbidden: Your account may not do that.
+    notFound: That summary is no longer stored.
+    refused: The service did not store that file, because it is not an IPS document.
+    unreachable: The service could not be reached.
+    unreadable: That file could not be read as JSON or YAML.
+    service: The service could not do that. Try again later.

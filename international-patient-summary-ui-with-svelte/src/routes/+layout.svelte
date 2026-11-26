@@ -9,6 +9,7 @@
 	import PickerBar from '@lilydesignsystem/svelte-picker-bar';
 	import { locale } from '@sveltia/i18n';
 	import { APP_LOCALES, LOCALE_LABELS, LOCALE_STORAGE_KEY, STORAGE_PREFIX, t } from '#lib/i18n.ts';
+	import { serviceConfig } from '#lib/service/config.ts';
 
 	let { children } = $props();
 
@@ -16,6 +17,9 @@
 	const homeHref = resolve('/');
 	const examplesHref = resolve('/examples');
 	const tourHref = resolve('/tour');
+	const serviceHref = resolve('/service');
+	// The service page is linked only from a build that has a service (spec §6.10).
+	const hasService = !!serviceConfig();
 
 	// trailingSlash is 'always', so '/tour/' is the page resolve('/tour') names.
 	const isCurrent = (href: string) =>
@@ -39,7 +43,17 @@
 			label: t('header.tour'),
 			href: tourHref,
 			current: isCurrent(tourHref)
-		}
+		},
+		...(hasService
+			? [
+					{
+						id: 'service',
+						label: t('header.service'),
+						href: serviceHref,
+						current: isCurrent(serviceHref)
+					}
+				]
+			: [])
 	]);
 
 	// Share sends the app's own address only — never a document (spec §6.5).

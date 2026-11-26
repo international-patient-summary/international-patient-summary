@@ -1630,7 +1630,7 @@ time {
 
 .tour-sign-in .field p[role='alert'],
 .tour-error {
-	color: var(--color-error, var(--lily-text));
+	color: var(--lily-error-text, var(--lily-text));
 	font-weight: 600;
 }
 

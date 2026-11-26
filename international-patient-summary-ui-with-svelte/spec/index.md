@@ -134,10 +134,8 @@ fixtures (§9).
 - Terminology server lookups; the viewer displays `coding.display` /
   `text` as supplied.
 - Any storage of patient data server-side or in browser storage.
-- Real sign-in, and calls to the backend service. The tour's sign-in is a
-  demonstration. The backend now needs a Keycloak or PASETO bearer token on
-  every `/fhir` request (its spec §6.1); signing in to its Keycloak realm
-  (OIDC with PKCE) is the `HttpService`'s first step (§11).
+- Refreshing an access token: when it ends, the person signs in again
+  (§6.10).
 
 ## 4. Technology
 
@@ -310,7 +308,11 @@ src/
     service/         # pure TypeScript, no Svelte (§6.8)
       service.ts     # the backend's API as an interface; its IPS check and refusal codes
       tour-service.ts# in-memory implementation for the tour
+      http-service.ts# the backend over HTTP, with a bearer token (§6.9)
+      oidc.ts        # OIDC authorization code flow with PKCE (§6.10)
+      config.ts      # the build's service and identity provider (§6.10)
     tour.svelte.ts   # tour session: demo sign-in, seeding, open/delete/reset, sign-out
+    remote.svelte.ts # service session: sign-in, store, list, open, delete, sign-out (§6.10)
       summary.ts     # patient identity and document metadata in words
     export/          # pure TypeScript, no Svelte; each returns a Blob
       json.ts        # canonical pretty JSON of the loaded Bundle
@@ -625,6 +627,49 @@ that use it, are still to come (§11).
 - **F-HTTP-4 Privacy.** Documents and tokens are held in memory only (§5);
   nothing is sent anywhere but the service root.
 
+### 6.10 Signing in to the service
+
+A page at `/service/` signs in to the backend's identity provider and uses
+`HttpService` (§6.9) with the token. The header links to it only in a build
+that has a service.
+
+- **F-SIGN-1 Sign-in.** OpenID Connect's authorization code flow with PKCE
+  (RFC 7636, `S256`) for the public client: the provider's endpoints come
+  from its discovery document, which must name the configured issuer; a
+  fresh 16-byte `state` and 32-byte verifier per sign-in; scope `openid`;
+  the redirect URI is the page itself. No library: these are standard
+  requests.
+- **F-SIGN-2 Return.** On return, the `state` must equal the pending one,
+  which is removed whatever happens, so a code is exchanged once; the code
+  and state are taken out of the address. A forged or stale return says so
+  (`signInStale`); an `error` return or a refused exchange says the
+  sign-in did not succeed.
+- **F-SIGN-3 Token.** The access token is kept in memory only and is not
+  used within 30 seconds of its `expires_in`. A `401` from the service ends
+  the session and asks the person to sign in again; a `403` says the
+  account may not do that. The token's `preferred_username` is shown, read
+  without verification, for display only. Signing out forgets the token,
+  the list and the open document.
+- **F-SIGN-4 Configuration.** `VITE_IPS_SERVICE_URL`,
+  `VITE_IPS_OIDC_ISSUER` and `VITE_IPS_OIDC_CLIENT_ID` (default
+  `ips-viewer`), fixed at build time. The development server falls back to
+  the backend's local defaults (`http://localhost:1241`, Keycloak's `ips`
+  realm on `http://localhost:8080`); a production build without them says
+  it is not connected to a service.
+- **F-SIGN-5 Pages.** Signed in: "Store a summary" (a JSON or YAML file,
+  read as F-LOAD-1, checked by the service), the stored summaries newest
+  first (as F-TOUR-4) with Open and Delete, and Refresh. Open shows the
+  ordinary viewer with source "service", and "Back to the stored summaries".
+- **F-SIGN-7 Save to service.** While the tab is signed in, the viewer
+  offers "Save to service" for a document it did not open from the service;
+  it stores the document as loaded and confirms "Saved to the service." The
+  service page shows the viewer only for a document it opened itself. The
+  session is the same one, kept in memory across navigation within the app.
+- **F-SIGN-6 Privacy.** The only thing that outlives a page load is the
+  pending sign-in's `state` and verifier, in `sessionStorage` for this tab,
+  across the provider's redirect, removed on return. No token, document or
+  name is stored. Requests go only to the issuer and the service root.
+
 ## 7. Non-functional requirements
 
 - **Accessibility**: WCAG 2.2 AA required, AAA targeted (matching Lily).
@@ -685,6 +730,11 @@ lossless.
   needed.
 - **i18n**: key parity and MF2 compile check across the four locales;
   plural rendering for Welsh counts 0, 1, 2, 3, 6, 7.
+- **Sign-in**: `src/lib/service/oidc.test.ts` (F-SIGN-1…3, the PKCE
+  challenge checked against Node's own SHA-256), `src/lib/remote.test.ts`
+  and `src/lib/service/config.test.ts` (F-SIGN-4…6), and `e2e/service.spec.ts`
+  (the whole flow against a stand-in provider and service, nothing stored,
+  no request elsewhere, axe).
 - **Service client**: `src/lib/service/http-service.test.ts` holds
   `HttpService` to F-HTTP-1…4 against a fake of the backend's HTTP API.
 - **Tour**: `src/lib/service/service.test.ts` holds the service to the
@@ -722,10 +772,8 @@ lossless.
 - Validation hand-off to the HL7 FHIR Validator.
 - Tagged (accessible) PDF / PDF/UA for the one-page summary.
 - Multi-page full-summary PDF export.
-- Sign-in to the backend's Keycloak realm with OIDC and PKCE (the
-  development realm's public `ips-viewer` client), supplying the token of
-  `HttpService` (§6.9), and the "Save to service" and "Open from service"
-  pages that use it.
+- Refreshing the access token without signing in again, and signing out
+  of the identity provider as well as the viewer.
 
 ## 12. References
 

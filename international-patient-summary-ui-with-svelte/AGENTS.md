@@ -25,7 +25,10 @@ commit.
 - Clinical content is never translated, and carries the document's `lang`.
 - Never persist or transmit patient data: no localStorage/IndexedDB/cookies,
   no document in a URL, no network request except a URL the person asks to
-  fetch. Picker preferences (theme, locale, text size) may be stored.
+  fetch, or the service and identity provider the person signs in to
+  (spec §6.10). Picker preferences (theme, locale, text size) may be stored,
+  and the pending sign-in's state and PKCE verifier in sessionStorage across
+  the provider's redirect only. Never store a token.
 - YAML is parsed and emitted with the YAML 1.2 core schema only.
 - Statuses are words first: every Lily medical component gets a `*Label` for
   every status code it receives. Colour only reinforces.

@@ -14,6 +14,7 @@
 	import DocumentMeta from './DocumentMeta.svelte';
 	import ExportMenu from './ExportMenu.svelte';
 	import PatientBanner from './PatientBanner.svelte';
+	import SaveToService from './SaveToService.svelte';
 	import SectionView from './SectionView.svelte';
 	import { formatHumanName, formatFhirDate } from '#lib/fhir/format.ts';
 	import type { IpsDocument } from '#lib/fhir/types.ts';
@@ -65,6 +66,8 @@
 			{t('loader.loadedAs', { format: viewer.loaded.format.toUpperCase(), source })}
 		</p>
 	{/if}
+
+	<SaveToService />
 
 	<PatientBanner {doc} />
 

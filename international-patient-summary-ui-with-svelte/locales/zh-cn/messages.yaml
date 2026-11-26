@@ -16,6 +16,7 @@ header:
   home: 首页
   examples: 示例
   tour: 导览
+  service: 服务
 
 picker:
   links: 页面
@@ -588,3 +589,45 @@ tour:
     signIn: 这不是导览账户。请使用 example@example.com，密码为“example”。
     notFound: 该摘要已不再存储。
     service: 导览无法加载其摘要。请重新加载页面后重试。
+
+service:
+  heading: 服务
+  intro: 登录您的 IPS 服务，以存储摘要、查看您可阅读的摘要，并在查看器中打开其中一份。
+  calloutLabel: 关于该服务
+  privacy: 摘要只会发送到您登录的服务。您的登录信息和您打开的任何摘要都只保存在此标签页的内存中，退出登录或重新加载后即会消失。
+  notConfigured: 此查看器副本未连接到任何服务。
+  signIn: 登录
+  signOut: 退出登录
+  signedInAs: '已登录为 {$name}'
+  signedIn: 已登录
+  loading: 正在与服务通信
+  store:
+    heading: 存储摘要
+    label: 选择 IPS 文件（JSON 或 YAML）
+  summaries:
+    heading: 已存储的摘要
+    list: 已存储的摘要
+    empty: 该服务中没有您可查看的摘要。
+    untitled: 无标题摘要
+    date: '日期：{$date}'
+    open: 打开
+    openNamed: '打开 {$title}'
+    delete: 删除
+    deleteNamed: '删除 {$title}'
+    refresh: 刷新
+  view:
+    back: 返回已存储的摘要
+  save:
+    button: 保存到服务
+    done: 已保存到服务。
+  errors:
+    signInFailed: 登录未成功。请重试。
+    signInStale: 该登录已过期，或是在另一个标签页中发起的。请重新登录。
+    providerUnreachable: 无法连接登录服务。
+    expired: 您的登录已结束。请重新登录。
+    forbidden: 您的账户无权执行此操作。
+    notFound: 该摘要已不再存储。
+    refused: 该服务未存储此文件，因为它不是 IPS 文档。
+    unreachable: 无法连接该服务。
+    unreadable: 无法将该文件读取为 JSON 或 YAML。
+    service: 该服务无法完成此操作。请稍后重试。

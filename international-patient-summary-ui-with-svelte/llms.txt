@@ -27,6 +27,7 @@
 - [/](src/routes/+page.svelte): loader and viewer
 - [/examples/](src/routes/examples/+page.svelte): the five IG examples
 - [/tour/](src/routes/tour/+page.svelte): public backendless tour: sign in as example@example.com
+- [/service/](src/routes/service/+page.svelte): sign in to the backend (OIDC with PKCE), store, list, open and delete summaries (spec §6.10); VITE_IPS_SERVICE_URL, VITE_IPS_OIDC_ISSUER, VITE_IPS_OIDC_CLIENT_ID
 
 ## Modules
 
@@ -34,6 +35,8 @@
 - [Export](src/lib/export/): JSON, YAML, Markdown, one-page PDF
 - [Service contract](src/lib/service/service.ts): the backend API as IpsService; its IPS check and refusal codes
 - [Tour service](src/lib/service/tour-service.ts): in-memory IpsService for the tour
+- [OIDC](src/lib/service/oidc.ts): authorization code flow with PKCE, no library; token in memory only
+- [Service session](src/lib/remote.svelte.ts): the tab's backend session behind /service/ and the viewer's Save to service
 - [HTTP service](src/lib/service/http-service.ts): IpsService against the backend: bearer token, problems as ServiceError, paged list through next links (spec §6.9)
 - [Tour session](src/lib/tour.svelte.ts): demo sign-in, seeding, open, delete, sign-out
 - [Viewer state](src/lib/state.svelte.ts): the open document, in memory only

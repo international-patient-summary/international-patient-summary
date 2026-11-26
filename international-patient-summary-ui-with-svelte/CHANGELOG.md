@@ -2,6 +2,16 @@
 
 ## 0.1.0 — unreleased
 
+- `/service/` (spec §6.10): sign in to the backend's identity provider with OIDC
+  and PKCE (no library; the token in memory only, only the pending sign-in in
+  sessionStorage across the redirect), then store a JSON or YAML file, list,
+  open, delete and sign out over `HttpService`. Configured with `VITE_IPS_*` at
+  build time; the development server uses the backend's local defaults. The
+  header links to it only when a service is configured. `.tour-error` now uses
+  the theme's error text colour (it failed colour contrast).
+- "Save to service" in the viewer while signed in (F-SIGN-7): stores the open
+  document as loaded; not offered for a document opened from the service.
+
 - `HttpService` (spec §6.9): the backend's API as `IpsService`, with a bearer
   token, no caching or cookies, problems as `ServiceError` (code and pointer),
   and `list()` paging through the backend's `GET /fhir/Bundle`. The tour and it

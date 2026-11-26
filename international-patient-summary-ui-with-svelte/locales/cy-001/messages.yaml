@@ -16,6 +16,7 @@ header:
   home: Hafan
   examples: Enghreifftiau
   tour: Taith
+  service: Gwasanaeth
 
 picker:
   links: Tudalennau
@@ -680,3 +681,45 @@ tour:
     signIn: Nid dyna gyfrif y daith. Defnyddiwch example@example.com gyda'r cyfrinair “example”.
     notFound: Nid yw'r crynodeb hwnnw wedi'i storio mwyach.
     service: Nid oedd modd i'r daith lwytho ei chrynodebau. Ail-lwythwch y dudalen a rhowch gynnig arall arni.
+
+service:
+  heading: Gwasanaeth
+  intro: Mewngofnodwch i'ch gwasanaeth IPS i storio crynodebau, gweld y rhai y cewch eu darllen, ac agor un yn y gwyliwr.
+  calloutLabel: Am y gwasanaeth
+  privacy: Dim ond i'r gwasanaeth rydych yn mewngofnodi iddo y mae crynodebau'n mynd. Mae eich mewngofnodi ac unrhyw grynodeb rydych yn ei agor yn cael eu cadw yng nghof y tab hwn, ac yn diflannu pan fyddwch yn allgofnodi neu'n ail-lwytho.
+  notConfigured: Nid yw'r copi hwn o'r gwyliwr wedi'i gysylltu â gwasanaeth.
+  signIn: Mewngofnodi
+  signOut: Allgofnodi
+  signedInAs: 'Wedi mewngofnodi fel {$name}'
+  signedIn: Wedi mewngofnodi
+  loading: Wrthi'n cysylltu â'r gwasanaeth
+  store:
+    heading: Storio crynodeb
+    label: Dewiswch ffeil IPS (JSON neu YAML)
+  summaries:
+    heading: Crynodebau wedi'u storio
+    list: Crynodebau wedi'u storio
+    empty: Nid oes gan y gwasanaeth grynodebau y cewch eu gweld.
+    untitled: Crynodeb heb deitl
+    date: 'Dyddiad: {$date}'
+    open: Agor
+    openNamed: 'Agor {$title}'
+    delete: Dileu
+    deleteNamed: 'Dileu {$title}'
+    refresh: Adnewyddu
+  view:
+    back: Yn ôl i'r crynodebau wedi'u storio
+  save:
+    button: Cadw i'r gwasanaeth
+    done: Wedi'i gadw i'r gwasanaeth.
+  errors:
+    signInFailed: Ni lwyddodd y mewngofnodi. Rhowch gynnig arall arni.
+    signInStale: Mae'r mewngofnodi hwnnw wedi dod i ben neu wedi'i ddechrau mewn tab arall. Mewngofnodwch eto.
+    providerUnreachable: Nid oedd modd cyrraedd y gwasanaeth mewngofnodi.
+    expired: Mae eich mewngofnodi wedi dod i ben. Mewngofnodwch eto.
+    forbidden: Ni chaiff eich cyfrif wneud hynny.
+    notFound: Nid yw'r crynodeb hwnnw wedi'i storio mwyach.
+    refused: Ni storiodd y gwasanaeth y ffeil honno, gan nad yw'n ddogfen IPS.
+    unreachable: Nid oedd modd cyrraedd y gwasanaeth.
+    unreadable: Nid oedd modd darllen y ffeil honno fel JSON neu YAML.
+    service: Nid oedd modd i'r gwasanaeth wneud hynny. Rhowch gynnig arall arni yn nes ymlaen.
