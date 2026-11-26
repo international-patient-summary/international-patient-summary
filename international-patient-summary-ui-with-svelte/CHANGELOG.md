@@ -2,6 +2,11 @@
 
 ## 0.1.0 — unreleased
 
+- `HttpService` (spec §6.9): the backend's API as `IpsService`, with a bearer
+  token, no caching or cookies, problems as `ServiceError` (code and pointer),
+  and `list()` paging through the backend's `GET /fhir/Bundle`. The tour and it
+  share `listingOf`. Sign-in and the pages that use it come next (P9-T8).
+
 - Markdown export passes markdownlint (checked in the tests): URLs in clinical text are
   escaped so they never become links, absent states are plain words, and empty table
   cells use the compact `| |` (F-EXP-2).

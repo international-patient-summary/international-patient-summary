@@ -358,7 +358,12 @@ Rules for the executing agent:
       `/tour/` added to the axe route sweep. Verify: `pnpm run test:e2e`.
 - [ ] **P9-T6 Translation review** of the new `tour.*` strings in cy-001 and
       zh-cn (part of P7-T4).
-- [ ] **P9-T7 `HttpService`** against the backend. Its authentication is in
-      (its spec §6.1, 2026-11-17): needs OIDC sign-in with PKCE to its
-      Keycloak realm (`ips-viewer` client). F-LOAD-3 now permits literal
-      loopback HTTP in development only (the service's P2-T1).
+- [x] **P9-T7 `HttpService`** against the backend (§6.9, F-HTTP-1…4):
+      bearer token, problems as `ServiceError`, paged `list()` through
+      `next` links, shared `listingOf` with the tour. Verify:
+      `src/lib/service/http-service.test.ts`; by hand on 2026-11-26 against
+      the service (PASETO development token): store five examples, list,
+      read, delete, 404, 422 with pointer, 401 without a token.
+- [ ] **P9-T8 Sign-in and service pages.** OIDC with PKCE to the
+      backend's Keycloak realm (`ips-viewer` client), the token in memory
+      only, and "Save to service" / "Open from service" over `HttpService`.

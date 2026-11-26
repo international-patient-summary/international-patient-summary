@@ -600,6 +600,31 @@ viewer will work with the backend service, without needing it.
   Nothing is written to localStorage, sessionStorage, IndexedDB or cookies,
   apart from the picker preferences.
 
+### 6.9 Backend service client
+
+`HttpService` (`src/lib/service/http-service.ts`) implements `IpsService`
+against the backend (its spec §4). It is the client half of "Save to service"
+and "Open from service"; the sign-in that supplies its token, and the pages
+that use it, are still to come (§11).
+
+- **F-HTTP-1 Requests.** Each call goes to the configured service root
+  (`https://`, or loopback `http://` in development only, as F-LOAD-3),
+  with `Authorization: Bearer` when there is a token, `cache: no-store`,
+  `credentials: omit` and `redirect: error`. A body is
+  `application/fhir+json`. An id that is not a v4 UUID is a `404` without
+  any request.
+- **F-HTTP-2 Problems.** A failed answer becomes a `ServiceError` with the
+  status and the problem's `code` and `errors[0].pointer` (the backend's
+  RFC 9457 problems), `http_error` when the body is not a problem, and status
+  `0` with `unreachable` when the request itself fails.
+- **F-HTTP-3 Listing.** `list()` asks for pages of 100 and follows each
+  `next` link, at most 100 pages, and never one that leaves the service
+  root. Each entry, the backend's SUBSETTED document (its S-API-7), is read
+  by the same `listingOf` as the tour's, so both list the same title, date
+  and patient name.
+- **F-HTTP-4 Privacy.** Documents and tokens are held in memory only (§5);
+  nothing is sent anywhere but the service root.
+
 ## 7. Non-functional requirements
 
 - **Accessibility**: WCAG 2.2 AA required, AAA targeted (matching Lily).
@@ -660,6 +685,8 @@ lossless.
   needed.
 - **i18n**: key parity and MF2 compile check across the four locales;
   plural rendering for Welsh counts 0, 1, 2, 3, 6, 7.
+- **Service client**: `src/lib/service/http-service.test.ts` holds
+  `HttpService` to F-HTTP-1…4 against a fake of the backend's HTTP API.
 - **Tour**: `src/lib/service/service.test.ts` holds the service to the
   backend's contract (check order, codes, pointers, ids, 404s, copies);
   `src/lib/tour.test.ts` covers sign-in, seeding, open, delete and sign-out;
@@ -695,10 +722,10 @@ lossless.
 - Validation hand-off to the HL7 FHIR Validator.
 - Tagged (accessible) PDF / PDF/UA for the one-page summary.
 - Multi-page full-summary PDF export.
-- An `HttpService` implementing `IpsService` against the backend, which
-  now has authentication (its spec §6.1): sign-in to its Keycloak realm with
-  OIDC and PKCE (the development realm's public `ips-viewer` client), a
-  bearer token on each request, "Save to service" and "Open from service".
+- Sign-in to the backend's Keycloak realm with OIDC and PKCE (the
+  development realm's public `ips-viewer` client), supplying the token of
+  `HttpService` (§6.9), and the "Save to service" and "Open from service"
+  pages that use it.
 
 ## 12. References
 

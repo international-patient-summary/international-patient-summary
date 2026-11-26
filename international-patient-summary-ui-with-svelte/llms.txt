@@ -34,6 +34,7 @@
 - [Export](src/lib/export/): JSON, YAML, Markdown, one-page PDF
 - [Service contract](src/lib/service/service.ts): the backend API as IpsService; its IPS check and refusal codes
 - [Tour service](src/lib/service/tour-service.ts): in-memory IpsService for the tour
+- [HTTP service](src/lib/service/http-service.ts): IpsService against the backend: bearer token, problems as ServiceError, paged list through next links (spec §6.9)
 - [Tour session](src/lib/tour.svelte.ts): demo sign-in, seeding, open, delete, sign-out
 - [Viewer state](src/lib/state.svelte.ts): the open document, in memory only
 

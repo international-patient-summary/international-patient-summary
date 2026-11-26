@@ -2,7 +2,10 @@
 // international-patient-summary-service-with-axum (its spec §4): ids are
 // server-issued v4 UUIDs written into Bundle.id, a document must pass the same
 // structural IPS check, and refusals carry the same codes and JSON pointers.
-// TourService implements it in memory, so the tour needs no backend.
+// TourService implements it in memory, so the tour needs no backend;
+// HttpService (http-service.ts) implements it against the backend.
+import type { HumanName } from 'fhir/r4';
+import { formatHumanName } from '../fhir/format.ts';
 
 /** A stored document: its id, and the Bundle with `id` set to it. */
 export interface StoredSummary {
@@ -36,7 +39,8 @@ export type RefusalCode = (typeof REFUSALS)[number][0];
 /** A failed call, as the backend's RFC 9457 problem would state it. */
 export class ServiceError extends Error {
 	constructor(
-		readonly status: 401 | 404 | 422,
+		/** The HTTP status, or 0 when the service could not be reached. */
+		readonly status: number,
 		readonly code: string,
 		readonly pointer?: string
 	) {
@@ -87,4 +91,41 @@ const UUID_V4 = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f
 /** An id the backend could have issued (its spec S-API-5). */
 export function isServiceId(id: string): boolean {
 	return UUID_V4.test(id);
+}
+
+type Entry = {
+	fullUrl?: string;
+	resource?: { resourceType?: string; id?: string; name?: HumanName[] };
+};
+
+/**
+ * What a list shows of `bundle`: its Composition's title and date and its
+ * subject's name. A whole document and the backend's SUBSETTED list entry
+ * (its S-API-7) read the same way.
+ */
+export function listingOf(id: string, bundle: Record<string, unknown>): SummaryListing {
+	const entries = Array.isArray(bundle.entry) ? (bundle.entry as Entry[]) : [];
+	const composition = (entries[0] as { resource?: Record<string, unknown> } | undefined)?.resource;
+	return {
+		id,
+		title: typeof composition?.title === 'string' ? composition.title : undefined,
+		date: typeof composition?.date === 'string' ? composition.date : undefined,
+		patient: subjectName(entries, composition)
+	};
+}
+
+/** The Composition subject's name, resolved by fullUrl, Type/id, or a fullUrl ending /Type/id. */
+function subjectName(
+	entries: Entry[],
+	composition: Record<string, unknown> | undefined
+): string | undefined {
+	const reference = (composition?.subject as { reference?: string } | undefined)?.reference;
+	if (!reference) return undefined;
+	const subject = entries.find(
+		(e) =>
+			e.fullUrl === reference ||
+			`${e.resource?.resourceType}/${e.resource?.id}` === reference ||
+			e.fullUrl?.endsWith(`/${reference}`)
+	)?.resource;
+	return formatHumanName(subject?.name);
 }

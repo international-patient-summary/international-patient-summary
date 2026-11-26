@@ -70,6 +70,11 @@
 				"description": "in-memory IpsService for the tour"
 			},
 			{
+				"name": "HTTP service",
+				"path": "src/lib/service/http-service.ts",
+				"description": "IpsService against the backend: bearer token, problems as ServiceError, paged list through next links (spec §6.9)"
+			},
+			{
 				"name": "Tour session",
 				"path": "src/lib/tour.svelte.ts",
 				"description": "demo sign-in, seeding, open, delete, sign-out"

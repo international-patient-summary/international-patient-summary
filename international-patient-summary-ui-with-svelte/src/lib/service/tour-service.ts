@@ -1,11 +1,10 @@
 // The backendless IPS service used by the public tour (spec §6.8): the
 // backend's API, held in memory only. Nothing is stored in the browser or sent
 // anywhere, and everything is gone on sign-out or reload.
-import { formatHumanName } from '../fhir/format.ts';
-import type { HumanName } from 'fhir/r4';
 import {
 	checkIps,
 	isServiceId,
+	listingOf,
 	REFUSALS,
 	ServiceError,
 	type IpsService,
@@ -50,35 +49,6 @@ export class TourService implements IpsService {
 	async list(): Promise<SummaryListing[]> {
 		return [...this.#rows.entries()]
 			.sort(([, a], [, b]) => b.created - a.created)
-			.map(([id, { bundle }]) => {
-				const composition = (bundle.entry as { resource?: Record<string, unknown> }[])[0]?.resource;
-				return {
-					id,
-					title: typeof composition?.title === 'string' ? composition.title : undefined,
-					date: typeof composition?.date === 'string' ? composition.date : undefined,
-					patient: subjectName(bundle, composition)
-				};
-			});
+			.map(([id, { bundle }]) => listingOf(id, bundle));
 	}
-}
-
-type Entry = {
-	fullUrl?: string;
-	resource?: { resourceType?: string; id?: string; name?: HumanName[] };
-};
-
-/** The Composition subject's name, resolved by fullUrl or Type/id. */
-function subjectName(
-	bundle: Record<string, unknown>,
-	composition: Record<string, unknown> | undefined
-): string | undefined {
-	const reference = (composition?.subject as { reference?: string } | undefined)?.reference;
-	if (!reference) return undefined;
-	const subject = (bundle.entry as Entry[]).find(
-		(e) =>
-			e.fullUrl === reference ||
-			`${e.resource?.resourceType}/${e.resource?.id}` === reference ||
-			e.fullUrl?.endsWith(`/${reference}`)
-	)?.resource;
-	return formatHumanName(subject?.name);
 }
