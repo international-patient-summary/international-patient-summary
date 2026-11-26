@@ -14,6 +14,9 @@ First implementation of the specification (spec/index.md).
 - `health [--ready]` probes the local server, for an image with no `curl` (Axa 0.16).
 - `POST /fhir/Bundle` stores an IPS document Bundle after a structural check;
   `GET` and `DELETE /fhir/Bundle/{id}` read and remove it.
+- `GET /fhir/Bundle` lists documents newest first with `_count` and `_cursor` paging
+  (S-API-7/8/9): each is subsetted to the Composition's title, date and subject and
+  the subject's name, as the viewer's `SummaryListing` needs, and logged as a read.
 - Health probes with a pending-migrations check (and Keycloak's keys); refuses
   to start in production without an authenticator.
 - Unit and request tests, including the five IPS IG example Bundles.

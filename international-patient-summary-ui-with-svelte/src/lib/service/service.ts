@@ -10,7 +10,10 @@ export interface StoredSummary {
 	bundle: Record<string, unknown>;
 }
 
-/** What a list shows of a stored document. Planned in the backend as its P4. */
+/**
+ * What a list shows of a stored document. The backend's `GET /fhir/Bundle`
+ * (its S-API-7) answers each as a SUBSETTED Bundle holding just these.
+ */
 export interface SummaryListing {
 	id: string;
 	title?: string;

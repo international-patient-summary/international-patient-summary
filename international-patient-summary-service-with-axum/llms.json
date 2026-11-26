@@ -39,6 +39,11 @@
         "description": "store an IPS document: 201 + Location, or 422 problem with code and pointer"
       },
       {
+        "name": "GET /fhir/Bundle",
+        "path": "src/routes.rs",
+        "description": "a page of stored documents, newest first, as a searchset Bundle of SUBSETTED documents (Composition title, date, subject; the subject's name): _count, _cursor, next link; each logged as a read"
+      },
+      {
         "name": "GET /fhir/Bundle/{id}",
         "path": "src/routes.rs",
         "description": "the stored Bundle, Cache-Control: no-store, or 404"

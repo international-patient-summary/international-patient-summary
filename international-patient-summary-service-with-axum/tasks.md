@@ -54,7 +54,8 @@ Checklist for [plans.md](plans.md). Spec: [spec/index.md](spec/index.md).
 
 ## P4 — Listing
 
-- [ ] **P4-T1** `GET /fhir/Bundle` with cursor pagination, filtered by policy.
+- [x] **P4-T1** `GET /fhir/Bundle` with cursor pagination, filtered by policy
+      (S-API-7/8/9). Per-record filtering waits for P3-T4. Verify: `tests/api.rs`.
 - [ ] **P4-T2** Decide `Bundle.identifier` uniqueness.
 
 ## P5 — Operations

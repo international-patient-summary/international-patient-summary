@@ -132,7 +132,29 @@ come before anything below.
 - **S-API-6** `204` once deleted; `404` as in **S-API-5**, including for a
   second delete of the same id.
 
-### 4.4 Health
+### 4.4 `GET /fhir/Bundle` — list documents
+
+- **S-API-7** `200` with a `searchset` Bundle, newest document first. Each
+  entry has `fullUrl` `/fhir/Bundle/{id}` and, as its `resource`, the
+  document subsetted to what a list shows (the viewer's `SummaryListing`,
+  its spec §6.8) and tagged `SUBSETTED` in `meta.tag`: the Composition with
+  only `title`, `date` and `subject.reference`, then the subject's entry
+  (matched as the viewer matches it: `fullUrl`, `Type/id`, or a `fullUrl`
+  ending `/Type/id`) with only `resourceType`, `id` and `name`. No section,
+  entry, birth date or identifier is listed. It needs the `read` action of
+  §6.1 and has no `total`.
+- **S-API-8** `_count` (1 to 100, default 20) sets the page size; `_cursor`
+  continues from the `next` link, which is present exactly when another
+  page follows. A cursor is a storage time and an id, so it stays valid when
+  the document it ended on is deleted. A `_count` or `_cursor` that is not
+  understood is `400` with `code` `invalid_count` or `invalid_cursor` and
+  `errors[0].parameter` naming it.
+- **S-API-9** Every document listed is logged as a `read` with status 200,
+  before the page is sent (**S-AUDIT-1**); an empty page logs nothing.
+  Which documents a caller may list is settled by the policy only (§6.1); a
+  per-record rule waits for tasks P3-T4.
+
+### 4.5 Health
 
 - **S-HEALTH-1** `/_health/live`, `/_health/ready`, and `/_health/startup`,
   from Axa. Readiness and startup fail, naming `migrations`, while a
@@ -189,8 +211,8 @@ come before anything below.
   included. A PASETO token carries `access` itself; a Keycloak realm role
   maps to it: `ips-reader`, `ips-writer`, `ips-admin`, unless
   `IPS_KEYCLOAK_ROLE_MAP` says otherwise. An unmapped role grants nothing.
-- **S-AUDIT-1** Each allowed rule obliges an audit. Every create, read, and
-  delete of a document id writes an `ips_access_log` row (§3), the `404`s
+- **S-AUDIT-1** Each allowed rule obliges an audit. Every create, read (a list
+  included, S-API-9), and delete of a document id writes an `ips_access_log` row (§3), the `404`s
   included: a create and a delete in the same transaction as the change, a
   read before the document is sent. If the row cannot be written the answer
   is `500` and carries no document. An id that is not a v4 UUID is a `404`
@@ -257,6 +279,7 @@ AXA_TEST_DB_URL=postgres://… cargo nextest run --run-ignored all
 | S-API-2     | `src/ips.rs` tests; `tests/api.rs` `a_non_ips_body_is_refused_with_a_pointer` |
 | S-API-3/4/6 | `tests/api.rs` `every_example_round_trips` (all five IG examples)         |
 | S-API-5     | `tests/api.rs` `an_id_this_service_never_issues_is_not_found`             |
+| S-API-7/8/9 | `src/routes.rs` tests; `tests/api.rs` `a_list_pages_newest_first_and_shows_only_what_a_list_needs`, `a_list_refuses_a_count_or_cursor_it_does_not_understand`; `tests/auth.rs` `a_read_that_cannot_be_logged_sends_nothing` |
 | S-HEALTH-1  | `tests/api.rs` `liveness_answers_without_a_database`, `readiness_answers_once_migrated` |
 | S-SAFE-1    | `src/auth.rs` `production_refuses_to_run_without_an_authenticator`, `a_half_configured_authenticator_is_refused` |
 | S-AUTH-1    | `tests/auth.rs` `every_fhir_route_needs_a_token_and_health_does_not`, `a_token_from_another_key_is_refused` |

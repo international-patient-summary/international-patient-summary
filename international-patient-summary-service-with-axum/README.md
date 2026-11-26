@@ -125,6 +125,7 @@ as Keycloak, under the same policy.
 | Method   | Path                  | Answer                                                       |
 | -------- | --------------------- | ------------------------------------------------------------ |
 | `POST`   | `/fhir/Bundle`        | `201` with `Location` and the stored Bundle; `422` if not an IPS |
+| `GET`    | `/fhir/Bundle`        | `200` with a `searchset` Bundle of subsetted documents, newest first (`_count`, `_cursor`) |
 | `GET`    | `/fhir/Bundle/{id}`   | `200` with the Bundle (`application/fhir+json`), or `404`    |
 | `DELETE` | `/fhir/Bundle/{id}`   | `204`, or `404`                                              |
 | `GET`    | `/_health/live`, `/_health/ready`, `/_health/startup` | Probes                       |

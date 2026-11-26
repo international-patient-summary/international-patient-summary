@@ -82,6 +82,7 @@ async fn every_fhir_route_needs_a_token_and_health_does_not() {
     let id = "/fhir/Bundle/2b39610e-a2d8-4548-9e5f-eaa9ecd0fc08";
     for response in [
         server.get(id).expect_failure().await,
+        server.get("/fhir/Bundle").expect_failure().await,
         server.delete(id).expect_failure().await,
         server
             .post("/fhir/Bundle")
@@ -112,17 +113,20 @@ async fn the_policy_refuses_by_access_before_any_handler_runs() {
     let keys = TestKeys::new();
     let server = server(no_database(), &paseto_auth(&keys, "policy"));
     let id = "/fhir/Bundle/2b39610e-a2d8-4548-9e5f-eaa9ecd0fc08";
-    // No access attribute: not even a read.
+    // No access attribute: not even a read, or a list.
     let nobody = token(&keys, "nobody", &[]);
-    assert_eq!(
-        server
-            .get(id)
-            .authorization(&nobody)
-            .expect_failure()
-            .await
-            .status_code(),
-        403
-    );
+    for path in [id, "/fhir/Bundle"] {
+        assert_eq!(
+            server
+                .get(path)
+                .authorization(&nobody)
+                .expect_failure()
+                .await
+                .status_code(),
+            403,
+            "{path}"
+        );
+    }
     // A reader may not store or delete; a writer may not delete.
     let reader = token(&keys, "reader", &["read"]);
     let response = server
@@ -273,6 +277,14 @@ async fn a_read_that_cannot_be_logged_sends_nothing() {
         !response.text().contains("\"resourceType\""),
         "no document in the answer"
     );
+    // A list that cannot log its reads sends no list either (S-API-9).
+    let listed = server
+        .get("/fhir/Bundle")
+        .authorization(&writer)
+        .expect_failure()
+        .await;
+    assert_eq!(listed.status_code(), 500);
+    assert!(!listed.text().contains(&id), "no id in the answer");
     db.close().await;
 }
 
@@ -439,5 +451,7 @@ async fn a_keycloak_read_is_logged_under_the_tokens_subject() {
     assert_eq!(rows.len(), 1);
     assert_eq!(rows[0].0.as_deref(), Some("kc-writer"));
     assert_eq!(rows[0].1, Some(idp.issuer()));
+    // Readiness waits for the realm's keys, which keycloak_auth has already fetched (S-AUTH-2).
+    assert_eq!(server.get("/_health/ready").await.status_code(), 200);
     db.close().await;
 }

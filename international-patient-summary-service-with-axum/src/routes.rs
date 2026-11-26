@@ -3,7 +3,7 @@
 use axa::{
     Error, Result,
     error::ErrorDetail,
-    extract::{Json, Path},
+    extract::{Json, Path, Query},
     prelude::*,
 };
 use axum::{
@@ -14,6 +14,7 @@ use axum::{
     },
 };
 use serde_json::{Value, json};
+use std::collections::HashMap;
 use uuid::Uuid;
 
 use crate::{
@@ -33,7 +34,7 @@ pub const BUNDLES: &str = "/fhir/Bundle";
 pub fn bundles() -> Routes {
     Routes::new()
         .prefix(BUNDLES)
-        .add("/", post(create))
+        .add("/", get(list).post(create))
         .add("/{id}", get(read).delete(remove))
 }
 
@@ -68,6 +69,156 @@ async fn create(
         HeaderValue::try_from(format!("{BUNDLES}/{id}")).map_err(Error::wrap)?,
     );
     Ok(response)
+}
+
+/// How many documents a page holds unless `_count` says otherwise (S-API-8).
+const DEFAULT_COUNT: usize = 20;
+/// The most `_count` may ask for.
+const MAX_COUNT: usize = 100;
+
+/// Where a page of the list starts: after the document `id`, stored at `micros`
+/// microseconds since the epoch. It names a time, not a row, so it outlives the
+/// deletion of that document (S-API-8). Written `{micros}_{id}`.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+struct Cursor {
+    micros: i64,
+    id: Uuid,
+}
+
+impl Cursor {
+    /// A cursor this service issued, or `None`: digits, `_`, and a v4 id.
+    fn parse(text: &str) -> Option<Self> {
+        let (micros, id) = text.split_once('_')?;
+        if micros.is_empty() || !micros.bytes().all(|byte| byte.is_ascii_digit()) {
+            return None;
+        }
+        Some(Self {
+            micros: micros.parse().ok()?,
+            id: parse_id(id)?,
+        })
+    }
+}
+
+impl std::fmt::Display for Cursor {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}_{}", self.micros, self.id)
+    }
+}
+
+/// What a list request asks for: the page size, and where the page starts.
+#[derive(Debug, PartialEq, Eq)]
+struct PageQuery {
+    count: usize,
+    after: Option<Cursor>,
+}
+
+impl PageQuery {
+    /// Read `_count` and `_cursor`; any other parameter is ignored, as FHIR servers do.
+    fn from_query(query: &HashMap<String, String>) -> Result<Self> {
+        let count = match query.get("_count") {
+            None => DEFAULT_COUNT,
+            Some(text) => text
+                .parse::<usize>()
+                .ok()
+                .filter(|count| (1..=MAX_COUNT).contains(count))
+                .ok_or_else(|| {
+                    bad_request(
+                        "invalid_count",
+                        "_count is a whole number from 1 to 100",
+                        "_count",
+                    )
+                })?,
+        };
+        let after = query
+            .get("_cursor")
+            .map(|text| {
+                Cursor::parse(text).ok_or_else(|| {
+                    bad_request(
+                        "invalid_cursor",
+                        "_cursor is not one this service issued",
+                        "_cursor",
+                    )
+                })
+            })
+            .transpose()?;
+        Ok(Self { count, after })
+    }
+
+    /// The URL of this page, or of the page after `cursor` at the same size.
+    fn url(count: usize, cursor: Option<Cursor>) -> String {
+        match cursor {
+            None => format!("{BUNDLES}?_count={count}"),
+            Some(cursor) => format!("{BUNDLES}?_count={count}&_cursor={cursor}"),
+        }
+    }
+}
+
+/// `GET /fhir/Bundle`: a page of the stored documents, newest first, as a `searchset`
+/// Bundle (S-API-7). An entry is its document subsetted to what a list shows. Each
+/// document listed is logged as a read before the page is sent (S-API-9, S-AUDIT-1).
+async fn list(
+    State(ctx): State<AppContext>,
+    Extension(caller): Extension<Caller>,
+    Query(query): Query<HashMap<String, String>>,
+) -> Result<Response> {
+    let PageQuery { count, after } = PageQuery::from_query(&query)?;
+    // One more than a page, to know whether another follows.
+    let limit = i64::try_from(count.saturating_add(1)).map_err(Error::wrap)?;
+    let after_key = after.map(|cursor| (cursor.micros, cursor.id));
+    let mut rows = store::list(&ctx.db, limit, after_key).await?;
+    let more = rows.len() > count;
+    rows.truncate(count);
+
+    if !rows.is_empty() {
+        let ids: Vec<Uuid> = rows.iter().map(|row| row.id).collect();
+        let mut connection = ctx.db.acquire().await?;
+        store::log_reads(&mut connection, &caller, &ids, StatusCode::OK.as_u16()).await?;
+    }
+
+    let more_after = rows.last().map(|row| Cursor {
+        micros: row.micros,
+        id: row.id,
+    });
+    let entries: Vec<Value> = rows.into_iter().map(listing).collect();
+    let mut links = vec![json!({ "relation": "self", "url": PageQuery::url(count, after) })];
+    if let (true, Some(next)) = (more, more_after) {
+        links.push(json!({ "relation": "next", "url": PageQuery::url(count, Some(next)) }));
+    }
+    fhir_json(
+        StatusCode::OK,
+        &json!({ "resourceType": "Bundle", "type": "searchset", "link": links, "entry": entries }),
+    )
+}
+
+/// The FHIR tag that marks a resource as only part of itself.
+const SUBSETTED: &str = "http://terminology.hl7.org/CodeSystem/v3-ObservationValue";
+
+/// A list entry (S-API-7): the document, subsetted to what a list shows and tagged so.
+fn listing(row: store::Listed) -> Value {
+    let mut entries = vec![json!({ "resource": row.composition })];
+    entries.extend(row.subject);
+    json!({
+        "fullUrl": format!("{BUNDLES}/{}", row.id),
+        "resource": {
+            "resourceType": "Bundle",
+            "id": row.id.to_string(),
+            "type": "document",
+            "meta": { "tag": [{ "system": SUBSETTED, "code": "SUBSETTED" }] },
+            "entry": entries,
+        },
+        "search": { "mode": "match" },
+    })
+}
+
+/// A `400` problem naming the query parameter at fault.
+fn bad_request(code: &str, detail: &str, parameter: &str) -> Error {
+    Error::CustomError(
+        StatusCode::BAD_REQUEST,
+        ErrorDetail {
+            errors: Some(json!([{ "parameter": parameter }])),
+            ..ErrorDetail::new(code, detail)
+        },
+    )
 }
 
 /// `GET /fhir/Bundle/{id}`: the stored document, or `404`. The read is logged before
@@ -151,4 +302,86 @@ fn fhir_json(status: StatusCode, body: &Value) -> Result<Response> {
         bytes,
     )
         .into_response())
+}
+
+#[cfg(test)]
+mod tests {
+    use std::collections::HashMap;
+
+    use uuid::Uuid;
+
+    use super::{Cursor, DEFAULT_COUNT, MAX_COUNT, PageQuery};
+
+    const ID: &str = "2b39610e-a2d8-4548-9e5f-eaa9ecd0fc08";
+
+    fn query(pairs: &[(&str, &str)]) -> HashMap<String, String> {
+        pairs
+            .iter()
+            .map(|(key, value)| ((*key).to_owned(), (*value).to_owned()))
+            .collect()
+    }
+
+    #[test]
+    fn a_cursor_reads_back_what_it_writes() {
+        let cursor = Cursor {
+            micros: 1_795_000_000_000_000,
+            id: Uuid::try_parse(ID).expect("uuid"),
+        };
+        assert_eq!(Cursor::parse(&cursor.to_string()), Some(cursor));
+    }
+
+    #[test]
+    fn a_cursor_this_service_did_not_issue_is_refused() {
+        for text in [
+            "",
+            "_",
+            "12",
+            &format!("_{ID}"),
+            &format!("-1_{ID}"),
+            &format!("+1_{ID}"),
+            &format!("1 _{ID}"),
+            "12_not-a-uuid",
+            "12_00000000-0000-0000-0000-000000000000",
+            &format!("99999999999999999999_{ID}"),
+        ] {
+            assert_eq!(Cursor::parse(text), None, "{text:?}");
+        }
+    }
+
+    #[test]
+    fn a_page_query_defaults_and_bounds_its_count() {
+        let page = PageQuery::from_query(&query(&[])).expect("default");
+        assert_eq!(
+            page,
+            PageQuery {
+                count: DEFAULT_COUNT,
+                after: None
+            }
+        );
+        for count in ["1", "100"] {
+            assert!(PageQuery::from_query(&query(&[("_count", count)])).is_ok());
+        }
+        for count in ["0", "101", "-1", "ten", ""] {
+            assert!(
+                PageQuery::from_query(&query(&[("_count", count)])).is_err(),
+                "{count:?}"
+            );
+        }
+        let page = PageQuery::from_query(&query(&[("_count", "7"), ("other", "x")])).expect("ok");
+        assert_eq!(page.count, 7);
+        assert_eq!(MAX_COUNT, 100);
+    }
+
+    #[test]
+    fn a_page_url_carries_its_size_and_cursor() {
+        assert_eq!(PageQuery::url(5, None), "/fhir/Bundle?_count=5");
+        let cursor = Cursor {
+            micros: 42,
+            id: Uuid::try_parse(ID).expect("uuid"),
+        };
+        assert_eq!(
+            PageQuery::url(5, Some(cursor)),
+            format!("/fhir/Bundle?_count=5&_cursor=42_{ID}")
+        );
+    }
 }

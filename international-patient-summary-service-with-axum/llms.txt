@@ -25,6 +25,7 @@
 ## API
 
 - [POST /fhir/Bundle](src/routes.rs): store an IPS document: 201 + Location, or 422 problem with code and pointer
+- [GET /fhir/Bundle](src/routes.rs): a page of stored documents, newest first, as a searchset Bundle of SUBSETTED documents (Composition title, date, subject; the subject's name) with _count, _cursor and a next link; each logged as a read
 - [GET /fhir/Bundle/{id}](src/routes.rs): the stored Bundle, Cache-Control: no-store, or 404
 - [DELETE /fhir/Bundle/{id}](src/routes.rs): 204 or 404
 - [Health](src/lib.rs): /_health/live, /_health/ready (waits on migrations and Keycloak's keys), /_health/startup; no token needed

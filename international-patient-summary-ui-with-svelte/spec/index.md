@@ -575,8 +575,8 @@ viewer will work with the backend service, without needing it.
   shows an inline error. The check is a demonstration, not security, and
   the page says so.
 - **F-TOUR-2 Backendless.** `TourService` implements `IpsService`, the
-  backend's API (`create`, `read`, `remove`, and `list`, which the backend
-  plans as P4), entirely in memory. It mirrors the backend's contract:
+  backend's API (`create`, `read`, `remove`, and `list`, the backend's
+  `GET /fhir/Bundle`, its S-API-7), entirely in memory. It mirrors the backend's contract:
   server-issued v4 UUIDs written into `Bundle.id`; the backend's structural
   IPS check with its five refusal codes and JSON pointers (`not_a_bundle`,
   `not_a_document`, `no_composition`, `not_a_patient_summary`,

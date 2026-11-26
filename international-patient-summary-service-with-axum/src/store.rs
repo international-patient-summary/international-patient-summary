@@ -15,7 +15,7 @@ pub const TABLES: &[&str] = &["ips_documents", "ips_access_log"];
 pub enum Access {
     /// `POST /fhir/Bundle`.
     Create,
-    /// `GET /fhir/Bundle/{id}`.
+    /// `GET /fhir/Bundle/{id}`, or each document of `GET /fhir/Bundle`.
     Read,
     /// `DELETE /fhir/Bundle/{id}`.
     Delete,
@@ -89,6 +89,113 @@ pub async fn find(pool: &Db, id: Uuid) -> Result<Option<Value>, sqlx::Error> {
             .fetch_optional(pool)
             .await?;
     Ok(row.map(|Json(bundle)| bundle))
+}
+
+/// What a list shows of a stored document (spec S-API-7): its id, its storage time in
+/// microseconds since the epoch (for the cursor), the Composition with only `title`,
+/// `date` and `subject.reference`, and the subject's entry with only its `name`, if the
+/// document holds it.
+#[derive(Debug)]
+pub struct Listed {
+    /// The document's id.
+    pub id: Uuid,
+    /// When it was stored, in microseconds since the epoch.
+    pub micros: i64,
+    /// The subsetted Composition.
+    pub composition: Value,
+    /// The subsetted entry of the Composition's subject, if the document holds one.
+    pub subject: Option<Value>,
+}
+
+/// A row of [`list`]'s query, by column position.
+#[derive(sqlx::FromRow)]
+struct ListedRow(Uuid, i64, Json<Value>, Option<Json<Value>>);
+
+/// Up to `limit` stored documents, newest first, continuing after the cursor `after`
+/// (storage time in microseconds, id) if there is one. A cursor holds a time, not a row,
+/// so a page boundary survives the deletion of the document it ended on. The subset is
+/// built in SQL, so a page never loads a whole document.
+///
+/// The time goes back to a `timestamptz` as `epoch + micros × 1 µs`. Postgres multiplies an
+/// interval by a `float8`, which holds every whole number below 2⁵³ exactly: any time before
+/// the year 2255. The ordering uses the `ips_documents_created_at` index.
+///
+/// # Errors
+///
+/// A database error.
+pub async fn list(
+    pool: &Db,
+    limit: i64,
+    after: Option<(i64, Uuid)>,
+) -> Result<Vec<Listed>, sqlx::Error> {
+    let (micros, id) = after.map_or((None, None), |(micros, id)| (Some(micros), Some(id)));
+    let rows: Vec<ListedRow> = sqlx::query_as(
+        "SELECT d.id, (extract(epoch FROM d.created_at) * 1000000)::bigint, \
+           jsonb_strip_nulls(jsonb_build_object( \
+             'resourceType', 'Composition', \
+             'title', c.resource -> 'title', \
+             'date', c.resource -> 'date', \
+             'subject', jsonb_build_object('reference', c.resource #> '{subject,reference}'))), \
+           s.entry \
+         FROM ips_documents d \
+         CROSS JOIN LATERAL (SELECT d.bundle #> '{entry,0,resource}' AS resource, \
+                                    d.bundle #>> '{entry,0,resource,subject,reference}' AS reference) c \
+         LEFT JOIN LATERAL ( \
+           SELECT jsonb_strip_nulls(jsonb_build_object( \
+                    'fullUrl', e -> 'fullUrl', \
+                    'resource', jsonb_build_object( \
+                      'resourceType', e #> '{resource,resourceType}', \
+                      'id', e #> '{resource,id}', \
+                      'name', e #> '{resource,name}'))) AS entry \
+           FROM jsonb_array_elements(d.bundle -> 'entry') WITH ORDINALITY AS t(e, at) \
+           WHERE at > 1 AND ( \
+             e ->> 'fullUrl' = c.reference \
+             OR (e #>> '{resource,resourceType}') || '/' || (e #>> '{resource,id}') = c.reference \
+             OR e ->> 'fullUrl' LIKE '%/' || c.reference) \
+           ORDER BY at LIMIT 1) s ON true \
+         WHERE $1::bigint IS NULL \
+            OR (d.created_at, d.id) < ('epoch'::timestamptz + $1::bigint * interval '1 microsecond', $2::uuid) \
+         ORDER BY d.created_at DESC, d.id DESC LIMIT $3",
+    )
+    .bind(micros)
+    .bind(id)
+    .bind(limit)
+    .fetch_all(pool)
+    .await?;
+    Ok(rows
+        .into_iter()
+        .map(|ListedRow(id, micros, Json(composition), subject)| Listed {
+            id,
+            micros,
+            composition,
+            subject: subject.map(|Json(entry)| entry),
+        })
+        .collect())
+}
+
+/// Record that `caller` read each of the documents `ids`, answered with `status`.
+///
+/// # Errors
+///
+/// A database error: the caller then gets a `500`, and no list (S-AUDIT-1).
+pub async fn log_reads(
+    connection: &mut PgConnection,
+    caller: &Caller,
+    ids: &[Uuid],
+    status: u16,
+) -> Result<(), sqlx::Error> {
+    let status = status_column(status)?;
+    sqlx::query(
+        "INSERT INTO ips_access_log (subject, issuer, action, bundle_id, status) \
+         SELECT $1, $2, 'read', unnest($3::uuid[]), $4",
+    )
+    .bind(caller.subject.as_deref())
+    .bind(caller.issuer.as_deref())
+    .bind(ids)
+    .bind(status)
+    .execute(connection)
+    .await?;
+    Ok(())
 }
 
 /// Delete the Bundle stored under `id`, answering whether there was one.
