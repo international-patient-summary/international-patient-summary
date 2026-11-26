@@ -60,4 +60,5 @@
 - [Manifest](app/src/main/AndroidManifest.xml): no network permission, no backup or device transfer, FileProvider, Open with and Share filters for application/json and application/fhir+json only
 - [Tests](app/src/test/kotlin/io/github/internationalpatientsummary/app/): JVM unit tests; fixtures in app/src/test/resources/fixtures/
 - [SmokeTest](app/src/androidTest/kotlin/io/github/internationalpatientsummary/app/SmokeTest.kt): Compose UI Test on an emulator: load examples, open one, share as PDF, Clear all
+- [OnePagePdfJvmTest](app/src/test/kotlin/io/github/internationalpatientsummary/app/OnePagePdfJvmTest.kt): the PDF's layout and drawing on the JVM (Robolectric) through a fake PdfSink, every example in en-US, en-GB and ar, a trimmed and a continued summary
 - [OnePagePdfTest](app/src/androidTest/kotlin/io/github/internationalpatientsummary/app/OnePagePdfTest.kt): the PDF of every example (en-US, en-GB, ar) and two crafted summaries on an emulator; pdfOut=1 writes them to cacheDir/share/

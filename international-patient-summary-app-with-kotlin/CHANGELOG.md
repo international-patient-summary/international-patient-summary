@@ -2,6 +2,10 @@
 
 ## 0.1.0 — unreleased
 
+- Tests: `OnePagePdf` draws through a `PdfSink` (the platform's `PdfDocument` by
+  default), so `OnePagePdfJvmTest` covers its layout and drawing on the JVM;
+  unit-test line coverage is 97.5% (P13-T3).
+
 - Share as PDF (M-PDF-1..3): Share now offers "Share the file (FHIR JSON)"
   or "Share as PDF", a one-page summary for handing over or printing, by
   the web viewer's rules: the patient, a box with the alerts and every

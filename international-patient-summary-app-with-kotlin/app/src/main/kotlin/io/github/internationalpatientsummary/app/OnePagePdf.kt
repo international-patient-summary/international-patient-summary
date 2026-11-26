@@ -51,8 +51,40 @@ import java.util.Locale
 /** A made PDF: its bytes, and how it fitted (for checks and tests). */
 class MadePdf(val bytes: ByteArray, val fileName: String, val pageCount: Int, val fit: PdfFit, val paper: Paper)
 
+/** Where the pages are drawn: the platform's PdfDocument, or a fake in a JVM test, where PdfDocument is closed. */
+interface PdfSink {
+    /** Draw page [number] (from 1) of [width] by [height] points. */
+    fun page(width: Int, height: Int, number: Int, draw: (Canvas) -> Unit)
+
+    /** The finished document's bytes. */
+    fun bytes(): ByteArray
+
+    /** Release the document; called once, after [bytes] or after a failure. */
+    fun close()
+}
+
+/** The platform's [PdfDocument]; only a device exercises it (OnePagePdfTest, instrumented). */
+private class PlatformPdf : PdfSink {
+    private val document = PdfDocument()
+
+    override fun page(width: Int, height: Int, number: Int, draw: (Canvas) -> Unit) {
+        val page = document.startPage(PdfDocument.PageInfo.Builder(width, height, number).create())
+        draw(page.canvas)
+        document.finishPage(page)
+    }
+
+    override fun bytes(): ByteArray = ByteArrayOutputStream().also { document.writeTo(it) }.toByteArray()
+
+    override fun close() = document.close()
+}
+
 /** Makes the PDF for [summary] in [context]'s language; call off the main thread. */
-class OnePagePdf(private val context: Context, private val summary: Summary, private val now: LocalDateTime = LocalDateTime.now()) {
+class OnePagePdf(
+    private val context: Context,
+    private val summary: Summary,
+    private val now: LocalDateTime = LocalDateTime.now(),
+    private val sink: () -> PdfSink = ::PlatformPdf,
+) {
     private val locale: Locale = context.resources.configuration.locales[0]
     private val rtl = locale.layoutDirection == View.LAYOUT_DIRECTION_RTL
     /** Every line runs in the reader's direction; the document's own text is isolated within it. */
@@ -65,18 +97,13 @@ class OnePagePdf(private val context: Context, private val summary: Summary, pri
         val fit = page.fit { plan -> paginate(pieces(plan), top(continued = false)).pages }
         val pieces = pieces(fit.plan)
         val laid = paginate(pieces, top(fit.continued))
-        val document = PdfDocument()
+        val document = sink()
         try {
             for (number in 0 until laid.pages) {
-                val info = PdfDocument.PageInfo.Builder(paper.width, paper.height, number + 1).create()
-                val pdfPage = document.startPage(info)
-                draw(pdfPage.canvas, laid, number, fit)
-                document.finishPage(pdfPage)
+                document.page(paper.width, paper.height, number + 1) { canvas -> draw(canvas, laid, number, fit) }
             }
-            val out = ByteArrayOutputStream()
-            document.writeTo(out)
             val name = PdfFile.name(summary.document.date)
-            return MadePdf(PdfInfo.withTitle(out.toByteArray(), name), name, laid.pages, fit, paper)
+            return MadePdf(PdfInfo.withTitle(document.bytes(), name), name, laid.pages, fit, paper)
         } finally {
             document.close()
         }

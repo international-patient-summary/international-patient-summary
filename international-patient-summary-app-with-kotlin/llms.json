@@ -213,6 +213,11 @@
         "description": "Compose UI Test on an emulator: load examples, open one, share as PDF, Clear all"
       },
       {
+        "name": "OnePagePdfJvmTest",
+        "path": "app/src/test/kotlin/io/github/internationalpatientsummary/app/OnePagePdfJvmTest.kt",
+        "description": "the PDF's layout and drawing on the JVM (Robolectric) through a fake PdfSink, every example in en-US, en-GB and ar, a trimmed and a continued summary"
+      },
+      {
         "name": "OnePagePdfTest",
         "path": "app/src/androidTest/kotlin/io/github/internationalpatientsummary/app/OnePagePdfTest.kt",
         "description": "the PDF of every example (en-US, en-GB, ar) and two crafted summaries on an emulator; pdfOut=1 writes them to cacheDir/share/"
