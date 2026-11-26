@@ -161,6 +161,13 @@ export function formatPeriod(
 
 const COMPARATORS = new Set(['<', '<=', '>=', '>']);
 
+/** The quantity's comparator when it is one FHIR defines (`ad` and others are dropped). */
+function comparatorOf(quantity: Quantity): QuantityComparator | undefined {
+	return COMPARATORS.has(quantity.comparator ?? '')
+		? (quantity.comparator as QuantityComparator)
+		: undefined;
+}
+
 /** "5 mg", "<5 mmol/L"; falls back to the raw value when it is not a number. */
 export function formatQuantityValue(
 	quantity: Quantity | undefined,
@@ -170,10 +177,7 @@ export function formatQuantityValue(
 	const unit = quantity.unit ?? quantity.code ?? '';
 	if (typeof quantity.value !== 'number' || !Number.isFinite(quantity.value))
 		return unit || undefined;
-	const comparator = COMPARATORS.has(quantity.comparator ?? '')
-		? (quantity.comparator as QuantityComparator)
-		: undefined;
-	return formatQuantity(quantity.value, unit, locale, comparator);
+	return formatQuantity(quantity.value, unit, locale, comparatorOf(quantity));
 }
 
 /** The number part only, for ObservationView's value prop (the unit goes separately). */
@@ -183,10 +187,7 @@ export function formatQuantityNumber(
 ): string | undefined {
 	if (!quantity || typeof quantity.value !== 'number' || !Number.isFinite(quantity.value))
 		return undefined;
-	const comparator = COMPARATORS.has(quantity.comparator ?? '')
-		? (quantity.comparator as QuantityComparator)
-		: undefined;
-	return formatQuantity(quantity.value, '', locale, comparator);
+	return formatQuantity(quantity.value, '', locale, comparatorOf(quantity));
 }
 
 export function formatRange(
@@ -235,6 +236,13 @@ export interface IdentifierLabel {
 	type?: string;
 }
 
+/** "A1", or "B2 (MRN)" by its type, else its system, when it has one. */
+export function identifierText(identifier: IdentifierLabel): string {
+	return identifier.system
+		? `${identifier.value} (${identifier.type ?? identifier.system})`
+		: identifier.value;
+}
+
 export function formatIdentifier(identifier: Identifier): IdentifierLabel | undefined {
 	if (!identifier.value) return undefined;
 	return {
@@ -279,7 +287,7 @@ export function summariseDosage(
 	t: Translate
 ): DosageSummary {
 	const first = dosage?.[0];
-	if (!first) return {};
+	if (!dosage || !first) return {};
 	const route = displayOf(first.route);
 	const dose = first.doseAndRate?.[0];
 	const doseText = dose?.doseQuantity
@@ -297,6 +305,6 @@ export function summariseDosage(
 		});
 	if (first.asNeededBoolean)
 		frequency = [frequency, t('format.asNeeded')].filter(Boolean).join(', ');
-	const texts = (dosage ?? []).map((d) => d.text?.trim()).filter((s): s is string => !!s);
+	const texts = dosage.map((d) => d.text?.trim()).filter((s): s is string => !!s);
 	return { text: texts.length ? texts.join('; ') : undefined, route, frequency, dose: doseText };
 }

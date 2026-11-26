@@ -233,6 +233,8 @@ export type EntryModel =
 	| GenericModel;
 
 /** t(key), or `fallback` when the key has no message (t returns the key). */
+export function wordOr(t: Translate, key: string, fallback: string): string;
+export function wordOr(t: Translate, key: string, fallback: string | undefined): string | undefined;
 export function wordOr(
 	t: Translate,
 	key: string,
@@ -358,8 +360,7 @@ function medicationModel(
 		: undefined;
 	const med = medication?.resourceType === 'Medication' ? medication : undefined;
 	const concept = r.medicationCodeableConcept ?? med?.code;
-	const name =
-		displayOf(concept) ?? r.medicationReference?.display ?? (med ? undefined : undefined);
+	const name = displayOf(concept) ?? r.medicationReference?.display;
 	const dosage = summariseDosage(
 		r.resourceType === 'MedicationStatement' ? r.dosage : r.dosageInstruction,
 		locale,
@@ -599,7 +600,7 @@ function deviceModel(
 			: (formatFhirDate(timing, locale) ??
 				(timingAbsent
 					? t('format.usedSince', {
-							date: wordOr(t, `absentReason.${timingAbsent}`, timingAbsent) ?? ''
+							date: wordOr(t, `absentReason.${timingAbsent}`, timingAbsent)
 						})
 					: undefined)),
 		fields: []
@@ -1087,9 +1088,7 @@ export function stateLabel(section: IpsSection, t: Translate): string {
 			? wordOr(t, `emptyReason.${code}`, t(`state.${section.state}`))
 			: t(`state.${section.state}`);
 		const text = reason.text?.trim() || displayOf(reason);
-		return text && text !== base
-			? t('state.withReason', { state: base ?? '', reason: text })
-			: (base ?? '');
+		return text && text !== base ? t('state.withReason', { state: base, reason: text }) : base;
 	}
 	if (section.unresolved.length > 0) return t('state.unresolved');
 	return t(`state.${section.state}`);

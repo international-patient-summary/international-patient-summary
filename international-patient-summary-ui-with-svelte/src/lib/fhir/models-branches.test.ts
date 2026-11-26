@@ -2,7 +2,8 @@
 // generic resource types, and medications described in less usual ways.
 import { describe, expect, it } from 'vitest';
 import type { FhirResource } from 'fhir/r4';
-import { modelOf, observationText, type EntryModel } from './models.ts';
+import { modelOf, observationText, stateLabel, type EntryModel } from './models.ts';
+import type { IpsSection } from './types.ts';
 import { context, exampleDoc } from '../test-helpers.ts';
 
 const ctx = context('en-US');
@@ -258,5 +259,417 @@ describe('medications described in less usual ways', () => {
 			}
 		} as unknown as FhirResource);
 		if (m.kind === 'medication') expect(m.effectiveLabel).toBeTruthy();
+	});
+});
+
+describe('sparse and unusual resources', () => {
+	const as = <K extends EntryModel['kind']>(m: EntryModel, kind: K) => {
+		expect(m.kind).toBe(kind);
+		return m as Extract<EntryModel, { kind: K }>;
+	};
+
+	it('names an allergy without a code "not stated" and joins its reactions', () => {
+		const m = as(
+			model({
+				resourceType: 'AllergyIntolerance',
+				patient: { reference: 'Patient/1' },
+				reaction: [
+					{ manifestation: [{ text: 'Hives' }, {}] },
+					{ manifestation: [{ text: 'Wheeze' }] },
+					{}
+				]
+			} as FhirResource),
+			'allergy'
+		);
+		expect(clean(m.title)).toBe('Not stated');
+		expect(JSON.stringify(m.fields)).toContain('Hives, Wheeze');
+	});
+
+	it('names a medication by its reference display when nothing is coded', () => {
+		const m = as(
+			model({
+				resourceType: 'MedicationStatement',
+				status: 'active',
+				subject: { reference: 'Patient/1' },
+				medicationReference: { reference: 'Medication/gone', display: 'Mystery tablets' }
+			} as FhirResource),
+			'medication'
+		);
+		expect(clean(m.title)).toBe('Mystery tablets');
+		expect(m.current).toBe(true);
+	});
+
+	it('dates a prescription by when it was authored, and maps draft and cancelled', () => {
+		const request = (status: string, authoredOn?: string) =>
+			as(
+				model({
+					resourceType: 'MedicationRequest',
+					status,
+					intent: 'order',
+					subject: { reference: 'Patient/1' },
+					medicationCodeableConcept: { text: 'Amoxicillin' },
+					...(authoredOn ? { authoredOn } : {})
+				} as FhirResource),
+				'medication'
+			);
+		const draft = request('draft', '2024-05-06');
+		expect(draft.status).toBe('intended');
+		expect(draft.current).toBe(true);
+		expect(clean(draft.effectiveLabel)).toContain('2024');
+		const cancelled = request('cancelled');
+		expect(cancelled.status).toBe('stopped');
+		expect(cancelled.current).toBe(false);
+		expect(cancelled.effectiveLabel).toBeUndefined();
+	});
+
+	it('shows a statement without a date as absent only when it says why', () => {
+		const statement = (extra: Record<string, unknown>) =>
+			as(
+				model({
+					resourceType: 'MedicationStatement',
+					status: 'unknown',
+					subject: { reference: 'Patient/1' },
+					medicationCodeableConcept: { text: 'Aspirin' },
+					...extra
+				} as FhirResource),
+				'medication'
+			);
+		expect(statement({}).effectiveLabel).toBeUndefined();
+		const unknown = statement({
+			_effectiveDateTime: {
+				extension: [
+					{
+						url: 'http://hl7.org/fhir/StructureDefinition/data-absent-reason',
+						valueCode: 'unknown'
+					}
+				]
+			}
+		});
+		expect(unknown.effectiveLabel).toBeTruthy();
+		const period = statement({ effectivePeriod: { start: '2020-01-01' } });
+		expect(clean(period.effectiveLabel)).toContain('2020');
+	});
+
+	it('keeps a condition’s own words for onset and abatement, and defaults to active', () => {
+		const said = as(
+			model({
+				resourceType: 'Condition',
+				subject: { reference: 'Patient/1' },
+				code: { text: 'Asthma' },
+				onsetString: 'childhood',
+				abatementString: 'teens'
+			} as FhirResource),
+			'problem'
+		);
+		expect(said.onsetLabel).toBe('childhood');
+		expect(said.abatementLabel).toBe('teens');
+		expect(said.active).toBe(true);
+		const dated = as(
+			model({
+				resourceType: 'Condition',
+				subject: { reference: 'Patient/1' },
+				code: { text: 'Fracture' },
+				clinicalStatus: { coding: [{ code: 'resolved' }] },
+				onsetPeriod: { start: '2019-02-03' },
+				abatementPeriod: { start: '2019-04-05' }
+			} as FhirResource),
+			'problem'
+		);
+		expect(dated.active).toBe(false);
+		expect(clean(dated.onsetLabel)).toContain('2019');
+		expect(dated.abatement).toBe('2019-04-05');
+	});
+
+	it('words an immunization dose with and without its series', () => {
+		const dose = (applied: Record<string, unknown>) =>
+			as(
+				model({
+					resourceType: 'Immunization',
+					status: 'completed',
+					patient: { reference: 'Patient/1' },
+					vaccineCode: { text: 'MMR' },
+					occurrenceDateTime: '2010-01-01',
+					protocolApplied: [applied]
+				} as FhirResource),
+				'immunization'
+			);
+		expect(clean(JSON.stringify(dose({ doseNumberString: 'booster' }).fields))).toContain(
+			'booster'
+		);
+		expect(
+			clean(JSON.stringify(dose({ doseNumberPositiveInt: 2, seriesDosesString: 'three' }).fields))
+		).toContain('three');
+	});
+
+	it('dates a procedure by its period or its own words', () => {
+		const procedure = (extra: Record<string, unknown>) =>
+			as(
+				model({
+					resourceType: 'Procedure',
+					status: 'completed',
+					subject: { reference: 'Patient/1' },
+					code: { text: 'Appendectomy' },
+					...extra
+				} as FhirResource),
+				'procedure'
+			);
+		expect(procedure({ performedString: 'as a child' }).performedLabel).toBe('as a child');
+		const period = procedure({ performedPeriod: { start: '2001-01-01', end: '2001-01-02' } });
+		expect(period.performed).toBe('2001-01-01');
+		expect(clean(period.performedLabel)).toContain('2001');
+	});
+
+	it('names a device from the resolved Device, its reference display, or nothing', () => {
+		const use = (device: Record<string, unknown>, extra: Record<string, unknown> = {}) =>
+			({
+				resourceType: 'DeviceUseStatement',
+				status: 'active',
+				subject: { reference: 'Patient/1' },
+				device,
+				...extra
+			}) as FhirResource;
+		const typed = as(
+			model(use({ reference: 'Device/1' }, { timingPeriod: { start: '2022-01-01' } }), {
+				'Device/1': { resourceType: 'Device', type: { text: 'Pacemaker' } } as FhirResource
+			}),
+			'device'
+		);
+		expect(clean(typed.title)).toBe('Pacemaker');
+		expect(clean(typed.timingLabel)).toContain('2022');
+		const shown = as(model(use({ display: 'Hearing aid' })), 'device');
+		expect(clean(shown.title)).toBe('Hearing aid');
+		expect(shown.timingLabel).toBeUndefined();
+		const absent = as(
+			model(
+				use(
+					{ display: 'Stent' },
+					{
+						_timingDateTime: {
+							extension: [
+								{
+									url: 'http://hl7.org/fhir/StructureDefinition/data-absent-reason',
+									valueCode: 'unknown'
+								}
+							]
+						}
+					}
+				)
+			),
+			'device'
+		);
+		expect(absent.timingLabel).toBeTruthy();
+	});
+
+	it('flags an abnormal component and lists resolved panel members', () => {
+		const m = as(
+			model(
+				observation({
+					component: [
+						{
+							code: { text: 'Systolic' },
+							valueQuantity: { value: 150, unit: 'mmHg' },
+							interpretation: [{ coding: [{ code: 'H' }], text: 'High' }]
+						},
+						{
+							code: { text: 'Diastolic' },
+							valueQuantity: { value: 80, unit: 'mmHg' },
+							interpretation: [{ coding: [{ code: 'N' }] }]
+						},
+						{}
+					],
+					hasMember: [{ reference: 'Observation/m1' }, { reference: 'Observation/none' }]
+				}),
+				{ 'Observation/m1': observation({ code: { text: 'Member' }, valueString: 'ok' }) }
+			),
+			'observation'
+		);
+		const [systolic, diastolic, untitled, member] = m.components;
+		expect(clean(systolic.flagLabel)).toBeTruthy();
+		expect(diastolic.flagLabel).toBeUndefined();
+		expect(clean(untitled.title)).toBe('Not stated');
+		expect(clean(member.title)).toBe('Member');
+		expect(m.components).toHaveLength(4);
+	});
+
+	it('words an interpretation it has no code for in the document’s own words', () => {
+		const m = as(
+			model(observation({ valueString: 'x', interpretation: [{ text: 'Odd' }] })),
+			'observation'
+		);
+		expect(m.interpretation).toBeUndefined();
+		expect(m.flagLabel).toBeUndefined();
+	});
+
+	it('lists a report’s resolved results and says when it is not final', () => {
+		const m = as(
+			model(
+				{
+					resourceType: 'DiagnosticReport',
+					status: 'preliminary',
+					code: { text: 'Blood count' },
+					issued: '2024-07-08T10:00:00Z',
+					result: [{ reference: 'Observation/r1' }, { reference: 'Patient/1' }],
+					conclusionCode: [{ text: 'Normal' }]
+				} as FhirResource,
+				{
+					'Observation/r1': observation({ code: { text: 'Hb' }, valueQuantity: { value: 140 } }),
+					'Patient/1': { resourceType: 'Patient' } as FhirResource
+				}
+			),
+			'report'
+		);
+		expect(m.results).toHaveLength(1);
+		expect(m.statusLabel).toBeTruthy();
+		expect(m.conclusion).toBe('Normal');
+		expect(m.effective).toBe('2024-07-08');
+	});
+
+	it('describes a consent by its provision and source document', () => {
+		const m = as(
+			model(
+				{
+					resourceType: 'Consent',
+					status: 'active',
+					scope: { text: 'Treatment' },
+					category: [{}],
+					provision: { type: 'permit', code: [{ text: 'Share' }, {}] },
+					sourceReference: { reference: 'DocumentReference/d1' }
+				} as FhirResource,
+				{
+					'DocumentReference/d1': {
+						resourceType: 'DocumentReference',
+						status: 'current',
+						type: { text: 'Advance directive' },
+						content: [{ attachment: {} }]
+					} as FhirResource
+				}
+			),
+			'generic'
+		);
+		expect(clean(m.title)).toBe('Treatment');
+		const fields = clean(JSON.stringify(m.fields));
+		expect(fields).toContain('Share');
+		expect(fields).toContain('Advance directive');
+	});
+});
+
+describe('section state words', () => {
+	const t = ctx.t;
+	const section = (extra: Partial<IpsSection>): IpsSection =>
+		({
+			key: 'problems',
+			state: 'empty',
+			narrativeOnly: false,
+			absentEntries: [],
+			unresolved: [],
+			...extra
+		}) as IpsSection;
+
+	it('names the empty reason in words, adding its text only when it says more', () => {
+		const coded = stateLabel(
+			section({ emptyReason: { coding: [{ code: 'unavailable' }], text: 'Lost in a flood' } }),
+			t
+		);
+		expect(clean(coded)).toContain('Lost in a flood');
+		const textOnly = stateLabel(section({ emptyReason: { text: '  ' } }), t);
+		expect(textOnly).toBe(stateLabel(section({}), t));
+	});
+
+	it('says an entry could not be found when nothing else explains the gap', () => {
+		const label = stateLabel(section({ unresolved: ['Condition/gone'] } as Partial<IpsSection>), t);
+		expect(label).not.toBe(stateLabel(section({}), t));
+	});
+
+	it('falls back to the state when the coded absent entries carry no words', () => {
+		const label = stateLabel(
+			section({
+				absentEntries: [
+					{ reference: 'x' },
+					{ reference: 'y', resource: { resourceType: 'Condition' } }
+				]
+			} as Partial<IpsSection>),
+			t
+		);
+		expect(label).toBe(stateLabel(section({}), t));
+	});
+});
+
+describe('values and dates a resource states only in part', () => {
+	it.each([
+		['a quantity with nothing in it', { valueQuantity: {} }],
+		['an empty concept', { valueCodeableConcept: {} }],
+		['a range without bounds', { valueRange: {} }],
+		['a ratio without parts', { valueRatio: {} }],
+		['a period without dates', { valuePeriod: {} }]
+	])('shows %s as no value', (_name, extra) => {
+		const m = model(observation(extra));
+		if (m.kind !== 'observation') throw new Error(m.kind);
+		expect(m.value ?? '').toBe('');
+	});
+
+	it('dates an observation by its period, and says its status when it has no value', () => {
+		const m = model(
+			observation({
+				status: 'preliminary',
+				effectivePeriod: { start: '2023-03-04', end: '2023-03-05' }
+			})
+		);
+		if (m.kind !== 'observation') throw new Error(m.kind);
+		expect(m.effective).toBe('2023-03-04');
+		expect(clean(JSON.stringify(m.fields))).toContain('2023');
+		expect(clean(observationText(m))).toBe(clean(m.statusLabel));
+	});
+
+	it('draws a meter only when the range is in the value’s unit, by unit or code', () => {
+		const meter = (range: object, quantity: object = { value: 5, unit: 'mmol/L' }) => {
+			const m = model(observation({ valueQuantity: quantity, referenceRange: [range] }));
+			return m.kind === 'observation' ? m.meter : undefined;
+		};
+		expect(
+			meter({ low: { value: 3, unit: 'mmol/L' }, high: { value: 7, unit: 'mmol/L' } })
+		).toBeTruthy();
+		expect(meter({ low: { value: 3, code: 'mmol/L' } })).toBeTruthy();
+		expect(meter({ low: { value: 3 } }, { value: 5, code: 'mg' })).toBeTruthy();
+		expect(meter({ low: { value: 3, unit: 'mg/dL' } })).toBeUndefined();
+	});
+
+	it('has no status or current flag for a medication that states no status', () => {
+		const m = model({
+			resourceType: 'MedicationStatement',
+			subject: { reference: 'Patient/1' },
+			medicationCodeableConcept: { text: 'Aspirin' },
+			effectivePeriod: {}
+		} as unknown as FhirResource);
+		if (m.kind !== 'medication') throw new Error(m.kind);
+		expect(m.status).toBeUndefined();
+		expect(m.current).toBe(false);
+	});
+
+	it('titles a consent with no provision or source by its scope alone', () => {
+		const m = model({
+			resourceType: 'Consent',
+			status: 'active',
+			scope: { text: 'Research' },
+			category: [{ text: 'Study' }]
+		} as FhirResource);
+		expect(clean(m.title)).toBe('Study');
+		if (m.kind === 'generic') expect(JSON.stringify(m.fields)).not.toContain('sourceDocument');
+	});
+
+	it('titles a care plan by its category when it has no title or description', () => {
+		const m = model({
+			resourceType: 'CarePlan',
+			status: 'active',
+			intent: 'plan',
+			subject: { reference: 'Patient/1' },
+			category: [{ text: 'Diabetes care' }]
+		} as FhirResource);
+		expect(clean(m.title)).toBe('Diabetes care');
+	});
+
+	it('says a section with entries is known', () => {
+		expect(stateLabel({ state: 'known', narrativeOnly: false } as IpsSection, ctx.t)).toBe(
+			ctx.t('state.known')
+		);
 	});
 });

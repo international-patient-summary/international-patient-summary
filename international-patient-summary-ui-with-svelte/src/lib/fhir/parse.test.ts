@@ -92,6 +92,27 @@ describe('parseText errors', () => {
 		expect(error(() => parseText('a: .nan\n', { filename: 'x.yaml' })).key).toBe('yamlNonFinite');
 	});
 
+	it('names the root when the whole YAML document is not finite', () => {
+		const e = error(() => parseText('.inf', { filename: 'x.yaml' }));
+		expect(e.key).toBe('yamlNonFinite');
+		expect(e.values).toEqual({ path: '/' });
+	});
+
+	it('treats a YAML stream of comments as empty', () => {
+		expect(error(() => parseText('# only a comment\n', { filename: 'x.yaml' })).key).toBe('empty');
+	});
+
+	it('without a hint, keeps a YAML refusal more precise than "not JSON or YAML"', () => {
+		const e = error(() => parseText('a: 1\na: 2\n'));
+		expect(e.key).toBe('yamlDuplicateKey');
+		expect(e.line).toBe(2);
+	});
+
+	it('without a hint, reads flow-style YAML that starts like JSON', () => {
+		expect(parseText('{a: 1}')).toEqual({ data: { a: 1 }, format: 'yaml' });
+		expect(error(() => parseText('{a: [}')).key).toBe('invalidJson');
+	});
+
 	it('refuses more aliases than the limit', () => {
 		const anchors = Array.from({ length: 60 }, () => '*a').join(', ');
 		const e = error(() => parseText(`base: &a [1]\nlist: [${anchors}]\n`, { filename: 'x.yaml' }));

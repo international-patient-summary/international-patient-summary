@@ -17,6 +17,7 @@ import {
 	type EntryModel,
 	type MedicationModel
 } from '../fhir/models.ts';
+import { identifierText } from '../fhir/format.ts';
 import { documentSummary, patientSummary } from '../fhir/summary.ts';
 import type { FormatContext, IpsDocument, IpsSection, SectionKey } from '../fhir/types.ts';
 
@@ -181,9 +182,7 @@ function definition(
 									patient.genderLabel ?? notStated,
 									'    ',
 									{ text: `${t('patient.identifiers')}: `, bold: true },
-									patient.identifiers[0]
-										? `${patient.identifiers[0].value}${patient.identifiers[0].system ? ` (${patient.identifiers[0].type ?? patient.identifiers[0].system})` : ''}`
-										: notStated
+									patient.identifiers[0] ? identifierText(patient.identifiers[0]) : notStated
 								]
 							},
 							...(patient.deceasedLabel ? [{ text: patient.deceasedLabel, bold: true }] : [])

@@ -3,7 +3,7 @@
 // Composition order, with the three required sections always present and
 // absent states in words. Clinical text is escaped so it cannot break a
 // table or inject HTML; narrative XHTML becomes plain text, never HTML.
-import { codesText } from '../fhir/format.ts';
+import { codesText, identifierText } from '../fhir/format.ts';
 import { sectionModels, stateLabel, type EntryModel, type Field } from '../fhir/models.ts';
 import { narrativeToText } from '../fhir/narrative.ts';
 import { documentSummary, patientSummary } from '../fhir/summary.ts';
@@ -112,9 +112,7 @@ export function exportMarkdown(
 	out.push(
 		`- **${escapeMarkdown(t('patient.gender'))}:** ${escapeMarkdown(patient.genderLabel ?? notStated)}`
 	);
-	const ids = patient.identifiers.map((i) =>
-		i.system ? `${i.value} (${i.type ?? i.system})` : i.value
-	);
+	const ids = patient.identifiers.map(identifierText);
 	out.push(
 		`- **${escapeMarkdown(t('patient.identifiers'))}:** ${escapeMarkdown(ids.length ? ids.join('; ') : notStated)}`
 	);

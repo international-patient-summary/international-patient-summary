@@ -4,7 +4,7 @@
 // FHIR JSON, so a YAML document must parse to exactly the object its JSON
 // equivalent would: YAML 1.2 core schema only (no YAML 1.1 coercions such as
 // `no` → false), unique keys, a low alias budget, no custom tags, one document.
-import { parseAllDocuments, YAMLParseError } from 'yaml';
+import { parseAllDocuments } from 'yaml';
 
 export type InputFormat = 'json' | 'yaml';
 
@@ -159,11 +159,8 @@ function parseYaml(text: string): unknown {
 	try {
 		data = doc.toJS({ maxAliasCount: MAX_ALIAS_COUNT });
 	} catch (error) {
-		if (
-			error instanceof YAMLParseError ||
-			error instanceof ReferenceError ||
-			error instanceof Error
-		)
+		// The yaml library throws a ReferenceError (an Error) past the alias limit.
+		if (error instanceof Error)
 			throw new LoadError('yamlAliasLimit', { max: MAX_ALIAS_COUNT }, undefined, error.message);
 		throw error;
 	}
