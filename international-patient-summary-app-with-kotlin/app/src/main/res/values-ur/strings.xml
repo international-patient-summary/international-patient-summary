@@ -74,6 +74,7 @@
     <string name="entry_not_found">اندراج اس دستاویز میں نہیں ملا</string>
     <string name="entry_no_concept">%1$s، کوئی وضاحت نہیں</string>
     <string name="narrative_show">دستاویز کا متن دکھائیں</string>
+    <string name="summary_contents">فہرست</string>
     <string name="narrative_hide">دستاویز کا متن چھپائیں</string>
     <string name="detail_line">%1$s: %2$s</string>
     <string name="list_pair">%1$s، %2$s</string>

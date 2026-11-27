@@ -74,6 +74,7 @@
     <string name="entry_not_found">प्रविष्टि एह दस्तावेज़ में ना मिलल</string>
     <string name="entry_no_concept">%1$s, कवनो विवरण नइखे</string>
     <string name="narrative_show">दस्तावेज़ के टेक्स्ट देखाईं</string>
+    <string name="summary_contents">विषय सूची</string>
     <string name="narrative_hide">दस्तावेज़ के टेक्स्ट छिपाईं</string>
     <string name="detail_line">%1$s: %2$s</string>
     <string name="list_pair">%1$s, %2$s</string>

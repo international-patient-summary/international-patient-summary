@@ -74,6 +74,7 @@
     <string name="entry_not_found">Færsla fannst ekki í þessu skjali</string>
     <string name="entry_no_concept">%1$s, engin lýsing</string>
     <string name="narrative_show">Sýna texta skjals</string>
+    <string name="summary_contents">Efnisyfirlit</string>
     <string name="narrative_hide">Fela texta skjals</string>
     <string name="detail_line">%1$s: %2$s</string>
     <string name="list_pair">%1$s, %2$s</string>

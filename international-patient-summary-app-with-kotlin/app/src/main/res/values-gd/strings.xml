@@ -74,6 +74,7 @@
     <string name="entry_not_found">Cha deach an innteart a lorg san sgrìobhainn seo</string>
     <string name="entry_no_concept">%1$s, gun tuairisgeul</string>
     <string name="narrative_show">Seall teacsa na sgrìobhainne</string>
+    <string name="summary_contents">Clàr-innse</string>
     <string name="narrative_hide">Falaich teacsa na sgrìobhainne</string>
     <string name="detail_line">%1$s: %2$s</string>
     <string name="list_pair">%1$s, %2$s</string>

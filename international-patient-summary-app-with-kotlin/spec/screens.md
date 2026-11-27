@@ -73,6 +73,10 @@
   the reader's language when the app knows the code; an unknown code is
   shown as the document wrote it. Codes shown on one line are joined with
   the language's list separator.
+- **M-VIEW-8 Contents.** The summary offers its contents after the banner:
+  one entry per section, in the summary's order, each named as its section
+  is and labelled as a group in the reader's language. Choosing an entry
+  scrolls the summary to that section's heading.
 
 ## 4.3 About
 

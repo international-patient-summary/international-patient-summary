@@ -225,7 +225,7 @@ not.
   `values/` as en-US.
 - **Dates**: a FHIR dateTime is written at the document's own offset, not
   converted to the phone's time zone, so it reads as the document wrote it.
-- **[Lily Design System](https://lilydesignsystem.com)** (§8.1): the app uses Lily for its interface and for the IPS rules Lily owns, building Lily's `lily-core` and `lily-compose`
+- **[Lily Design System](https://lilydesignsystem.com)** (§8.1): the app uses Lily for its interface and for the IPS rules Lily owns, building Lily's `lily-core`, `lily-compose` and `lily-compose-themes`
   from a local checkout through a Gradle composite build (`includeBuild` in
   `settings.gradle.kts`; the path defaults to
   `../../../lilydesignsystem/lily-design-system/lily-design-system-kotlin`, or `-Plily.dir=...`).
@@ -237,4 +237,10 @@ not.
   `lint.checkDependencies` is off. The allergy alert is Lily's `LilyAlert` (kind Error) inside the error-coloured
   card: one TalkBack stop, spoken as its heading then its lines, and announced when it
   appears; its text is exposed as a content description, not as separate text nodes.
-  Adopted so far: the section and the alert. Next: the banner and the contents.
+  The theme is Lily's `LilyTheme` from `lily-compose-themes`, inside Material 3:
+  Lily's light or dark tokens as the system's appearance says, so Lily's
+  components use Lily's gated colour pairs while Material keeps the system's
+  dynamic colour around them.
+  The contents (M-VIEW-8) are Lily's, given the label and a callback that
+  scrolls the lazy list to the section's item.
+  Adopted so far: the section, the alert, the theme and the contents. Next: the banner.

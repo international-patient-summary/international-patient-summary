@@ -74,6 +74,7 @@
     <string name="entry_not_found">Heb ddod o hyd i’r cofnod yn y ddogfen hon</string>
     <string name="entry_no_concept">%1$s, dim disgrifiad</string>
     <string name="narrative_show">Dangos testun y ddogfen</string>
+    <string name="summary_contents">Cynnwys</string>
     <string name="narrative_hide">Cuddio testun y ddogfen</string>
     <string name="detail_line">%1$s: %2$s</string>
     <string name="list_pair">%1$s, %2$s</string>

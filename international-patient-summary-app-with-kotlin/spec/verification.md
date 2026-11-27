@@ -54,6 +54,7 @@ on to three pages, each marked CONTINUED); with
 | M-VIEW-5              | `ips.SummaryReaderTest.noInfoSectionsAreUnavailable`, `emptyReasonsAndAbsentCodesMapToTheirStates` |
 | M-VIEW-6              | `ips.FormatTest.narrativeBecomesPlainText`; `ips.SummaryReaderTest.narrativeWithoutEntriesIsKept` |
 | M-VIEW-7              | `ips.FormatTest.displayPrefersCodingDisplayThenTextThenSystemAndCode`, `statusIsAWordNotAUri`, `systemLabels` |
+| M-VIEW-8              | `ContentsTest.choosingAnEntryMovesToItsSection`, `anEntryNamesTheItemAfterTheBannerAndTheContents` |
 | M-TAB-4               | `AppViewModelTest.theOpenSummaryOutlivesARecreatedActivity` (summaries, relationships and the open summary are `AppViewModel` state); manual (fold) |
 | M-PEOPLE-1            | `ips.PeopleTest` (`theThreeMarthaDeLarosaExamplesAreOnePerson`, `nameAndBirthDateMatchIgnoringCaseAccentsAndSpacing`, `theLinkIsTransitive`, `anIdentifierNeedsTheSameSystemAndValue`, `withoutAnIdentifierANameAndABirthDateAreBothNeeded`, `aSummaryWithoutAPatientIsAPersonOfItsOwn`, `groupsKeepTheOrderGiven`) |
 | M-PEOPLE-2            | `SummaryStoreTest.peopleAreInTheOrderOfTheirNewestSummary`; `SmokeTest.loadOpenAndClearAll` (three headings, Martha's three rows); manual (TalkBack) |

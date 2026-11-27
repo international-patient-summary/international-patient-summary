@@ -3,6 +3,9 @@
 // Nothing here decides what a value is; it lays out what SummaryReader read.
 package io.github.internationalpatientsummary.app.ui
 
+import kotlinx.coroutines.launch
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -35,6 +38,7 @@ import io.github.lilydesignsystem.compose.AlertKind
 import io.github.lilydesignsystem.compose.InternationalPatientSummaryLazy
 import io.github.lilydesignsystem.compose.InternationalPatientSummarySection
 import io.github.lilydesignsystem.core.IpsSectionEntry
+import io.github.lilydesignsystem.core.ipsContents
 import io.github.lilydesignsystem.compose.LilyAlert
 import io.github.lilydesignsystem.compose.RecordList
 import io.github.lilydesignsystem.compose.RecordListItem
@@ -106,19 +110,30 @@ fun SummaryScreen(
     ) { padding ->
         // Lily's lazy summary: the banner and the alert first, then one item per section (spec §9.1). The document's own
         // sections already include a missing required one, in words, so Lily adds none of its own.
-        val entries = summary.sections.map { IpsSectionEntry(it.key?.key ?: "other", sectionTitleText(it), lilyStatus(it.state)) }
+        // A section outside the registry gets a key of its own, so each contents entry finds its section.
+        val entries = summary.sections.mapIndexed { index, section ->
+            IpsSectionEntry(section.key?.key ?: "other-$index", sectionTitleText(section), lilyStatus(section.state))
+        }
         val headings = mapOf(
             "medications" to stringResource(R.string.section_medications),
             "allergies" to stringResource(R.string.section_allergies),
             "problems" to stringResource(R.string.section_problems),
         )
+        val list = rememberLazyListState()
+        val scope = rememberCoroutineScope()
         InternationalPatientSummaryLazy(
             label = summary.listTitle ?: stringResource(R.string.list_untitled),
             sections = entries,
             requiredHeadings = headings,
             omittedLabel = stringResource(R.string.state_missing),
             modifier = Modifier.padding(padding).fillMaxSize(),
+            state = list,
             contentPadding = PaddingValues(16.dp),
+            // M-VIEW-8: the contents, each entry moving to its section.
+            contentsLabel = stringResource(R.string.summary_contents),
+            onSelectSection = { key ->
+                contentsItemIndex(entries, headings, key)?.let { scope.launch { list.animateScrollToItem(it) } }
+            },
             banner = {
                 Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                     if (!summary.allergyAlert.isEmpty) AlertBox(summary.allergyAlert)
@@ -133,6 +148,13 @@ fun SummaryScreen(
         }
     }
 }
+
+/**
+ * The list item of the section [key] names: after the banner and the contents come the document's sections, then
+ * any required one Lily adds, in the contents' own order.
+ */
+internal fun contentsItemIndex(entries: List<IpsSectionEntry>, headings: Map<String, String>, key: String): Int? =
+    ipsContents(entries, headings).indexOfFirst { it.key == key }.takeIf { it >= 0 }?.plus(2)
 
 /** Share offers two things (M-SHARE-1): the file as it was opened, or a PDF for people. */
 @Composable

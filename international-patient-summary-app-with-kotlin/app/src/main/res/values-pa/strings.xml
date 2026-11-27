@@ -74,6 +74,7 @@
     <string name="entry_not_found">ਐਂਟਰੀ ਇਸ ਦਸਤਾਵੇਜ਼ ਵਿੱਚ ਨਹੀਂ ਮਿਲੀ</string>
     <string name="entry_no_concept">%1$s, ਕੋਈ ਵੇਰਵਾ ਨਹੀਂ</string>
     <string name="narrative_show">ਦਸਤਾਵੇਜ਼ ਦਾ ਟੈਕਸਟ ਦਿਖਾਓ</string>
+    <string name="summary_contents">ਤਤਕਰਾ</string>
     <string name="narrative_hide">ਦਸਤਾਵੇਜ਼ ਦਾ ਟੈਕਸਟ ਲੁਕਾਓ</string>
     <string name="detail_line">%1$s: %2$s</string>
     <string name="list_pair">%1$s, %2$s</string>

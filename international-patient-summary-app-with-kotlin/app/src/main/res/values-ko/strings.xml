@@ -74,6 +74,7 @@
     <string name="entry_not_found">이 문서에서 항목을 찾을 수 없음</string>
     <string name="entry_no_concept">%1$s, 설명 없음</string>
     <string name="narrative_show">문서 텍스트 보기</string>
+    <string name="summary_contents">목차</string>
     <string name="narrative_hide">문서 텍스트 숨기기</string>
     <string name="detail_line">%1$s: %2$s</string>
     <string name="list_pair">%1$s, %2$s</string>

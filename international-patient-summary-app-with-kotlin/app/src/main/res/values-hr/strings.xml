@@ -74,6 +74,7 @@
     <string name="entry_not_found">Unos nije pronađen u ovom dokumentu</string>
     <string name="entry_no_concept">%1$s, bez opisa</string>
     <string name="narrative_show">Prikaži tekst dokumenta</string>
+    <string name="summary_contents">Sadržaj</string>
     <string name="narrative_hide">Sakrij tekst dokumenta</string>
     <string name="detail_line">%1$s: %2$s</string>
     <string name="list_pair">%1$s, %2$s</string>

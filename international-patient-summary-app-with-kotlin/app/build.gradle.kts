@@ -82,6 +82,7 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.lily.core)
     implementation(libs.lily.compose)
+    implementation(libs.lily.compose.themes)
 
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)

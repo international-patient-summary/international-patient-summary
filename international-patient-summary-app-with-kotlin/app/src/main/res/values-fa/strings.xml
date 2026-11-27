@@ -74,6 +74,7 @@
     <string name="entry_not_found">مورد در این سند پیدا نشد</string>
     <string name="entry_no_concept">%1$s، بدون شرح</string>
     <string name="narrative_show">نمایش متن سند</string>
+    <string name="summary_contents">فهرست مطالب</string>
     <string name="narrative_hide">پنهان کردن متن سند</string>
     <string name="detail_line">%1$s: %2$s</string>
     <string name="list_pair">%1$s، %2$s</string>

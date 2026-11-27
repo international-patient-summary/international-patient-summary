@@ -74,6 +74,7 @@
     <string name="entry_not_found">ບໍ່ພົບລາຍການນີ້ໃນເອກະສານ</string>
     <string name="entry_no_concept">%1$s, ບໍ່ມີຄຳອະທິບາຍ</string>
     <string name="narrative_show">ສະແດງຂໍ້ຄວາມເອກະສານ</string>
+    <string name="summary_contents">ສາລະບານ</string>
     <string name="narrative_hide">ເຊື່ອງຂໍ້ຄວາມເອກະສານ</string>
     <string name="detail_line">%1$s: %2$s</string>
     <string name="list_pair">%1$s, %2$s</string>

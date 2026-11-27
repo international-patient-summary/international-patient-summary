@@ -74,6 +74,7 @@
     <string name="entry_not_found">Eintrag nicht in diesem Dokument gefunden</string>
     <string name="entry_no_concept">%1$s, keine Beschreibung</string>
     <string name="narrative_show">Dokumenttext einblenden</string>
+    <string name="summary_contents">Inhalt</string>
     <string name="narrative_hide">Dokumenttext ausblenden</string>
     <string name="detail_line">%1$s: %2$s</string>
     <string name="list_pair">%1$s, %2$s</string>

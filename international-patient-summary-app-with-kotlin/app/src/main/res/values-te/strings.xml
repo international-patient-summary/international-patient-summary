@@ -74,6 +74,7 @@
     <string name="entry_not_found">ఈ డాక్యుమెంట్‌లో ఎంట్రీ కనుగొనబడలేదు</string>
     <string name="entry_no_concept">%1$s, వివరణ లేదు</string>
     <string name="narrative_show">డాక్యుమెంట్ టెక్స్ట్‌ను చూపండి</string>
+    <string name="summary_contents">విషయ సూచిక</string>
     <string name="narrative_hide">డాక్యుమెంట్ టెక్స్ట్‌ను దాచండి</string>
     <string name="detail_line">%1$s: %2$s</string>
     <string name="list_pair">%1$s, %2$s</string>

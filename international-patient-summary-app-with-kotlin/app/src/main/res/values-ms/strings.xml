@@ -74,6 +74,7 @@
     <string name="entry_not_found">Entri tidak ditemui dalam dokumen ini</string>
     <string name="entry_no_concept">%1$s, tiada keterangan</string>
     <string name="narrative_show">Tunjukkan teks dokumen</string>
+    <string name="summary_contents">Kandungan</string>
     <string name="narrative_hide">Sembunyikan teks dokumen</string>
     <string name="detail_line">%1$s: %2$s</string>
     <string name="list_pair">%1$s, %2$s</string>

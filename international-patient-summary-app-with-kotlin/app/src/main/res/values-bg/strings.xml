@@ -74,6 +74,7 @@
     <string name="entry_not_found">Записът не е намерен в този документ</string>
     <string name="entry_no_concept">%1$s, без описание</string>
     <string name="narrative_show">Показване на текста на документа</string>
+    <string name="summary_contents">Съдържание</string>
     <string name="narrative_hide">Скриване на текста на документа</string>
     <string name="detail_line">%1$s: %2$s</string>
     <string name="list_pair">%1$s, %2$s</string>

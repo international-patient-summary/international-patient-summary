@@ -2,6 +2,13 @@
 
 ## 0.1.0 — unreleased
 
+- Contents (M-VIEW-8): Lily's list of the summary's sections after the banner,
+  "Contents" in every language; choosing one scrolls to it. A section outside the
+  registry gets its own key (`other-N`), as on iOS.
+- Theme: Lily's `LilyTheme` (`lily-compose-themes`, from the same local checkout)
+  inside Material 3, with Lily's light or dark tokens by the system's appearance, so
+  the allergy alert and the sections use Lily's gated colour pairs (spec §8.1).
+
 - Tests: `OnePagePdf` draws through a `PdfSink` (the platform's `PdfDocument` by
   default), so `OnePagePdfJvmTest` covers its layout and drawing on the JVM;
   unit-test line coverage is 97.5% (P13-T3).

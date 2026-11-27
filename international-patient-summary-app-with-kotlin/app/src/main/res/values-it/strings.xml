@@ -74,6 +74,7 @@
     <string name="entry_not_found">Voce non trovata in questo documento</string>
     <string name="entry_no_concept">%1$s, nessuna descrizione</string>
     <string name="narrative_show">Mostra il testo del documento</string>
+    <string name="summary_contents">Indice</string>
     <string name="narrative_hide">Nascondi il testo del documento</string>
     <string name="detail_line">%1$s: %2$s</string>
     <string name="list_pair">%1$s, %2$s</string>

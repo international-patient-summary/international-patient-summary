@@ -74,6 +74,7 @@
     <string name="entry_not_found">Ba a sami shigarwar a cikin wannan takarda ba</string>
     <string name="entry_no_concept">%1$s, babu bayani</string>
     <string name="narrative_show">Nuna rubutun takarda</string>
+    <string name="summary_contents">Abubuwan ciki</string>
     <string name="narrative_hide">Ɓoye rubutun takarda</string>
     <string name="detail_line">%1$s: %2$s</string>
     <string name="list_pair">%1$s, %2$s</string>

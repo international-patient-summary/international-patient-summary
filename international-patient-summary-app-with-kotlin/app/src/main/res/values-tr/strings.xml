@@ -74,6 +74,7 @@
     <string name="entry_not_found">Kayıt bu belgede bulunamadı</string>
     <string name="entry_no_concept">%1$s, açıklama yok</string>
     <string name="narrative_show">Belge metnini göster</string>
+    <string name="summary_contents">İçindekiler</string>
     <string name="narrative_hide">Belge metnini gizle</string>
     <string name="detail_line">%1$s: %2$s</string>
     <string name="list_pair">%1$s, %2$s</string>

@@ -74,6 +74,7 @@
     <string name="entry_not_found">Hindi nakita ang entry sa dokumentong ito</string>
     <string name="entry_no_concept">%1$s, walang paglalarawan</string>
     <string name="narrative_show">Ipakita ang teksto ng dokumento</string>
+    <string name="summary_contents">Nilalaman</string>
     <string name="narrative_hide">Itago ang teksto ng dokumento</string>
     <string name="detail_line">%1$s: %2$s</string>
     <string name="list_pair">%1$s, %2$s</string>

@@ -74,6 +74,7 @@
     <string name="entry_not_found">Item niet gevonden in dit document</string>
     <string name="entry_no_concept">%1$s, geen omschrijving</string>
     <string name="narrative_show">Documenttekst tonen</string>
+    <string name="summary_contents">Inhoud</string>
     <string name="narrative_hide">Documenttekst verbergen</string>
     <string name="detail_line">%1$s: %2$s</string>
     <string name="list_pair">%1$s, %2$s</string>

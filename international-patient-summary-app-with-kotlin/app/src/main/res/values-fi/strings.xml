@@ -74,6 +74,7 @@
     <string name="entry_not_found">Merkintää ei löydy tästä asiakirjasta</string>
     <string name="entry_no_concept">%1$s, ei kuvausta</string>
     <string name="narrative_show">Näytä asiakirjan teksti</string>
+    <string name="summary_contents">Sisällys</string>
     <string name="narrative_hide">Piilota asiakirjan teksti</string>
     <string name="detail_line">%1$s: %2$s</string>
     <string name="list_pair">%1$s, %2$s</string>

@@ -74,6 +74,7 @@
     <string name="entry_not_found">A bejegyzés nem található ebben a dokumentumban</string>
     <string name="entry_no_concept">%1$s, leírás nélkül</string>
     <string name="narrative_show">Dokumentumszöveg megjelenítése</string>
+    <string name="summary_contents">Tartalom</string>
     <string name="narrative_hide">Dokumentumszöveg elrejtése</string>
     <string name="detail_line">%1$s: %2$s</string>
     <string name="list_pair">%1$s, %2$s</string>

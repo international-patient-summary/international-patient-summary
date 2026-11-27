@@ -74,6 +74,7 @@
     <string name="entry_not_found">Androung net an dësem Dokument fonnt</string>
     <string name="entry_no_concept">%1$s, keng Beschreiwung</string>
     <string name="narrative_show">Dokumententext weisen</string>
+    <string name="summary_contents">Inhalt</string>
     <string name="narrative_hide">Dokumententext verstoppen</string>
     <string name="detail_line">%1$s: %2$s</string>
     <string name="list_pair">%1$s, %2$s</string>

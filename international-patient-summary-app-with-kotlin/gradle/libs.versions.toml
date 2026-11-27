@@ -24,6 +24,7 @@ espressoCore = "3.7.0"
 # Lily Design System, from a local checkout through a composite build (settings.gradle.kts); no version.
 lily-core = { module = "io.github.lilydesignsystem:lily-core" }
 lily-compose = { module = "io.github.lilydesignsystem:lily-compose" }
+lily-compose-themes = { module = "io.github.lilydesignsystem:lily-compose-themes" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
 androidx-lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycle" }

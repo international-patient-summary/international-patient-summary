@@ -74,6 +74,7 @@
     <string name="entry_not_found">Oppføringen finnes ikke i dette dokumentet</string>
     <string name="entry_no_concept">%1$s, ingen beskrivelse</string>
     <string name="narrative_show">Vis dokumenttekst</string>
+    <string name="summary_contents">Innhold</string>
     <string name="narrative_hide">Skjul dokumenttekst</string>
     <string name="detail_line">%1$s: %2$s</string>
     <string name="list_pair">%1$s, %2$s</string>

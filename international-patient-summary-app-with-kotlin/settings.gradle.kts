@@ -26,5 +26,6 @@ includeBuild(lilyDir) {
     dependencySubstitution {
         substitute(module("io.github.lilydesignsystem:lily-core")).using(project(":lily-core"))
         substitute(module("io.github.lilydesignsystem:lily-compose")).using(project(":lily-compose"))
+        substitute(module("io.github.lilydesignsystem:lily-compose-themes")).using(project(":lily-compose-themes"))
     }
 }

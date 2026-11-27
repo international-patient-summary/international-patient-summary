@@ -74,6 +74,7 @@
     <string name="entry_not_found">ಈ ನಮೂದು ದಾಖಲೆಯಲ್ಲಿ ಕಂಡುಬಂದಿಲ್ಲ</string>
     <string name="entry_no_concept">%1$s, ವಿವರಣೆ ಇಲ್ಲ</string>
     <string name="narrative_show">ದಾಖಲೆಯ ಪಠ್ಯ ತೋರಿಸಿ</string>
+    <string name="summary_contents">ಪರಿವಿಡಿ</string>
     <string name="narrative_hide">ದಾಖಲೆಯ ಪಠ್ಯ ಮರೆಮಾಡಿ</string>
     <string name="detail_line">%1$s: %2$s</string>
     <string name="list_pair">%1$s, %2$s</string>

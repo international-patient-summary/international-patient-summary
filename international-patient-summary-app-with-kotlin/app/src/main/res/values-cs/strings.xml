@@ -74,6 +74,7 @@
     <string name="entry_not_found">Záznam nebyl v tomto dokumentu nalezen</string>
     <string name="entry_no_concept">%1$s, bez popisu</string>
     <string name="narrative_show">Zobrazit text dokumentu</string>
+    <string name="summary_contents">Obsah</string>
     <string name="narrative_hide">Skrýt text dokumentu</string>
     <string name="detail_line">%1$s: %2$s</string>
     <string name="list_pair">%1$s, %2$s</string>
