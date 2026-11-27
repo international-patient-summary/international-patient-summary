@@ -87,7 +87,11 @@ IPSApp.xcodeproj           project (objectVersion 77, synchronized folders)
   none. Lily's package is added as a local path to a checkout beside this
   repository (`../../../lilydesignsystem/lily-design-system/lily-design-system-swift`);
   it is not published, so CI checks it out. Lily parses no FHIR: `IPSKit` still
-  reads documents, and the app passes Lily plain data.
+  reads documents, and the app passes Lily plain data. The SwiftUI screens (the
+  summary and About) wear `LilyThemes`' `.lilyTheme`, with Lily's light or dark
+  tokens as the system's appearance says (`lilyAppearance()`), so Lily's
+  components use Lily's gated colour pairs and its link tint; the UIKit list
+  keeps the system's colours.
 - **Network** (M-PRIV-1): the app links no networking code and declares no
   network use; `PrivacyInfo.xcprivacy` declares no tracking and no data
   collection.

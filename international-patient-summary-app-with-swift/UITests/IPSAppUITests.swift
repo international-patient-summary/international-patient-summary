@@ -335,6 +335,27 @@ final class IPSAppUITests: XCTestCase {
     /// M-I18N-2, M-A11Y-2: right-to-left (ar, he) and long (de, fi) languages at the
     /// largest text size: the examples load through the + menu, a summary opens, no
     /// string is missing, and a screenshot is kept for review (tasks P2-T3).
+    /// M-VIEW-8: the contents name each section in order, and choosing one moves the
+    /// summary to it: the last section's heading starts off screen and is reachable after.
+    func testContentsMovesToASection() throws {
+        let app = Self.app()
+        app.launch()
+        app.buttons["list.examples"].tap()
+        let table = app.tables["summaries"]
+        XCTAssertTrue(table.cells.element(boundBy: 4).waitForExistence(timeout: 20))
+        table.staticTexts["Patricia JORDANA"].firstMatch.tap()
+        let contents = app.otherElements["Contents"]
+        XCTAssertTrue(contents.waitForExistence(timeout: 20), "the contents are named")
+        let entries = contents.buttons
+        XCTAssertGreaterThan(entries.count, 2, "an entry per section")
+        let last = entries.element(boundBy: entries.count - 1)
+        let heading = app.staticTexts[last.label]
+        XCTAssertFalse(heading.exists && heading.isHittable, "the last section starts off screen")
+        last.tap()
+        let reached = expectation(for: NSPredicate(format: "exists == true AND hittable == true"), evaluatedWith: heading)
+        wait(for: [reached], timeout: 20)
+    }
+
     /// One test per language, so a failure names it and each stays short. The waits
     /// are long because a CI simulator lays out accessibility sizes slowly; XCTest
     /// stops the app between tests, so none terminates it here.

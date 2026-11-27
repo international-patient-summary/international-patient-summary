@@ -153,6 +153,11 @@
         "description": "safety, privacy, versions, Clear all"
       },
       {
+        "name": "LilyAppearance",
+        "path": "App/LilyAppearance.swift",
+        "description": "Lily's theme on the SwiftUI screens, light or dark tokens by the system's appearance"
+      },
+      {
         "name": "SummaryStore",
         "path": "App/SummaryStore.swift",
         "description": "the open summaries, people and relationships, saved to the encrypted store; examples, share file"

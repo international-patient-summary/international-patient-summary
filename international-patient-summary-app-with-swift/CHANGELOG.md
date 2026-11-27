@@ -2,6 +2,11 @@
 
 ## 0.1.0 — unreleased
 
+- Theme: the summary and About wear Lily's `LilyThemes` (`.lilyTheme`), with
+  Lily's light or dark tokens by the system's appearance.
+- Contents (M-VIEW-8): Lily's list of the summary's sections after the banner,
+  "Contents" in every language; choosing one scrolls the summary to it.
+
 - About and the summary are SwiftUI (`AboutView`, `SummaryView` on Lily's `InternationalPatientSummary`, hosted in the UIKit navigation stack, with Share's menu and sheet in UIKit); the list screen stays UIKit until it moves.
 - App icon and accent colour, the same design as the Android app's.
 - Share as PDF: a one-page summary for people by the web viewer's rules (identity, alerts and

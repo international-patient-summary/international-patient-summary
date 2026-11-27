@@ -49,6 +49,7 @@
 - [SummaryPDF](App/SummaryPDF.swift): M-PDF-1..3: draws the one-page PDF
 - [KeychainKeys](App/KeychainKeys.swift): M-STORE-2: the store's key, this device only
 - [AboutViewController](App/AboutViewController.swift): safety, privacy, versions, Clear all
+- [LilyAppearance](App/LilyAppearance.swift): Lily's theme on the SwiftUI screens, light or dark tokens by the system's appearance
 - [SummaryStore](App/SummaryStore.swift): the open summaries, people and relationships, saved to the encrypted store; examples, share file
 - [Assets](App/Assets.xcassets): app icon and accent colour; `bin/draw-app-icon.swift` redraws the icon
 - [Strings](App/Localizable.xcstrings): every interface string, in English and 65 localizations

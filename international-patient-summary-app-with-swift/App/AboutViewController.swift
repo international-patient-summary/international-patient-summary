@@ -91,6 +91,7 @@ struct AboutView: View {
         } message: {
             Text(verbatim: L10n.text("about.clearAll.confirm.body"))
         }
+        .lilyAppearance()
     }
 }
 

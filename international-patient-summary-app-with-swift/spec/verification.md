@@ -40,6 +40,7 @@ xcodebuild test -project IPSApp.xcodeproj -scheme IPSApp \
 | M-VIEW-5              | `DocumentTests.absentStatesFromEmptyReason`, `aMixedAllergyListIsKnown`, `sectionStatesFollowTheViewersOrder`; `FormatTests.absentStates`; UI |
 | M-VIEW-6              | `FormatTests.narrativeBecomesPlainText`                                  |
 | M-VIEW-7              | `FormatTests.displayPrefersDisplayThenTextThenSystemAndCode`, `statusesAreCodes` |
+| M-VIEW-8              | UI `testContentsMovesToASection`                                         |
 | M-LOAD-4              | By hand on a simulator: `xcrun simctl openurl <device> file:///path/bundle-minimal.json` opens Martha DeLarosa (cold and warm); a JSON that is not a Bundle shows the `not_a_bundle` alert; nothing is left in `Documents/Inbox` |
 | M-LOAD-2, M-LIST-3    | UI `testPasteRefusalAndShare` (plain text refused as `not_json`, list unchanged; an IPS opens) |
 | M-SHARE-1             | `DocumentTests.sharingGivesBackTheExactBytes`; UI `testPasteRefusalAndShare` (the sheet names `international-patient-summary`, JSON) |

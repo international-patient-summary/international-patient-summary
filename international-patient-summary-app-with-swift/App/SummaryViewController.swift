@@ -172,6 +172,7 @@ struct SummaryView: View {
     let model: SummaryModel
 
     var body: some View {
+        ScrollViewReader { reader in
         ScrollView {
             // The registry's required sections are always in the document (the document adds the missing ones), so Lily adds none.
             if let summary = try? InternationalPatientSummary(
@@ -180,6 +181,9 @@ struct SummaryView: View {
                 requiredHeadings: Dictionary(
                     uniqueKeysWithValues: ipsRequiredSections.map { key in (key, L10n.sectionTitle(SectionKey.allCases.first { $0.lilyKey == key })) }),
                 omittedLabel: L10n.text("state.omitted"),
+                // M-VIEW-8: the contents, each entry moving to its section.
+                contentsLabel: L10n.text("summary.contents"),
+                onSelectSection: { key in withAnimation { reader.scrollTo(key, anchor: .top) } },
                 banner: {
                     ForEach(Array(model.banner.enumerated()), id: \.offset) { _, block in card(block.header, block.rows) }
                 },
@@ -200,6 +204,7 @@ struct SummaryView: View {
                                 rows(section.trail)
                             }
                         }
+                        .id(section.key)
                     }
                 },
                 details: { EmptyView() })
@@ -207,7 +212,9 @@ struct SummaryView: View {
                 summary.padding()
             }
         }
+        }
         .background(Color(.systemGroupedBackground))
+        .lilyAppearance()
     }
 
     /// A banner block: its heading, then its rows on a card.

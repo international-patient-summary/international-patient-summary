@@ -10,6 +10,7 @@
 		A1000000000000000000F001 /* IPSKit in Frameworks */ = {isa = PBXBuildFile; productRef = A1000000000000000000D001 /* IPSKit */; };
 		A1000000000000000000F002 /* IPSKit in Frameworks */ = {isa = PBXBuildFile; productRef = A1000000000000000000D002 /* IPSKit */; };
 		A1000000000000000000F003 /* LilyUI in Frameworks */ = {isa = PBXBuildFile; productRef = A1000000000000000000D003 /* LilyUI */; };
+		A1000000000000000000F004 /* LilyThemes in Frameworks */ = {isa = PBXBuildFile; productRef = A1000000000000000000D004 /* LilyThemes */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 			files = (
 				A1000000000000000000F001 /* IPSKit in Frameworks */,
 				A1000000000000000000F003 /* LilyUI in Frameworks */,
+				A1000000000000000000F004 /* LilyThemes in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,6 +125,7 @@
 			packageProductDependencies = (
 				A1000000000000000000D001 /* IPSKit */,
 				A1000000000000000000D003 /* LilyUI */,
+				A1000000000000000000D004 /* LilyThemes */,
 			);
 			productName = IPSApp;
 			productReference = A1000000000000000000E001 /* IPSApp.app */;
@@ -585,6 +588,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A10000000000000000004002 /* XCLocalSwiftPackageReference "lily-design-system-swift" */;
 			productName = LilyUI;
+		};
+		A1000000000000000000D004 /* LilyThemes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A10000000000000000004002 /* XCLocalSwiftPackageReference "lily-design-system-swift" */;
+			productName = LilyThemes;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
