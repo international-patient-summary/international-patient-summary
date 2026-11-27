@@ -171,17 +171,17 @@ describe('RemoteSession', () => {
 		expect(none.error).toBe('expired');
 	});
 
-	it('saves the open document to the service, and confirms it', async () => {
+	it('saves the open document to the service, and says so for that document only', async () => {
 		const { remote, rows } = await signedIn();
-		await remote.save(exampleJson('bundle-minimal'));
-		expect(remote.error).toBeUndefined();
-		expect(remote.saved).toBe([...rows.keys()][0]);
+		const first = { data: exampleJson('bundle-minimal') };
+		await remote.save(first);
+		expect(remote.saveResult).toEqual({ for: first, id: [...rows.keys()][0], error: undefined });
 		expect(remote.summaries).toHaveLength(1);
-		await remote.save({ resourceType: 'Bundle', type: 'collection' });
-		expect(remote.saved).toBeUndefined();
-		expect(remote.error).toBe('refused');
+		const refused = { data: { resourceType: 'Bundle', type: 'collection' } };
+		await remote.save(refused);
+		expect(remote.saveResult).toEqual({ for: refused, id: undefined, error: 'refused' });
 		remote.signOut();
-		expect(remote.saved).toBeUndefined();
+		expect(remote.saveResult).toBeUndefined();
 	});
 
 	it('signs out everywhere: here at once, and at the provider when it can', async () => {

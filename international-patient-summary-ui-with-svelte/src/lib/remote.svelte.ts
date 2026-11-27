@@ -61,8 +61,13 @@ export class RemoteSession {
 	summaries = $state.raw<SummaryListing[]>([]);
 	busy = $state(false);
 	error = $state<RemoteError | undefined>(undefined);
-	/** The id of the document "Save to service" last stored, for its confirmation. */
-	saved = $state<string | undefined>(undefined);
+	/**
+	 * What the last "Save to service" did, and for which loaded document, so its
+	 * confirmation or error shows only beside that document (F-SIGN-7).
+	 */
+	saveResult = $state.raw<{ for: unknown; id?: string; error?: RemoteError } | undefined>(
+		undefined
+	);
 	#service: HttpService | undefined;
 	/** The one renewal in flight, so concurrent calls share it. */
 	#renewing: Promise<string | undefined> | undefined;
@@ -155,14 +160,15 @@ export class RemoteSession {
 		});
 	}
 
-	/** "Save to service" (F-SIGN-7): store the document open in the viewer, as loaded. */
-	save(data: unknown): Promise<void> {
-		this.saved = undefined;
-		return this.#run(async () => {
-			const { id } = await this.#require().create(data);
-			this.saved = id;
+	/** "Save to service" (F-SIGN-7): store `loaded.data`, the document as it was loaded. */
+	async save(loaded: { data: unknown }): Promise<void> {
+		this.saveResult = undefined;
+		let id: string | undefined;
+		await this.#run(async () => {
+			id = (await this.#require().create(loaded.data)).id;
 			this.summaries = await this.#require().list();
 		});
+		this.saveResult = { for: loaded, id, error: id ? undefined : this.error };
 	}
 
 	/**
@@ -177,7 +183,7 @@ export class RemoteSession {
 	}
 
 	signOut(): void {
-		this.saved = undefined;
+		this.saveResult = undefined;
 		this.session = undefined;
 		this.#service = undefined;
 		this.summaries = [];

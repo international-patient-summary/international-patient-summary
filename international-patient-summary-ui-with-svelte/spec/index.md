@@ -661,6 +661,8 @@ that has a service.
 - **F-SIGN-7 Save to service.** While the tab is signed in, the viewer
   offers "Save to service" for a document it did not open from the service;
   it stores the document as loaded and confirms "Saved to the service." The
+  confirmation, or the reason it failed, shows only beside that document,
+  never beside another, and never an error from the service page. The
   service page shows the viewer only for a document it opened itself. The
   session is the same one, kept in memory across navigation within the app.
 - **F-SIGN-8 Renewal.** A token within 30 seconds of its end is renewed

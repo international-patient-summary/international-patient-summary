@@ -9,6 +9,8 @@
   build time; the development server uses the backend's local defaults. The
   header links to it only when a service is configured. `.tour-error` now uses
   the theme's error text colour (it failed colour contrast).
+- "Save to service" shows its confirmation or error beside that document only: an
+  error from the service page no longer appears on Home.
 - Sign out at the provider too (F-SIGN-9): the ID token, in memory only, is the
   hint for its end-session endpoint, which returns to `/service/`.
 - Token renewal (F-SIGN-8): an ending access token is renewed with the refresh

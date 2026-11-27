@@ -167,6 +167,13 @@ test.describe('service', () => {
 			page.getByRole('status').filter({ hasText: 'Saved to the service.' })
 		).toBeVisible();
 		expect(rows.size).toBe(1);
+		// The confirmation is that document's: another document starts without it.
+		await page.getByRole('button', { name: 'Open another document' }).click();
+		const again = page.waitForEvent('filechooser');
+		await page.locator('.file-upload button').click();
+		await (await again).setFiles(join(EXAMPLES_DIR, 'IPS-examples-Bundle-01.json'));
+		await page.locator('.patient-banner').waitFor();
+		await expect(page.getByText('Saved to the service.')).toHaveCount(0);
 		await page.locator('.site-nav').getByRole('link', { name: 'Service' }).click();
 		await expect(
 			page
