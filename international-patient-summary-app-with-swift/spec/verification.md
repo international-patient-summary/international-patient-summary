@@ -45,7 +45,7 @@ xcodebuild test -project IPSApp.xcodeproj -scheme IPSApp \
 | M-SHARE-1             | `DocumentTests.sharingGivesBackTheExactBytes`; UI `testPasteRefusalAndShare` (the sheet names `international-patient-summary`, JSON) |
 | M-PRIV-1              | `TemporaryShareTests` (same name for two patients, cancellation, delayed recipient, relaunch cleanup); no networking code or entitlement; UI share tests |
 | M-PRIV-3, M-ABOUT-1   | UI `testTheExamplesOpenAndClear`                                         |
-| M-A11Y-2              | UI `testTheLargestTextSize`; `testLanguagesAtTheLargestTextSize` (ar, he, de, fi)                                              |
+| M-A11Y-2              | UI `testTheLargestTextSize`; `testLanguageAtTheLargestTextSize_ar`, `_he`, `_de`, `_fi`                                              |
 | M-I18N-1              | UI: no ⟦key⟧ on any screen visited                                       |
 | M-TAB-1, M-TAB-2      | UI `testTheListSitsBesideTheSummaryOnIPad` (side by side, ⌘E, selection, delete, Clear all); `testRightToLeftOnIPad` |
 | M-TAB-3               | `DocumentFileTests` (size before bytes); the drop itself by hand          |

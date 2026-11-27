@@ -335,30 +335,35 @@ final class IPSAppUITests: XCTestCase {
     /// M-I18N-2, M-A11Y-2: right-to-left (ar, he) and long (de, fi) languages at the
     /// largest text size: the examples load through the + menu, a summary opens, no
     /// string is missing, and a screenshot is kept for review (tasks P2-T3).
-    func testLanguagesAtTheLargestTextSize() throws {
-        for language in ["ar", "he", "de", "fi"] {
-            let app = Self.app()
-            app.launchArguments += [
-                "-AppleLanguages", "(\(language))", "-AppleLocale", language,
-                "-UIPreferredContentSizeCategoryName", "UICTContentSizeCategoryAccessibilityXXXL",
-            ]
-            app.launch()
-            XCTAssertTrue(app.buttons["open"].waitForExistence(timeout: 10), language)
-            app.buttons["open"].tap()
-            // The menu's third item is Load examples, in any language.
-            let item = app.collectionViews.buttons.element(boundBy: 2)
-            XCTAssertTrue(item.waitForExistence(timeout: 5), language)
-            item.tap()
-            let first = app.tables["summaries"].cells.element(boundBy: 0)
-            XCTAssertTrue(first.waitForExistence(timeout: 10), language)
-            assertNoMissingStrings(app)
-            screenshot(app, "lang-\(language)-1-list")
-            first.tap()
-            XCTAssertTrue(app.buttons["share"].waitForExistence(timeout: 5), language)
-            assertNoMissingStrings(app)
-            screenshot(app, "lang-\(language)-2-summary")
-            app.terminate()
-        }
+    /// One test per language, so a failure names it and each stays short. The waits
+    /// are long because a CI simulator lays out accessibility sizes slowly; XCTest
+    /// stops the app between tests, so none terminates it here.
+    func testLanguageAtTheLargestTextSize_ar() throws { try languageAtTheLargestTextSize("ar") }
+    func testLanguageAtTheLargestTextSize_he() throws { try languageAtTheLargestTextSize("he") }
+    func testLanguageAtTheLargestTextSize_de() throws { try languageAtTheLargestTextSize("de") }
+    func testLanguageAtTheLargestTextSize_fi() throws { try languageAtTheLargestTextSize("fi") }
+
+    private func languageAtTheLargestTextSize(_ language: String) throws {
+        let app = Self.app()
+        app.launchArguments += [
+            "-AppleLanguages", "(\(language))", "-AppleLocale", language,
+            "-UIPreferredContentSizeCategoryName", "UICTContentSizeCategoryAccessibilityXXXL",
+        ]
+        app.launch()
+        XCTAssertTrue(app.buttons["open"].waitForExistence(timeout: 20), language)
+        app.buttons["open"].tap()
+        // The menu's third item is Load examples, in any language.
+        let item = app.collectionViews.buttons.element(boundBy: 2)
+        XCTAssertTrue(item.waitForExistence(timeout: 20), language)
+        item.tap()
+        let first = app.tables["summaries"].cells.element(boundBy: 0)
+        XCTAssertTrue(first.waitForExistence(timeout: 20), language)
+        assertNoMissingStrings(app)
+        screenshot(app, "lang-\(language)-1-list")
+        first.tap()
+        XCTAssertTrue(app.buttons["share"].waitForExistence(timeout: 20), language)
+        assertNoMissingStrings(app)
+        screenshot(app, "lang-\(language)-2-summary")
     }
 
     /// M-PDF-1, M-PDF-3, M-SHARE-2: Share as PDF, after confirming whose summary it is,

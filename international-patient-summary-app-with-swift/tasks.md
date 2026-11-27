@@ -39,7 +39,7 @@ See the [shared release checklist](../tasks.md) for cross-platform work.
 - [x] P2-T4 The home-screen name in every language (`App/InfoPlist.xcstrings`, from `app.name`)
 - [ ] P2-T2 Clinical review of each translation (as the web viewer's `locales/*/REVIEW.md`); mark reviewed strings `translated`
 - [x] P2-T3 Screenshots in a right-to-left language (ar, he) and a long one (de, fi) at the largest text size
-      Verify: UI `testLanguagesAtTheLargestTextSize` on iPhone 18 Pro Max (2026-11-17): every string
+      Verify: UI `testLanguageAtTheLargestTextSize_ar`, `_he`, `_de`, `_fi` (one test per language since 2026-11-26, with 20 s waits for slow CI simulators) on iPhone 18 Pro Max (2026-11-17): every string
       present; long words hyphenate, nothing clipped, right to left in ar and he.
 
 ## Phase 3 — Open from other apps
