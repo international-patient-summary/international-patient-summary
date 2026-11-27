@@ -168,7 +168,8 @@
    "storage_problem_title": "Chưa lưu",
    "storage_unavailable": "Hiện không thể đọc các bản tóm tắt đã lưu. Chúng được giữ nguyên trên điện thoại này.",
    "storage_unsaved": "Các bản tóm tắt vẫn đang mở nhưng không thể lưu thay đổi trên điện thoại này.",
-   "summaries_title": "Bản tóm tắt"
+   "summaries_title": "Bản tóm tắt",
+   "summary_contents": "Mục lục"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "Các bản tóm tắt vẫn đang mở nhưng không thể lưu thay đổi trên điện thoại này.",
   "storage.notSaved.title": "Chưa lưu",
   "storage.unavailable.body": "Hiện không thể đọc các bản tóm tắt đã lưu. Chúng được giữ nguyên trên điện thoại này.",
+  "summary.contents": "Mục lục",
   "summary.share": "Chia sẻ",
   "summary.share.file": "Chia sẻ tệp (FHIR JSON)",
   "summary.share.pdf": "Chia sẻ dưới dạng PDF",

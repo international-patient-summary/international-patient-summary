@@ -168,7 +168,8 @@
    "storage_problem_title": "לא נשמר",
    "storage_unavailable": "לא ניתן לקרוא כרגע את הסיכומים השמורים. הם נשארו ללא שינוי בטלפון הזה.",
    "storage_unsaved": "הסיכומים שלך עדיין פתוחים, אך לא ניתן היה לשמור את השינויים בטלפון הזה.",
-   "summaries_title": "סיכומים"
+   "summaries_title": "סיכומים",
+   "summary_contents": "תוכן העניינים"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "הסיכומים שלך עדיין פתוחים, אך לא ניתן היה לשמור את השינויים בטלפון הזה.",
   "storage.notSaved.title": "לא נשמר",
   "storage.unavailable.body": "לא ניתן לקרוא כרגע את הסיכומים השמורים. הם נשארו ללא שינוי בטלפון הזה.",
+  "summary.contents": "תוכן העניינים",
   "summary.share": "שיתוף",
   "summary.share.file": "שיתוף הקובץ (FHIR JSON)",
   "summary.share.pdf": "שיתוף כ-PDF",

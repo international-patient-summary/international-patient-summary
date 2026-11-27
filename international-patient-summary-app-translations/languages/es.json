@@ -168,7 +168,8 @@
    "storage_problem_title": "No guardado",
    "storage_unavailable": "Los resúmenes guardados no se pueden leer ahora. Se han dejado sin cambios en este teléfono.",
    "storage_unsaved": "Sus resúmenes siguen abiertos, pero no se pudieron guardar los cambios en este teléfono.",
-   "summaries_title": "Resúmenes"
+   "summaries_title": "Resúmenes",
+   "summary_contents": "Contenido"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "Sus resúmenes siguen abiertos, pero no se pudieron guardar los cambios en este teléfono.",
   "storage.notSaved.title": "No guardado",
   "storage.unavailable.body": "Los resúmenes guardados no se pueden leer ahora. Se han dejado sin cambios en este teléfono.",
+  "summary.contents": "Contenido",
   "summary.share": "Compartir",
   "summary.share.file": "Compartir el archivo (FHIR JSON)",
   "summary.share.pdf": "Compartir como PDF",

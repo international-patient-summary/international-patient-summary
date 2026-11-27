@@ -168,7 +168,8 @@
    "storage_problem_title": "Neišsaugota",
    "storage_unavailable": "Išsaugotų suvestinių dabar perskaityti negalima. Jos paliktos nepakeistos šiame telefone.",
    "storage_unsaved": "Jūsų suvestinės vis dar atidarytos, bet pakeitimų nepavyko išsaugoti šiame telefone.",
-   "summaries_title": "Santraukos"
+   "summaries_title": "Santraukos",
+   "summary_contents": "Turinys"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "Jūsų suvestinės vis dar atidarytos, bet pakeitimų nepavyko išsaugoti šiame telefone.",
   "storage.notSaved.title": "Neišsaugota",
   "storage.unavailable.body": "Išsaugotų suvestinių dabar perskaityti negalima. Jos paliktos nepakeistos šiame telefone.",
+  "summary.contents": "Turinys",
   "summary.share": "Bendrinti",
   "summary.share.file": "Bendrinti failą (FHIR JSON)",
   "summary.share.pdf": "Bendrinti kaip PDF",

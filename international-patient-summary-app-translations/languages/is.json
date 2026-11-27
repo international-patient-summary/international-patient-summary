@@ -168,7 +168,8 @@
    "storage_problem_title": "Ekki vistað",
    "storage_unavailable": "Ekki er hægt að lesa vistaðar samantektir núna. Þær voru látnar óbreyttar í þessum síma.",
    "storage_unsaved": "Samantektirnar þínar eru enn opnar, en ekki tókst að vista breytingarnar í þessum síma.",
-   "summaries_title": "Yfirlit"
+   "summaries_title": "Yfirlit",
+   "summary_contents": "Efnisyfirlit"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "Samantektirnar þínar eru enn opnar, en ekki tókst að vista breytingarnar í þessum síma.",
   "storage.notSaved.title": "Ekki vistað",
   "storage.unavailable.body": "Ekki er hægt að lesa vistaðar samantektir núna. Þær voru látnar óbreyttar í þessum síma.",
+  "summary.contents": "Efnisyfirlit",
   "summary.share": "Deila",
   "summary.share.file": "Deila skránni (FHIR JSON)",
   "summary.share.pdf": "Deila sem PDF",

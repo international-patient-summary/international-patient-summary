@@ -168,7 +168,8 @@
    "storage_problem_title": "محفوظ نہیں ہوا",
    "storage_unavailable": "محفوظ شدہ خلاصے اس وقت پڑھے نہیں جا سکتے۔ انہیں اس فون پر بغیر تبدیلی کے چھوڑ دیا گیا ہے۔",
    "storage_unsaved": "آپ کے خلاصے اب بھی کھلے ہیں، لیکن تبدیلیاں اس فون پر محفوظ نہیں ہو سکیں۔",
-   "summaries_title": "خلاصے"
+   "summaries_title": "خلاصے",
+   "summary_contents": "فہرست"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "آپ کے خلاصے اب بھی کھلے ہیں، لیکن تبدیلیاں اس فون پر محفوظ نہیں ہو سکیں۔",
   "storage.notSaved.title": "محفوظ نہیں ہوا",
   "storage.unavailable.body": "محفوظ شدہ خلاصے اس وقت پڑھے نہیں جا سکتے۔ انہیں اس فون پر بغیر تبدیلی کے چھوڑ دیا گیا ہے۔",
+  "summary.contents": "فہرست",
   "summary.share": "شیئر کریں",
   "summary.share.file": "فائل شیئر کریں (FHIR JSON)",
   "summary.share.pdf": "PDF کے طور پر شیئر کریں",

@@ -168,7 +168,8 @@
    "storage_problem_title": "لم يتم الحفظ",
    "storage_unavailable": "لا يمكن قراءة الملخصات المحفوظة الآن. تُركت دون تغيير على هذا الهاتف.",
    "storage_unsaved": "لا تزال ملخصاتك مفتوحة، ولكن تعذّر حفظ التغييرات على هذا الهاتف.",
-   "summaries_title": "الملخصات"
+   "summaries_title": "الملخصات",
+   "summary_contents": "المحتويات"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "لا تزال ملخصاتك مفتوحة، ولكن تعذّر حفظ التغييرات على هذا الهاتف.",
   "storage.notSaved.title": "لم يتم الحفظ",
   "storage.unavailable.body": "لا يمكن قراءة الملخصات المحفوظة الآن. تُركت دون تغيير على هذا الهاتف.",
+  "summary.contents": "المحتويات",
   "summary.share": "مشاركة",
   "summary.share.file": "مشاركة الملف (FHIR JSON)",
   "summary.share.pdf": "مشاركة كملف PDF",

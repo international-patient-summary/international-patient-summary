@@ -168,7 +168,8 @@
    "storage_problem_title": "No saved",
    "storage_unavailable": "Saved summaries cannae be read juist noo. They hae been left unchynged on this phone.",
    "storage_unsaved": "Yer summaries are still open, but the chynges couldnae be saved on this phone.",
-   "summaries_title": "Summaries"
+   "summaries_title": "Summaries",
+   "summary_contents": "Contents"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "Yer summaries are still open, but the chynges couldnae be saved on this phone.",
   "storage.notSaved.title": "No saved",
   "storage.unavailable.body": "Saved summaries cannae be read juist noo. They hae been left unchynged on this phone.",
+  "summary.contents": "Contents",
   "summary.share": "Share",
   "summary.share.file": "Share the file (FHIR JSON)",
   "summary.share.pdf": "Share as PDF",

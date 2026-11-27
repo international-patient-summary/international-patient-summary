@@ -168,7 +168,8 @@
    "storage_problem_title": "保存されていません",
    "storage_unavailable": "保存済みのサマリーを現在読み取れません。このスマートフォン上では変更されずに残っています。",
    "storage_unsaved": "サマリーは開いたままですが、変更をこのスマートフォンに保存できませんでした。",
-   "summaries_title": "サマリー"
+   "summaries_title": "サマリー",
+   "summary_contents": "目次"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "サマリーは開いたままですが、変更をこのスマートフォンに保存できませんでした。",
   "storage.notSaved.title": "保存されていません",
   "storage.unavailable.body": "保存済みのサマリーを現在読み取れません。このスマートフォン上では変更されずに残っています。",
+  "summary.contents": "目次",
   "summary.share": "共有",
   "summary.share.file": "ファイルを共有（FHIR JSON）",
   "summary.share.pdf": "PDFとして共有",

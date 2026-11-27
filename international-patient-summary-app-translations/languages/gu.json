@@ -168,7 +168,8 @@
    "storage_problem_title": "સાચવાયું નથી",
    "storage_unavailable": "સાચવેલા સારાંશ અત્યારે વાંચી શકાતા નથી. તેમને આ ફોન પર બદલ્યા વિના રાખવામાં આવ્યા છે.",
    "storage_unsaved": "તમારા સારાંશ હજુ ખુલ્લા છે, પરંતુ ફેરફારો આ ફોન પર સાચવી શકાયા નથી.",
-   "summaries_title": "સારાંશ"
+   "summaries_title": "સારાંશ",
+   "summary_contents": "અનુક્રમણિકા"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "તમારા સારાંશ હજુ ખુલ્લા છે, પરંતુ ફેરફારો આ ફોન પર સાચવી શકાયા નથી.",
   "storage.notSaved.title": "સાચવાયું નથી",
   "storage.unavailable.body": "સાચવેલા સારાંશ અત્યારે વાંચી શકાતા નથી. તેમને આ ફોન પર બદલ્યા વિના રાખવામાં આવ્યા છે.",
+  "summary.contents": "અનુક્રમણિકા",
   "summary.share": "શેર કરો",
   "summary.share.file": "ફાઇલ શેર કરો (FHIR JSON)",
   "summary.share.pdf": "PDF તરીકે શેર કરો",

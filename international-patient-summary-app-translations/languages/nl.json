@@ -168,7 +168,8 @@
    "storage_problem_title": "Niet opgeslagen",
    "storage_unavailable": "Opgeslagen samenvattingen kunnen nu niet worden gelezen. Ze zijn ongewijzigd op deze telefoon gelaten.",
    "storage_unsaved": "Uw samenvattingen zijn nog geopend, maar de wijzigingen konden niet op deze telefoon worden opgeslagen.",
-   "summaries_title": "Samenvattingen"
+   "summaries_title": "Samenvattingen",
+   "summary_contents": "Inhoud"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "Uw samenvattingen zijn nog geopend, maar de wijzigingen konden niet op deze telefoon worden opgeslagen.",
   "storage.notSaved.title": "Niet opgeslagen",
   "storage.unavailable.body": "Opgeslagen samenvattingen kunnen nu niet worden gelezen. Ze zijn ongewijzigd op deze telefoon gelaten.",
+  "summary.contents": "Inhoud",
   "summary.share": "Delen",
   "summary.share.file": "Bestand delen (FHIR JSON)",
   "summary.share.pdf": "Als PDF delen",

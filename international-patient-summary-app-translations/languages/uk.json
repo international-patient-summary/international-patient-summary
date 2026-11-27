@@ -168,7 +168,8 @@
    "storage_problem_title": "Не збережено",
    "storage_unavailable": "Збережені зведення зараз неможливо прочитати. На цьому телефоні їх залишено без змін.",
    "storage_unsaved": "Ваші зведення все ще відкриті, але зміни не вдалося зберегти на цьому телефоні.",
-   "summaries_title": "Зведення"
+   "summaries_title": "Зведення",
+   "summary_contents": "Зміст"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "Ваші зведення все ще відкриті, але зміни не вдалося зберегти на цьому телефоні.",
   "storage.notSaved.title": "Не збережено",
   "storage.unavailable.body": "Збережені зведення зараз неможливо прочитати. На цьому телефоні їх залишено без змін.",
+  "summary.contents": "Зміст",
   "summary.share": "Поділитися",
   "summary.share.file": "Поділитися файлом (FHIR JSON)",
   "summary.share.pdf": "Поділитися як PDF",

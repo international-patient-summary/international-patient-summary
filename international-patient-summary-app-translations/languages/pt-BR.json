@@ -168,7 +168,8 @@
    "storage_problem_title": "Não salvo",
    "storage_unavailable": "Os resumos salvos não podem ser lidos agora. Eles foram mantidos sem alterações neste telefone.",
    "storage_unsaved": "Seus resumos ainda estão abertos, mas não foi possível salvar as alterações neste telefone.",
-   "summaries_title": "Resumos"
+   "summaries_title": "Resumos",
+   "summary_contents": "Sumário"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "Seus resumos ainda estão abertos, mas não foi possível salvar as alterações neste telefone.",
   "storage.notSaved.title": "Não salvo",
   "storage.unavailable.body": "Os resumos salvos não podem ser lidos agora. Eles foram mantidos sem alterações neste telefone.",
+  "summary.contents": "Sumário",
   "summary.share": "Compartilhar",
   "summary.share.file": "Compartilhar o arquivo (FHIR JSON)",
   "summary.share.pdf": "Compartilhar como PDF",

@@ -168,7 +168,8 @@
    "storage_problem_title": "जतन केले नाही",
    "storage_unavailable": "जतन केलेले सारांश सध्या वाचता येत नाहीत. ते या फोनवर न बदलता ठेवले आहेत.",
    "storage_unsaved": "तुमचे सारांश अजूनही उघडे आहेत, पण बदल या फोनवर जतन करता आले नाहीत.",
-   "summaries_title": "सारांश"
+   "summaries_title": "सारांश",
+   "summary_contents": "अनुक्रमणिका"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "तुमचे सारांश अजूनही उघडे आहेत, पण बदल या फोनवर जतन करता आले नाहीत.",
   "storage.notSaved.title": "जतन केले नाही",
   "storage.unavailable.body": "जतन केलेले सारांश सध्या वाचता येत नाहीत. ते या फोनवर न बदलता ठेवले आहेत.",
+  "summary.contents": "अनुक्रमणिका",
   "summary.share": "शेअर करा",
   "summary.share.file": "फाइल शेअर करा (FHIR JSON)",
   "summary.share.pdf": "PDF म्हणून शेअर करा",

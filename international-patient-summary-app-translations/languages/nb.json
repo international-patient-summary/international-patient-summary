@@ -168,7 +168,8 @@
    "storage_problem_title": "Ikke lagret",
    "storage_unavailable": "Lagrede sammendrag kan ikke leses akkurat nå. De er ikke endret på denne telefonen.",
    "storage_unsaved": "Sammendragene dine er fortsatt åpne, men endringene kunne ikke lagres på denne telefonen.",
-   "summaries_title": "Sammendrag"
+   "summaries_title": "Sammendrag",
+   "summary_contents": "Innhold"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "Sammendragene dine er fortsatt åpne, men endringene kunne ikke lagres på denne telefonen.",
   "storage.notSaved.title": "Ikke lagret",
   "storage.unavailable.body": "Lagrede sammendrag kan ikke leses akkurat nå. De er ikke endret på denne telefonen.",
+  "summary.contents": "Innhold",
   "summary.share": "Del",
   "summary.share.file": "Del filen (FHIR JSON)",
   "summary.share.pdf": "Del som PDF",

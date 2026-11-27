@@ -168,7 +168,8 @@
    "storage_problem_title": "未儲存",
    "storage_unavailable": "目前無法讀取已儲存的摘要。它們在此手機上保持不變。",
    "storage_unsaved": "您的摘要仍為開啟狀態，但無法將變更儲存到此手機。",
-   "summaries_title": "摘要"
+   "summaries_title": "摘要",
+   "summary_contents": "目錄"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "您的摘要仍為開啟狀態，但無法將變更儲存到此手機。",
   "storage.notSaved.title": "未儲存",
   "storage.unavailable.body": "目前無法讀取已儲存的摘要。它們在此手機上保持不變。",
+  "summary.contents": "目錄",
   "summary.share": "分享",
   "summary.share.file": "分享檔案（FHIR JSON）",
   "summary.share.pdf": "以 PDF 分享",

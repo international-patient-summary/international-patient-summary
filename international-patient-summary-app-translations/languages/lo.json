@@ -168,7 +168,8 @@
    "storage_problem_title": "ບໍ່ໄດ້ບັນທຶກ",
    "storage_unavailable": "ບໍ່ສາມາດອ່ານບົດສະຫຼຸບທີ່ບັນທຶກໄວ້ໃນຕອນນີ້. ມັນຖືກປະໄວ້ໂດຍບໍ່ປ່ຽນແປງໃນໂທລະສັບນີ້.",
    "storage_unsaved": "ບົດສະຫຼຸບຂອງທ່ານຍັງເປີດຢູ່ ແຕ່ບໍ່ສາມາດບັນທຶກການປ່ຽນແປງໃນໂທລະສັບນີ້ໄດ້.",
-   "summaries_title": "ບົດສະຫຼຸບ"
+   "summaries_title": "ບົດສະຫຼຸບ",
+   "summary_contents": "ສາລະບານ"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "ບົດສະຫຼຸບຂອງທ່ານຍັງເປີດຢູ່ ແຕ່ບໍ່ສາມາດບັນທຶກການປ່ຽນແປງໃນໂທລະສັບນີ້ໄດ້.",
   "storage.notSaved.title": "ບໍ່ໄດ້ບັນທຶກ",
   "storage.unavailable.body": "ບໍ່ສາມາດອ່ານບົດສະຫຼຸບທີ່ບັນທຶກໄວ້ໃນຕອນນີ້. ມັນຖືກປະໄວ້ໂດຍບໍ່ປ່ຽນແປງໃນໂທລະສັບນີ້.",
+  "summary.contents": "ສາລະບານ",
   "summary.share": "ແບ່ງປັນ",
   "summary.share.file": "ແບ່ງປັນໄຟລ໌ (FHIR JSON)",
   "summary.share.pdf": "ແບ່ງປັນເປັນ PDF",

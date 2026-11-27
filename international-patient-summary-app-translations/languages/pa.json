@@ -168,7 +168,8 @@
    "storage_problem_title": "ਸੁਰੱਖਿਅਤ ਨਹੀਂ ਹੋਇਆ",
    "storage_unavailable": "ਸੁਰੱਖਿਅਤ ਕੀਤੇ ਸਾਰ ਇਸ ਵੇਲੇ ਪੜ੍ਹੇ ਨਹੀਂ ਜਾ ਸਕਦੇ। ਉਨ੍ਹਾਂ ਨੂੰ ਇਸ ਫ਼ੋਨ ਉੱਤੇ ਬਿਨਾਂ ਬਦਲਾਅ ਦੇ ਛੱਡਿਆ ਗਿਆ ਹੈ।",
    "storage_unsaved": "ਤੁਹਾਡੇ ਸਾਰ ਅਜੇ ਵੀ ਖੁੱਲ੍ਹੇ ਹਨ, ਪਰ ਤਬਦੀਲੀਆਂ ਇਸ ਫ਼ੋਨ ਉੱਤੇ ਸੁਰੱਖਿਅਤ ਨਹੀਂ ਹੋ ਸਕੀਆਂ।",
-   "summaries_title": "ਸੰਖੇਪ"
+   "summaries_title": "ਸੰਖੇਪ",
+   "summary_contents": "ਤਤਕਰਾ"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "ਤੁਹਾਡੇ ਸਾਰ ਅਜੇ ਵੀ ਖੁੱਲ੍ਹੇ ਹਨ, ਪਰ ਤਬਦੀਲੀਆਂ ਇਸ ਫ਼ੋਨ ਉੱਤੇ ਸੁਰੱਖਿਅਤ ਨਹੀਂ ਹੋ ਸਕੀਆਂ।",
   "storage.notSaved.title": "ਸੁਰੱਖਿਅਤ ਨਹੀਂ ਹੋਇਆ",
   "storage.unavailable.body": "ਸੁਰੱਖਿਅਤ ਕੀਤੇ ਸਾਰ ਇਸ ਵੇਲੇ ਪੜ੍ਹੇ ਨਹੀਂ ਜਾ ਸਕਦੇ। ਉਨ੍ਹਾਂ ਨੂੰ ਇਸ ਫ਼ੋਨ ਉੱਤੇ ਬਿਨਾਂ ਬਦਲਾਅ ਦੇ ਛੱਡਿਆ ਗਿਆ ਹੈ।",
+  "summary.contents": "ਤਤਕਰਾ",
   "summary.share": "ਸਾਂਝਾ ਕਰੋ",
   "summary.share.file": "ਫ਼ਾਈਲ ਸਾਂਝੀ ਕਰੋ (FHIR JSON)",
   "summary.share.pdf": "PDF ਵਜੋਂ ਸਾਂਝਾ ਕਰੋ",

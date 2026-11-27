@@ -168,7 +168,8 @@
    "storage_problem_title": "Gun a shàbhaladh",
    "storage_unavailable": "Cha ghabh na geàrr-chunntasan a chaidh a shàbhaladh a leughadh an-dràsta. Chaidh am fàgail gun atharrachadh air an fhòn seo.",
    "storage_unsaved": "Tha na geàrr-chunntasan agad fosgailte fhathast, ach cha b’ urrainn na h-atharraichean a shàbhaladh air an fhòn seo.",
-   "summaries_title": "Geàrr-chunntasan"
+   "summaries_title": "Geàrr-chunntasan",
+   "summary_contents": "Clàr-innse"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "Tha na geàrr-chunntasan agad fosgailte fhathast, ach cha b’ urrainn na h-atharraichean a shàbhaladh air an fhòn seo.",
   "storage.notSaved.title": "Gun a shàbhaladh",
   "storage.unavailable.body": "Cha ghabh na geàrr-chunntasan a chaidh a shàbhaladh a leughadh an-dràsta. Chaidh am fàgail gun atharrachadh air an fhòn seo.",
+  "summary.contents": "Clàr-innse",
   "summary.share": "Co-roinn",
   "summary.share.file": "Co-roinn am faidhle (FHIR JSON)",
   "summary.share.pdf": "Co-roinn mar PDF",

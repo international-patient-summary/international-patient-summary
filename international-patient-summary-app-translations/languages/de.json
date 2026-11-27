@@ -168,7 +168,8 @@
    "storage_problem_title": "Nicht gespeichert",
    "storage_unavailable": "Gespeicherte Zusammenfassungen können derzeit nicht gelesen werden. Sie wurden auf diesem Telefon unverändert belassen.",
    "storage_unsaved": "Ihre Zusammenfassungen sind noch geöffnet, aber die Änderungen konnten auf diesem Telefon nicht gespeichert werden.",
-   "summaries_title": "Übersichten"
+   "summaries_title": "Übersichten",
+   "summary_contents": "Inhalt"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "Ihre Zusammenfassungen sind noch geöffnet, aber die Änderungen konnten auf diesem Telefon nicht gespeichert werden.",
   "storage.notSaved.title": "Nicht gespeichert",
   "storage.unavailable.body": "Gespeicherte Zusammenfassungen können derzeit nicht gelesen werden. Sie wurden auf diesem Telefon unverändert belassen.",
+  "summary.contents": "Inhalt",
   "summary.share": "Teilen",
   "summary.share.file": "Datei teilen (FHIR JSON)",
   "summary.share.pdf": "Als PDF teilen",

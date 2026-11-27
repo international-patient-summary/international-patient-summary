@@ -168,7 +168,8 @@
    "storage_problem_title": "सहेजा नहीं गया",
    "storage_unavailable": "सहेजे गए सारांश अभी पढ़े नहीं जा सकते। उन्हें इस फ़ोन पर बिना बदलाव के रखा गया है।",
    "storage_unsaved": "आपके सारांश अभी भी खुले हैं, लेकिन बदलाव इस फ़ोन पर सहेजे नहीं जा सके।",
-   "summaries_title": "सारांश"
+   "summaries_title": "सारांश",
+   "summary_contents": "विषय सूची"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "आपके सारांश अभी भी खुले हैं, लेकिन बदलाव इस फ़ोन पर सहेजे नहीं जा सके।",
   "storage.notSaved.title": "सहेजा नहीं गया",
   "storage.unavailable.body": "सहेजे गए सारांश अभी पढ़े नहीं जा सकते। उन्हें इस फ़ोन पर बिना बदलाव के रखा गया है।",
+  "summary.contents": "विषय सूची",
   "summary.share": "शेयर करें",
   "summary.share.file": "फ़ाइल शेयर करें (FHIR JSON)",
   "summary.share.pdf": "PDF के रूप में शेयर करें",

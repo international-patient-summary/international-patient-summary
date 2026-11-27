@@ -168,7 +168,8 @@
    "storage_problem_title": "సేవ్ కాలేదు",
    "storage_unavailable": "సేవ్ చేసిన సారాంశాలను ప్రస్తుతం చదవడం సాధ్యపడదు. వాటిని ఈ ఫోన్‌లో మార్చకుండా ఉంచారు.",
    "storage_unsaved": "మీ సారాంశాలు ఇంకా తెరిచే ఉన్నాయి, కానీ మార్పులను ఈ ఫోన్‌లో సేవ్ చేయడం సాధ్యపడలేదు.",
-   "summaries_title": "సారాంశాలు"
+   "summaries_title": "సారాంశాలు",
+   "summary_contents": "విషయ సూచిక"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "మీ సారాంశాలు ఇంకా తెరిచే ఉన్నాయి, కానీ మార్పులను ఈ ఫోన్‌లో సేవ్ చేయడం సాధ్యపడలేదు.",
   "storage.notSaved.title": "సేవ్ కాలేదు",
   "storage.unavailable.body": "సేవ్ చేసిన సారాంశాలను ప్రస్తుతం చదవడం సాధ్యపడదు. వాటిని ఈ ఫోన్‌లో మార్చకుండా ఉంచారు.",
+  "summary.contents": "విషయ సూచిక",
   "summary.share": "షేర్ చేయండి",
   "summary.share.file": "ఫైల్‌ను షేర్ చేయండి (FHIR JSON)",
   "summary.share.pdf": "PDFగా షేర్ చేయండి",

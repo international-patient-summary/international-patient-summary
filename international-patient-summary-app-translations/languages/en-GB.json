@@ -168,7 +168,8 @@
    "storage_problem_title": "Not saved",
    "storage_unavailable": "Saved summaries cannot be read right now. They have been left unchanged on this phone.",
    "storage_unsaved": "Your summaries are still open, but changes could not be saved on this phone.",
-   "summaries_title": "Summaries"
+   "summaries_title": "Summaries",
+   "summary_contents": "Contents"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "Your summaries are still open, but changes could not be saved on this phone.",
   "storage.notSaved.title": "Not saved",
   "storage.unavailable.body": "Saved summaries cannot be read right now. They have been left unchanged on this phone.",
+  "summary.contents": "Contents",
   "summary.share": "Share",
   "summary.share.file": "Share the file (FHIR JSON)",
   "summary.share.pdf": "Share as PDF",

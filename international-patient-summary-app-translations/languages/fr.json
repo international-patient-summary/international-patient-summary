@@ -168,7 +168,8 @@
    "storage_problem_title": "Non enregistré",
    "storage_unavailable": "Les résumés enregistrés ne peuvent pas être lus pour le moment. Ils ont été laissés inchangés sur ce téléphone.",
    "storage_unsaved": "Vos résumés sont toujours ouverts, mais les modifications n’ont pas pu être enregistrées sur ce téléphone.",
-   "summaries_title": "Résumés"
+   "summaries_title": "Résumés",
+   "summary_contents": "Sommaire"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "Vos résumés sont toujours ouverts, mais les modifications n’ont pas pu être enregistrées sur ce téléphone.",
   "storage.notSaved.title": "Non enregistré",
   "storage.unavailable.body": "Les résumés enregistrés ne peuvent pas être lus pour le moment. Ils ont été laissés inchangés sur ce téléphone.",
+  "summary.contents": "Sommaire",
   "summary.share": "Partager",
   "summary.share.file": "Partager le fichier (FHIR JSON)",
   "summary.share.pdf": "Partager en PDF",

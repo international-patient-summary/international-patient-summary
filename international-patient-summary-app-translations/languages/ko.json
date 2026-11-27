@@ -168,7 +168,8 @@
    "storage_problem_title": "저장되지 않음",
    "storage_unavailable": "저장된 요약을 지금 읽을 수 없습니다. 이 휴대전화에서 변경되지 않은 상태로 유지되었습니다.",
    "storage_unsaved": "요약은 아직 열려 있지만 변경 사항을 이 휴대전화에 저장할 수 없습니다.",
-   "summaries_title": "요약"
+   "summaries_title": "요약",
+   "summary_contents": "목차"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "요약은 아직 열려 있지만 변경 사항을 이 휴대전화에 저장할 수 없습니다.",
   "storage.notSaved.title": "저장되지 않음",
   "storage.unavailable.body": "저장된 요약을 지금 읽을 수 없습니다. 이 휴대전화에서 변경되지 않은 상태로 유지되었습니다.",
+  "summary.contents": "목차",
   "summary.share": "공유",
   "summary.share.file": "파일 공유(FHIR JSON)",
   "summary.share.pdf": "PDF로 공유",

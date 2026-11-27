@@ -168,7 +168,8 @@
    "storage_problem_title": "Net gespäichert",
    "storage_unavailable": "Gespäichert Zesummefaassunge kënnen elo net gelies ginn. Si goufen op dësem Telefon onverännert gelooss.",
    "storage_unsaved": "Är Zesummefaassunge sinn nach op, mee d’Ännerunge konnten net op dësem Telefon gespäichert ginn.",
-   "summaries_title": "Iwwersiichten"
+   "summaries_title": "Iwwersiichten",
+   "summary_contents": "Inhalt"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "Är Zesummefaassunge sinn nach op, mee d’Ännerunge konnten net op dësem Telefon gespäichert ginn.",
   "storage.notSaved.title": "Net gespäichert",
   "storage.unavailable.body": "Gespäichert Zesummefaassunge kënnen elo net gelies ginn. Si goufen op dësem Telefon onverännert gelooss.",
+  "summary.contents": "Inhalt",
   "summary.share": "Deelen",
   "summary.share.file": "De Fichier deelen (FHIR JSON)",
   "summary.share.pdf": "Als PDF deelen",

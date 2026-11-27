@@ -168,7 +168,8 @@
    "storage_problem_title": "Salvestamata",
    "storage_unavailable": "Salvestatud kokkuvõtteid ei saa praegu lugeda. Need jäeti selles telefonis muutmata.",
    "storage_unsaved": "Teie kokkuvõtted on endiselt avatud, kuid muudatusi ei saanud sellesse telefoni salvestada.",
-   "summaries_title": "Kokkuvõtted"
+   "summaries_title": "Kokkuvõtted",
+   "summary_contents": "Sisukord"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "Teie kokkuvõtted on endiselt avatud, kuid muudatusi ei saanud sellesse telefoni salvestada.",
   "storage.notSaved.title": "Salvestamata",
   "storage.unavailable.body": "Salvestatud kokkuvõtteid ei saa praegu lugeda. Need jäeti selles telefonis muutmata.",
+  "summary.contents": "Sisukord",
   "summary.share": "Jaga",
   "summary.share.file": "Jaga faili (FHIR JSON)",
   "summary.share.pdf": "Jaga PDF-ina",

@@ -168,7 +168,8 @@
    "storage_problem_title": "Durung disimpen",
    "storage_unavailable": "Ringkesan sing wis disimpen saiki ora bisa diwaca. Ringkesan kasebut ditinggal tanpa owah-owahan ing telpon iki.",
    "storage_unsaved": "Ringkesan sampeyan isih mbukak, nanging owah-owahan ora bisa disimpen ing telpon iki.",
-   "summaries_title": "Ringkesan"
+   "summaries_title": "Ringkesan",
+   "summary_contents": "Isi"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "Ringkesan sampeyan isih mbukak, nanging owah-owahan ora bisa disimpen ing telpon iki.",
   "storage.notSaved.title": "Durung disimpen",
   "storage.unavailable.body": "Ringkesan sing wis disimpen saiki ora bisa diwaca. Ringkesan kasebut ditinggal tanpa owah-owahan ing telpon iki.",
+  "summary.contents": "Isi",
   "summary.share": "Bagèkaké",
   "summary.share.file": "Bagèkaké berkas (FHIR JSON)",
   "summary.share.pdf": "Bagèkaké minangka PDF",

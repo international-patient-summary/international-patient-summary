@@ -168,7 +168,8 @@
    "storage_problem_title": "Belum disimpan",
    "storage_unavailable": "Ringkasan tersimpan tidak dapat dibaca saat ini. Ringkasan tersebut dibiarkan tanpa perubahan di ponsel ini.",
    "storage_unsaved": "Ringkasan Anda masih terbuka, tetapi perubahan tidak dapat disimpan di ponsel ini.",
-   "summaries_title": "Ringkasan"
+   "summaries_title": "Ringkasan",
+   "summary_contents": "Daftar isi"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "Ringkasan Anda masih terbuka, tetapi perubahan tidak dapat disimpan di ponsel ini.",
   "storage.notSaved.title": "Belum disimpan",
   "storage.unavailable.body": "Ringkasan tersimpan tidak dapat dibaca saat ini. Ringkasan tersebut dibiarkan tanpa perubahan di ponsel ini.",
+  "summary.contents": "Daftar isi",
   "summary.share": "Bagikan",
   "summary.share.file": "Bagikan file (FHIR JSON)",
   "summary.share.pdf": "Bagikan sebagai PDF",

@@ -168,7 +168,8 @@
    "storage_problem_title": "Nesalvat",
    "storage_unavailable": "Rezumatele salvate nu pot fi citite acum. Au fost lăsate neschimbate pe acest telefon.",
    "storage_unsaved": "Rezumatele sunt încă deschise, dar modificările nu au putut fi salvate pe acest telefon.",
-   "summaries_title": "Rezumate"
+   "summaries_title": "Rezumate",
+   "summary_contents": "Cuprins"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "Rezumatele sunt încă deschise, dar modificările nu au putut fi salvate pe acest telefon.",
   "storage.notSaved.title": "Nesalvat",
   "storage.unavailable.body": "Rezumatele salvate nu pot fi citite acum. Au fost lăsate neschimbate pe acest telefon.",
+  "summary.contents": "Cuprins",
   "summary.share": "Partajați",
   "summary.share.file": "Partajați fișierul (FHIR JSON)",
   "summary.share.pdf": "Partajați ca PDF",

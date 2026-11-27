@@ -168,7 +168,8 @@
    "storage_problem_title": "Não guardado",
    "storage_unavailable": "Os resumos guardados não podem ser lidos neste momento. Foram deixados sem alterações neste telemóvel.",
    "storage_unsaved": "Os seus resumos continuam abertos, mas não foi possível guardar as alterações neste telemóvel.",
-   "summaries_title": "Resumos"
+   "summaries_title": "Resumos",
+   "summary_contents": "Índice"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "Os seus resumos continuam abertos, mas não foi possível guardar as alterações neste telemóvel.",
   "storage.notSaved.title": "Não guardado",
   "storage.unavailable.body": "Os resumos guardados não podem ser lidos neste momento. Foram deixados sem alterações neste telemóvel.",
+  "summary.contents": "Índice",
   "summary.share": "Partilhar",
   "summary.share.file": "Partilhar o ficheiro (FHIR JSON)",
   "summary.share.pdf": "Partilhar como PDF",

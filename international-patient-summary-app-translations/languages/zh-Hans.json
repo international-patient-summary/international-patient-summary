@@ -168,7 +168,8 @@
    "storage_problem_title": "未保存",
    "storage_unavailable": "目前无法读取已保存的摘要。它们在此手机上保持不变。",
    "storage_unsaved": "您的摘要仍处于打开状态，但更改无法保存到此手机。",
-   "summaries_title": "摘要"
+   "summaries_title": "摘要",
+   "summary_contents": "目录"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "您的摘要仍处于打开状态，但更改无法保存到此手机。",
   "storage.notSaved.title": "未保存",
   "storage.unavailable.body": "目前无法读取已保存的摘要。它们在此手机上保持不变。",
+  "summary.contents": "目录",
   "summary.share": "分享",
   "summary.share.file": "分享文件（FHIR JSON）",
   "summary.share.pdf": "以 PDF 分享",

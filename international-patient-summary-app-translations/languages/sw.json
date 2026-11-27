@@ -168,7 +168,8 @@
    "storage_problem_title": "Haijahifadhiwa",
    "storage_unavailable": "Muhtasari uliohifadhiwa hauwezi kusomwa sasa. Umeachwa bila kubadilishwa kwenye simu hii.",
    "storage_unsaved": "Muhtasari wako bado uko wazi, lakini mabadiliko hayakuweza kuhifadhiwa kwenye simu hii.",
-   "summaries_title": "Muhtasari"
+   "summaries_title": "Muhtasari",
+   "summary_contents": "Yaliyomo"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "Muhtasari wako bado uko wazi, lakini mabadiliko hayakuweza kuhifadhiwa kwenye simu hii.",
   "storage.notSaved.title": "Haijahifadhiwa",
   "storage.unavailable.body": "Muhtasari uliohifadhiwa hauwezi kusomwa sasa. Umeachwa bila kubadilishwa kwenye simu hii.",
+  "summary.contents": "Yaliyomo",
   "summary.share": "Shiriki",
   "summary.share.file": "Shiriki faili (FHIR JSON)",
   "summary.share.pdf": "Shiriki kama PDF",

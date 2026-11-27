@@ -168,7 +168,8 @@
    "storage_problem_title": "Gan sábháil",
    "storage_unavailable": "Ní féidir na hachoimrí sábháilte a léamh faoi láthair. Fágadh gan athrú iad ar an bhfón seo.",
    "storage_unsaved": "Tá d’achoimrí fós oscailte, ach níorbh fhéidir na hathruithe a shábháil ar an bhfón seo.",
-   "summaries_title": "Achoimrí"
+   "summaries_title": "Achoimrí",
+   "summary_contents": "Clár ábhair"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "Tá d’achoimrí fós oscailte, ach níorbh fhéidir na hathruithe a shábháil ar an bhfón seo.",
   "storage.notSaved.title": "Gan sábháil",
   "storage.unavailable.body": "Ní féidir na hachoimrí sábháilte a léamh faoi láthair. Fágadh gan athrú iad ar an bhfón seo.",
+  "summary.contents": "Clár ábhair",
   "summary.share": "Comhroinn",
   "summary.share.file": "Comhroinn an comhad (FHIR JSON)",
   "summary.share.pdf": "Comhroinn mar PDF",

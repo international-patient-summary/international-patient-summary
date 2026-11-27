@@ -168,7 +168,8 @@
    "storage_problem_title": "Gorde gabe",
    "storage_unavailable": "Gordetako laburpenak ezin dira irakurri une honetan. Aldatu gabe utzi dira telefono honetan.",
    "storage_unsaved": "Zure laburpenak irekita daude oraindik, baina aldaketak ezin izan dira telefono honetan gorde.",
-   "summaries_title": "Laburpenak"
+   "summaries_title": "Laburpenak",
+   "summary_contents": "Aurkibidea"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "Zure laburpenak irekita daude oraindik, baina aldaketak ezin izan dira telefono honetan gorde.",
   "storage.notSaved.title": "Gorde gabe",
   "storage.unavailable.body": "Gordetako laburpenak ezin dira irakurri une honetan. Aldatu gabe utzi dira telefono honetan.",
+  "summary.contents": "Aurkibidea",
   "summary.share": "Partekatu",
   "summary.share.file": "Partekatu fitxategia (FHIR JSON)",
   "summary.share.pdf": "Partekatu PDF gisa",

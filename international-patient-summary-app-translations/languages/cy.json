@@ -168,7 +168,8 @@
    "storage_problem_title": "Heb ei gadw",
    "storage_unavailable": "Ni ellir darllen y crynodebau sydd wedi'u cadw ar hyn o bryd. Maent wedi'u gadael heb eu newid ar y ffôn hwn.",
    "storage_unsaved": "Mae eich crynodebau yn dal ar agor, ond ni fu modd cadw'r newidiadau ar y ffôn hwn.",
-   "summaries_title": "Crynodebau"
+   "summaries_title": "Crynodebau",
+   "summary_contents": "Cynnwys"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "Mae eich crynodebau yn dal ar agor, ond ni fu modd cadw'r newidiadau ar y ffôn hwn.",
   "storage.notSaved.title": "Heb ei gadw",
   "storage.unavailable.body": "Ni ellir darllen y crynodebau sydd wedi'u cadw ar hyn o bryd. Maent wedi'u gadael heb eu newid ar y ffôn hwn.",
+  "summary.contents": "Cynnwys",
   "summary.share": "Rhannu",
   "summary.share.file": "Rhannu’r ffeil (FHIR JSON)",
   "summary.share.pdf": "Rhannu fel PDF",

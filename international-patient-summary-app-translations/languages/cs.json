@@ -168,7 +168,8 @@
    "storage_problem_title": "Neuloženo",
    "storage_unavailable": "Uložené souhrny nyní nelze přečíst. V tomto telefonu zůstaly beze změny.",
    "storage_unsaved": "Vaše souhrny jsou stále otevřené, ale změny se do tohoto telefonu nepodařilo uložit.",
-   "summaries_title": "Souhrny"
+   "summaries_title": "Souhrny",
+   "summary_contents": "Obsah"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "Vaše souhrny jsou stále otevřené, ale změny se do tohoto telefonu nepodařilo uložit.",
   "storage.notSaved.title": "Neuloženo",
   "storage.unavailable.body": "Uložené souhrny nyní nelze přečíst. V tomto telefonu zůstaly beze změny.",
+  "summary.contents": "Obsah",
   "summary.share": "Sdílet",
   "summary.share.file": "Sdílet soubor (FHIR JSON)",
   "summary.share.pdf": "Sdílet jako PDF",

@@ -168,7 +168,8 @@
    "storage_problem_title": "Nav saglabāts",
    "storage_unavailable": "Saglabātos kopsavilkumus pašlaik nevar nolasīt. Tie šajā tālrunī ir atstāti nemainīti.",
    "storage_unsaved": "Jūsu kopsavilkumi joprojām ir atvērti, taču izmaiņas nevarēja saglabāt šajā tālrunī.",
-   "summaries_title": "Kopsavilkumi"
+   "summaries_title": "Kopsavilkumi",
+   "summary_contents": "Saturs"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "Jūsu kopsavilkumi joprojām ir atvērti, taču izmaiņas nevarēja saglabāt šajā tālrunī.",
   "storage.notSaved.title": "Nav saglabāts",
   "storage.unavailable.body": "Saglabātos kopsavilkumus pašlaik nevar nolasīt. Tie šajā tālrunī ir atstāti nemainīti.",
+  "summary.contents": "Saturs",
   "summary.share": "Kopīgot",
   "summary.share.file": "Kopīgot failu (FHIR JSON)",
   "summary.share.pdf": "Kopīgot kā PDF",

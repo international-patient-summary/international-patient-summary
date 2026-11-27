@@ -168,7 +168,8 @@
    "storage_problem_title": "Kaydedilmedi",
    "storage_unavailable": "Kaydedilmiş özetler şu anda okunamıyor. Bu telefonda değiştirilmeden bırakıldılar.",
    "storage_unsaved": "Özetleriniz hâlâ açık, ancak değişiklikler bu telefona kaydedilemedi.",
-   "summaries_title": "Özetler"
+   "summaries_title": "Özetler",
+   "summary_contents": "İçindekiler"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "Özetleriniz hâlâ açık, ancak değişiklikler bu telefona kaydedilemedi.",
   "storage.notSaved.title": "Kaydedilmedi",
   "storage.unavailable.body": "Kaydedilmiş özetler şu anda okunamıyor. Bu telefonda değiştirilmeden bırakıldılar.",
+  "summary.contents": "İçindekiler",
   "summary.share": "Paylaş",
   "summary.share.file": "Dosyayı paylaş (FHIR JSON)",
   "summary.share.pdf": "PDF olarak paylaş",

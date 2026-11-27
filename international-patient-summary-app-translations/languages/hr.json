@@ -168,7 +168,8 @@
    "storage_problem_title": "Nije spremljeno",
    "storage_unavailable": "Spremljeni sažeci trenutačno se ne mogu pročitati. Ostavljeni su nepromijenjeni na ovom telefonu.",
    "storage_unsaved": "Vaši su sažeci još otvoreni, ali promjene se nisu mogle spremiti na ovaj telefon.",
-   "summaries_title": "Sažeci"
+   "summaries_title": "Sažeci",
+   "summary_contents": "Sadržaj"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "Vaši su sažeci još otvoreni, ali promjene se nisu mogle spremiti na ovaj telefon.",
   "storage.notSaved.title": "Nije spremljeno",
   "storage.unavailable.body": "Spremljeni sažeci trenutačno se ne mogu pročitati. Ostavljeni su nepromijenjeni na ovom telefonu.",
+  "summary.contents": "Sadržaj",
   "summary.share": "Podijeli",
   "summary.share.file": "Podijeli datoteku (FHIR JSON)",
   "summary.share.pdf": "Podijeli kao PDF",

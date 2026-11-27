@@ -168,7 +168,8 @@
    "storage_problem_title": "Mhux issejvjat",
    "storage_unavailable": "Is-sommarji ssejvjati ma jistgħux jinqraw bħalissa. Tħallew kif inhuma fuq dan it-telefon.",
    "storage_unsaved": "Is-sommarji tiegħek għadhom miftuħa, iżda l-bidliet ma setgħux jiġu ssejvjati fuq dan it-telefon.",
-   "summaries_title": "Sommarji"
+   "summaries_title": "Sommarji",
+   "summary_contents": "Kontenut"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "Is-sommarji tiegħek għadhom miftuħa, iżda l-bidliet ma setgħux jiġu ssejvjati fuq dan it-telefon.",
   "storage.notSaved.title": "Mhux issejvjat",
   "storage.unavailable.body": "Is-sommarji ssejvjati ma jistgħux jinqraw bħalissa. Tħallew kif inhuma fuq dan it-telefon.",
+  "summary.contents": "Kontenut",
   "summary.share": "Aqsam",
   "summary.share.file": "Aqsam il-fajl (FHIR JSON)",
   "summary.share.pdf": "Aqsam bħala PDF",

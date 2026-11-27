@@ -168,7 +168,8 @@
    "storage_problem_title": "ذخیره نشد",
    "storage_unavailable": "خلاصه‌های ذخیره‌شده اکنون قابل خواندن نیستند. آن‌ها در این تلفن بدون تغییر باقی مانده‌اند.",
    "storage_unsaved": "خلاصه‌های شما همچنان باز هستند، اما تغییرات در این تلفن ذخیره نشدند.",
-   "summaries_title": "خلاصه‌ها"
+   "summaries_title": "خلاصه‌ها",
+   "summary_contents": "فهرست مطالب"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "خلاصه‌های شما همچنان باز هستند، اما تغییرات در این تلفن ذخیره نشدند.",
   "storage.notSaved.title": "ذخیره نشد",
   "storage.unavailable.body": "خلاصه‌های ذخیره‌شده اکنون قابل خواندن نیستند. آن‌ها در این تلفن بدون تغییر باقی مانده‌اند.",
+  "summary.contents": "فهرست مطالب",
   "summary.share": "هم‌رسانی",
   "summary.share.file": "هم‌رسانی فایل (FHIR JSON)",
   "summary.share.pdf": "هم‌رسانی به‌صورت PDF",

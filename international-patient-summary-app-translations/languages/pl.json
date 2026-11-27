@@ -168,7 +168,8 @@
    "storage_problem_title": "Nie zapisano",
    "storage_unavailable": "Nie można teraz odczytać zapisanych podsumowań. Pozostawiono je bez zmian na tym telefonie.",
    "storage_unsaved": "Podsumowania są nadal otwarte, ale nie udało się zapisać zmian na tym telefonie.",
-   "summaries_title": "Podsumowania"
+   "summaries_title": "Podsumowania",
+   "summary_contents": "Spis treści"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "Podsumowania są nadal otwarte, ale nie udało się zapisać zmian na tym telefonie.",
   "storage.notSaved.title": "Nie zapisano",
   "storage.unavailable.body": "Nie można teraz odczytać zapisanych podsumowań. Pozostawiono je bez zmian na tym telefonie.",
+  "summary.contents": "Spis treści",
   "summary.share": "Udostępnij",
   "summary.share.file": "Udostępnij plik (FHIR JSON)",
   "summary.share.pdf": "Udostępnij jako PDF",

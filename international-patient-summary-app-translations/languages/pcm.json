@@ -168,7 +168,8 @@
    "storage_problem_title": "E no save",
    "storage_unavailable": "Di summary dem wey save no fit read now. Dem leave dem as dem be for dis phone.",
    "storage_unsaved": "Your summary dem still open, but di changes no fit save for dis phone.",
-   "summaries_title": "Summaries"
+   "summaries_title": "Summaries",
+   "summary_contents": "Wetin dey inside"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "Your summary dem still open, but di changes no fit save for dis phone.",
   "storage.notSaved.title": "E no save",
   "storage.unavailable.body": "Di summary dem wey save no fit read now. Dem leave dem as dem be for dis phone.",
+  "summary.contents": "Wetin dey inside",
   "summary.share": "Share",
   "summary.share.file": "Share di file (FHIR JSON)",
   "summary.share.pdf": "Share as PDF",

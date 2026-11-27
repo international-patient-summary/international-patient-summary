@@ -168,7 +168,8 @@
    "storage_problem_title": "Ba a ajiye ba",
    "storage_unavailable": "Ba za a iya karanta takaitattun da aka ajiye yanzu ba. An bar su ba tare da canji ba a wannan wayar.",
    "storage_unsaved": "Takaitattunku suna nan a buɗe, amma ba a iya ajiye sauye-sauyen a wannan wayar ba.",
-   "summaries_title": "Taƙaitattun bayanai"
+   "summaries_title": "Taƙaitattun bayanai",
+   "summary_contents": "Abubuwan ciki"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "Takaitattunku suna nan a buɗe, amma ba a iya ajiye sauye-sauyen a wannan wayar ba.",
   "storage.notSaved.title": "Ba a ajiye ba",
   "storage.unavailable.body": "Ba za a iya karanta takaitattun da aka ajiye yanzu ba. An bar su ba tare da canji ba a wannan wayar.",
+  "summary.contents": "Abubuwan ciki",
   "summary.share": "Tura",
   "summary.share.file": "Tura fayil ɗin (FHIR JSON)",
   "summary.share.pdf": "Tura a matsayin PDF",

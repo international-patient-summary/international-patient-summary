@@ -168,7 +168,8 @@
    "storage_problem_title": "Nincs mentve",
    "storage_unavailable": "A mentett összefoglalók jelenleg nem olvashatók. Változatlanul maradtak ezen a telefonon.",
    "storage_unsaved": "Az összefoglalók még nyitva vannak, de a módosításokat nem sikerült menteni erre a telefonra.",
-   "summaries_title": "Összefoglalók"
+   "summaries_title": "Összefoglalók",
+   "summary_contents": "Tartalom"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "Az összefoglalók még nyitva vannak, de a módosításokat nem sikerült menteni erre a telefonra.",
   "storage.notSaved.title": "Nincs mentve",
   "storage.unavailable.body": "A mentett összefoglalók jelenleg nem olvashatók. Változatlanul maradtak ezen a telefonon.",
+  "summary.contents": "Tartalom",
   "summary.share": "Megosztás",
   "summary.share.file": "A fájl megosztása (FHIR JSON)",
   "summary.share.pdf": "Megosztás PDF-ként",

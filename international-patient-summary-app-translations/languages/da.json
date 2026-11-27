@@ -168,7 +168,8 @@
    "storage_problem_title": "Ikke gemt",
    "storage_unavailable": "Gemte resuméer kan ikke læses lige nu. De er ikke blevet ændret på denne telefon.",
    "storage_unsaved": "Dine resuméer er stadig åbne, men ændringerne kunne ikke gemmes på denne telefon.",
-   "summaries_title": "Oversigter"
+   "summaries_title": "Oversigter",
+   "summary_contents": "Indhold"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "Dine resuméer er stadig åbne, men ændringerne kunne ikke gemmes på denne telefon.",
   "storage.notSaved.title": "Ikke gemt",
   "storage.unavailable.body": "Gemte resuméer kan ikke læses lige nu. De er ikke blevet ændret på denne telefon.",
+  "summary.contents": "Indhold",
   "summary.share": "Del",
   "summary.share.file": "Del filen (FHIR JSON)",
   "summary.share.pdf": "Del som PDF",

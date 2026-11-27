@@ -168,7 +168,8 @@
    "storage_problem_title": "Inte sparat",
    "storage_unavailable": "Sparade sammanfattningar kan inte läsas just nu. De har lämnats oförändrade på den här telefonen.",
    "storage_unsaved": "Dina sammanfattningar är fortfarande öppna, men ändringarna kunde inte sparas på den här telefonen.",
-   "summaries_title": "Sammanfattningar"
+   "summaries_title": "Sammanfattningar",
+   "summary_contents": "Innehåll"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "Dina sammanfattningar är fortfarande öppna, men ändringarna kunde inte sparas på den här telefonen.",
   "storage.notSaved.title": "Inte sparat",
   "storage.unavailable.body": "Sparade sammanfattningar kan inte läsas just nu. De har lämnats oförändrade på den här telefonen.",
+  "summary.contents": "Innehåll",
   "summary.share": "Dela",
   "summary.share.file": "Dela filen (FHIR JSON)",
   "summary.share.pdf": "Dela som PDF",

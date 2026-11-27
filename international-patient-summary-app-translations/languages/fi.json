@@ -168,7 +168,8 @@
    "storage_problem_title": "Ei tallennettu",
    "storage_unavailable": "Tallennettuja yhteenvetoja ei voi lukea juuri nyt. Ne on jätetty muuttamatta tähän puhelimeen.",
    "storage_unsaved": "Yhteenvedot ovat edelleen avoinna, mutta muutoksia ei voitu tallentaa tähän puhelimeen.",
-   "summaries_title": "Yhteenvedot"
+   "summaries_title": "Yhteenvedot",
+   "summary_contents": "Sisällys"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "Yhteenvedot ovat edelleen avoinna, mutta muutoksia ei voitu tallentaa tähän puhelimeen.",
   "storage.notSaved.title": "Ei tallennettu",
   "storage.unavailable.body": "Tallennettuja yhteenvetoja ei voi lukea juuri nyt. Ne on jätetty muuttamatta tähän puhelimeen.",
+  "summary.contents": "Sisällys",
   "summary.share": "Jaa",
   "summary.share.file": "Jaa tiedosto (FHIR JSON)",
   "summary.share.pdf": "Jaa PDF-tiedostona",

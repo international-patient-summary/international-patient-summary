@@ -168,7 +168,8 @@
    "storage_problem_title": "未儲存",
    "storage_unavailable": "而家無法讀取已儲存嘅摘要。佢哋喺呢部電話保持不變。",
    "storage_unsaved": "你嘅摘要仍然開啟，但變更未能儲存喺呢部電話。",
-   "summaries_title": "摘要"
+   "summaries_title": "摘要",
+   "summary_contents": "目錄"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "你嘅摘要仍然開啟，但變更未能儲存喺呢部電話。",
   "storage.notSaved.title": "未儲存",
   "storage.unavailable.body": "而家無法讀取已儲存嘅摘要。佢哋喺呢部電話保持不變。",
+  "summary.contents": "目錄",
   "summary.share": "分享",
   "summary.share.file": "分享檔案（FHIR JSON）",
   "summary.share.pdf": "以 PDF 分享",

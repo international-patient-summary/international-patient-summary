@@ -168,7 +168,8 @@
    "storage_problem_title": "Hindi na-save",
    "storage_unavailable": "Hindi mabasa ngayon ang mga naka-save na buod. Iniwan ang mga ito nang walang pagbabago sa teleponong ito.",
    "storage_unsaved": "Bukas pa rin ang iyong mga buod, ngunit hindi ma-save ang mga pagbabago sa teleponong ito.",
-   "summaries_title": "Mga buod"
+   "summaries_title": "Mga buod",
+   "summary_contents": "Nilalaman"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "Bukas pa rin ang iyong mga buod, ngunit hindi ma-save ang mga pagbabago sa teleponong ito.",
   "storage.notSaved.title": "Hindi na-save",
   "storage.unavailable.body": "Hindi mabasa ngayon ang mga naka-save na buod. Iniwan ang mga ito nang walang pagbabago sa teleponong ito.",
+  "summary.contents": "Nilalaman",
   "summary.share": "Ibahagi",
   "summary.share.file": "Ibahagi ang file (FHIR JSON)",
   "summary.share.pdf": "Ibahagi bilang PDF",

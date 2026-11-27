@@ -168,7 +168,8 @@
    "storage_problem_title": "সংরক্ষিত হয়নি",
    "storage_unavailable": "সংরক্ষিত সারাংশগুলো এখন পড়া যাচ্ছে না। এই ফোনে সেগুলো অপরিবর্তিত রাখা হয়েছে।",
    "storage_unsaved": "আপনার সারাংশগুলো এখনও খোলা আছে, কিন্তু এই ফোনে পরিবর্তনগুলো সংরক্ষণ করা যায়নি।",
-   "summaries_title": "সারসংক্ষেপ"
+   "summaries_title": "সারসংক্ষেপ",
+   "summary_contents": "সূচিপত্র"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "আপনার সারাংশগুলো এখনও খোলা আছে, কিন্তু এই ফোনে পরিবর্তনগুলো সংরক্ষণ করা যায়নি।",
   "storage.notSaved.title": "সংরক্ষিত হয়নি",
   "storage.unavailable.body": "সংরক্ষিত সারাংশগুলো এখন পড়া যাচ্ছে না। এই ফোনে সেগুলো অপরিবর্তিত রাখা হয়েছে।",
+  "summary.contents": "সূচিপত্র",
   "summary.share": "শেয়ার করুন",
   "summary.share.file": "ফাইল শেয়ার করুন (FHIR JSON)",
   "summary.share.pdf": "PDF হিসেবে শেয়ার করুন",

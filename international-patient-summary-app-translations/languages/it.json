@@ -168,7 +168,8 @@
    "storage_problem_title": "Non salvato",
    "storage_unavailable": "Al momento non è possibile leggere i riepiloghi salvati. Sono rimasti invariati su questo telefono.",
    "storage_unsaved": "I riepiloghi sono ancora aperti, ma non è stato possibile salvare le modifiche su questo telefono.",
-   "summaries_title": "Riepiloghi"
+   "summaries_title": "Riepiloghi",
+   "summary_contents": "Indice"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "I riepiloghi sono ancora aperti, ma non è stato possibile salvare le modifiche su questo telefono.",
   "storage.notSaved.title": "Non salvato",
   "storage.unavailable.body": "Al momento non è possibile leggere i riepiloghi salvati. Sono rimasti invariati su questo telefono.",
+  "summary.contents": "Indice",
   "summary.share": "Condividi",
   "summary.share.file": "Condividi il file (FHIR JSON)",
   "summary.share.pdf": "Condividi come PDF",

@@ -168,7 +168,8 @@
    "storage_problem_title": "Ni shranjeno",
    "storage_unavailable": "Shranjenih povzetkov trenutno ni mogoče prebrati. V tem telefonu so ostali nespremenjeni.",
    "storage_unsaved": "Vaši povzetki so še vedno odprti, vendar sprememb ni bilo mogoče shraniti v ta telefon.",
-   "summaries_title": "Povzetki"
+   "summaries_title": "Povzetki",
+   "summary_contents": "Vsebina"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "Vaši povzetki so še vedno odprti, vendar sprememb ni bilo mogoče shraniti v ta telefon.",
   "storage.notSaved.title": "Ni shranjeno",
   "storage.unavailable.body": "Shranjenih povzetkov trenutno ni mogoče prebrati. V tem telefonu so ostali nespremenjeni.",
+  "summary.contents": "Vsebina",
   "summary.share": "Deli",
   "summary.share.file": "Deli datoteko (FHIR JSON)",
   "summary.share.pdf": "Deli kot PDF",

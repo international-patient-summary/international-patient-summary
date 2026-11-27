@@ -168,7 +168,8 @@
    "storage_problem_title": "Tidak disimpan",
    "storage_unavailable": "Ringkasan yang disimpan tidak dapat dibaca sekarang. Ringkasan tersebut dibiarkan tanpa perubahan pada telefon ini.",
    "storage_unsaved": "Ringkasan anda masih terbuka, tetapi perubahan tidak dapat disimpan pada telefon ini.",
-   "summaries_title": "Ringkasan"
+   "summaries_title": "Ringkasan",
+   "summary_contents": "Kandungan"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "Ringkasan anda masih terbuka, tetapi perubahan tidak dapat disimpan pada telefon ini.",
   "storage.notSaved.title": "Tidak disimpan",
   "storage.unavailable.body": "Ringkasan yang disimpan tidak dapat dibaca sekarang. Ringkasan tersebut dibiarkan tanpa perubahan pada telefon ini.",
+  "summary.contents": "Kandungan",
   "summary.share": "Kongsi",
   "summary.share.file": "Kongsi fail (FHIR JSON)",
   "summary.share.pdf": "Kongsi sebagai PDF",

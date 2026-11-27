@@ -168,7 +168,8 @@
    "storage_problem_title": "ಉಳಿಸಲಾಗಿಲ್ಲ",
    "storage_unavailable": "ಉಳಿಸಿದ ಸಾರಾಂಶಗಳನ್ನು ಈಗ ಓದಲು ಸಾಧ್ಯವಿಲ್ಲ. ಅವುಗಳನ್ನು ಈ ಫೋನ್‌ನಲ್ಲಿ ಬದಲಾಯಿಸದೆ ಬಿಡಲಾಗಿದೆ.",
    "storage_unsaved": "ನಿಮ್ಮ ಸಾರಾಂಶಗಳು ಇನ್ನೂ ತೆರೆದಿವೆ, ಆದರೆ ಬದಲಾವಣೆಗಳನ್ನು ಈ ಫೋನ್‌ನಲ್ಲಿ ಉಳಿಸಲಾಗಲಿಲ್ಲ.",
-   "summaries_title": "ಸಾರಾಂಶಗಳು"
+   "summaries_title": "ಸಾರಾಂಶಗಳು",
+   "summary_contents": "ಪರಿವಿಡಿ"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "ನಿಮ್ಮ ಸಾರಾಂಶಗಳು ಇನ್ನೂ ತೆರೆದಿವೆ, ಆದರೆ ಬದಲಾವಣೆಗಳನ್ನು ಈ ಫೋನ್‌ನಲ್ಲಿ ಉಳಿಸಲಾಗಲಿಲ್ಲ.",
   "storage.notSaved.title": "ಉಳಿಸಲಾಗಿಲ್ಲ",
   "storage.unavailable.body": "ಉಳಿಸಿದ ಸಾರಾಂಶಗಳನ್ನು ಈಗ ಓದಲು ಸಾಧ್ಯವಿಲ್ಲ. ಅವುಗಳನ್ನು ಈ ಫೋನ್‌ನಲ್ಲಿ ಬದಲಾಯಿಸದೆ ಬಿಡಲಾಗಿದೆ.",
+  "summary.contents": "ಪರಿವಿಡಿ",
   "summary.share": "ಹಂಚಿಕೊಳ್ಳಿ",
   "summary.share.file": "ಫೈಲ್ ಹಂಚಿಕೊಳ್ಳಿ (FHIR JSON)",
   "summary.share.pdf": "PDF ಆಗಿ ಹಂಚಿಕೊಳ್ಳಿ",

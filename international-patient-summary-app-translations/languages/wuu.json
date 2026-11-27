@@ -168,7 +168,8 @@
    "storage_problem_title": "呒没保存",
    "storage_unavailable": "现在呒没办法读取已经保存个摘要。伊拉勒搿只手机浪保持原样。",
    "storage_unsaved": "侬个摘要还开勒浪向，不过改动呒没办法保存到搿只手机浪。",
-   "summaries_title": "摘要"
+   "summaries_title": "摘要",
+   "summary_contents": "目录"
   }
  },
  "ios": {
@@ -338,6 +339,7 @@
   "storage.notSaved.body": "侬个摘要还开勒浪向，不过改动呒没办法保存到搿只手机浪。",
   "storage.notSaved.title": "呒没保存",
   "storage.unavailable.body": "现在呒没办法读取已经保存个摘要。伊拉勒搿只手机浪保持原样。",
+  "summary.contents": "目录",
   "summary.share": "分享",
   "summary.share.file": "分享文件（FHIR JSON）",
   "summary.share.pdf": "分享成 PDF",
