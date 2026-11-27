@@ -12,6 +12,8 @@ import {
 	isSignInReturn,
 	OidcError,
 	PENDING_KEY,
+	refreshSession,
+	signOutHref,
 	usernameOf,
 	type OidcConfig,
 	type OidcDeps
@@ -182,6 +184,86 @@ describe('the sign-in', () => {
 		await expect(
 			finishSignIn(config, new URL(`${config.redirectUri}?code=abc&state=${state}`), d)
 		).rejects.toMatchObject({ key: 'providerUnreachable' });
+	});
+});
+
+describe('renewal', () => {
+	it('renews with the refresh token, keeping it unless the provider rotates it', async () => {
+		let answer: Record<string, unknown> = {
+			access_token: 'a2',
+			expires_in: 60,
+			refresh_token: 'r2'
+		};
+		const { sent, fetch } = provider(() => json(answer));
+		const d = deps(fetch);
+		const renewed = await refreshSession(
+			config,
+			{ accessToken: 'a1', expiresAt: 0, refreshToken: 'r1' },
+			d,
+			() => 5_000
+		);
+		expect(renewed).toMatchObject({ accessToken: 'a2', expiresAt: 65_000, refreshToken: 'r2' });
+		const form = Object.fromEntries(sent.at(-1)!.init!.body as URLSearchParams);
+		expect(form).toEqual({
+			grant_type: 'refresh_token',
+			refresh_token: 'r1',
+			client_id: 'ips-viewer'
+		});
+		answer = { access_token: 'a3' };
+		const kept = await refreshSession(config, renewed, d, () => 0);
+		expect(kept).toMatchObject({ accessToken: 'a3', expiresAt: 300_000, refreshToken: 'r2' });
+	});
+
+	it('fails without a refresh token, or when the provider refuses it', async () => {
+		const { fetch } = provider(() => json({ error: 'invalid_grant' }, 400));
+		await expect(
+			refreshSession(config, { accessToken: 'a', expiresAt: 0 }, deps(fetch))
+		).rejects.toMatchObject({
+			key: 'signInFailed'
+		});
+		await expect(
+			refreshSession(config, { accessToken: 'a', expiresAt: 0, refreshToken: 'r' }, deps(fetch))
+		).rejects.toMatchObject({ key: 'signInFailed' });
+	});
+});
+
+describe('signing out at the provider', () => {
+	it('sends the browser to its end-session endpoint with the hint, coming back here', async () => {
+		const withEnd = (async () =>
+			json({
+				...discovery,
+				end_session_endpoint: `${ISSUER}/protocol/openid-connect/logout`
+			})) as typeof fetch;
+		const href = new URL(
+			(await signOutHref(config, { accessToken: 'a', expiresAt: 0, idToken: 'id.t.k' }, withEnd))!
+		);
+		expect(href.origin + href.pathname).toBe(`${ISSUER}/protocol/openid-connect/logout`);
+		expect(Object.fromEntries(href.searchParams)).toEqual({
+			client_id: 'ips-viewer',
+			post_logout_redirect_uri: config.redirectUri,
+			id_token_hint: 'id.t.k'
+		});
+		const noHint = new URL((await signOutHref(config, undefined, withEnd))!);
+		expect(noHint.searchParams.has('id_token_hint')).toBe(false);
+	});
+
+	it('has nowhere to send the browser when the provider offers no endpoint or is down', async () => {
+		const { fetch } = provider();
+		expect(await signOutHref(config, undefined, fetch)).toBeUndefined();
+		const down = (async () => {
+			throw new TypeError('offline');
+		}) as typeof fetch;
+		expect(await signOutHref(config, undefined, down)).toBeUndefined();
+	});
+
+	it('keeps the id token through a renewal that sends none', async () => {
+		const { fetch } = provider(() => json({ access_token: 'a2' }));
+		const renewed = await refreshSession(
+			config,
+			{ accessToken: 'a1', expiresAt: 0, refreshToken: 'r', idToken: 'id1' },
+			deps(fetch)
+		);
+		expect(renewed.idToken).toBe('id1');
 	});
 });
 

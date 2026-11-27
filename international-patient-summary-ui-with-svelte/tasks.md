@@ -375,5 +375,15 @@ Rules for the executing agent:
       `remote.test.ts`, `e2e/service.spec.ts` (signed in, Home, open a
       file, save, listed; not offered when signed out or for a document from
       the service).
+- [x] **P9-T11 Token renewal** (F-SIGN-8): the refresh token, in memory
+      only, renews an ending access token once for every call that needs it.
+      Verify: `oidc.test.ts` (form, rotation, refusal), `remote.test.ts`
+      (three concurrent calls, one renewal; a refused renewal ends the session);
+      by hand on 2026-11-26 against Keycloak 26.8.2 (`ips` realm): a new
+      access token for 300 s, the refresh token rotated, a forged one refused.
+- [x] **P9-T12 Sign out at the provider** (F-SIGN-9). Verify: `oidc.test.ts`,
+      `remote.test.ts`, `e2e/service.spec.ts` (the hint and the return); by
+      hand on 2026-11-26 against Keycloak 26.8.2: sign out returns to
+      `/service/`, and signing in again asks for the password.
 - [ ] **P9-T9 Translation review** of the new `service.*` strings in cy-001
       and zh-cn (part of P7-T4).

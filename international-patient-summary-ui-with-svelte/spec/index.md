@@ -134,8 +134,6 @@ fixtures (§9).
 - Terminology server lookups; the viewer displays `coding.display` /
   `text` as supplied.
 - Any storage of patient data server-side or in browser storage.
-- Refreshing an access token: when it ends, the person signs in again
-  (§6.10).
 
 ## 4. Technology
 
@@ -665,6 +663,19 @@ that has a service.
   it stores the document as loaded and confirms "Saved to the service." The
   service page shows the viewer only for a document it opened itself. The
   session is the same one, kept in memory across navigation within the app.
+- **F-SIGN-8 Renewal.** A token within 30 seconds of its end is renewed
+  with the refresh token (`grant_type=refresh_token`), kept like it in
+  memory only; a rotated refresh token replaces the old one. Calls that need
+  a token while one renewal is running share it. When renewal fails, the
+  service's `401` ends the session as F-SIGN-3 says.
+- **F-SIGN-9 Sign-out.** Sign out ends the session here at once, then, when
+  the provider's discovery names an `end_session_endpoint`, sends the
+  browser there (OpenID Connect RP-Initiated Logout) with `client_id`,
+  `id_token_hint` (the ID token, kept in memory only like the others) and
+  `post_logout_redirect_uri` (this page), so the provider's session ends
+  too. A provider without one, or out of reach, ends only the session here.
+  The backend's development realm registers `http://localhost:5173/*` as
+  the client's post-logout redirect.
 - **F-SIGN-6 Privacy.** The only thing that outlives a page load is the
   pending sign-in's `state` and verifier, in `sessionStorage` for this tab,
   across the provider's redirect, removed on return. No token, document or
@@ -772,8 +783,6 @@ lossless.
 - Validation hand-off to the HL7 FHIR Validator.
 - Tagged (accessible) PDF / PDF/UA for the one-page summary.
 - Multi-page full-summary PDF export.
-- Refreshing the access token without signing in again, and signing out
-  of the identity provider as well as the viewer.
 
 ## 12. References
 

@@ -19,7 +19,11 @@ const cors = (origin: string) => ({
 /** Stand in for Keycloak and the service; answer what the tab asks, and record it. */
 async function standIns(page: Page) {
 	const rows = new Map<string, Record<string, unknown>>();
-	const seen = { exchanges: [] as URLSearchParams[], authorizations: [] as (string | null)[] };
+	const seen = {
+		exchanges: [] as URLSearchParams[],
+		authorizations: [] as (string | null)[],
+		logouts: [] as URLSearchParams[]
+	};
 	let next = 1;
 	await page.route(`${ISSUER}/**`, async (route: Route) => {
 		const request = route.request();
@@ -30,10 +34,18 @@ async function standIns(page: Page) {
 				json: {
 					issuer: ISSUER,
 					authorization_endpoint: `${ISSUER}/protocol/openid-connect/auth`,
-					token_endpoint: `${ISSUER}/protocol/openid-connect/token`
+					token_endpoint: `${ISSUER}/protocol/openid-connect/token`,
+					end_session_endpoint: `${ISSUER}/protocol/openid-connect/logout`
 				},
 				headers: cors(origin)
 			});
+		if (url.pathname.endsWith('/logout')) {
+			seen.logouts.push(url.searchParams);
+			return route.fulfill({
+				status: 302,
+				headers: { location: url.searchParams.get('post_logout_redirect_uri')! }
+			});
+		}
 		if (url.pathname.endsWith('/auth')) {
 			// Signed in at once: send the browser back with a code and the same state.
 			const back = new URL(url.searchParams.get('redirect_uri')!);
@@ -44,7 +56,10 @@ async function standIns(page: Page) {
 			return route.fulfill({ status: 302, headers: { location: back.href } });
 		}
 		seen.exchanges.push(new URLSearchParams(request.postData() ?? ''));
-		return route.fulfill({ json: { access_token: TOKEN, expires_in: 300 }, headers: cors(origin) });
+		return route.fulfill({
+			json: { access_token: TOKEN, expires_in: 300, id_token: 'id-token-1' },
+			headers: cors(origin)
+		});
 	});
 	await page.route(`${SERVICE}/**`, async (route: Route) => {
 		const request = route.request();
@@ -122,6 +137,10 @@ test.describe('service', () => {
 
 		await page.getByRole('button', { name: 'Sign out' }).click();
 		await expect(page.getByRole('button', { name: 'Sign in' })).toBeVisible();
+		// Signed out at the provider too, with the hint, and back on this page.
+		await expect.poll(() => seen.logouts.length).toBe(1);
+		expect(seen.logouts[0].get('id_token_hint')).toBe('id-token-1');
+		expect(new URL(page.url()).pathname).toBe('/service/');
 		const stored = await page.evaluate(() => ({
 			local: Object.keys(localStorage).filter((k) => !/\.(locale|theme|text-size)$/.test(k)),
 			session: Object.keys(sessionStorage).filter((k) => !k.startsWith('sveltekit:')),

@@ -28,6 +28,11 @@
 		await remote.completeSignIn(url);
 	});
 
+	async function signOut() {
+		const href = await remote.signOutEverywhere();
+		if (href) location.assign(href);
+	}
+
 	async function signIn() {
 		const href = await remote.signInHref();
 		if (href) location.assign(href);
@@ -80,7 +85,7 @@
 			{#if viewing}
 				<Button onclick={() => viewer.clear()}>{t('service.view.back')}</Button>
 			{/if}
-			<Button onclick={() => remote.signOut()}>{t('service.signOut')}</Button>
+			<Button onclick={signOut}>{t('service.signOut')}</Button>
 		</div>
 
 		{#if viewing && viewer.doc}

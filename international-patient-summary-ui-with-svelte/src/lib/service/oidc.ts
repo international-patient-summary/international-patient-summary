@@ -27,12 +27,18 @@ export interface OidcSession {
 	expiresAt: number;
 	/** The token's `preferred_username`, for display only (it is not verified here). */
 	username?: string;
+	/** Renews the access token without signing in again (F-SIGN-8); in memory only. */
+	refreshToken?: string;
+	/** The hint for signing out at the provider (F-SIGN-9); in memory only. */
+	idToken?: string;
 }
 
 interface Discovery {
 	issuer: string;
 	authorization_endpoint: string;
 	token_endpoint: string;
+	/** RP-initiated logout (OpenID Connect RP-Initiated Logout 1.0), when offered. */
+	end_session_endpoint?: string;
 }
 
 interface Pending {
@@ -132,19 +138,67 @@ export async function finishSignIn(
 		throw new OidcError('signInStale');
 	const code = url.searchParams.get('code');
 	if (!code || url.searchParams.has('error')) throw new OidcError('signInFailed');
+	return tokenRequest(
+		config,
+		{
+			grant_type: 'authorization_code',
+			code,
+			redirect_uri: config.redirectUri,
+			client_id: config.clientId,
+			code_verifier: pending.verifier
+		},
+		deps,
+		now
+	);
+}
+
+/**
+ * A new access token from the session's refresh token (F-SIGN-8). The provider
+ * may rotate the refresh token; without a new one, the old one is kept.
+ */
+export async function refreshSession(
+	config: OidcConfig,
+	session: OidcSession,
+	deps: OidcDeps,
+	now: () => number = Date.now
+): Promise<OidcSession> {
+	if (!session.refreshToken) throw new OidcError('signInFailed');
+	const renewed = await tokenRequest(
+		config,
+		{
+			grant_type: 'refresh_token',
+			refresh_token: session.refreshToken,
+			client_id: config.clientId
+		},
+		deps,
+		now
+	);
+	return {
+		...renewed,
+		refreshToken: renewed.refreshToken ?? session.refreshToken,
+		idToken: renewed.idToken ?? session.idToken
+	};
+}
+
+/** POST to the token endpoint; the answer as a session, or an OidcError. */
+async function tokenRequest(
+	config: OidcConfig,
+	form: Record<string, string>,
+	deps: OidcDeps,
+	now: () => number
+): Promise<OidcSession> {
 	const { token_endpoint } = await discover(config.issuer, deps.fetch);
-	let body: { access_token?: unknown; expires_in?: unknown };
+	let body: {
+		access_token?: unknown;
+		expires_in?: unknown;
+		refresh_token?: unknown;
+		id_token?: unknown;
+	};
 	try {
 		const response = await deps.fetch(token_endpoint, {
 			method: 'POST',
 			headers: { 'content-type': 'application/x-www-form-urlencoded' },
-			body: new URLSearchParams({
-				grant_type: 'authorization_code',
-				code,
-				redirect_uri: config.redirectUri,
-				client_id: config.clientId,
-				code_verifier: pending.verifier
-			}),
+			body: new URLSearchParams(form),
 			cache: 'no-store',
 			credentials: 'omit'
 		});
@@ -158,8 +212,37 @@ export async function finishSignIn(
 	return {
 		accessToken: body.access_token,
 		expiresAt: now() + lifetime * 1000,
-		username: usernameOf(body.access_token)
+		username: usernameOf(body.access_token),
+		refreshToken: typeof body.refresh_token === 'string' ? body.refresh_token : undefined,
+		idToken: typeof body.id_token === 'string' ? body.id_token : undefined
 	};
+}
+
+/**
+ * Where to send the browser to sign out at the provider too (F-SIGN-9), coming
+ * back to the page; undefined when the provider offers no such endpoint or
+ * cannot be reached, so only the local session ends.
+ */
+export async function signOutHref(
+	config: OidcConfig,
+	session: OidcSession | undefined,
+	fetchImpl: typeof fetch
+): Promise<string | undefined> {
+	let endpoint: string | undefined;
+	try {
+		endpoint = (await discover(config.issuer, fetchImpl)).end_session_endpoint;
+	} catch {
+		return undefined;
+	}
+	if (!endpoint) return undefined;
+	const url = new URL(endpoint);
+	const params = new URLSearchParams({
+		client_id: config.clientId,
+		post_logout_redirect_uri: config.redirectUri
+	});
+	if (session?.idToken) params.set('id_token_hint', session.idToken);
+	url.search = params.toString();
+	return url.href;
 }
 
 /** The token's `preferred_username`, read without checking it: for display only. */

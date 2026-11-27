@@ -9,6 +9,11 @@
   build time; the development server uses the backend's local defaults. The
   header links to it only when a service is configured. `.tour-error` now uses
   the theme's error text colour (it failed colour contrast).
+- Sign out at the provider too (F-SIGN-9): the ID token, in memory only, is the
+  hint for its end-session endpoint, which returns to `/service/`.
+- Token renewal (F-SIGN-8): an ending access token is renewed with the refresh
+  token, held in memory only, once for every call that needs it; a refused
+  renewal ends the session.
 - "Save to service" in the viewer while signed in (F-SIGN-7): stores the open
   document as loaded; not offered for a document opened from the service.
 

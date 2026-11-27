@@ -18,7 +18,7 @@ const json = (body: unknown, status = 200) =>
 function world() {
 	const rows = new Map<string, Record<string, unknown>>();
 	let next = 1;
-	const state = { token: 'tok', revoked: false };
+	const state = { token: 'tok', revoked: false, refreshes: 0, refuseRefresh: false };
 	const storage = new Map<string, string>();
 	const fetch = (async (input: RequestInfo | URL, init: RequestInit = {}) => {
 		const url = new URL(String(input));
@@ -28,7 +28,15 @@ function world() {
 				authorization_endpoint: `${ISSUER}/auth`,
 				token_endpoint: `${ISSUER}/token`
 			});
-		if (url.href === `${ISSUER}/token`) return json({ access_token: state.token, expires_in: 300 });
+		if (url.href === `${ISSUER}/token`) {
+			const form = new URLSearchParams(String(init.body));
+			if (form.get('grant_type') === 'refresh_token') {
+				state.refreshes++;
+				if (state.refuseRefresh) return json({ error: 'invalid_grant' }, 400);
+				state.token = `tok${state.refreshes + 1}`;
+			}
+			return json({ access_token: state.token, expires_in: 300, refresh_token: 'refresh' });
+		}
 		if (url.origin !== SERVICE) return new Response(null, { status: 404 });
 		const auth = new Headers(init.headers).get('authorization');
 		if (state.revoked || auth !== `Bearer ${state.token}`)
@@ -65,6 +73,7 @@ function world() {
 
 async function signedIn() {
 	const w = world();
+	const clock = { now: 0 };
 	const remote = new RemoteSession(
 		config,
 		() => REDIRECT,
@@ -72,8 +81,8 @@ async function signedIn() {
 	);
 	const href = new URL((await remote.signInHref())!);
 	const back = new URL(`${REDIRECT}?code=c&state=${href.searchParams.get('state')}`);
-	await remote.completeSignIn(back);
-	return { ...w, remote };
+	await remote.completeSignIn(back, () => clock.now);
+	return { ...w, remote, clock };
 }
 
 const file = (body: unknown, name = 'ips.json') =>
@@ -111,6 +120,25 @@ describe('RemoteSession', () => {
 		expect(remote.error).toBe('refused');
 		await remote.store(file('{ not json', 'x.json'));
 		expect(remote.error).toBe('unreadable');
+	});
+
+	it('renews an expired token once, however many calls need it', async () => {
+		const { remote, state, clock } = await signedIn();
+		clock.now = 10 * 60_000;
+		await Promise.all([remote.refresh(), remote.refresh(), remote.refresh()]);
+		expect(state.refreshes).toBe(1);
+		expect(remote.error).toBeUndefined();
+		expect(remote.session?.accessToken).toBe('tok2');
+		expect(remote.signedIn).toBe(true);
+	});
+
+	it('ends the session when the token cannot be renewed', async () => {
+		const { remote, state, clock } = await signedIn();
+		state.refuseRefresh = true;
+		clock.now = 10 * 60_000;
+		await remote.refresh();
+		expect(remote.error).toBe('expired');
+		expect(remote.signedIn).toBe(false);
 	});
 
 	it('ends the session when the service refuses the token', async () => {
@@ -154,6 +182,13 @@ describe('RemoteSession', () => {
 		expect(remote.error).toBe('refused');
 		remote.signOut();
 		expect(remote.saved).toBeUndefined();
+	});
+
+	it('signs out everywhere: here at once, and at the provider when it can', async () => {
+		const { remote } = await signedIn();
+		expect(await remote.signOutEverywhere()).toBeUndefined(); // the fake provider has no endpoint
+		expect(remote.signedIn).toBe(false);
+		expect(await remote.signOutEverywhere()).toBeUndefined(); // already signed out
 	});
 
 	it('signs out, forgetting the token, the list and the open document', async () => {

@@ -10,6 +10,8 @@ import {
 	beginSignIn,
 	currentToken,
 	finishSignIn,
+	refreshSession,
+	signOutHref,
 	OidcError,
 	type OidcConfig,
 	type OidcDeps,
@@ -62,6 +64,8 @@ export class RemoteSession {
 	/** The id of the document "Save to service" last stored, for its confirmation. */
 	saved = $state<string | undefined>(undefined);
 	#service: HttpService | undefined;
+	/** The one renewal in flight, so concurrent calls share it. */
+	#renewing: Promise<string | undefined> | undefined;
 
 	constructor(
 		readonly config: ServiceConfig | undefined,
@@ -105,7 +109,7 @@ export class RemoteSession {
 			this.session = session;
 			this.#service = new HttpService({
 				base: this.config!.serviceUrl,
-				token: async () => currentToken(this.session, now()),
+				token: () => this.#token(now),
 				allowHttpLoopback: this.allowHttpLoopback,
 				fetch: this.deps().fetch
 			});
@@ -161,6 +165,17 @@ export class RemoteSession {
 		});
 	}
 
+	/**
+	 * Sign out here and at the provider (F-SIGN-9): end this session, and answer
+	 * the provider's sign-out address to send the browser to, if it has one.
+	 */
+	async signOutEverywhere(): Promise<string | undefined> {
+		const session = this.session;
+		this.signOut();
+		if (!this.config || !session) return undefined;
+		return signOutHref(this.#oidc(), session, this.deps().fetch);
+	}
+
 	signOut(): void {
 		this.saved = undefined;
 		this.session = undefined;
@@ -168,6 +183,28 @@ export class RemoteSession {
 		this.summaries = [];
 		this.error = undefined;
 		viewer.clear();
+	}
+
+	/**
+	 * The access token while it is good; else one renewed with the refresh token
+	 * (F-SIGN-8); else undefined, so the service answers 401 and the session ends.
+	 */
+	async #token(now: () => number): Promise<string | undefined> {
+		const token = currentToken(this.session, now());
+		if (token || !this.session?.refreshToken) return token;
+		this.#renewing ??= (async () => {
+			const session = this.session;
+			try {
+				if (!session) return undefined;
+				this.session = await refreshSession(this.#oidc(), session, this.deps(), now);
+				return this.session.accessToken;
+			} catch {
+				return undefined;
+			} finally {
+				this.#renewing = undefined;
+			}
+		})();
+		return this.#renewing;
 	}
 
 	#require(): HttpService {
